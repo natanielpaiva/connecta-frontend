@@ -40,7 +40,7 @@ module.exports = function(grunt) {
           '!Gruntfile.js'
         ],
         dest: 'dist/',
-        expand:true
+        expand: true
       }
     },
     template: {
@@ -53,6 +53,11 @@ module.exports = function(grunt) {
         files: {
           'dist/app/connecta.js': ['app/connecta.js']
         }
+      }
+    },
+    karma: {
+      unit: {
+        configFile: 'test/karma.conf.js'
       }
     },
     connect: {
@@ -92,7 +97,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-template');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('default', ['jshint', 'sass', 'copy', 'template']);
-  grunt.registerTask('serve', ['default', 'connect:server']);
+  grunt.registerTask('test', ['default', 'karma']);
+  grunt.registerTask('run', ['default', 'connect:server']);
 };
