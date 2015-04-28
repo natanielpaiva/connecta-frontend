@@ -1,0 +1,25 @@
+{
+    "VALIDATION": {
+        "REQUIRED": "Esse campo é obrigatório",
+        "EMAIL": "Deve ser um endereço de email válido",
+        "MINLENGTH": "Deve ter mais letras",
+        "MAXLENGTH": "Deve ter menos letras"
+    },
+    "LAYOUT": {
+        "HOME" : "Página inicial",
+        "ADD" : "Adicionar",
+        "EDIT" : "Editar",
+        "DELETE" : "Excluir",
+        "SAVE":  "Salvar",
+        "BACK":  "Voltar",
+        "NEXT": "Avançar",
+        "CANCEL":"Cancelar",
+        "APPLY": "Aplicar",
+        "FILTER": "Filtro",
+        "SELECT" : "Selecione",
+        "SEARCH" : "Buscar"
+    },
+    "KEY_VALUE": {
+        "NO_ITEM" : "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."
+    }
+}

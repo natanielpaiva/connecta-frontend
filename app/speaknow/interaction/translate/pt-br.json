@@ -1,0 +1,14 @@
+
+{
+    "INTERACTION": {
+        "ADD_INTERACTION": "Adicionar Interação",
+        "ACTIONS": "Ações",
+        "NAME": "Nome",
+        "MESSAGE": "Mensagem",
+        "IMAGE" : "Imagem",
+        "ICON" : "Ícone",
+        "TYPE" : "Tipo",
+        "DESCRIPTION" : "Descrição",
+        "DROP_FILE_HERE": "Arraste ou clique aqui"
+    }
+}

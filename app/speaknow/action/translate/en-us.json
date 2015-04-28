@@ -1,0 +1,60 @@
+{
+    "ACTION": {
+        "ADD": "Add Action",
+        "EDIT": "Edit Action",
+        "VIEW": "View Action",
+        "NAME": "Name",
+        "ICON": "Icon",
+        "TYPE": "Type",
+        "DESCRIPTION": "Description",
+        "CUSTOMER_SERVICE": "Customer Service",
+        "CAMPAIGN": "Campaign",
+        "POLL": "Poll",
+        "QUESTIONNAIRE": "Questionnaire",
+        "OMBUDSMAN": "Ombudsman",
+        "PROMOTION": "Promotion",
+        "FAQ": "FAQ",
+        "SERVICE": "Service",
+        "SECTION": {
+            "TITLE": "Section Title",
+            "FOOTER": "Footer",
+            "ADD": "Add Section",
+            "NEW": "New Section",
+            "DONE": "Done",
+            "PARAM": {
+                "NAME": "Parameter Name",
+                "TITLE": "Parameter Title",
+                "TAG": "Parameter Tag",
+                "TYPE": "Parameter Type",
+                "ADD": "Add Parameter",
+                "OPT": "Parameter Option",
+                "PARAM.OPTIONS": "Parameter Options",
+                "ADD_OPT": "Add Parameter Option",
+                "NEW": "New Parameter",
+                "PARAM_TYPE": {
+                    "TEXT": "Text",
+                    "URL": "Url",
+                    "NUMBER": "Number",
+                    "PHONE": "Phone",
+                    "EMAIL": "Email",
+                    "PASSWORD": "Password",
+                    "BOOLEANSWITCH": "Boolean Switch",
+                    "BOOLEANCHECK": "Boolean Check",
+                    "DATE": "Date",
+                    "TIME": "Time",
+                    "DATETIME": "Date and Time",
+                    "DATE_PICKER": "Date Picker",
+                    "SELECT": "Select",
+                    "MULTI_SELECT": "Multi Select",
+                    "MULTI_CHECKBOX": "Multi Checkbox",
+                    "RADIO": "Radio",
+                    "FILE": "File",
+                    "IMAGE": "Image"
+                }
+            }
+        }
+    },
+    "STEP": {
+        "SCRIPT": "Groovy Script"
+    }
+}

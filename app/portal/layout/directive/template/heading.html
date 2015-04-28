@@ -1,0 +1,44 @@
+<div id="menu-top" class="navbar navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed">
+            <span class="sr-only">Toggle navigation</span>
+        </button>
+
+        <!--<a href="#" class="navbar-toggle collapsed connecta-ico-menu"></a>-->
+
+        <div class="navbar-brand {{appInstance.name}}">
+            <button type="button" class="navbar-toggle toggle-menu" ng-click="toggleSidebar()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-menu"></span>
+            </button>
+            <div class="current-app" title="{{appInstance.title}}"></div>
+        </div>
+
+
+    </div>
+
+    <div class="navbar-collapse collapse">
+        <!--            <ul class="nav navbar-nav">
+                        <li ng-repeat="application in applications"
+                            class="logo-app {{application.name}}"
+                            ng-if="(application.name !== appInstance.name)">
+                            <a
+                                href="#/{{application.name}}"
+                                class="app-icon logo"
+                                title="{{application.title}}"
+                                >
+                            </a>
+                        </li>
+                    </ul>-->
+
+<!--        <div class="pull-right">
+            <ul class="nav navbar-nav menu">
+                <li>
+                    <button class="btn app-icon" ng-click="togglePageTabs()">
+                        <span class="fa fa-th-large"></span>
+                    </button>
+                </li>
+            </ul>
+        </div>-->
+    </div>
+</div>

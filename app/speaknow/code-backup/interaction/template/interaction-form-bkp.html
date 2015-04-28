@@ -1,0 +1,241 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>INTERACTION.REGISTER_INTERACTION</h3>
+    </div>
+</div>
+
+<div>
+    <div class="steps">
+        <div class="box-step box1">
+            <div class="number-step step1" ng-class="{'step-active':stepsIcons[0]}">
+                1
+            </div>
+            <div class="legend-step" translate>
+                INTERACTION.INTERACTION_DATA
+            </div>
+        </div>
+        <div class="divider-step1" ng-class="{'divider-blue':stepsIcons[1]}"></div>
+        <div class="box-step box2">
+            <div class="number-step step2" ng-class="{'step-active':stepsIcons[1]}">
+                2
+            </div>
+            <div class="legend-step" translate>
+                INTERACTION.ANSWER_CONFIG
+            </div>
+        </div>
+        <div class="divider-step2" ng-class="{'divider-blue':stepsIcons[2]}"></div>
+        <div class="box-step box3">
+            <div class="number-step step3" ng-class="{'step-active':stepsIcons[2]}">
+                3
+            </div>
+            <div class="legend-step" translate>
+                Destinatários
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+            <div class="step1" ng-show="steps[0]">
+                <div class="form-group">
+                    <label for="nome" translate>INTERACTION.NAME</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                           ng-model="interaction.name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="hashtag" translate>INTERACTION.HASHTAG</label>
+                    <input type="text" class="form-control" id="hashtag" name="hashtag"
+                           ng-model="interaction.monitorHashtag" />
+                </div>
+
+                <div class="form-group">
+                    <label for="message" translate>INTERACTION.MESSAGE</label>
+                    <textarea class="form-control" id="message" name="message"
+                              ng-model="interaction.descriptionItem"></textarea>
+                </div>
+                <a href="#/speaknow/interaction"
+                   class="btn btn-default" translate>
+                    LAYOUT.CANCEL                     
+                </a>
+                <a class="btn btn-primary" translate ng-click="activeStep(1)">
+                    INTERACTION.NEXT
+                </a>
+            </div>
+
+            <div class="step2" ng-show="steps[1]">
+                <div class="form-question">
+                    <fieldset>
+                        <legend translate class="interaction-question">INTERACTION.QUESTION</legend>
+                        <div class="form-group">
+                            <label for="answer" translate>INTERACTION.ANSWER</label>
+                            <input type="text" class="form-control" id="answer" name="answer"
+                                   ng-model="question.answer" />
+                        </div>
+                        <div class="form-group">
+                            <label for="answer" translate>INTERACTION.QUESTION_TYPE</label>
+                            <select ng-model="question.type" id="categoria" ng-options="type for type in questionTypes">
+                            </select>
+                        </div>
+                        
+                        <div key-value class="well well-sm clearfix" ng-model="question.questionItems">
+                            <div key-value-item class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group margin-bottom-zero">
+                                        <label translate>INTERACTION.QUESTION_ITEM</label>
+                                        <input type="text" class="form-control" ng-model="$parent.$parent.$item.key" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group margin-bottom-zero">
+                                        <label translate>INTERACTION.QUESTION_VALUE</label>
+                                        <input type="text" class="form-control" ng-model="$parent.$parent.$item.value" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="btn btn-primary" id="add-question" ng-click="addQuestion()" translate>
+                            INTERACTION.ADD_QUESTION
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <label for="separator-answer" translate>INTERACTION.SEPARATOR_ANSWER</label>
+                    <input type="text" class="form-control" id="separator-answer" name="separator-answer"
+                           ng-model="interaction.answerSeparator" />
+                </div>
+
+                <div class="form-group">
+                    <label for="separator-question" translate>INTERACTION.SEPARATOR_QUESTION</label>
+                    <input type="text" class="form-control" id="separator-question" name="separator-question"
+                           ng-model="interaction.questionSeparator" />
+                </div>
+
+                <div class="questions">
+                    <accordion class="accordion-question-title">
+                        <accordion-group is-open="status.open" ng-repeat="question in interaction.questions">
+                            <accordion-heading>
+                                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i> 
+                                <span class="question-answer">{{question.answer}} </span>
+                                <a role="button" class="btn btn-xs btn-info" ng-click="removeQuestion(question)">
+                                    <span class="icon-trash"></span>
+                                </a>
+                            </accordion-heading>
+                            <div class="question-type">
+                                {{question.type}}
+                            </div>
+                            <ul>
+                                <li ng-repeat="item in question.items" >
+                                    {{item.key + " - " + item.value}}
+                                </li>
+                            </ul>
+                        </accordion-group>
+                    </accordion>
+                </div>
+                
+                <a class="btn btn-default" translate ng-click="activeStep(0)">
+                    INTERACTION.PREVIOUS                     
+                </a>
+                <a class="btn btn-primary" translate ng-click="activeStep(2)">
+                    INTERACTION.NEXT
+                </a>
+            </div>
+
+            <div class="step3" ng-show="steps[2]">
+                <div class="dsc-form-web">
+                    <img src="assets/img/speaknow/web.png"> 
+                    <span class="dsc-form-web">
+                        Formulário Web
+                    </span>
+                    <p class="txt-web">
+                        Assim que a Interação for salva e enviada, será gerado automaticamente um formulário 
+                        web com as opções informadas anteriormente. Esse formulário possui um código de 
+                        identificação único que será mostrado ao concluir a ação de salvar. Para acessar 
+                        este formulário na web, basta acessar o link gerado pelo sistema, que deve se parecer 
+                        com este: <b>www.speaknowweb.com.br/interaction/sn12312312</b>. 
+                        Outra forma de acessar é pelo link: <b>www.speaknowweb.com.br</b>, informando o 
+                        código da interação, por exemplo <b>sn123213</b>.
+                    </p>
+
+                </div>
+
+                <div class="channels">
+                    <div class="channel" ng-class="{'img-active':facebook}">
+                        <input type="checkbox" id="img_facebook" class="img_facebook img_icon" ng-model="facebook"> <label for="img_facebook"></label>
+                    </div>
+                    <div class="channel" ng-class="{'img-active':twitter}">
+                        <input type="checkbox"  id="img_twitter" class="img_twitter img_icon" ng-model="twitter"> <label for="img_twitter"></label>
+                    </div>
+                    <div class="channel" ng-class="{'img-active':whatsapp}">
+                        <input type="checkbox"  id="img_whatsapp" class="img_whatsapp img_icon" ng-model="whatsapp"> <label for="img_whatsapp"></label>                    
+                    </div>
+                </div>
+
+                <div class="recipients-whatsapp" ng-show="whatsapp">
+                    <img src="assets/img/speaknow/wh_on.png"> 
+                    <span translate>
+                        INTERACTION.RECIPIENT
+                    </span>
+                    <div class="form-group">
+                        <label for="contacts" translate>INTERACTION.SELECT_CONTACT</label>
+                        <input type="text" class="form-control" id="contacts" name="contacts"
+                               ng-model="contatos" />
+
+                        <input type="checkbox" ng-model="interaction.allContacts">
+                        <span translate>INTERACTION.ALL_CONTACTS</span>
+                    </div>
+
+                    <div class="table-contacts" ng-show="!interaction.allContacts">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th translate>INTERACTION.NAME</th>
+                                    <th translate>INTERACTION.EMAIL</th>
+                                    <th translate>INTERACTION.PHONE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="contact in contacts">
+                                    <td>{{contact.name}}</td>
+                                    <td class="text-left">{{contact.email}}</td>
+                                    <td>{{contact.phone}}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a role="button" class="btn btn-xs btn-info" ng-click="removeContact(contact)">
+                                                <span class="icon-trash"></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="config-twitter" ng-show="twitter">
+                    <img src="assets/img/speaknow/tw_on.png"> 
+                    <span translate>
+                        INTERACTION.CONFIG_TWITTER
+                    </span>
+                    <div class="form-group">
+                        <label for="hashtag-twitter" translate>INTERACTION.CONFIG_TWITTER_EXE</label>
+                        <input type="text" class="form-control" id="hashtag-twitter" name="hashtag-twitter"
+                               ng-model="interaction.hashtagTwitter" />
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px">
+                    <a class="btn btn-default" translate ng-click="activeStep(1)">
+                        INTERACTION.PREVIOUS
+                    </a>
+                    <button class="btn btn-primary" translate>
+                        INTERACTION.SAVE
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

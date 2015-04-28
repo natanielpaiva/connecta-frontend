@@ -1,0 +1,9 @@
+{
+    "CONTACT": {
+        "CONTACTS" : "Contacts",
+        "NAME": "Name",
+        "EMAIL":"Email",
+        "PHONE":"Phone",
+        "REGISTER_CONTACT": "Register Contact"
+    }
+}

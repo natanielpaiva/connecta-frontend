@@ -1,0 +1,52 @@
+/**
+arquivo base de estilo da aplicação, define aqui as cores e outros elementos
+*/
+
+.maps4 .logo {
+    background-image:url(./../img/logo-maps.png);
+    background-color: #36D0B0;
+}
+
+.maps4 .base-color{
+    color: #36D0B0;
+}
+
+.maps4 .base-color-bg {
+    background-color: #36D0B0;
+    color: #000;
+}
+
+.maps4 .app-icon .arrow{
+    border-top-color: #36D0B0!important;
+}
+
+.typeAnalysis {
+    width: 40px;
+}
+
+td, th {
+    text-align: center !important;
+}
+
+//espaçamento de entre labels
+label {
+    margin-top: 15px !important;
+}
+
+//alinhamento de botões de paginação
+.pagination {
+    display: inherit !important;
+}
+
+//padronização de cores do componente de paginação
+.pagination > li > span {
+    color: #333843 !important;
+}
+
+
+.pagination > li > a:hover, 
+.pagination > li > a:focus, 
+.pagination > li > span:focus {
+    color: #333843 !important;
+}
+

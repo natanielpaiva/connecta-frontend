@@ -1,0 +1,18 @@
+{
+    "GROUP":
+            {
+                "REGISTER_GROUP": "Cadastro de Grupos",
+                "NAME": "Nome",
+                "TYPE": "Tipo",
+                "DESCRIPTION" : "Descrição",
+                "ATTRIBUTE_NAME" : "Nome do atributo",
+                "ATTRIBUTE_VALUE" : "Valor do atributo",
+                "ATTRIBUTE TYPE" : "Tipo de atributo",
+                "SELECT_FILE" : "Selecionar arquivos",
+                "FILTER" : "Agrupar por filtros",
+                "GROUPS" : "Grupos"
+                
+            }
+
+}
+

@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 translate>hello</h1>
+
+        <translate>hello</translate>
+
+        <button class="btn btn-default" ng-click="setLang('pt-br')">Português</button>
+        <button class="btn btn-default" ng-click="setLang('en-us')">English</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario">
+            <div class="form-group">
+                <label for="model-nome" translate>LABEL.NAME</label>
+                <input type="text" name="nome" ng-model="model.nome"
+                       id="model-nome" required class="form-control" />
+                <div ng-if="formulario.$dirty" ng-messages="formulario.nome.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+
+            <div class="form-group" ng-class="{
+                        'has-error': formulario.firstName.$invalid && formulario.$dirty }">
+                <label for="model-firstName" translate>LABEL.FIRSTNAME</label>
+                <input type="text" name="firstName" ng-model="model.firstName"
+                       id="model-firstName" required minlength="3" class="form-control" />
+                <div ng-messages="formulario.firstName.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="model-lastName" translate>LABEL.LASTNAME</label>
+                <input type="text" name="lastName" ng-model="model.lastName" maxlength="10"
+                       id="model-lastName" required class="form-control" />
+                <div ng-messages="formulario.lastName.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="model-email" translate>LABEL.EMAIL</label>
+                <input type="email" name="email" ng-model="model.email"
+                       id="model-email" required class="form-control" />
+                <div ng-messages="formulario.email.$error" ng-messages-include="portal-validation-messages"></div>
+            </div>
+        </form>
+    </div>
+</div>

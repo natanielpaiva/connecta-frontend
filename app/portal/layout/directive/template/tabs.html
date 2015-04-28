@@ -1,0 +1,24 @@
+<div
+    ng-class="{
+        'show-tabs':showTabs
+    }">
+    <div id="page-switcher-wrapper">
+        <h3>Área de trabalho</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group radio radio-success">
+                    <input type="radio" ng-model="listTabsAsHistory" id="agreeTrue" ng-value="false">
+                    <label for="agreeTrue">Application</label>
+
+                    <input type="radio" ng-model="listTabsAsHistory" id="agreeFalse" ng-value="true">
+                    <label for="agreeFalse">History</label>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="showTabs">
+            <div app-pages-tabs-history ng-if="listTabsAsHistory"></div>
+            <div app-pages-tabs-app ng-if="!listTabsAsHistory"></div>
+        </div>
+    </div>
+</div>

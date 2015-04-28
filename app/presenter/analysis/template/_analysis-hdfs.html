@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-xs-6 form-group">
+        <label for="domain" translate>analysis.type_query</label>
+        <select class="form-control" ng-model="analysis.typeQuery" ng-options="item.value as item.name for item in typeQuery">
+            <option value="">Selecione</option>
+        </select>
+    </div>
+</div>
+<div class="row am-flip-x" ng-if="analysis.typeQuery === 'hiveQL'">
+   <div class="col-xs-6 form-group">
+        <label for="hiveQL" translate>analysis.hive_ql</label>
+        <textarea class="form-control" id="hiveQL" name="hiveQL"
+                          ng-model="analysis.hiveQL"></textarea>
+    </div>
+</div>
+<div class="row am-flip-x" ng-if="analysis.typeQuery === 'pigQuery'">
+    <div class="col-xs-6 form-group">
+        <label for="pigQuery" translate>analysis.pig_query</label>
+       <textarea class="form-control" id="description" name="pigQuery"
+                          ng-model="analysis.pigQuery"></textarea>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-3 form-group">
+        <label for="sourceOfdata" translate>analysis.mr_class</label>
+        <input type="text" name="mr_class" class="form-control" id="mrClass"
+               ng-model="analysis.mrClass">
+    </div>
+    
+    <div class="col-xs-3 form-group">
+        <label for="dataInsertion" translate>analysis.mr_method</label>
+        <input type="text" name="MrMethod" class="form-control" id="mrMethod"
+               ng-model="analysis.mrMethod">
+    </div>
+</div>

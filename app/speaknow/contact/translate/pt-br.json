@@ -1,0 +1,9 @@
+{
+    "CONTACT": {
+        "CONTACTS" : "Contatos",
+        "NAME": "Nome",
+        "EMAIL":"Email",
+        "PHONE":"Telefone",
+        "REGISTER_CONTACT": "Adicionar Contato"
+    }
+}

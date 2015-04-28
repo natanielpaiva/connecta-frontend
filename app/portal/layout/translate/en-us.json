@@ -1,0 +1,25 @@
+{
+    "VALIDATION":{
+        "REQUIRED":"This field is required",
+        "EMAIL": "Must be a valid email address",
+        "MINLENGTH": "The field is too short",
+        "MAXLENGTH": "The field is too long"
+    },
+    "LAYOUT": {
+        "HOME" : "Home",
+        "ADD" : "Add",
+        "EDIT" : "Edit",
+        "DELETE" : "Delete",
+        "SAVE":  "Save",
+        "BACK":  "Back",
+        "NEXT": "Next",
+        "CANCEL":"Cancel",
+        "APPLY": "Apply",
+        "FILTER": "Filter",
+        "SELECT" : "Choose an option",
+        "SEARCH" : "Search"
+    },
+    "KEY_VALUE": {
+        "NO_ITEM" : "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."
+    }
+}

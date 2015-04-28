@@ -1,0 +1,29 @@
+<div class="form-group">
+    <label for="method" translate>DATASOURCE.METHOD</label>
+    <input type="text" name="method" id="method" class="form-control"
+           ng-model="datasource.method" />
+</div>
+<div class="form-group">
+    <label for="address" translate>DATASOURCE.URL</label>
+    <input type="text" name="address" id="address" class="form-control"
+           ng-model="datasource.address"/>
+</div>
+
+<div key-value class="well well-sm clearfix" ng-model="datasource.parameters">
+    <div key-value-item class="row">
+        <div class="col-md-6">
+            <label for="params" translate>DATASOURCE.PARAMETER</label>
+            <input type="text" name="params" id="params" class="form-control"
+                   ng-model="$parent.$parent.$item.params" />
+            <div ng-if="formulario.$dirty" ng-messages="formulario.params.$error"
+                 ng-messages-include="portal-validation-messages"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="value" translate>DATASOURCE.PARAMETER_VALUE</label>
+                <input type="text" id="value" class="form-control"
+                       ng-model="$parent.$parent.$item.value" />
+            </div>
+        </div>
+    </div>
+</div>

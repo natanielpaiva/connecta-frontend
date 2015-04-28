@@ -1,0 +1,238 @@
+.steps{
+    width: 600px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.divider-blue {
+    background-color: #1b7f96 !important;
+    -webkit-transition: background-color 1s;
+}
+
+.divider-step1 {
+    width: 230px;
+    height: 4px;
+    margin: 0 auto;
+    background-color: #a1a1a1;
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 65px;
+    z-index: -1;
+    -webkit-transition: background-color 1s;
+}
+
+.divider-step2 {
+    width: 230px;
+    height: 4px;
+    margin: 0 auto;
+    background-color: #a1a1a1;
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 300px;
+    z-index: -1;
+    -webkit-transition: background-color 1s;
+}
+
+.number-step{
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #a1a1a1;
+    line-height: 40px;
+    text-align: center;
+    -webkit-border-radius: 180px;
+    -moz-border-radius: 180px;
+    border-radius: 180px;
+    margin-top: 10px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.box-step{
+    width: 120px;
+    height: 80px;
+    text-align: center;
+    display: inline-block;
+    float: left;
+}
+
+.legend-step{
+    font-size: 12px;
+    float: left;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.step-active{
+    background-color: #1b7f96;
+}
+
+.box1{
+    float: left;
+}
+.box2{
+    float: left;
+    margin-left: 120px;
+}
+.box3{
+    float: right;
+}
+
+.interaction-question {
+    margin: 15px 0px 0px 0px !important
+}
+
+.recipients-whatsapp {
+    margin-top: 10px;
+}
+
+.config-twitter{
+    margin-top: 10px;
+}
+
+.img-active{
+    background-color: white;
+    border-radius: 15px;
+    border: 1px solid #cdccca;
+}
+
+.img_web {
+    background: url('#{$speaknowImagePath}/web.png') 0 0px no-repeat;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+}
+
+.img_whatsapp {
+    background: url('#{$speaknowImagePath}/wh_on.png') 0 0px no-repeat;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+}
+
+.channels {
+
+    width: 255px;
+    height: 80px;
+    border: 2px solid #cdccca;
+    border-radius: 8px; 
+
+    input[type=checkbox] {
+        display:none;
+    }
+
+    .channel{
+        height: 65px;
+        width: 65px;
+        display: inline-block;
+        text-align: center;
+        margin-left: 10px;
+        margin-top: 5px;
+
+        &:hover {
+            background-color: white;
+            border-radius: 15px;
+            border: 1px solid #cdccca;
+        }
+
+        label{
+            height: 50px;
+            width: 50px;
+            margin-top: 7px !important;
+            display: inline-block;
+            padding: 0 0 0 0px;
+        }
+
+        .img_whatsapp {
+            & + label {
+                background: url('#{$speaknowImagePath}/wh_off.png') 0 0px no-repeat;
+            }
+
+            &:checked {
+                & + label {
+                    background: url('#{$speaknowImagePath}/wh_on.png') 0 0px no-repeat;
+                }
+            }
+        }
+
+        .img_twitter{
+            & + label {
+                background: url('#{$speaknowImagePath}/tw_off.png') 0 0px no-repeat;
+            }
+
+            &:checked {
+                & + label {
+                    background: url('#{$speaknowImagePath}/tw_on.png') 0 0px no-repeat;
+                }
+            }
+        }
+
+        .img_facebook{
+            & + label {
+                background: url('#{$speaknowImagePath}/fb_off.png') 0 0px no-repeat;
+            }
+
+            &:checked {
+                & + label {
+                    background: url('#{$speaknowImagePath}/fb_on.png') 0 0px no-repeat;
+                }
+            }
+        }
+    }
+}
+
+.table-contacts{
+    border: 1px solid #a1a0a0;
+    width: 800px;
+    height: 165px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.questions {
+
+    width: 40%;
+
+    .question-answer {
+        position: relative;
+        top: 5px;
+    }
+
+    .question-type {
+        background-color: #ccc;
+        padding: 5px;
+    }
+
+    .glyphicon {
+        padding: 5px;
+        position: relative;
+        top: 5px;
+    }
+
+    .panel-body{
+        padding: 0px;
+        background-color: #ebebeb;
+    }
+
+    .panel-default .panel-heading {
+        padding: 0px;
+        padding-bottom: 10px;
+    }   
+
+    .btn {
+        position: relative;
+        float: right;
+        margin: 5px;
+    }
+
+    ul{
+        float: left;
+        margin: 4px;
+        list-style: none;
+        padding: 0px;
+    }
+
+}

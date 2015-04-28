@@ -1,0 +1,32 @@
+{
+    "analysis":
+            {
+                "registerAnalysis": "Register Análises",
+                "sourceAnalysis": "Source Analysis*",
+                "name": "Name*",
+                "description": "Description*",
+                "attribute": "Attribute*",
+                "value": "Value*",
+                "type": "Type*",
+                "AddAttributes": "Add Attributes",
+                "sourceOfdata": "Source of Data*",
+                "dataInsertion": "Data insertion",
+                "customSQL": "Custom SQL*",
+                "table": "Table*",
+                "column": "Column",
+                "descriptionOfcolumns": "Description of Columns",
+                "select": "Select",
+                "separator":"Separator",
+                "quote": "Quote",
+                "csv-type": "type CSV",
+                "csv-file": "CSV File",
+                "csv-text": "CSV Text",
+                "domain": "Domain",
+                "type_query": "Query type",
+                "hive_ql": "HiveQL",
+                "pig_query": "PigQuery",
+                "mr_class":"MR Class",
+                "mr_method": "MR Method",
+                "directories": "Directories"
+            }
+}

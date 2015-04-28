@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>SINGLESOURCE.REGISTER_MEDIA</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+
+            <div class="form-group">
+                <label for="model-nome" translate>SINGLESOURCE.NAME</label>
+                <input type="text" name="nome" ng-model="typeSingleSource.name"
+                       id="model-nome" required class="form-control" />
+                <div ng-if="formulario.nome.$dirty" ng-messages="formulario.nome.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+            
+
+            <div class="portal-type-switcher">
+                <p class="bold" translate>SINGLESOURCE.TYPE_MEDIA<p>
+                <label ng-repeat="tp in types"  class="radio-inline portal-type-switcher-item">
+                    <input type="radio" ng-model="typeSingleSource.type" name="type" 
+                           class="portal-type-switcher-input" id="single-source-type-{{tp.id}}" ng-value="tp" /> 
+                    <span ng-if="tp.id === 'FILE'" class="icon-file3"></span>
+                    <span ng-if="tp.id === 'URL'" class="icon-link"></span>
+                </label>
+            </div>
+
+            <div class="am-collapse" ng-include="'app/presenter/singlesource/template/' + typeSingleSource.type.template"></div>
+
+            <div key-value class="well well-sm clearfix" ng-model="typeSingleSource.singleSourceAttributes">
+                <div key-value-item class="row">
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback">
+                            <label for="user" translate>SINGLESOURCE.ATTRIBUTE_NAME</label>
+                            
+                                <input type="text" name="singleSourceAttributes" id="singleSourceAttributes" class="form-control" 
+                                       ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
+                                <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="valor" translate>SINGLESOURCE.ATTRIBUTE_VALUE</label>
+                            <input type="text" class="form-control"
+                                   ng-model="$parent.$parent.$item.value" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
+                            <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
+                                    ng-model="$parent.$parent.$item.attributeType" class="form-control">
+                                <option value="" translate>LAYOUT.SELECT</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#/presenter/singlesource"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate>
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

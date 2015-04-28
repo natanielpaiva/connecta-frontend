@@ -1,0 +1,17 @@
+{
+    "INTERACTION": {
+        "INTERACTIONS": "Interactions",
+        "ACTIONS": "Actions",
+        "ADD": "Add Interaction",
+        "EDIT": "Edit Interaction",
+        "VIEW": "View Interaction",
+        "ACTIONS": "Actions",
+        "NAME": "Name",
+        "MESSAGE": "Message",
+        "IMAGE" : "Image",
+        "ICON" : "Icon",
+        "TYPE" : "Type",
+        "DESCRIPTION" : "Description",
+        "DROP_FILE_HERE": "Drop file here"
+    }
+}

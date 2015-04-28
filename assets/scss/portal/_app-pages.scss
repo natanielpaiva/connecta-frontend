@@ -1,0 +1,133 @@
+$pageGutter:1em;
+
+// Configurando o container das views
+.page-container {
+    background-color: rgba($white, 0.9);
+    margin-left: $sidebarSize;
+    margin-top: $headerHeight + (2*$pageGutter);
+    transition: margin $defaultAnimationDuration;
+    padding:$pageGutter;
+    border-radius:0.25em;
+    /*@extend .margin-bottom-double;*/
+    @include clearfix();
+
+    h1, h3 {
+        @extend .margin-top-zero;
+    }
+}
+.hide-sidebar .page-container {
+    margin-left: $miniSidebarSize;
+}
+
+.show-tabs .page-container {
+    margin-right: $sidebarSize;
+}
+
+#page-switcher-wrapper {
+    background-color: #1B1E25;
+    transition: all 0.3s;
+    position: fixed;
+    right: -300px;
+    width: 250px;
+    height: 100%;
+    overflow: hidden;
+    z-index: 5;
+    top: 0;
+    padding: 0 10px;
+    padding-top: 60px;
+}
+
+.show-tabs #page-switcher-wrapper{
+    right: 0px;
+}
+
+#page-switcher-wrapper h3{
+    font-size: 18px;
+    color: #fff;
+}
+
+#page-switcher-wrapper h4{
+    font-size: 16px;
+}
+
+#page-switcher-wrapper ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#page-switcher-wrapper ul li{
+    margin-bottom: 10px;
+}
+
+#page-switcher-wrapper .page-shot{
+    background-color: #fff;
+    position: relative;
+    opacity: 0.7;
+    transition: all 0.3s;
+}
+
+#page-switcher-wrapper .page-shot:hover{
+    opacity: 1;
+}
+
+#page-switcher-wrapper .page-shot .btn-close{
+    position: absolute;
+    top: 0;
+    right: 2px;
+    color: #494F5B;
+    transition: all 0.3s;
+}
+
+#page-switcher-wrapper .page-shot .btn-close:hover{
+    color: #000;
+}
+
+#page-switcher-wrapper .page-shot .btn-close i{
+    font-size: 22px;
+}
+
+#page-switcher-wrapper .footer{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+}
+
+/*** Page title ***/
+.page-title {
+    padding: 0px;
+    letter-spacing: -1px;
+    display: block;
+    color: #666;
+    margin: 0 0 10px;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+.page-title h3{
+    display:inline-block;
+    top:-5px;
+    position:relative;
+    width: 83%;
+}
+.page-title p{
+    color:#63696d;
+    letter-spacing:0.5px
+}
+.page-title i{
+    display:inline-block;
+    color:#73777c;
+    font-size:30px;
+    margin-right:12px;
+    position: relative;
+    top: 7px;
+    float:left
+}
+.page-title small {
+    font-size: 14px;
+    letter-spacing: 0px;
+    font-weight: 300;
+    color: #888;
+}
+.page-title .actions{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}

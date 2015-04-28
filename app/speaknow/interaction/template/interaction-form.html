@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{isEditing ? 'INTERACTION.EDIT' : 'INTERACTION.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+            <div class="form-group">
+                <label for="name" translate>INTERACTION.NAME</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       ng-model="interaction.name" />
+            </div>
+
+            <div class="form-group">
+                <label for="image" translate>INTERACTION.IMAGE</label>
+                <label id="image"
+                       class="well drop-box set-file" ng-file-drop 
+                       ng-file-select="onFileSelected($files)"
+                       ng-multiple="false" 
+                       ng-accept="'.jpeg,.jpg,.png'" 
+                       ng-model-rejected="rejFiles" 
+                       allow-dir="false" 
+                       drag-over-class="{accept:'acceptClass', reject:'rejectClass'}">
+                    {{imgName || interactionImg}}
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="icon" translate>INTERACTION.ICON</label>
+                <button type="button" class="btn btn-default" 
+                        ng-click="openIconModal()">
+                    <span class="icon-{{interaction.icon}}"></span>
+                    <input type="hidden" class="form-control" id="icon" name="icon"
+                           ng-model="interaction.icon" />
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label for="type" translate>INTERACTION.TYPE</label>
+                <select id="type" name="type" class="form-control" ng-model="interaction.type">
+                    <option ng-repeat="type in interactionTypes" value="{{type}}">
+                        {{'ACTION.' + type| translate}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionItem" translate>INTERACTION.DESCRIPTION</label>
+                <textarea class="form-control" id="descriptionItem" name="descriptionItem"
+                          ng-model="interaction.description"></textarea>
+            </div>
+            <a href="#/speaknow/interaction"
+               class="btn btn-default" translate>
+                LAYOUT.BACK                     
+            </a>
+            <a class="btn btn-primary" translate 
+               ng-click="nextStep()" ng-show="!isEditing">
+                LAYOUT.NEXT
+            </a>
+            <a class="btn btn-primary" translate 
+               ng-click="save()" ng-show="isEditing">
+                LAYOUT.SAVE
+            </a>
+        </form>
+        <pre>{{interaction | json}}</pre>
+        
+    </div>
+</div>

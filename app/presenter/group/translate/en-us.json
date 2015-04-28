@@ -1,0 +1,16 @@
+{
+    "GROUP":
+            {
+                "REGISTER_GROUP": "Register group",
+                "NAME": "Name",
+                "TYPE" : "Type",
+                "DESCRIPTION" : "Description",
+                "ATTRIBUTE_NAME" : "Attribute Name",
+                "ATTRIBUTE_VALUE" : "Attribute Value",
+                "ATTRIBUTE TYPE" : "Attribute Type",
+                "SELECT_FILE" : "Select File",
+                "FILTER" : "Filter",
+                "GROUPS" : "Groups"
+            }
+}
+
