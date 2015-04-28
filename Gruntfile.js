@@ -27,6 +27,22 @@ module.exports = function(grunt) {
         }]
       }
     },
+    copy: {
+      dist: {
+        src: [
+          '**',
+          '!node_modules/**',
+          '!**/scss/**',
+          '!test/**',
+          '!bower.json',
+          '!package.json',
+          '!new-module.sh',
+          '!Gruntfile.js'
+        ],
+        dest: 'dist/',
+        expand:true
+      }
+    },
     template: {
       'process-html-template': {
         options: {
@@ -48,12 +64,6 @@ module.exports = function(grunt) {
           base: 'dist'
         }
       }
-    },
-    copy: {
-        dist: {
-            src: 'app/**',
-            dest: 'dist/app/**'
-        }
     }
   });
 
@@ -78,10 +88,11 @@ module.exports = function(grunt) {
 
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-template');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
-  grunt.registerTask('default', ['jshint', 'sass', 'template']);
+  grunt.registerTask('default', ['jshint', 'sass', 'copy', 'template']);
   grunt.registerTask('serve', ['default', 'connect:server']);
 };

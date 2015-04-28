@@ -2,7 +2,7 @@ define([
     'angular',
     'jquery',
     // Configuração dos módulos
-    'json!<%= backend %>/application',
+    'json!applications.json',
     // Módulos Angular Connecta
     'connecta.portal',
     'connecta.collector',
