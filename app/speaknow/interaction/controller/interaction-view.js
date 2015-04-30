@@ -14,6 +14,7 @@ define([
         if ($routeParams.id) {
             InteractionService.get($routeParams.id).success(function (data) {
                 $scope.interaction = data;
+                $scope.interactionImage = "data:image/jpeg;base64," + $scope.interaction.image;
             });
         } else {
             console.error("Id da interaction não informado na url");

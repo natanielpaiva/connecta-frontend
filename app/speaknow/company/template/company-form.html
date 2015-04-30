@@ -48,7 +48,7 @@
                        drag-over-class="{accept:'accept', reject:'reject'}">
                     <translate>{{fileQuad.name ? fileQuad.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
                 </label>
-                <img class="img-company-quad" ng-if="company.imageQuad" ng-src="{{fileQuad | dataUri }}" />
+                <img class="img-company-quad" ng-if="company.imageQuad" ng-src="{{fileQuad}}" />
             </div>
             
             <div class="form-group">
@@ -66,7 +66,7 @@
                        translate>
                     COMPANY.DROP_FILE_HERE
                 </label>
-                <img class="img-company-rect" ng-if="company.imageRect" ng-src="{{company.imageRect}}" />
+                <img class="img-company-rect" ng-if="company.imageRect" ng-src="{{fileRect}}" />
             </div>
             <button class="btn btn-primary" translate>
                 LAYOUT.SAVE

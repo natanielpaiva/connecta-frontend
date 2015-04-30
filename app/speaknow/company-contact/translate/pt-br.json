@@ -1,15 +1,8 @@
-    {
-    "COMPANYGROUP": {
-        "COMPANYGROUP": "Grupo de empresas",
-        "COMPANY": "Empresa",
-        "NAME": "Nome",
-        "EMAIL": "Email",
-        "PHONE": "Telefone",
-        "ADDRESS": "Address",
-        "DROP_FILE_HERE": "Arraste ou clique aqui",
+{
+    "COMPANY_CONTACT": {
         "TYPE": "Tipo",
-        "IMAGE_QUAD": "Imagem Quadrada",
-        "IMAGE_RECT": "Imagem Retangular",
-        "DESCRIPTION":"Descrição"
+        "REGISTER_CONTACT": "Adicionar Contato",
+        "NAME": "Nome",
+        "VALUE": "Valor"
     }
 }

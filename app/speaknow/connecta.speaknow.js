@@ -9,6 +9,7 @@ define([
         $translatePartialLoaderProvider.addPart('speaknow/action');
         $translatePartialLoaderProvider.addPart('speaknow/company');
         $translatePartialLoaderProvider.addPart('speaknow/company-contact');
+        $translatePartialLoaderProvider.addPart('speaknow/company-contact-group');
     });
 
     speaknow.run(function (applications) {
@@ -23,7 +24,8 @@ define([
             contact: appSpeaknow.host + '/contact',
             interaction: appSpeaknow.host + '/interaction',
             company: appSpeaknow.host + '/company',
-            companyContact: appSpeaknow.host + '/contact/group',
+            contactGroup: appSpeaknow.host + '/contact/group',
+            companyContact: appSpeaknow.host + '/company/contact',
             regexBase64: '.*base64,'
         });
 
@@ -112,10 +114,41 @@ define([
             controllerUrl: 'speaknow/company/controller/company-form',
             templateUrl: 'app/speaknow/company/template/company-form.html'
         },
+        /**
+         * URL COMPANY CONTACT GROUP
+         */
+        '/speaknow/company/contact/group/new' :{
+            controller: 'ContactGroupFormController',
+            controllerUrl: 'speaknow/company-contact-group/controller/contact-group-form',
+            templateUrl: 'app/speaknow/company-contact-group/template/contact-group-form.html'
+        },
+        '/speaknow/company/contact/group/:id' :{
+            controller: 'ContactGroupViewController',
+            controllerUrl: 'speaknow/company-contact-group/controller/contact-group-view',
+            templateUrl: 'app/speaknow/company-contact-group/template/contact-group-view.html'
+        },
+        '/speaknow/company/contact/group/:id/edit' :{
+            controller: 'ContactGroupFormController',
+            controllerUrl: 'speaknow/company-contact-group/controller/contact-group-form',
+            templateUrl: 'app/speaknow/company-contact-group/template/contact-group-form.html'
+        },
+         /**
+         * URL COMPANY CONTACT 
+         */
+        '/speaknow/company/contact/new' :{
+            controller: 'CompanyContactFormController',
+            controllerUrl: 'speaknow/company-contact/controller/company-contact-form',
+            templateUrl: 'app/speaknow/company-contact/template/company-contact-form.html'
+        },
         '/speaknow/company/contact/:id' :{
             controller: 'CompanyContactViewController',
             controllerUrl: 'speaknow/company-contact/controller/company-contact-view',
             templateUrl: 'app/speaknow/company-contact/template/company-contact-view.html'
+        },
+        '/speaknow/company/contact/:id/edit' :{
+            controller: 'CompanyContactFormController',
+            controllerUrl: 'speaknow/company-contact/controller/company-contact-form',
+            templateUrl: 'app/speaknow/company-contact/template/company-contact-form.html'
         }
     };
 
@@ -123,19 +156,19 @@ define([
         {
             href: 'speaknow/contact',
             title: 'CONTACT.CONTACTS',
-            icon: 'icon-user',
+            icon: 'icon-contacts',
             children: []
         },
         {
             title: 'INTERACTION.INTERACTIONS',
-            icon: 'icon-target',
+            icon: 'icon-archive',
             href: 'speaknow/interaction',
             children: []
         },
         {
             href: 'speaknow/company',
             title: 'COMPANY.COMPANY',
-            icon: 'icon-user',
+            icon: 'icon-suitcase',
             children: []
         }
     ];

@@ -1,0 +1,11 @@
+{
+    "COMPANY_CONTACT": {
+        "COMPANY_CONTACT": "Company Groups",
+        "CONTACTS": "Contacts",
+        "TYPE": "Type",
+        "IMAGE_QUAD": "Image Square",
+        "IMAGE_RECT": "Image Rectangle",
+        "DROP_FILE_HERE":"Drop or click here",
+        "DESCRIPTION":"Description"
+    }
+}

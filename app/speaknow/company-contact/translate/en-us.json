@@ -1,10 +1,8 @@
 {
     "COMPANY_CONTACT": {
-        "COMPANY_CONTACT": "Company Groups",
         "TYPE": "Type",
-        "IMAGE_QUAD": "Image Square",
-        "IMAGE_RECT": "Image Rectangle",
-        "DROP_FILE_HERE":"Drop or click here",
-        "DESCRIPTION":"Description"
+        "REGISTER_CONTACT": "Register Contact",
+        "NAME": "Name",
+        "VALUE": "Value"
     }
 }

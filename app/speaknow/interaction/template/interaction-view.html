@@ -17,7 +17,7 @@
             <button type="button" class="btn btn-default" ng-click="deleteInteraction(interaction.id)">
                 <span class="icon-dump"></span></button>
 
-            <a href="#/speaknow/interaction/{{action.id}}/edit" class="btn btn-default">
+            <a href="#/speaknow/interaction/{{interaction.id}}/edit" class="btn btn-default">
                 <span class="icon-pencil"></span>
             </a>
         </div>
@@ -31,7 +31,9 @@
                     </p>
                     <p ng-if="interaction.image">
                         <strong translate>INTERACTION.IMAGE</strong>: 
-                        {{interaction.image}}
+                    </p>
+                    <p>
+                        <img class="img-company-quad" ng-src="{{interactionImage}}" />
                     </p>
                     <p ng-if="interaction.icon">
                         <strong translate>INTERACTION.ICON</strong>: 

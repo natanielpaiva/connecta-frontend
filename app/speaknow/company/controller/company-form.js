@@ -12,6 +12,8 @@ define([
             $scope.isEditing = true;
             CompanyService.get($routeParams.id).success(function (data) {
                 $scope.company = data;
+                $scope.fileQuad = "data:image/jpeg;base64," + $scope.company.imageQuad;
+                $scope.fileRect = "data:image/jpeg;base64," + $scope.company.imageRect;
             });
         }
 
@@ -23,13 +25,11 @@ define([
 
         $scope.fileQuadDropped = function (files) {
             if (files && files.length) {
-                $scope.fileQuad = files[0];
-                
-                $scope.fileQuad.binary = '';
-//                $("#file-quad").html($scope.fileQuad.name);
+
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     $scope.company.imageQuad = e.target.result.replace(new RegExp(speaknowResources.regexBase64), "");
+                    $scope.fileQuad = "data:image/jpeg;base64," + $scope.company.imageQuad;
                     $scope.$apply();
                 };
                 reader.readAsDataURL(files[0]);
@@ -38,11 +38,10 @@ define([
         
         $scope.fileRectDropped = function (files) {
             if (files && files.length) {
-                $scope.fileRect = files[0];
-//                $("#file-rect").html($scope.fileRect.name);
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     $scope.company.imageRect = e.target.result.replace(new RegExp(speaknowResources.regexBase64), "");
+                    $scope.fileRect = "data:image/jpeg;base64," + $scope.company.imageRect;
                     $scope.$apply();
                 };
                 reader.readAsDataURL(files[0]);

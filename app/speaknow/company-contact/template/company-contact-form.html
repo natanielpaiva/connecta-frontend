@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>COMPANY_CONTACT.REGISTER_CONTACT</h3>
+    </div>
+</div>
+
+<div class="row" ng-if="contactGroup">
+    <div class="col-md-12">
+        <div class="well well-sm">
+            <h4>{{contactGroup.name}}</h4>
+            <p>{{contactGroup.description}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+            <div class="form-group">
+                <label for="nome" translate>COMPANY_CONTACT.NAME</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       ng-model="companyContact.name" />
+            </div>
+            <div class="form-group">
+                <label for="type" translate>COMPANY_CONTACT.TYPE</label>
+                <select id="type" name="type" class="form-control" ng-model="companyContact.type">
+                    <option value="PHONE">
+                        Telefone
+                    </option>
+                    <option value="EMAIL">
+                        E-mail
+                    </option>
+                </select>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="value" translate>COMPANY_CONTACT.VALUE</label>
+                <input type="text" class="form-control" id="name" name="value"
+                       ng-model="companyContact.value" />
+            </div>
+
+            <a href="#/speaknow/company"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate>
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

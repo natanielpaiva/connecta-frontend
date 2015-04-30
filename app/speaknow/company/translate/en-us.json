@@ -10,6 +10,7 @@
         "IMAGE_QUAD": "Image Square",
         "IMAGE_RECT": "Image Rectangle",
         "DROP_FILE_HERE":"Drop or click here",
-        "DESCRIPTION":"Description"
+        "DESCRIPTION":"Description",
+        "GROUPS":"Contacts Groups"
     }
 }

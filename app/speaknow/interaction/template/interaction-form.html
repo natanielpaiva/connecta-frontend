@@ -16,15 +16,18 @@
             <div class="form-group">
                 <label for="image" translate>INTERACTION.IMAGE</label>
                 <label id="image"
-                       class="well drop-box set-file" ng-file-drop 
-                       ng-file-select="onFileSelected($files)"
-                       ng-multiple="false" 
-                       ng-accept="'.jpeg,.jpg,.png'" 
+                       class="well drop-box set-file dropzone"
+                       ng-file-drop 
+                       ng-file-select
+                       ng-multiple="false"
+                       ng-file-change="onFileSelected($files, $event, $rejectedFiles)" 
+                       ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'" 
                        ng-model-rejected="rejFiles" 
                        allow-dir="false" 
-                       drag-over-class="{accept:'acceptClass', reject:'rejectClass'}">
+                       drag-over-class="{accept:'accept', reject:'reject'}">
                     {{imgName || interactionImg}}
                 </label>
+                <img class="img-company-quad" ng-if="interaction.image" ng-src="{{interactionImage}}" />
             </div>
 
             <div class="form-group">
@@ -64,7 +67,5 @@
                 LAYOUT.SAVE
             </a>
         </form>
-        <pre>{{interaction | json}}</pre>
-        
     </div>
 </div>

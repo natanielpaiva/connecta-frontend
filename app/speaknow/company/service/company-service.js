@@ -9,25 +9,18 @@ define([
         };
         
         this.get = function (id) {
-            var url = speaknowResources.company + '/' + id;
+            var url = speaknowResources.company + '/get/' + id;
             return $http.get(url);
         };
 
-//        this.save = function (fileQuad, fileRect, company) {
-//            var url = speaknowResources.company + "/save";
-//            var fd = new FormData();
-//            fd.append('fileQuad', fileQuad);
-//            fd.append('fileRect', fileRect);
-//            fd.append('company', JSON.stringify(company));
-//            return $http.post(url, fd, {
-//                transformRequest: angular.identity,
-//                headers: {'Content-Type': undefined}
-//            });
-//        };
-        
         this.save = function (company) {
-            var url = speaknowResources.company + "/saveTest";
+            var url = speaknowResources.company + "/save";
             return $http.post(url, company);
+        };
+        
+        this.delete = function (id){
+            var url = speaknowResources.company + "/" + id;
+            return $http.delete(url);
         };
 
         this.getQuestionTypes = function () {

@@ -1,7 +1,8 @@
     {
-    "COMPANY": {
-        "COMPNANIES": "Empresas",
+    "COMPANYGROUP": {
+        "COMPANYGROUP": "Grupo de empresas",
         "COMPANY": "Empresa",
+        "CONTACTS": "Contatos",
         "NAME": "Nome",
         "EMAIL": "Email",
         "PHONE": "Telefone",
@@ -10,8 +11,6 @@
         "TYPE": "Tipo",
         "IMAGE_QUAD": "Imagem Quadrada",
         "IMAGE_RECT": "Imagem Retangular",
-        "DESCRIPTION":"Descrição",
-        "GROUPS":"Grupos de contatos"
-        
+        "DESCRIPTION":"Descrição"
     }
 }

@@ -9,7 +9,7 @@ define([
      * Criar diretiva para modal para o portal, e para modal de icones do speaknow
      */
     return speaknow.lazy.controller('InteractionFormController', function ($scope,
-            InteractionService, ActionService, $location, $routeParams, $translate,
+            InteractionService, ActionService, speaknowResources, $location, $routeParams, $translate,
             $modal) {
 
         $scope.interaction = {
@@ -33,6 +33,7 @@ define([
             $scope.isEditing = true;
             InteractionService.get($routeParams.id).success(function (data) {
                 $scope.interaction = data;
+                $scope.interactionImage = "data:image/jpeg;base64," + $scope.interaction.image;
             });
         }
 
@@ -70,7 +71,8 @@ define([
                 $scope.imgName = file.name;
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.interaction.image = e.target.result;
+                    $scope.interaction.image = e.target.result.replace(new RegExp(speaknowResources.regexBase64), "");
+                    $scope.interactionImage = "data:image/jpeg;base64," + $scope.interaction.image;
                     $scope.$apply();
                 };
                 reader.readAsDataURL(files[0]);
