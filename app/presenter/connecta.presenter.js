@@ -10,7 +10,7 @@ define([
         $translatePartialLoaderProvider.addPart('presenter/singlesource');
         $translatePartialLoaderProvider.addPart('presenter/analysis');
         $translatePartialLoaderProvider.addPart('presenter/group');
-//        $translatePartialLoaderProvider.addPart('presenter/hierarchy');
+        $translatePartialLoaderProvider.addPart('presenter/hierarchy');
         $translatePartialLoaderProvider.addPart('presenter/network');
         $translatePartialLoaderProvider.addPart('presenter/viewer');
     });
@@ -125,7 +125,13 @@ define([
             controller: 'HierarchyFormController',
             controllerUrl: 'presenter/hierarchy/controller/hierarchy-form',
             templateUrl: 'app/presenter/hierarchy/template/hierarchy-form.html'
+        },
+        '/presenter/hierarchy/:id': {
+            controller: 'HierarchyViewController',
+            controllerUrl: 'presenter/hierarchy/controller/hierarchy-view',
+            templateUrl: 'app/presenter/hierarchy/template/hierarchy-view.html'
         }
+        
     };
     
     presenter._menu = [

@@ -182,7 +182,7 @@ define([
                 },
                 'responseError': function (rejection) {
                     $log.debug('Received response: ', rejection.status);
-
+                    
                     var responseInterceptors = {
                         400: function (rejection) {
                             // BAD REQUEST
@@ -259,11 +259,13 @@ define([
         'portal/layout/service/search',
         'portal/layout/directive/debug',
         'portal/layout/directive/key-value',
+        'portal/layout/directive/file-model',
+        'portal/layout/directive/input-timeout',
         'portal/layout/filter/data-uri',
         'portal/layout/directive/file-model'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });
 
-    return connecta;
+    return connecta; 
 });

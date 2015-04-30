@@ -2,15 +2,27 @@ define([
     'connecta.presenter',
     'presenter/analysis/service/analysis-service'
 ], function (presenter) {
-    return presenter.lazy.controller('AnalysisFormController', function ($scope, AnalysisService) {
+    return presenter.lazy.controller('AnalysisFormController', function ($scope, AnalysisService, $log) {
+
+        var datasourceCurrent = null;
 
         //preenche o combo de datasource
         AnalysisService.getListDatasource().then(function (response) {
             $scope.listDatasource = response.data;
         });
 
+        function resetComponent() {
+            if (!$scope.component) {
+                $scope.component = {};
+            }
+            $scope.component.catalog = [];
+            $scope.component.columns = [];
+            $scope.component.domain = [];
+        }
+        resetComponent();
 
-        $scope.columns = [{name: '', label: ''}];
+        // $scope.$watch('component.catalog', $log.debug);
+        // $scope.$watch('component.column', $log.debug);
 
         $scope.attributeTypes = ["Select", "Map", "Date", "Text", "Etc"];
 
@@ -33,36 +45,23 @@ define([
         $scope.types = AnalysisService.getTypes();
 
         $scope.$watch('analysis.datasource.id', function (idDatasouce) {
-            var filterCSV = function (value) {
-                return value.id.toUpperCase() === "CSV";
-            };
+            for (var ds  in $scope.listDatasource) {
 
-            if (idDatasouce === "csv") {
-                $scope.analysis.type = $scope.types.filter(filterCSV).pop();
-            } else {
-                for (var ds  in $scope.listDatasource) {
+                if (idDatasouce === $scope.listDatasource[ds].id.toString()) {
 
-                    if (idDatasouce === $scope.listDatasource[ds].id.toString()) {
-                        console.log($scope.listDatasource[ds].type);
-                        var type = $scope.listDatasource[ds].type.toLowerCase();
+                    datasourceCurrent = $scope.listDatasource[ds];
 
-                        for (var ty in $scope.types) {
-                            if ($scope.types[ty].id === type) {
-                                //Monta o template de acordo com o datasource
-                                $scope.analysis.type = $scope.types[ty];
+                    //Monta o template de acordo com o datasource
+                    $scope.analysis.type = $scope.types[datasourceCurrent.type];
 
-                                //Verifica se a propriedade o Start existe no array
-                                if ($scope.types[ty].hasOwnProperty("start")) {
-                                    $scope.types[ty].start(idDatasouce).then(startColumns);
-                                }
-                            }
-                        }
+                    if ($scope.types[datasourceCurrent.type].hasOwnProperty("start")) {
+                        resetComponent();
+                        $scope.types[datasourceCurrent.type].start(
+                                datasourceCurrent.id,
+                                $scope.component
+                                );
                     }
                 }
-                startColumns = function (response){
-                    //preenche as colunas
-                    $scope.columns = response.data;
-                };
             }
         });
 
@@ -97,20 +96,16 @@ define([
         $scope.$watch('databaseForm.selectedTable', function (tabela) {
             if (tabela !== null) {
                 //tipo todas as colunas
-                $scope.columns = [];
+                $scope.component.columns = [];
                 for (var tb in tabela.columns) {
-                    $scope.columns.push({
+                    $scope.component.columns.push({
                         name: tabela.columns[tb].name,
                         label: tabela.columns[tb].name,
                         formula: tabela.tableName + "." + tabela.columns[tb].name
                     });
                 }
             }
-            console.log($scope.columns);
         });
-
-
-
 
         //################CSV#####################
         $scope.separator = [
@@ -123,34 +118,54 @@ define([
             {value: "text", name: 'Texto'}
         ];
 
-        //################Endeca#####################
-        $scope.domain = [
-            {value: "xxx", name: "xxx"},
-            {value: "yyy", name: "yyy"}
-        ];
+        //################Endeca###################
+        $scope.$watch('analysis.domain', function (domain) {
+            if ($scope.component.domain !== null && domain !== undefined) {
+                return AnalysisService.getListColumnsEndeca(datasourceCurrent.id, domain).then(function (response) {
+                    $scope.component.columns = response.data;
+                });
+            }
+        });
 
+       //################HDFS#####################
         $scope.typeQuery = [
             {value: "hiveQL", name: "HiveQL"},
             {value: "pigQuery", name: "PigQuery"}
         ];
 
+        //################Obiee#####################
+        $scope.getCatalog = function (scope, item) {
+            scope.toggle();
+            var IdDatosource = $scope.analysis.datasource.id;
 
+            //muda o icon para uma pasta aberta
+            scope.$modelValue.icon = "glyphicon glyphicon-folder-open";
+
+            //caso seja uma pasta
+            if (item.type === "folder") {
+                return AnalysisService.getListCatologBiee(IdDatosource, item.path).then(function (response) {
+                    item.items = response.data;
+
+                    for (var it in item.items) {
+
+                        if (item.items[it].type === "folder") {
+                            item.items[it].icon = "glyphicon glyphicon-folder-close";
+                        }
+                        if (item.items[it].type === "object") {
+                            item.items[it].icon = "glyphicon glyphicon-signal";
+                        }
+                    }
+                });
+            } else if (item.type === "object") {
+                return AnalysisService.getListColumnsObiee(IdDatosource, item.path).then(function (response) {
+                    $scope.component.columns = response.data;
+                });
+            }
+        };
 
         $scope.submit = function () {
-            //Montando estrutuda de colunas
-            console.log($scope.columns);
 
-//            var columnsDatabase = angular.copy($scope.databaseForm.selectedTable.columns);
-//            var analysisColumns = [];
-//            for (var columns in columnsDatabase) {
-//                analysisColumns.push({
-//                    name: columnsDatabase[columns].name,
-//                    label: columnsDatabase[columns].label,
-//                    formula: $scope.databaseForm.selectedTable.tableName + "." + columnsDatabase[columns].name
-//                });
-//            }
-            //add colunas na analysis
-            $scope.analysis.analysisColumns = $scope.columns;
+            $scope.analysis.analysisColumns = $scope.component.columns;
             //console.log(analysisColumns);
             AnalysisService.save($scope.analysis).then(function () {
             });
