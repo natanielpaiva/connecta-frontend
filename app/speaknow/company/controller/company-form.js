@@ -2,7 +2,7 @@ define([
     'connecta.speaknow',
     'speaknow/company/service/company-service'
 ], function (speaknow) {
-    return speaknow.lazy.controller('CompanyFormController', function ($scope, CompanyService, speaknowResources, $location, $routeParams) {
+    return speaknow.lazy.controller('CompanyFormController', function ($scope, CompanyService, regexBase64, $location, $routeParams) {
 
         $scope.company = {};
         $scope.contactMail = {};
@@ -28,7 +28,7 @@ define([
 
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.company.imageQuad = e.target.result.replace(new RegExp(speaknowResources.regexBase64), "");
+                    $scope.company.imageQuad = e.target.result.replace(new RegExp(regexBase64), "");
                     $scope.fileQuad = "data:image/jpeg;base64," + $scope.company.imageQuad;
                     $scope.$apply();
                 };
@@ -40,7 +40,7 @@ define([
             if (files && files.length) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.company.imageRect = e.target.result.replace(new RegExp(speaknowResources.regexBase64), "");
+                    $scope.company.imageRect = e.target.result.replace(new RegExp(regexBase64), "");
                     $scope.fileRect = "data:image/jpeg;base64," + $scope.company.imageRect;
                     $scope.$apply();
                 };

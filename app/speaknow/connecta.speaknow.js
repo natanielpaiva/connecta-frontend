@@ -25,11 +25,12 @@ define([
             interaction: appSpeaknow.host + '/interaction',
             company: appSpeaknow.host + '/company',
             contactGroup: appSpeaknow.host + '/contact/group',
-            companyContact: appSpeaknow.host + '/company/contact',
-            regexBase64: '.*base64,'
+            companyContact: appSpeaknow.host + '/company/contact'
         });
 
     });
+    
+    speaknow.constant('regexBase64', '.*base64,');
 
     speaknow._routes = {
         '/speaknow': {
