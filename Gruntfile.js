@@ -2,12 +2,6 @@ module.exports = function(grunt) {
 
   var backend = grunt.option('backend');
 
-  grunt.log.debug(grunt.template.process('[CONNECTA] Backend set to: <%= backend %>', {
-    data: {
-      backend: backend
-    }
-  }));
-
   grunt.initConfig({
     jshint: {
       jshintrc: '.jshintrc',
@@ -27,6 +21,22 @@ module.exports = function(grunt) {
         }]
       }
     },
+    watch: {
+      scripts: {
+        files: ['**/*.js'],
+        tasks: ['jshint'],
+        options: {
+          spawn: false,
+        },
+      },
+      css: {
+        files: ['**/*.scss'],
+        tasks: ['sass'],
+        options: {
+          spawn: false,
+        },
+      },
+    },
     copy: {
       dist: {
         src: [
@@ -34,6 +44,8 @@ module.exports = function(grunt) {
           '!node_modules/**',
           '!**/scss/**',
           '!test/**',
+          '!nbproject/**',
+          '!dist/**',
           '!bower.json',
           '!package.json',
           '!new-module.sh',
@@ -43,7 +55,7 @@ module.exports = function(grunt) {
         expand: true
       }
     },
-    template: {
+    /*template: {
       'process-html-template': {
         options: {
           data: {
@@ -54,19 +66,25 @@ module.exports = function(grunt) {
           'dist/app/connecta.js': ['app/connecta.js']
         }
       }
-    },
+    },*/
     karma: {
       unit: {
         configFile: 'test/karma.conf.js'
       }
     },
     connect: {
-      server: {
-        keepalive: true,
+      production: {
         options: {
           keepalive: true,
           port: 9001,
           base: 'dist'
+        }
+      },
+      dev: {
+        options: {
+          keepalive: true,
+          port: 9001,
+          base: '.'
         }
       }
     }
@@ -95,11 +113,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-template');
+  //grunt.loadNpmTasks('grunt-template');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('default', ['jshint', 'sass', 'copy', 'template']);
   grunt.registerTask('test', ['default', 'karma']);
-  grunt.registerTask('run', ['default', 'connect:server']);
+  grunt.registerTask('run-prod', ['default', 'connect:production']);
+  grunt.registerTask('run', ['jshint', 'sass', 'connect:dev', 'watch']);
 };
