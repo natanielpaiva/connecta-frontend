@@ -42,6 +42,14 @@ define([
             ]
         }
     ];
+    
+    portal.run(function($http, $templateCache){
+        
+        $http.get('app/portal/layout/template/portal-error-messages.html').then(function(response) {
+            $templateCache.put('portal-error-messages', response.data); 
+        });
+        
+    });
 
     return portal;
 });

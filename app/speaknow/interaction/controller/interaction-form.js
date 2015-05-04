@@ -78,8 +78,18 @@ define([
                 reader.readAsDataURL(files[0]);
             }
         };
+        
+        var validateForm = function(){
+            $scope.interaction_form.$submitted = true;
+            return $scope.interaction_form.$valid;
+        };
 
         $scope.nextStep = function () {
+            if(!validateForm()){
+                console.error('form is invalid');
+                return;
+            }
+            
             ActionService.setInteraction($scope.interaction);
             $location.path('speaknow/action/new');
         };
