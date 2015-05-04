@@ -32,6 +32,11 @@ define([
     });
 
     speaknow._routes = {
+        '/speaknow': {
+            controller: 'InteractionListController',
+            controllerUrl: 'speaknow/interaction/controller/interaction-list',
+            templateUrl: 'app/speaknow/interaction/template/interaction-list.html'
+        },
         /**
          * URL CONTACTS
          */
