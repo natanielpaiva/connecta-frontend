@@ -14,6 +14,7 @@ define([
     'angular-resource',
     'angular-ui-bootstrap',
     'angular-ng-table',
+    'bower_components/angular-ui-utils/ui-utils',
     'bower_components/prefix-free/prefixfree.min',
     'bower_components/angular-animate/angular-animate.min',
     'bower_components/angular-cookies/angular-cookies.min',
@@ -47,6 +48,7 @@ define([
         'ngMessages',
         'ui.bootstrap',
         'ui.tree',
+        'ui.mask',
         'pascalprecht.translate',
         'angularFileUpload'
     ]);
@@ -262,7 +264,8 @@ define([
         'portal/layout/directive/file-model',
         'portal/layout/directive/input-timeout',
         'portal/layout/filter/data-uri',
-        'portal/layout/directive/file-model'
+        'portal/layout/directive/file-model',
+        'portal/layout/directive/conf-modal'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });

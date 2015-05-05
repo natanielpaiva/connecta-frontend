@@ -37,7 +37,8 @@
     "angular-motion": "~0.3.4",
     "angular-ui-tree": "~2.1.5",
     "prefix-free": "gh-pages",
-    "toastr": "~2.1.1"
+    "toastr": "~2.1.1",
+    "angular-ui-utils": "~0.2.3"
   },
   "authors": [],
   "moduleType": [

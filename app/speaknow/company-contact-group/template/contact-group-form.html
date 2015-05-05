@@ -19,20 +19,24 @@
         <form novalidate name="formulario" ng-submit="submit()">
             <div class="form-group">
                 <label for="nome" translate>COMPANYGROUP.NAME</label>
-                <input type="text" class="form-control" id="name" name="name"
-                       ng-model="contactGroup.name" />
+                <input type="text" class="form-control" id="nome" name="nome"
+                       ng-model="contactGroup.name" required/>
+                <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
+                     ng-messages-include="portal-validation-messages"></div>
             </div>
             <div class="form-group">
-                <label for="desc" translate>COMPANYGROUP.TYPE</label>
-                <input type="text" class="form-control" id="name" name="desc"
-                       ng-model="contactGroup.description" />
+                <label for="type" translate>COMPANYGROUP.TYPE</label>
+                <input type="text" class="form-control" id="type" name="type"
+                       ng-model="contactGroup.description" required/>
+                <div ng-show="formulario.type.$touched" ng-messages="formulario.type.$error"
+                     ng-messages-include="portal-validation-messages"></div>
             </div>
 
             <a href="#/speaknow/company"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>
-            <button class="btn btn-primary" translate>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
                 LAYOUT.SAVE
             </button>
         </form>

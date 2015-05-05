@@ -11,27 +11,37 @@
 
             <div class="form-group">
                 <label for="nome" translate>COMPANY.NAME</label>
-                <input type="text" class="form-control" id="name" name="name" ng-model="company.name" />
+                <input type="text" class="form-control" id="name" name="nome" ng-model="company.name" required/>
+                <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
+                     ng-messages-include="portal-validation-messages"></div>
             </div>
 
             <div class="form-group">
                 <label for="address" translate>COMPANY.ADDRESS</label>
-                <input type="text" class="form-control" id="address" name="address" ng-model="company.address" />
+                <input type="text" class="form-control" id="address" name="address" ng-model="company.address" required/>
+                <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
+                     ng-messages-include="portal-validation-messages"></div>
             </div>
 
             <div class="form-group">
                 <label for="mail" translate>COMPANY.EMAIL</label>
-                <input type="text" class="form-control" id="mail" name="mail" ng-model="email" />
+                <input type="email" class="form-control" id="mail" name="mail" ng-model="email" required/>
+                <div ng-show="formulario.mail.$touched" ng-messages="formulario.mail.$error"
+                     ng-messages-include="portal-validation-messages"></div>
             </div>
 
             <div class="form-group">
                 <label for="phone" translate>COMPANY.PHONE</label>
-                <input type="text" class="form-control" id="phone" name="phone" ng-model="phone"/>
+                <input type="text" class="form-control" id="phone" name="phone" ng-model="phone" required/>
+                <div ng-show="formulario.phone.$touched" ng-messages="formulario.phone.$error"
+                     ng-messages-include="portal-validation-messages"></div>
             </div>
 
             <div class="form-group">
                 <label for="type" translate>COMPANY.TYPE</label>
-                <input type="text" class="form-control" id="type" name="type" ng-model="company.type" />
+                <input type="text" class="form-control" id="type" name="type" ng-model="company.type" required/>
+                <div ng-show="formulario.type.$touched" ng-messages="formulario.type.$error"
+                     ng-messages-include="portal-validation-messages"></div>
             </div>
 
             <div class="form-group">
@@ -49,6 +59,9 @@
                     <translate>{{fileQuad.name ? fileQuad.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
                 </label>
                 <img class="img-company-quad" ng-if="company.imageQuad" ng-src="{{fileQuad}}" />
+                <p ng-show="quadInvalid" class="help-block ng-binding ng-scope">
+                        Esse campo é obrigatório
+                </p>
             </div>
             
             <div class="form-group">
@@ -67,8 +80,12 @@
                     COMPANY.DROP_FILE_HERE
                 </label>
                 <img class="img-company-rect" ng-if="company.imageRect" ng-src="{{fileRect}}" />
+                <p ng-show="rectInvalid" class="help-block ng-binding ng-scope">
+                        Esse campo é obrigatório
+                </p>
             </div>
-            <button class="btn btn-primary" translate>
+            <button class="btn btn-primary" translate 
+                    ng-disabled="formulario.$invalid">
                 LAYOUT.SAVE
             </button>
         </form>

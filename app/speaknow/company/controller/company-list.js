@@ -3,8 +3,8 @@ define([
     'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams) {
-        
+    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, $translate) {
+
         $scope.companies = null;
         $scope.tableParams = new ngTableParams({
             count: 10,
@@ -19,12 +19,21 @@ define([
             },
             counts: [10, 30, 50, 100]
         });
-        
-        $scope.delete = function(id){
+
+        $scope.delete = function (id) {
             CompanyService.delete(id).success(function () {
-                $scope.tableParams.reload();
+                $translate('COMPANY.REMOVE_SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $scope.tableParams.reload();
+                });
             });
         };
 
+        $scope.modalParams = {
+            title: 'Exclusão de empresa',
+            text: 'Deseja realmente excluir a empresa?',
+            size: 'sm',
+            success: $scope.delete
+        };
     });
 });

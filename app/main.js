@@ -35,6 +35,9 @@ require.config({
         'angular-ui-bootstrap': {
             deps: ['angular']
         },
+        'bower_components/angular-ui-utils/ui-utils':{
+            deps: ['angular']
+        },
         'bower_components/angular-animate/angular-animate.min':{
             deps: ['angular']
         },

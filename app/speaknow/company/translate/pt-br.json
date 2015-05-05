@@ -11,7 +11,7 @@
         "IMAGE_QUAD": "Imagem Quadrada",
         "IMAGE_RECT": "Imagem Retangular",
         "DESCRIPTION":"Descrição",
-        "GROUPS":"Grupos de contatos"
-        
+        "GROUPS":"Grupos de contatos",
+        "REMOVE_SUCCESS": "Empresa removida com sucesso"
     }
 }

@@ -1,8 +1,10 @@
 define([
     'connecta.speaknow',
-    'speaknow/company/service/company-service'
+    'speaknow/company/service/company-service',
+    'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('CompanyFormController', function ($scope, CompanyService, regexBase64, $location, $routeParams) {
+    return speaknow.lazy.controller('CompanyFormController', 
+            function ($scope, CompanyService, notify, regexBase64, $location, $routeParams, $translate) {
 
         $scope.company = {};
         $scope.contactMail = {};
@@ -18,9 +20,18 @@ define([
         }
 
         $scope.submit = function () {
-            CompanyService.save($scope.company).then(function () {
-                $location.path('speaknow/company');
-            }, function (response) {});
+            if($scope.fileQuad === undefined){
+                $scope.quadInvalid = true;
+            } else if($scope.fileRect === undefined){
+                $scope.rectInvalid = true;
+            } else {
+                CompanyService.save($scope.company).then(function () {
+                    $translate('COMPANY.SUCCESS').then(function (text) {
+                        notify.success(text);
+                    });
+                    $location.path('speaknow/company');
+                }, function (response) {});
+            }
         };
 
         $scope.fileQuadDropped = function (files) {
