@@ -1,10 +1,17 @@
 module.exports = function(grunt) {
 
-  var backend = grunt.option('backend');
+  var port = grunt.option('port') || 9001;
+
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-war');
 
   grunt.initConfig({
     jshint: {
-      jshintrc: '.jshintrc',
       files: ['app/**/*.js']
     },
     sass: {
@@ -55,18 +62,24 @@ module.exports = function(grunt) {
         expand: true
       }
     },
-    /*template: {
-      'process-html-template': {
+    war: {
+      target: {
         options: {
-          data: {
-            backend: backend
-          }
+          war_dist_folder: '.',
+          war_name: 'connecta-frontend',
+          webxml_welcome:'index.html',
+          webxml_display_name: 'Connecta Frontend'
         },
-        files: {
-          'dist/app/connecta.js': ['app/connecta.js']
-        }
+        files:[
+          {
+            expand: true,
+            cwd: 'dist',
+            src: ['**'],
+            dest: ''
+          }
+        ]
       }
-    },*/
+    },
     karma: {
       unit: {
         configFile: 'test/karma.conf.js'
@@ -76,50 +89,25 @@ module.exports = function(grunt) {
       production: {
         options: {
           keepalive: true,
-          port: 9001,
+          port: port,
           base: 'dist'
         }
       },
-      dev: {
+      development: {
         options: {
           keepalive: true,
-          port: 9001,
-          base: '.'
+          port: port,
+          base: '.',
+          debug:true,
+          open:grunt.option('open'),
+          livereload:true
         }
       }
     }
   });
 
-
-  // htmlmin: {
-  //   dist: {
-  //     options: {
-  //       collapseWhitespace: true,
-  //       conservativeCollapse: true,
-  //       collapseBooleanAttributes: true,
-  //       removeCommentsFromCDATA: true,
-  //       removeOptionalTags: true
-  //     },
-  //     files: [{
-  //       expand: true,
-  //       cwd: '<%= yeoman.dist %>',
-  //       src: ['*.html', 'views/{,*/}*.html'],
-  //       dest: '<%= yeoman.dist %>'
-  //     }]
-  //   }
-  // },
-
-
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  //grunt.loadNpmTasks('grunt-template');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-karma');
-
-  grunt.registerTask('default', ['jshint', 'sass', 'copy', 'template']);
+  grunt.registerTask('default', ['jshint', 'sass', 'copy']);
   grunt.registerTask('test', ['default', 'karma']);
   grunt.registerTask('run-prod', ['default', 'connect:production']);
-  grunt.registerTask('run', ['jshint', 'sass', 'connect:dev', 'watch']);
+  grunt.registerTask('run', ['jshint', 'sass', 'connect:development', 'watch']);
 };

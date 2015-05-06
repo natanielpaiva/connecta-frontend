@@ -10,7 +10,19 @@ Versão mínima do NPM: __2.1.17__
 
 ### Instalação do NodeJS no Linux
 
-No Github da Joyent tem o how-to da instalação do Node para cada distribuição de Linux (https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager), sendo a mais comum o Ubuntu com o `curl` instalado,
+No Github da Joyent tem o how-to da instalação do Node para cada distribuição de Linux (https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager), sendo a mais comum o Ubuntu com o `curl` instalado, baixe o shell da instalação e passe ele para o bash com o comando:
+
+```
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+```
+
+O script acima adiciona o repositório do NodeJS no seu APT e executa um `apt-get update`. Agora é só instalar o nodejs direto do APT:
+
+```
+apt-get install nodejs
+```
+
+Após o comando acima, estarão instalados o NodeJS e o NPM.
 
 ### Instalação do NodeJS no Windows
 
@@ -20,7 +32,7 @@ Baixar o instalador .msi do site https://nodejs.org/download/, e instalar normal
 
 Rode os seguintes comandos na raiz do projeto para instalar:
 
-```console
+```
 npm install
 bower install
 ```
