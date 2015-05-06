@@ -34,6 +34,11 @@ define([
 
 
     maps._routes = {
+        '/maps/': {
+            controller: 'LayerSourceListController',
+            controllerUrl: 'maps/layer-source/controller/layer-source-list',
+            templateUrl: 'app/maps/layer-source/template/layer-source-list.html'
+        },
         '/maps/layer-source': {
             controller: 'LayerSourceListController',
             controllerUrl: 'maps/layer-source/controller/layer-source-list',
