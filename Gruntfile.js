@@ -110,4 +110,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['default', 'karma']);
   grunt.registerTask('run-prod', ['default', 'connect:production']);
   grunt.registerTask('run', ['jshint', 'sass', 'connect:development', 'watch']);
+  grunt.registerTask('war-dist', ['default', 'war']);
+  
 };

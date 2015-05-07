@@ -1,26 +1,22 @@
-[
-    {
-        "id": 1,
-        "name": "presenter",
+{
+    "presenter": {
         "title": "Presenter",
-        "host": "http://localhost:7002/connecta-presenter"
+        "host": "http://connectad.cds.com.br/connecta-presenter"
     },
-    {
-        "id": 2,
-        "name": "collector",
+    "collector": {
         "title": "Collector",
-        "host": "http://localhost:7001/collector2-dev"
+        "host": "http://connectad.cds.com.br/connecta-collector"
     },
-    {
-        "id": 3,
-        "name": "maps4",
-        "title": "Maps4",
-        "host": "http://localhost:7001/maps4-dev"
+    "maps": {
+        "title": "Maps",
+        "host": "http://connectad.cds.com.br/connecta-maps"
     },
-    {
-        "id": 15,
-        "name": "speaknow",
+    "speaknow": {
         "title": "Speaknow",
-        "host": "http://localhost:7001/speaknow"
+        "host": "http://connectad.cds.com.br/connecta-speaknow"
+    },
+    "portal": {
+        "title": "Portal",
+        "host": "http://connectad.cds.com.br/connecta-portal"
     }
-]
+}

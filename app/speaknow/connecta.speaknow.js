@@ -13,9 +13,7 @@ define([
     });
 
     speaknow.run(function (applications) {
-        var appSpeaknow = applications.filter(function (app) {
-            return app.name === 'speaknow';
-        }).pop();
+        var appSpeaknow = applications.speaknow;
         
 //        appSpeaknow.host = 'http://localhost:7002/speaknow';
 

@@ -43,7 +43,9 @@ define([
         }
     ];
     
-    portal.run(function($http, $templateCache){
+    portal.run(function($http, $templateCache, applications){
+        
+        var appPortal = applications.portal;
         
         $http.get('app/portal/layout/template/portal-error-messages.html').then(function(response) {
             $templateCache.put('portal-error-messages', response.data); 

@@ -14,9 +14,7 @@ define([
 
 
     maps.run(function (applications) {
-        var appMaps = applications.filter(function (app) {
-            return app.name === 'maps';
-        }).pop();
+        var appMaps = applications.maps;
 
         maps.lazy.value('mapsResources', {
             layerSource: appMaps.host + '/layerSources',
