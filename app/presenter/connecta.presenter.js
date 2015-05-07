@@ -44,6 +44,11 @@ define([
     });
 
     presenter._routes = {
+        '/presenter': {
+            controller: 'DatasourceListController',
+            controllerUrl: 'presenter/datasource/controller/datasource-list',
+            templateUrl: 'app/presenter/datasource/template/datasource-list.html'
+        },
         '/presenter/datasource': {
             controller: 'DatasourceListController',
             controllerUrl: 'presenter/datasource/controller/datasource-list',
