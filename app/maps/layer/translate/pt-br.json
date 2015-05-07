@@ -1,6 +1,9 @@
 
 {
     "LAYER": {
-        "LAYER":"CAMADAS"
+        "LAYER":"CAMADAS",
+        "SOURCE":"ORIGEM",
+        "DESCRIPTION":"DESCRIÇÃO",
+        "NAME":"NOME"
     }
 }

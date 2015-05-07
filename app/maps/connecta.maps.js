@@ -20,7 +20,7 @@ define([
             layerSource: appMaps.host + '/layerSources',
             layerSourceType: appMaps.host + '/layerSources',
             layer: appMaps.host + '/layers',
-            layerViewer: appMaps.host + '/layer-viewer',
+            layerViewer: appMaps.host + '/layerViewers',
             layerViewerType: appMaps.host + '/layerViewerTypes',
             importSHP: appMaps.host + '/geoRest',
             regexBase64: '.*base64,'
@@ -41,24 +41,23 @@ define([
             controller: 'LayerSourceListController',
             controllerUrl: 'maps/layer-source/controller/layer-source-list',
             templateUrl: 'app/maps/layer-source/template/layer-source-list.html'
+        },
+        '/maps/layer': {
+            controller: 'LayerListController',
+            controllerUrl: 'maps/layer/controller/layer-list',
+            templateUrl: 'app/maps/layer/template/layer-list.html'
+        },
+        '/maps/layer-viewer': {
+            controller: 'LayerViewerListController',
+            controllerUrl: 'maps/layer-viewer/controller/layer-viewer-list',
+            templateUrl: 'app/maps/layer-viewer/template/layer-viewer-list.html'
         }
-//        ,
-//        '/maps/layer': {
-//            controller: 'HomeController',
-//            controllerUrl: 'module/submodule/controller/controller-name',
-//            templateUrl: 'app/module/submodule/template/template-name.html'
-//        },
-//        '/maps/layer-viewer': {
-//            controller: 'HomeController',
-//            controllerUrl: 'module/submodule/controller/controller-name',
-//            templateUrl: 'app/module/submodule/template/template-name.html'
-//        },
 //        '/maps/import-shp': {
 //            controller: 'HomeController',
 //            controllerUrl: 'module/submodule/controller/controller-name',
 //            templateUrl: 'app/module/submodule/template/template-name.html'
 //        }
-        
+
     };
 
 

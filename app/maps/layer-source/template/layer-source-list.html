@@ -36,22 +36,22 @@
             <tbody>
                 <tr ng-repeat="layerSource in layerSources">
                     <td><input type="checkbox" value="{{layerSource.id}}" /></td>
-                    <td class="text-left">{{layerSource.nm_source}}</td>
+                    <td class="text-center">{{layerSource.nm_source}}</td>
 
-                    <td class="text-left" >
+                    <td class="text-center" >
                         <span ng-if="!layerSource.$edit && layerSource.layerSourceTypeEntity.id == 1">Geoserver</span>
                         <span ng-if="!layerSource.$edit && layerSource.layerSourceTypeEntity.id == 2">ArcGis</span>
                         <span ng-if="!layerSource.$edit && layerSource.layerSourceTypeEntity.id == 3">MapViewer</span>
                         <span ng-if="!layerSource.$edit && layerSource.layerSourceTypeEntity.id == 4">MapServer</span>                        
                     </td>   
 
-                    <td class="text-left" >{{layerSource.ds_link_interno}}</td> 
+                    <td class="text-center" >{{layerSource.ds_link_interno}}</td> 
 
-                    <td class="text-left">{{layerSource.ds_link_externo}}</td> 
+                    <td class="text-center">{{layerSource.ds_link_externo}}</td> 
 
-                    <td class="text-left">{{layerSource.nm_user_rest}}</td> 
+                    <td class="text-center">{{layerSource.nm_user_rest}}</td> 
 
-                    <td class="text-left">{{layerSource.nm_pass_rest}}</td> 
+                    <td class="text-center">{{layerSource.nm_pass_rest}}</td> 
                 </tr>
             </tbody>
         </table>
