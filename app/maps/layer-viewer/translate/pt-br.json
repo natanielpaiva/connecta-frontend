@@ -1,9 +1,9 @@
 
 {
     "LAYERVIEWER": {
-        "LAYERVIEWER":"VISUALIZADORES DE MAPA",
-        "TYPE":"TIPO",
-        "NAME":"NOME",
-        "IMPL":"IMPLEMENTAÇÃO"
+        "LAYERVIEWER":"Visualizadores de Mapa",
+        "TYPE":"Tipo",
+        "NAME":"Nome",
+        "IMPL":"Implementação"
     }
 }

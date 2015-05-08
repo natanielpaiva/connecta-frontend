@@ -1,13 +1,13 @@
 
 {   
     "LAYERSOURCE": {
-        "LAYERSOURCE":"FONTE DE CAMADAS",
-        "VIEW_LAYER_SOURCE":"VISUALIZAR FONTE DE CAMADA",
-        "NAME":"NOME",
-        "TYPE":"TIPO",
-        "INTERNAL_LINK":"LINK INTERNO",
-        "EXTERNAL_LINK":"LINK EXTERNO",
-        "USER":"USUÁRIO",
-        "PASSWORD":"SENHA"   
+        "LAYERSOURCE":"Fonte de Camadas",
+        "VIEW_LAYER_SOURCE":"Visualizar Fonte de Camada",
+        "NAME":"Nome",
+        "TYPE":"Tipo",
+        "INTERNAL_LINK":"Link Interno",
+        "EXTERNAL_LINK":"Link Externo",
+        "USER":"Usuário",
+        "PASSWORD":"Senha"   
     }
 }

@@ -1,5 +1,8 @@
 {
     "LAYERVIEWER": {
-        "LAYERVIEWER":"LAYERVIEWERS"
+        "LAYERVIEWER": "Layerviewers",
+        "TYPE": "Type",
+        "NAME": "Name",
+        "IMPL": "Implementation"
     }
 }

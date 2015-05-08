@@ -1,12 +1,12 @@
 {
     "LAYERSOURCE": {
-        "LAYERSOURCE":"LAYERS SOURCE",
-        "VIEW_LAYER_SOURCE":"VIEW LAYER SOURCE",
-        "NAME":"NAME",
-        "TYPE": "TYPE",
-        "INTERNAL_LINK": "INTERNAL LINK",
-        "EXTERNAL_LINK": "EXTERNAL LINK",
-        "USER": "USER",
-        "PASSWORD": "PASSWORD"
+        "LAYERSOURCE":"Layers Source",
+        "VIEW_LAYER_SOURCE":"View Layer Source",
+        "NAME":"Name",
+        "TYPE": "Type",
+        "INTERNAL_LINK": "Internal Link",
+        "EXTERNAL_LINK": "External Link",
+        "USER": "User",
+        "PASSWORD": "Password"
     }
 }

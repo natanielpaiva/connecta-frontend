@@ -1,6 +1,6 @@
 {
     "IMPORT": {
-        "IMPORT": "IMPORT",
-        "SHP": "SHAPEFILE"
+        "IMPORT": "Import",
+        "SHP": "Shapefile"
     }
 }

@@ -1,5 +1,8 @@
 {
     "LAYER": {
-        "LAYER":"LAYERS"
+        "LAYER":"Layers",
+        "SOURCE":"Source",
+        "DESCRIPTION":"Description",
+        "NAME":"Name"
     }
 }
