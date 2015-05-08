@@ -35,23 +35,34 @@
             </thead>
             <tbody>
                 <tr ng-repeat="layerSource in layerSources">
-                    <td><input type="checkbox" value="{{layerSource.id}}" /></td>
-                    <td class="text-center">{{layerSource.nm_source}}</td>
+                    <td><a href="#/maps/layer-source/{{layerSource.id}}" class="full-size-block link-no-state">
+                            
+                            <input type="checkbox" value="{{layerSource.id}}" /></a></td>
+                    <td class="text-center"><a href="#/maps/layer-source/{{layerSource.id}}" class="full-size-block link-no-state">
+                            {{layerSource.nm_source}}
+                        </a>
+                    </td>
 
                     <td class="text-center" >
+                        <a href="#/maps/layer-source/{{layerSource.id}}" class="full-size-block link-no-state">
                         <span ng-if="!layerSource.$edit && layerSource.layerSourceTypeEntity.id == 1">Geoserver</span>
                         <span ng-if="!layerSource.$edit && layerSource.layerSourceTypeEntity.id == 2">ArcGis</span>
                         <span ng-if="!layerSource.$edit && layerSource.layerSourceTypeEntity.id == 3">MapViewer</span>
                         <span ng-if="!layerSource.$edit && layerSource.layerSourceTypeEntity.id == 4">MapServer</span>                        
+                        </a>
                     </td>   
 
-                    <td class="text-center" >{{layerSource.ds_link_interno}}</td> 
+                    <td class="text-center" ><a href="#/maps/layer-source/{{layerSource.id}}" class="full-size-block link-no-state">
+                            {{layerSource.ds_link_interno}}</a></td> 
 
-                    <td class="text-center">{{layerSource.ds_link_externo}}</td> 
+                    <td class="text-center"><a href="#/maps/layer-source/{{layerSource.id}}" class="full-size-block link-no-state">
+                            {{layerSource.ds_link_externo}}</a></td> 
 
-                    <td class="text-center">{{layerSource.nm_user_rest}}</td> 
+                    <td class="text-center"><a href="#/maps/layer-source/{{layerSource.id}}" class="full-size-block link-no-state">
+                            {{layerSource.nm_user_rest}}</a></td> 
 
-                    <td class="text-center">{{layerSource.nm_pass_rest}}</td> 
+                    <td class="text-center"><a href="#/maps/layer-source/{{layerSource.id}}" class="full-size-block link-no-state">
+                            {{layerSource.nm_pass_rest}}</a></td> 
                 </tr>
             </tbody>
         </table>

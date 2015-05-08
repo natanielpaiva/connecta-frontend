@@ -2,6 +2,7 @@
 {   
     "LAYERSOURCE": {
         "LAYERSOURCE":"FONTE DE CAMADAS",
+        "VIEW_LAYER_SOURCE":"VISUALIZAR FONTE DE CAMADA",
         "NAME":"NOME",
         "TYPE":"TIPO",
         "INTERNAL_LINK":"LINK INTERNO",

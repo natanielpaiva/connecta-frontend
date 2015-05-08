@@ -8,7 +8,7 @@ define([
         $translatePartialLoaderProvider.addPart('maps/layer-source');
         $translatePartialLoaderProvider.addPart('maps/layer');
         $translatePartialLoaderProvider.addPart('maps/layer-viewer');
-        $translatePartialLoaderProvider.addPart('maps/import-shp');
+        $translatePartialLoaderProvider.addPart('maps/import');
     });
 
 
@@ -42,6 +42,11 @@ define([
             controllerUrl: 'maps/layer-source/controller/layer-source-list',
             templateUrl: 'app/maps/layer-source/template/layer-source-list.html'
         },
+        '/maps/layer-source/:id': {
+            controller: 'LayerSourceViewController',
+            controllerUrl: 'maps/layer-source/controller/layer-source-view',
+            templateUrl: 'app/maps/layer-source/template/layer-source-view.html'
+        },        
         '/maps/layer': {
             controller: 'LayerListController',
             controllerUrl: 'maps/layer/controller/layer-list',
@@ -52,11 +57,6 @@ define([
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-list',
             templateUrl: 'app/maps/layer-viewer/template/layer-viewer-list.html'
         }
-//        '/maps/import-shp': {
-//            controller: 'HomeController',
-//            controllerUrl: 'module/submodule/controller/controller-name',
-//            templateUrl: 'app/module/submodule/template/template-name.html'
-//        }
 
     };
 
@@ -81,12 +81,15 @@ define([
             children: []
         },
         {
-            href: 'maps/import-shp',
-            title: 'IMPORT SHP',
+            href: 'maps/import',
+            title: 'IMPORT.IMPORT',
             icon: 'icon-import-export',
-            children: []
+            children: [{href: 'maps/import/shp',
+                    title: 'IMPORT.SHP',
+                    icon: 'icon-map',
+                    children: []}
+            ]
         }
     ];
-
     return maps;
 });

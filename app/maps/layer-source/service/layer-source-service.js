@@ -2,26 +2,33 @@ define([
     'connecta.maps'
 ], function (maps) {
     return maps.lazy.service('LayerSourceService', function (mapsResources, $http) {
-        this.get = function(id){
+        this.get = function (id) {
             var url = mapsResources.layerSource + "/" + id;
             return $http.get(url);
         };
-        
-        
-        this.list = function(){
+
+
+        this.getById = function (id) {
+            var url = mapsResources.layerSource + '/' + id;
+            return $http.get(url);
+        };
+
+
+
+        this.list = function () {
             var url = mapsResources.layerSource;
             return $http.get(url);
         };
-        
-        
-        this.save = function(layerSource){
+
+
+        this.save = function (layerSource) {
             return $http.post(mapsResources.layerSource, layerSource);
         };
-        
-        this.delete = function(id){
+
+        this.delete = function (id) {
             var url = mapsResources.layerSource + '/' + id;
             return $http.delete(url);
         };
-        
+
     });
 });

@@ -1,6 +1,7 @@
 {
     "LAYERSOURCE": {
         "LAYERSOURCE":"LAYERS SOURCE",
+        "VIEW_LAYER_SOURCE":"VIEW LAYER SOURCE",
         "NAME":"NAME",
         "TYPE": "TYPE",
         "INTERNAL_LINK": "INTERNAL LINK",
