@@ -58,7 +58,8 @@
                        drag-over-class="{accept:'accept', reject:'reject'}">
                     <translate>{{fileQuad.name ? fileQuad.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
                 </label>
-                <img class="img-company-quad" ng-if="company.imageQuad" ng-src="{{fileQuad}}" />
+                <img class="img-company-quad" ng-if="company.imageQuad || imageQuad" 
+                     ng-src="{{company.imageQuad && imageQuad === undefined? baseUrl + company.imageQuad : imageQuad}}" />
                 <p ng-show="quadInvalid" class="help-block ng-binding ng-scope">
                         Esse campo é obrigatório
                 </p>
@@ -75,11 +76,11 @@
                        ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'" 
                        ng-model-rejected="rejFiles" 
                        allow-dir="false" 
-                       drag-over-class="{accept:'accept', reject:'reject'}" 
-                       translate>
-                    COMPANY.DROP_FILE_HERE
+                       drag-over-class="{accept:'accept', reject:'reject'}" >
+                    <translate>{{fileRect.name ? fileRect.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
                 </label>
-                <img class="img-company-rect" ng-if="company.imageRect" ng-src="{{fileRect}}" />
+                <img class="img-company-rect" ng-if="company.imageRect || imageRect" 
+                     ng-src="{{company.imageRect && imageRect === undefined ? baseUrl + company.imageRect : imageRect}}" />
                 <p ng-show="rectInvalid" class="help-block ng-binding ng-scope">
                         Esse campo é obrigatório
                 </p>

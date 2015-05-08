@@ -4,18 +4,17 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('CompanyFormController', 
-            function ($scope, CompanyService, notify, regexBase64, $location, $routeParams, $translate) {
+            function ($scope, CompanyService, notify, speaknowResources, regexBase64, $location, $routeParams, $translate) {
 
         $scope.company = {};
         $scope.contactMail = {};
         $scope.contactPhone = {};
-
+        $scope.baseUrl = speaknowResources.base;
+        
         if ($routeParams.id) {
             $scope.isEditing = true;
             CompanyService.get($routeParams.id).success(function (data) {
                 $scope.company = data;
-                $scope.fileQuad = "data:image/jpeg;base64," + $scope.company.imageQuad;
-                $scope.fileRect = "data:image/jpeg;base64," + $scope.company.imageRect;
             });
         }
 
@@ -25,22 +24,21 @@ define([
             } else if($scope.fileRect === undefined){
                 $scope.rectInvalid = true;
             } else {
-                CompanyService.save($scope.company).then(function () {
-                    $translate('COMPANY.SUCCESS').then(function (text) {
-                        notify.success(text);
-                    });
+                CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function () {
+                $translate('COMPANY.SUCCESS').then(function (text) {
+                    notify.success(text);
                     $location.path('speaknow/company');
-                }, function (response) {});
+                });
+            }, function (response) {});
             }
         };
 
         $scope.fileQuadDropped = function (files) {
+            $scope.fileQuad = files[0];
             if (files && files.length) {
-
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.company.imageQuad = e.target.result.replace(new RegExp(regexBase64), "");
-                    $scope.fileQuad = "data:image/jpeg;base64," + $scope.company.imageQuad;
+                    $scope.imageQuad = "data:image/jpeg;base64," + e.target.result.replace(new RegExp(regexBase64), "");
                     $scope.$apply();
                 };
                 reader.readAsDataURL(files[0]);
@@ -48,11 +46,11 @@ define([
         };
         
         $scope.fileRectDropped = function (files) {
+            $scope.fileRect = files[0];
             if (files && files.length) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.company.imageRect = e.target.result.replace(new RegExp(regexBase64), "");
-                    $scope.fileRect = "data:image/jpeg;base64," + $scope.company.imageRect;
+                    $scope.imageRect = "data:image/jpeg;base64," + e.target.result.replace(new RegExp(regexBase64), "");
                     $scope.$apply();
                 };
                 reader.readAsDataURL(files[0]);

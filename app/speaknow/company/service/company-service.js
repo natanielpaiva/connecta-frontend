@@ -9,13 +9,20 @@ define([
         };
         
         this.get = function (id) {
-            var url = speaknowResources.company + '/get/' + id;
+            var url = speaknowResources.company + "/" + id;
             return $http.get(url);
         };
 
-        this.save = function (company) {
+        this.save = function (fileQuad, fileRect, company) {
             var url = speaknowResources.company + "/save";
-            return $http.post(url, company);
+            var fd = new FormData();
+            fd.append('fileQuad', fileQuad);
+            fd.append('fileRect', fileRect);
+            fd.append('company', JSON.stringify(company));
+            return $http.post(url, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            });
         };
         
         this.delete = function (id){

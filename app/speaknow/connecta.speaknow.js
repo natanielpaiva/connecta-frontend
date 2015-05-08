@@ -16,6 +16,7 @@ define([
         var appSpeaknow = applications.speaknow;
         
         speaknow.lazy.value('speaknowResources', {
+            base: appSpeaknow.host,
             action: appSpeaknow.host + '/action',
             contact: appSpeaknow.host + '/contact',
             interaction: appSpeaknow.host + '/interaction',
