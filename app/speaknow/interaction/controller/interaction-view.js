@@ -4,9 +4,11 @@ define([
     'speaknow/action/service/action-service'
 ], function (speaknow) {
     return speaknow.lazy.controller('InteractionViewController', function (
-            $scope, InteractionService, ActionService, $routeParams, $location, ngTableParams
+            $scope, InteractionService, speaknowResources, ActionService, $routeParams, $location, ngTableParams
             ) {
 
+        $scope.baseUrl = speaknowResources.base;
+        
         var redirectToInteraction = function () {
             $location.path('speaknow/interaction');
         };
@@ -14,7 +16,6 @@ define([
         if ($routeParams.id) {
             InteractionService.get($routeParams.id).success(function (data) {
                 $scope.interaction = data;
-                $scope.interactionImage = "data:image/jpeg;base64," + $scope.interaction.image;
             });
         } else {
             console.error("Id da interaction não informado na url");

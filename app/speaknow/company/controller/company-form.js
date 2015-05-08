@@ -38,7 +38,7 @@ define([
             if (files && files.length) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.imageQuad = "data:image/jpeg;base64," + e.target.result.replace(new RegExp(regexBase64), "");
+                    $scope.imageQuad = e.target.result;
                     $scope.$apply();
                 };
                 reader.readAsDataURL(files[0]);
@@ -50,7 +50,7 @@ define([
             if (files && files.length) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.imageRect = "data:image/jpeg;base64," + e.target.result.replace(new RegExp(regexBase64), "");
+                    $scope.imageRect = e.target.result;
                     $scope.$apply();
                 };
                 reader.readAsDataURL(files[0]);

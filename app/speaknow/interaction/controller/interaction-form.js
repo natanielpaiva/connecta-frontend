@@ -67,12 +67,12 @@ define([
         //TODO: Implementar regras de upload de arquivo
         $scope.onFileSelected = function (files) {
             var file = files[0];
+            $scope.fileImage = file;
             if (file) {
                 $scope.imgName = file.name;
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.interaction.image = e.target.result.replace(new RegExp(regexBase64), "");
-                    $scope.interactionImage = "data:image/jpeg;base64," + $scope.interaction.image;
+                    $scope.interactionImage = e.target.result;
                     $scope.$apply();
                 };
                 reader.readAsDataURL(files[0]);
@@ -88,13 +88,13 @@ define([
             if(!validateForm()){
                 return;
             }
-            
+            $scope.interaction.image = $scope.fileImage;
             ActionService.setInteraction($scope.interaction);
             $location.path('speaknow/action/new');
         };
         
         $scope.save = function () {
-            InteractionService.save($scope.interaction).success(function () {
+            InteractionService.save($scope.interaction, $scope.fileImage).success(function () {
                 console.info("Interaction Salva com sucesso!");
                 $location.path('speaknow/interaction');
             });

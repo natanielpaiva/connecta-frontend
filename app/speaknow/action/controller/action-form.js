@@ -143,9 +143,14 @@ define([
                 //TODO trazer a company da Grid
                 $scope.interaction.company = {id: 1};
                 $scope.interaction.actions = [];
+                
+                var image = $scope.interaction.image;
+                
+                delete $scope.interaction.image;
                 delete $scope.action.interaction;
+                
                 $scope.interaction.actions.push($scope.action);
-                InteractionService.save($scope.interaction).success(function (response) {
+                InteractionService.save($scope.interaction, image).success(function (response) {
                     ActionService.clearInteraction();
                     $location.path('/speaknow/interaction/' + response.id);
                 });

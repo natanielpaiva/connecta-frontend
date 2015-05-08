@@ -13,9 +13,15 @@ define([
             return $http.get(url);
         };
 
-        this.save = function (interaction) {
-            var url = speaknowResources.interaction;
-            return $http.post(url, interaction);
+        this.save = function (interaction, fileImage) {
+            var url = speaknowResources.interaction + "/save";
+            var fd = new FormData();
+            fd.append('image', fileImage);
+            fd.append('interaction', JSON.stringify(interaction));
+            return $http.post(url, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            });
         };
 
         this.delete = function (id){
