@@ -15,11 +15,13 @@ define([
 
         var param = {
             type: "TEXT",
-            options: []
+            options: [],
+            max: true
         };
 
         var section = {
-            params: [angular.copy(param)]
+            params: [angular.copy(param)],
+            max: true
         };
 
         $scope.action = {
@@ -33,12 +35,12 @@ define([
             icon: "dump"
         };
 
-        if ($scope.interaction) {
-            $scope.action.interaction = $scope.interaction;
-        } else {
-            $location.path('/speaknow/interaction');
-            console.error('Interaction não informada');
-        }
+//        if ($scope.interaction) {
+//            $scope.action.interaction = $scope.interaction;
+//        } else {
+//            $location.path('/speaknow/interaction');
+//            console.error('Interaction não informada');
+//        }
 
         $translate('ACTION.SECTION.TITLE').then(function (value) {
             $scope.newSectionStr = value;
@@ -56,6 +58,20 @@ define([
         $scope.removeParam = function (section, param) {
             section.params.splice(section.params.indexOf(param), 1);
         };
+        
+        function isMultiple (value) {
+            var multipleTypes = [
+                "MULTI_SELECT",
+                "MULTI_CHECKBOX",
+                "RADIO"
+            ];
+            
+            return multipleTypes.indexOf(value) >= 0;
+        }
+        
+        $scope.onChangeParamType = function (type){
+            $scope.showParamOpts = isMultiple(type);
+        };
 
         var sections = $scope.action.steps[0].sections;
         $scope.addSection = function () {
@@ -69,7 +85,7 @@ define([
 
         $scope.minifyCard = function (itemArr) {
             itemArr.forEach(function (item) {
-                item.min = true;
+                item.max = false;
             });
         };
 
@@ -139,6 +155,15 @@ define([
                     $location.path('/speaknow/interaction/' + $scope.action.interaction.id);
                 });
             }
+        };
+        
+        /** Validations */
+        
+        $scope.validateParam = function(index, param){
+            var form = $scope.actionForm;
+            var title = form['param_title_'+index].$invalid;
+            var name = isMultiple(param.type) && form['param_name_'+index].$invalid;
+            return title || name;
         };
     });
 });

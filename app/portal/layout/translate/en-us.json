@@ -17,7 +17,8 @@
         "APPLY": "Apply",
         "FILTER": "Filter",
         "SELECT" : "Choose an option",
-        "SEARCH" : "Search"
+        "SEARCH" : "Search",
+        "DONE": "Done"
     },
     "KEY_VALUE": {
         "NO_ITEM" : "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."

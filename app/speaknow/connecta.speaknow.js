@@ -15,8 +15,6 @@ define([
     speaknow.run(function (applications) {
         var appSpeaknow = applications.speaknow;
         
-//        appSpeaknow.host = 'http://localhost:7002/speaknow';
-
         speaknow.lazy.value('speaknowResources', {
             action: appSpeaknow.host + '/action',
             contact: appSpeaknow.host + '/contact',

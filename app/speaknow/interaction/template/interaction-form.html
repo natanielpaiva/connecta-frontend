@@ -58,18 +58,17 @@
                 <textarea class="form-control" id="descriptionItem" name="descriptionItem"
                           ng-model="interaction.description"></textarea>
             </div>
-            <a href="#/speaknow/interaction"
-               class="btn btn-default" translate>
-                LAYOUT.BACK                     
+            <a href="#/speaknow/interaction" class="btn btn-default" translate>
+                LAYOUT.BACK
             </a>
-            <a class="btn btn-primary" translate 
-               ng-click="nextStep()" ng-show="!isEditing">
+            <button class="btn btn-primary" translate 
+               ng-click="nextStep()" ng-show="!isEditing" ng-disable="interaction_form.$invalid">
                 LAYOUT.NEXT
-            </a>
-            <a class="btn btn-primary" translate 
-               ng-click="save()" ng-show="isEditing">
+            </button>
+            <button class="btn btn-primary" translate 
+               ng-click="save()" ng-show="isEditing" ng-disable="interaction_form.$invalid">
                 LAYOUT.SAVE
-            </a>
+            </button>
         </form>
     </div>
 </div>

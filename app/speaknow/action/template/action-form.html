@@ -20,14 +20,18 @@
 
             <!--Dados da action-->
             <div class="form-group">
-                <label for="name" translate>ACTION.NAME</label>
+                <label for="name" class="required" translate>ACTION.NAME</label>
                 <input type="text" class="form-control" id="name" name="name"
-                       ng-model="action.name" />
+                       ng-model="action.name" required />
+                <div ng-show="actionForm.$submitted || actionForm.name.$touched" 
+                     ng-messages="actionForm.name.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="icon" translate>ACTION.ICON</label>
-                <button type="button" class="btn" 
+                <button type="button" class="btn btn-default" 
                         ng-click="openIconModal()">
                     <span class="icon-{{action.icon}}"></span>
                     <input type="hidden" class="form-control" id="icon" name="icon"
@@ -58,12 +62,12 @@
                                     <h4>Passo 1</h4>
                                 </div>
                                 <hr/>-->
+                
                 <div class="content-card">
-
-                    <div class="card-form card-section" ng-repeat="section in action.steps[0].sections" ng-class="{'card-form-min': section.max }">
+                <!--Inicio Section-->
+                    <div class="card-form card-section" ng-repeat="section in action.steps[0].sections" ng-class="{'card-form-min': !section.max }">
                         <!--header-->
-                        <div class="header-card" ng-click="minifyCard(action.steps[0].sections);
-                                section.max = !section.max">
+                        <div class="header-card" ng-click="minifyCard(action.steps[0].sections); section.max = !section.max">
                             <h4>{{section.title ? section.title : newSectionStr}}</h4>
                             <div class="btn-group pull-right margin-right-single" role="group">
                                 <button type="button" class="btn btn-default">
@@ -84,10 +88,10 @@
 
 
                             <!--Inicio Parametros-->
-                            <div class="card-form card-params" ng-repeat="param in section.params" ng-class="{'card-form-min': param.max }">
+                            <div class="card-form card-params" ng-repeat="(index, param) in section.params" ng-class="{'card-form-min': !param.max }">
                                 <!--Header-->
                                 <div class="header-card" ng-click="minifyCard(section.params);
-                                            param.max = !param.max">
+                                            param.max = true">
                                     <h4>{{param.title ? param.title : newParamStr}}</h4>
                                     <div class="btn-group pull-right margin-right-single" role="group">
                                         <button class="btn btn-default">
@@ -100,22 +104,25 @@
                                 </div>
                                 <!--content-->
                                 <div class="content-card">
-                                    <div class="form-group" ng-show="action.type === 'SERVICE'">
-                                        <label for="param-name" translate>ACTION.SECTION.PARAM.NAME</label>
-                                        <input type="text" class="form-control" id="param-name" name="param-name"
-                                               ng-model="param.name" />
-                                    </div>
                                     <div class="form-group">
                                         <label for="param-title" translate>ACTION.SECTION.PARAM.TITLE</label>
-                                        <input type="text" class="form-control" id="param-title" name="param-title"
+                                        <input type="text" class="form-control" id="param-title" name="param_title_{{index}}"
                                                ng-model="param.title" required />
+                                        <div ng-messages="actionForm.param_title_0.$invalid"
+                                            ng-messages-include="portal-error-messages">
+                                       </div>
+                                    </div>
+                                    <div class="form-group" ng-show="action.type === 'SERVICE'">
+                                        <label for="param-name" translate>ACTION.SECTION.PARAM.NAME</label>
+                                        <input type="text" class="form-control" id="param-name" name="param_name_{{index}}"
+                                               ng-model="param.name" required />
                                     </div>
                                     <div class="form-group">
                                         <label for="param-type" translate>ACTION.SECTION.PARAM.TYPE</label>
-                                        <select id="type" name="param-type" class="form-control" ng-model="param.type"
-                                                ng-change="onChangeParamType()">
+                                        <select id="type" name="param-type-{{index}}" class="form-control" ng-model="param.type"
+                                                ng-change="onChangeParamType(param.type)">
                                             <option ng-repeat="paramType in paramTypes" value="{{paramType}}">
-                                                {{'PARAM_TYPE.' + paramType| translate}}
+                                                {{'ACTION.SECTION.PARAM.PARAM_TYPE.' + paramType| translate}}
                                             </option>
                                         </select>
                                     </div>
@@ -126,7 +133,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="param-val" translate>ACTION.SECTION.PARAM.VALUE</label>
-                                                        <input type="text" class="form-control" id="param-val" name="param-val"
+                                                        <input type="text" class="form-control" id="param-val" name="param_val"
                                                                ng-model="$parent.$parent.$item.value" placeholder="Valor"/>
                                                     </div>
                                                 </div>
@@ -140,100 +147,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="" class="btn btn-primary margin-top-single" ng-click="param.max = !param.max">Concluir Campo</a>
+                                    <a href="" class="btn btn-primary margin-top-single" ng-click="validateParam(index, param)" translate>LAYOUT.DONE</a>
                                 </div>
                             </div>
                             <!--Fim parametros-->
 
-                            <!--Parametros ou campos repetidos em cards-->
-                            <!--                            <div class="card-form card-params card-form-min">
-                                                            Header
-                                                            <div class="header-card">
-                                                                <h4>Campo 1 cadastrado</h4>
-                                                                <div class="btn-group pull-right margin-right-single" role="group">
-                                                                    <button class="btn btn-default">
-                                                                        <span class="icon-trash"/>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-form card-params card-form-min">
-                                                            Header
-                                                            <div class="header-card">
-                                                                <h4>Campo 2 cadastrado</h4>
-                                                                <div class="btn-group pull-right margin-right-single" role="group">
-                                                                    <button class="btn btn-default">
-                                                                        <span class="icon-trash"/>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-form card-params card-form-min">
-                                                            Header
-                                                            <div class="header-card">
-                                                                <h4>Campo 3 cadastrado</h4>
-                                                                <div class="btn-group pull-right margin-right-single" role="group">
-                                                                    <button class="btn btn-default">
-                                                                        <span class="icon-trash"/>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>-->
-                            <!--Parametros ou campos repetidos em cards-->
-
-
-
-                            <!--a href="" class="btn btn-default" translate ng-click="addParam()">PARAM.ADD</a-->
-                            <button type="button" class="btn" translate ng-click="addParam(section)">ACTION.SECTION.PARAM.NEW</button>
+                            <button type="button" class="btn btn-default" translate ng-click="addParam(section)">ACTION.SECTION.PARAM.NEW</button>
                             <div class="form-group">
                                 <label for="footer" translate>ACTION.SECTION.FOOTER</label>
                                 <input type="text" class="form-control" id="footer" name="footer"
                                        ng-model="section.footer" />
                             </div>
-                            <a href="" class="btn btn-primary" translate ng-click="section.max = !section.max">ACTION.SECTION.DONE</a>
-                        </div>
-                    </div>
-
-                    <!--Sections repetidas em cards minimizados-->
-                    <!--                    <div class="card-form card-section card-form-min">
-                                            header
-                                            <div class="header-card">
-                                                <h4>Sessão 1 salva</h4>
-                                                <div class="btn-group pull-right margin-right-single" role="group">
-                                                    <button class="btn btn-default">
-                                                        <span class="icon-trash"/>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-form card-section card-form-min">
-                                            header
-                                            <div class="header-card">
-                                                <h4>Sessão 2 salva</h4>
-                                                <div class="btn-group pull-right margin-right-single" role="group">
-                                                    <button class="btn btn-default">
-                                                        <span class="icon-trash"/>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-form card-section card-form-min">
-                                            header
-                                            <div class="header-card">
-                                                <h4>Sessão 3 salva</h4>
-                                                <div class="btn-group pull-right margin-right-single" role="group">
-                                                    <button class="btn btn-default">
-                                                        <span class="icon-trash"/>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>-->
-                    <!--Sections repetidas em cards minimizados-->
-                    <!--Inicio Section-->
-
-                    <button type="button" class="btn" translate ng-click="addSection()">ACTION.SECTION.NEW</button>
-                    <!--Fim sections-->
+                            <a href="" class="btn btn-primary" translate ng-click="section.max = !section.max">LAYOUT.DONE</a>
+                        </div> 
+                    <button type="button" class="btn btn-default" translate ng-click="addSection()">ACTION.SECTION.NEW</button>
                 </div>
+                <!--Fim sections-->
                 <div class="form-group" ng-show="action.type === 'SERVICE'">
                     <label for="script" translate>STEP.SCRIPT</label>
                     <textarea class="form-control" id="script" name="script"
@@ -241,7 +170,7 @@
                 </div>
             </div>
             <!--Fim step-->
-            <button type="button" onclick="window.history.back()" class="btn" translate>
+            <button type="button" onclick="window.history.back()" class="btn btn-default" translate>
                 LAYOUT.BACK                     
             </button>
             <button type="submit" class="btn btn-primary" translate>
@@ -249,5 +178,5 @@
             </button>
         </form>
     </div>
-    <!--<pre>{{(isEditing ? action : interaction )| json}}</pre>-->
 </div>
+<textarea>{{actionForm | json}}</textarea>

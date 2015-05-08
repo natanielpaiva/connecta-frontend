@@ -86,7 +86,6 @@ define([
 
         $scope.nextStep = function () {
             if(!validateForm()){
-                console.error('form is invalid');
                 return;
             }
             
