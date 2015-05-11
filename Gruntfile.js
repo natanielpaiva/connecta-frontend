@@ -2,13 +2,8 @@ module.exports = function(grunt) {
 
   var port = grunt.option('port') || 9001;
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-war');
+  // Load Grunt tasks declared in the package.json file
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
     jshint: {
@@ -27,22 +22,6 @@ module.exports = function(grunt) {
           ext: '.css'
         }]
       }
-    },
-    watch: {
-      scripts: {
-        files: ['**/*.js'],
-        tasks: ['jshint'],
-        options: {
-          spawn: false,
-        },
-      },
-      css: {
-        files: ['**/*.scss'],
-        tasks: ['sass'],
-        options: {
-          spawn: false,
-        },
-      },
     },
     copy: {
       dist: {
@@ -99,17 +78,57 @@ module.exports = function(grunt) {
           port: port,
           base: '.',
           debug:true,
-          open:grunt.option('open'),
-          livereload:true
+          open:grunt.option('open')
+        }
+      },
+      live: {
+          options: {
+          port: port,
+          base: '.',
+          debug:true,
+          open: true,
+          middleware: function(connect, options) {
+ 
+            return [
+ 
+              // Load the middleware provided by the livereload plugin
+              // that will take care of inserting the snippet
+               require('connect-livereload')(),
+ 
+              // Serve the project folder
+              connect.static(options.base[0])
+            ];
+          }
+        }
+      }
+    },
+    watch: {
+      scripts: {
+        files: ['app/*.js', 'app/**/*.js'],
+        tasks: ['jshint'],
+        options: {
+          livereload: true
+        }
+      },
+      css: {
+        files: ['assets/**/*.scss'],
+        tasks: ['sass']
+      },
+      livereload: {
+        files: ['assets/css/*.css'],
+        options: {
+          livereload: true
         }
       }
     }
   });
 
-  grunt.registerTask('default', ['jshint', 'sass', 'copy']);
+  grunt.registerTask('default', ['jshint', 'sass']);
+  grunt.registerTask('dist', ['default', 'copy']);
   grunt.registerTask('test', ['default', 'karma']);
-  grunt.registerTask('run-prod', ['default', 'connect:production']);
-  grunt.registerTask('run', ['jshint', 'sass', 'connect:development', 'watch']);
-  grunt.registerTask('war-dist', ['default', 'war']);
+  grunt.registerTask('run', ['default', 'connect:development']);
+  grunt.registerTask('run-live', ['default', 'connect:live', 'watch']);
+  grunt.registerTask('run-prod', ['dist', 'connect:production']);
+  grunt.registerTask('war-dist', ['dist', 'war']);
   
 };
