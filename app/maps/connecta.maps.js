@@ -62,6 +62,16 @@ define([
             controllerUrl: 'maps/layer/controller/layer-list',
             templateUrl: 'app/maps/layer/template/layer-list.html'
         },
+        '/maps/layer/new': {
+            controller: 'LayerFormController',
+            controllerUrl: 'maps/layer/controller/layer-form',
+            templateUrl: 'app/maps/layer/template/layer-form.html'
+        },
+        '/maps/layer/:id': {
+            controller: 'LayerViewController',
+            controllerUrl: 'maps/layer/controller/layer-view',
+            templateUrl: 'app/maps/layer/template/layer-view.html'
+        },
         '/maps/layer-viewer': {
             controller: 'LayerViewerListController',
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-list',

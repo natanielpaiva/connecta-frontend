@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>LAYER.VIEW</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group">
+            <button class="btn btn-default">
+                <span class="icon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default">
+                <span class="icon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <div class="col-md-offset-8 col-md-2 text-right">
+        <div class="btn-group">
+            <a class="btn btn-default" href="#/maps/layer/{{layer.id}}/edit">
+                <span class="icon-pencil" aria-hidden="true"></span>
+            </a>
+            <button class="btn btn-default" ng-click="remove(layer.id)">
+                <span class="icon-trash" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single margin-bottom-single">
+            
+            <p ng-if="layer.nm_layer">
+                <strong translate>LAYER.NAME</strong>: 
+                {{layer.nm_layer}}
+            </p>
+
+            <p ng-if="layer.ds_layer">
+                <strong translate>LAYER.SOURCE</strong>:
+                {{layer.ds_layer}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="#/maps/layer" role="button" class="btn btn-default" translate>
+            LAYOUT.BACK
+        </a>
+    </div>
+</div>

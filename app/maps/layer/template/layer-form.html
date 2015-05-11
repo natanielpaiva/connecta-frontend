@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-12">        
+        <h3 translate>{{isEditing ? 'LAYER.EDIT' : 'LAYER.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+            <div class="form-group">
+                <label for="nm_layer" translate>LAYER.NAME</label>
+                <input type="text" class="form-control" id="nm_source" name="nm_source"
+                       ng-model="layer.nm_layer" required/>
+                 <div ng-show="formulario.$submitted || formulario.name.$touched" 
+                     ng-messages="formulario.nm_layer.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="layerSourceEntityID" translate>LAYER.SOURCE</label>
+                
+                <select class="form-control" 
+                        name="layerSourceEntityID" 
+                        ng-model="layer.layerSourceEntity.id"
+                        ng-change="getLayer(layer.layerSourceEntity.id)"
+                        id="layerSourceEntityID" required>
+
+                    <option value=""> Escolha um tipo</option>
+                    <option value="1"> Geoserver </option>
+                    <option value="2"> ArcGis </option>
+                    <option value="3"> MapViewer </option>
+                    <option value="4"> MapServer </option>
+                </select>                
+                <div ng-show="formulario.layerSourceEntityID.$touched" ng-messages="formulario.layerSourceEntityID.$error"
+                     ng-messages-include="portal-validation-messages"></div>      
+            </div>
+            
+            <div class="form-group">
+                <label for="layerSourceEntityID" translate>LAYER.SOURCE</label>
+                
+                <select class="form-control" 
+                        name="layerSourceEntityID" 
+                        ng-model="layer.layerSourceEntity.id"
+                        id="layerSourceEntityID" required>
+                    <option value=""> Escolha uma layer</option>
+                </select>                
+                <div ng-show="formulario.layerSourceEntityID.$touched" ng-messages="formulario.layerSourceEntityID.$error"
+                     ng-messages-include="portal-validation-messages"></div>      
+            </div>
+            
+            
+            <a href="#/maps/layer"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

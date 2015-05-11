@@ -1,5 +1,8 @@
 {
     "LAYER": {
+        "ADD": "Add Layer Source",
+        "ADD": "Add Layer",
+        "VIEW":"View Layer",
         "LAYER":"Layers",
         "SOURCE":"Source",
         "DESCRIPTION":"Description",

@@ -7,12 +7,10 @@ define([
             return $http.get(url);
         };
         
-        
         this.list = function(){
             var url = mapsResources.layer;
             return $http.get(url);
         };
-        
         
         this.save = function(layer){
             return $http.post(mapsResources.layer, layer);

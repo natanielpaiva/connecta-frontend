@@ -1,6 +1,8 @@
 
 {
     "LAYER": {
+        "VIEW":"Visualizar Camada",
+        "ADD": "Adicionar Layer",
         "LAYER":"Camadas",
         "SOURCE":"Origem",
         "DESCRIPTION":"Descrição",
