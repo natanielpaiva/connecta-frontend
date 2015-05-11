@@ -7,6 +7,11 @@ define([
             return $http.get(url);
         };
         
+        this.getByType = function (type) {
+            var url = mapsResources.layer + "/listByType?type=" + type;
+            return $http.get(url);
+        };
+        
         this.list = function(){
             var url = mapsResources.layer;
             return $http.get(url);

@@ -2,8 +2,9 @@
 {
     "LAYERVIEWER": {
         "LAYERVIEWER":"Visualizadores de Mapa",
-        "VIEW_LAYER_VIEWER":"Visualizar Visualizadores de Mapa",
-        "ALTER_LAYER_VIEWER":"Alterar cadastro de Visualizador",
+        "ADD":"Adicionar novo Visualizador",
+        "EDIT":"Alterar cadastro de Visualizador",
+        "VIEW":"Visualizar Visualizadores de Mapa",
         "TYPE":"Tipo",
         "NAME":"Nome",
         "LAYER":"Camada",

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h3 translate>LAYERVIEWER.ALTER_LAYER_VIEWER</h3>
+        <h3 translate>{{isEditing ? 'LAYERVIEWER.EDIT' : 'LAYERVIEWER.ADD'}}</h3>
     </div>
 </div>
 
@@ -20,7 +20,7 @@
 
                 <div class="form-group">
                     <label for="type" translate>LAYERVIEWER.TYPE</label>
-                    <select class="form-control" name="type" ng-model="layerViewer.layerViewerTypeEntity.id">
+                    <select class="form-control" name="type" ng-model="layerViewer.layerViewerTypeEntity.id" ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)">
                         <option translate value="">LAYERVIEWER.SELECT</option>
                         <option translate value="1">LAYERVIEWER.DEFAULT</option>
                         <option translate value="2">LAYERVIEWER.HEATMAP</option>
@@ -32,7 +32,9 @@
 
                 <div class="form-group">
                     <label for="layer" translate>LAYERVIEWER.LAYER</label>
-                    <select class="form-control" name="layer" ng-model="layerViewer.layer">
+                    <select class="form-control" name="layer" 
+                            ng-model="layerViewer.layer"
+                            ng-options="layer.ds_layer for layer in layers">
                         <option value="">Selecione</option>
 
                     </select>

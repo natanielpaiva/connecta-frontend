@@ -77,6 +77,11 @@ define([
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-list',
             templateUrl: 'app/maps/layer-viewer/template/layer-viewer-list.html'
         },
+        '/maps/layer-viewer/new': {
+            controller: 'LayerViewerFormController',
+            controllerUrl: 'maps/layer-viewer/controller/layer-viewer-form',
+            templateUrl: 'app/maps/layer-viewer/template/layer-viewer-form.html'
+        },
         '/maps/layer-viewer/:id': {
             controller: 'LayerViewerViewController',
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-view',
