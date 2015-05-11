@@ -2,8 +2,24 @@
 {
     "LAYERVIEWER": {
         "LAYERVIEWER":"Visualizadores de Mapa",
+        "VIEW_LAYER_VIEWER":"Visualizar Visualizadores de Mapa",
+        "ALTER_LAYER_VIEWER":"Alterar cadastro de Visualizador",
         "TYPE":"Tipo",
         "NAME":"Nome",
-        "IMPL":"Implementação"
+        "LAYER":"Camada",
+        "SELECT":"Selecionar",
+        "DEFAULT":"Padrão",
+        "HEATMAP":"Calor",
+        "IMPL":"Implementação",
+        "INITIAL_COLOR":"Cor inicial",
+        "FINAL_COLOR":"Cor final",
+        "CLUSTER":"Concentração",
+        "INTERVAL_INITIAL":"Inicial",
+        "INTERVAL":"Intervalo",
+        "INTERVAL_FINAL":"Final",
+        "INITIAL_RAIO":"Raio inicial",
+        "FINAL_RAIO":"Raio final",
+        "FILE_SLD":"Arquivo SLD"
+        
     }
 }

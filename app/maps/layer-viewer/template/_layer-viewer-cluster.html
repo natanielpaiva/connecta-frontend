@@ -1,0 +1,110 @@
+<h3 translate>LAYERVIEWER.CLUSTER</h3>
+<h4 translate>LAYERVIEWER.INTERVAL_INITIAL</h4>
+<div class="row">
+    <div class="col-xs-2 form-group">
+        <label for="raioInitial" translate>LAYERVIEWER.INITIAL_RAIO</label>
+        <input type="number" name="raioInitial" required class="form-control" id="raioInitial"
+               ng-model="layerViewer.server" />
+    </div>
+
+    <div class="col-xs-3 form-group">
+        <label for="initialColor" translate>LAYERVIEWER.INITIAL_COLOR</label>
+        <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt" style="width: 80%; border-right: none; float: left;"
+               ng-model="layerViewer.server" />
+        <input type="color" name="initialColor" required class="form-control" id="initialColor" style="width: 20%; padding: 0px; float: left;"
+               ng-model="layerViewer.server" />
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
+             ng-messages-include="portal-validation-messages"></div>
+    </div>
+
+    <div class="col-xs-3 form-group">
+        <label for="finalColor" translate>LAYERVIEWER.FINAL_COLOR</label>
+        <input type="text" name="finalColorTxt" required class="form-control" id="finalColorTxt" style="width: 80%; border-right: none; float: left;"
+               ng-model="layerViewer.port">
+        <input type="color" name="finalColor" required class="form-control" id="finalColor" style="width: 20%; padding: 0px; float: left;"
+               ng-model="layerViewer.port">
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
+             ng-messages-include="portal-validation-messages"></div>
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label for="opacityInitial" translate>LAYERVIEWER.INITIAL_RAIO</label>
+        <input name="opacityInitial" required class="form-control" id="opacityInitial" type="range" step="5" min="0" max="100" style="border: none"
+               
+               ng-model="layerViewer.server" />
+    </div>
+</div>
+
+<h4 translate>LAYERVIEWER.INTERVAL</h4>
+
+<div class="row">
+    <div class="col-xs-2 form-group">
+        <label for="raioInitial" translate>LAYERVIEWER.INITIAL_RAIO</label>
+        <input type="number" name="raioInitial" required class="form-control" id="raioInitial"
+               ng-model="layerViewer.server" />
+    </div>
+
+    <div class="col-xs-3 form-group">
+        <label for="initialColor" translate>LAYERVIEWER.INITIAL_COLOR</label>
+        <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt" style="width: 80%; border-right: none; float: left;"
+               ng-model="layerViewer.server" />
+        <input type="color" name="initialColor" required class="form-control" id="initialColor" style="width: 20%; padding: 0px; float: left;"
+               ng-model="layerViewer.server" />
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
+             ng-messages-include="portal-validation-messages"></div>
+    </div>
+
+    <div class="col-xs-3 form-group">
+        <label for="finalColor" translate>LAYERVIEWER.FINAL_COLOR</label>
+        <input type="text" name="finalColorTxt" required class="form-control" id="finalColorTxt" style="width: 80%; border-right: none; float: left;"
+               ng-model="layerViewer.port">
+        <input type="color" name="finalColor" required class="form-control" id="finalColor" style="width: 20%; padding: 0px; float: left;"
+               ng-model="layerViewer.port">
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
+             ng-messages-include="portal-validation-messages"></div>
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label for="opacityInitial" translate>LAYERVIEWER.INITIAL_RAIO</label>
+        <input name="opacityInitial" required class="form-control" id="opacityInitial" type="range" step="5" min="0" max="100" style="border: none"
+               
+               ng-model="layerViewer.server" />
+    </div>
+</div>
+
+<h4 translate>LAYERVIEWER.INTERVAL_FINAL</h4>
+
+<div class="row">
+    <div class="col-xs-2 form-group">
+        <label for="raioInitial" translate>LAYERVIEWER.INITIAL_RAIO</label>
+        <input type="number" name="raioInitial" required class="form-control" id="raioInitial"
+               ng-model="layerViewer.server" />
+    </div>
+
+    <div class="col-xs-3 form-group">
+        <label for="initialColor" translate>LAYERVIEWER.INITIAL_COLOR</label>
+        <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt" style="width: 80%; border-right: none; float: left;"
+               ng-model="layerViewer.server" />
+        <input type="color" name="initialColor" required class="form-control" id="initialColor" style="width: 20%; padding: 0px; float: left;"
+               ng-model="layerViewer.server" />
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
+             ng-messages-include="portal-validation-messages"></div>
+    </div>
+
+    <div class="col-xs-3 form-group">
+        <label for="finalColor" translate>LAYERVIEWER.FINAL_COLOR</label>
+        <input type="text" name="finalColorTxt" required class="form-control" id="finalColorTxt" style="width: 80%; border-right: none; float: left;"
+               ng-model="layerViewer.port">
+        <input type="color" name="finalColor" required class="form-control" id="finalColor" style="width: 20%; padding: 0px; float: left;"
+               ng-model="layerViewer.port">
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
+             ng-messages-include="portal-validation-messages"></div>
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label for="opacityInitial" translate>LAYERVIEWER.INITIAL_RAIO</label>
+        <input name="opacityInitial" required class="form-control" id="opacityInitial" type="range" step="5" min="0" max="100" style="border: none"
+               
+               ng-model="layerViewer.server" />
+    </div>
+</div>

@@ -46,9 +46,9 @@ define([
             controller: 'LayerSourceViewController',
             controllerUrl: 'maps/layer-source/controller/layer-source-view',
             templateUrl: 'app/maps/layer-source/template/layer-source-view.html'
-        },        
+        },
         '/maps/layer': {
-            controller: 'LayerListController',
+            controller: 'LayerfListController',
             controllerUrl: 'maps/layer/controller/layer-list',
             templateUrl: 'app/maps/layer/template/layer-list.html'
         },
@@ -56,7 +56,17 @@ define([
             controller: 'LayerViewerListController',
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-list',
             templateUrl: 'app/maps/layer-viewer/template/layer-viewer-list.html'
-        }
+        },
+        '/maps/layer-viewer/:id': {
+            controller: 'LayerViewerViewController',
+            controllerUrl: 'maps/layer-viewer/controller/layer-viewer-view',
+            templateUrl: 'app/maps/layer-viewer/template/layer-viewer-view.html'
+        },
+        '/maps/layer-viewer/:id/edit': {
+            controller: 'LayerViewerFormController',
+            controllerUrl: 'maps/layer-viewer/controller/layer-viewer-form',
+            templateUrl: 'app/maps/layer-viewer/template/layer-viewer-form.html'
+        },
 
     };
 

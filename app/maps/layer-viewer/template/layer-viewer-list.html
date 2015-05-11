@@ -34,17 +34,22 @@
                 <tr ng-repeat="layerViewer in layerViewers">
                     <td><input type="checkbox" value="{{layerViewer.id}}" /></td>
                     <td class="text-center" >
-                        <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 1">mapDefault</span>
-                        <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 2">mapHeatmap</span>
-                        <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 3">mapCluster</span>
-                        <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 4">mapAnalisys</span>                        
+                        <a href="#/maps/layer-viewer/{{layerViewer.id}}" class="full-size-block link-no-state">
+                            <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 1">mapDefault</span>
+                            <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 2">mapHeatmap</span>
+                            <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 3">mapCluster</span>
+                            <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 4">mapAnalisys</span>                        
+                        </a>
                     </td>   
 
-                    <td class="text-center">{{layerViewer.nm_viewer}}</td>
+                    <td class="text-center">
+                        <a href="#/maps/layer-viewer/{{layerViewer.id}}" class="full-size-block link-no-state">
+                            {{layerViewer.nm_viewer}}</a></td>
 
-                    <td class="text-center" >
-                        <span ng-if="!layerViewer.$edit && layerViewer.viewerTypeImplEntity.id == 1">OpenLayers</span>
-                        <span ng-if="!layerViewer.$edit && layerViewer.viewerTypeImplEntity.id == 2">ESRI</span>                        
+                    <td class="text-center" ><a href="#/maps/layer-viewer/{{layerViewer.id}}" class="full-size-block link-no-state">
+                            <span ng-if="!layerViewer.$edit && layerViewer.viewerTypeImplEntity.id == 1">OpenLayers</span>
+                            <span ng-if="!layerViewer.$edit && layerViewer.viewerTypeImplEntity.id == 2">ESRI</span>                        
+                        </a>
                     </td>
 
                 </tr>
