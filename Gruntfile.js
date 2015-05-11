@@ -73,24 +73,13 @@ module.exports = function(grunt) {
         }
       },
       development: {
-        options: {
-          keepalive: true,
-          port: port,
-          base: '.',
-          debug:true,
-          open:grunt.option('open')
-        }
-      },
-      live: {
           options: {
           port: port,
           base: '.',
           debug:true,
           open: grunt.option('open'),
           middleware: function(connect, options) {
- 
             return [
- 
               // Load the middleware provided by the livereload plugin
               // that will take care of inserting the snippet
                require('connect-livereload')(),
@@ -107,7 +96,7 @@ module.exports = function(grunt) {
         files: ['app/*.js', 'app/**/*.js'],
         tasks: ['jshint'],
         options: {
-          livereload: true
+          livereload: grunt.option('reload'),
         }
       },
       css: {
@@ -117,7 +106,7 @@ module.exports = function(grunt) {
       livereload: {
         files: ['assets/css/*.css'],
         options: {
-          livereload: true
+          livereload: grunt.option('reload'),
         }
       }
     }
@@ -126,8 +115,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['jshint', 'sass']);
   grunt.registerTask('dist', ['default', 'copy']);
   grunt.registerTask('test', ['default', 'karma']);
-  grunt.registerTask('run', ['default', 'connect:development']);
-  grunt.registerTask('run-live', ['default', 'connect:live', 'watch']);
+  grunt.registerTask('run', ['default', 'connect:development', 'watch']);
   grunt.registerTask('run-prod', ['dist', 'connect:production']);
   grunt.registerTask('war-dist', ['dist', 'war']);
   
