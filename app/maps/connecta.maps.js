@@ -92,6 +92,11 @@ define([
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-form',
             templateUrl: 'app/maps/layer-viewer/template/layer-viewer-form.html'
         },
+        '/maps/import/shp': {
+            controller: 'ImportSHPController',
+            controllerUrl: 'maps/import/controller/import-shp',
+            templateUrl: 'app/maps/import/template/import-shp.html'
+        }
 
     };
 

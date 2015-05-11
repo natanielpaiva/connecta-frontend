@@ -7,14 +7,6 @@ define([
             return $http.get(url);
         };
 
-
-        this.getById = function (id) {
-            var url = mapsResources.layerSource + '/' + id;
-            return $http.get(url);
-        };
-
-
-
         this.list = function () {
             var url = mapsResources.layerSource;
             return $http.get(url);

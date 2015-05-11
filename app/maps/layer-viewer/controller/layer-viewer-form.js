@@ -26,7 +26,7 @@ define([
 
         $scope.getLayerByType = function (typeLayer) {
 
-            if (typeLayer == "") {
+            if (typeLayer === '') {
                 $scope.layers = [];
                 return false;
             }

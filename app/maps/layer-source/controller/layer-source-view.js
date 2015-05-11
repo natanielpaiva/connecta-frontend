@@ -5,7 +5,7 @@ define([
     return maps.lazy.controller('LayerSourceViewController', function ($scope, LayerSourceService,$routeParams, $location) {
         
 
-        LayerSourceService.getById($routeParams.id).then(function (response) {
+        LayerSourceService.get($routeParams.id).then(function (response) {
             $scope.layerSource = response.data;
 
             
