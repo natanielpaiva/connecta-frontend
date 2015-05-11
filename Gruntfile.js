@@ -86,7 +86,7 @@ module.exports = function(grunt) {
           port: port,
           base: '.',
           debug:true,
-          open: true,
+          open: grunt.option('open'),
           middleware: function(connect, options) {
  
             return [
