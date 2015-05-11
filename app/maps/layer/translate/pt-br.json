@@ -5,6 +5,7 @@
         "ADD": "Adicionar Layer",
         "LAYER":"Camadas",
         "SOURCE":"Origem",
+        "SOURCE_LAYER":"Fonte de Camadas",
         "DESCRIPTION":"Descrição",
         "NAME":"Nome"
     }
