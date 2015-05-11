@@ -2,12 +2,14 @@
 {   
     "LAYERSOURCE": {
         "LAYERSOURCE":"Fonte de Camadas",
-        "VIEW_LAYER_SOURCE":"Visualizar Fonte de Camada",
+        "ADD": "Adicionar Fonte de Camada",
+        "EDIT": "Editar Fonte de Camada",        
+        "VIEW":"Visualizar Fonte de Camada",
         "NAME":"Nome",
         "TYPE":"Tipo",
         "INTERNAL_LINK":"Link Interno",
         "EXTERNAL_LINK":"Link Externo",
         "USER":"Usuário",
-        "PASSWORD":"Senha"   
+        "PASSWORD":"Senha"
     }
 }

@@ -42,6 +42,11 @@ define([
             controllerUrl: 'maps/layer-source/controller/layer-source-list',
             templateUrl: 'app/maps/layer-source/template/layer-source-list.html'
         },
+        '/maps/layer-source/new': {
+            controller: 'LayerSourceFormController',
+            controllerUrl: 'maps/layer-source/controller/layer-source-form',
+            templateUrl: 'app/maps/layer-source/template/layer-source-form.html'
+        },
         '/maps/layer-source/:id': {
             controller: 'LayerSourceViewController',
             controllerUrl: 'maps/layer-source/controller/layer-source-view',

@@ -10,8 +10,8 @@ define([
 
             
 
-            $scope.excluir = function (id) {
-                LayerSourceService.remove(id).then(function () {
+            $scope.remove = function (id) {
+                LayerSourceService.delete(id).then(function () {                    
                     $location.path('maps/layer-source');
                 });
             };

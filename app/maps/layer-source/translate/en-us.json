@@ -1,7 +1,9 @@
 {
     "LAYERSOURCE": {
-        "LAYERSOURCE":"Layers Source",
-        "VIEW_LAYER_SOURCE":"View Layer Source",
+        "LAYERSOURCE":"Layers Source",       
+        "ADD": "Add Layer Source",
+        "EDIT": "Edit Layer Source",  
+        "VIEW":"View Layer Source",
         "NAME":"Name",
         "TYPE": "Type",
         "INTERNAL_LINK": "Internal Link",

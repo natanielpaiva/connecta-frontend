@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>LAYERSOURCE.ADD</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+            <div class="form-group">
+                <label for="nm_source" translate>LAYERSOURCE.NAME</label>
+                <input type="text" class="form-control" id="nm_source" name="nm_source"
+                       ng-model="layerSource.nm_source" required/>
+                <div ng-show="formulario.nm_source.$touched" ng-messages="layerSource.nm_source.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="layerSourceTypeEntityID" translate>LAYERSOURCE.TYPE</label>
+                
+                <select class="form-control" 
+                        name="layerSourceTypeEntityID" 
+                        ng-model="layerSource.layerSourceTypeEntity.id"
+                        id="layerSourceTypeEntityID" required>
+
+                    <option value=""> Escolha um tipo</option>
+                    <option value="1"> GEOSERVER </option>
+                    <option value="2"> ARCGISSERVER </option>
+                    <option value="3"> MAPVIEWER </option>
+                    <option value="4"> MAPSERVER </option>
+                </select>                
+                <div ng-show="formulario.layerSourceTypeEntityID.$touched" ng-messages="formulario.layerSourceTypeEntityID.$error"
+                     ng-messages-include="portal-validation-messages"></div>      
+            </div>
+            
+            
+            
+             <div class="form-group">
+                <label for="ds_link_interno" translate>LAYERSOURCE.INTERNAL_LINK</label>
+                <input type="text" class="form-control" id="nm_source" name="ds_link_interno"
+                       ng-model="layerSource.ds_link_interno" required/>
+                <div ng-show="formulario.ds_link_interno.$touched" ng-messages="layerSource.ds_link_interno.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+            
+            
+             <div class="form-group">
+                <label for="ds_link_externo" translate>LAYERSOURCE.EXTERNAL_LINK</label>
+                <input type="text" class="form-control" id="nm_source" name="ds_link_externo"
+                       ng-model="layerSource.ds_link_externo" required/>
+                <div ng-show="formulario.ds_link_externo.$touched" ng-messages="layerSource.ds_link_externo.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+            
+            
+             <div class="form-group">
+                <label for="nm_user_rest" translate>LAYERSOURCE.USER</label>
+                <input type="text" class="form-control" id="nm_source" name="nm_user_rest"
+                       ng-model="layerSource.nm_user_rest" required/>
+                <div ng-show="formulario.nm_user_rest.$touched" ng-messages="layerSource.nm_user_rest.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+            
+            
+            
+             <div class="form-group">
+                <label for="nm_pass_rest" translate>LAYERSOURCE.PASSWORD</label>
+                <input type="text" class="form-control" id="nm_source" name="nm_pass_rest"
+                       ng-model="layerSource.nm_pass_rest" required/>
+                <div ng-show="formulario.nm_pass_rest.$touched" ng-messages="layerSource.nm_pass_rest.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>                        
+            
+            
+            <a href="#/maps/layer-source"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>
