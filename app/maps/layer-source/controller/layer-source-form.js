@@ -4,15 +4,22 @@ define([
 ], function (maps) {
     return maps.lazy.controller('LayerSourceFormController', function ($scope, LayerSourceService, $location, $routeParams) {
         $scope.layerSource = null;
-        
+        $scope.isEditing = false;
+
         if ($routeParams.id) {
-            //TOOD: Implementar update
-        } 
-        
+            $scope.isEditing = true;
+            LayerSourceService.get($routeParams.id).success(function (data) {
+                $scope.layerSource = data;
+            });
+        }
+
+
+
         $scope.submit = function () {
             LayerSourceService.save($scope.layerSource).then(function () {
                 $location.path('maps/layer-source');
-            }, function (response) {});
+            }, function (response) {
+            });
         };
     });
 });
