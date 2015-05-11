@@ -10,7 +10,8 @@
             <div class="form-group">
                 <label for="nm_layer" translate>LAYER.NAME</label>
                 <input type="text" class="form-control" id="nm_source" name="nm_source"
-                       ng-model="layer.nm_layer" required/>
+                       ng-model="layer.nm_layer" 
+                       required/>
                  <div ng-show="formulario.$submitted || formulario.name.$touched" 
                      ng-messages="formulario.nm_layer.$error"
                      ng-messages-include="portal-error-messages">
@@ -23,7 +24,7 @@
                 <select class="form-control" 
                         name="layerSourceEntityID" 
                         ng-model="layer.layerSourceEntity.id"
-                        ng-change="getLayer(layer.layerSourceEntity.id)"
+                        ng-change="getLayersBySource(layer.layerSourceEntity.id)"
                         id="layerSourceEntityID" required>
 
                     <option value=""> Escolha um tipo</option>

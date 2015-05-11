@@ -13,7 +13,15 @@ define([
             });
         }
 
-        $scope.getLayer = function (typeLayerSource) {
+        $scope.getLayersBySource = function (typeLayerSource) {
+          LayerService.getLayersBySource(typeLayerSource,$scope);
+          var interval = setInterval(function(){
+              if(typeof $scope.layers !='undefined'){
+                  console.info("scope.layers",$scope.layers);
+                  clearInterval(interval);
+              }
+                            
+          });
             
         };
         

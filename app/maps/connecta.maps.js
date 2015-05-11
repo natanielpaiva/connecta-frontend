@@ -22,7 +22,7 @@ define([
             layer: appMaps.host + '/layers',
             layerViewer: appMaps.host + '/layerViewers',
             layerViewerType: appMaps.host + '/layerViewerTypes',
-            importSHP: appMaps.host + '/geoRest',
+            geo: appMaps.host + '/geoRest',
             regexBase64: '.*base64,'
         });
 
