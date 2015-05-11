@@ -10,6 +10,7 @@
         "INTERNAL_LINK":"Link Interno",
         "EXTERNAL_LINK":"Link Externo",
         "USER":"Usuário",
-        "PASSWORD":"Senha"
+        "PASSWORD":"Senha",
+        "SELECT":"Selecione uma Fonte de Camada"
     }
 }

@@ -9,6 +9,7 @@
         "INTERNAL_LINK": "Internal Link",
         "EXTERNAL_LINK": "External Link",
         "USER": "User",
-        "PASSWORD": "Password"
+        "PASSWORD": "Password",
+        "SELECT":"Select LayerSource"
     }
 }

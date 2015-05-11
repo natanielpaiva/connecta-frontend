@@ -8,35 +8,20 @@
     <div class="col-md-12">
         <form novalidate name="formulario" ng-submit="submit()">
             <div class="form-group">
-                <label for="nm_layerSourceSHP" translate>LAYERSOURCE.SOURCE</label>
+                <label for="nm_layerSourceSHP" translate>LAYERSOURCE.LAYERSOURCE</label>
                 <select class="form-control" 
                         name="nm_layerSourceSHP" 
                         id="nm_layerSourceSHP"
                         ng-model="nm_layerSource.selectTipo" 
                         ng-options="selectTipo as selectTipo.nm_source for selectTipo in nm_layerSource" required>
-                    <option value=""> Escolha um tipo</option>
+                    <option value="" translate> LAYERSOURCE.SELECT</option>
                 </select>
 
                 <div ng-show="formulario.nm_layerSourceSHP.$touched" ng-messages="formulario.nm_layerSourceSHP.$error"
                      ng-messages-include="portal-validation-messages"></div>
             </div>
 
-            <div class="form-group">
-                <label for="tpl_type_layer" translate>IMPORT.FILE</label>
-                    <label id="tpl_type_layer"
-                           class="well drop-box set-file dropzone"
-                           ng-file-drop 
-                           ng-file-select
-                           ng-multiple="false"
-                           ng-accept="'.zip'" 
-                           ng-model-rejected="rejFiles" 
-                           allow-dir="false" 
-                           drag-over-class="{accept:'accept', reject:'reject'}">                        
-                    </label>                    
-
-                <div ng-show="formulario.tpl_type_layer.$touched" ng-messages="formulario.tpl_type_layer.$error"
-                     ng-messages-include="portal-validation-messages"></div>
-            </div>
+            
 
             <a href="#/maps/"
                class="btn btn-default" translate>
