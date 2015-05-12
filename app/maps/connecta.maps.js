@@ -121,13 +121,13 @@ define([
             children: []
         },
         {
-            href: 'maps/import',
             title: 'IMPORT.IMPORT',
             icon: 'icon-import-export',
-            children: [{href: 'maps/import/shp',
-                    title: 'IMPORT.SHP',
-                    icon: 'icon-map',
-                    children: []}
+            children: [
+                {
+                    href: 'maps/import/shp',
+                    title: 'IMPORT.SHP'
+                }
             ]
         }
     ];

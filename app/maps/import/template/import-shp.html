@@ -4,9 +4,9 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <form novalidate name="formulario" ng-submit="submit()">
+<form novalidate name="formulario" ng-submit="submit()">
+    <div class="row">
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="nm_layerSourceSHP" translate>LAYERSOURCE.LAYERSOURCE</label>
                 <select class="form-control" 
@@ -19,10 +19,24 @@
 
                 <div ng-show="formulario.nm_layerSourceSHP.$touched" ng-messages="formulario.nm_layerSourceSHP.$error"
                      ng-messages-include="portal-validation-messages"></div>
+
             </div>
+        </div>
+        <div class="col-md-8">
 
-            
+            <div class="form-group">
+                <label for="shapefile" translate>IMPORT.IMPORT_SHP</label>
 
+                <input type="text" class="form-control" name="file-falso" id="file-falso"
+                       style="padding-right: 160px">
+                <input type="button" class="btn-primary btn" value="Selecione um arquivo"
+                       style="position: absolute; right: 0px; top: 39px;">
+                <input type="file" id="file-original" size="30" class="btn btn-primary" name="file-original" accept=".sld"
+                       style="height: 34px !important; opacity: 0; position: absolute; top: 39px; right: 0px; width: 172px;">
+
+            </div>
+        </div>
+        <div class="col-md-12">
             <a href="#/maps/"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
@@ -30,6 +44,7 @@
             <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
                 LAYOUT.SAVE
             </button>
-        </form>
+        </div>
+        <!--</div>-->
     </div>
-</div>
+</form>

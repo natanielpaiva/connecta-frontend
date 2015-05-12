@@ -12,7 +12,8 @@ define([
         $scope.layers = [];
 
         $scope.layerViewer = {
-            parameters: []
+            ds_param_names: " ",
+            ds_param_values: " "
         };
 
         if ($routeParams.id) {
@@ -42,6 +43,9 @@ define([
         };
 
         $scope.submit = function () {
+            
+            $scope.layerViewer.layerEntity = {"id":$scope.layerViewer.layerEntity.id}
+            
             LayerViewerService.save($scope.layerViewer).then(function () {
                 $location.path('maps/layer-viewer');
             }, function (response) {
