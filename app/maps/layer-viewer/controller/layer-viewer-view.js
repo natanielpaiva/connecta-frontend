@@ -9,8 +9,8 @@ define([
 
             $scope.layerViewer = response.data;
 
-            $scope.excluir = function (id) {
-                LayerViewerService.remove(id).then(function () {
+            $scope.remove = function (id) {
+                LayerViewerService.delete(id).then(function () {
                     $location.path('maps/layer-viewer');
                 });
             };
