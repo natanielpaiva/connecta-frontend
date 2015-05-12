@@ -16,8 +16,7 @@ define([
         $scope.getLayersBySource = function (typeLayerSource) {
           LayerService.getLayersBySource(typeLayerSource,$scope);
           var interval = setInterval(function(){
-              if(typeof $scope.layers !='undefined'){
-                  console.info("scope.layers",$scope.layers);
+              if(typeof $scope.layers !='undefined'){                  
                   clearInterval(interval);
               }
                             

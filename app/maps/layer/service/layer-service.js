@@ -12,14 +12,12 @@ define([
             return $http.get(url);
         };
 
-        this.getLayersBySource = function (sourceType,scope) {
-            console.info("SCOPE",scope);
+        this.getLayersBySource = function (sourceType,scope) {            
             var url = mapsResources.geo + "/getLayers";
-            var config = JSON.stringify({idLayerSource: sourceType});
             
            $http({
                 method: 'POST',
-                url: url,
+                url: url,                
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 transformRequest: function (obj) {
                     var str = [];
@@ -29,7 +27,7 @@ define([
                 },
                 data: {data: JSON.stringify({idLayerSource: sourceType})}
             }).success(function(data){                               
-                scope.layers=data;
+                scope.layers=JSON.parse(data);
                 return data;
             });                       
 
