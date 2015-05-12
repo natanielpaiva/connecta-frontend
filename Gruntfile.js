@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   var port = grunt.option('port') || 9001;
 
-  // Load Grunt tasks declared in the package.json file
+  // Carrega as tasks do Grunt declaradas como dependência no package.json
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
@@ -82,8 +82,8 @@ module.exports = function(grunt) {
             return [
               // Load the middleware provided by the livereload plugin
               // that will take care of inserting the snippet
-               require('connect-livereload')(),
- 
+              require('connect-livereload')(),
+
               // Serve the project folder
               connect.static(options.base[0])
             ];
@@ -118,5 +118,5 @@ module.exports = function(grunt) {
   grunt.registerTask('run', ['default', 'connect:development', 'watch']);
   grunt.registerTask('run-prod', ['dist', 'connect:production']);
   grunt.registerTask('war-dist', ['dist', 'war']);
-  
+
 };
