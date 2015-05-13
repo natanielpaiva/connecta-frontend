@@ -113,7 +113,13 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('default', ['jshint', 'sass']);
+  grunt.registerTask('create-local-applications', 'Criar cópia local do applications.json', function(){
+    if (!grunt.file.exists('app/applications.json')) {
+      grunt.file.write('app/applications.json', grunt.file.read('app/applications.json.dist'));
+    }
+  });
+
+  grunt.registerTask('default', ['jshint', 'sass', 'create-local-applications']);
   grunt.registerTask('dist', ['default', 'copy']);
   grunt.registerTask('test', ['default', 'karma']);
   grunt.registerTask('run', ['default', 'connect:development', 'watch']);
