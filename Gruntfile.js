@@ -93,7 +93,7 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['app/*.js', 'app/**/*.js'],
+        files: ['app/**/*.js'],
         tasks: ['jshint'],
         options: {
           livereload: grunt.option('reload'),
@@ -104,7 +104,7 @@ module.exports = function(grunt) {
         tasks: ['sass']
       },
       livereload: {
-        files: ['assets/css/*.css'],
+        files: ['assets/css/*.css', 'app/**/*.html'],
         options: {
           livereload: grunt.option('reload'),
         }
