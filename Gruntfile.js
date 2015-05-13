@@ -35,6 +35,7 @@ module.exports = function(grunt) {
           '!bower.json',
           '!package.json',
           '!new-module.sh',
+          '!**/connecta-frontend.war',
           '!Gruntfile.js'
         ],
         dest: 'dist/',
@@ -45,7 +46,7 @@ module.exports = function(grunt) {
       target: {
         options: {
           war_dist_folder: '.',
-          war_name: 'connecta-frontend',
+          war_name: 'dist/connecta-frontend',
           webxml_welcome:'index.html',
           webxml_display_name: 'Connecta Frontend'
         },
