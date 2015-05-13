@@ -31,13 +31,20 @@
     <div class="col-md-12">
         <div class="well margin-top-single margin-bottom-single">
             
+            
+            <p ng-if="layer.layerSourceEntity.layerSourceTypeEntity">
+                <strong translate>LAYER.SOURCE</strong>:
+                {{layer.layerSourceEntity.layerSourceTypeEntity.id}}
+            </p>
+            
+            
             <p ng-if="layer.nm_layer">
                 <strong translate>LAYER.NAME</strong>: 
                 {{layer.nm_layer}}
             </p>
 
             <p ng-if="layer.ds_layer">
-                <strong translate>LAYER.SOURCE</strong>:
+                <strong translate>LAYER.DESCRIPTION</strong>:
                 {{layer.ds_layer}}
             </p>
         </div>

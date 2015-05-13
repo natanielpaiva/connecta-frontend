@@ -8,12 +8,12 @@
     <div class="col-md-12">
         <form novalidate name="formulario" ng-submit="submit()">
             <div class="form-group">
-                <label for="nm_layer" translate>LAYER.NAME</label>
-                <input type="text" class="form-control" id="nm_source" name="nm_source"
-                       ng-model="layer.nm_layer" 
+                <label for="ds_layer" translate>LAYER.DESCRIPTION</label>
+                <input type="text" class="form-control" id="nm_source" name="ds_layer"
+                       ng-model="layer.ds_layer" 
                        required/>
-                <div ng-show="formulario.$submitted || formulario.name.$touched" 
-                     ng-messages="formulario.nm_layer.$error"
+                <div ng-show="formulario.$submitted || formulario.ds_layer.$touched" 
+                     ng-messages="formulario.ds_layer.$error"
                      ng-messages-include="portal-error-messages">
                 </div>
             </div>
@@ -23,27 +23,25 @@
 
                 <select class="form-control" 
                         name="layerSourceEntityID" 
-                        ng-model="layer.layerSourceEntity.id"
+                        ng-model="layer.layerSourceEntity"
                         ng-change="getLayersBySource(layer.layerSourceEntity.id)"
-                        id="layerSourceEntityID" required>
-
+                        id="layerSourceEntityID" required
+                        ng-options="layerSource.nm_source for layerSource in layerSourceType" required>
                     <option value="" translate> LAYER.SELECT_SOURCE</option>
-                    <option value="1"> Geoserver </option>
-                    <option value="2"> ArcGis </option>
-                    <option value="3"> MapViewer </option>
-                    <option value="4"> MapServer </option>
+
                 </select>                
                 <div ng-show="formulario.layerSourceEntityID.$touched" ng-messages="formulario.layerSourceEntityID.$error"
                      ng-messages-include="portal-validation-messages"></div>      
             </div>
 
             <div class="form-group">
-                <label for="layerCMB" translate>LAYER.LAYER</label>
+                <label for="nm_layer" translate>LAYER.LAYER</label>
 
                 <select class="form-control" 
-                        name="layerCMB" 
-                        id="layerCMB"
-                        ng-model="layerName" 
+                        name="nm_layer" 
+                        id="nm_layer"
+                        ng-model="layer.layerName"
+                        ng-change="getLayerConfigs(layer.layerName.layerName)"
                         ng-options="layerName as layerName.layerName for layerName in layers" required>
                     <option value="" translate> LAYER.SELECT_LAYER</option>
                 </select>          

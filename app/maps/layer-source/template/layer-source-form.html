@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">        
-        <h3 translate>{{isEditing ? 'LAYERSOURCE.EDIT' : 'LAYERSOURCE.ADD'}}</h3>
+        <h3 translate>{{isEditing ? 'LAYER.EDIT' : 'LAYER.ADD'}}</h3>
     </div>
 </div>
 
@@ -18,20 +18,18 @@
             </div>
 
             <div class="form-group">
-                <label for="layerSourceTypeEntityID" translate>LAYERSOURCE.TYPE</label>
-                
-                <select class="form-control" 
-                        name="layerSourceTypeEntityID" 
-                        ng-model="layerSource.layerSourceTypeEntity.id"
-                        id="layerSourceTypeEntityID" required>
+                <label for="layerSourceEntityID" translate>LAYER.SOURCE_LAYER</label>
 
-                    <option value=""> Escolha um tipo</option>
-                    <option value="1"> GEOSERVER </option>
-                    <option value="2"> ARCGISSERVER </option>
-                    <option value="3"> MAPVIEWER </option>
-                    <option value="4"> MAPSERVER </option>
+                <select class="form-control" 
+                        name="layerSourceEntityID" 
+                        ng-model="layer.layerSourceEntity.id"
+                        ng-change="getLayersBySource(layer.layerSourceEntity.id)"
+                        id="layerSourceEntityID" required
+                        ng-options="layerSource.nm_source for layerSource in layerSourceType" required>
+                    <option value="" translate> LAYER.SELECT_SOURCE</option>
+                    
                 </select>                
-                <div ng-show="formulario.layerSourceTypeEntityID.$touched" ng-messages="formulario.layerSourceTypeEntityID.$error"
+                <div ng-show="formulario.layerSourceEntityID.$touched" ng-messages="formulario.layerSourceEntityID.$error"
                      ng-messages-include="portal-validation-messages"></div>      
             </div>
             

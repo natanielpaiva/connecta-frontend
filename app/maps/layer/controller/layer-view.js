@@ -10,7 +10,7 @@ define([
 
             
 
-            $scope.excluir = function (id) {
+            $scope.remove = function (id) {
                 LayerService.delete(id).then(function () {
                     $location.path('maps/layer');
                 });

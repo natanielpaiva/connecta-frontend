@@ -23,6 +23,7 @@ define([
             layerViewer: appMaps.host + '/layerViewers',
             layerViewerType: appMaps.host + '/layerViewerTypes',
             geo: appMaps.host + '/geoRest',
+            openlayersProxy: appMaps.host + '/proxy.jsp',
             regexBase64: '.*base64,'
         });
 
@@ -71,6 +72,11 @@ define([
             controller: 'LayerViewController',
             controllerUrl: 'maps/layer/controller/layer-view',
             templateUrl: 'app/maps/layer/template/layer-view.html'
+        },
+        '/maps/layer/:id/edit': {
+            controller: 'LayerFormController',
+            controllerUrl: 'maps/layer/controller/layer-form',
+            templateUrl: 'app/maps/layer/template/layer-form.html'
         },
         '/maps/layer-viewer': {
             controller: 'LayerViewerListController',

@@ -2,7 +2,8 @@
 {
     "LAYER": {
         "VIEW":"Visualizar Camada",
-        "ADD": "Adicionar Layer",
+        "ADD": "Adicionar Camada",
+        "EDIT": "Editar Camada",
         "LAYER":"Camadas",
         "SOURCE":"Origem",
         "SOURCE_LAYER":"Fonte de Camadas",
