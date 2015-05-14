@@ -80,6 +80,9 @@ require.config({
         'bower_components/ngDraggable/ngDraggable':{
             deps: ['angular']
         },
+        'bower_components/ng-tags-input/ng-tags-input':{
+            deps: ['angular']
+        },
         'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min':{
             deps: ['angular']
         },
