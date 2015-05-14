@@ -44,7 +44,7 @@ define([
 
         $scope.submit = function () {
             
-            $scope.layerViewer.layerEntity = {"id":$scope.layerViewer.layerEntity.id}
+            $scope.layerViewer.layerEntity = {"id":$scope.layerViewer.layerEntity.id};
             
             LayerViewerService.save($scope.layerViewer).then(function () {
                 $location.path('maps/layer-viewer');
