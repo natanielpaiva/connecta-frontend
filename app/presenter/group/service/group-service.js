@@ -247,7 +247,7 @@ define([
 
                _fixQueryBuilder(queryBuilder);
                return $http.post(urlSaveQuery, queryBuilder);
-          }
+          };
 
 
           this.save = function(group) {

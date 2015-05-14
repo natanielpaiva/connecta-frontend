@@ -20,7 +20,7 @@ define([
                          "statements": []
                     }
                };
-          }
+          };
 
           var getSingleSourceByQueryBuilder = function(data) {
                $scope.medias = [];
