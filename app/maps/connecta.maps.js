@@ -18,7 +18,7 @@ define([
 
         maps.lazy.value('mapsResources', {
             layerSource: appMaps.host + '/layerSources',
-            layerSourceType: appMaps.host + '/layerSources',
+            layerSourceType: appMaps.host + '/layerSourceTypes',
             layer: appMaps.host + '/layers',
             layerViewer: appMaps.host + '/layerViewers',
             layerViewerType: appMaps.host + '/layerViewerTypes',

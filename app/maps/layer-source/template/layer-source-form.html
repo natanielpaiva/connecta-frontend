@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">        
-        <h3 translate>{{isEditing ? 'LAYER.EDIT' : 'LAYER.ADD'}}</h3>
+        <h3 translate>{{isEditing ? 'LAYERSOURCE.EDIT' : 'LAYERSOURCE.ADD'}}</h3>
     </div>
 </div>
 
@@ -11,67 +11,65 @@
                 <label for="nm_source" translate>LAYERSOURCE.NAME</label>
                 <input type="text" class="form-control" id="nm_source" name="nm_source"
                        ng-model="layerSource.nm_source" required/>
-                 <div ng-show="formulario.$submitted || formulario.name.$touched" 
+                <div ng-show="formulario.$submitted || formulario.name.$touched" 
                      ng-messages="formulario.nm_source.$error"
                      ng-messages-include="portal-error-messages">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="layerSourceEntityID" translate>LAYER.SOURCE_LAYER</label>
+                <label for="layerSourceTypeEntity" translate>LAYER.SOURCE_LAYER</label>
 
                 <select class="form-control" 
-                        name="layerSourceEntityID" 
-                        ng-model="layer.layerSourceEntity.id"
-                        ng-change="getLayersBySource(layer.layerSourceEntity.id)"
-                        id="layerSourceEntityID" required
-                        ng-options="layerSource.nm_source for layerSource in layerSourceType" required>
-                    <option value="" translate> LAYER.SELECT_SOURCE</option>
-                    
-                </select>                
-                <div ng-show="formulario.layerSourceEntityID.$touched" ng-messages="formulario.layerSourceEntityID.$error"
+                        name="layerSourceTypeEntity" 
+                        id="layerSourceTypeEntity"                        
+                        ng-model="layerSource.layerSourceTypeEntity" 
+                        ng-options="selectTipo as selectTipo.ds_source_type for selectTipo in nm_source_type" required>
+                    <option value="" translate> LAYERSOURCE.SELECT</option>
+                </select>            
+                <div ng-show="formulario.layerSourceTypeEntity.$touched" ng-messages="formulario.layerSourceTypeEntity.$error"
                      ng-messages-include="portal-validation-messages"></div>      
             </div>
-            
-            
-            
-             <div class="form-group">
+
+
+
+            <div class="form-group">
                 <label for="ds_link_interno" translate>LAYERSOURCE.INTERNAL_LINK</label>
                 <input type="text" class="form-control" id="nm_source" name="ds_link_interno"
                        ng-model="layerSource.ds_link_interno" required/>
                 <div ng-show="formulario.ds_link_interno.$touched" ng-messages="layerSource.ds_link_interno.$error"
                      ng-messages-include="portal-validation-messages"></div>
             </div>
-            
-            
-             <div class="form-group">
+
+
+            <div class="form-group">
                 <label for="ds_link_externo" translate>LAYERSOURCE.EXTERNAL_LINK</label>
                 <input type="text" class="form-control" id="nm_source" name="ds_link_externo"
                        ng-model="layerSource.ds_link_externo" required/>
                 <div ng-show="formulario.ds_link_externo.$touched" ng-messages="layerSource.ds_link_externo.$error"
                      ng-messages-include="portal-validation-messages"></div>
             </div>
-            
-            
-             <div class="form-group">
+
+
+            <div class="form-group">
                 <label for="nm_user_rest" translate>LAYERSOURCE.USER</label>
                 <input type="text" class="form-control" id="nm_source" name="nm_user_rest"
                        ng-model="layerSource.nm_user_rest" required/>
                 <div ng-show="formulario.nm_user_rest.$touched" ng-messages="layerSource.nm_user_rest.$error"
                      ng-messages-include="portal-validation-messages"></div>
             </div>
-            
-            
-            
-             <div class="form-group">
+
+
+
+            <div class="form-group">
                 <label for="nm_pass_rest" translate>LAYERSOURCE.PASSWORD</label>
                 <input type="text" class="form-control" id="nm_source" name="nm_pass_rest"
                        ng-model="layerSource.nm_pass_rest" required/>
                 <div ng-show="formulario.nm_pass_rest.$touched" ng-messages="layerSource.nm_pass_rest.$error"
                      ng-messages-include="portal-validation-messages"></div>
             </div>                        
-            
-            
+
+
             <a href="#/maps/layer-source"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL

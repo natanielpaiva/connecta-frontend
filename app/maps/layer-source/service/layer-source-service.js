@@ -13,7 +13,7 @@ define([
         };
 
 
-        this.save = function (layerSource) {
+        this.save = function (layerSource) {            
             return $http.post(mapsResources.layerSource, layerSource);
         };
 
