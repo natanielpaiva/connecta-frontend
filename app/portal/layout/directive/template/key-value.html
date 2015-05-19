@@ -1,4 +1,11 @@
-<button class="btn btn-default" ng-click="keyValueAddItem()" type="button">
+<button class="btn btn-default" ng-click="keyValueAddItem()" type="button"
+        ng-if="disableButton === undefined">
+    <span class="icon-plus"></span>
+    <translate>LAYOUT.ADD</translate>
+</button>
+<button class="btn btn-default" ng-click="keyValueAddItem()" type="button"
+        ng-if="disableButton !== undefined"
+        ng-disabled="disableButton">
     <span class="icon-plus"></span>
     <translate>LAYOUT.ADD</translate>
 </button>

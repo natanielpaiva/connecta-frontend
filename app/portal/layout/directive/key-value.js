@@ -1,23 +1,24 @@
 define([
     'connecta.portal',
     'portal/layout/directive/key-value-item'
-], function(portal){
-    return portal.directive('keyValue', function(){
+], function (portal) {
+    return portal.directive('keyValue', function () {
         return {
-            restrict:'AE',
+            restrict: 'AE',
             templateUrl: "app/portal/layout/directive/template/key-value.html",
             transclude: true,
-            scope:{
-                $model:'=ngModel'
+            scope: {
+                $model: '=ngModel',
+                disableButton: '='
             },
-            controller:function($scope) {
-                $scope.keyValueAddItem = function(){
+            controller: function ($scope) {
+                $scope.keyValueAddItem = function () {
                     $scope.$model.push({});
                 };
-                $scope.keyValueRemoveItem = function($item) {
+                $scope.keyValueRemoveItem = function ($item) {
                     $scope.$model.splice(
-                        $scope.$model.indexOf($item), 1
-                    );
+                            $scope.$model.indexOf($item), 1
+                            );
                 };
             }
         };

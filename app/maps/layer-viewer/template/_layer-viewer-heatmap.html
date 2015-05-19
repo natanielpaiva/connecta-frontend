@@ -1,11 +1,10 @@
-<h3 translate>LAYERVIEWER.HEATMAP</h3>
 <div class="row">
     <div class="col-xs-3 form-group">
         <label for="initialColor" translate>LAYERVIEWER.INITIAL_COLOR</label>
         <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt" style="width: 80%; border-right: none; float: left;"
-               ng-model="layerViewer.server" />
+               ng-model="layerViewer.initialColor" />
         <input type="color" name="initialColor" required class="form-control" id="initialColor" style="width: 20%; padding: 0px; float: left;"
-               ng-model="layerViewer.server" />
+               ng-model="layerViewer.initialColor" />
         <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
              ng-messages-include="portal-validation-messages"></div>
     </div>
@@ -13,9 +12,9 @@
     <div class="col-xs-3 form-group">
         <label for="finalColor" translate>LAYERVIEWER.FINAL_COLOR</label>
         <input type="text" name="finalColorTxt" required class="form-control" id="finalColorTxt" style="width: 80%; border-right: none; float: left;"
-               ng-model="layerViewer.port">
+               ng-model="layerViewer.finalColor" />
         <input type="color" name="finalColor" required class="form-control" id="finalColor" style="width: 20%; padding: 0px; float: left;"
-               ng-model="layerViewer.port">
+               ng-model="layerViewer.finalColor" />
         <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
              ng-messages-include="portal-validation-messages"></div>
     </div>
