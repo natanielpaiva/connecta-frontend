@@ -73,6 +73,8 @@ define([
 
                         break;
                     case 3:
+                        
+                        ds_param_values = $scope.layerViewer.ds_param_values.replace(/@/gi, "");
                         ds_param_values = $scope.layerViewer.ds_param_values.split("~");
 
                         var countParamValues = 0;
@@ -150,7 +152,7 @@ define([
                     $scope.layerViewer.ds_param_names = "styleName";
                     break;
                 case 2:
-                    $scope.layerViewer.ds_param_names = "raioInitial~finalColor";
+                    $scope.layerViewer.ds_param_names = "initialColor~finalColor";
                     $scope.layerViewer.ds_param_values = $scope.layerViewer.initialColor + "~" + $scope.layerViewer.finalColor;
                     break;
                 case 3:
@@ -163,7 +165,7 @@ define([
                                 $scope.layerViewer.parameters[item].int_raioInitial + "~" +
                                 $scope.layerViewer.parameters[item].int_initialColor + "~" +
                                 $scope.layerViewer.parameters[item].int_finalColor + "~" +
-                                $scope.layerViewer.parameters[item].int_opacity + "~";
+                                $scope.layerViewer.parameters[item].int_opacity + "@~";
                     }
 
                     $scope.layerViewer.ds_param_names = "initialColor~ini_initialColor~ini_finalColor~opacityFinal~raioFinal~fim_initialColor~fim_initialColor~opacityFinal";
@@ -171,7 +173,7 @@ define([
                             $scope.layerViewer.raioInitial + "~" +
                             $scope.layerViewer.ini_initialColor + "~" +
                             $scope.layerViewer.ini_finalColor + "~" +
-                            $scope.layerViewer.opacityFinal + "~" +
+                            $scope.layerViewer.opacityFinal + "@~" +
                             intervalsCluster +
                             $scope.layerViewer.raioFinal + "~" +
                             $scope.layerViewer.fim_initialColor + "~" +
