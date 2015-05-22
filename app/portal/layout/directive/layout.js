@@ -17,6 +17,7 @@ define([
             replace: true,
             templateUrl: 'app/portal/layout/directive/template/layout.html',
             controller:function($scope, layoutService) {
+                $scope.showAsFlat = false;
                 $scope.showSidebar = layoutService.isSidebarVisible();
                 /**
                  * Evento para exibir a barra lateral
@@ -30,6 +31,14 @@ define([
                  */
                 $scope.$on('menu.hide', function () {
                     $scope.showSidebar = false;
+                });
+
+                /**
+                 * Evento para mostrar o page container sem fundo
+                 * e sem padding
+                 */
+                $scope.$on('page.flat', function (ev, val) {
+                    $scope.showAsFlat = val;
                 });
             },
             link: function (scope, element) {
@@ -50,4 +59,3 @@ define([
         };
     });
 });
-

@@ -74,6 +74,9 @@ require.config({
         'bower_components/angular-ui-tree/dist/angular-ui-tree.min': {
             deps: ['angular']
         },
+        'bower_components/angular-gridster/dist/angular-gridster.min': {
+            deps: ['angular']
+        },
         'angular-ng-table':{
             deps: ['angular']
         },

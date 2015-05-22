@@ -15,7 +15,7 @@ $headerHeight: 4em;
         height:100%;
         color: $white;
         font-size: 2.8em;
-        
+
         &:active {
             color: $lighterGray;
         }
@@ -66,6 +66,31 @@ $headerHeight: 4em;
             }
         }
     }
+
+    .dashboard {
+      ul.nav.navbar-nav {
+        li {
+          a {
+            padding:0;
+            margin:0;
+            height:100%;
+            text-align:center;
+            line-height:1.55em;
+            font-size:3em;
+            width:1.5em;
+            display:block;
+            float:left;
+
+            .icon-view-quilt {
+              color:$lightBlack;
+              // font-size:3em;
+              // line-height:1.55em;
+              // text-align:center;
+            }
+          }
+        }
+      }
+    }
 }
 
 /*Ícones das aplicações*/
@@ -82,21 +107,3 @@ $headerHeight: 4em;
     //Temporário
     background-image: url('../img/logo-connecta.png');
 }
-
-/*#menu-top .actual-app .arrow{
-    display: block;
-    position: absolute;
-    left: 210px;
-    width: 0;
-    height: 0;
-    border: 10px outset transparent;
-    top: 60px;
-    border-top: 10px solid;
-    transition: top 0.1s;
-}
-
-.hide-sidebar #menu-top .actual-app .arrow{
-    top: 50px;
-    border-top: 0px;
-    border-bottom:10px solid;
-}*/

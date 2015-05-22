@@ -12,15 +12,15 @@ define([
      */
     return portal.service('layoutService', function ($rootScope, $cookieStore) {
         var SIDEBAR = 'connecta.portal.layout.menu';
-        
+
         var isShowPageTabs = false;
-        
+
         var broadcastEvent = function(show){
             var eventName = show ? 'menu.show' : 'menu.hide';
-            
+
             $rootScope.$broadcast(eventName);
         };
-        
+
         /**
          * Oculta e exibe a barra lateral (menu esquerdo)
          *
@@ -43,13 +43,16 @@ define([
                 $rootScope.$broadcast('page.hideTabs');
             }
         };
-        
+
         /**
          * Informa se a barra lateral está aberta
          */
         this.isSidebarVisible = function(){
             return $cookieStore.get(SIDEBAR);
         };
+
+        this.showAsFlat = function(flat){
+          $rootScope.$broadcast('page.flat', flat);
+        };
     });
 });
-
