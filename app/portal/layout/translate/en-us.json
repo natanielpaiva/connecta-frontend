@@ -18,7 +18,8 @@
         "FILTER": "Filter",
         "SELECT" : "Choose an option",
         "SEARCH" : "Search",
-        "DONE": "Done"
+        "DONE": "Done",
+        "DASHBOARD": "Dashboard"
     },
     "KEY_VALUE": {
         "NO_ITEM" : "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."
