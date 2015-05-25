@@ -11,6 +11,13 @@ define([
 
             $scope.layerViewer = response.data;
 
+            $scope.remove = function (id) {
+                LayerViewerService.delete(id).then(function () {
+                    $location.path('maps/layer-viewer');
+                });
+            };
+
+
             //Parâmetros da Modal
             $scope.modalParams = {
                 title: "",
@@ -26,11 +33,7 @@ define([
 
             ConnectaGeoService.showViewer($scope.layerViewer);
 
-            $scope.remove = function (id) {
-                LayerViewerService.delete(id).then(function () {
-                    $location.path('maps/layer-viewer');
-                });
-            };
+
         });
 
     });

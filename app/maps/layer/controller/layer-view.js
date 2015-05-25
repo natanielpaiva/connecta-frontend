@@ -10,6 +10,13 @@ define([
             $scope.layer = response.data;
 
 
+            $scope.remove = function (id) {
+                LayerService.delete(id).then(function () {
+                    $location.path('maps/layer');
+                });
+            };
+
+
             //Parâmetros da Modal
             $scope.modalParams = {
                 title: "",
@@ -23,11 +30,7 @@ define([
             $modalTranslate($scope.modalParams, 'text', 'LAYER.CONFIRM_DELETE');
 
 
-            $scope.remove = function (id) {
-                LayerService.delete(id).then(function () {
-                    $location.path('maps/layer');
-                });
-            };
+
         });
 
     });

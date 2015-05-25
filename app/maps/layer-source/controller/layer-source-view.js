@@ -10,6 +10,13 @@ define([
             $scope.layerSource = response.data;
 
 
+            $scope.remove = function (id) {
+                console.info("REMOVE LAYERSOURCE");
+                LayerSourceService.delete(id).then(function () {
+                    $location.path('maps/layer-source');
+                });
+            };
+                                    
             //Parâmetros da Modal
             $scope.modalParams = {
                 title: "",
@@ -23,11 +30,6 @@ define([
             $modalTranslate($scope.modalParams, 'text', 'LAYERSOURCE.CONFIRM_DELETE');
 
 
-            $scope.remove = function (id) {
-                LayerSourceService.delete(id).then(function () {
-                    $location.path('maps/layer-source');
-                });
-            };
         });
 
     });
