@@ -19,6 +19,8 @@
         "INTERVAL_FINAL":"Final",
         "INITIAL_RAIO":"Initial Radius",
         "FINAL_RAIO":"Final Radius",
-        "FILE_SLD":"SLD File"        
+        "FILE_SLD":"SLD File",
+        "TITLE_CONFIRM_DELETE": "LayerViewer Delete",
+        "CONFIRM_DELETE": "Do you really want to delete LayerViewer?"
     }
 }

@@ -20,7 +20,9 @@
         "INTERVAL_FINAL":"Final",
         "INITIAL_RAIO":"Raio inicial",
         "FINAL_RAIO":"Raio final",
-        "FILE_SLD":"Arquivo SLD"        
+        "FILE_SLD":"Arquivo SLD",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Visualizador de mapa",
+        "CONFIRM_DELETE": "Deseja realmente excluir o Visualizador de mapa?"
         
     }
 }

@@ -1,15 +1,17 @@
 
 {
     "LAYER": {
-        "VIEW":"Visualizar Camada",
+        "VIEW": "Visualizar Camada",
         "ADD": "Adicionar Camada",
         "EDIT": "Editar Camada",
-        "LAYER":"Camadas",
-        "SOURCE":"Origem",
-        "SOURCE_LAYER":"Fonte de Camadas",
-        "DESCRIPTION":"Descrição",
-        "NAME":"Nome",
-        "SELECT_LAYER":"Selecione uma Camada",
-        "SELECT_SOURCE":"Selecione uma Fonte de Camada"
+        "LAYER": "Camadas",
+        "SOURCE": "Origem",
+        "SOURCE_LAYER": "Fonte de Camadas",
+        "DESCRIPTION": "Descrição",
+        "NAME": "Nome",
+        "SELECT_LAYER": "Selecione uma Camada",
+        "SELECT_SOURCE": "Selecione uma Fonte de Camada",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Camada",
+        "CONFIRM_DELETE": "Deseja realmente excluir a Camada?"
     }
 }

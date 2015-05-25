@@ -9,6 +9,8 @@
         "DESCRIPTION":"Description",
         "NAME":"Name",
         "SELECT_LAYER":"Select Layer",
-        "SELECT_SOURCE":"Select Layer Source"
+        "SELECT_SOURCE":"Select Layer Source",
+        "TITLE_CONFIRM_DELETE": "Layer Delete",
+        "CONFIRM_DELETE": "Do you really want to delete Layer?"
     }
 }

@@ -11,6 +11,8 @@
         "EXTERNAL_LINK":"Link Externo",
         "USER":"Usuário",
         "PASSWORD":"Senha",
-        "SELECT":"Selecione uma Fonte de Camada"
+        "SELECT":"Selecione uma Fonte de Camada",
+        "TITLE_CONFIRM_DELETE":"Exclusão de Fonte de Camada",
+        "CONFIRM_DELETE":"Deseja realmente excluir a Fonte de camada?"
     }
 }

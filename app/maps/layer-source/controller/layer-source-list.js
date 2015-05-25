@@ -8,16 +8,17 @@ define([
 
         LayerSourceService.list().then(function (response) {
             $scope.layerSources = response.data;
-        }, function (response) {});
-        
-        
-        $scope.excluir = function (id) {
-            LayerSourceService.delete(id).then(function(){
+        }, function (response) {
+        });
+
+
+        $scope.excluir = function (id) {            
+            LayerSourceService.delete(id).then(function () {
                 //Retira um item da lista de layerSource
                 $scope.layerSources.splice(
                         $scope.layerSources.indexOf(id), 1);
             });
         };
-        
+       
     });
 });

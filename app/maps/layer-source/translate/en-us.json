@@ -10,6 +10,8 @@
         "EXTERNAL_LINK": "External Link",
         "USER": "User",
         "PASSWORD": "Password",
-        "SELECT":"Select LayerSource"
+        "SELECT":"Select LayerSource",
+        "TITLE_CONFIRM_DELETE":"LayerSource Delete",
+        "CONFIRM_DELETE":"Do you really want to delete LayerSource??"
     }
 }
