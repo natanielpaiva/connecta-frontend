@@ -12,6 +12,12 @@
         "IMAGE_RECT": "Imagem Retangular",
         "DESCRIPTION":"Descrição",
         "GROUPS":"Grupos de contatos",
-        "REMOVE_SUCCESS": "Empresa removida com sucesso"
+        "REMOVE_SUCCESS": "Empresa removida com sucesso",
+        "SUCCESS":"Success",
+        "VALIDATION" : {
+            "IMAGESIZE":"A imagem não deve ser maior que 1mb",
+            "IMAGEFORM":"A imagem deve ser retangular",
+            "IMAGERESOLUTION": "É recomendado utilizar a resolução 512x1080 HD"
+        }
     }
 }

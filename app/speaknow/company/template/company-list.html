@@ -18,7 +18,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-search"></span>
                             </span>
-                            <input type="text" class="form-control" 
+                            <input type="text" class="form-control" name="name"
                                    ng-model="search.name" placeholder="Search">
                         </div>
                     </div>
@@ -45,7 +45,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th translate>COMPANY.NAME</th>
+                    <th translate >COMPANY.NAME</th>
                     <th translate>COMPANY.EMAIL</th>
                     <th translate>COMPANY.TYPE</th>
                     <th></th>
@@ -56,7 +56,7 @@
                     <td>
 					 <input type="checkbox" value="{{company.id}}" />
 					</td>
-                    <td class="text-left">{{company.name}}</td>
+                    <td class="text-left" name="name">{{company.name}}</td>
                     <td class="text-left">{{company.mail}}</td>
                     <td class="text-left">{{company.type}}</td>
                     <td>

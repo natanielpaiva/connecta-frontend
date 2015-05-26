@@ -6,6 +6,9 @@ define([
     return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, $translate) {
 
         $scope.companies = null;
+        $scope.search = {
+            name:''
+        };
         $scope.tableParams = new ngTableParams({
             count: 10,
             page: 1,

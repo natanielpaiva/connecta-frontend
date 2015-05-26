@@ -33,28 +33,37 @@ define([
             }
         };
 
-        $scope.fileQuadDropped = function (files) {
-            $scope.fileQuad = files[0];
+        $scope.fileRectDropped = function (files) {
             if (files && files.length) {
+                $scope.fileRect = files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.imageQuad = e.target.result;
-                    $scope.$apply();
+                    if($scope.validateImage(e)){
+                        $scope.imageRect = e.target.result;
+                        $scope.$apply();
+                    } else {
+                        $scope.imageRect = null;
+                        $scope.fileRect = null;
+                    }
                 };
                 reader.readAsDataURL(files[0]);
             }
         };
         
-        $scope.fileRectDropped = function (files) {
-            $scope.fileRect = files[0];
-            if (files && files.length) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $scope.imageRect = e.target.result;
-                    $scope.$apply();
-                };
-                reader.readAsDataURL(files[0]);
+        $scope.validateImage = function(image){
+            var isValid = true;
+            if(image.total / 1000000 > 1){
+                notify.warning("COMPANY.VALIDATION.IMAGESIZE");
+                isValid = false;
+            } else {
+                var img = angular.element("<img>")[0];
+                img.src = image.target.result;
+                if(img.height >= img.width){
+                    notify.warning("COMPANY.VALIDATION.IMAGEFORM");
+                    isValid = false;
+                }
             }
+            return isValid;
         };
     });
 });

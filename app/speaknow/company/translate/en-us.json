@@ -1,6 +1,6 @@
 {
     "COMPANY": {
-        "COMPNANIES": "Companies",
+        "COMPANIES": "Companies",
         "COMPANY": "Company",
         "NAME": "Name",
         "EMAIL": "Email",
@@ -12,6 +12,12 @@
         "DROP_FILE_HERE":"Drop or click here",
         "DESCRIPTION":"Description",
         "GROUPS":"Contacts Groups",
-        "REMOVE_SUCCESS": "Successfully Removed"
+        "REMOVE_SUCCESS": "Successfully Removed",
+        "SUCCESS":"Success",
+        "VALIDATION" : {
+            "IMAGESIZE":"A imagem não deve ser maior que 1mb",
+            "IMAGEFORM":"A imagem deve ser retangular",
+            "IMAGERESOLUTION": "É recomendado utilizar a resolução 512x1080 HD"
+        }
     }
 }

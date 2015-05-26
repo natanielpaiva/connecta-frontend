@@ -2,7 +2,7 @@ define([
     'connecta.portal',
     'bower_components/toastr/toastr.min'
 ], function (portal, toastr) {
-    return portal.lazy.factory("notify", function () {
+    return portal.lazy.factory("notify", function ($translate) {
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -10,7 +10,7 @@ define([
             "onclick": null,
             "showDuration": "300",
             "hideDuration": "1000",
-            "timeOut": "2000",
+            "timeOut": "3000",
             "extendedTimeOut": "1000",
             "showEasing": "swing",
             "hideEasing": "linear",
@@ -20,16 +20,24 @@ define([
 
         return {
             success: function (text) {
-                toastr.success(text);
+                $translate(text).then(function (translate) {
+                    toastr.success(translate);
+                });
             },
             error: function (text) {
-                toastr.error(text, "Error");
+                $translate(text).then(function (translate) {
+                    toastr.error(translate, "Error");
+                });
             },
             info: function (text) {
-                toastr.info(text);
+                $translate(text).then(function (translate) {
+                    toastr.info(translate);
+                });
             },
             warning: function(text){
-                toastr.warning(text);
+                $translate(text).then(function (translate) {
+                    toastr.warning(translate);
+                });
             }
         };
     });
