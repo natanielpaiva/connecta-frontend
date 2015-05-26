@@ -74,8 +74,11 @@ require.config({
         'bower_components/angular-ui-tree/dist/angular-ui-tree.min': {
             deps: ['angular']
         },
-        'bower_components/angular-gridster/dist/angular-gridster.min': {
-            deps: ['angular']
+        'bower_components/angular-gridster/src/angular-gridster': {
+            deps: [
+              'angular',
+              '/bower_components/javascript-detect-element-resize/detect-element-resize.js'
+            ]
         },
         'angular-ng-table':{
             deps: ['angular']

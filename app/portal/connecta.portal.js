@@ -1,6 +1,6 @@
 define([
     'angular',
-    'bower_components/angular-gridster/dist/angular-gridster.min'
+    'bower_components/angular-gridster/src/angular-gridster'
 ], function (angular) {
     var portal = angular.module('connecta.portal', [
         'pascalprecht.translate',

@@ -16,7 +16,7 @@ $pageGutter:1em;
 
   &.flat {
     margin-left: ($sidebarSize - 1);
-    margin-top: ($headerHeight + (2*$pageGutter)) - 1;
+    margin-top: ($headerHeight + (2*$pageGutter)) - 1.4;
     background-color: transparent;
     padding:0;
   }
@@ -25,7 +25,7 @@ $pageGutter:1em;
     margin-left: $miniSidebarSize;
 }
 .hide-sidebar .page-container.flat {
-    margin-left: $miniSidebarSize - 1;
+    margin-left: $miniSidebarSize - 1.15;
 }
 
 .show-tabs .page-container {

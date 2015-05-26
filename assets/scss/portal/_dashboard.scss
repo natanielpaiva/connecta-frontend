@@ -1,0 +1,9 @@
+.dashboard {
+  .dashboard-item {
+    background: $white;
+    .gridster-item-resizable-handler.handle-se {
+      right:0;
+      bottom:0;
+    }
+  }
+}
