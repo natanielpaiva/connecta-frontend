@@ -1,6 +1,5 @@
 {
     "LAYERVIEWER": {
-        "LAYERVIEWER": "Layerviewers",
         "ADD":"Add LayerViewer",
         "EDIT":"Edit LayerViewer",
         "VIEW":"View LayerViewer",
@@ -19,6 +18,8 @@
         "INTERVAL_FINAL":"Final",
         "INITIAL_RAIO":"Initial Radius",
         "FINAL_RAIO":"Final Radius",
+        "OF": "Of:",
+        "TO": "To:",
         "FILE_SLD":"SLD File",
         "TITLE_CONFIRM_DELETE": "LayerViewer Delete",
         "CONFIRM_DELETE": "Do you really want to delete LayerViewer?"

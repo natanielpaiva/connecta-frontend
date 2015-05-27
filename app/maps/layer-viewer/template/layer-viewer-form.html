@@ -74,7 +74,7 @@
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>
-            <button class="btn btn-primary" ng-disabled="formulario.$invalid" translate >
+            <button class="btn btn-primary" ng-disabled="formulario.$invalid || layerViewer.parameters.length < 1" translate >
                 LAYOUT.SAVE
             </button>
         </form>
