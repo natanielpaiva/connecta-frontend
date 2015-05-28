@@ -333,7 +333,7 @@ define([
             }
 
             LayerViewerService.save($scope.layerViewer).then(function () {
-                $translate('LAYERVIEWER.SUCCESS').then(function (text) {
+                $translate('LAYERVIEWER.ADDED_SUCCESS').then(function (text) {
                     notify.success(text);
                     $location.path('maps/layer-viewer');
                 });
