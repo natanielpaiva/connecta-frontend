@@ -111,7 +111,8 @@ require.config({
             deps:['jquery']
         },
         'bower_components/imperavi-redactor/redactor/redactor.min':{
-            deps:['jquery']
+            deps:['jquery'],
+            exports:'jQuery.fn.redactor'
         },
         'connecta': {
             deps: [
