@@ -24,6 +24,7 @@
         "TITLE_CONFIRM_DELETE": "LayerViewer Delete",
         "CONFIRM_DELETE": "Do you really want to delete LayerViewer?",
         "SUCESS": "Saved successfully",
-        "REMOVE_SUCCESS":"Successfully removed"
+        "REMOVE_SUCCESS":"Successfully removed",
+        "ERROR_REMOVING": "Error Removing"
     }
 }

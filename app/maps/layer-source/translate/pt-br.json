@@ -15,6 +15,7 @@
         "TITLE_CONFIRM_DELETE":"Exclusão de Fonte de Camada",
         "CONFIRM_DELETE":"Deseja realmente excluir a Fonte de camada?",
         "ADDED_SUCCESS": "Adicionada com sucesso!",
-        "REMOVE_SUCCESS": "Removido com sucesso!"
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!"
     }
 }

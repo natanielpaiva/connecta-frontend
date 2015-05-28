@@ -16,8 +16,13 @@ define([
                 LayerViewerService.delete(id).then(function () {
                     $translate('LAYERVIEWER.REMOVE_SUCCESS').then(function (text) {
                         notify.success(text);
+                        $location.path('maps/layer-viewer');
                     });
-                    $location.path('maps/layer-viewer');
+                }, function (response) {
+                    $translate('LAYERVIEWER.ERROR_REMOVING').then(function (text) {
+                        notify.error(text);
+                        $location.path('maps/layer-viewer');
+                    });
                 });
             };
 

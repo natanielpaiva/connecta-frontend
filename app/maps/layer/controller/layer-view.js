@@ -17,7 +17,11 @@ define([
                         notify.success(text);
                         $location.path('maps/layer');
                     });
-
+                }, function (response) {
+                    $translate('LAYER.ERROR_REMOVING').then(function (text) {
+                        notify.error(text);
+                        $location.path('maps/layer');
+                    });
                 });
             };
 

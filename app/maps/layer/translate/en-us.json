@@ -13,6 +13,7 @@
         "TITLE_CONFIRM_DELETE": "Layer Delete",
         "CONFIRM_DELETE": "Do you really want to delete Layer?",
         "ADDED_SUCCESS": "Successfully Added",
-        "REMOVE_SUCCESS":"Successfully removed"
+        "REMOVE_SUCCESS":"Successfully Removed",
+        "ERROR_REMOVING": "Error Removing"
     }
 }

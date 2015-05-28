@@ -16,8 +16,13 @@ define([
                 LayerSourceService.delete(id).then(function () {
                     $translate('LAYERSOURCE.REMOVE_SUCCESS').then(function (text) {
                         notify.success(text);
+                        $location.path('maps/layer-source');
                     });
-                    $location.path('maps/layer-source');
+                }, function (response) {
+                    $translate('LAYERSOURCE.ERROR_REMOVING').then(function (text) {
+                        notify.error(text);
+                        $location.path('maps/layer-source');
+                    });
                 });
             };
                                     
