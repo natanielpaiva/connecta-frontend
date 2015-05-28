@@ -115,6 +115,7 @@ require.config({
         },
         'connecta': {
             deps: [
+                'angular',
                 'jquery',
                 'bower_components/jquery-ui-custom/index',
                 'bower_components/jquery-slimscroll/jquery.slimscroll.min',
