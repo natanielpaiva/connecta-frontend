@@ -4,19 +4,11 @@ define([
   return portal.lazy.controller('DashboardController', function ($scope, layoutService) {
     layoutService.showAsFlat(true);
 
-    $scope.config = {
-      // columns: 12,
-      // resizable: {
-      //   enabled: false
-      // },
-      // draggable: {
-      //   enabled: false
-      // }
-    };
-
     $scope.$on("$locationChangeStart", function(event) {
       layoutService.showAsFlat(false);
     });
+
+    $scope.config = {};
 
     $scope.focus = function($event){
       angular.element($event.target).parent('[contenteditable]').focus();
