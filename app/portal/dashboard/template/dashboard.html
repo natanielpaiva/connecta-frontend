@@ -1,6 +1,12 @@
 <div gridster="config" class="dashboard">
-  <div gridster-item="item" ng-repeat="item in items"
-     ng-dblclick="remove(item)" class="dashboard-item">
-
+  <!-- ng-dblclick="remove(item)" -->
+  <div gridster-item="item"
+      ng-repeat="item in items" class="dashboard-item">
+      <div>
+        <div ng-model="content"
+          ng-click="batata($event)"
+          redactor></div>
+      </div>
+      <!-- ="{buttons: ['formatting', '|', 'bold', 'italic']}" -->
   </div>
 </div>

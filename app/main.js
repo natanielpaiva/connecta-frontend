@@ -74,10 +74,19 @@ require.config({
         'bower_components/angular-ui-tree/dist/angular-ui-tree.min': {
             deps: ['angular']
         },
+        'bower_components/javascript-detect-element-resize/detect-element-resize':{
+          deps:[]
+        },
         'bower_components/angular-gridster/src/angular-gridster': {
             deps: [
               'angular',
-              '/bower_components/javascript-detect-element-resize/detect-element-resize.js'
+              'bower_components/javascript-detect-element-resize/detect-element-resize'
+            ]
+        },
+        'bower_components/angular-redactor/redactor':{
+            deps:[
+              'angular',
+              'bower_components/imperavi-redactor/redactor/redactor.min'
             ]
         },
         'angular-ng-table':{
@@ -99,6 +108,9 @@ require.config({
             deps: ['jquery']
         },
         'bower_components/jquery-slimscroll/jquery.slimscroll.min':{
+            deps:['jquery']
+        },
+        'bower_components/imperavi-redactor/redactor/redactor.min':{
             deps:['jquery']
         },
         'connecta': {

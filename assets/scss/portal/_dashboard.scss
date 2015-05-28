@@ -5,5 +5,14 @@
       right:0;
       bottom:0;
     }
+
+    &.gridster-item {
+      overflow:hidden;
+    }
+  }
+  .gridster-preview-holder {
+    &.ng-enter, &.ng-leave {
+      background-color:$lightGray !important;
+    }
   }
 }
