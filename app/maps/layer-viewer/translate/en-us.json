@@ -22,6 +22,8 @@
         "TO": "To:",
         "FILE_SLD":"SLD File",
         "TITLE_CONFIRM_DELETE": "LayerViewer Delete",
-        "CONFIRM_DELETE": "Do you really want to delete LayerViewer?"
+        "CONFIRM_DELETE": "Do you really want to delete LayerViewer?",
+        "SUCESS": "Saved successfully",
+        "REMOVE_SUCCESS":"Successfully removed"
     }
 }

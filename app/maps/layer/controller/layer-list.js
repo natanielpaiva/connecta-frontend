@@ -8,7 +8,8 @@ define([
 
         LayerService.list().then(function (response) {
             $scope.layers = response.data;
-        }, function (response) {});
-        
+        }, function (response) {
+        });
+
     });
 });

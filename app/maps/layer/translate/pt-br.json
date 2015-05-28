@@ -12,6 +12,8 @@
         "SELECT_LAYER": "Selecione uma Camada",
         "SELECT_SOURCE": "Selecione uma Fonte de Camada",
         "TITLE_CONFIRM_DELETE": "Exclusão de Camada",
-        "CONFIRM_DELETE": "Deseja realmente excluir a Camada?"
+        "CONFIRM_DELETE": "Deseja realmente excluir a Camada?",
+        "ADDED_SUCCESS": "Adicionada com sucesso!",
+        "REMOVE_SUCCESS": "Removido com sucesso!"
     }
 }

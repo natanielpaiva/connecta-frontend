@@ -11,6 +11,8 @@
         "SELECT_LAYER":"Select Layer",
         "SELECT_SOURCE":"Select Layer Source",
         "TITLE_CONFIRM_DELETE": "Layer Delete",
-        "CONFIRM_DELETE": "Do you really want to delete Layer?"
+        "CONFIRM_DELETE": "Do you really want to delete Layer?",
+        "ADDED_SUCCESS": "Successfully Added",
+        "REMOVE_SUCCESS":"Successfully removed"
     }
 }

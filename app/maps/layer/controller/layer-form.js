@@ -1,9 +1,10 @@
 define([
     'connecta.maps',
     'maps/layer-source/service/layer-source-service',
-    'maps/layer/service/layer-service'
+    'maps/layer/service/layer-service',
+    'portal/layout/service/notify'
 ], function (maps) {
-    return maps.lazy.controller('LayerFormController', function ($scope, LayerService, LayerSourceService, $location, $routeParams) {
+    return maps.lazy.controller('LayerFormController', function ($scope, LayerService, LayerSourceService, notify, $location, $routeParams, $translate) {
         $scope.layer = null;
         $scope.isEditing = false;
         $scope.layerSource = null;
@@ -64,8 +65,12 @@ define([
             $scope.layer.nm_layer = $scope.layer.layerName.layerName;
             delete $scope.layer.layerName;
             LayerService.save($scope.layer).then(function () {
-                $location.path('maps/layer');
+                $translate('LAYER.ADDED_SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $location.path('maps/layer');
+                });
             }, function (response) {
+                notify.error(response);
             });
         };
     });

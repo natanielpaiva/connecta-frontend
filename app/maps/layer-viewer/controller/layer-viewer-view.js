@@ -2,9 +2,10 @@ define([
     'connecta.maps',
     'maps/layer-viewer/service/connecta-geo-service',
     'maps/layer-viewer/service/layer-viewer-service',
-    'portal/layout/service/modalTranslate'
+    'portal/layout/service/modalTranslate',
+    'portal/layout/service/notify'
 ], function (maps) {
-    return maps.lazy.controller('LayerViewerViewController', function ($scope, LayerViewerService, ConnectaGeoService, $routeParams, $location, $modalTranslate) {
+    return maps.lazy.controller('LayerViewerViewController', function ($scope, LayerViewerService, notify, ConnectaGeoService, $routeParams, $location, $modalTranslate, $translate) {
 
 
         LayerViewerService.getById($routeParams.id).then(function (response) {
@@ -13,6 +14,9 @@ define([
 
             $scope.remove = function (id) {
                 LayerViewerService.delete(id).then(function () {
+                    $translate('LAYERVIEWER.REMOVE_SUCCESS').then(function (text) {
+                        notify.success(text);
+                    });
                     $location.path('maps/layer-viewer');
                 });
             };

@@ -12,6 +12,8 @@
         "PASSWORD": "Password",
         "SELECT":"Select LayerSource",
         "TITLE_CONFIRM_DELETE":"LayerSource Delete",
-        "CONFIRM_DELETE":"Do you really want to delete LayerSource??"
+        "CONFIRM_DELETE":"Do you really want to delete LayerSource??",
+        "ADDED_SUCCESS": "Successfully Added",
+        "REMOVE_SUCCESS":"Successfully removed"
     }
 }

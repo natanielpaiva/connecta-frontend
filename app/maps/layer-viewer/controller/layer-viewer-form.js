@@ -257,7 +257,7 @@ define([
                             angular.element("#file-falso").val(angular.element("#file-original").val());
                         });
                         clearInterval(type1);
-                        ;
+                        
                     }
                 }, 500);
 

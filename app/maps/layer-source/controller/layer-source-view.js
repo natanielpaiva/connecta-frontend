@@ -1,9 +1,10 @@
 define([
     'connecta.maps',
     'maps/layer-source/service/layer-source-service',
-    'portal/layout/service/modalTranslate'
+    'portal/layout/service/modalTranslate',
+    'portal/layout/service/notify'
 ], function (maps) {
-    return maps.lazy.controller('LayerSourceViewController', function ($scope, LayerSourceService, $routeParams, $location, $modalTranslate) {
+    return maps.lazy.controller('LayerSourceViewController', function ($scope, LayerSourceService, notify, $routeParams, $location, $modalTranslate, $translate) {
 
 
         LayerSourceService.get($routeParams.id).then(function (response) {
@@ -13,6 +14,9 @@ define([
             $scope.remove = function (id) {
                 console.info("REMOVE LAYERSOURCE");
                 LayerSourceService.delete(id).then(function () {
+                    $translate('LAYERSOURCE.REMOVE_SUCCESS').then(function (text) {
+                        notify.success(text);
+                    });
                     $location.path('maps/layer-source');
                 });
             };

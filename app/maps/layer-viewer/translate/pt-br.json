@@ -22,6 +22,7 @@
         "OF": "De:",
         "TO": "Até:",
         "FILE_SLD": "Arquivo SLD",
-        "SUCESS": "Salvo com sucesso!"
+        "SUCESS": "Salvo com sucesso!",
+        "REMOVE_SUCCESS": "Removido com sucesso!"
     }
 }

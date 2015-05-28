@@ -1,9 +1,10 @@
 define([
     'connecta.maps',
     'maps/layer/service/layer-service',
-    'portal/layout/service/modalTranslate'
+    'portal/layout/service/modalTranslate',
+    'portal/layout/service/notify'
 ], function (maps) {
-    return maps.lazy.controller('LayerViewController', function ($scope, LayerService, $routeParams, $location, $modalTranslate) {
+    return maps.lazy.controller('LayerViewController', function ($scope, LayerService, notify, $routeParams, $location, $modalTranslate, $translate) {
 
 
         LayerService.get($routeParams.id).then(function (response) {
@@ -12,7 +13,11 @@ define([
 
             $scope.remove = function (id) {
                 LayerService.delete(id).then(function () {
-                    $location.path('maps/layer');
+                    $translate('LAYER.REMOVE_SUCCESS').then(function (text) {
+                        notify.success(text);
+                        $location.path('maps/layer');
+                    });
+
                 });
             };
 
