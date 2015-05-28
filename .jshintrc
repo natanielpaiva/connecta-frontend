@@ -1,3 +1,3 @@
 {
-    "-W065": true // disable: Missing radix parameter.
+    "-W065": true
 }

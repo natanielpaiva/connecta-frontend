@@ -1,6 +1,6 @@
 define([
     'angular',
-    'bower_components/angular-redactor/angular-redactor',
+    // 'bower_components/angular-redactor/angular-redactor',
     'bower_components/angular-gridster/src/angular-gridster'
 ], function (angular) {
     var portal = angular.module('connecta.portal', [
