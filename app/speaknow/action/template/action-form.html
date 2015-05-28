@@ -62,10 +62,10 @@
                                     <h4>Passo 1</h4>
                                 </div>
                                 <hr/>-->
-                
+
                 <div class="content-card">
-                <!--Inicio Section-->
-                    <div class="card-form card-section" ng-repeat="section in action.steps[0].sections" ng-class="{'card-form-min': !section.max }">
+                    <!--Inicio Section-->
+                    <div class="card-form card-section" ng-repeat="(sec_index, section) in action.steps[0].sections" ng-class="{'card-form-min': !section.max }">
                         <!--header-->
                         <div class="header-card" ng-click="minifyCard(action.steps[0].sections); section.max = !section.max">
                             <h4>{{section.title ? section.title : newSectionStr}}</h4>
@@ -91,7 +91,7 @@
                             <div class="card-form card-params" ng-repeat="(index, param) in section.params" ng-class="{'card-form-min': !param.max }">
                                 <!--Header-->
                                 <div class="header-card" ng-click="minifyCard(section.params);
-                                            param.max = true">
+                                                    param.max = true">
                                     <h4>{{param.title ? param.title : newParamStr}}</h4>
                                     <div class="btn-group pull-right margin-right-single" role="group">
                                         <button class="btn btn-default">
@@ -106,16 +106,22 @@
                                 <div class="content-card">
                                     <div class="form-group">
                                         <label for="param-title" translate>ACTION.SECTION.PARAM.TITLE</label>
-                                        <input type="text" class="form-control" id="param-title" name="param_title_{{index}}"
+                                        <input type="text" class="form-control" id="param-title" name="section{{sec_index}}_param_title_{{index}}"
                                                ng-model="param.title" required />
-                                        <div ng-messages="actionForm.param_title_0.$invalid"
-                                            ng-messages-include="portal-error-messages">
-                                       </div>
+                                        <div ng-show="actionForm.$submitted || actionForm.section{{sec_index}}_param_title_{{index}}.$touched"
+                                             ng-messages="actionForm.section{{sec_index}}_param_title_{{index}}.$error"
+                                             ng-messages-include="portal-error-messages">
+                                        </div>
                                     </div>
-                                    <div class="form-group" ng-show="action.type === 'SERVICE'">
+                                    <div class="form-group" ng-show="isServiceAction()">
                                         <label for="param-name" translate>ACTION.SECTION.PARAM.NAME</label>
-                                        <input type="text" class="form-control" id="param-name" name="param_name_{{index}}"
+                                        <input type="text" class="form-control" id="param-name" name="section{{sec_index}}_param_name_{{index}}"
                                                ng-model="param.name" required />
+
+                                        <div ng-show="actionForm.$submitted || actionForm.section{{sec_index}}_param_name_{{index}}.$touched"
+                                             ng-messages="actionForm.section{{sec_index}}_param_name_{{index}}.$error"
+                                             ng-messages-include="portal-error-messages">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="param-type" translate>ACTION.SECTION.PARAM.TYPE</label>
@@ -132,51 +138,58 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <label for="param-opt" translate>ACTION.SECTION.PARAM.TEXT</label>
+                                                        <input type="text" class="form-control" id="param-opt" name="param_opt"
+                                                               ng-model="$parent.$parent.$item.text" placeholder="Texto"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
                                                         <label for="param-val" translate>ACTION.SECTION.PARAM.VALUE</label>
                                                         <input type="text" class="form-control" id="param-val" name="param_val"
                                                                ng-model="$parent.$parent.$item.value" placeholder="Valor"/>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="param-opt" translate>ACTION.SECTION.PARAM.TEXT</label>
-                                                        <input type="text" class="form-control" id="param-opt" name="param-opt"
-                                                               ng-model="$parent.$parent.$item.text" placeholder="Texto"/>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="" class="btn btn-primary margin-top-single" ng-click="validateParam(index, param)" translate>LAYOUT.DONE</a>
+                                    <a href="" class="btn btn-primary margin-top-single" 
+                                       ng-click="finishParam(sec_index, index, param)" 
+                                       ng-class="{disabled: !validateParam(sec_index, index, param)}" translate>LAYOUT.DONE</a>
                                 </div>
                             </div>
                             <!--Fim parametros-->
 
-                            <button type="button" class="btn btn-default" translate ng-click="addParam(section)">ACTION.SECTION.PARAM.NEW</button>
+                            <button type="button" class="btn btn-default" translate 
+                                ng-class="{disabled: !validateParams(sec_index, section)}" 
+                                ng-click="addParam(section)">ACTION.SECTION.PARAM.NEW</button>
                             <div class="form-group">
                                 <label for="footer" translate>ACTION.SECTION.FOOTER</label>
                                 <input type="text" class="form-control" id="footer" name="footer"
                                        ng-model="section.footer" />
                             </div>
-                            <a href="" class="btn btn-primary" translate ng-click="section.max = !section.max">LAYOUT.DONE</a>
+                            <a href="" class="btn btn-primary" translate 
+                                ng-class="{disabled: !validateParams(sec_index, section)}" 
+                                ng-click="section.max = !section.max">LAYOUT.DONE</a>
                         </div> 
-                    <button type="button" class="btn btn-default" translate ng-click="addSection()">ACTION.SECTION.NEW</button>
+                    </div>
+                    <button type="button" class="btn btn-default" translate 
+                        ng-class="{disabled: !validateSections()}"
+                        ng-click="addSection()">ACTION.SECTION.NEW</button>
+                    <!--Fim sections-->
+                    <div class="form-group" ng-show="action.type === 'SERVICE'">
+                        <label for="script" translate>STEP.SCRIPT</label>
+                        <textarea class="form-control" id="script" name="script"
+                                  ng-model="action.steps[0].value"></textarea>
+                    </div>
                 </div>
-                <!--Fim sections-->
-                <div class="form-group" ng-show="action.type === 'SERVICE'">
-                    <label for="script" translate>STEP.SCRIPT</label>
-                    <textarea class="form-control" id="script" name="script"
-                              ng-model="action.steps[0].value"></textarea>
-                </div>
-            </div>
-            <!--Fim step-->
-            <button type="button" onclick="window.history.back()" class="btn btn-default" translate>
-                LAYOUT.BACK                     
-            </button>
-            <button type="submit" class="btn btn-primary" translate>
-                LAYOUT.SAVE
-            </button>
+                <!--Fim step-->
+                <button type="button" onclick="window.history.back()" class="btn btn-default" translate>
+                    LAYOUT.BACK                     
+                </button>
+                <button type="submit" class="btn btn-primary" translate>
+                    LAYOUT.SAVE
+                </button>
         </form>
     </div>
 </div>
-<textarea>{{actionForm | json}}</textarea>
