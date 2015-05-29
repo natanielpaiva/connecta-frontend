@@ -19,9 +19,7 @@ define([
         }
 
         $scope.submit = function () {
-            if($scope.fileQuad === undefined){
-                $scope.quadInvalid = true;
-            } else if($scope.fileRect === undefined){
+            if($scope.fileRect === undefined){
                 $scope.rectInvalid = true;
             } else {
                 CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function () {
