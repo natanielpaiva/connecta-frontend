@@ -92,23 +92,25 @@ define([
             var clusterParams = [];
             var jsonConfig = config.split('@');
             var qtdInterval = parseInt(jsonConfig[jsonConfig.length - 1].substr(jsonConfig[jsonConfig.length - 1].lastIndexOf("~") + 1));
+            
             //Initial
             clusterParams.push({
                 "parameterName": "radius#clusterColor#fontColor#opacity",
                 "parameterValue": jsonConfig[0]
             });
+
             //Intervals
             for (var i = 1; i < qtdInterval + 1; i++) {
                 clusterParams.push({
                     "parameterName": "radius#clusterColor#fontColor#opacity#less#greater",
-                    "parameterValue": jsonConfig[i]
+                    "parameterValue": jsonConfig[i].substring(1)
                 });
             }
 
             //Final
             clusterParams.push({
                 "parameterName": "radius#clusterColor#fontColor#opacity",
-                "parameterValue": jsonConfig[qtdInterval - 1]
+                "parameterValue": jsonConfig[qtdInterval + 1]
             });
             // goiaba2= goiaba.replace(/~/gi,"");
 

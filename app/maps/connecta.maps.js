@@ -23,7 +23,7 @@ define([
             layerViewer: appMaps.host + '/layerViewers',
             layerViewerType: appMaps.host + '/layerViewerTypes',
             geo: appMaps.host + '/geoRest',
-            openlayersProxy: appMaps.host + '/proxy.jsp',
+            openlayersProxy: appMaps.host + '/proxy.jsp?',
             regexBase64: '.*base64,'
         });
 

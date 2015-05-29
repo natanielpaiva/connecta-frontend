@@ -9,11 +9,17 @@ define([
             transclude: true,
             scope: {
                 $model: '=ngModel',
-                disableButton: '='
+                disableButton: '=',
+                defaultNewItem:'='
             },
             controller: function ($scope) {
                 $scope.keyValueAddItem = function () {
-                    $scope.$model.push({});
+                    var newObj = {};
+                    if ($scope.defaultNewItem){
+                        newObj = angular.copy($scope.defaultNewItem);
+                    }
+                    $scope.$model.push(newObj);
+                    console.log("param->", newObj);
                 };
                 $scope.keyValueRemoveItem = function ($item) {
                     $scope.$model.splice(
