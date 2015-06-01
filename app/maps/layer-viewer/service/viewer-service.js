@@ -95,9 +95,7 @@ define([
             // var config = "16#b50404#e03b3b#25@17#ff6300#c92121#35#1#9@21#b11818#f8843c#35#10#13@12#b41e73#bd1313#75#14#15@12#ff0000#dabb34#65#3";
             var clusterParams = [];
             var jsonConfig = config.split('@');
-            var qtdInterval = parseInt(jsonConfig[jsonConfig.length - 1].substr(jsonConfig[jsonConfig.length - 1].lastIndexOf("~") + 1));            
-
-            console.info("JSONCONFIG", jsonConfig,qtdInterval);
+            var qtdInterval = parseInt(jsonConfig[jsonConfig.length - 1].substr(jsonConfig[jsonConfig.length - 1].lastIndexOf("~") + 1));
             
             //Initial
             clusterParams.push({
@@ -106,11 +104,7 @@ define([
             });
 
             //Intervals
-            for (var i = 1; i < qtdInterval + 1; i++) {
-                console.info("INTEERVAL", jsonConfig[i]);
-//                if (jsonConfig[i][0] == "") {
-//                    objValues.splice(0, 1);                    
-//                }
+            for (var i = 1; i < qtdInterval + 1; i++) {    
 
                 clusterParams.push({
                     "parameterName": "radius#clusterColor#fontColor#opacity#less#greater",
@@ -118,12 +112,11 @@ define([
                 });
             }
 
-
-            console.info("FNAL INTERVAL", qtdInterval, jsonConfig[qtdInterval - 1], jsonConfig[qtdInterval]);
+           
             //Final
             clusterParams.push({
                 "parameterName": "radius#clusterColor#fontColor#opacity",
-                "parameterValue": jsonConfig[qtdInterval + 1]
+                "parameterValue": jsonConfig[qtdInterval + 1].substring(1)
             });
             // goiaba2= goiaba.replace(/~/gi,"");
 
