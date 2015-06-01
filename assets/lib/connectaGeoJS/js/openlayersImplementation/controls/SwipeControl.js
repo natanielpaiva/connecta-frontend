@@ -1,4 +1,4 @@
-define(['openlayersImplementation/openlayers-api/OpenLayers-2.13.1/lib/OpenLayers/Control/Swipe'], function(Swipe) {
+define([ConnectaGeoConfig.baseURL+'openlayersImplementation/openlayers-api/OpenLayers-2.13.1/lib/OpenLayers/Control/Swipe'], function(Swipe) {
 
 	var SwipeControl = function(configSwipe) {
 		Function.apply(this);

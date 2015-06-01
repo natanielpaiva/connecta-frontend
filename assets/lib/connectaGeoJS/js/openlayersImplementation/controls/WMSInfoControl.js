@@ -1,4 +1,4 @@
-define(['openlayersImplementation/Popup'], function(Popup) {
+define([ConnectaGeoConfig.baseURL+'openlayersImplementation/Popup'], function(Popup) {
 
 	var WMSInfoControl = function(configControl) {
 		Function.apply(this);

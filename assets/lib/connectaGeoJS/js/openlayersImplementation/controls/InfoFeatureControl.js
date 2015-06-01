@@ -1,4 +1,4 @@
-define(['openlayersImplementation/Popup'], function(Popup) {
+define([ConnectaGeoConfig.baseURL+'openlayersImplementation/Popup'], function(Popup) {
 
 	var InfoFeatureControl = function(configInfoFeature) {
 		Function.apply(this);

@@ -1,4 +1,4 @@
-define(['openlayersImplementation/Layer'], function(Layer) {
+define([ConnectaGeoConfig.baseURL+'openlayersImplementation/Layer'], function(Layer) {
 
 	var Geocoder = function(configMap) {
 		Function.apply(this);

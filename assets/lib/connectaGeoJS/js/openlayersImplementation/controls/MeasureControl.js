@@ -1,4 +1,4 @@
-define(['openlayersImplementation/Layer', 'openlayersImplementation/Feature'], function(Layer, Feature) {
+define([ConnectaGeoConfig.baseURL+'openlayersImplementation/Layer', ConnectaGeoConfig.baseURL+'openlayersImplementation/Feature'], function(Layer, Feature) {
 
     var MeasureControl = function(config) {
         Function.apply(this);

@@ -1,6 +1,6 @@
-define(['openlayersImplementation/Layer',
-	'openlayersImplementation/openlayers-api/OpenLayers-2.13.1/lib/OpenLayers/Control/Snapping',
-	'openlayersImplementation/openlayers-api/OpenLayers-2.13.1/lib/OpenLayers/Control/Trace'
+define([ConnectaGeoConfig.baseURL+'openlayersImplementation/Layer',
+	ConnectaGeoConfig.baseURL+'openlayersImplementation/openlayers-api/OpenLayers-2.13.1/lib/OpenLayers/Control/Snapping',
+	ConnectaGeoConfig.baseURL+'openlayersImplementation/openlayers-api/OpenLayers-2.13.1/lib/OpenLayers/Control/Trace'
 ], function(Layer, Snapping, Trace) {
 
 	var DrawFeatureControl = function(configDrawFeature) {

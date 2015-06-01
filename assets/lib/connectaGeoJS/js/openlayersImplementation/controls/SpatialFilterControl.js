@@ -1,4 +1,4 @@
-define(['openlayersImplementation/Layer'], function(Layer) {
+define([ConnectaGeoConfig.baseURL+'openlayersImplementation/Layer'], function(Layer) {
 
 	var SpatialFilterControl = function(configSpatialFilter) {
 		Function.apply(this);

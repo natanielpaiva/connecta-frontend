@@ -4,7 +4,6 @@ define([ConnectaGeoConfig.baseURL+'openlayersImplementation/Legend',
 
 	var WMSLayer = function(configLayer) {
 		Function.apply(this);
-		console.log("configLayer", configLayer);
 		//Construtor				
 
 
