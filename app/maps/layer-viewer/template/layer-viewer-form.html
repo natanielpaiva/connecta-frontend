@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        
+
         <div id="map"></div>
 
         <form name="formulario" ng-submit="submit()">
@@ -16,6 +16,10 @@
                 <input type="text" class="form-control" id="name" name="name" required
                        placeholder="{{'LAYERVIEWER.NAME'|translate}}"
                        ng-model="layerViewer.nm_viewer" />
+                <div ng-show="formulario.$submitted || formulario.name.$touched" 
+                     ng-messages="formulario.name.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
             </div>
 
             <div class="form-group">
@@ -28,11 +32,13 @@
                     <option translate value="2">LAYERVIEWER.HEATMAP</option>
                     <option translate value="3">LAYERVIEWER.CLUSTER</option>
                 </select>
-<!--                <div ng-if="formulario.$dirty" ng-messages="formulario.driver.$error"
-                     ng-messages-include="portal-validation-messages"></div>-->
+                    <div ng-show="formulario.$submitted || formulario.type.$touched" 
+                         ng-messages="formulario.type.$error"
+                         ng-messages-include="portal-error-messages">
+                    </div>
             </div>
 
-            <div class="portal-type-switcher">
+<!--            <div class="portal-type-switcher">
                 <label ng-repeat="(key, tp) in types" class="radio-inline portal-type-switcher-item"
                        title="{{tp.name}}">
                     <input type="radio" class="portal-type-switcher-input" name="type" required
@@ -40,8 +46,12 @@
                            ng-model="layerViewer.layerViewerTypeEntity.id" id="datasource-type-{{key}}"
                            ng-value="key" />
                     <span class="{{tp.icon}}"></span>
+                    <div ng-show="formulario.$submitted || formulario.type.$touched" 
+                         ng-messages="formulario.type.$error"
+                         ng-messages-include="portal-error-messages">
+                    </div>
                 </label>
-            </div>
+            </div>-->
 
             <div class="form-group">
                 <label for="layer" translate>LAYERVIEWER.LAYER</label>
@@ -49,10 +59,11 @@
                         ng-model="layerViewer.layerEntity"
                         ng-options="layer.ds_layer for layer in layers">
                     <option value="">Selecione</option>
-
                 </select>
-<!--                <div ng-if="formulario.$dirty" ng-messages="formulario.driver.$error"
-                     ng-messages-include="portal-validation-messages"></div>-->
+                    <div ng-show="formulario.$submitted || formulario.layer.$touched" 
+                         ng-messages="formulario.layer.$error"
+                         ng-messages-include="portal-error-messages">
+                    </div>
             </div>
 
             <div class="form-group">
@@ -62,8 +73,10 @@
                     <option value="1">OpenLayers</option>
                     <option value="2">ESRI</option>
                 </select>
-<!--                <div ng-if="formulario.$dirty" ng-messages="formulario.driver.$error"
-                     ng-messages-include="portal-validation-messages"></div>-->
+                <div ng-show="formulario.$submitted || formulario.impl.$touched" 
+                     ng-messages="formulario.impl.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
             </div>
             <div ng-if="types[layerViewer.layerViewerTypeEntity.id].template"
                  ng-include="types[layerViewer.layerViewerTypeEntity.id].template"

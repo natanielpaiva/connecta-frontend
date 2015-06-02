@@ -25,13 +25,14 @@
                         name="layerSourceEntityID" 
                         ng-model="layer.layerSourceEntity"
                         ng-change="getLayersBySource(layer.layerSourceEntity.id)"
-                        id="layerSourceEntityID" required
+                        id="layerSourceEntityID" 
                         ng-options="layerSource.nm_source for layerSource in layerSourceType" required>
                     <option value="" translate> LAYER.SELECT_SOURCE</option>
-
                 </select>                
-                <div ng-show="formulario.layerSourceEntityID.$touched" ng-messages="formulario.layerSourceEntityID.$error"
-                     ng-messages-include="portal-validation-messages"></div>      
+                <div ng-show="formulario.$submitted || formulario.layerSourceEntityID.$touched" 
+                     ng-messages="formulario.layerSourceEntityID.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>      
             </div>
 
             <div class="form-group">
@@ -45,8 +46,10 @@
                         ng-options="layerName as layerName.layerName for layerName in layers" required>
                     <option value="" translate> LAYER.SELECT_LAYER</option>
                 </select>          
-                <div ng-show="formulario.nm_layer.$touched" ng-messages="formulario.nm_layer.$error"
-                     ng-messages-include="portal-validation-messages"></div>      
+                <div ng-show="formulario.$submitted || formulario.nm_layer.$touched" 
+                     ng-messages="formulario.nm_layer.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>      
             </div>
 
 
