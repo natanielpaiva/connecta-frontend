@@ -20,18 +20,19 @@
         <div class="row">
             <div  class="col-md-12">
 
-                <div>
-                    <ul dnd-list="group.singleSource.lists.singleSourceGet" >
+                <div >
+                    <ul dnd-list="group.singleSource.lists.singleSourceGet"  >
                         <li ng-repeat="item in group.singleSource.lists.singleSourceGet"
                             dnd-draggable="item"
+
                             dnd-moved="group.singleSource.lists.singleSourceGet.splice($index, 1)"
                             dnd-effect-allowed="move"
                             dnd-selected="group.singleSource.selected = item"
                             ng-class="{'selected': group.singleSource.selected === item}"
-                            ng-style="{'background-image': 'url({{item.path}})'}">
-                            <div ng-if="item.fileType === 'VIDEO'"> 
+                            ng-attr-style="background-image:url({{item.path}})">
+                            <div ng-if="item.fileType === 'VIDEO'">
                                 <video width="120" height="100" >
-                                    <source src="{{item.path}}" type="video/mp4">
+                                    <source ng-if="item.path" src="{{item.path}}" type="video/mp4">
                                     Your browser does not support HTML5 video.
                                 </video>
                                 <div class="fill-parent"></div>
@@ -67,19 +68,19 @@
                             dnd-effect-allowed="move"
                             dnd-selected="group.singleSource.selected = item"
                             ng-class="{'selected': group.singleSource.selected === item}"
-                            ng-style="{'background-image': 'url({{item.path}})'}">
-                            <div ng-if="item.fileType === 'VIDEO'"> 
-                                <video width="120" height="100" >
-                                    <source src="{{item.path}}" type="video/mp4">
+                            ng-attr-style="background-image:url({{item.path}})">
+                            <div ng-if="item.fileType === 'VIDEO'">
+                                <video  width="120" height="100" >
+                                    <source ng-if="item.path" src="{{item.path}}" type="video/mp4">
                                     Your browser does not support HTML5 video.
                                 </video>
                                 <div class="fill-parent"></div>
                             </div>
-                            
+
                             <div class="media-item">
                                 {{item.name}}
                             </div>
-                            
+
                         </li>
                     </ul>
 
@@ -89,6 +90,3 @@
 
     </div>
 </div>
-
-
-

@@ -10,26 +10,22 @@
     Buscar Arquivos
 </button>
 
-<div class="form-group">
-    <div >
+<div  class="form-group">
+    <div>
         <label>GROUP.MEDIAS</label>
     </div>
 </div>
-<div class="gallery row form-group">
-    <div class="container-gallery">
-        <div class="row">
-            <div  class="col-md-12">
-                <div>
-                    <ul class="gallery-view" >
-                        <li ng-repeat="item in medias"
-                            dnd-effect-allowed="false"
-                            ng-style="{'background-image': 'url({{item.url}})'}">
-                            <div class="media-item">
-                                {{item.name}}
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+<div class="gallery form-group">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <ul class="gallery-view">
+                    <li ng-repeat="item in medias" dnd-effect-allowed="false" ng-style="{'background-image': 'url({{item.url}})'}">
+                        <div class="media-item">
+                            {{item.name}}
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

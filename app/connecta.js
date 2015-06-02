@@ -45,6 +45,7 @@ define([
     'ngAnimate',
     'ngTouch',
     'ngLocale',
+    'amChartsDirective',
     'ngTable',
     'ngDraggable',
     'ngTagsInput',
@@ -229,17 +230,18 @@ define([
    * Configura o whitelist de todos os protocolos que podem ser usados
    * em links no HTML (retira o unsafe:... da frente do protocolo)
    */
-  function configureProtocolWhitelist($compileProvider) {
+  function configureHTTPWhitelist($compileProvider, $sceProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|javascript):/);
+    $sceProvider.enabled(false);
   }
 
-  connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider) {
+  connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider) {
 
     configureLazyProviders($controllerProvider, $compileProvider, $provide, $filterProvider);
     configureTranslations($translateProvider, window.navigator);
     configureRoutes($routeProvider);
     configureRequestInterceptors($httpProvider);
-    configureProtocolWhitelist($compileProvider);
+    configureHTTPWhitelist($compileProvider, $sceProvider);
 
   });
 

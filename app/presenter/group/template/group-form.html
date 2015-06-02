@@ -42,8 +42,9 @@
                 </label>
             </div>
 
-            <div width="100%" class="am-collapse form-group" ng-include="'app/presenter/group/template/' + group.typeFilter.template">
-            </div>
+            <ng-include ng-if="group.typeFilter.template"
+                class="am-collapse" src="'app/presenter/group/template/' + group.typeFilter.template">
+            </ng-include>
 
             <div class="form-group" style="float: left;">
                 <a href="#/presenter/group" class="btn btn-default" translate>

@@ -2,7 +2,7 @@ define([
     'angular'
 ], function (angular) {
     var presenter = angular.module('connecta.presenter', [
-        
+
     ]);
 
     presenter.config(function ($translatePartialLoaderProvider) {
@@ -39,7 +39,8 @@ define([
             attribute: appPresenter.host + '/attribute',
             hierarchy: appPresenter.host + '/hierarchy',
             hierarchyItem: appPresenter.host + '/hierarchy/hierarchy-item',
-            group: appPresenter.host + '/group'
+            group: appPresenter.host + '/group',
+            viewer:appPresenter.host + '/viewer'
         });
     });
 
@@ -133,10 +134,15 @@ define([
             controller: 'HierarchyViewController',
             controllerUrl: 'presenter/hierarchy/controller/hierarchy-view',
             templateUrl: 'app/presenter/hierarchy/template/hierarchy-view.html'
+        },
+        '/presenter/viewer/new': {
+            controller: 'ViewerFormController',
+            controllerUrl: 'presenter/viewer/controller/viewer-form',
+            templateUrl: 'app/presenter/viewer/template/viewer-form.html'
         }
-        
+
     };
-    
+
     presenter._menu = [
         {
             href: 'presenter/analysis',
