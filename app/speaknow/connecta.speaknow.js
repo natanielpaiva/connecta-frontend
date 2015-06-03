@@ -8,6 +8,7 @@ define([
         $translatePartialLoaderProvider.addPart('speaknow/interaction');
         $translatePartialLoaderProvider.addPart('speaknow/action');
         $translatePartialLoaderProvider.addPart('speaknow/company');
+        $translatePartialLoaderProvider.addPart('speaknow/product');
         $translatePartialLoaderProvider.addPart('speaknow/company-contact');
         $translatePartialLoaderProvider.addPart('speaknow/company-contact-group');
     });
@@ -21,6 +22,7 @@ define([
             contact: appSpeaknow.host + '/contact',
             interaction: appSpeaknow.host + '/interaction',
             company: appSpeaknow.host + '/company',
+            product: appSpeaknow.host + '/product',
             contactGroup: appSpeaknow.host + '/contact/group',
             companyContact: appSpeaknow.host + '/company/contact'
         });
@@ -99,7 +101,7 @@ define([
          */
         '/speaknow/company': {
             controller: 'CompanyListController',
-            controllerUrl: 'speaknow/company/controller/company-list',
+            controllerUrl: 'speaknow/company/controller/CompanyContactFormControllercompany-list',
             templateUrl: 'app/speaknow/company/template/company-list.html'
         },
         '/speaknow/company/new': {
@@ -152,6 +154,19 @@ define([
             controller: 'CompanyContactFormController',
             controllerUrl: 'speaknow/company-contact/controller/company-contact-form',
             templateUrl: 'app/speaknow/company-contact/template/company-contact-form.html'
+        },
+         /**
+         * URL PRODUCT
+         */
+        '/speaknow/product/' :{
+            controller: 'ProductList',
+            controllerUrl: 'speaknow/product/controller/product-list',
+            templateUrl: 'app/speaknow/product/template/product-list.html'
+        },
+        '/speaknow/product/new' :{
+            controller: 'ProductForm',
+            controllerUrl: 'speaknow/product/controller/product-form',
+            templateUrl: 'app/speaknow/product/template/product-form.html'
         }
     };
 
@@ -172,6 +187,12 @@ define([
             href: 'speaknow/company',
             title: 'COMPANY.COMPANY',
             icon: 'icon-suitcase',
+            children: []
+        },
+        {
+            href: 'speaknow/product',
+            title: 'PRODUCT.PRODUCT',
+            icon: 'icon-box2',
             children: []
         }
     ];

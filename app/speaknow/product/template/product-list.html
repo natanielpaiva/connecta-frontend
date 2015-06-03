@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-12">
-        <h3 translate>CONTACT.CONTACTS</h3>
+        <h3 translate>PRODUCT.PRODUCT</h3>
 
-        <a class="btn btn-default" href="#/speaknow/contact/new" translate>
+        <a class="btn btn-default" href="#/speaknow/product/new" translate>
             <span class="glyphicon glyphicon-plus"></span>
         </a>
 
@@ -40,27 +40,29 @@
                 </div>
             </div>
         </div>-->
+
         <table ng-table class="table table-striped margin-top-single">
             <thead>
                 <tr>
                     <th></th>
-                    <th translate>CONTACT.NAME</th>
-                    <th translate>CONTACT.EMAIL</th>
-                    <th translate>CONTACT.PHONE</th>
+                    <th translate>PRODUCT.IMAGE</th>
+                    <th translate>PRODUCT.NAME</th>
+                    <th translate>PRODUCT.PRICE</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="contact in $data">
-                    <td>{{contact.id}}</td>
-                    <td class="text-left">{{contact.name}}</td>
-                    <td class="text-left">{{contact.type}}</td>
+                <tr ng-repeat="product in $data">
+                    <td>{{product.id}}</td>
+                    <td class="text-left"></td>
+                    <td class="text-left">{{product.name}}</td>
+                    <td class="text-left">{{product.price}}</td>
                     <td>
                         <div class="btn-group">
-                            <a href="#/presenter/datasource/view/{{contact.id}}" role="button" class="btn btn-sm btn-info">
+                            <a href="#/presenter/product/view/{{product.id}}" role="button" class="btn btn-sm btn-info">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </a>
-                            <a href="#/presenter/datasource/{{contact.id}}" role="button" class="btn btn-sm btn-warning">
+                            <a href="#/presenter/product/{{product.id}}" role="button" class="btn btn-sm btn-warning">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
                             <button type="button" class="btn btn-sm btn-danger">

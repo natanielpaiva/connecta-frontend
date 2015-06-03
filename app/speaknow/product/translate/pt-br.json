@@ -1,0 +1,24 @@
+{
+    "PRODUCT": {
+        "PRODUCT": "Produtos e Serviços",
+        "NAME": "Nome",
+        "IMAGE": "Foto",
+        "PRICE": "Preço",
+        "DESCRIPTION": "Descrição",
+        "UNIT": "UNIT",
+        "HOUR": "HOUR",
+        "CRATE": "CRATE",
+        "PIECE": "PIECE",
+        "EACH": "EACH",
+        "GRAMS": "GRAMS",
+        "MILIGRAMS": "MILIGRAMS",
+        "KILO": "KILO",
+        "MILLILITER": "MILLILITER",
+        "LITER": "LITER",
+        "OUNCE": "OUNCE",
+        "POUND": "POUND",
+        "MEASURE": "Medida",
+        "CATEGORY":"Categoria",
+        "CREATE":"Criar Produto"
+    }
+}

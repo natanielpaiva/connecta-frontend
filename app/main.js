@@ -90,6 +90,12 @@ require.config({
         'bower_components/imperavi-redactor/redactor/redactor.min'
       ]
     },
+    'bower_components/amcharts-angular/dist/amChartsDirective': {
+      deps: [
+        'angular',
+        'bower_components/amcharts/dist/amcharts/amcharts'
+      ]
+    },
     'angular-ng-table': {
       deps: ['angular']
     },
@@ -114,6 +120,9 @@ require.config({
     'bower_components/imperavi-redactor/redactor/redactor.min': {
       deps: ['jquery'],
       exports: 'jQuery.fn.redactor'
+    },
+    'bower_components/amcharts/dist/amcharts/amcharts': {
+      exports: 'AmCharts'
     },
     'connecta': {
       deps: [
