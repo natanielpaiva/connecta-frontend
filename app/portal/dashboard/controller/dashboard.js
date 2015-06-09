@@ -11,7 +11,7 @@ define([
     $scope.config = {};
 
     $scope.focus = function($event){
-      angular.element($event.target).parent('[contenteditable]').focus();
+      angular.element($event.target).parent('[redactor]').focus();
     };
 
     $scope.items = [

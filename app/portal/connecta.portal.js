@@ -10,9 +10,16 @@ define([
         'angular-redactor'
     ]);
 
-    portal.config(function($translatePartialLoaderProvider){
+    portal.config(function($translatePartialLoaderProvider, redactorOptions){
         $translatePartialLoaderProvider.addPart('portal/layout');
         $translatePartialLoaderProvider.addPart('portal/application');
+
+        var _redactorOptions = {
+          // buttons: ['formatting', '|', 'bold', 'italic'],
+          toolbarFixed:true
+        };
+
+        angular.extend(redactorOptions, _redactorOptions);
     });
 
     portal._routes = {
