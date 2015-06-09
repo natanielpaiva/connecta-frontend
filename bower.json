@@ -18,8 +18,8 @@
     "angular-i18n": "~1.3.11",
     "angular-bootstrap": "0.12.1",
     "angular-chosen-localytics": "~1.0.5",
-    "amcharts":"3.14.2",
-    "amcharts-angular":"master",
+    "amcharts": "3.14.2",
+    "amcharts-angular": "master",
     "ng-table": "~0.3.0",
     "ng-file-upload": "~3.0.4",
     "ngDraggable": "0.1.3",
@@ -71,6 +71,7 @@
   ],
   "resolutions": {
     "angular": "~1.3.11",
-    "angular-cookies": "~1.3.11"
+    "angular-cookies": "~1.3.11",
+    "jquery": ">=2.0.0"
   }
 }
