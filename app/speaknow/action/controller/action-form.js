@@ -277,6 +277,7 @@ define([
 
         $scope.createWhatsappMessage = function (action) {
             var section = action.steps[0].sections[0];
+            var containsMultiselect = false;
             var message = "Connecta Speaknow \n \n";
             message += section.title + "\n";
 
@@ -296,6 +297,7 @@ define([
 
                 switch (param.type) {
                     case "MULTI_SELECT":
+                        containsMultiselect = true;
                         message += "Escolha uma ou mais resposta: " + "\n";
                         message += createOptions(param.options);
                         break;
@@ -309,15 +311,15 @@ define([
 
             }
 
-            if (param.type == "MULTI_SELECT") {
+            if (containsMultiselect) {
                 message += "Use " + action.answerSeparator + " para separar as respostas" + "\n";
                 message += "Ex: resposta 1" + action.answerSeparator + " resposta 2...";
-            };
+            }
 
             if (section.params.length > 1) {
                 message += "Use " + action.questionSeparator + " para separar as questões" + "\n";
                 message += "Ex: questão 1" + action.questionSeparator + " questão 2...";
-            };
+            }
 
             return message;
         };
