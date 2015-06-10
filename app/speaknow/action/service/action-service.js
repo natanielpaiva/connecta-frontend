@@ -1,7 +1,8 @@
 define([
-    'connecta.speaknow'
+    'connecta.speaknow',
+    'portal/layout/service/autocomplete'
 ], function (speaknow) {
-    return speaknow.lazy.service('ActionService', function (speaknowResources, $http) {
+    return speaknow.lazy.service('ActionService', function (speaknowResources, $http, $autocomplete) {
         
         var _interaction = null;
         
@@ -35,6 +36,11 @@ define([
             return $http.get(url);
         };
         
+        this.getWhatsappAccounts = function(){
+            var url = speaknowResources.whatsappAccount + "/list";
+            return $http.get(url);
+        };
+        
         this.getIcons = function(){
             var url = "assets/fonts/connecta/selection.json";
             return $http.get(url);
@@ -49,5 +55,14 @@ define([
             return $http.delete(url);
         };
         
+        this.getContacts = function(val){
+            return $autocomplete(speaknowResources.contact + "/find", {
+                name: val
+            }).then(function (response) {
+                return response.data.map(function (item) {
+                    return item;
+                });
+            });
+        };
     });
 });

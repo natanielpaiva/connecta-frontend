@@ -30,6 +30,74 @@
             </div>
 
             <div class="form-group">
+                <label for="whatsapp" class="required" translate>ACTION.WHATSAPP</label>
+                <input type="checkbox" class="form-control" id="whatsapp" name="whatsapp"
+                       ng-model="isWhatsapp" required style="width: 2%;"/>
+            </div>
+
+            <div class="form-group" ng-show="isWhatsapp">
+                <label for="default" class="required" translate>ACTION.DEFAULT</label>
+                <input type="checkbox" class="form-control" id="default" name="default"
+                       ng-model="action.default" required  style="width: 2%;"/>
+            </div>
+            
+            <div class="form-group" ng-show="isWhatsapp">
+                <label for="questionSeparator" class="required" translate>ACTION.QUESTION_SEPARATOR</label>
+                <input type="text" class="form-control" id="name" name="questionSeparator"
+                       ng-model="action.questionSeparator" required />
+            </div>
+
+            
+            <div class="form-group" ng-show="isWhatsapp">
+                <label for="answerSeparator" class="required" translate>ACTION.ANSWER_SEPARATOR</label>
+                <input type="text" class="form-control" id="name" name="answerSeparator"
+                       ng-model="action.answerSeparator" required />
+            </div>
+            
+            <div class="form-group" ng-show="isWhatsapp">
+                <label for="type" translate>ACTION.WHATSAPP_ACC</label>
+                <select id="type" name="type" class="form-control" ng-model="whatsappAccount">
+                    <option ng-repeat="whatsappAccount in whatsappAccounts" value="{{whatsappAccount}}">
+                        {{whatsappAccount.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group" ng-show="isWhatsapp">
+                <label for="contacts" translate>ACTION.CONTACT</label>
+                <input type="text" name="contacts" id="contacts" class="form-control" typeahead-on-select="addContact()"
+                       ng-model="contact" typeahead="contact as contact.name for contact in getContacts($viewValue)" typeahead-loading="loadingAttributes"  />
+                <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+            </div>
+
+            <div class="table-contacts" ng-show="contacts.length > 0">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th translate>ACTION.NAME</th>
+                            <th translate>ACTION.EMAIL</th>
+                            <th translate>ACTION.PHONE</th>
+                            <th translate>ACTION.ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="con in contacts">
+                            <td>{{con.name}}</td>
+                            <td class="text-left">{{con.email}}</td>
+                            <td>{{con.phone}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a role="button" class="btn btn-xs btn-info" ng-click="removeContact(contact)">
+                                        <span class="icon-trash"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group">
                 <label for="icon" translate>ACTION.ICON</label>
                 <button type="button" class="btn btn-default" 
                         ng-click="openIconModal()">
@@ -91,7 +159,7 @@
                             <div class="card-form card-params" ng-repeat="(index, param) in section.params" ng-class="{'card-form-min': !param.max }">
                                 <!--Header-->
                                 <div class="header-card" ng-click="minifyCard(section.params);
-                                                    param.max = true">
+                                            param.max = true">
                                     <h4>{{param.title ? param.title : newParamStr}}</h4>
                                     <div class="btn-group pull-right margin-right-single" role="group">
                                         <button class="btn btn-default">
@@ -161,21 +229,21 @@
                             <!--Fim parametros-->
 
                             <button type="button" class="btn btn-default" translate 
-                                ng-class="{disabled: !validateParams(sec_index, section)}" 
-                                ng-click="addParam(section)">ACTION.SECTION.PARAM.NEW</button>
+                                    ng-class="{disabled: !validateParams(sec_index, section)}" 
+                                    ng-click="addParam(section)">ACTION.SECTION.PARAM.NEW</button>
                             <div class="form-group">
                                 <label for="footer" translate>ACTION.SECTION.FOOTER</label>
                                 <input type="text" class="form-control" id="footer" name="footer"
                                        ng-model="section.footer" />
                             </div>
                             <a href="" class="btn btn-primary" translate 
-                                ng-class="{disabled: !validateParams(sec_index, section)}" 
-                                ng-click="section.max = !section.max">LAYOUT.DONE</a>
+                               ng-class="{disabled: !validateParams(sec_index, section)}" 
+                               ng-click="section.max = !section.max">LAYOUT.DONE</a>
                         </div> 
                     </div>
                     <button type="button" class="btn btn-default" translate 
-                        ng-class="{disabled: !validateSections()}"
-                        ng-click="addSection()">ACTION.SECTION.NEW</button>
+                            ng-class="{disabled: !validateSections()}"
+                            ng-click="addSection()">ACTION.SECTION.NEW</button>
                     <!--Fim sections-->
                     <div class="form-group" ng-show="action.type === 'SERVICE'">
                         <label for="script" translate>STEP.SCRIPT</label>

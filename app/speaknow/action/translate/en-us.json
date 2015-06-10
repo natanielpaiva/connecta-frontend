@@ -4,6 +4,12 @@
         "EDIT": "Edit Action",
         "VIEW": "View Action",
         "NAME": "Name",
+        "PHONE": "Phone",
+        "ACTIONS": "Actions",
+        "CONTACT": "Contact",
+        "ANSWER_SEPARATOR":"Separador entre resposta",
+        "QUESTION_SEPARATOR":"Separador entre pergunta",
+        "EMAIL": "Email",
         "ICON": "Icon",
         "TYPE": "Type",
         "DONE": "Done",
@@ -58,7 +64,10 @@
                     "VIDEO":"Video"
                 }
             }
-        }
+        },
+    "DEFAULT":"Default",
+    "WHATSAPP":"Whatsapp",
+    "WHATSAPP_ACC": "Whatsapp Account"
     },
     "STEP": {
         "SCRIPT": "Groovy Script"

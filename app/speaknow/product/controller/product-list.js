@@ -2,10 +2,14 @@ define([
     'connecta.speaknow',
     'speaknow/product/service/product-service',
     'portal/layout/service/notify'
-], function(speaknow){
-    return speaknow.lazy.controller('ProductList', function ($scope, ProductService, notify, ngTableParams, $translate) {    
-        $scope.products = [];
-        
+], function (speaknow) {
+    return speaknow.lazy.controller('ProductList', function ($scope, ProductService, notify, ngTableParams, $translate, speaknowResources) {
+
+        $scope.products = null;
+        $scope.productUrl = speaknowResources.base;
+        $scope.search = {
+            name:''
+        };
         $scope.tableParams = new ngTableParams({
             count: 10,
             page: 1,
@@ -19,6 +23,5 @@ define([
             },
             counts: [10, 30, 50, 100]
         });
-        
     });
 });

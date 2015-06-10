@@ -3,7 +3,7 @@ define([
     'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, $translate) {
+    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, $translate, speaknowResources) {
 
         $scope.companies = null;
         $scope.search = {

@@ -104,7 +104,7 @@
                         <translate>{{productImage.name ? productImage.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
                     </label>
                     <img class="img-company-quad" ng-if="product.image || productImage" 
-                         ng-src="{{product.image && productImage === undefined ? baseUrl + product.image : image}}" />
+                         ng-src="{{product.image && productImage == undefined ? baseUrl + product.image : image}}" />
                     <p ng-show="rectInvalid" class="help-block ng-binding ng-scope">
                         Esse campo é obrigatório
                     </p>

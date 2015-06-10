@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('ProductForm',
-            function ($scope, $routeParams, $location, ProductService, notify) {
+            function ($scope, $routeParams, $location, ProductService, notify, speaknowResources) {
 
                 $scope.product = {
                     name: "",
@@ -16,10 +16,12 @@ define([
                 $scope.productName = null;
                 $scope.products = [];
                 $scope.productNotExist = false;
+                $scope.baseUrl = speaknowResources.base;
 
                 if ($routeParams.id) {
                     ProductService.get($routeParams.id).success(function (data) {
                         $scope.product = data;
+                        $scope.productReference = data;
                     });
                 }
 

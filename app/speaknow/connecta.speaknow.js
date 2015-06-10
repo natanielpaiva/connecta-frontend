@@ -19,6 +19,7 @@ define([
         speaknow.lazy.value('speaknowResources', {
             base: appSpeaknow.host,
             action: appSpeaknow.host + '/action',
+            whatsappAccount: appSpeaknow.host + '/whats/account',
             contact: appSpeaknow.host + '/contact',
             interaction: appSpeaknow.host + '/interaction',
             company: appSpeaknow.host + '/company',
@@ -101,7 +102,7 @@ define([
          */
         '/speaknow/company': {
             controller: 'CompanyListController',
-            controllerUrl: 'speaknow/company/controller/CompanyContactFormControllercompany-list',
+            controllerUrl: 'speaknow/company/controller/company-list',
             templateUrl: 'app/speaknow/company/template/company-list.html'
         },
         '/speaknow/company/new': {
@@ -164,6 +165,16 @@ define([
             templateUrl: 'app/speaknow/product/template/product-list.html'
         },
         '/speaknow/product/new' :{
+            controller: 'ProductForm',
+            controllerUrl: 'speaknow/product/controller/product-form',
+            templateUrl: 'app/speaknow/product/template/product-form.html'
+        },
+        '/speaknow/product/:id' :{
+            controller: 'ProductForm',
+            controllerUrl: 'speaknow/product/controller/product-form',
+            templateUrl: 'app/speaknow/product/template/product-form.html'
+        },
+        '/speaknow/product/:id/edit' :{
             controller: 'ProductForm',
             controllerUrl: 'speaknow/product/controller/product-form',
             templateUrl: 'app/speaknow/product/template/product-form.html'

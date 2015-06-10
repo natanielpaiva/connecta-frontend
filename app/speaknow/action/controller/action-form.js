@@ -12,7 +12,9 @@ define([
             InteractionService, ActionService, $location, $routeParams, $modal, $translate) {
 
         $scope.interaction = ActionService.getInteraction();
-        
+        $scope.contact = null;
+        $scope.contacts = [];
+
         var param = {
             type: "TEXT",
             options: [],
@@ -32,14 +34,14 @@ define([
                     type: "POLL"
                 }
             ],
-            icon: "dump"
+            icon: "dump",
         };
 
         if ($scope.interaction) {
-           $scope.action.interaction = $scope.interaction;
+            $scope.action.interaction = $scope.interaction;
         } else {
-           $location.path('/speaknow/interaction');
-           console.error('Interaction não informada');
+            $location.path('/speaknow/interaction');
+            console.error('Interaction não informada');
         }
 
         $translate('ACTION.SECTION.TITLE').then(function (value) {
@@ -47,8 +49,24 @@ define([
         });
 
         $translate('ACTION.SECTION.PARAM.TITLE').then(function (value) {
-            $scope.newParamStr = value; 
+            $scope.newParamStr = value;
         });
+
+        $scope.getContacts = function (val) {
+            if (val.length > 3) {
+                return ActionService.getContacts(val);
+            }
+        };
+
+        $scope.addContact = function () {
+            $scope.contacts.push($scope.contact);
+            $scope.contact = null;
+        };
+
+        $scope.removeContact = function (contact) {
+            var index = $scope.contacts.indexOf(contact);
+            $scope.contacts.splice(index, 1);
+        };
 
         $scope.addParam = function (section) {
             $scope.minifyCard(section.params);
@@ -59,15 +77,15 @@ define([
             section.params.splice(section.params.indexOf(param), 1);
         };
 
-        $scope.finishParam = function(sec_index, index, param){
-            if(!$scope.validateParam(sec_index, index, param)){
+        $scope.finishParam = function (sec_index, index, param) {
+            if (!$scope.validateParam(sec_index, index, param)) {
                 return;
             }
 
             param.max = false;
         };
-        
-        $scope.onChangeParamType = function (type){
+
+        $scope.onChangeParamType = function (type) {
             $scope.showParamOpts = $scope.isMultiple(type);
         };
 
@@ -130,6 +148,10 @@ define([
             $scope.action.type = response.data[0];
         });
 
+        ActionService.getWhatsappAccounts().then(function (response) {
+            $scope.whatsappAccounts = response.data;
+        });
+
         // Recupera os tipos de parametros (enum InteractionParameterType)
         $scope.paramTypes = [];
         ActionService.getParamTypes().then(function (response) {
@@ -137,19 +159,26 @@ define([
         });
 
         $scope.submit = function () {
-            if(!$scope.validateSections()){
+            $scope.action.contacts = $scope.contacts;
+            //Verifica se esta action possui Whatsapp
+            if ($scope.isWhatsapp) {
+                $scope.action.whatsappAccount = angular.fromJson($scope.whatsappAccount);
+                $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+            }
+
+            if (!$scope.validateSections()) {
                 return;
             }
             if ($scope.isEditing || !$scope.interaction.id) {
                 //TODO trazer a company da Grid
                 $scope.interaction.company = {id: 1};
                 $scope.interaction.actions = [];
-                
+
                 var image = $scope.interaction.image;
-                
+
                 delete $scope.interaction.image;
                 delete $scope.action.interaction;
-                
+
                 $scope.interaction.actions.push($scope.action);
                 InteractionService.save($scope.interaction, image).success(function (response) {
                     ActionService.clearInteraction();
@@ -163,9 +192,9 @@ define([
                 });
             }
         };
-        
+
         /** Validations */
-        
+
         /**
          * Método para validar cada parametro individualmente
          * utilizado no ng-repeat dos parametros de cada Section
@@ -173,25 +202,26 @@ define([
          * @param  {Object} param - O parametro da section do escoppo
          * @return {Boolean} True -> valid e False -> invalid
          */
-        $scope.validateParam = function(sec_index, index, param){
+        $scope.validateParam = function (sec_index, index, param) {
             var form = $scope.actionForm;
-            var title = form['section'+sec_index+'_param_title_'+index];
-            
-            if(!title) return;
+            var title = form['section' + sec_index + '_param_title_' + index];
 
-            title = form['section'+sec_index+'_param_title_'+index].$valid;
-            var name = $scope.isServiceAction() ? form['section'+sec_index+'_param_name_'+index].$valid : true;
+            if (!title)
+                return;
+
+            title = form['section' + sec_index + '_param_title_' + index].$valid;
+            var name = $scope.isServiceAction() ? form['section' + sec_index + '_param_name_' + index].$valid : true;
             var options = $scope.isMultiple(param.type) ? (param.options.length && $scope.validateParamOptions(param.options)) : true;
 
             return title && name && options;
         };
 
-        $scope.validateParams = function(index, section){
+        $scope.validateParams = function (index, section) {
 
-            function checkParams(){
-                for(var i in section.params){
+            function checkParams() {
+                for (var i in section.params) {
                     var param = section.params[i];
-                    if(!$scope.validateParam(index, i, param)){
+                    if (!$scope.validateParam(index, i, param)) {
                         return false;
                     }
                 }
@@ -199,50 +229,97 @@ define([
             }
 
             return section.params.length && checkParams();
-            
+
         };
-        
-        $scope.validateParamOptions = function (options){
-            function verifyEmpty (option){
+
+        $scope.validateParamOptions = function (options) {
+            function verifyEmpty(option) {
                 return (
-                        (!option.value || angular.equals("", option.value)) || 
+                        (!option.value || angular.equals("", option.value)) ||
                         (!option.text || angular.equals("", option.text))
-                );
+                        );
             }
-            
-            for(var i in options){
+
+            for (var i in options) {
                 var option = options[i];
-                if(angular.equals({}, option) || verifyEmpty(option) ){
+                if (angular.equals({}, option) || verifyEmpty(option)) {
                     return false;
                 }
             }
-            
+
             return true;
         };
 
-        $scope.validateSections = function(){
+        $scope.validateSections = function () {
             var sections = $scope.action.steps[0].sections;
-            for(var i in sections){
+            for (var i in sections) {
                 var section = sections[i];
-                if(!$scope.validateParams(i, section)){
+                if (!$scope.validateParams(i, section)) {
                     return false;
                 }
             }
             return true;
         };
-        
-        $scope.isServiceAction = function (){
+
+        $scope.isServiceAction = function () {
             return $scope.action.type === 'SERVICE';
         };
-        
+
         $scope.isMultiple = function (value) {
             var multipleTypes = [
                 "MULTI_SELECT",
                 "MULTI_CHECKBOX",
                 "RADIO"
             ];
-            
+
             return multipleTypes.indexOf(value) >= 0;
+        };
+
+        $scope.createWhatsappMessage = function (action) {
+            var section = action.steps[0].sections[0];
+            var message = "Connecta Speaknow \n \n";
+            message += section.title + "\n";
+
+            for (var index in section.params) {
+                var param = section.params[index];
+                message += "Pergunta " + (parseInt(index) + 1) + ": " + "\n";
+                message += param.title + "\n";
+
+                var createOptions = function (options) {
+                    var result = "";
+                    for (var i in options) {
+                        result += options[i].text + ": " + options[i].value + "\n";
+                    }
+
+                    return result;
+                };
+
+                switch (param.type) {
+                    case "MULTI_SELECT":
+                        message += "Escolha uma ou mais resposta: " + "\n";
+                        message += createOptions(param.options);
+                        break;
+                    case "SELECT":
+                        message += "Escolha apenas uma resposta: " + "\n";
+                        message += createOptions(param.options);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            if (param.type == "MULTI_SELECT") {
+                message += "Use " + action.answerSeparator + " para separar as respostas" + "\n";
+                message += "Ex: resposta 1" + action.answerSeparator + " resposta 2...";
+            };
+
+            if (section.params.length > 1) {
+                message += "Use " + action.questionSeparator + " para separar as questões" + "\n";
+                message += "Ex: questão 1" + action.questionSeparator + " questão 2...";
+            };
+
+            return message;
         };
     });
 });
