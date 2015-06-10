@@ -71,6 +71,11 @@
                     <td class="text-left">{{action.type}}</td>
                     <td>
                         <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-danger">
+                                <span class="glyphicon icon-send" aria-hidden="true"
+                                      ng-click="sendMessage(action.id)"></span>
+                            </button>
+
                             <a href="#/speaknow/action/{{action.id}}" role="button" class="btn btn-sm btn-info">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </a>

@@ -53,6 +53,14 @@
                     <div ng-show="formulario.name.$touched" ng-messages="formulario.price.$error"
                          ng-messages-include="portal-validation-messages"></div>
                 </div>
+                
+                <div class="form-group">
+                    <label for="measureType" translate>PRODUCT.TYPE</label>
+                    <select id="measureType" name="measureType" class="form-control" ng-model="product.demand">
+                        <option value="false">{{'PRODUCT.OFFER' | translate}}</option>
+                        <option value="true">{{'PRODUCT.DEMAND' | translate}}</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="price" translate>PRODUCT.PRICE</label>

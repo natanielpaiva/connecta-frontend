@@ -278,8 +278,7 @@ define([
         $scope.createWhatsappMessage = function (action) {
             var section = action.steps[0].sections[0];
             var containsMultiselect = false;
-            var message = "Connecta Speaknow \n \n";
-            message += section.title + "\n";
+            var message = section.title + "\n";
 
             for (var index in section.params) {
                 var param = section.params[index];

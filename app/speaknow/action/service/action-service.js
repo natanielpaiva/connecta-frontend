@@ -64,5 +64,14 @@ define([
                 });
             });
         };
+        
+        this.delete = function (id){
+            var url = speaknowResources.action + "/" + id;
+            return $http.delete(url);
+        };
+        
+        this.sendMessage = function(id){
+            return $http.post(speaknowResources.whatsapp + "/sendMessage", id);
+        };
     });
 });

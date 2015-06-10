@@ -15,6 +15,7 @@ define([
 
     speaknow.run(function (applications) {
         var appSpeaknow = applications.speaknow;
+        var appSpeaknowBatch = applications.speaknowBatch;
         
         speaknow.lazy.value('speaknowResources', {
             base: appSpeaknow.host,
@@ -25,7 +26,8 @@ define([
             company: appSpeaknow.host + '/company',
             product: appSpeaknow.host + '/product',
             contactGroup: appSpeaknow.host + '/contact/group',
-            companyContact: appSpeaknow.host + '/company/contact'
+            companyContact: appSpeaknow.host + '/company/contact',
+            whatsapp: appSpeaknowBatch.host + '/whatsapp'
         });
 
     });
