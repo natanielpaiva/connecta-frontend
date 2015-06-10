@@ -28,6 +28,7 @@ define([
   'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min',
   'bower_components/angular-messages/angular-messages.min',
   'bower_components/ng-file-upload/angular-file-upload.min',
+  'bower_components/amcharts/dist/amcharts/amcharts',
   'bower_components/amcharts-angular/dist/amChartsDirective',
   'bower_components/angular-redactor/angular-redactor',
   'bower_components/angular-ui-tree/dist/angular-ui-tree.min'
