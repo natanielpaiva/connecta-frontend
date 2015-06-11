@@ -27,6 +27,7 @@ define([
         $scope.search = {
             name: ''
         };
+        
         $scope.tableParams = new ngTableParams({
             count: 20,
             page: 1,
@@ -74,7 +75,22 @@ define([
         $scope.delete = function (id) {
             ActionService.delete(id).success(function () {
                 notify.success("Action removida com sucesso");
+                $scope.tableParams.reload();
             });
+        };
+        
+        $scope.modalSendWhats = {
+            title: 'Enviar Whatsapp',
+            text: 'Deseja realmente enviar a enquete?',
+            size: 'sm',
+            success: $scope.sendMessage
+        };
+        
+        $scope.modalRemoveAction = {
+            title: 'Excluir Action',
+            text: 'Deseja realmente remover a action?',
+            size: 'sm',
+            success: $scope.delete
         };
 
     });
