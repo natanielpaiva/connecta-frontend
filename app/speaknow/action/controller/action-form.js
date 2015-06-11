@@ -278,7 +278,7 @@ define([
         $scope.createWhatsappMessage = function (action) {
             var section = action.steps[0].sections[0];
             var containsMultiselect = false;
-            var message = section.title + "\n";
+            var message = action.description + "\n";
 
             for (var index in section.params) {
                 var param = section.params[index];

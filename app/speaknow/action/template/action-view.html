@@ -29,6 +29,18 @@
                         <strong translate>ACTION.NAME</strong>: 
                         {{action.name}}
                     </p>
+                    <p ng-if="action.default != undefined">
+                        <strong translate>ACTION.WHATSAPP_DEFAULT</strong>: 
+                        {{action.default}}
+                    </p>
+                    <p ng-if="action.whatsappAccount">
+                        <strong translate>ACTION.WHATSAPP_ACC_NAME</strong>: 
+                        {{action.whatsappAccount.name}}
+                    </p>
+                    <p ng-if="action.whatsappAccount">
+                        <strong translate>ACTION.WHATSAPP_ACC_NUMBER</strong>: 
+                        {{action.whatsappAccount.number}}
+                    </p>
                     <p ng-if="action.type">
                         <strong translate>ACTION.TYPE</strong>: 
                         {{action.type}}
@@ -44,14 +56,14 @@
 
                     <h3>Sections</h3>
                     <ul ng-repeat='section in action.steps[0].sections'>
-                        <li>{{'SECTION.TITLE'| translate}}: {{section.title}}</li>
+                        <li>{{'ACTION.SECTION.TITLE'| translate}}: {{section.title}}</li>
                         <ul ng-if='section.params.length'>
                             <li>Params</li>
                             <ul ng-repeat="param in section.params">
-                                <li>{{'PARAM.TITLE'| translate}}: {{param.title}}</li>
-                                <li ng-if='param.name'>{{'PARAM.NAME'| translate}}: {{param.name}}</li>
-                                <li ng-if='param.tag'>{{'PARAM.TAG'| translate}}: {{param.tag}}</li>
-                                <li>{{'PARAM.TYPE'| translate}}: {{param.type}}</li>
+                                <li>{{'ACTION.SECTION.PARAM.TITLE'| translate}}: {{param.title}}</li>
+                                <li ng-if='param.name'>{{'PARAM.SECTION.PARAM.NAME'| translate}}: {{param.name}}</li>
+                                <li ng-if='param.tag'>{{'PARAM.SECTION.PARAM.TAG'| translate}}: {{param.tag}}</li>
+                                <li>{{'ACTION.SECTION.PARAM.TYPE'| translate}}: {{param.type}}</li>
                                 <ul ng-if="param.options.length">
                                     <li>Options</li>
                                     <ul>
@@ -60,7 +72,7 @@
                                 </ul>
                             </ul>
                         </ul>
-                        <li ng-if='section.footer'>{{'SECTION.FOOTER'| translate}}: {{section.footer}}</li>
+                        <li ng-if='section.footer'>{{'ACTION.SECTION.FOOTER'| translate}}: {{section.footer}}</li>
                     </ul>
                 </div>
             </div>
