@@ -15,6 +15,10 @@
         "title": "Speaknow",
         "host": "http://connectad.cds.com.br/connecta-speaknow"
     },
+    "speaknowBatch": {
+        "title": "Speaknow",
+        "host": "http://connectad.cds.com.br/speaknow-batch/"
+    },
     "portal": {
         "title": "Portal",
         "host": "http://connectad.cds.com.br/connecta-portal"
