@@ -4,7 +4,7 @@ define([
     return presenter.lazy.service('ContactService', function (speaknowResources, $http) {
 
         this.list = function (params) {
-            var url = speaknowResources.contact;
+            var url = speaknowResources.contact + "/list";
             return $http.get(url, {params: params});
         };
         
