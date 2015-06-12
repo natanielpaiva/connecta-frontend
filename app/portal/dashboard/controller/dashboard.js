@@ -8,10 +8,31 @@ define([
       layoutService.showAsFlat(false);
     });
 
-    $scope.config = {};
+    $scope.config = {
+      draggable: {
+        enabled:true
+      },
+      resizable: {
+        enabled:true
+      }
+    };
 
-    $scope.focus = function($event){
-      angular.element($event.target).parent('[redactor]').focus();
+    // $scope.focus = function($event){
+    //   angular.element($event.target).parent('[redactor]').focus();
+    // };
+
+    var disableDragResize = function() {
+      $scope.config.draggable.enabled = false;
+      $scope.config.resizable.enabled = false;
+    };
+
+    var enableDragResize = function() {
+      $scope.config.draggable.enabled = true;
+      $scope.config.resizable.enabled = true;
+    };
+
+    $scope.edit = function(){
+
     };
 
     $scope.items = [
@@ -29,6 +50,7 @@ define([
         sizeX: 2, sizeY: 1, row: 0, col: 0
       });
     };
+
     $scope.remove = function(item){
       $scope.items.splice($scope.items.indexOf(item), 1);
     };

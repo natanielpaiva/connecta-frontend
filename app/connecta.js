@@ -236,7 +236,7 @@ define([
     $sceProvider.enabled(false);
   }
 
-  connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider) {
+  connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider, $locationProvider) {
 
     configureLazyProviders($controllerProvider, $compileProvider, $provide, $filterProvider);
     configureTranslations($translateProvider, window.navigator);
@@ -244,6 +244,7 @@ define([
     configureRequestInterceptors($httpProvider);
     configureHTTPWhitelist($compileProvider, $sceProvider);
 
+    //$locationProvider.html5Mode(true);
   });
 
   connecta.run(function($rootScope, $menu) {

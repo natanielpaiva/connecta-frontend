@@ -1,8 +1,8 @@
-<div gridster="config" class="dashboard">
-  <div gridster-item="item" ng-repeat="item in items"
-      class="dashboard-item">
-
-    <div ng-model="content" ng-click="focus($event)" redactor></div>
-
+<div class="dashboard" gridster="config">
+  <div class="dashboard-item" gridster-item="item" ng-repeat="item in items">
+    <button class="btn btn-sm btn-default pull-right" ng-click="edit()" type="button">
+      <span class="icon-cog"></span>
+    </button>
+<!-- <div ng-model="content" ng-click="focus($event)" redactor></div> -->
   </div>
 </div>
