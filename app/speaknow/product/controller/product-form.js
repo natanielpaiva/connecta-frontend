@@ -9,7 +9,8 @@ define([
                 $scope.product = {
                     name: "",
                     code: "",
-                    type: ""
+                    type: "",
+                    productReference: null
                 };
                 $scope.productImage = null;
                 $scope.image = null;
@@ -98,13 +99,10 @@ define([
                 };
                 
                 $scope.showForm = function(){
-                    return ($scope.product.type == 'SERVICE')
-                                || 
-                                (
-                                    $scope.newProductReference || $scope.product.productReference != null 
-                                    && 
-                                    $scope.product.type == 'PRODUCT'
-                                );
+                    var isService = $scope.product.type == 'SERVICE';
+                    var isNewOrReferenceExists = $scope.newProductReference || $scope.product.productReference !== null;
+                    var isProduct = $scope.product.type == 'PRODUCT';
+                    return isService ||  (isNewOrReferenceExists && isProduct);
                 };
 
             });

@@ -206,8 +206,7 @@ define([
             var form = $scope.actionForm;
             var title = form['section' + sec_index + '_param_title_' + index];
 
-            if (!title)
-                return;
+            if (!title) return;
 
             title = form['section' + sec_index + '_param_title_' + index].$valid;
             var name = $scope.isServiceAction() ? form['section' + sec_index + '_param_name_' + index].$valid : true;
