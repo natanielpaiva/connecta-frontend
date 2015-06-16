@@ -5,6 +5,7 @@
         "NAME": "Name",
         "EMAIL": "Email",
         "PHONE": "Phone",
+        "IMAGE":"Image",
         "ADDRESS": "Address",
         "TYPE": "Type",
         "IMAGE_QUAD": "Image Square",

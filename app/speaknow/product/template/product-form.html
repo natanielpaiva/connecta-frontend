@@ -32,9 +32,6 @@
                 </div>
             </form>
         </div>
-        <span class="btn red btn-primary" style="margin-top: 10px" translate ng-show="productNotExist">
-            PRODUCT.CREATE
-        </span>
 
         <form novalidate name="formulario" ng-submit="submit()">
 
@@ -46,10 +43,22 @@
                 </lu>
             </div>
 
-            <div ng-show="(product.type == 'SERVICE') || (productReference != null && product.type == 'PRODUCT')" class="am-fade-and-slide-bottom ng-scope">
+            <span class="btn red btn-primary" style="margin-top: 10px" translate ng-show="productNotExist" 
+                  ng-click="createProductReference()">
+                PRODUCT.CREATE
+            </span>
+
+            <div ng-show="showForm()" class="am-fade-and-slide-bottom ng-scope">
                 <div class="form-group">
                     <label for="name" translate>PRODUCT.NAME</label>
-                    <input type="text" class="form-control" id="name" name="name" ng-model="product.name" required/>
+                    <input type="text" class="form-control" id="name" name="name" ng-model="product.productReference.name" required/>
+                    <div ng-show="formulario.name.$touched" ng-messages="formulario.price.$error"
+                         ng-messages-include="portal-validation-messages"></div>
+                </div>
+
+                <div class="form-group" ng-show="newProductReference">
+                    <label for="name" translate>PRODUCT.CODE</label>
+                    <input type="text" class="form-control" id="name" name="name" ng-model="product.productReference.code"/>
                     <div ng-show="formulario.name.$touched" ng-messages="formulario.price.$error"
                          ng-messages-include="portal-validation-messages"></div>
                 </div>

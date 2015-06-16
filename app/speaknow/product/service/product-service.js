@@ -13,6 +13,11 @@ define([
             return $http.get(url);
         };
 
+        this.delete = function (id){
+            var url = speaknowResources.product + "/" + id;
+            return $http.delete(url);
+        };
+        
         this.save = function (product, image) {
             var url = speaknowResources.product + "/save";
             var fd = new FormData();

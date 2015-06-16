@@ -9,13 +9,14 @@ define([
                 $scope.product = {
                     name: "",
                     code: "",
-                    type: "",
+                    type: ""
                 };
                 $scope.productImage = null;
                 $scope.image = null;
                 $scope.productName = null;
                 $scope.products = [];
                 $scope.productNotExist = false;
+                $scope.newProductReference = false;
                 $scope.baseUrl = speaknowResources.base;
 
                 if ($routeParams.id) {
@@ -28,13 +29,14 @@ define([
                 ProductService.getMeasureTypes().then(function (response) {
                     $scope.measureTypes = response.data;
                 });
-                
+
                 ProductService.getCategories().then(function (response) {
                     $scope.categories = response.data;
                 });
 
                 $scope.submit = function () {
                     $scope.product.subcategory = angular.fromJson($scope.subcategory);
+                    $scope.product.name = $scope.product.productReference.name;
                     ProductService.save($scope.product, $scope.productImage).then(function () {
                         $location.path('speaknow/product');
                     }, function (response) {
@@ -55,24 +57,54 @@ define([
 
                 $scope.search = function () {
                     ProductService.searchProductReference($scope.productName).then(function (response) {
-                        if(response.data.length > 0){
-                            $scope.productNotExist = false;
+                        if (response.data.length > 0) {
                             $scope.productReference = null;
                             $scope.product.name = null;
                             $scope.product.code = null;
                             $scope.products = response.data;
+                            $scope.productNotExist = true;
                         } else {
                             notify.warning("Nãa foi encontrado nenhum produto.");
                             $scope.productNotExist = true;
+                            $scope.products = [];
                         }
                     });
                 };
 
                 $scope.setProductReference = function (productReference) {
-                    $scope.productReference = productReference;
-                    $scope.product.name = productReference.name;
-                    $scope.product.code = productReference.code;
+                    $scope.product.productReference = productReference;
                     $scope.products = [];
+                    $scope.productNotExist = false;
+                };
+
+                $scope.createProductReference = function () {
+                    $scope.newProductReference = true;
+                    $scope.products = [];
+                    $scope.productNotExist = false;
+                };
+
+                $scope.modalCreateProduct = {
+                    title: 'Excluir Produto',
+                    text: 'Deseja realmente remover o produto?',
+                    size: 'sm',
+                    success: $scope.delete
+                };
+
+                $scope.delete = function (id) {
+                    ProductService.delete(id).success(function () {
+                        notify.success("Produto removido com sucesso");
+                        $scope.tableParams.reload();
+                    });
+                };
+                
+                $scope.showForm = function(){
+                    return ($scope.product.type == 'SERVICE')
+                                || 
+                                (
+                                    $scope.newProductReference || $scope.product.productReference != null 
+                                    && 
+                                    $scope.product.type == 'PRODUCT'
+                                );
                 };
 
             });

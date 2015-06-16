@@ -23,5 +23,19 @@ define([
             },
             counts: [10, 30, 50, 100]
         });
+        
+        $scope.modalRemoveProduct = {
+            title: 'Excluir Produto',
+            text: 'Deseja realmente remover o produto?',
+            size: 'sm',
+            success: $scope.delete
+        };
+        
+        $scope.delete = function(id){
+             ProductService.delete(id).success(function () {
+                notify.success("Produto removido com sucesso");
+                $scope.tableParams.reload();
+            });
+        };
     });
 });

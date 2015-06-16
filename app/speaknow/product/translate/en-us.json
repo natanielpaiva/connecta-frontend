@@ -7,6 +7,7 @@
         "DESCRIPTION": "Description",
         "UNIT": "UNIT",
         "HOUR": "HOUR",
+        "CODE":"Code Bar",
         "CRATE": "CRATE",
         "OFFER":"Offer",
         "DEMAND":"Demand",

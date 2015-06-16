@@ -29,9 +29,11 @@
                         <strong translate>COMPANY.NAME</strong>: 
                         {{company.name}}
                     </p>
-                    <p ng-if="company.image">
+                    <p ng-if="company.imageRect">
                         <strong translate>COMPANY.IMAGE</strong>: 
-                        {{company.image}}
+                    </p>
+                    <p>
+                        <img class="img-company-quad" ng-src="{{baseUrl + company.imageRect}}" />
                     </p>
                     <p ng-if="company.icon">
                         <strong translate>COMPANY.ICON</strong>: 

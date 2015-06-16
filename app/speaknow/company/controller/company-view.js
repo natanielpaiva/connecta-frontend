@@ -4,9 +4,10 @@ define([
     'speaknow/company-contact-group/service/contact-group-service'
 ], function(speaknow){
     return speaknow.lazy.controller('CompanyViewController', 
-        function($scope, CompanyService, ContactGroupService, $routeParams, $location, ngTableParams){
+        function($scope, CompanyService, ContactGroupService, $routeParams, $location, ngTableParams, speaknowResources){
         
         $scope.company = {};
+        $scope.baseUrl = speaknowResources.base;
         
         if ($routeParams.id) {
             CompanyService.get($routeParams.id).success(function(data){
