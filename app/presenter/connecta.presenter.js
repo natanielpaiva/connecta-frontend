@@ -1,5 +1,12 @@
 define([
-    'angular'
+    'angular',
+    'bower_components/amcharts/dist/amcharts/funnel',
+    'bower_components/amcharts/dist/amcharts/gauge',
+    'bower_components/amcharts/dist/amcharts/pie',
+    'bower_components/amcharts/dist/amcharts/radar',
+    'bower_components/amcharts/dist/amcharts/serial',
+    'bower_components/amcharts/dist/amcharts/xy'
+
 ], function (angular) {
     var presenter = angular.module('connecta.presenter', [
 
