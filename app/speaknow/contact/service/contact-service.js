@@ -13,5 +13,15 @@ define([
             return $http.post(url, contact);
         };
         
+        this.delete = function (id){
+            var url = speaknowResources.contact + "/" + id;
+            return $http.delete(url);
+        };
+        
+        this.get = function (id) {
+            var url = speaknowResources.contact + "/" + id;
+            return $http.get(url);
+        };
+        
     });
 });

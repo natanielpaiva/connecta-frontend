@@ -53,6 +53,16 @@ define([
             controllerUrl: 'speaknow/contact/controller/contact-form',
             templateUrl: 'app/speaknow/contact/template/contact-form.html'
         },
+        '/speaknow/contact/:id': {
+            controller: 'ContactViewController',
+            controllerUrl: 'speaknow/contact/controller/contact-view',
+            templateUrl: 'app/speaknow/contact/template/contact-view.html'
+        },
+        '/speaknow/contact/:id/edit': {
+            controller: 'ContactFormController',
+            controllerUrl: 'speaknow/contact/controller/contact-form',
+            templateUrl: 'app/speaknow/contact/template/contact-form.html'
+        },
         /**
          * URL INTERACTIONS
          */

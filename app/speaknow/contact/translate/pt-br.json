@@ -2,6 +2,7 @@
     "CONTACT": {
         "CONTACTS" : "Contatos",
         "NAME": "Nome",
+        "REMOVE_SUCCESS": "Contato removido com sucesso.",
         "EMAIL":"Email",
         "PHONE":"Telefone",
         "REGISTER_CONTACT": "Adicionar Contato"

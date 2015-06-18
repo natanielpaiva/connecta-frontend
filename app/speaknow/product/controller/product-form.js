@@ -23,6 +23,7 @@ define([
                 if ($routeParams.id) {
                     ProductService.get($routeParams.id).success(function (data) {
                         $scope.product = data;
+                        $scope.product.demand = $scope.product.demand.toString();
                         $scope.productReference = data;
                     });
                 }
@@ -37,7 +38,9 @@ define([
 
                 $scope.submit = function () {
                     $scope.product.subcategory = angular.fromJson($scope.subcategory);
-                    $scope.product.name = $scope.product.productReference.name;
+                    if($scope.newProductReference){
+                        $scope.product.productReference.name = $scope.product.name;
+                    }
                     ProductService.save($scope.product, $scope.productImage).then(function () {
                         $location.path('speaknow/product');
                     }, function (response) {
@@ -74,6 +77,7 @@ define([
 
                 $scope.setProductReference = function (productReference) {
                     $scope.product.productReference = productReference;
+                    $scope.product.name = productReference.name;
                     $scope.products = [];
                     $scope.productNotExist = false;
                 };

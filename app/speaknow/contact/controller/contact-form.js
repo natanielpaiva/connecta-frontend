@@ -6,7 +6,9 @@ define([
         $scope.contact = null;
         
         if ($routeParams.id) {
-            //TOOD: Implementar update
+            ContactService.get($routeParams.id).success(function (data) {
+                $scope.contact = data;
+            });
         } 
         
         $scope.submit = function () {
