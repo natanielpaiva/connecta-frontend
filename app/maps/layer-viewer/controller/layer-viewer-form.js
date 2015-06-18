@@ -321,7 +321,7 @@ define([
             }
 
 
-            var layerByType = (typeLayer === 1) ? LayerService.list() : LayerService.getByType(1);
+            var layerByType = (typeLayer === 1 || typeLayer === "1") ? LayerService.list() : LayerService.getByType(1);
 
             layerByType.then(function (result) {
                 $scope.layers = result.data;
