@@ -22,7 +22,7 @@ define([
                 var interval = setInterval(function () {
                     if ($scope.formulario.nm_source.$viewValue !== "") {
                         angular.element("#layerSourceTypeEntity").find("option[label='" + $scope.layerSource.layerSourceTypeEntity.ds_source_type + "']").attr('selected', 'true');
-                        angular.element('input[name="'+$scope.layerSource.layerSourceTypeEntity.ds_source_type+'"]').attr('checked', true)
+                        angular.element('input[name="'+$scope.layerSource.layerSourceTypeEntity.ds_source_type+'"]').attr('checked', true);
                         clearInterval(interval);
                     }
 
@@ -38,8 +38,7 @@ define([
                 }
 
             });
-        }
-        ;
+        }        
 
 
 
