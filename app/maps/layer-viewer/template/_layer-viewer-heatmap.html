@@ -1,23 +1,21 @@
 <div class="row">
     <div class="col-xs-3 form-group">
         <label for="initialColor" translate>LAYERVIEWER.INITIAL_COLOR</label>
-        <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt" style="width: 80%; border-right: none; float: left;"
+        <input type="text" name="initialColorTxt" required class="form-control txtColorHeatmap" id="initialColorTxt"
                ng-model="layerViewer.initialColor" />
-        <input type="color" name="initialColor" required class="form-control" id="initialColor" style="width: 20%; padding: 0px; float: left;"
+        <input type="color" name="initialColor" required class="form-control corColorHeatmap" id="initialColor"
                ng-model="layerViewer.initialColor" />
-        <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
-             ng-messages-include="portal-validation-messages"></div>
+<!--        <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
+             ng-messages-include="portal-validation-messages"></div>-->
     </div>
 
     <div class="col-xs-3 form-group">
         <label for="finalColor" translate>LAYERVIEWER.FINAL_COLOR</label>
-        <input type="text" name="finalColorTxt" required class="form-control" id="finalColorTxt" style="width: 80%; border-right: none; float: left;"
+        <input type="text" name="finalColorTxt" required class="form-control txtColorHeatmap" id="finalColorTxt" 
                ng-model="layerViewer.finalColor" />
-        <input type="color" name="finalColor" required class="form-control" id="finalColor" style="width: 20%; padding: 0px; float: left;"
+        <input type="color" name="finalColor" required class="form-control corColorHeatmap" id="finalColor"
                ng-model="layerViewer.finalColor" />
-        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
-             ng-messages-include="portal-validation-messages"></div>
+<!--        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
+             ng-messages-include="portal-validation-messages"></div>-->
     </div>
-<!--    <div class="col-xs-4 form-group">
-    </div>-->
 </div>

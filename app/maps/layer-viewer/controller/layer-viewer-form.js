@@ -1,9 +1,10 @@
 define([
     'connecta.maps',
+    'bower_components/connectaGeoJS/index/utils/colorComponent',
     'maps/layer/service/layer-service',
     'maps/layer-viewer/service/layer-viewer-service',
     'portal/layout/service/notify'
-], function (maps) {
+], function (maps, colorComponent) {
     return maps.lazy.controller('LayerViewerFormController', function ($scope, LayerService, notify, LayerViewerService, $location, $routeParams, $translate) {
 
         $scope.types = LayerViewerService.getTypes();
@@ -11,6 +12,8 @@ define([
         $scope.isEditing = false;
 
         $scope.layers = [];
+
+        $scope.layerColumns = [];
 
         var generateColorHexadecimal = function () {
             var letters = '0123456789ABCDEF'.split('');
@@ -30,17 +33,17 @@ define([
             raioFinal: 5,
             ini_initialColor: generateColorHexadecimal(),
             fim_initialColor: generateColorHexadecimal(),
-            ini_finalColor: generateColorHexadecimal(),
-            fim_finalColor: generateColorHexadecimal(),
+            ini_finalColor: "#FFFFFF",
+            fim_finalColor: "#FFFFFF",
             opacityInitial: 100,
             opacityFinal: 100,
             parameters: [{
                     int_raioInitial: 5,
                     int_initialColor: generateColorHexadecimal(),
-                    int_finalColor: generateColorHexadecimal(),
+                    int_finalColor: "#FFFFFF",
                     int_opacity: 100,
-                    int_de: 1,
-                    int_para: 2
+                    int_de: 5,
+                    int_para: 6
                 }]
         };
 
@@ -55,7 +58,7 @@ define([
 
         $scope.paramInterLayerViewer = function () {
             obj.int_initialColor = generateColorHexadecimal();
-            obj.int_finalColor = generateColorHexadecimal();
+            obj.int_finalColor = "#FFFFFF";
             return obj;
         };
 
@@ -72,13 +75,13 @@ define([
             var intervalMin = setInterval(function () {
                 if (angular.element(".intervalMin")[0]) {
                     if ((typeof angular.element(".intervalMin")[0]) === "undefined") {
-                        angular.element(angular.element(".intervalMin")[0]).val(1);
-                        angular.element(angular.element(".intervalMin")[1]).val(2);
+                        angular.element(angular.element(".intervalMin")[0]).val(5);
+                        angular.element(angular.element(".intervalMin")[1]).val(6);
                     }
-                    angular.element(angular.element(".intervalMin")[0]).attr("min", "1");
-                    angular.element(angular.element(".intervalMin")[1]).attr("min", "2");
-                    angular.element(angular.element(".intervalMin")[2]).attr("min", "3");
-                    angular.element(angular.element(".intervalMin")[3]).attr("min", "4");
+                    angular.element(angular.element(".intervalMin")[0]).attr("min", "5");
+                    angular.element(angular.element(".intervalMin")[1]).attr("min", "6");
+                    angular.element(angular.element(".intervalMin")[2]).attr("min", "7");
+                    angular.element(angular.element(".intervalMin")[3]).attr("min", "8");
                     clearInterval(intervalMinimo);
                 }
             }, 50);
@@ -103,8 +106,8 @@ define([
                 //quando existir os campos, setar a propriedade de valor minimo
                 var intervalMinimo = setInterval(function () {
                     if (angular.element(".intervalMin")[2]) {
-                        angular.element(angular.element(".intervalMin")[2]).attr("min", "3");
-                        angular.element(angular.element(".intervalMin")[3]).attr("min", "4");
+                        angular.element(angular.element(".intervalMin")[2]).attr("min", "7");
+                        angular.element(angular.element(".intervalMin")[3]).attr("min", "8");
                         clearInterval(intervalMinimo);
                     }
                 }, 50);
@@ -140,8 +143,8 @@ define([
                 //quando existir os campos, setar os propriedade de valor minimo
                 var intervalMin2 = setInterval(function () {
                     if (angular.element(".intervalMin")[4]) {
-                        angular.element(angular.element(".intervalMin")[4]).attr("min", "5");
-                        angular.element(angular.element(".intervalMin")[5]).attr("min", "6");
+                        angular.element(angular.element(".intervalMin")[4]).attr("min", "9");
+                        angular.element(angular.element(".intervalMin")[5]).attr("min", "10");
                         clearInterval(intervalMin2);
                     }
                 }, 50);
@@ -243,25 +246,80 @@ define([
         }
 
         $scope.getLayerByType = function (typeLayer) {
-
+            $scope.layerColumns = [];
             if (typeLayer === '') {
                 $scope.layers = [];
                 return false;
             }
 
             //setando evento para o campo de input file
-            if (typeLayer === '1') {
-                var type1 = setInterval(function () {
-                    if (angular.element("#file-original")) {
-                        angular.element("#file-original").change(function () {
-                            angular.element("#file-falso").val(angular.element("#file-original").val());
-                        });
-                        clearInterval(type1);
+            switch (typeLayer) {
+                case '1':
+                    var type1 = setInterval(function () {
+                        if (angular.element("#file-original")) {
+                            angular.element("#file-original").change(function () {
+                                angular.element("#file-falso").val(angular.element("#file-original").val());
+                            });
+                            clearInterval(type1);
+                        }
+                    }, 500);
 
-                    }
-                }, 500);
+                    break;
 
+                case '4':
+//                    $scope.analisys = ["option1", "option2", "option3", "option4", "option5"];
+//TESTE DO OBJETO DE ANÁLISES
+                    $scope.analisys = {
+                        "config": [{
+                                "columnLayer": "no_regiao",
+                                "columnBoundName": "regiao",
+                                "valueColumn": "NORTE",
+                                "valueMetric": "20",
+                                "objValues": "NORTE",
+                                "color": "#ffff00",
+                                "legend": "20 - 36",
+                                "title": "asfsafa"
+                            }, {
+                                "columnLayer": "no_regiao",
+                                "columnBoundName": "regiao",
+                                "valueColumn": "SUL",
+                                "valueMetric": "40",
+                                "objValues": "SUL",
+                                "color": "#ffbf00",
+                                "legend": "36 - 52",
+                                "title": "asfsafa"
+                            }, {
+                                "columnLayer": "no_regiao",
+                                "columnBoundName": "regiao",
+                                "valueColumn": "CENTRO-OESTE",
+                                "valueMetric": "60",
+                                "objValues": "CENTRO-OESTE",
+                                "color": "#ff8000",
+                                "legend": "52 - 68",
+                                "title": "asfsafa"
+                            }, {
+                                "columnLayer": "no_regiao",
+                                "columnBoundName": "regiao",
+                                "valueColumn": "SUDESTE",
+                                "valueMetric": "80",
+                                "objValues": "SUDESTE",
+                                "color": "#ff4000",
+                                "legend": "68 - 84",
+                                "title": "asfsafa"
+                            }, {
+                                "columnLayer": "no_regiao",
+                                "columnBoundName": "regiao",
+                                "valueColumn": "NORDESTE",
+                                "valueMetric": "100",
+                                "objValues": "NORDESTE",
+                                "color": "#ff0000",
+                                "legend": "84 - 100",
+                                "title": "asfsafa"
+                            }]};
+                    console.info("$scope.analisys", $scope.analisys);
+                    break;
             }
+
 
             var layerByType = (typeLayer === 1) ? LayerService.list() : LayerService.getByType(1);
 
@@ -274,18 +332,51 @@ define([
         };
 
         $scope.validateColorCluster = function (element) {
+//            verificação de campos com cores iguais            
+//            var itens = angular.element(".validate-cluster");
+//            var flag = 0;
+//            for (var item in itens) {
+//                if (itens[item].value === element) {
+//                    ++flag;
+//                    if (flag > 1) {
+//                        console.log("não pode conter campos iguais");
+//                        return false;
+//                    }
+//                } else {
+//                    console.log("tudo certo");
+//                }
+//            }
 
-            var itens = angular.element(".validate-cluster");
+        };
 
-            for (var item in itens) {
-                if (itens[item].value === element) {
-                    console.log("não pode conter campos iguais");
-                    return false;
-                } else {
-                    console.log("tudo certo");
-                }
+        $scope.generateComboColumns = function () {
+            $scope.layerColumns = [];
+            $scope.layerViewer.id_layer = "";
+            if ($scope.layerViewer.layerViewerTypeEntity.id === "4") {
+                $scope.layerColumns = $scope.layerViewer.layerEntity.txt_columns.split("#");
             }
+        };
 
+        $scope.generateIdAnalisy = function () {
+            $scope.id_analisys = ["id_analisy1", "id_analisy2", "id_analisy3", "id_analisy4"];
+        };
+
+        $scope.generateColorDegradee = function () {
+
+            var rangeColor = new colorComponent().calculateDegradee($scope.layerViewer.initialColor, $scope.layerViewer.finalColor, $scope.layerViewer.qtd_classes, 1);
+
+            if ($scope.layerViewer.qtd_classes > 1) {
+                $scope.layerViewer.initialColorClass1 = rangeColor[1];
+            }
+            if ($scope.layerViewer.qtd_classes > 2) {
+                $scope.layerViewer.initialColorClass2 = rangeColor[2];
+            }
+            if ($scope.layerViewer.qtd_classes > 3) {
+                $scope.layerViewer.initialColorClass3 = rangeColor[3];
+            }
+            if ($scope.layerViewer.qtd_classes > 4) {
+                $scope.layerViewer.initialColorClass4 = rangeColor[4];
+            }
         };
 
         $scope.submit = function () {
@@ -326,7 +417,7 @@ define([
                             intervalsCluster +
                             $scope.layerViewer.raioFinal + "~" +
                             $scope.layerViewer.fim_initialColor + "~" +
-                            $scope.layerViewer.fim_initialColor + "~" +
+                            $scope.layerViewer.fim_finalColor + "~" +
                             $scope.layerViewer.opacityFinal + "~" +
                             countIntervals;
                     break;

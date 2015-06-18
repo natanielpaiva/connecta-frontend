@@ -3,4 +3,5 @@ arquivo base de estilo da aplicação, define aqui as cores e outros elementos
 */
 $mapsImagePath:'#{$imagePath}maps';
 
-@import "_menu"
+@import "_menu";
+@import "_viewer";

@@ -18,7 +18,13 @@ define([
                 name: 'Cluster',
                 template: 'app/maps/layer-viewer/template/_layer-viewer-cluster.html',
                 icon: 'icon-cluster'
+            },
+            "4": {
+                name: 'Analisys',
+                template: 'app/maps/layer-viewer/template/_layer-viewer-analisys.html',
+                icon: 'icon-analisys'
             }
+            
         };
 
         this.get = function (id) {

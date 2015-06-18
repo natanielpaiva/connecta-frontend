@@ -1,0 +1,185 @@
+<div class="row">
+    <div class="col-xs-12 form-group">
+        <label for="id_layer" translate>LAYERVIEWER.ID_LAYER</label>
+        <select class="form-control" name="id_layer" 
+                ng-model="layerViewer.id_layer" 
+                ng-options="column for column in layerColumns">
+            <option translate value="">LAYERVIEWER.SELECT</option>
+        </select>
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label for="analisy" translate>LAYERVIEWER.ANALISY</label>
+        <select class="form-control" name="analisy" 
+                ng-model="layerViewer.analisy" 
+                ng-change="generateIdAnalisy()"
+                ng-options="obj.config as analisy.title for (obj, analisy) in analisys">
+            <option translate value="">LAYERVIEWER.SELECT</option>
+        </select>
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label for="id_analisy" translate>LAYERVIEWER.ID_ANALISY</label>
+        <select class="form-control" name="id_analisy" 
+                ng-model="layerViewer.id_analisy" 
+                ng-change=""
+                ng-options="id_analisy for id_analisy in id_analisys">
+            <option translate value="">LAYERVIEWER.SELECT</option>
+        </select>
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label for="metricas" translate>LAYERVIEWER.METRICAS</label>
+        <select class="form-control" name="metricas" 
+                ng-model="layerViewer.metricas" 
+                ng-change="">
+            <option translate value="">LAYERVIEWER.SELECT</option>
+            <option translate value="1">LAYERVIEWER.DEFAULT</option>
+            <option translate value="2">LAYERVIEWER.HEATMAP</option>
+            <option translate value="3">LAYERVIEWER.CLUSTER</option>
+            <option translate value="4">LAYERVIEWER.ANALISYS</option>
+        </select>
+    </div>
+
+    <div  ng-if="layerViewer.metricas >= 1">
+        <div class="col-xs-4 form-group">
+            <label for="qtdClasses" translate>LAYERVIEWER.QTDCLASSES</label>
+            <select class="form-control" name="qtdClasses" 
+                    ng-model="layerViewer.qtd_classes" 
+                    ng-change="generateColorDegradee()">
+                <option translate value="">LAYERVIEWER.SELECT</option>
+                <option translate value="2">2</option>
+                <option translate value="3">3</option>
+                <option translate value="4">4</option>
+                <option translate value="5">5</option>
+            </select>
+        </div>
+
+        <div class="col-xs-2 form-group">
+            <label for="initialColor" translate>LAYERVIEWER.INITIAL_COLOR_ANALISYS</label>
+            <input type="text" name="initialColorTxt" required class="form-control txtColorHeatmap" id="initialColorTxt"
+                   ng-model="layerViewer.initialColor"/>
+            <input type="color" name="initialColor" required class="form-control corColorHeatmap" id="initialColor"
+                   ng-model="layerViewer.initialColor"
+                   ng-change="generateColorDegradee()"/>
+        </div>
+
+        <div class="col-xs-2 form-group">
+            <label for="finalColor" translate>LAYERVIEWER.FINAL_COLOR_ANALISYS</label>
+            <input type="text" name="finalColorTxt" required class="form-control txtColorHeatmap" id="finalColorTxt" 
+                   ng-model="layerViewer.finalColor"/>
+            <input type="color" name="finalColor" required class="form-control corColorHeatmap" id="finalColor"
+                   ng-model="layerViewer.finalColor"
+                   ng-change="generateColorDegradee()"/>
+        </div>
+
+
+        <!--CAMPO 1-->
+        <div class="col-xs-12" ng-if="layerViewer.qtd_classes > 1">
+            <div class="col-xs-2 form-group">
+                <label for="int_de" translate>LAYERVIEWER.OF</label>
+                <input type="number" name="int_de" min="1" max="999" required class="form-control"
+                       ng-model="layerViewer.numberOF1" />
+            </div>
+            <div class="col-xs-2 form-group">
+                <label for="int_para" translate>LAYERVIEWER.TO</label>
+                <input type="number" name="int_para" min="2" max="999" required class="form-control"
+                       ng-model="layerViewer.numberTO1" />
+
+            </div>
+            <div class="col-xs-2 form-group">
+                <label for="initialColorClass" translate>LAYERVIEWER.COLOR</label>
+                <input type="text" name="initialColorTxtClass" required class="form-control txtColorHeatmap" id="initialColorTxtClass"
+                       ng-model="layerViewer.initialColorClass1" />
+                <input type="color" name="initialColor" required class="form-control corColorHeatmap" id="initialColorClass"
+                       ng-model="layerViewer.initialColorClass1" />
+            </div>
+            <div class="col-xs-3 form-group">
+                <label for="initialColor" translate>LAYERVIEWER.LEGEND</label>
+                <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt"
+                       ng-model="layerViewer.legend1" />
+            </div>
+        </div>
+
+        <!--CAMPO 2-->
+        <div class="col-xs-12" ng-if="layerViewer.qtd_classes > 2">
+            <div class="col-xs-2 form-group">
+                <label for="int_de" translate>LAYERVIEWER.OF</label>
+                <input type="number" name="int_de" min="1" max="999" required class="form-control"
+                       ng-model="layerViewer.numberOF2" />
+            </div>
+            <div class="col-xs-2 form-group">
+                <label for="int_para" translate>LAYERVIEWER.TO</label>
+                <input type="number" name="int_para" min="2" max="999" required class="form-control"
+                       ng-model="layerViewer.numberTO2" />
+
+            </div>
+            <div class="col-xs-2 form-group">
+                <label for="initialColorClass" translate>LAYERVIEWER.COLOR</label>
+                <input type="text" name="initialColorTxtClass" required class="form-control txtColorHeatmap" id="initialColorTxtClass"
+                       ng-model="layerViewer.initialColorClass2" />
+                <input type="color" name="initialColor" required class="form-control corColorHeatmap" id="initialColorClass"
+                       ng-model="layerViewer.initialColorClass2" />
+            </div>
+            <div class="col-xs-3 form-group">
+                <label for="initialColor" translate>LAYERVIEWER.LEGEND</label>
+                <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt"
+                       ng-model="layerViewer.legend2" />
+            </div>
+        </div>
+
+        <!--CAMPO 3-->
+        <div class="col-xs-12" ng-if="layerViewer.qtd_classes > 3">
+            <div class="col-xs-2 form-group">
+                <label for="int_de" translate>LAYERVIEWER.OF</label>
+                <input type="number" name="int_de" min="1" max="999" required class="form-control"
+                       ng-model="layerViewer.numberOF3" />
+            </div>
+            <div class="col-xs-2 form-group">
+                <label for="int_para" translate>LAYERVIEWER.TO</label>
+                <input type="number" name="int_para" min="2" max="999" required class="form-control"
+                       ng-model="layerViewer.numberTO3" />
+
+            </div>
+            <div class="col-xs-2 form-group">
+                <label for="initialColorClass" translate>LAYERVIEWER.COLOR</label>
+                <input type="text" name="initialColorTxtClass" required class="form-control txtColorHeatmap" id="initialColorTxtClass"
+                       ng-model="layerViewer.initialColorClass3" />
+                <input type="color" name="initialColor" required class="form-control corColorHeatmap" id="initialColorClass"
+                       ng-model="layerViewer.initialColorClass3" />
+            </div>
+            <div class="col-xs-3 form-group">
+                <label for="initialColor" translate>LAYERVIEWER.LEGEND</label>
+                <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt"
+                       ng-model="layerViewer.legend3" />
+            </div>
+        </div>
+
+        <!--CAMPO 4-->
+        <div class="col-xs-12" ng-if="layerViewer.qtd_classes > 4">
+            <div class="col-xs-2 form-group">
+                <label for="int_de" translate>LAYERVIEWER.OF</label>
+                <input type="number" name="int_de" min="1" max="999" required class="form-control"
+                       ng-model="layerViewer.numberOF4" />
+            </div>
+            <div class="col-xs-2 form-group">
+                <label for="int_para" translate>LAYERVIEWER.TO</label>
+                <input type="number" name="int_para" min="2" max="999" required class="form-control"
+                       ng-model="layerViewer.numberTO4" />
+
+            </div>
+            <div class="col-xs-2 form-group">
+                <label for="initialColorClass" translate>LAYERVIEWER.COLOR</label>
+                <input type="text" name="initialColorTxtClass" required class="form-control txtColorHeatmap" id="initialColorTxtClass"
+                       ng-model="layerViewer.initialColorClass4" />
+                <input type="color" name="initialColor" required class="form-control corColorHeatmap" id="initialColorClass"
+                       ng-model="layerViewer.initialColorClass4" />
+            </div>
+            <div class="col-xs-3 form-group">
+                <label for="initialColor" translate>LAYERVIEWER.LEGEND</label>
+                <input type="text" name="initialColorTxt" required class="form-control" id="initialColorTxt"
+                       ng-model="layerViewer.legend4" />
+            </div>
+        </div>
+    </div>
+</div>

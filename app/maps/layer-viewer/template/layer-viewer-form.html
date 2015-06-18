@@ -31,6 +31,7 @@
                     <option translate value="1">LAYERVIEWER.DEFAULT</option>
                     <option translate value="2">LAYERVIEWER.HEATMAP</option>
                     <option translate value="3">LAYERVIEWER.CLUSTER</option>
+                    <option translate value="4">LAYERVIEWER.ANALISYS</option>
                 </select>
                     <div ng-show="formulario.$submitted || formulario.type.$touched" 
                          ng-messages="formulario.type.$error"
@@ -57,7 +58,8 @@
                 <label for="layer" translate>LAYERVIEWER.LAYER</label>
                 <select class="form-control" name="layer" id="layerEntity" required
                         ng-model="layerViewer.layerEntity"
-                        ng-options="layer.ds_layer for layer in layers">
+                        ng-options="layer.ds_layer for layer in layers"
+                        ng-change="generateComboColumns()">
                     <option value="">Selecione</option>
                 </select>
                     <div ng-show="formulario.$submitted || formulario.layer.$touched" 

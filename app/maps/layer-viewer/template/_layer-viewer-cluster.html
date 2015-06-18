@@ -8,9 +8,9 @@
 
     <div class="col-xs-3 form-group">
         <label for="ini_initialColor" translate>LAYERVIEWER.INITIAL_COLOR</label>
-        <input type="text" min="3" max="7" name="ini_initialColorTxt" required class="form-control" id="ini_initialColorTxt" style="float: left; width: 100%;"
+        <input type="text" min="3" max="7" name="ini_initialColorTxt" required class="form-control validate-cluster txtColorCluster" id="ini_initialColorTxt"
                ng-model="layerViewer.ini_initialColor" />
-        <input type="color" name="initialColor" required class="form-control validate-cluster" id="initialColor" style="width: 40px; position: absolute; top: 39px; right: 0px; padding: 0px;"
+        <input type="color" name="initialColor" required class="form-control corColorCluster" id="initialColor"
                ng-change="validateColorCluster(layerViewer.ini_initialColor)"
                ng-model="layerViewer.ini_initialColor" />
 <!--        <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
@@ -19,9 +19,9 @@
 
     <div class="col-xs-3 form-group">
         <label for="ini_finalColor" translate>LAYERVIEWER.FINAL_COLOR</label>
-        <input type="text" min="3" max="7" name="ini_finalColorTxt" required class="form-control" id="finalColorTxt" style="float: left; width: 100%;"
+        <input type="text" min="3" max="7" name="ini_finalColorTxt" required class="form-control txtColorCluster" id="finalColorTxt"
                ng-model="layerViewer.ini_finalColor">
-        <input type="color" name="ini_finalColor" required class="form-control validate-cluster" id="finalColor" style="width: 40px; position: absolute; top: 39px; right: 0px; padding: 0px;"
+        <input type="color" name="ini_finalColor" required class="form-control corColorCluster" id="finalColor"
                ng-change="validateColorCluster(layerViewer.ini_finalColor)"
                ng-model="layerViewer.ini_finalColor">
 <!--        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
@@ -30,7 +30,7 @@
 
     <div class="col-xs-4 form-group">
         <label for="opacityInitial" translate>LAYERVIEWER.OPACITY </label> {{layerViewer.opacityInitial}}%
-        <input name="opacityInitial" required class="form-control" id="opacityInitial" type="range" step="5" min="0" max="100" style="border: none"
+        <input name="opacityInitial" required class="form-control cmpOpacity" id="opacityInitial" type="range" step="5" min="0" max="100"
                ng-model="layerViewer.opacityInitial" />
     </div>
 </div>
@@ -52,9 +52,9 @@
 
         <div class="col-xs-3 form-group">
             <label for="int_initialColor" translate>LAYERVIEWER.INITIAL_COLOR</label>
-            <input type="text" min="3" max="7" name="int_initialColorTxt" required class="form-control" id="int_initialColorTxt" style="float: left; width: 100%;"
+            <input type="text" min="3" max="7" name="int_initialColorTxt" required class="form-control validate-cluster txtColorCluster" id="int_initialColorTxt"
                    ng-model="$parent.$parent.$item.int_initialColor" />
-            <input type="color" name="int_initialColor" required class="form-control validate-cluster" id="int_initialColor" style="width: 40px; position: absolute; top: 39px; right: 0px; padding: 0px;"
+            <input type="color" name="int_initialColor" required class="form-control corColorCluster" id="int_initialColor"
                    ng-change="validateColorCluster($parent.$parent.$item.int_initialColor)"
                    ng-model="$parent.$parent.$item.int_initialColor" />
 <!--            <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
@@ -63,9 +63,9 @@
 
         <div class="col-xs-3 form-group">
             <label for="int_finalColor" translate>LAYERVIEWER.FINAL_COLOR</label>
-            <input type="text" min="3" max="7" name="int_finalColorTxt" required class="form-control" id="int_finalColorTxt" style="float: left; width: 100%;"
+            <input type="text" min="3" max="7" name="int_finalColorTxt" required class="form-control txtColorCluster" id="int_finalColorTxt"
                    ng-model="$parent.$parent.$item.int_finalColor">
-            <input type="color" name="int_finalColor" required class="form-control validate-cluster" id="int_finalColor" style="width: 40px; position: absolute; top: 39px; right: 0px; padding: 0px;"
+            <input type="color" name="int_finalColor" required class="form-control corColorCluster" id="int_finalColor"
                    ng-change="validateColorCluster($parent.$parent.$item.int_finalColor)"
                    ng-model="$parent.$parent.$item.int_finalColor">
 <!--            <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
@@ -74,17 +74,17 @@
 
         <div class="col-xs-4 form-group">
             <label for="int_opacity" translate>LAYERVIEWER.OPACITY </label> {{$parent.$parent.$item.int_opacity}}%
-            <input name="int_opacity" required class="form-control" id="int_opacity" type="range" step="5" min="0" max="100" style="border: none"
+            <input name="int_opacity" required class="form-control cmpOpacity" id="int_opacity" type="range" step="5" min="0" max="100"
                    ng-model="$parent.$parent.$item.int_opacity" />
         </div>
         <div class="col-xs-2 form-group">
             <label for="int_de" translate>LAYERVIEWER.OF</label>
-            <input type="number" name="int_de" min="1" max="999" required class="form-control intervalMin"
+            <input type="number" name="int_de" min="5" max="999" required class="form-control intervalMin"
                    ng-model="$parent.$parent.$item.int_de" />
         </div>
         <div class="col-xs-2 form-group">
             <label for="int_para" translate>LAYERVIEWER.TO</label>
-            <input type="number" name="int_para" min="2" max="999" required class="form-control intervalMin"
+            <input type="number" name="int_para" min="6" max="999" required class="form-control intervalMin"
                    ng-model="$parent.$parent.$item.int_para"
                    />
         </div>
@@ -108,9 +108,9 @@
 
     <div class="col-xs-3 form-group">
         <label for="fim_initialColor" translate>LAYERVIEWER.INITIAL_COLOR</label>
-        <input type="text" min="3" max="7" name="fim_initialColorTxt" required class="form-control" id="fim_initialColorTxt" style="float: left; width: 100%;"
+        <input type="text" min="3" max="7" name="fim_initialColorTxt" required class="form-control validate-cluster txtColorCluster" id="fim_initialColorTxt"
                ng-model="layerViewer.fim_initialColor" />
-        <input type="color" name="initialColor" required class="form-control validate-cluster" id="initialColor" style="width: 40px; position: absolute; top: 39px; right: 0px; padding: 0px;"
+        <input type="color" name="initialColor" required class="form-control corColorCluster" id="initialColor"
                ng-change="validateColorCluster(layerViewer.fim_initialColor)"
                ng-model="layerViewer.fim_initialColor" />
 <!--        <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
@@ -119,9 +119,9 @@
 
     <div class="col-xs-3 form-group">
         <label for="fim_finalColor" translate>LAYERVIEWER.FINAL_COLOR</label>
-        <input type="text" min="3" max="7" name="fim_finalColorTxt" required class="form-control" id="fim_finalColorTxt" style="float: left; width: 100%;"
+        <input type="text" min="3" max="7" name="fim_finalColorTxt" required class="form-control txtColorCluster" id="fim_finalColorTxt"
                ng-model="layerViewer.fim_finalColor">
-        <input type="color" name="finalColor" required class="form-control validate-cluster" id="finalColor" style="width: 40px; position: absolute; top: 39px; right: 0px; padding: 0px;"
+        <input type="color" name="finalColor" required class="form-control corColorCluster" id="finalColor"
                ng-change="validateColorCluster(layerViewer.fim_finalColor)"
                ng-model="layerViewer.fim_finalColor">
 <!--        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
@@ -130,7 +130,7 @@
 
     <div class="col-xs-4 form-group">
         <label for="opacityFinal" translate>LAYERVIEWER.OPACITY </label> {{layerViewer.opacityFinal}}%
-        <input name="opacityFinal" required class="form-control" id="opacityFinal" type="range" step="5" min="0" max="100" style="border: none"
+        <input name="opacityFinal" required class="form-control cmpOpacity" id="opacityFinal" type="range" step="5" min="0" max="100"
                ng-model="layerViewer.opacityFinal" />
     </div>
 </div>
