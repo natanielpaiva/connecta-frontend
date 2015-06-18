@@ -32,21 +32,23 @@
         <div class="well margin-top-single margin-bottom-single">
             
             
-            <p ng-if="layer.layerSourceEntity.layerSourceTypeEntity">
-                <strong translate>LAYER.SOURCE</strong>:
-                {{layer.layerSourceEntity.layerSourceTypeEntity.id}}
+            
+            <p ng-if="layer.ds_layer">
+                <strong translate>LAYER.NAME</strong>:
+                {{layer.ds_layer}}
             </p>
             
-            
+            <p ng-if="layer.layerSourceEntity">
+                <strong translate>LAYER.SOURCE</strong>:
+                {{layer.layerSourceEntity.nm_source}}
+            </p>
+                        
             <p ng-if="layer.nm_layer">
-                <strong translate>LAYER.NAME</strong>: 
+                <strong translate>LAYER.LAYER</strong>: 
                 {{layer.nm_layer}}
             </p>
 
-            <p ng-if="layer.ds_layer">
-                <strong translate>LAYER.DESCRIPTION</strong>:
-                {{layer.ds_layer}}
-            </p>
+            
         </div>
     </div>
 </div>

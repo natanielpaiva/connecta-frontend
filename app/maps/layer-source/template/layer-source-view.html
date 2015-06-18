@@ -35,10 +35,17 @@
                 <strong translate>LAYERSOURCE.NAME</strong>: 
                 {{layerSource.nm_source}}
             </p>
-
+                        
             <p ng-if="layerSource.layerSourceTypeEntity">
                 <strong translate>LAYERSOURCE.TYPE</strong>:
-                {{layerSource.layerSourceTypeEntity.id}}
+                <span class="{{layerSourceTypes[layerSource.layerSourceTypeEntity.ds_source_type].icon}}"></span>
+                {{layerSourceTypes[layerSource.layerSourceTypeEntity.ds_source_type].name}}
+            </p>
+            
+            
+             <p ng-if="datasource.type" >
+                <strong translate>DATASOURCE.DATASOURCE_TYPE</strong>:
+                
             </p>
 
             <p ng-if="layerSource.ds_link_interno" >

@@ -7,25 +7,22 @@ define([
     return maps.lazy.controller('LayerSourceFormController', function ($scope, LayerSourceService, notify, LayerSourceTypeService, $location, $routeParams, $translate) {
         $scope.layerSource = null;
         $scope.isEditing = false;
-
-
         $scope.nm_source_type = null;
+
+
 
         LayerSourceTypeService.list().then(function (response) {
             $scope.nm_source_type = response.data;
-
         }, function (response) {
         });
-
-
         if ($routeParams.id) {
             $scope.isEditing = true;
             LayerSourceService.get($routeParams.id).success(function (data) {
                 $scope.layerSource = data;
-
                 var interval = setInterval(function () {
                     if ($scope.formulario.nm_source.$viewValue !== "") {
                         angular.element("#layerSourceTypeEntity").find("option[label='" + $scope.layerSource.layerSourceTypeEntity.ds_source_type + "']").attr('selected', 'true');
+                        angular.element('input[name="'+$scope.layerSource.layerSourceTypeEntity.ds_source_type+'"]').attr('checked', true)
                         clearInterval(interval);
                     }
 
@@ -42,18 +39,23 @@ define([
 
             });
         }
+        ;
 
 
 
         $scope.submit = function () {
-            LayerSourceService.save($scope.layerSource).then(function () {
-                $translate('LAYERSOURCE.ADDED_SUCCESS').then(function (text) {
-                    notify.success(text);
+            LayerSourceTypeService.get($scope.layerSource.layerSourceTypeEntity).then(function (response) {
+                $scope.layerSource.layerSourceTypeEntity = response.data;
+                LayerSourceService.save($scope.layerSource).then(function () {
+                    $translate('LAYERSOURCE.ADDED_SUCCESS').then(function (text) {
+                        notify.success(text);
+                    });
+                    $location.path('maps/layer-source');
+                }, function (response) {
+                    notify.error(response);
                 });
-                $location.path('maps/layer-source');
-            }, function (response) {
-                notify.error(response);
             });
+
         };
     });
 });

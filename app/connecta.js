@@ -269,7 +269,7 @@ define([
     //'portal/layout/service/pages',
     'portal/layout/service/menu',
     'portal/layout/service/layout',
-    'portal/layout/directive/sidebar',
+    //'portal/layout/directive/sidebar',
     // 'portal/layout/service/search',
     'portal/layout/directive/debug',
     'portal/layout/directive/key-value',

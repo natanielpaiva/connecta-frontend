@@ -9,6 +9,8 @@ define([
 
         LayerService.get($routeParams.id).then(function (response) {
             $scope.layer = response.data;
+            
+            console.info("MMHVJKHJHVJKG",  $scope.layer );
 
 
             $scope.remove = function (id) {

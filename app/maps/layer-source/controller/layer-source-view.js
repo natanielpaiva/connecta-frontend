@@ -8,8 +8,10 @@ define([
 
 
         LayerSourceService.get($routeParams.id).then(function (response) {
-            $scope.layerSource = response.data;
+            $scope.layerSourceTypes = LayerSourceService.getTypes();
 
+            $scope.layerSource = response.data;
+            
 
             $scope.remove = function (id) {
                 console.info("REMOVE LAYERSOURCE");
@@ -25,7 +27,7 @@ define([
                     });
                 });
             };
-                                    
+
             //Parâmetros da Modal
             $scope.modalParams = {
                 title: "",

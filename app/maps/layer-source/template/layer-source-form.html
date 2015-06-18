@@ -19,24 +19,47 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="layerSourceTypeEntity" translate>LAYER.SOURCE_LAYER</label>
 
-                <select class="form-control" 
-                        name="layerSourceTypeEntity" 
-                        id="layerSourceTypeEntity"                        
-                        ng-model="layerSource.layerSourceTypeEntity" 
-                        ng-options="selectTipo as selectTipo.ds_source_type for selectTipo in nm_source_type" required>
-                    <option value="" translate> LAYERSOURCE.SELECT</option>
-                </select>            
-                <div ng-show="formulario.$submitted || formulario.layerSourceTypeEntity.$touched" 
+            <div class="portal-type-switcher">
+                <label for="layerSourceTypeEntity" translate>LAYER.SOURCE_LAYER</label></br>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Geoserver">
+                    <input type="radio" class="portal-type-switcher-input" name="GEOSERVER" id="layerSourceTypeEntity"  
+                           ng-model="layerSource.layerSourceTypeEntity" value="1" required/>
+                    <span class="icon-geoserver"></span>                    
+                </label>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Arcgis"> 
+                    <input type="radio" class="portal-type-switcher-input" name="ARCGISSERVER" id="layerSourceTypeEntity"  
+                           ng-model="layerSource.layerSourceTypeEntity" value="2" required/>
+                    <span class="icon-esri"></span>
+                </label>
+
+
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Mapviewer"> 
+                    <input type="radio" class="portal-type-switcher-input" name="MAPVIEWER" id="layerSourceTypeEntity"  
+                           ng-model="layerSource.layerSourceTypeEntity" value="3" required/>
+                    <span class="icon-globe"></span>
+                </label>
+
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Mapserver"> 
+                    <input type="radio" class="portal-type-switcher-input" name="MAPSERVER" id="layerSourceTypeEntity"  
+                           ng-model="layerSource.layerSourceTypeEntity" value="4" required/>
+                    <span class="icon-map2"></span>
+                </label>
+                
+                
+                 <div ng-show="formulario.$submitted || formulario.layerSourceTypeEntity.$touched" 
                      ng-messages="formulario.layerSourceTypeEntity.$error"
                      ng-messages-include="portal-error-messages">
                 </div>
             </div>
 
+            </br>
 
-
+           
             <div class="form-group">
                 <label for="ds_link_interno" translate>LAYERSOURCE.INTERNAL_LINK</label>
                 <input type="text" class="form-control" id="ds_link_interno" name="ds_link_interno"
