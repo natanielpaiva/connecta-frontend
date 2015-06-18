@@ -169,7 +169,7 @@ define([
             if (!$scope.validateSections()) {
                 return;
             }
-            if ($scope.isEditing || !$scope.interaction.id) {
+            if (!$scope.interaction.id) {
                 //TODO trazer a company da Grid
                 $scope.interaction.company = {id: 1};
                 $scope.interaction.actions = [];

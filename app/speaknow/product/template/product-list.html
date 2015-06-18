@@ -56,7 +56,7 @@
                     <td>{{product.id}}</td>
                     <td class="text-left"><img src="{{productUrl + product.image}}" style="height: 48px; width: 48px;" /></td>
                     <td class="text-left">{{product.name}}</td>
-                    <td class="text-left">{{product.price}}</td>
+                    <td class="text-left">{{product.price | currency : "R$ " : 2}}</td>
                     <td>
                         <div class="btn-group">
                             <a href="#/speaknow/product/view/{{product.id}}" role="button" class="btn btn-sm btn-info">

@@ -31,7 +31,7 @@
                        drag-over-class="{accept:'accept', reject:'reject'}">
                     {{imgName || interactionImg}}
                 </label>
-                <img class="img-company-quad" ng-if="interaction.image" ng-src="{{interactionImage}}" />
+                <img class="img-company-quad" ng-if="interaction.image || interactionImage" ng-src="{{interactionImage}}" />
             </div>
 
             <div class="form-group">

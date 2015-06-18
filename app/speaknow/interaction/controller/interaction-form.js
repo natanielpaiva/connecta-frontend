@@ -10,11 +10,12 @@ define([
      */
     return speaknow.lazy.controller('InteractionFormController', function ($scope,
             InteractionService, ActionService, regexBase64, $location, $routeParams, $translate,
-            $modal) {
+            $modal, speaknowResources) {
 
         $scope.interaction = {
             icon: "dump"
         };
+        $scope.baseUrl = speaknowResources.base;
 
         $translate('INTERACTION.DROP_FILE_HERE').then(function (text) {
             $scope.interactionImg = text;
@@ -33,7 +34,7 @@ define([
             $scope.isEditing = true;
             InteractionService.get($routeParams.id).success(function (data) {
                 $scope.interaction = data;
-                $scope.interactionImage = "data:image/jpeg;base64," + $scope.interaction.image;
+                $scope.interactionImage = $scope.baseUrl + $scope.interaction.image;
             });
         }
 

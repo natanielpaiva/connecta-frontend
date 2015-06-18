@@ -1,9 +1,10 @@
 define([
     'connecta.speaknow',
-    'speaknow/interaction/service/interaction-service'
+    'speaknow/interaction/service/interaction-service',
+    'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('InteractionListController', function (
-            $scope, InteractionService, ngTableParams
+            $scope, InteractionService, ngTableParams, notify
             ) {
 
         $scope.search = {
@@ -27,9 +28,16 @@ define([
         //TODO caixa de dialogo de confirmação do delete
         $scope.delete = function (id) {
             InteractionService.delete(id).success(function () {
-                console.info("Interaction Deletada com sucesso!");
+                notify.success("interaçao Deletada com sucesso!");
                 $scope.tableParams.reload();
             });
+        };
+        
+        $scope.modalParams = {
+            title: 'Exclusão de Interações',
+            text: 'Deseja realmente excluir esta interaçao?',
+            size: 'sm',
+            success: $scope.delete
         };
 
     });
