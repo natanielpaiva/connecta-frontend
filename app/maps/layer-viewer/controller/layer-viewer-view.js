@@ -8,9 +8,13 @@ define([
     return maps.lazy.controller('LayerViewerViewController', function ($scope, LayerViewerService, notify, ConnectaGeoService, $routeParams, $location, $modalTranslate, $translate) {
 
 
+
         LayerViewerService.getById($routeParams.id).then(function (response) {
+            
+            $scope.types = LayerViewerService.getTypes();
 
             $scope.layerViewer = response.data;
+            
 
             $scope.remove = function (id) {
                 LayerViewerService.delete(id).then(function () {

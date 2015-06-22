@@ -32,25 +32,23 @@
         <div class="well margin-top-single margin-bottom-single">
             
              <p ng-if="layerViewer.nm_viewer">
-                <strong translate>LAYERVIEWER.NAME</strong>:
+                <strong translate>LAYERVIEWER.NAME</strong>
                 {{layerViewer.nm_viewer}}
             </p>
-
-            <p ng-if="layerViewer.nm_viewer">
-                <strong translate>LAYERVIEWER.TYPE</strong>: 
-                <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 1" translate>LAYERVIEWER.DEFAULT</span>
-                <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 2" translate>LAYERVIEWER.HEATMAP</span>
-                <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 3" translate>LAYERVIEWER.CLUSTER</span>
-                <span ng-if="!layerViewer.$edit && layerViewer.layerViewerTypeEntity.id == 4" translate>mapAnalisys</span>
+            
+            <p ng-if="layerViewer.layerViewerTypeEntity">
+                <strong translate>LAYERVIEWER.TYPE</strong>
+                <span class="{{types[layerViewer.layerViewerTypeEntity.id].icon}}"></span>
+                <span translate>{{types[layerViewer.layerViewerTypeEntity.id].name}}</span>
             </p>
-
+                       
             <p ng-if="layerViewer.layerEntity.ds_layer">
-                <strong translate>LAYERVIEWER.LAYER</strong>:
+                <strong translate>LAYERVIEWER.LAYER</strong>
                 {{layerViewer.layerEntity.ds_layer}}
             </p>
 
             <p ng-if="layerViewer.viewerTypeImplEntity.id" >
-                <strong translate>LAYERVIEWER.IMPL</strong>:                
+                <strong translate>LAYERVIEWER.IMPL</strong>         
                 <span ng-if="!layerViewer.$edit && layerViewer.viewerTypeImplEntity.id == 1">OpenLayers</span>
                 <span ng-if="!layerViewer.$edit && layerViewer.viewerTypeImplEntity.id == 2">ESRI</span>
             </p>

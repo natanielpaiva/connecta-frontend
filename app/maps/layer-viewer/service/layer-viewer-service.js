@@ -5,22 +5,22 @@ define([
 
         var typeConfig = {
             "1": {
-                name: 'Default',
+                name: 'LAYERVIEWER.DEFAULT',
                 template: 'app/maps/layer-viewer/template/_layer-viewer-default.html',
                 icon: 'icon-default'
             },
             "2": {
-                name: 'Heatmap',
+                name: 'LAYERVIEWER.HEATMAP',
                 template: 'app/maps/layer-viewer/template/_layer-viewer-heatmap.html',
                 icon: 'icon-heatmap'
             },
             "3": {
-                name: 'Cluster',
+                name: 'LAYERVIEWER.CLUSTER',
                 template: 'app/maps/layer-viewer/template/_layer-viewer-cluster.html',
                 icon: 'icon-cluster'
             },
             "4": {
-                name: 'Analisys',
+                name: 'LAYERVIEWER.ANALYSIS',
                 template: 'app/maps/layer-viewer/template/_layer-viewer-analisys.html',
                 icon: 'icon-analisys'
             }
