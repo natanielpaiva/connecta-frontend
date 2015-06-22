@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{product.name}}</h3>
+
+        <!--        //TODO filtros e search da Grid-->
+        <div class="margin-top-single">
+            <a href="#/speaknow/contact"
+               class="btn btn-default" translate>
+                LAYOUT.BACK                     
+            </a>
+            <!--//TODO previous e back nos items (ouch)-->
+<!--            <button type="button" class="btn btn-default" >
+                <span class="icon-arrow-bold-left"></span></button>
+            <button type="button" class="btn btn-default" >
+                <span class="icon-arrow-bold-right"></span></button>-->
+
+            <button type="button" class="btn btn-default" 
+                    conf-modal="modalParams" conf-modal-args="[product.id]">
+                <span class="icon-dump"></span>
+            </button>
+
+            <a href="#/speaknow/product/{{product.id}}/edit" class="btn btn-default">
+                <span class="icon-pencil"></span>
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well margin-top-single margin-bottom-single">
+                    <p ng-if="product.name">
+                        <strong translate>PRODUCT.NAME</strong>: 
+                        {{product.name}}
+                    </p>
+                    <p ng-if="product.image">
+                        <strong translate>PRODUCT.IMAGE</strong>: 
+                    </p>
+                    <p>
+                        <img class="img-company-quad" ng-src="{{baseUrl + product.image}}" />
+                    </p>
+                    <p ng-if="product.description">
+                        <strong translate>PRODUCT.DESCRIPTION</strong>: 
+                        {{product.description}}
+                    </p>
+                    <p ng-if="contact.price">
+                        <strong translate>PRODUCT.PRICE</strong>: 
+                        {{contact.price}}
+                    </p>
+                    <p ng-if="contact.code">
+                        <strong translate>PRODUCT.CODE</strong>: 
+                        {{contact.code}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

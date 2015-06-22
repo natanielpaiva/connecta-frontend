@@ -9,12 +9,13 @@
                 LAYOUT.BACK                     
             </a>
             <!--//TODO previous e back nos items (ouch)-->
-            <button type="button" class="btn btn-default" ng-click="previousIntercontactGroup(company.id)">
+<!--            <button type="button" class="btn btn-default" ng-click="previousIntercontactGroup(company.id)">
                 <span class="icon-arrow-bold-left"></span></button>
             <button type="button" class="btn btn-default" ng-click="nextIntercontactGroup(company.id)">
-                <span class="icon-arrow-bold-right"></span></button>
+                <span class="icon-arrow-bold-right"></span></button>-->
 
-            <button type="button" class="btn btn-default" ng-click="deleteIntercontactGroup(company.id)">
+            <button type="button" class="btn btn-defaultc"
+                    conf-modal="modalParams" conf-modal-args="[company.id]">
                 <span class="icon-dump"></span></button>
 
             <a href="#/speaknow/company/{{company.id}}/edit" class="btn btn-default">
@@ -83,7 +84,7 @@
                             </a>
                             <button type="button" class="btn btn-sm btn-danger">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"
-                                      ng-click="delete(contactGroup.id)"></span>
+                                      conf-modal="modalRemoveContactGroup" conf-modal-args="[contactGroup.id]"></span>
                             </button>
                         </div>
                     </td>

@@ -1,10 +1,12 @@
 define([
     'connecta.speaknow',
     'speaknow/company/service/company-service',
-    'speaknow/company-contact-group/service/contact-group-service'
+    'speaknow/company-contact-group/service/contact-group-service',
+    'portal/layout/service/notify'
 ], function(speaknow){
     return speaknow.lazy.controller('CompanyViewController', 
-        function($scope, CompanyService, ContactGroupService, $routeParams, $location, ngTableParams, speaknowResources){
+        function($scope, CompanyService, ContactGroupService, $routeParams, $location, ngTableParams, $translate,
+                speaknowResources, notify){
         
         $scope.company = {};
         $scope.baseUrl = speaknowResources.base;
@@ -32,6 +34,38 @@ define([
                 },
                 counts: [20, 50, 100]
             });
+        };
+        
+        $scope.delete = function (id) {
+            CompanyService.delete(id).success(function () {
+                $translate('COMPANY.REMOVE_SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $location.path('speaknow/company/');
+                });
+            });
+        };
+        
+        $scope.deleteContactGroup = function (id) {
+            ContactGroupService.delete(id).success(function () {
+                $translate('COMPANY_CONTACT.REMOVE_SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $scope.getGroups();
+                });
+            });
+        };
+        
+        $scope.modalRemoveContactGroup = {
+            title: 'Exclusão de grupo de contatos',
+            text: 'Deseja realmente excluir este grupo?',
+            size: 'sm',
+            success: $scope.deleteContactGroup
+        };
+        
+        $scope.modalParams = {
+            title: 'Exclusão de Company',
+            text: 'Deseja realmente excluir esta empresa?',
+            size: 'sm',
+            success: $scope.delete
         };
     });
 });

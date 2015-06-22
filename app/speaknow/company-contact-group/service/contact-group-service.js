@@ -24,5 +24,10 @@ define([
             var url = speaknowResources.contactGroup;
             return $http.post(url, company);
         };
+        
+        this.delete = function (id) {
+            var url = speaknowResources.contactGroup + '/' + id;
+            return $http.delete(url);
+        };
     });
 });

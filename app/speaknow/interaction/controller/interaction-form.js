@@ -73,8 +73,12 @@ define([
                 $scope.imgName = file.name;
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $scope.interactionImage = e.target.result;
-                    $scope.$apply();
+                    if($scope.validateImage(e)){
+                        $scope.interactionImage = e.target.result;
+                        $scope.$apply();
+                    } else {
+                        $scope.interactionImage = null;
+                    }
                 };
                 reader.readAsDataURL(files[0]);
             }
@@ -99,6 +103,22 @@ define([
                 console.info("Interaction Salva com sucesso!");
                 $location.path('speaknow/interaction');
             });
+        };
+        
+        $scope.validateImage = function(image){
+            var isValid = true;
+            if(image.total / 1000000 > 1){
+                notify.warning("COMPANY.VALIDATION.IMAGESIZE");
+                isValid = false;
+            } else {
+                var img = angular.element("<img>")[0];
+                img.src = image.target.result;
+                if(img.height >= img.width){
+                    notify.warning("COMPANY.VALIDATION.IMAGEFORM");
+                    isValid = false;
+                }
+            }
+            return isValid;
         };
 
     });

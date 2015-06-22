@@ -1,9 +1,10 @@
 define([
     'connecta.speaknow',
-    'speaknow/action/service/action-service'
+    'speaknow/action/service/action-service',
+    'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('ActionViewController', function (
-            $scope, ActionService, $routeParams, $location
+            $scope, ActionService, $routeParams, $location, $translate,notify
             ) {
 
         if ($routeParams.id) {
@@ -15,12 +16,17 @@ define([
             $location.path('speaknow/interaction');
         }
 
-        //TODO caixa de dialogo de confirmação do delete
         $scope.delete = function (id) {
             ActionService.delete(id).success(function () {
-                console.info("Interaction Deletada com sucesso!");
-                $scope.tableParams.reload();
+                $location.path('speaknow/interaction/' + $scope.action.interaction.id);
             });
+        };
+        
+        $scope.modalParams = {
+            title: 'Exclusão de Actions',
+            text: 'Deseja realmente excluir esta ação?',
+            size: 'sm',
+            success: $scope.delete
         };
 
     });

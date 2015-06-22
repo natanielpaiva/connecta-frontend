@@ -19,8 +19,8 @@ define([
             CompanyContactService.save($scope.companyContact).then(function () {
                 $translate('COMPANY.SUCCESS').then(function (text) {
                     notify.success(text);
+                    $location.path('speaknow/company/contact/group/' + $scope.contactGroup.id);
                 });
-                $location.path('speaknow/company');
             });
         };
     });

@@ -5,7 +5,8 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('InteractionViewController', function (
-            $scope, InteractionService, speaknowResources, ActionService, $routeParams, $location, ngTableParams, notify
+            $scope, InteractionService, speaknowResources, ActionService, $routeParams, $location, ngTableParams, 
+            $translate,notify
             ) {
 
         $scope.baseUrl = speaknowResources.base;
@@ -41,10 +42,8 @@ define([
             counts: [20, 50, 100]
         });
 
-        //TODO caixa de dialogo de confirmação do delete
         $scope.deleteInteraction = function (id) {
             InteractionService.delete(id).success(function () {
-                console.info("Interaction Deletada com sucesso!");
                 redirectToInteraction();
             });
         };
@@ -91,6 +90,13 @@ define([
             text: 'Deseja realmente remover a action?',
             size: 'sm',
             success: $scope.delete
+        };
+        
+        $scope.modalRemoveInteraction = {
+            title: 'Exclusão de Interações',
+            text: 'Deseja realmente excluir esta interaçao?',
+            size: 'sm',
+            success: $scope.deleteInteraction
         };
 
     });

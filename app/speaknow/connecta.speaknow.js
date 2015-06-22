@@ -182,9 +182,9 @@ define([
             templateUrl: 'app/speaknow/product/template/product-form.html'
         },
         '/speaknow/product/:id' :{
-            controller: 'ProductForm',
-            controllerUrl: 'speaknow/product/controller/product-form',
-            templateUrl: 'app/speaknow/product/template/product-form.html'
+            controller: 'ProductViewController',
+            controllerUrl: 'speaknow/product/controller/product-view',
+            templateUrl: 'app/speaknow/product/template/product-view.html'
         },
         '/speaknow/product/:id/edit' :{
             controller: 'ProductForm',
