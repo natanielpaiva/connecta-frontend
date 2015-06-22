@@ -21,11 +21,26 @@ define([
             return $http.get(url);
         };
         
+        this.listDefaultAccounts = function (params){
+            var url = speaknowResources.action + "/list-default";
+            return $http.get(url, {params: params});
+        };
+
+        this.setDefault = function(actionID){
+            var url = speaknowResources.action + "/" + actionID + "/set-default";
+            return $http.post(url);
+        };
+        
         this.getActionTypes = function(){
             var url = speaknowResources.action + "/type";
             return $http.get(url);
         };
         
+        this.getActionAnswers = function(actionId){
+            var url = speaknowResources.action + "/" + actionId + '/answers';
+            return $http.get(url);
+        };
+
         this.getParamTypes = function(){
             var url = speaknowResources.action + "/paramType";
             return $http.get(url);
@@ -33,11 +48,6 @@ define([
         
         this.getParamTypes = function(){
             var url = speaknowResources.action + "/paramType";
-            return $http.get(url);
-        };
-        
-        this.getWhatsappAccounts = function(){
-            var url = speaknowResources.whatsappAccount + "/list";
             return $http.get(url);
         };
         

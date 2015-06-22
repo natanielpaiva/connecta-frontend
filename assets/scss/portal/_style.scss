@@ -295,3 +295,13 @@ blockquote small{
         }
     }
 }
+
+.icon {
+    &.status-active {
+        color: $status-active;
+    }
+    
+    &.status-inactive {
+        color: $status-inactive;
+    }
+}

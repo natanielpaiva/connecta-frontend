@@ -1,0 +1,15 @@
+{
+    "WHATSAPP": {
+    	"ADD": "Add Account",
+    	"EDIT": "Edit Account",
+    	"ACCOUNTS": "Accounts",
+    	"WHATSAPP_ACCOUNTS": "Whatsapp",
+    	"ACCOUNTS_DEFAULT": "Default Whatsapp",
+    	"NAME": "Name",
+    	"ACCOUNT_NAME": "Account Name",
+    	"NUMBER": "Number",
+    	"ACCOUNT_NUMBER": "Account Number",
+    	"PASSWORD": "Password",
+    	"ACTIVE": "Active"
+    }
+}

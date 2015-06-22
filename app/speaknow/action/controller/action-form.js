@@ -2,6 +2,7 @@ define([
     'connecta.speaknow',
     'speaknow/action/service/action-service',
     'speaknow/interaction/service/interaction-service',
+    'speaknow/whatsapp/service/whatsapp-service',
     'speaknow/action/controller/action-modal'
 ], function (speaknow) {
     /* //TODO
@@ -9,7 +10,7 @@ define([
      * regras de uplaod de arquivo
      */
     return speaknow.lazy.controller('ActionFormController', function ($scope,
-            InteractionService, ActionService, $location, $routeParams, $modal, $translate) {
+            InteractionService, ActionService, WhatsappService, $location, $routeParams, $modal, $translate) {
 
         $scope.interaction = ActionService.getInteraction();
         $scope.contact = null;
@@ -148,8 +149,8 @@ define([
             $scope.action.type = response.data[0];
         });
 
-        ActionService.getWhatsappAccounts().then(function (response) {
-            $scope.whatsappAccounts = response.data;
+        WhatsappService.listActive().then(function (response) {
+            $scope.whatsappAccounts = response.data.content;
         });
 
         // Recupera os tipos de parametros (enum InteractionParameterType)
@@ -200,7 +201,7 @@ define([
          * utilizado no ng-repeat dos parametros de cada Section
          * @param  {number} index - Index do parametro dentro da section
          * @param  {Object} param - O parametro da section do escoppo
-         * @return {Boolean} True -> valid e False -> invalid
+         * @return {Boolean} rue -> valid e False -> invalid
          */
         $scope.validateParam = function (sec_index, index, param) {
             var form = $scope.actionForm;
@@ -235,7 +236,7 @@ define([
             function verifyEmpty(option) {
                 return (
                         (!option.value || angular.equals("", option.value)) ||
-                        (!option.text || angular.equals("", option.text))
+                        (!option.key || angular.equals("", option.key))
                         );
             }
 

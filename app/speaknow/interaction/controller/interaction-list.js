@@ -24,7 +24,7 @@ define([
             },
             counts: [10, 30, 50, 100]
         });
-
+        
         //TODO caixa de dialogo de confirmação do delete
         $scope.delete = function (id) {
             InteractionService.delete(id).success(function () {

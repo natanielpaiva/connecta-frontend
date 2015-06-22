@@ -72,11 +72,19 @@
                     <td class="text-left">{{action.type}}</td>
                     <td>
                         <div class="btn-group">
+                            
+                            <button type="button" class="btn btn-sm" ng-class="{'icon-star2': action.default, 'icon-star-outline': !action.default}"
+                                    conf-modal="modalSetDefault" conf-modal-args="[action.id]">
+                                <span aria-hidden="true"></span>
+                            </button>
+
                             <button type="button" class="btn btn-sm icon-send"
                                     conf-modal="modalSendWhats" conf-modal-args="[action.id]">
                                 <span aria-hidden="true"></span>
                             </button>
-
+                            <!-- <a href="#/speaknow/action/{{action.id}}/data" role="button" class="btn btn-sm btn-default">
+                                <span class="icon-chart3" aria-hidden="true"></span>
+                            </a> -->
                             <a href="#/speaknow/action/{{action.id}}" role="button" class="btn btn-sm btn-info">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </a>

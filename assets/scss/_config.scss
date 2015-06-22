@@ -17,7 +17,10 @@ $lightGray:     #CCCCCC; //204,204,204
 $lighterGray:   #E1E1E1; //225,225,225
 $white:         #FFFFFF;
 
-$backgroundGray:$lighterGray;
+$status-active:     $white;
+$status-inactive:   $black;
+
+$backgroundGray: $lighterGray;
 
 $presenterBlue: #297EB8;
 $speaknowBlue: #1b7f96;

@@ -4,6 +4,7 @@ define([
     var speaknow = angular.module('connecta.speaknow', []);
 
     speaknow.config(function ($translatePartialLoaderProvider) {
+        $translatePartialLoaderProvider.addPart('speaknow/whatsapp');
         $translatePartialLoaderProvider.addPart('speaknow/contact');
         $translatePartialLoaderProvider.addPart('speaknow/interaction');
         $translatePartialLoaderProvider.addPart('speaknow/action');
@@ -20,14 +21,14 @@ define([
         speaknow.lazy.value('speaknowResources', {
             base: appSpeaknow.host,
             action: appSpeaknow.host + '/action',
-            whatsappAccount: appSpeaknow.host + '/whats/account',
             contact: appSpeaknow.host + '/contact',
             interaction: appSpeaknow.host + '/interaction',
             company: appSpeaknow.host + '/company',
             product: appSpeaknow.host + '/product',
             contactGroup: appSpeaknow.host + '/contact/group',
             companyContact: appSpeaknow.host + '/company/contact',
-            whatsapp: appSpeaknowBatch.host + '/whatsapp'
+            whatsapp: appSpeaknowBatch.host + '/whatsapp',
+            whatsappAccount: appSpeaknow.host + '/whatsapp/account'
         });
 
     });
@@ -103,6 +104,11 @@ define([
             controller: 'ActionViewController',
             controllerUrl: 'speaknow/action/controller/action-view',
             templateUrl: 'app/speaknow/action/template/action-view.html'
+        },
+        '/speaknow/action/:id/data': {
+            controller: 'ActionDataAnalysisController',
+            controllerUrl: 'speaknow/action/controller/action-data',
+            templateUrl: 'app/speaknow/action/template/action-data.html'
         },
         '/speaknow/action/:id/edit': {
             controller: 'ActionFormController',
@@ -190,10 +196,47 @@ define([
             controller: 'ProductForm',
             controllerUrl: 'speaknow/product/controller/product-form',
             templateUrl: 'app/speaknow/product/template/product-form.html'
+        },
+         /**
+         * URL WHATSAPP ACCOUNTS
+         */
+        '/speaknow/whatsapp/default' :{
+            controller: 'AccountDefaultList',
+            controllerUrl: 'speaknow/whatsapp/controller/account-default-list',
+            templateUrl: 'app/speaknow/whatsapp/template/account-default-list.html'
+        },
+        '/speaknow/whatsapp/' :{
+            controller: 'WhatsappAccountList',
+            controllerUrl: 'speaknow/whatsapp/controller/whatsapp-list',
+            templateUrl: 'app/speaknow/whatsapp/template/whatsapp-list.html'
+        },
+        '/speaknow/whatsapp/new' :{
+            controller: 'WhatsappForm',
+            controllerUrl: 'speaknow/whatsapp/controller/whatsapp-form',
+            templateUrl: 'app/speaknow/whatsapp/template/whatsapp-form.html'
+        },
+        '/speaknow/whatsapp/:id' :{
+            controller: 'WhatsappForm',
+            controllerUrl: 'speaknow/whatsapp/controller/whatsapp-form',
+            templateUrl: 'app/speaknow/whatsapp/template/whatsapp-form.html'
         }
     };
 
     speaknow._menu = [
+        {
+            title: 'WHATSAPP.ACCOUNTS',
+            icon: 'icon-comments',
+            children: [
+                {
+                    href: 'speaknow/whatsapp',
+                    title: 'WHATSAPP.WHATSAPP_ACCOUNTS'
+                },
+                {
+                    href: 'speaknow/whatsapp/default',
+                    title: 'WHATSAPP.ACCOUNTS_DEFAULT'
+                }
+            ]
+        },
         {
             href: 'speaknow/contact',
             title: 'CONTACT.CONTACTS',

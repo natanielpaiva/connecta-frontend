@@ -55,14 +55,12 @@ define([
         $scope.redirectToAction = function (id) {
             ActionService.setInteraction($scope.interaction);
 
-            var url;
             if (!id) {
-                url = '#/speaknow/action/new';
+                return '#/speaknow/action/new';
             } else {
-                url = '#/speaknow/action/' + id + '/edit';
+                return '#/speaknow/action/' + id + '/edit';
             }
 
-            return url;
         };
 
         $scope.sendMessage = function (id) {
@@ -81,6 +79,23 @@ define([
             });
         };
 
+        $scope.updateDefault = function (id) {
+            ActionService.setDefault(id).success(function () {
+                notify.success("Action padrão alterada com sucesso");
+                InteractionService.get($routeParams.id).success(function (data) {
+                    $scope.interaction = data;
+                    $scope.tableParams.reload();
+                });
+            });
+        };
+
+        $scope.modalSetDefault = {
+            title: 'Status da Action',
+            text: 'Deseja marcar a Action como padrão?',
+            size: 'sm',
+            success: $scope.updateDefault
+        };
+        
         $scope.modalSendWhats = {
             title: 'Enviar Whatsapp',
             text: 'Deseja realmente enviar a enquete?',
