@@ -27,25 +27,25 @@
                 <label for="type" translate>LAYER.SOURCE_LAYER</label></br>
                 <label class="radio-inline portal-type-switcher-item"
                        title="Default">
-                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                    <input type="radio" class="portal-type-switcher-input" name="DEFAULT" id="layerViewerTypeEntity"  
                            ng-model="layerViewer.layerViewerTypeEntity.id" value="1" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
                     <span class="icon-geoserver"></span>                    
                 </label>
                 <label class="radio-inline portal-type-switcher-item"
                        title="Heatmap"> 
-                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                    <input type="radio" class="portal-type-switcher-input" name="HEATMAP" id="layerViewerTypeEntity"  
                            ng-model="layerViewer.layerViewerTypeEntity.id" value="2" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
                     <span class="icon-heatmap"></span>
                 </label>
                 <label class="radio-inline portal-type-switcher-item"
                        title="Mapviewer"> 
-                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                    <input type="radio" class="portal-type-switcher-input" name="CLUSTER" id="layerViewerTypeEntity"  
                            ng-model="layerViewer.layerViewerTypeEntity.id" value="3" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
                     <span class="icon-cluster"></span>
                 </label>
                 <label class="radio-inline portal-type-switcher-item"
                        title="Analysis"> 
-                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                    <input type="radio" class="portal-type-switcher-input" name="ANALYSIS" id="layerViewerTypeEntity"  
                            ng-model="layerViewer.layerViewerTypeEntity.id" value="4" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
                     <span class="icon-analysis"></span>
                 </label>

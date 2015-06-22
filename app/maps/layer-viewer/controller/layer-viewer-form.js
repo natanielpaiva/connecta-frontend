@@ -241,7 +241,7 @@ define([
 
 
             });
-        } else {
+        } else {            
             $scope.layerViewer.type = Object.keys($scope.types)[0];
         }
 
