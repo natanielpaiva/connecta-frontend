@@ -35,7 +35,7 @@ define([
 
 
         this.getLayerColumns = function (serverUrl, layerName,scope) {
-            var request = $http.get(mapsResources.openlayersProxy + "?" + serverUrl + "/wfs?version=1.1.0&request=DescribeFeatureType&typeName=" + layerName + "&outputFormat=application/json");
+            var request = $http.get(mapsResources.openlayersProxy.replace("?","") + "?" + serverUrl + "/wfs?version=1.1.0&request=DescribeFeatureType&typeName=" + layerName + "&outputFormat=application/json");
             scope.layerCOLUMNS = '';
 
 
@@ -58,7 +58,7 @@ define([
 
         this.getLayerGeometryType = function (serverUrl, layerName,scope) {
             //http://192.168.2.10:9704/geoserver/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=estados_mira&maxFeatures=1&outputFormat=application/json
-            var request = $http.get(mapsResources.openlayersProxy + "?" + serverUrl + "/wfs?version=1.1.0&request=GetFeature&typeName=" + layerName + "&outputFormat=application/json&maxFeatures=1");
+            var request = $http.get(mapsResources.openlayersProxy.replace("?","") + "?" + serverUrl + "/wfs?version=1.1.0&request=GetFeature&typeName=" + layerName + "&outputFormat=application/json&maxFeatures=1");
             scope.layerGeometryType = "";
 
             request.then(function (response) {
