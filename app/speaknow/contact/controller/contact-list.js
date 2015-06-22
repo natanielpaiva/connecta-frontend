@@ -6,7 +6,9 @@ define([
     return speaknow.lazy.controller('ContactListController', function ($scope, ContactService, notify, ngTableParams, $translate) {
 
         $scope.contacts = null;
-
+        $scope.search = {
+            name:''
+        };
         $scope.tableParams = new ngTableParams({
             count: 10,
             page: 1,

@@ -12,21 +12,21 @@
                 <input type="text" class="form-control" id="name" name="nome"
                        ng-model="contact.name" required/>
                 <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
             <div class="form-group">
                 <label for="email" translate>CONTACT.EMAIL</label>
                 <input type="email" class="form-control" id="email" name="email"
                        ng-model="contact.email" required/>
                 <div ng-show="formulario.email.$touched" ng-messages="formulario.email.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
             <div class="form-group">
                 <label for="phone" translate>CONTACT.PHONE</label>
                 <input type="text" class="form-control" id="phone" name="phone"
                        ng-model="contact.phone" ui-mask="+99 (99) 99999-999?9" required/>
                 <div ng-show="formulario.phone.$touched" ng-messages="formulario.phone.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
             <a href="#/speaknow/contact"
                class="btn btn-default" translate>

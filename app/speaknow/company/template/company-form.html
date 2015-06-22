@@ -12,21 +12,21 @@
                 <label for="nome" translate>COMPANY.NAME</label>
                 <input type="text" class="form-control" id="name" name="nome" ng-model="company.name" required/>
                 <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
 
             <div class="form-group">
                 <label for="address" translate>COMPANY.ADDRESS</label>
                 <input type="text" class="form-control" id="address" name="address" ng-model="company.address" required/>
                 <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
 
             <div class="form-group">
                 <label for="mail" translate>COMPANY.EMAIL</label>
                 <input type="email" class="form-control" id="mail" name="mail" ng-model="email" required/>
                 <div ng-show="formulario.mail.$touched" ng-messages="formulario.mail.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
 
             <div class="form-group">
@@ -34,14 +34,14 @@
                 <input type="text" class="form-control" id="phone" name="phone" 
                        ng-model="phone" ui-mask="+99 (99) 99999-999?9" required/>
                 <div ng-show="formulario.phone.$touched" ng-messages="formulario.phone.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
 
             <div class="form-group">
                 <label for="type" translate>COMPANY.TYPE</label>
                 <input type="text" class="form-control" id="type" name="type" ng-model="company.type" required/>
                 <div ng-show="formulario.type.$touched" ng-messages="formulario.type.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
 
             <!--A imagem quadrada não está mais sendo utilizada......-->

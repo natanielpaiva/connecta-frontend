@@ -53,14 +53,14 @@
                     <label for="name" translate>PRODUCT.NAME</label>
                     <input type="text" class="form-control" id="name" name="name" ng-model="product.name" required/>
                     <div ng-show="formulario.name.$touched" ng-messages="formulario.price.$error"
-                         ng-messages-include="portal-validation-messages"></div>
+                         ng-messages-include="portal-error-messages"></div>
                 </div>
 
                 <div class="form-group" ng-show="newProductReference">
                     <label for="name" translate>PRODUCT.CODE</label>
                     <input type="text" class="form-control" id="name" name="name" ng-model="product.productReference.code"/>
                     <div ng-show="formulario.name.$touched" ng-messages="formulario.price.$error"
-                         ng-messages-include="portal-validation-messages"></div>
+                         ng-messages-include="portal-error-messages"></div>
                 </div>
                 
                 <div class="form-group">
@@ -75,7 +75,7 @@
                     <label for="price" translate>PRODUCT.PRICE</label>
                     <input type="text" class="form-control" id="price" name="price" ng-model="product.price" required/>
                     <div ng-show="formulario.price.$touched" ng-messages="formulario.price.$error"
-                         ng-messages-include="portal-validation-messages"></div>
+                         ng-messages-include="portal-error-messages"></div>
                 </div>
 
                 <div class="form-group">
@@ -100,7 +100,7 @@
                     <label for="description" translate>PRODUCT.DESCRIPTION</label>
                     <input type="description" class="form-control" id="description" name="description" ng-model="product.description" required/>
                     <div ng-show="formulario.description.$touched" ng-messages="formulario.description.$error"
-                         ng-messages-include="portal-validation-messages"></div>
+                         ng-messages-include="portal-error-messages"></div>
                 </div>
 
                 <div class="form-group">
@@ -131,9 +131,6 @@
                     LAYOUT.SAVE
                 </button>
             </div>
-
-
-
         </form>
     </div>
 </div>
