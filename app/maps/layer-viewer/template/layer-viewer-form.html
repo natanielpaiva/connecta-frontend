@@ -22,37 +22,41 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="type" translate>LAYERVIEWER.TYPE</label>
-                <select class="form-control" name="type" 
-                        ng-model="layerViewer.layerViewerTypeEntity.id" 
-                        ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)">
-                    <option translate value="">LAYERVIEWER.SELECT</option>
-                    <option translate value="1">LAYERVIEWER.DEFAULT</option>
-                    <option translate value="2">LAYERVIEWER.HEATMAP</option>
-                    <option translate value="3">LAYERVIEWER.CLUSTER</option>
-                    <option translate value="4">LAYERVIEWER.ANALISYS</option>
-                </select>
-                    <div ng-show="formulario.$submitted || formulario.type.$touched" 
-                         ng-messages="formulario.type.$error"
-                         ng-messages-include="portal-error-messages">
-                    </div>
+
+            <div class="portal-type-switcher">
+                <label for="type" translate>LAYER.SOURCE_LAYER</label></br>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Default">
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="1" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
+                    <span class="icon-geoserver"></span>                    
+                </label>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Heatmap"> 
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="2" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
+                    <span class="icon-heatmap"></span>
+                </label>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Mapviewer"> 
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="3" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
+                    <span class="icon-cluster"></span>
+                </label>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Analysis"> 
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="4" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
+                    <span class="icon-analysis"></span>
+                </label>
+
+                <div ng-show="formulario.$submitted || formulario.type.$touched" 
+                     ng-messages="formulario.layerViewerTypeEntity.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
             </div>
 
-<!--            <div class="portal-type-switcher">
-                <label ng-repeat="(key, tp) in types" class="radio-inline portal-type-switcher-item"
-                       title="{{tp.name}}">
-                    <input type="radio" class="portal-type-switcher-input" name="type" required
-                           ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"
-                           ng-model="layerViewer.layerViewerTypeEntity.id" id="datasource-type-{{key}}"
-                           ng-value="key" />
-                    <span class="{{tp.icon}}"></span>
-                    <div ng-show="formulario.$submitted || formulario.type.$touched" 
-                         ng-messages="formulario.type.$error"
-                         ng-messages-include="portal-error-messages">
-                    </div>
-                </label>
-            </div>-->
+            </br>
 
             <div class="form-group">
                 <label for="layer" translate>LAYERVIEWER.LAYER</label>
@@ -62,10 +66,10 @@
                         ng-change="generateComboColumns()">
                     <option value="">Selecione</option>
                 </select>
-                    <div ng-show="formulario.$submitted || formulario.layer.$touched" 
-                         ng-messages="formulario.layer.$error"
-                         ng-messages-include="portal-error-messages">
-                    </div>
+                <div ng-show="formulario.$submitted || formulario.layer.$touched" 
+                     ng-messages="formulario.layer.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
             </div>
 
             <div class="form-group">

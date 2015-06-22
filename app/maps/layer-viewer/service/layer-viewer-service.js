@@ -26,7 +26,7 @@ define([
             }
             
         };
-
+                
         this.get = function (id) {
             var url = mapsResources.layerViewer + "/" + id;
             return $http.get(url);

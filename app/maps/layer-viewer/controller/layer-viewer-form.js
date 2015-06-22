@@ -245,7 +245,7 @@ define([
             $scope.layerViewer.type = Object.keys($scope.types)[0];
         }
 
-        $scope.getLayerByType = function (typeLayer) {
+        $scope.getLayerByType = function (typeLayer) {                        
             $scope.layerColumns = [];
             if (typeLayer === '') {
                 $scope.layers = [];
