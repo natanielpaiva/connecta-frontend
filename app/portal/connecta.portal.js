@@ -54,6 +54,10 @@ define([
                 {
                     href: 'application',
                     title: 'APPLICATION.MODULES'
+                },
+                {
+                    href: 'speaknow',
+                    title: 'Speaknow'
                 }
             ]
         }
