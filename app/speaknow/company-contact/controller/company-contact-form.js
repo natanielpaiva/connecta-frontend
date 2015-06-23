@@ -37,6 +37,6 @@ define([
                     } else {
                         $scope.isPhone = false;
                     }
-                }
+                };
             });
 });
