@@ -7,7 +7,7 @@ define([
             "1": {
                 name: 'LAYERVIEWER.DEFAULT',
                 template: 'app/maps/layer-viewer/template/_layer-viewer-default.html',
-                icon: 'icon-default'
+                icon: 'icon-map3'
             },
             "2": {
                 name: 'LAYERVIEWER.HEATMAP',
