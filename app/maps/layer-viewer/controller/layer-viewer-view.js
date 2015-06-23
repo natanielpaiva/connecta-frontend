@@ -13,7 +13,7 @@ define([
             
             $scope.types = LayerViewerService.getTypes();
 
-            $scope.layerViewer = response.data;
+            $scope.layerViewer = response.data;            
             
 
             $scope.remove = function (id) {
@@ -45,7 +45,6 @@ define([
 
 
             ConnectaGeoService.showViewer($scope.layerViewer);
-
 
         });
 

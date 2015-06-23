@@ -26,6 +26,27 @@ define([
             }
             
         };
+        
+        
+        this.createStyle = function (formData) {
+
+            var url = mapsResources.geo + "/createStyle";
+
+            $http.post(url, formData, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).success(function (data) {
+                //TODO notificação de sucesso
+                console.info("Estilo criado com sucesso", data);                
+            }).error(function(data){
+                //TODO notificação de sucesso
+                
+                console.info("ERRO NA Criação do estilo", data);                
+            });
+
+        };
+        
+        
                 
         this.get = function (id) {
             var url = mapsResources.layerViewer + "/" + id;
@@ -57,6 +78,6 @@ define([
             var url = mapsResources.layerViewer + '/' + id;
             return $http.delete(url);
         };
-
+                        
     });
 });

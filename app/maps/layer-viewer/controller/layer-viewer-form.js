@@ -196,7 +196,7 @@ define([
 
                 switch ($scope.layerViewer.layerViewerTypeEntity.id) {
                     case 1:
-//                        $scope.layerViewer.ds_param_names = "styleName";
+                        $scope.layerViewer.ds_param_names = "styleName";
                         break;
                     case 2:
                         ds_param_values = $scope.layerViewer.ds_param_values.split("~");
@@ -241,11 +241,11 @@ define([
 
 
             });
-        } else {            
+        } else {
             $scope.layerViewer.type = Object.keys($scope.types)[0];
         }
 
-        $scope.getLayerByType = function (typeLayer) {                        
+        $scope.getLayerByType = function (typeLayer) {
             $scope.layerColumns = [];
             if (typeLayer === '') {
                 $scope.layers = [];
@@ -384,8 +384,19 @@ define([
             $scope.layerViewer.layerEntity = {"id": $scope.layerViewer.layerEntity.id};
 
             switch (parseInt($scope.layerViewer.layerViewerTypeEntity.id)) {
-                case 1:
+                case 1:                    
                     $scope.layerViewer.ds_param_names = "styleName";
+
+                    if (typeof angular.element('#file-original').get(0).files[0] != 'undefined') {
+                        var formData = new FormData();
+                        var styleName = $scope.layerViewer.nm_viewer.replace(/ /gi, "_");
+                        $scope.layerViewer.ds_param_values = styleName;
+                        formData.append('styleName', styleName);
+                        formData.append('layerID', $scope.layerViewer.layerEntity.id);
+                        formData.append("file", angular.element('#file-original').get(0).files[0]);
+                        LayerViewerService.createStyle(formData);                        
+                    }
+
                     break;
                 case 2:
                     $scope.layerViewer.ds_param_names = "initialColor~finalColor";

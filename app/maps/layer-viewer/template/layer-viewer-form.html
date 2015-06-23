@@ -24,34 +24,34 @@
 
 
             <div class="portal-type-switcher">
-                <label for="type" translate>LAYER.SOURCE_LAYER</label></br>
+                <label for="type" translate>LAYERVIEWER.TYPE</label></br>
                 <label class="radio-inline portal-type-switcher-item"
                        title="Default">
-                    <input type="radio" class="portal-type-switcher-input" name="DEFAULT" id="layerViewerTypeEntity"  
-                           ng-model="layerViewer.layerViewerTypeEntity.id" value="1" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="1" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"/>
                     <span class="icon-geoserver"></span>                    
                 </label>
                 <label class="radio-inline portal-type-switcher-item"
                        title="Heatmap"> 
-                    <input type="radio" class="portal-type-switcher-input" name="HEATMAP" id="layerViewerTypeEntity"  
-                           ng-model="layerViewer.layerViewerTypeEntity.id" value="2" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="2" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"/>
                     <span class="icon-heatmap"></span>
                 </label>
                 <label class="radio-inline portal-type-switcher-item"
                        title="Mapviewer"> 
-                    <input type="radio" class="portal-type-switcher-input" name="CLUSTER" id="layerViewerTypeEntity"  
-                           ng-model="layerViewer.layerViewerTypeEntity.id" value="3" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="3" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"/>
                     <span class="icon-cluster"></span>
                 </label>
                 <label class="radio-inline portal-type-switcher-item"
                        title="Analysis"> 
-                    <input type="radio" class="portal-type-switcher-input" name="ANALYSIS" id="layerViewerTypeEntity"  
-                           ng-model="layerViewer.layerViewerTypeEntity.id" value="4" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity)"/>
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="4" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"/>
                     <span class="icon-analysis"></span>
                 </label>
 
                 <div ng-show="formulario.$submitted || formulario.type.$touched" 
-                     ng-messages="formulario.layerViewerTypeEntity.$error"
+                     ng-messages="formulario.type.$error"
                      ng-messages-include="portal-error-messages">
                 </div>
             </div>
