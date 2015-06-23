@@ -65,7 +65,8 @@
                     "IMAGE": "Image",
                     "SWITCH": "Switch",
                     "CHECKBOX": "Checkbox",
-                    "VIDEO":"Video"
+                    "VIDEO":"Video",
+                    "GEO_LOCATION": "Geolocation"
                 }
             }
         },

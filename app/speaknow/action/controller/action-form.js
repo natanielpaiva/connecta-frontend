@@ -267,6 +267,7 @@ define([
 
         $scope.isMultiple = function (value) {
             var multipleTypes = [
+                "SELECT",
                 "MULTI_SELECT",
                 "MULTI_CHECKBOX",
                 "RADIO"
@@ -288,7 +289,7 @@ define([
                 var createOptions = function (options) {
                     var result = "";
                     for (var i in options) {
-                        result += options[i].text + ": " + options[i].value + "\n";
+                        result += options[i].key + ": " + options[i].value + "\n";
                     }
 
                     return result;
