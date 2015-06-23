@@ -21,11 +21,12 @@
                 <input type="text" class="form-control" id="nome" name="nome"
                        ng-model="companyContact.name" required/>
                 <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
             <div class="form-group">
                 <label for="type" translate>COMPANY_CONTACT.TYPE</label>
-                <select id="type" name="type" class="form-control" ng-model="companyContact.type" required>
+                <select id="type" name="type" class="form-control" ng-model="companyContact.type" required 
+                        ng-change="createInputValue()">
                     <option value="PHONE">
                         Telefone
                     </option>
@@ -34,16 +35,24 @@
                     </option>
                 </select>
                 <div ng-show="formulario.type.$touched" ng-messages="formulario.type.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
             
-            
-            <div class="form-group">
+            <div class="form-group" ng-show="!isPhone">
                 <label for="value" translate>COMPANY_CONTACT.VALUE</label>
-                <input type="text" class="form-control" id="name" name="value"
-                       ng-model="companyContact.value" required/>
-                <div ng-show="formulario.value.$touched" ng-messages="formulario.value.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                <input type="email" class="form-control" id="email" name="email"
+                       ng-model="email" ng-required="!isPhone"/>
+                <div ng-show="formulario.email.$touched" ng-messages="formulario.email.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+            
+            <div class="form-group" ng-show="isPhone">
+                <label for="value" translate>COMPANY_CONTACT.VALUE</label>
+                <input type="text" class="form-control" id="phone" name="phone"
+                       ng-model="phone"
+                       ui-mask="+99 (99) 99999-999?9" ng-required="isPhone"/>
+                <div ng-show="formulario.phone.$touched" ng-messages="formulario.phone.$error"
+                     ng-messages-include="portal-error-messages"></div>
             </div>
 
             <a href="#/speaknow/company"
