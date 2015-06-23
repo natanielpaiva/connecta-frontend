@@ -15,6 +15,7 @@ define([
         $scope.interaction = ActionService.getInteraction();
         $scope.contact = null;
         $scope.contacts = [];
+        $scope.allContacts = true;
 
         var param = {
             type: "TEXT",
@@ -160,7 +161,9 @@ define([
         });
 
         $scope.submit = function () {
-            $scope.action.contacts = $scope.contacts;
+            if($scope.allContacts && $scope.contacts.length > 0){
+                $scope.action.contacts = $scope.contacts;
+            }
             //Verifica se esta action possui Whatsapp
             if ($scope.isWhatsapp) {
                 $scope.action.whatsappAccount = angular.fromJson($scope.whatsappAccount);

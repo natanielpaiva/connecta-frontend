@@ -5,6 +5,8 @@
         "VIEW": "View Action",
         "NAME": "Name",
         "ACTION_NAME": "Action Name",
+        "WHATSAPP_CONFIG":"Whatsapp Config",
+        "ALL_CONTACTS":"Enviar para todos os contatos",
         "PHONE": "Phone",
         "ACTIONS": "Actions",
         "CONTACT": "Contact",
