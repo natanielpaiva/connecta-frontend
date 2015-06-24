@@ -4,12 +4,14 @@
     	"EDIT": "Edit Account",
     	"ACCOUNTS": "Accounts",
     	"WHATSAPP_ACCOUNTS": "Whatsapp",
-    	"ACCOUNTS_DEFAULT": "Default Whatsapp",
+    	"ACCOUNTS_DEFAULT": "Default Interactions",
     	"NAME": "Name",
     	"ACCOUNT_NAME": "Account Name",
     	"NUMBER": "Number",
     	"ACCOUNT_NUMBER": "Account Number",
     	"PASSWORD": "Password",
-    	"ACTIVE": "Active"
+    	"ACTIVE": "Active",
+        "WHATSAPP": "Whatsapp",
+        "LISTENERS": "Listeners"
     }
 }

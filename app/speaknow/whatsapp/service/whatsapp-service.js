@@ -31,7 +31,7 @@ define([
         };
 
         this.activate = function(accountID, active){
-            var url =speaknowResources.whatsappAccount + "/switch";
+            var url = speaknowResources.whatsapp + "/switch";
             var params = {
                 accountID: accountID,
                 active: active

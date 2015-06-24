@@ -224,20 +224,6 @@ define([
 
     speaknow._menu = [
         {
-            title: 'WHATSAPP.ACCOUNTS',
-            icon: 'icon-comments',
-            children: [
-                {
-                    href: 'speaknow/whatsapp',
-                    title: 'WHATSAPP.WHATSAPP_ACCOUNTS'
-                },
-                {
-                    href: 'speaknow/whatsapp/default',
-                    title: 'WHATSAPP.ACCOUNTS_DEFAULT'
-                }
-            ]
-        },
-        {
             href: 'speaknow/contact',
             title: 'CONTACT.CONTACTS',
             icon: 'icon-contacts',
@@ -260,6 +246,20 @@ define([
             title: 'PRODUCT.PRODUCT',
             icon: 'icon-box2',
             children: []
+        },
+        {
+            title: 'WHATSAPP.WHATSAPP',
+            icon: 'icon-comments',
+            children: [
+                {
+                    href: 'speaknow/whatsapp',
+                    title: 'WHATSAPP.ACCOUNTS'
+                },
+                {
+                    href: 'speaknow/whatsapp/default',
+                    title: 'WHATSAPP.ACCOUNTS_DEFAULT'
+                }
+            ]
         }
     ];
 
