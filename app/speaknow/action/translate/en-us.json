@@ -46,6 +46,7 @@
                 "NEW": "New Parameter",
                 "VALUE": "Value",
                 "TEXT": "Text",
+                "KEY": "Key",
                 "PARAM_TYPE": {
                     "TEXT": "Text",
                     "URL": "Url",
