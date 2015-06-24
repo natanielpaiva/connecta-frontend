@@ -163,7 +163,7 @@ define([
         };
         
         $scope.setParamTypesWhatsApp = function(){
-            $scope.paramTypes = ["UNIQUE_ANWER", "MULTI_ANSWER", "TEXT"];
+            $scope.paramTypes = ["MULTI_SELECT", "SELECT", "TEXT"];
         };
         
         $scope.setParameterType = function(){
@@ -286,8 +286,6 @@ define([
 
         $scope.isMultiple = function (value) {
             var multipleTypes = [
-                "MULTI_ANSWER",
-                "UNIQUE_ANWER",
                 "SELECT",
                 "MULTI_SELECT",
                 "MULTI_CHECKBOX",
@@ -317,12 +315,12 @@ define([
                 };
 
                 switch (param.type) {
-                    case "MULTI_ANSWER":
+                    case "MULTI_SELECT":
                         containsMultiselect = true;
                         message += "Escolha uma ou mais resposta: " + "\n";
                         message += createOptions(param.options);
                         break;
-                    case "UNIQUE_ANWER":
+                    case "SELECT":
                         message += "Escolha apenas uma resposta: " + "\n";
                         message += createOptions(param.options);
                         break;
