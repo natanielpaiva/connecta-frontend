@@ -156,9 +156,25 @@ define([
 
         // Recupera os tipos de parametros (enum InteractionParameterType)
         $scope.paramTypes = [];
-        ActionService.getParamTypes().then(function (response) {
-            $scope.paramTypes = response.data;
-        });
+        $scope.getParamTypes = function(){
+            ActionService.getParamTypes().then(function (response) {
+                $scope.paramTypes = response.data;
+            });
+        };
+        
+        $scope.setParamTypesWhatsApp = function(){
+            $scope.paramTypes = ["UNIQUE_ANWER", "MULTI_ANSWER", "TEXT"];
+        };
+        
+        $scope.setParameterType = function(){
+            if($scope.isWhatsapp){
+                $scope.setParamTypesWhatsApp();
+            } else {
+                $scope.getParamTypes();
+            }
+        };
+        
+        $scope.getParamTypes();
 
         $scope.submit = function () {
             if($scope.allContacts && $scope.contacts.length > 0){
@@ -270,6 +286,8 @@ define([
 
         $scope.isMultiple = function (value) {
             var multipleTypes = [
+                "MULTI_ANSWER",
+                "UNIQUE_ANWER",
                 "SELECT",
                 "MULTI_SELECT",
                 "MULTI_CHECKBOX",
@@ -299,12 +317,12 @@ define([
                 };
 
                 switch (param.type) {
-                    case "MULTI_SELECT":
+                    case "MULTI_ANSWER":
                         containsMultiselect = true;
                         message += "Escolha uma ou mais resposta: " + "\n";
                         message += createOptions(param.options);
                         break;
-                    case "SELECT":
+                    case "UNIQUE_ANWER":
                         message += "Escolha apenas uma resposta: " + "\n";
                         message += createOptions(param.options);
                         break;

@@ -68,7 +68,9 @@
                     "SWITCH": "Switch",
                     "CHECKBOX": "Checkbox",
                     "VIDEO":"Video",
-                    "GEO_LOCATION": "Geolocation"
+                    "GEO_LOCATION": "Geolocation",
+                    "UNIQUE_ANWER":"Única resposta",
+                    "MULTI_ANSWER":"Múltipla respostas"
                 }
             }
         },
