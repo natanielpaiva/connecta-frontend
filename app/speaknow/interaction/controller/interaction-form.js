@@ -86,7 +86,7 @@ define([
         
         var validateForm = function(){
             $scope.interaction_form.$submitted = true;
-            if($scope.interactionImage == null){
+            if($scope.interactionImage === null){
                 $scope.imageInvalid = true;
                 return false;
             } else {
