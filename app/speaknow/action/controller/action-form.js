@@ -177,7 +177,7 @@ define([
         $scope.getParamTypes();
 
         $scope.submit = function () {
-            if($scope.allContacts && $scope.contacts.length > 0){
+            if($scope.contacts.length > 0){
                 $scope.action.contacts = $scope.contacts;
             }
             //Verifica se esta action possui Whatsapp
