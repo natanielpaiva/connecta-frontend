@@ -32,6 +32,9 @@
                     {{imgName || interactionImg}}
                 </label>
                 <img class="img-company-quad" ng-if="interaction.image || interactionImage" ng-src="{{interactionImage}}" />
+                <p ng-show="imageInvalid" class="help-block ng-binding ng-scope">
+                        Esse campo é obrigatório
+                </p>
             </div>
 
             <div class="form-group">

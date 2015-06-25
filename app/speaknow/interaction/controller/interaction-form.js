@@ -2,7 +2,8 @@ define([
     'connecta.speaknow',
     'speaknow/interaction/service/interaction-service',
     'speaknow/action/service/action-service',
-    'speaknow/action/controller/action-modal'
+    'speaknow/action/controller/action-modal',
+    'portal/layout/service/notify'
 ], function (speaknow) {
     /**
      * //TODO
@@ -10,7 +11,7 @@ define([
      */
     return speaknow.lazy.controller('InteractionFormController', function ($scope,
             InteractionService, ActionService, regexBase64, $location, $routeParams, $translate,
-            $modal, speaknowResources) {
+            $modal, speaknowResources, notify) {
 
         $scope.interaction = {
             icon: "dump"
@@ -65,7 +66,6 @@ define([
             });
         };
 
-        //TODO: Implementar regras de upload de arquivo
         $scope.onFileSelected = function (files) {
             var file = files[0];
             $scope.fileImage = file;
@@ -86,6 +86,12 @@ define([
         
         var validateForm = function(){
             $scope.interaction_form.$submitted = true;
+            if($scope.interactionImage == null){
+                $scope.imageInvalid = true;
+                return false;
+            } else {
+                $scope.imageInvalid = false;
+            }
             return $scope.interaction_form.$valid;
         };
 
