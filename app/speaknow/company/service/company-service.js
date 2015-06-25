@@ -34,5 +34,10 @@ define([
             var url = speaknowResources.interaction + "/poll/question/types";
             return $http.get(url);
         };
+        
+        this.getLatLong = function(address){
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address;
+            return $http.get(url);
+        };
     });
 });

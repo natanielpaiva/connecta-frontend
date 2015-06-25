@@ -16,6 +16,7 @@
         "REMOVE_SUCCESS": "Successfully Removed",
         "SUCCESS":"Success",
         "VALIDATION" : {
+            "ADDRESS":"Endereço inválido",
             "IMAGESIZE":"A imagem não deve ser maior que 1mb",
             "IMAGEFORM":"A imagem deve ser retangular",
             "IMAGERESOLUTION": "É recomendado utilizar a resolução 1080x512HD"

@@ -25,23 +25,31 @@ define([
         }
 
         $scope.submit = function () {
-            if($scope.fileRect === undefined){
-                $scope.rectInvalid = true;
-            } else {
-                if($scope.isEditing){
-                    $scope.updateContacts();
-                } else {
-                    $scope.registerContacts();
-                }
-                CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function () {
-                    $translate('COMPANY.SUCCESS').then(function (text) {
-                        notify.success(text);
-                        $location.path('speaknow/company');
-                    });
-                }, function (response) {});
+            $scope.prepareToSave();
+        };
+        
+        $scope.prepareToSave = function(){
+            if($scope.validateForm()){
+                CompanyService.getLatLong($scope.company.address).then(function(result){
+                    if(result.data.status === "OK"){
+                        $scope.company.lat = result.data.results[0].geometry.location.lat;
+                        $scope.company.lng = result.data.results[0].geometry.location.lng;
+                        $scope.save();
+                    } else {
+                        notify.warning("COMPANY.VALIDATION.ADDRESS");
+                    }
+                });
             }
         };
 
+        $scope.save = function () {
+            CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function () {
+                $translate('COMPANY.SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $location.path('speaknow/company');
+                });
+            });
+        };
         
         $scope.updateContacts = function(){
             for(var index in $scope.company.companyContacts[0].contacts){
@@ -54,6 +62,9 @@ define([
         };
         
         $scope.registerContacts = function(){
+            $scope.company.companyContacts = [];
+            $scope.companyContacts.contacts = [];
+            
             var contactPhone = {
                 'name':$scope.company.name + " Phone",
                 'type': 0,
@@ -100,6 +111,21 @@ define([
                 if(img.height >= img.width){
                     notify.warning("COMPANY.VALIDATION.IMAGEFORM");
                     isValid = false;
+                }
+            }
+            return isValid;
+        };
+        
+        $scope.validateForm = function(){
+            var isValid = true;
+            if($scope.fileRect === undefined){
+                $scope.rectInvalid = true;
+                isValid = false;
+            } else {
+                if($scope.isEditing){
+                    $scope.updateContacts();
+                } else {
+                    $scope.registerContacts();
                 }
             }
             return isValid;
