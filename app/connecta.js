@@ -33,7 +33,7 @@ define([
   'bower_components/amcharts-angular/dist/amChartsDirective',
   'bower_components/angular-redactor/angular-redactor',
   'bower_components/angular-ui-tree/dist/angular-ui-tree.min'
-], function(angular, $, applications, portal, collector, speaknow, presenter, maps) {
+], function(angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel) {
 
   var connecta = angular.module('connecta', [
     'connecta.portal',
@@ -93,6 +93,7 @@ define([
     speaknow.lazy = lazy;
     presenter.lazy = lazy;
     maps.lazy = lazy;
+    datamodel.lazy = lazy;
   }
 
   /**
@@ -143,7 +144,7 @@ define([
    * @returns {undefined}
    */
   function configureRoutes($routeProvider) {
-    var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps);
+    var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, datamodel);
 
     angular.forEach(allRoutes, function(route, url) {
       if (route.controllerUrl) {
