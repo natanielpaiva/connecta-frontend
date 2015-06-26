@@ -89,6 +89,7 @@ define([
 
         $scope.onChangeParamType = function (type) {
             $scope.showParamOpts = $scope.isMultiple(type);
+            $scope.isAnswerSeparator = type != "SELECT" && $scope.isMultiple(type);
         };
 
         var sections = $scope.action.steps[0].sections;
