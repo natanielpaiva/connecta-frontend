@@ -22,5 +22,9 @@
     "portal": {
         "title": "Portal",
         "host": "http://connectad.cds.com.br/connecta-portal"
+    },
+    "datamodel": {
+        "title": "Datamodel",
+        "host": "http://connectad.cds.com.br/connecta-datamodel"
     }
 }

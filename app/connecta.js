@@ -9,6 +9,7 @@ define([
   'connecta.speaknow',
   'connecta.presenter',
   'connecta.maps',
+  'connecta.datamodel',
   // Dependências principais
   'angular-route',
   'angular-resource',
@@ -40,6 +41,7 @@ define([
     'connecta.speaknow',
     'connecta.presenter',
     'connecta.maps',
+    'connecta.datamodel',
     'ngRoute',
     'ngResource',
     'ngCookies',
