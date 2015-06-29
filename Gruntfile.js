@@ -23,6 +23,7 @@ module.exports = function(grunt) {
         }]
       }
     },
+    clean: ['dist'],
     copy: {
       dist: {
         src: [
@@ -34,6 +35,8 @@ module.exports = function(grunt) {
           '!dist/**',
           '!bower.json',
           '!package.json',
+          '!app/applications.json.dist',
+          '!customs.json',
           '!new-module.sh',
           '!Gruntfile.js'
         ],
@@ -41,25 +44,49 @@ module.exports = function(grunt) {
         expand: true
       }
     },
+    ngAnnotate: {
+      dist:{
+        files: [{
+          expand: true,
+          cwd: 'dist/app',
+          src: '**/*.js',
+          dest: 'dist/app'
+        }]
+      }
+    },
+    uglify: {
+      dist: {
+        options:{
+	  compress:false,
+          //sourceMap: true
+	  screwIE8:true,
+	  mangle:false // FIXME tem que funcionar com true
+        },
+        files: [{
+          expand: true,
+          cwd: 'dist/app',
+          src: '**/*.js',
+          dest: 'dist/app'
+        }]
+      }
+    },
     war: {
       target: {
         options: {
           war_dist_folder: '.',
           war_name: 'dist/connecta',
-          webxml_welcome:'index.html',
+          webxml_welcome: 'index.html',
           webxml_display_name: 'Connecta Frontend'
         },
-        files:[
-          {
-            expand: true,
-            cwd: 'dist',
-            src: [
-                '**',
-                '!connecta.war'
-            ],
-            dest: ''
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: 'dist',
+          src: [
+            '**',
+            '!connecta.war'
+          ],
+          dest: ''
+        }]
       }
     },
     karma: {
@@ -76,10 +103,10 @@ module.exports = function(grunt) {
         }
       },
       development: {
-          options: {
+        options: {
           port: port,
           base: '.',
-          debug:true,
+          debug: true,
           open: grunt.option('open'),
           middleware: function(connect, options) {
             return [
@@ -115,14 +142,14 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('create-config', function(){
+  grunt.registerTask('create-config', function() {
     if (!grunt.file.exists('app/applications.json')) {
       grunt.file.write('app/applications.json', grunt.file.read('app/applications.json.dist'));
     }
   });
 
   grunt.registerTask('default', ['jshint', 'sass', 'create-config']);
-  grunt.registerTask('dist', ['default', 'copy']);
+  grunt.registerTask('dist', ['clean', 'default', 'copy', 'ngAnnotate', 'uglify']);
   grunt.registerTask('test', ['default', 'karma']);
   grunt.registerTask('run', ['default', 'connect:development', 'watch']);
   grunt.registerTask('run-prod', ['dist', 'connect:production']);
