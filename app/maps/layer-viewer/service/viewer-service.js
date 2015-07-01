@@ -142,7 +142,7 @@ define([
                 if (typeof map !== 'undefined') {
                     map.__createLayer(configLayer);
                     
-                    //Correção paleativa ara bug de base layer do Google
+                    //Correção paleativa para bug de base layer do Google
                     map.__map.setBaseLayer(map.__map.getLayersByName("OpenStreetMap Base Layer")[0]);                    
                     map.__zoomMapToMaxExtent();
                     map.__map.zoomIn();
