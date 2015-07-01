@@ -97,7 +97,7 @@ OpenLayers.Control.Swipe = OpenLayers.Class(OpenLayers.Control, {
 
                 
 
-        document.getElementById("divisionSwipe").style.left=(event.clientX-4) + 'px';
+        document.getElementById("divisionSwipe").style.left=(e.clientX-4) + 'px';
 
 
 
