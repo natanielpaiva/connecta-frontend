@@ -1,15 +1,17 @@
 define([
-    'angular'
-
+    'angular',
+    'angular-ui-bootstrap'
 ], function (angular) {
     var datamodel = angular.module('connecta.datamodel', [
-
+        'ui.bootstrap.tooltip',
+        'ui.bootstrap.popover'
     ]);
 
     datamodel.config(function ($translatePartialLoaderProvider) {
         $translatePartialLoaderProvider.addPart('datamodel/datasource');
+        $translatePartialLoaderProvider.addPart('datamodel/interaction');
     });
-    
+
     datamodel.run(function (applications) {
         var appDatamodel = applications.datamodel;
 
@@ -46,8 +48,15 @@ define([
             controller: 'DatasourceFormController',
             controllerUrl: 'datamodel/datasource/controller/datasource-form',
             templateUrl: 'app/datamodel/datasource/template/datasource-form.html'
-        }
-
+        },
+        /**
+         * Interaction
+         */
+        '/datamodel/interaction/new': {
+            controller: 'InteractionFormController',
+            controllerUrl: 'datamodel/interaction/controller/interaction-form',
+            templateUrl: 'app/datamodel/interaction/template/interaction-form.html'
+        },
     };
 
     datamodel._menu = [
@@ -70,6 +79,12 @@ define([
                     title: 'HIERARCHY.HIERARCHY_LIST'
                 }
             ]
+        },
+        {
+            href: 'datamodel/interaction/new',
+            title: 'INTERACTION.INTERACTION',
+            icon: 'icon-format-align-center',
+            children: []
         }
     ];
 

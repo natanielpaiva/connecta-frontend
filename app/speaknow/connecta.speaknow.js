@@ -10,6 +10,7 @@ define([
         $translatePartialLoaderProvider.addPart('speaknow/action');
         $translatePartialLoaderProvider.addPart('speaknow/company');
         $translatePartialLoaderProvider.addPart('speaknow/product');
+        $translatePartialLoaderProvider.addPart('speaknow/company-message');
         $translatePartialLoaderProvider.addPart('speaknow/company-contact');
         $translatePartialLoaderProvider.addPart('speaknow/company-contact-group');
         $translatePartialLoaderProvider.addPart('speaknow/config');
@@ -18,7 +19,7 @@ define([
     speaknow.run(function (applications) {
         var appSpeaknow = applications.speaknow;
         var appSpeaknowBatch = applications.speaknowBatch;
-        
+
         speaknow.lazy.value('speaknowResources', {
             base: appSpeaknow.host,
             action: appSpeaknow.host + '/action',
@@ -26,6 +27,7 @@ define([
             contact: appSpeaknow.host + '/contact',
             interaction: appSpeaknow.host + '/interaction',
             company: appSpeaknow.host + '/company',
+            companyMessage: appSpeaknow.host + '/company/message',
             product: appSpeaknow.host + '/product',
             contactGroup: appSpeaknow.host + '/contact/group',
             companyContact: appSpeaknow.host + '/company/contact',
@@ -34,7 +36,7 @@ define([
         });
 
     });
-    
+
     speaknow.constant('regexBase64', '.*base64,');
 
     speaknow._routes = {
@@ -126,6 +128,19 @@ define([
             templateUrl: 'app/speaknow/action/template/action-form.html'
         },
         /**
+         * URL COMPANY MESSAGE
+         */
+        '/speaknow/company/message': {
+            controller: 'CompanyMessageListController',
+            controllerUrl: 'speaknow/company-message/controller/company-message-list',
+            templateUrl: 'app/speaknow/company-message/template/company-message-list.html'
+        },
+        '/speaknow/company/message/:id': {
+            controller: 'CompanyMessageViewController',
+            controllerUrl: 'speaknow/company-message/controller/company-message-view',
+            templateUrl: 'app/speaknow/company-message/template/company-message-view.html'
+        },
+        /**
          * URL COMPANY
          */
         '/speaknow/company': {
@@ -151,81 +166,81 @@ define([
         /**
          * URL COMPANY CONTACT GROUP
          */
-        '/speaknow/company/contact/group/new' :{
+        '/speaknow/company/contact/group/new': {
             controller: 'ContactGroupFormController',
             controllerUrl: 'speaknow/company-contact-group/controller/contact-group-form',
             templateUrl: 'app/speaknow/company-contact-group/template/contact-group-form.html'
         },
-        '/speaknow/company/contact/group/:id' :{
+        '/speaknow/company/contact/group/:id': {
             controller: 'ContactGroupViewController',
             controllerUrl: 'speaknow/company-contact-group/controller/contact-group-view',
             templateUrl: 'app/speaknow/company-contact-group/template/contact-group-view.html'
         },
-        '/speaknow/company/contact/group/:id/edit' :{
+        '/speaknow/company/contact/group/:id/edit': {
             controller: 'ContactGroupFormController',
             controllerUrl: 'speaknow/company-contact-group/controller/contact-group-form',
             templateUrl: 'app/speaknow/company-contact-group/template/contact-group-form.html'
         },
-         /**
+        /**
          * URL COMPANY CONTACT 
          */
-        '/speaknow/company/contact/new' :{
+        '/speaknow/company/contact/new': {
             controller: 'CompanyContactFormController',
             controllerUrl: 'speaknow/company-contact/controller/company-contact-form',
             templateUrl: 'app/speaknow/company-contact/template/company-contact-form.html'
         },
-        '/speaknow/company/contact/:id' :{
+        '/speaknow/company/contact/:id': {
             controller: 'CompanyContactViewController',
             controllerUrl: 'speaknow/company-contact/controller/company-contact-view',
             templateUrl: 'app/speaknow/company-contact/template/company-contact-view.html'
         },
-        '/speaknow/company/contact/:id/edit' :{
+        '/speaknow/company/contact/:id/edit': {
             controller: 'CompanyContactFormController',
             controllerUrl: 'speaknow/company-contact/controller/company-contact-form',
             templateUrl: 'app/speaknow/company-contact/template/company-contact-form.html'
         },
-         /**
+        /**
          * URL PRODUCT
          */
-        '/speaknow/product/' :{
+        '/speaknow/product/': {
             controller: 'ProductList',
             controllerUrl: 'speaknow/product/controller/product-list',
             templateUrl: 'app/speaknow/product/template/product-list.html'
         },
-        '/speaknow/product/new' :{
+        '/speaknow/product/new': {
             controller: 'ProductForm',
             controllerUrl: 'speaknow/product/controller/product-form',
             templateUrl: 'app/speaknow/product/template/product-form.html'
         },
-        '/speaknow/product/:id' :{
+        '/speaknow/product/:id': {
             controller: 'ProductViewController',
             controllerUrl: 'speaknow/product/controller/product-view',
             templateUrl: 'app/speaknow/product/template/product-view.html'
         },
-        '/speaknow/product/:id/edit' :{
+        '/speaknow/product/:id/edit': {
             controller: 'ProductForm',
             controllerUrl: 'speaknow/product/controller/product-form',
             templateUrl: 'app/speaknow/product/template/product-form.html'
         },
-         /**
+        /**
          * URL WHATSAPP ACCOUNTS
          */
-        '/speaknow/whatsapp/default' :{
+        '/speaknow/whatsapp/default': {
             controller: 'AccountDefaultList',
             controllerUrl: 'speaknow/whatsapp/controller/account-default-list',
             templateUrl: 'app/speaknow/whatsapp/template/account-default-list.html'
         },
-        '/speaknow/whatsapp/' :{
+        '/speaknow/whatsapp/': {
             controller: 'WhatsappAccountList',
             controllerUrl: 'speaknow/whatsapp/controller/whatsapp-list',
             templateUrl: 'app/speaknow/whatsapp/template/whatsapp-list.html'
         },
-        '/speaknow/whatsapp/new' :{
+        '/speaknow/whatsapp/new': {
             controller: 'WhatsappForm',
             controllerUrl: 'speaknow/whatsapp/controller/whatsapp-form',
             templateUrl: 'app/speaknow/whatsapp/template/whatsapp-form.html'
         },
-        '/speaknow/whatsapp/:id' :{
+        '/speaknow/whatsapp/:id': {
             controller: 'WhatsappForm',
             controllerUrl: 'speaknow/whatsapp/controller/whatsapp-form',
             templateUrl: 'app/speaknow/whatsapp/template/whatsapp-form.html'
@@ -276,6 +291,12 @@ define([
                     title: 'WHATSAPP.ACCOUNTS_DEFAULT'
                 }
             ]
+        },
+        {
+            href: 'speaknow/company/message',
+            title: 'COMPANY_MESSAGE.COMPANY_MESSAGE',
+            icon: 'icon-message',
+            children: []
         }
     ];
 

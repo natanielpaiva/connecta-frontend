@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>INTERACTION.INTERACTION</h3>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div ng-repeat="item in fields"
+             ng-drag="true" ng-drag-data="item">
+            <span>{{item.name}}</span>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-xs-8">
+            <ul id="drop-field-area">
+                <li class="col-md-12" id="firstField" ng-drop="true" ng-drop-success="dropField($index, $data)" 
+                    style="width: 100%; height: 70px; background-color: gray"></li>
+                <li class="col-md-12" ng-drop="true" ng-drop-success="dropField($index, $data)" 
+                    ng-repeat="field in form.fields"
+                    style="width: 100%; height: 70px; background-color: gray" >
+                    <div  ng-drag="true" ng-drag-data="field">
+                        <div class="accordion-edit">
+                            <div class="row ng-scope">
+                                <div class="col-xs-2 form-group">
+                                    <label for="title"ng-model="field.title">{{field.title}}</label>
+                                </div>
+
+                                <div class="col-xs-6 form-group" ng-cancel-drag>
+                                    <input type="text" class="form-control" ng-model="field.value" 
+                                           value="{{field.value}}" ng-show="{{field.type == 'text'}}"/>
+
+                                    <input type="textarea" class="form-control" ng-model="field.value" 
+                                           value="{{field.value}}" ng-show="{{field.type == 'textarea'}}"/>
+
+                                    <select class="form-control" ng-model="field.value" ng-show="{{field.type === 'select'}}">
+                                        <option ng-repeat="option in field.options" value="{{option}}">
+                                            {{option.title}}
+                                        </option>
+                                    </select>
+
+                                    <div ng-repeat="option in field.options" ng-show="{{field.type === 'radio'}}">
+                                        <input type="radio" name="field-value"> {{option.title}}
+                                    </div>
+
+                                    <div ng-repeat="option in field.options" ng-show="{{field.type === 'checkbox'}}">
+                                        <input type="checkbox"> {{option.title}}
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-2 form-group" ng-cancel-drag>
+                                    <button popover-template="popoverConfig.templateUrl" 
+                                            popover-title="{{field.title}}"
+                                            popover-placement="bottom"
+                                            class="btn btn-default">Config</button>
+                                </div>
+                                <div class="col-xs-2 form-group" 
+                                     ng-cancel-drag 
+                                     style="background-color: #666666; height: 50px;">
+                                    {{field.columnName }}
+                                    <span ng-click="removeFieldColumn(field)"> x</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label translate>Domains</label>
+                <select class="form-control" ng-model="domain" ng-options="dom as dom.name for dom in domains">
+                </select>
+            </div>
+            <div>
+                <label translate>Columns</label>
+                <ul>
+                    <li ng-repeat="column in domain.columns" ng-drag="true" ng-drag-data="column">
+                        {{column.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/ng-template" id="popoverConfig.html">
+        <div ng-cancel-drag>{{field.type}}</div>
+        <div class="form-group" ng-cancel-drag> 
+        <input type="text" ng-model="field.title" class="form-control">
+        <div ng-show="containsOptions(field)">
+        <div>Field Options:</div>
+        <div ng-repeat="option in field.options" ng-cancel-drag>
+        <input type="text" ng-model="option.title" value="{{option.title}}" ng-cancel-drag>
+        <a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, option)"><i class="icon-minus icon-white"></i></a>
+        <span>Value: {{ option.option}}</span>
+        </div>
+        <button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="icon-plus icon-white"></i> Add Option</button>
+        </div>
+        <button class="btn btn-default" ng-click="deleteField(field.id)">Remove</button>
+        </div>
+    </script>
+</div>
