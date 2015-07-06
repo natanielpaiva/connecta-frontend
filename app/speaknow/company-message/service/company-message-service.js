@@ -9,7 +9,7 @@ define([
         };
 
         this.get = function(id){
-            var url = speaknowResources.companyMessage + "/" + id
+            var url = speaknowResources.companyMessage + "/" + id;
             return $http.get(url);
         };
 

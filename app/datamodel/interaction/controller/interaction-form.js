@@ -106,8 +106,8 @@ define([
                 }
             }
 
-            field = $scope.form.fields[index];
-            field.columnName = column.name;
+            var newField = $scope.form.fields[index];
+            newField.columnName = column.name;
         };
 
         $scope.removeFieldColumn = function (field) {
@@ -117,7 +117,7 @@ define([
         $scope.dropField = function (index, field) {
             if (field.isColumn) {
                 $scope.fieldSetColumn(index, field);
-            } else if (field.id != null) {
+            } else if (!field.id) {
                 $scope.reorderItem(index, field);
             } else {
                 $scope.addNewField(field);
