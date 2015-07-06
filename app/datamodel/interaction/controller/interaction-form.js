@@ -117,7 +117,7 @@ define([
         $scope.dropField = function (index, field) {
             if (field.isColumn) {
                 $scope.fieldSetColumn(index, field);
-            } else if (!field.id) {
+            } else if (field.id) {
                 $scope.reorderItem(index, field);
             } else {
                 $scope.addNewField(field);
