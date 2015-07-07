@@ -2,7 +2,7 @@ define([
     'connecta.datamodel'
 ], function (datamodel) {
 
-    return datamodel.lazy.service('InteractionService', function (datamodelResources, $http) {
+    return datamodel.lazy.service('InteractionFormService', function (datamodelResources, $http) {
 
         this.getTypeFields = function () {
             return [

@@ -1,12 +1,12 @@
 define([
     'connecta.datamodel',
-    'datamodel/interaction/service/interaction-service',
+    'datamodel/interaction/service/interaction-form-service',
     'portal/layout/service/notify'
 ], function (datamodel) {
-    return datamodel.lazy.controller('InteractionFormController', function ($scope, InteractionService, notify) {
+    return datamodel.lazy.controller('InteractionFormController', function ($scope, InteractionFormService, notify) {
 
-        $scope.fields = InteractionService.getTypeFields();
-        $scope.domains = InteractionService.getDomains();
+        $scope.fields = InteractionFormService.getTypeFields();
+        $scope.domains = InteractionFormService.getDomains();
         $scope.domain = {};
         $scope.lastFieldId = 0;
         $scope.form = {
