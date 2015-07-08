@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-xs-3 form-group">
+        <label for="sourceOfdata" translate>ANALYSIS.SOURCE_OF_DATA</label>
+        <select class="form-control" ng-model="databaseForm.selectSourceOfdata" ng-options="item.value as item.name for item in sourceOfdata" ng-change="getSourceOfdata()" >
+            <option value="">Selecione</option>
+        </select>
+        <div ng-if="formulario.$dirty" ng-messages="formulario.driver.$error"
+             ng-messages-include="portal-validation-messages"></div>
+    </div>
+    
+    <div class="col-xs-3 form-group">
+        <label for="dataInsertion" translate>ANALYSIS.DATA_INSERTION</label>
+        <input type="date" name="dataInsertion" class="form-control" id="dataInsertion"
+               ng-model="analysis.dataInsertion">
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
+             ng-messages-include="portal-validation-messages"></div>
+    </div>
+</div>
+
+<div class="row" ng-if="databaseForm.selectSourceOfdata === 'table'">
+   <div class="col-xs-6 form-group">
+        <label for="table" translate>ANALYSIS.TABLE</label>
+        <select class="form-control" name="table" ng-model="databaseForm.selectedTable"  ng-options="item as item.tableName for item in listTableDatasource">
+            <option value="">Selecione</option>
+        </select>
+    </div>
+</div>
+ 
+<div class="row" ng-if="databaseForm.selectSourceOfdata === 'sql'">
+    <div class="col-xs-6 form-group">
+        <label for="description" translate>ANALYSIS.CUSTOM_SQL</label>
+        <textarea class="form-control" id="description" name="customSQL" rows="4"
+                  ng-model="analysis.customSQL"></textarea>
+        <button type="button" class="btn" ng-click="(ds.id)">Aplicar</button>
+    </div>
+</div>

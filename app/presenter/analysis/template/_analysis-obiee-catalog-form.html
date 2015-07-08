@@ -1,0 +1,20 @@
+
+<div ui-tree-handle>
+    <a class="btn btn-success btn-xs" ng-click="getCatalog(this, item)">
+        <span  class="{{item.icon ? item.icon : 'icon-folder'}}"></span>
+        {{item.name}}
+    </a>
+    
+<!--    <button class="btn btn-success btn-xs" ng-click="getCatalog(this, item)">
+        <span   
+              class="{{item.icon ? item.icon : 'icon-folder'}}">
+        </span>
+    </button>
+    {{item.name}}-->
+</div>
+<ol ui-tree-nodes="options" ng-model="item.items" ng-class="{ hidden: collapsed }">
+    <li ng-repeat="item in item.items" ui-tree-node ng-include="'app/presenter/analysis/template/_analysis-obiee-catalog-form.html'">
+    </li>
+</ol>
+
+
