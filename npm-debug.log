@@ -1,0 +1,213 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.39
+4 verbose node symlink /usr/bin/node
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/home/diego/NetBeansProjects/connecta-portal-frontend',
+6 verbose install   [ 'archiver',
+6 verbose install     'connect-livereload',
+6 verbose install     'grunt',
+6 verbose install     'grunt-contrib-clean',
+6 verbose install     'grunt-contrib-connect',
+6 verbose install     'grunt-contrib-copy',
+6 verbose install     'grunt-contrib-jshint',
+6 verbose install     'grunt-contrib-sass',
+6 verbose install     'grunt-contrib-uglify',
+6 verbose install     'grunt-contrib-watch',
+6 verbose install     'grunt-karma',
+6 verbose install     'grunt-ng-annotate',
+6 verbose install     'grunt-war',
+6 verbose install     'karma',
+6 verbose install     'karma-jasmine',
+6 verbose install     'karma-junit-reporter',
+6 verbose install     'karma-phantomjs-launcher',
+6 verbose install     'karma-requirejs',
+6 verbose install     'matchdep',
+6 verbose install     'phantomjs' ] ]
+7 info preinstall connecta-portal@0.0.1
+8 verbose readDependencies using package.json deps
+9 verbose already installed skipping archiver@^0.12.0 /home/diego/NetBeansProjects/connecta-portal-frontend
+10 verbose already installed skipping connect-livereload@^0.5.3 /home/diego/NetBeansProjects/connecta-portal-frontend
+11 verbose already installed skipping grunt@~0.4.1 /home/diego/NetBeansProjects/connecta-portal-frontend
+12 verbose cache add [ 'grunt-contrib-clean@^0.6.0', null ]
+13 verbose cache add name=undefined spec="grunt-contrib-clean@^0.6.0" args=["grunt-contrib-clean@^0.6.0",null]
+14 verbose parsed url { protocol: null,
+14 verbose parsed url   slashes: null,
+14 verbose parsed url   auth: null,
+14 verbose parsed url   host: null,
+14 verbose parsed url   port: null,
+14 verbose parsed url   hostname: null,
+14 verbose parsed url   hash: null,
+14 verbose parsed url   search: null,
+14 verbose parsed url   query: null,
+14 verbose parsed url   pathname: 'grunt-contrib-clean@^0.6.0',
+14 verbose parsed url   path: 'grunt-contrib-clean@^0.6.0',
+14 verbose parsed url   href: 'grunt-contrib-clean@^0.6.0' }
+15 verbose already installed skipping grunt-contrib-connect@^0.10.1 /home/diego/NetBeansProjects/connecta-portal-frontend
+16 verbose already installed skipping grunt-contrib-copy@^0.8.0 /home/diego/NetBeansProjects/connecta-portal-frontend
+17 verbose already installed skipping grunt-contrib-jshint@~0.11.0 /home/diego/NetBeansProjects/connecta-portal-frontend
+18 verbose cache add name="grunt-contrib-clean" spec="^0.6.0" args=["grunt-contrib-clean","^0.6.0"]
+19 verbose parsed url { protocol: null,
+19 verbose parsed url   slashes: null,
+19 verbose parsed url   auth: null,
+19 verbose parsed url   host: null,
+19 verbose parsed url   port: null,
+19 verbose parsed url   hostname: null,
+19 verbose parsed url   hash: null,
+19 verbose parsed url   search: null,
+19 verbose parsed url   query: null,
+19 verbose parsed url   pathname: '^0.6.0',
+19 verbose parsed url   path: '^0.6.0',
+19 verbose parsed url   href: '^0.6.0' }
+20 verbose addNamed [ 'grunt-contrib-clean', '^0.6.0' ]
+21 verbose addNamed [ null, '>=0.6.0-0 <0.7.0-0' ]
+22 verbose already installed skipping grunt-contrib-sass@~0.8.1 /home/diego/NetBeansProjects/connecta-portal-frontend
+23 silly lockFile ca39a60f-grunt-contrib-clean-0-6-0 grunt-contrib-clean@^0.6.0
+24 verbose lock grunt-contrib-clean@^0.6.0 /home/diego/.npm/ca39a60f-grunt-contrib-clean-0-6-0.lock
+25 verbose cache add [ 'grunt-contrib-uglify@^0.9.1', null ]
+26 verbose cache add name=undefined spec="grunt-contrib-uglify@^0.9.1" args=["grunt-contrib-uglify@^0.9.1",null]
+27 verbose parsed url { protocol: null,
+27 verbose parsed url   slashes: null,
+27 verbose parsed url   auth: null,
+27 verbose parsed url   host: null,
+27 verbose parsed url   port: null,
+27 verbose parsed url   hostname: null,
+27 verbose parsed url   hash: null,
+27 verbose parsed url   search: null,
+27 verbose parsed url   query: null,
+27 verbose parsed url   pathname: 'grunt-contrib-uglify@^0.9.1',
+27 verbose parsed url   path: 'grunt-contrib-uglify@^0.9.1',
+27 verbose parsed url   href: 'grunt-contrib-uglify@^0.9.1' }
+28 verbose cache add name="grunt-contrib-uglify" spec="^0.9.1" args=["grunt-contrib-uglify","^0.9.1"]
+29 verbose parsed url { protocol: null,
+29 verbose parsed url   slashes: null,
+29 verbose parsed url   auth: null,
+29 verbose parsed url   host: null,
+29 verbose parsed url   port: null,
+29 verbose parsed url   hostname: null,
+29 verbose parsed url   hash: null,
+29 verbose parsed url   search: null,
+29 verbose parsed url   query: null,
+29 verbose parsed url   pathname: '^0.9.1',
+29 verbose parsed url   path: '^0.9.1',
+29 verbose parsed url   href: '^0.9.1' }
+30 verbose addNamed [ 'grunt-contrib-uglify', '^0.9.1' ]
+31 verbose addNamed [ null, '>=0.9.1-0 <0.10.0-0' ]
+32 silly lockFile 7638f5ff-grunt-contrib-uglify-0-9-1 grunt-contrib-uglify@^0.9.1
+33 verbose lock grunt-contrib-uglify@^0.9.1 /home/diego/.npm/7638f5ff-grunt-contrib-uglify-0-9-1.lock
+34 verbose already installed skipping grunt-contrib-watch@^0.6.1 /home/diego/NetBeansProjects/connecta-portal-frontend
+35 verbose already installed skipping grunt-karma@^0.10.1 /home/diego/NetBeansProjects/connecta-portal-frontend
+36 verbose cache add [ 'grunt-ng-annotate@^1.0.1', null ]
+37 verbose cache add name=undefined spec="grunt-ng-annotate@^1.0.1" args=["grunt-ng-annotate@^1.0.1",null]
+38 verbose parsed url { protocol: null,
+38 verbose parsed url   slashes: null,
+38 verbose parsed url   auth: null,
+38 verbose parsed url   host: null,
+38 verbose parsed url   port: null,
+38 verbose parsed url   hostname: null,
+38 verbose parsed url   hash: null,
+38 verbose parsed url   search: null,
+38 verbose parsed url   query: null,
+38 verbose parsed url   pathname: 'grunt-ng-annotate@^1.0.1',
+38 verbose parsed url   path: 'grunt-ng-annotate@^1.0.1',
+38 verbose parsed url   href: 'grunt-ng-annotate@^1.0.1' }
+39 verbose cache add name="grunt-ng-annotate" spec="^1.0.1" args=["grunt-ng-annotate","^1.0.1"]
+40 verbose parsed url { protocol: null,
+40 verbose parsed url   slashes: null,
+40 verbose parsed url   auth: null,
+40 verbose parsed url   host: null,
+40 verbose parsed url   port: null,
+40 verbose parsed url   hostname: null,
+40 verbose parsed url   hash: null,
+40 verbose parsed url   search: null,
+40 verbose parsed url   query: null,
+40 verbose parsed url   pathname: '^1.0.1',
+40 verbose parsed url   path: '^1.0.1',
+40 verbose parsed url   href: '^1.0.1' }
+41 verbose addNamed [ 'grunt-ng-annotate', '^1.0.1' ]
+42 verbose addNamed [ null, '>=1.0.1-0 <2.0.0-0' ]
+43 silly lockFile f4d4089c-grunt-ng-annotate-1-0-1 grunt-ng-annotate@^1.0.1
+44 verbose lock grunt-ng-annotate@^1.0.1 /home/diego/.npm/f4d4089c-grunt-ng-annotate-1-0-1.lock
+45 verbose already installed skipping grunt-war@^0.4.5 /home/diego/NetBeansProjects/connecta-portal-frontend
+46 verbose already installed skipping karma@~0.12.0 /home/diego/NetBeansProjects/connecta-portal-frontend
+47 verbose already installed skipping karma-jasmine@~0.1.5 /home/diego/NetBeansProjects/connecta-portal-frontend
+48 verbose already installed skipping karma-junit-reporter@^0.2.2 /home/diego/NetBeansProjects/connecta-portal-frontend
+49 verbose already installed skipping karma-phantomjs-launcher@~0.1.1 /home/diego/NetBeansProjects/connecta-portal-frontend
+50 verbose already installed skipping karma-requirejs@0.2.2 /home/diego/NetBeansProjects/connecta-portal-frontend
+51 verbose already installed skipping matchdep@~0.1.1 /home/diego/NetBeansProjects/connecta-portal-frontend
+52 verbose already installed skipping phantomjs@~1.9.13 /home/diego/NetBeansProjects/connecta-portal-frontend
+53 silly addNameRange { name: 'grunt-contrib-clean',
+53 silly addNameRange   range: '>=0.6.0-0 <0.7.0-0',
+53 silly addNameRange   hasData: false }
+54 silly addNameRange { name: 'grunt-contrib-uglify',
+54 silly addNameRange   range: '>=0.9.1-0 <0.10.0-0',
+54 silly addNameRange   hasData: false }
+55 silly addNameRange { name: 'grunt-ng-annotate',
+55 silly addNameRange   range: '>=1.0.1-0 <2.0.0-0',
+55 silly addNameRange   hasData: false }
+56 verbose request where is /grunt-contrib-clean
+57 verbose request registry https://registry.npmjs.org/
+58 verbose request id 993cf4637f1dadd3
+59 verbose url raw /grunt-contrib-clean
+60 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-contrib-clean' ]
+61 verbose url resolved https://registry.npmjs.org/grunt-contrib-clean
+62 verbose request where is https://registry.npmjs.org/grunt-contrib-clean
+63 info trying registry request attempt 1 at 17:32:15
+64 http GET https://registry.npmjs.org/grunt-contrib-clean
+65 verbose request where is /grunt-contrib-uglify
+66 verbose request registry https://registry.npmjs.org/
+67 verbose url raw /grunt-contrib-uglify
+68 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-contrib-uglify' ]
+69 verbose url resolved https://registry.npmjs.org/grunt-contrib-uglify
+70 verbose request where is https://registry.npmjs.org/grunt-contrib-uglify
+71 info trying registry request attempt 1 at 17:32:16
+72 http GET https://registry.npmjs.org/grunt-contrib-uglify
+73 verbose request where is /grunt-ng-annotate
+74 verbose request registry https://registry.npmjs.org/
+75 verbose url raw /grunt-ng-annotate
+76 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-ng-annotate' ]
+77 verbose url resolved https://registry.npmjs.org/grunt-ng-annotate
+78 verbose request where is https://registry.npmjs.org/grunt-ng-annotate
+79 info trying registry request attempt 1 at 17:32:16
+80 http GET https://registry.npmjs.org/grunt-ng-annotate
+81 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+82 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+83 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+84 info trying registry request attempt 2 at 17:32:46
+85 http GET https://registry.npmjs.org/grunt-contrib-clean
+86 info trying registry request attempt 2 at 17:32:46
+87 http GET https://registry.npmjs.org/grunt-contrib-uglify
+88 info trying registry request attempt 2 at 17:32:46
+89 http GET https://registry.npmjs.org/grunt-ng-annotate
+90 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+91 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+92 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+93 info trying registry request attempt 3 at 17:34:06
+94 http GET https://registry.npmjs.org/grunt-ng-annotate
+95 info trying registry request attempt 3 at 17:34:06
+96 http GET https://registry.npmjs.org/grunt-contrib-uglify
+97 info trying registry request attempt 3 at 17:34:06
+98 http GET https://registry.npmjs.org/grunt-contrib-clean
+99 silly lockFile 7638f5ff-grunt-contrib-uglify-0-9-1 grunt-contrib-uglify@^0.9.1
+100 silly lockFile 7638f5ff-grunt-contrib-uglify-0-9-1 grunt-contrib-uglify@^0.9.1
+101 silly lockFile f4d4089c-grunt-ng-annotate-1-0-1 grunt-ng-annotate@^1.0.1
+102 silly lockFile f4d4089c-grunt-ng-annotate-1-0-1 grunt-ng-annotate@^1.0.1
+103 silly lockFile ca39a60f-grunt-contrib-clean-0-6-0 grunt-contrib-clean@^0.6.0
+104 silly lockFile ca39a60f-grunt-contrib-clean-0-6-0 grunt-contrib-clean@^0.6.0
+105 error network getaddrinfo ENOTFOUND
+105 error network This is most likely not a problem with npm itself
+105 error network and is related to network connectivity.
+105 error network In most cases you are behind a proxy or have bad network settings.
+105 error network
+105 error network If you are behind a proxy, please make sure that the
+105 error network 'proxy' config is set properly.  See: 'npm help config'
+106 error System Linux 3.13.0-55-generic
+107 error command "/usr/bin/node" "/usr/bin/npm" "install"
+108 error cwd /home/diego/NetBeansProjects/connecta-portal-frontend
+109 error node -v v0.10.39
+110 error npm -v 1.4.28
+111 error syscall getaddrinfo
+112 error code ENOTFOUND
+113 error errno ENOTFOUND
+114 verbose exit [ 1, true ]

@@ -9,6 +9,7 @@ define([
 
     datamodel.config(function ($translatePartialLoaderProvider) {
         $translatePartialLoaderProvider.addPart('datamodel/datasource');
+        $translatePartialLoaderProvider.addPart('datamodel/analysis');
         $translatePartialLoaderProvider.addPart('datamodel/interaction');
     });
 
@@ -19,11 +20,15 @@ define([
 
         // Configurando os resources do backend
         datamodel.lazy.value('datamodelResources', {
-            datasource: appDatamodel.host + '/datasource'
+            datasource: appDatamodel.host + '/datasource',
+            analysis:   appDatamodel.host + '/analysis'
         });
     });
 
     datamodel._routes = {
+         /**
+         * DataSource
+         */
         '/datamodel': {
             controller: 'DatasourceListController',
             controllerUrl: 'datamodel/datasource/controller/datasource-list',
@@ -49,6 +54,7 @@ define([
             controllerUrl: 'datamodel/datasource/controller/datasource-form',
             templateUrl: 'app/datamodel/datasource/template/datasource-form.html'
         },
+        
         /**
          * Interaction
          */
@@ -57,11 +63,21 @@ define([
             controllerUrl: 'datamodel/interaction/controller/interaction-form',
             templateUrl: 'app/datamodel/interaction/template/interaction-form.html'
         },
+        
+         /**
+         * Analysis
+         */
+        '/datamodel/analysis/new': {
+            controller: 'AnalysisFormController',
+            controllerUrl: 'datamodel/analysis/controller/analysis-form',
+            templateUrl: 'app/datamodel/analysis/template/analysis-form.html'
+        }
+        
     };
 
     datamodel._menu = [
         {
-            href: 'datamodel/domain',
+            href: 'datamodel/analysis',
             title: 'ANALYSIS.ANALYSIS',
             icon: 'icon-analysis',
             children: []

@@ -97,11 +97,11 @@ define([
             controllerUrl: 'presenter/singlesource/controller/single-source-form',
             templateUrl: 'app/presenter/singlesource/template/single-source-form.html'
         },
-        '/presenter/analysis/new': {
-            controller: 'AnalysisFormController',
-            controllerUrl: 'presenter/analysis/controller/analysis-form',
-            templateUrl: 'app/presenter/analysis/template/analysis-form.html'
-        },
+//        '/presenter/analysis/new': {
+//            controller: 'AnalysisFormController',
+//            controllerUrl: 'presenter/analysis/controller/analysis-form',
+//            templateUrl: 'app/presenter/analysis/template/analysis-form.html'
+//        },
         '/presenter/group': {
             controller: 'GroupListController',
             controllerUrl: 'presenter/group/controller/group-list',

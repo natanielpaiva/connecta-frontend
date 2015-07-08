@@ -1,0 +1,64 @@
+.xml-tree {
+    padding-left: 1em;
+    list-style: none;
+    padding:0;
+    margin:0;
+
+    li {
+        padding:0;
+        margin:0;
+        line-height:1em;
+        list-style: none;
+
+        label {
+            margin:0.3em !important;
+            cursor:pointer;
+            user-select:none;
+        }
+
+        input[name=table] {
+            opacity:0;
+            height:0;
+            width:0;
+
+            &:checked ~ label.radio-table {
+                background-color:$presenterBlue;
+            }
+        }
+        label.radio-table {
+            background-color:$gray;
+            color:$white;
+            border-radius:0.2em;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            padding:0.25em;
+            font-size:1em;
+        }
+
+        input[name=column] {
+            opacity:0;
+            height:0;
+            width:0;
+
+            &:checked ~ label.checkbox-column {
+                background-color:$bs-brand-warning;
+            }
+        }
+        label.checkbox-column {
+            background-color:$lightGray;
+
+            color:$white;
+            border-radius:0.2em;
+            padding:0.3em;
+            font-size:0.8em;
+            font-weight:normal;
+            line-height:1.25em;
+            
+            &.element-level {
+                margin-right:-0.95em !important;
+                border-top-right-radius:0;
+                border-bottom-right-radius:0;
+            }
+        }
+    }
+}

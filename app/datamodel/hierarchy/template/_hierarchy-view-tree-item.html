@@ -1,0 +1,18 @@
+<div ui-tree-handle class="clearfix">
+    <div class="col-md-12 form-inline">
+        <span ng-class="{'icon-chevron-right': collapsed,'icon-chevron-down': !collapsed}"
+              data-nodrag ng-click="getSubitems(this, item)"
+              class="">
+        </span>
+        
+        Nome: <input type="text" class="form-control input-sm" ng-model="item.name"/> 
+        
+        Formula: <input type="text" class="form-control input-sm" ng-model="item.formula" />
+       
+    </div>
+</div>
+<ul ui-tree-nodes="options" ng-model="item.hierarchyItem" ng-class="{hidden: collapsed}" >
+    <li ng-repeat="item in item.hierarchyItem" ui-tree-node data-collapsed="{{open}}"
+        ng-include="'app/presenter/hierarchy/template/_hierarchy-view-tree-item.html'">
+    </li>
+</ul>
