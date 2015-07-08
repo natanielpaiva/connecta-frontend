@@ -269,6 +269,7 @@ define([
                 case '4':
 //                    $scope.analisys = ["option1", "option2", "option3", "option4", "option5"];
 //TESTE DO OBJETO DE ANÁLISES
+console.log("lool");
                     $scope.analisys = {
                         "config": [{
                                 "columnLayer": "no_regiao",
@@ -353,6 +354,7 @@ define([
             $scope.layerColumns = [];
             $scope.layerViewer.id_layer = "";
             if ($scope.layerViewer.layerViewerTypeEntity.id === "4") {
+                console.log("4444444",$scope.layerViewer.layerEntity);
                 $scope.layerColumns = $scope.layerViewer.layerEntity.txt_columns.split("#");
             }
         };

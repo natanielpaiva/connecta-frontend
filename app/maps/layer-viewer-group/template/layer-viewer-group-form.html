@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{isEditing ? 'LAYERVIEWERGROUP.EDIT' : 'LAYERVIEWERGROUP.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div id="map"></div>
+
+        <form name="formulario" ng-submit="submit()">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name" translate class="required">LAYERVIEWERGROUP.NAME</label>
+                        <input type="text" class="form-control" id="name" name="name" required
+                               placeholder="{{'LAYERVIEWERGROUP.NAME'|translate}}"
+                               ng-model="layerViewerGroup.nm_viewer" />
+                        <div ng-show="formulario.$submitted || formulario.name.$touched" 
+                             ng-messages="formulario.name.$error"
+                             ng-messages-include="portal-error-messages">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="impl" translate>LAYERVIEWER.IMPL</label>
+                    <select class="form-control" name="impl" ng-model="layerViewerGroup.viewerTypeImplEntity.id" required>
+                        <option value="">Selecione</option>
+                        <option value="1">OpenLayers</option>
+                        <option value="2">ESRI</option>
+                    </select>
+                    <div ng-show="formulario.$submitted || formulario.impl.$touched" 
+                         ng-messages="formulario.impl.$error"
+                         ng-messages-include="portal-error-messages">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div id="" class="col-md-6 column quadroEsquerdo">
+                    <div ng-repeat="viewer in viewerLayer">
+                        <div class="btnMargin">            
+                            {{viewer.nm_viewer}} 
+                            <button ng-click="parseDataLayerGroup(viewer.id)" class="btn_data_viewer" id={{viewer.id}}>-></button>
+                            <span ng-show="viewerLayer.length < 1">Nenhum Visualizador..</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="" class="col-md-6 column quadroDireito">
+                    <div ng-repeat="viewer in viewerLayerGroup">
+                        <div class="btnMargin">
+                            <button ng-click="parseDataLayer(viewer.id)" class="btn_data_viewerGroup" id={{viewer.id}}><-</button>
+                            {{viewer.nm_viewer}} 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#/maps/layer-viewer"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" ng-disabled="formulario.$invalid || layerViewerGroup.parameters.length < 1" translate >
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

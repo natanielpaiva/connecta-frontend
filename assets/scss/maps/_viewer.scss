@@ -43,3 +43,40 @@
 .cmpOpacity {
     border: none;
 }
+
+/*quadro de dados de visualizador agrupado*/
+.quadroEsquerdo {
+    border: thin solid silver;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    max-height: 200px;
+    min-height: 35px;
+    overflow: auto;
+    width: 45%;
+}
+.quadroDireito {
+    border: thin solid silver;
+    float: right;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    max-height: 200px;
+    min-height: 35px;
+    overflow: auto;
+    text-align: right;
+    width: 45%;
+}
+
+.btn_data_viewerGroup {
+    position: absolute;
+    left: 10px;
+}
+
+.btn_data_viewer {
+    position: absolute;
+    right: 10px;
+}
+
+.btnMargin{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

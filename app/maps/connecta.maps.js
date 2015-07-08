@@ -8,6 +8,7 @@ define([
         $translatePartialLoaderProvider.addPart('maps/layer-source');
         $translatePartialLoaderProvider.addPart('maps/layer');
         $translatePartialLoaderProvider.addPart('maps/layer-viewer');
+        $translatePartialLoaderProvider.addPart('maps/layer-viewer-group');
         $translatePartialLoaderProvider.addPart('maps/import');
     });
 
@@ -21,6 +22,7 @@ define([
             layerSourceType: appMaps.host + '/layerSourceTypes',
             layer: appMaps.host + '/layers',
             layerViewer: appMaps.host + '/layerViewers',
+            layerViewerGroup: appMaps.host + '/layerViewerGroups',
             layerViewerType: appMaps.host + '/layerViewerTypes',
             geo: appMaps.host + '/geoRest',
             openlayersProxy: appMaps.host + '/proxy.jsp?',
@@ -98,6 +100,26 @@ define([
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-form',
             templateUrl: 'app/maps/layer-viewer/template/layer-viewer-form.html'
         },
+        '/maps/layer-viewer-group': {
+            controller: 'LayerViewerGroupListController',
+            controllerUrl: 'maps/layer-viewer-group/controller/layer-viewer-group-list',
+            templateUrl: 'app/maps/layer-viewer-group/template/layer-viewer-group-list.html'
+        },
+        '/maps/layer-viewer-group/new': {
+            controller: 'LayerViewerGroupFormController',
+            controllerUrl: 'maps/layer-viewer-group/controller/layer-viewer-group-form',
+            templateUrl: 'app/maps/layer-viewer-group/template/layer-viewer-group-form.html'
+        },
+        '/maps/layer-viewer-group/:id': {
+            controller: 'LayerViewerGroupViewController',
+            controllerUrl: 'maps/layer-viewer-group/controller/layer-viewer-group-view',
+            templateUrl: 'app/maps/layer-viewer-group/template/layer-viewer-group-view.html'
+        },
+        '/maps/layer-viewer-group/:id/edit': {
+            controller: 'LayerViewerGroupFormController',
+            controllerUrl: 'maps/layer-viewer-group/controller/layer-viewer-group-form',
+            templateUrl: 'app/maps/layer-viewer-group/template/layer-viewer-group-form.html'
+        },
         '/maps/import/shp': {
             controller: 'ImportSHPController',
             controllerUrl: 'maps/import/controller/import-shp',
@@ -123,6 +145,12 @@ define([
         {
             href: 'maps/layer-viewer',
             title: 'LAYERVIEWER.LAYERVIEWER',
+            icon: 'icon-map',
+            children: []
+        },
+        {
+            href: 'maps/layer-viewer-group',
+            title: 'LAYERVIEWERGROUP.LAYERVIEWERGROUP',
             icon: 'icon-map',
             children: []
         },
