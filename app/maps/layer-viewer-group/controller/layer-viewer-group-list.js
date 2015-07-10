@@ -8,7 +8,7 @@ define([
 
         LayerViewerGroupService.list().then(function (response) {
             $scope.layerViewersGroup = response.data;
-            console.log("$scope.layerViewersGroup",$scope.layerViewersGroup);
+            console.log("$scope.layerViewerGroup",$scope.layerViewersGroup);
         }, function (response) {});
         
     });

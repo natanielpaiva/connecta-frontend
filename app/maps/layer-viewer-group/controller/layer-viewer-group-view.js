@@ -1,31 +1,27 @@
 define([
     'connecta.maps',
-    'maps/layer-viewer/service/connecta-geo-service',
-    'maps/layer-viewer/service/layer-viewer-service',
+    'maps/layer-viewer-group/service/connecta-geo-service',
+    'maps/layer-viewer-group/service/layer-viewer-group-service',
+    'maps/layer-viewer-group/service/group-layer-viewer-service',
     'portal/layout/service/modalTranslate',
     'portal/layout/service/notify'
 ], function (maps) {
-    return maps.lazy.controller('LayerViewerGroupViewController', function ($scope, LayerViewerService, notify, ConnectaGeoService, $routeParams, $location, $modalTranslate, $translate) {
+    return maps.lazy.controller('LayerViewerGroupViewController', function ($scope, LayerViewerGroupService, GroupLayerViewerService, notify, ConnectaGeoService, $routeParams, $location, $modalTranslate, $translate) {
 
+        GroupLayerViewerService.get($routeParams.id).then(function (response) {
 
-
-        LayerViewerService.getById($routeParams.id).then(function (response) {
+            $scope.layerViewerGroup = response.data;
             
-            $scope.types = LayerViewerService.getTypes();
-
-            $scope.layerViewer = response.data;            
-            
-
             $scope.remove = function (id) {
-                LayerViewerService.delete(id).then(function () {
-                    $translate('LAYERVIEWER.REMOVE_SUCCESS').then(function (text) {
+                GroupLayerViewerService.delete(id).then(function () {
+                    $translate('LAYERVIEWERGROUP.REMOVE_SUCCESS').then(function (text) {
                         notify.success(text);
-                        $location.path('maps/layer-viewer');
+                        $location.path('maps/layer-viewer-group');
                     });
                 }, function (response) {
-                    $translate('LAYERVIEWER.ERROR_REMOVING').then(function (text) {
+                    $translate('LAYERVIEWERGROUP.ERROR_REMOVING').then(function (text) {
                         notify.error(text);
-                        $location.path('maps/layer-viewer');
+                        $location.path('maps/layer-viewer-group');
                     });
                 });
             };
@@ -40,11 +36,11 @@ define([
             };
 
             //translate das propriedades da modal
-            $modalTranslate($scope.modalParams, 'title', 'LAYERVIEWER.TITLE_CONFIRM_DELETE');
-            $modalTranslate($scope.modalParams, 'text', 'LAYERVIEWER.CONFIRM_DELETE');
+            $modalTranslate($scope.modalParams, 'title', 'LAYERVIEWERGROUP.TITLE_CONFIRM_DELETE');
+            $modalTranslate($scope.modalParams, 'text', 'LAYERVIEWERGROUP.CONFIRM_DELETE');
 
 
-            ConnectaGeoService.showViewer($scope.layerViewer);
+            ConnectaGeoService.showViewer($scope.layerViewerGroup);
 
         });
 

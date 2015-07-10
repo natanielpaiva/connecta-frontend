@@ -1,7 +1,7 @@
 define([
     'connecta.maps'
 ], function (maps) {
-    return maps.lazy.service('LayerViewerGroupService', function (mapsResources, $http) {
+    return maps.lazy.service('GroupLayerViewerService', function (mapsResources, $http) {
 
         this.createStyle = function (formData) {
 
@@ -23,21 +23,21 @@ define([
         };
 
         this.get = function (id) {
-            var url = mapsResources.layerViewerGroup + "/" + id;
+            var url = mapsResources.groupLayerViewer + "/" + id;
             return $http.get(url);
         };
 
         this.list = function () {
-            var url = mapsResources.layerViewerGroup;
+            var url = mapsResources.groupLayerViewer;
             return $http.get(url);
         };
 
         this.save = function (layerGroupSource) {
-            return $http.post(mapsResources.layerViewerGroup, layerGroupSource);
+            return $http.post(mapsResources.groupLayerViewer, layerGroupSource);
         };
 
         this.delete = function (id) {
-            var url = mapsResources.layerViewerGroup + '/' + id;
+            var url = mapsResources.groupLayerViewer + '/' + id;
             return $http.delete(url);
         };
 

@@ -16,7 +16,7 @@
                         <label for="name" translate class="required">LAYERVIEWERGROUP.NAME</label>
                         <input type="text" class="form-control" id="name" name="name" required
                                placeholder="{{'LAYERVIEWERGROUP.NAME'|translate}}"
-                               ng-model="layerViewerGroup.nm_viewer" />
+                               ng-model="layerViewerGroup.nm_viewer_group" />
                         <div ng-show="formulario.$submitted || formulario.name.$touched" 
                              ng-messages="formulario.name.$error"
                              ng-messages-include="portal-error-messages">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="impl" translate>LAYERVIEWER.IMPL</label>
-                    <select class="form-control" name="impl" ng-model="layerViewerGroup.viewerTypeImplEntity.id" required>
+                    <select class="form-control" name="impl" ng-model="viewerTypeImplEntity.id" required>
                         <option value="">Selecione</option>
                         <option value="1">OpenLayers</option>
                         <option value="2">ESRI</option>
@@ -49,7 +49,7 @@
                 </div>
 
                 <div id="" class="col-md-6 column quadroDireito">
-                    <div ng-repeat="viewer in viewerLayerGroup">
+                    <div ng-repeat="viewer in viewerLayerGroups">
                         <div class="btnMargin">
                             <button ng-click="parseDataLayer(viewer.id)" class="btn_data_viewerGroup" id={{viewer.id}}><-</button>
                             {{viewer.nm_viewer}} 

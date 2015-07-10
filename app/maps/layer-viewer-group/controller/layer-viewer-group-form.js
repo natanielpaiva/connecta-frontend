@@ -1,15 +1,17 @@
 define([
     'connecta.maps',
-    'maps/layer/service/layer-service',
     'maps/layer-viewer/service/layer-viewer-service',
     'maps/layer-viewer-group/service/layer-viewer-group-service',
+    'maps/layer-viewer-group/service/group-layer-viewer-service',
     'portal/layout/service/notify'
 ], function (maps) {
-    return maps.lazy.controller('LayerViewerGroupFormController', function ($scope, LayerService, LayerViewerService, LayerViewerGroupService, notify, $location, $routeParams, $translate) {
+    return maps.lazy.controller('LayerViewerGroupFormController', function ($scope, LayerViewerService, LayerViewerGroupService, GroupLayerViewerService, notify, $location, $routeParams, $translate) {
 
         $scope.types = LayerViewerService.getTypes();
 
-        $scope.viewerLayerGroup = [];
+        $scope.layerViewerGroup = [];
+        
+        $scope.viewerLayerGroups = [];
 
         $scope.isEditing = false;
 
@@ -19,7 +21,7 @@ define([
 
         $scope.viewerLayer = [];
         //escuta o obj de parameters para saber quando se adicionou uma novo combo de intervalo
-        $scope.$watch('layerViewerGroup.viewerTypeImplEntity.id', function (val) {
+        $scope.$watch('viewerTypeImplEntity.id', function (val) {
             console.log("val", val);
 
             if (typeof val !== 'undefined') {
@@ -44,7 +46,7 @@ define([
                 if ($scope.viewerLayer[item].id == id) {
 
                     //adiciona o registro no outro array
-                    $scope.viewerLayerGroup.push($scope.viewerLayer[item]);
+                    $scope.viewerLayerGroups.push($scope.viewerLayer[item]);
 
                     //deleta o registro do array
                     $scope.viewerLayer.splice(item, 1);
@@ -58,44 +60,61 @@ define([
 
         //Realiza a transicao do registro de um campo para o outro
         $scope.parseDataLayer = function (id) {
-            for (var item = 0; item < $scope.viewerLayerGroup.length; item++) {
-                if ($scope.viewerLayerGroup[item].id == id) {
+            for (var item = 0; item < $scope.viewerLayerGroups.length; item++) {
+                if ($scope.viewerLayerGroups[item].id == id) {
 
                     //adiciona o registro no outro array
-                    $scope.viewerLayer.push($scope.viewerLayerGroup[item]);
+                    $scope.viewerLayer.push($scope.viewerLayerGroups[item]);
 
                     //deleta o registro do array
-                    $scope.viewerLayerGroup.splice(item, 1);
+                    $scope.viewerLayerGroups.splice(item, 1);
 
                     break;
                 } else {
-                    console.log("saiu", $scope.viewerLayerGroup[item]);
+                    console.log("saiu", $scope.viewerLayerGroups[item]);
                 }
             }
         };
 
         $scope.submit = function () {
 
-            //salvar o nome do grupo
-
-
-
-
-            // preparando os id's das layers
-            var objLayersGroup = "";
-            for (var view in $scope.viewerLayerGroup) {
-                if (view == 0 || view == "0") {
-                    objLayersGroup += $scope.viewerLayerGroup[view].id;
+            
+            var objLayerGroup = {"nm_viewer_group": $scope.layerViewerGroup.nm_viewer_group};
+            
+            LayerViewerGroupService.save(objLayerGroup).then(function (data) {
+                console.log("daaaata",data);
+                // preparando os id's das layers
+                var idLayersGroup = "";
+                
+                for (var view in $scope.viewerLayerGroups) {
+                    if (view === 0 || view === '0') {
+                        idLayersGroup += $scope.viewerLayerGroups[view].id;
+                    } else {
+                        idLayersGroup += "#" + $scope.viewerLayerGroups[view].id;
+                    }
                 }
-                objLayersGroup += "#" + $scope.viewerLayerGroup[view].id;
-            }
-
-//            $scope.layerViewerGroup
-
-            LayerViewerService.save($scope.layerViewerGroup).then(function () {
-                $translate('LAYERVIEWERGROUP.ADDED_SUCCESS').then(function (text) {
-                    notify.success(text);
-                    $location.path('maps/layer-viewer-group');
+                lool = GroupLayerViewerService.list();
+                
+//                var objLayerGroup = {
+////                    "id_viewer_group": parseInt(data.data.id),
+//                    "id_relation": parseInt(data.data.id),
+//                    "ds_viewers": idLayersGroup
+//                };
+                var objLayerGroup = {
+//                    "id_viewer_group": parseInt(data.data.id),
+                    "layerViewerGroupEntity": {"id": 1},
+                    "ds_viewers": "lala"
+                };
+                GroupLayerViewerService.save(objLayerGroup).then(function (data) {
+                    console.log("ahsuahusha",data);
+                    
+                    
+                    
+                    $translate('LAYERVIEWERGROUP.ADDED_SUCCESS').then(function (text) {
+                        notify.success(text);
+                        $location.path('maps/layer-viewer-group');
+                    });
+                    
                 });
             }, function (response) {
                 notify.error(response);

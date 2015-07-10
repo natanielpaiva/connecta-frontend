@@ -23,6 +23,7 @@ define([
             layer: appMaps.host + '/layers',
             layerViewer: appMaps.host + '/layerViewers',
             layerViewerGroup: appMaps.host + '/layerViewerGroups',
+            groupLayerViewer: appMaps.host + '/groupLayerViewers',
             layerViewerType: appMaps.host + '/layerViewerTypes',
             geo: appMaps.host + '/geoRest',
             openlayersProxy: appMaps.host + '/proxy.jsp?',
