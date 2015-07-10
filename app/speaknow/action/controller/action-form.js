@@ -29,14 +29,8 @@ define([
         };
 
         $scope.action = {
-            steps: [
-                {
-                    sections: [angular.copy(section)],
-                    name: "Step One",
-                    type: "POLL"
-                }
-            ],
-            icon: "dump",
+            sections: [angular.copy(section)],
+            icon: "dump"
         };
 
         if ($scope.interaction) {
@@ -92,7 +86,7 @@ define([
             $scope.isAnswerSeparator = type != "SELECT" && $scope.isMultiple(type);
         };
 
-        var sections = $scope.action.steps[0].sections;
+        var sections = $scope.action.sections;
         $scope.addSection = function () {
             $scope.minifyCard(sections);
             sections.push(angular.copy(section));
@@ -271,7 +265,7 @@ define([
         };
 
         $scope.validateSections = function () {
-            var sections = $scope.action.steps[0].sections;
+            var sections = $scope.action.sections;
             for (var i in sections) {
                 var section = sections[i];
                 if (!$scope.validateParams(i, section)) {
@@ -297,7 +291,7 @@ define([
         };
 
         $scope.createWhatsappMessage = function (action) {
-            var section = action.steps[0].sections[0];
+            var section = action.sections[0];
             var containsMultiselect = false;
             var message = action.description + "\n";
 

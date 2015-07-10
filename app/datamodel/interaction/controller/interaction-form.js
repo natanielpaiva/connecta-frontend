@@ -4,26 +4,30 @@ define([
     'portal/layout/service/notify'
 ], function (datamodel) {
     return datamodel.lazy.controller('InteractionFormController', function ($scope, InteractionFormService, notify) {
-
-        $scope.fields = InteractionFormService.getTypeFields();
+        $scope.sectionId = 0;
+        $scope.currentSection = 0;
+        $scope.sections = [
+            {
+                id: $scope.sectionId,
+                name: 'Name',
+                params: []
+            }
+        ];
+        $scope.params = InteractionFormService.getTypeFields();
         $scope.domains = InteractionFormService.getDomains();
         $scope.domain = {};
         $scope.lastFieldId = 0;
-        $scope.form = {
-            id: 1,
-            name: 'Name',
-            fields: []
-        };
         $scope.popoverConfig = {
             templateUrl: 'popoverConfig.html',
             title: 'Title'
         };
 
-        $scope.addNewField = function (field) {
+        $scope.viewSection = function (sectionId) {
+            $scope.currentSection = sectionId;
+        };
+
+        $scope.addNewField = function (field, sectionId) {
             $scope.lastFieldId++;
-            if ($scope.form.fields.length === 0) {
-                angular.element("#firstField").hide();
-            }
             var newField = {
                 "id": $scope.lastFieldId,
                 "title": "Field - " + ($scope.lastFieldId),
@@ -38,17 +42,28 @@ define([
                 $scope.addOption(newField);
             }
 
-            $scope.form.fields.push(newField);
+            $scope.sections[sectionId].params.push(newField);
         };
 
-        $scope.deleteField = function (id) {
-            for (var i = 0; i < $scope.form.fields.length; i++) {
-                if ($scope.form.fields[i].id === id) {
-                    $scope.form.fields.splice(i, 1);
+        $scope.addNewSection = function () {
+            $scope.sectionId++;
+            var newForm = {
+                id: $scope.sectionId,
+                name: 'Section ' + $scope.sectionId,
+                params: []
+            };
+            $scope.sections.push(newForm);
+        };
+
+        $scope.deleteField = function (fieldId, sectionId) {
+            var section = $scope.sections[sectionId];
+            for (var i = 0; i < section.params.length; i++) {
+                if (section.params[i].id === fieldId) {
+                    section.params.splice(i, 1);
                     break;
                 }
             }
-            if ($scope.form.fields.length === 0) {
+            if (section.params.length === 0) {
                 angular.element("#firstField").show();
             }
         };
@@ -89,24 +104,32 @@ define([
                 return false;
         };
 
-        $scope.reorderItem = function (index, obj) {
-            var otherObj = $scope.form.fields[index];
-            var otherIndex = $scope.form.fields.indexOf(obj);
+        $scope.reorderItem = function (index, obj, sectionId) {
+            var section = $scope.sections[sectionId];
+            var otherObj = section.params[index];
+            var otherIndex = section.params.indexOf(obj);
 
-            $scope.form.fields[index] = obj;
-            $scope.form.fields[otherIndex] = otherObj;
+            var otherObjId = otherObj.id;
+            var otherIndexId = obj.id;
+            
+            obj.id = otherObjId;
+            otherObj.id = otherIndexId;
+            
+            section.params[index] = obj;
+            section.params[otherIndex] = otherObj;
         };
 
-        $scope.fieldSetColumn = function (index, column) {
-            for (var i in $scope.form.fields) {
-                var field = $scope.form.fields[i];
+        $scope.fieldSetColumn = function (index, column, sectionId) {
+            var section = $scope.sections[sectionId];
+            for (var i in section.params) {
+                var field = section.params[i];
                 if (field.columnName === column.name) {
                     notify.warning("A coluna já está associada a outro field");
                     return;
                 }
             }
 
-            var newField = $scope.form.fields[index];
+            var newField = section.params[index];
             newField.columnName = column.name;
         };
 
@@ -114,20 +137,22 @@ define([
             field.columnName = "";
         };
 
-        $scope.dropField = function (index, field) {
+        $scope.dropField = function (index, field, sectionId) {
             if (field.isColumn) {
-                $scope.fieldSetColumn(index, field);
+                $scope.fieldSetColumn(index, field, sectionId);
             } else if (field.id) {
-                $scope.reorderItem(index, field);
+                $scope.reorderItem(index, field, sectionId);
             } else {
-                $scope.addNewField(field);
+                $scope.addNewField(field, sectionId);
             }
         };
 
-        $scope.teste = function (ev) {
-            ev.event.preventDefault();
-            ev.event.stopPropagation();
-            return false;
+        $scope.reorderSection = function (index, obj) {
+            var otherObj = $scope.sections[index];
+            var otherIndex = $scope.sections.indexOf(obj);
+
+            $scope.sections[index] = obj;
+            $scope.sections[otherIndex] = otherObj;
         };
 
         $scope.submit = function () {
@@ -135,34 +160,59 @@ define([
             var step = {
                 name: "Step Name",
                 title: "Step Title",
-                sections: [
-                    {
-                        title: "Section Title",
-                        params: []
-                    }
-                ]
+                sections: [$scope.sections]
             };
-            
-            var fields = $scope.form.fields;
-            for(var index in fields){
-                delete fields[index].id;
+
+            var params = $scope.form.params;
+            for (var index in params) {
+                delete params[index].id;
             }
-            
-            step.sections[0].params = fields;
-            
-            var interaction  = {
+
+            step.sections[0].params = params;
+
+            var interaction = {
                 name: "Interaction Name",
                 description: "Description",
                 type: "POLL",
-                actions:[
+                actions: [
                     {
-                        name:"Action Name",
-                        description:"Action Description",
-                        steps:[step]
+                        name: "Action Name",
+                        description: "Action Description",
+                        steps: [step]
                     }
                 ]
             };
         };
+
+//        var lol = {
+//                "id": $scope.lastFieldId,
+//                "title": "Field - " + ($scope.lastFieldId),
+//                "type": 'text',
+//                "value": "",
+//                "columnName": "",
+//                "required": true
+//            };
+//        $scope.addNewField(lol, 0);
+//        $scope.addNewSection();
+//        $scope.addNewField(lol, 1);
+
+
+        $scope.models = {
+            selected: null,
+            lists: {"A": [], "B": []}
+        };
+
+        // Generate initial model
+        for (var i = 1; i <= 3; ++i) {
+            $scope.models.lists.A.push({label: "Item A" + i});
+            $scope.models.lists.B.push({label: "Item B" + i});
+        }
+
+        // Model to JSON for demo purpose
+        $scope.$watch('models', function (model) {
+//            $scope.modelAsJson = angular.toJson(model, true);
+        }, true);
+
 
     });
 });

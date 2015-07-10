@@ -7,20 +7,36 @@
 <div class="row">
 
     <div class="col-md-12">
-        <div ng-repeat="item in fields"
-             ng-drag="true" ng-drag-data="item">
-            <span>{{item.name}}</span>
-        </div>
+        <button ng-click="addNewSection()">New Section</button>
+        <ul>
+            <li ng-repeat="(index, section) in sections"
+                ng-drop="true"
+                ng-drop-success="reorderSection($index, $data)"
+                ng-drag="true" 
+                ng-drag-data="section">
+                <button ng-click="viewSection(section.id)">{{section.name}}</button>
+                <button ng-click="sections.splice(index, 1)">Remove</button>
+            </li>
+        </ul>
     </div>
 
     <div class="col-md-12">
         <div class="col-xs-8">
-            <ul id="drop-field-area">
-                <li class="col-md-12" id="firstField" ng-drop="true" ng-drop-success="dropField($index, $data)" 
-                    style="width: 100%; height: 70px; background-color: gray"></li>
-                <li class="col-md-12" ng-drop="true" ng-drop-success="dropField($index, $data)" 
-                    ng-repeat="field in form.fields"
-                    style="width: 100%; height: 70px; background-color: gray" >
+            <ul id="drop-field-area" ng-repeat="(indexSection, section) in sections" 
+                class="clearfix am-fade-and-slide-bottom" style="list-style: none;"
+                ng-show="section.id == currentSection">
+
+                <div  class="col-md-12" id="firstField" ng-drop="true" ng-drop-success="dropField($index, $data, indexSection)"
+                      style="background-color: graytext; padding-top: 10px;">
+                    <label for="title"ng-model="field.title">Section Title</label>
+                    <input type="text" class="form-control" ng-model="section.title"/>
+                </div>
+
+                <li class="col-md-12" 
+                    ng-drop="true"  
+                    ng-repeat="(index, field) in section.params"
+                    ng-drop-success="dropField(index, $data, indexSection)"
+                    style="background-color: graytext; padding-top: 10px;">
                     <div  ng-drag="true" ng-drag-data="field">
                         <div class="accordion-edit">
                             <div class="row ng-scope">
@@ -29,11 +45,12 @@
                                 </div>
 
                                 <div class="col-xs-6 form-group" ng-cancel-drag>
+
                                     <input type="text" class="form-control" ng-model="field.value" 
-                                           value="{{field.value}}" ng-show="{{field.type == 'text'}}"/>
+                                           value="{{field.value}}" ng-show="{{field.type === 'text'}}"/>
 
                                     <input type="textarea" class="form-control" ng-model="field.value" 
-                                           value="{{field.value}}" ng-show="{{field.type == 'textarea'}}"/>
+                                           value="{{field.value}}" ng-show="{{field.type === 'textarea'}}"/>
 
                                     <select class="form-control" ng-model="field.value" ng-show="{{field.type === 'select'}}">
                                         <option ng-repeat="option in field.options" value="{{option}}">
@@ -56,10 +73,9 @@
                                             popover-placement="bottom"
                                             class="btn btn-default">Config</button>
                                 </div>
-                                <div class="col-xs-2 form-group" 
-                                     ng-cancel-drag 
+                                <div class="col-xs-2 form-group" ng-cancel-drag
                                      style="background-color: #666666; height: 50px;">
-                                    {{field.columnName }}
+                                    {{field.columnName}}
                                     <span ng-click="removeFieldColumn(field)"> x</span>
                                 </div>
                             </div>
@@ -83,24 +99,30 @@
                     </li>
                 </ul>
             </div>
-        </div>
 
+            <div class="col-md-12">
+                <div ng-repeat="item in params"
+                     ng-drag="true" ng-drag-data="item">
+                    <span>{{item.name}}</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="text/ng-template" id="popoverConfig.html">
-        <div ng-cancel-drag>{{field.type}}</div>
+        <div >{{field.type}}</div>
         <div class="form-group" ng-cancel-drag> 
-        <input type="text" ng-model="field.title" class="form-control">
-        <div ng-show="containsOptions(field)">
-        <div>Field Options:</div>
-        <div ng-repeat="option in field.options" ng-cancel-drag>
-        <input type="text" ng-model="option.title" value="{{option.title}}" ng-cancel-drag>
-        <a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, option)"><i class="icon-minus icon-white"></i></a>
-        <span>Value: {{ option.option}}</span>
-        </div>
-        <button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="icon-plus icon-white"></i> Add Option</button>
-        </div>
-        <button class="btn btn-default" ng-click="deleteField(field.id)">Remove</button>
+            <input type="text" ng-model="field.title" class="form-control">
+            <div ng-show="containsOptions(field)" ng-cancel-drag>
+            <div>Field Options:</div>
+            <div ng-repeat="option in field.options" ng-cancel-drag>
+            <input type="text" ng-model="option.title" value="{{option.title}}" >
+            <a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, option)"><i class="icon-minus icon-white"></i></a>
+            <span>Value: {{ option.option}}</span>
+            </div>
+            <button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="icon-plus icon-white"></i> Add Option</button>
+            </div>
+            <button class="btn btn-default" ng-click="deleteField(field.id, indexSection)">Remove</button>
         </div>
     </script>
 </div>
