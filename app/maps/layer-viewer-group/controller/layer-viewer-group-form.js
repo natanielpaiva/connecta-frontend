@@ -93,7 +93,7 @@ define([
                         idLayersGroup += "#" + $scope.viewerLayerGroups[view].id;
                     }
                 }
-                lool = GroupLayerViewerService.list();
+//                lool = GroupLayerViewerService.list();
                 
 //                var objLayerGroup = {
 ////                    "id_viewer_group": parseInt(data.data.id),
@@ -102,7 +102,7 @@ define([
 //                };
                 var objLayerGroup = {
 //                    "id_viewer_group": parseInt(data.data.id),
-                    "layerViewerGroupEntity": {"id": 1},
+                    "layerViewerGroupEntity": {"id": 4},
                     "ds_viewers": "lala"
                 };
                 GroupLayerViewerService.save(objLayerGroup).then(function (data) {
