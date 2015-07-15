@@ -2,6 +2,7 @@ define([
     'connecta.portal',
     'portal/layout/directive/heading',
     'portal/layout/directive/menu',
+    'portal/layout/directive/sidebar',
     'portal/layout/directive/pages',
     'portal/layout/directive/search-embedded',
     'portal/layout/service/layout'

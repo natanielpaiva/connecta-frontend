@@ -283,7 +283,8 @@ define([
         'portal/layout/directive/input-timeout',
         'portal/layout/filter/data-uri',
         'portal/layout/directive/file-model',
-        'portal/layout/directive/conf-modal'
+        'portal/layout/directive/conf-modal',
+        'presenter/viewer/directive/am-chart-serial-column'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });

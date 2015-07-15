@@ -4,7 +4,6 @@ define([
     'bower_components/amcharts/dist/amcharts/gauge',
     'bower_components/amcharts/dist/amcharts/pie',
     'bower_components/amcharts/dist/amcharts/radar',
-    'bower_components/amcharts/dist/amcharts/serial',
     'bower_components/amcharts/dist/amcharts/xy'
 
 ], function (angular) {
@@ -97,11 +96,11 @@ define([
             controllerUrl: 'presenter/singlesource/controller/single-source-form',
             templateUrl: 'app/presenter/singlesource/template/single-source-form.html'
         },
-//        '/presenter/analysis/new': {
-//            controller: 'AnalysisFormController',
-//            controllerUrl: 'presenter/analysis/controller/analysis-form',
-//            templateUrl: 'app/presenter/analysis/template/analysis-form.html'
-//        },
+        '/presenter/analysis/new': {
+            controller: 'AnalysisFormController',
+            controllerUrl: 'presenter/analysis/controller/analysis-form',
+            templateUrl: 'app/presenter/analysis/template/analysis-form.html'
+        },
         '/presenter/group': {
             controller: 'GroupListController',
             controllerUrl: 'presenter/group/controller/group-list',

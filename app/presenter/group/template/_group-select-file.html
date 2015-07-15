@@ -3,8 +3,8 @@
     <input type="text" name="media"
            class="form-control"
            ng-change="change()" ng-blur="change()"
-           ng-model="attribute.name"
-           typeahead="singleSource as singleSource.name for singleSource in getSingleSources($viewValue)"
+           ng-model="analysis.name"
+           typeahead="analysis as analysis.name for analysis in getAnalysis($viewValue)"
            typeahead-loading="loadingAttributes"
            typeahead-min-length="3"
            typeahead-wait-ms="600"/>

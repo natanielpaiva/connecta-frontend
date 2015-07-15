@@ -13,13 +13,13 @@ define([
     return portal.service('layoutService', function ($rootScope, $cookieStore) {
         var SIDEBAR = 'connecta.portal.layout.menu';
 
-        var isShowPageTabs = false;
-
-        var broadcastEvent = function(show){
-            var eventName = show ? 'menu.show' : 'menu.hide';
-
-            $rootScope.$broadcast(eventName);
-        };
+         var isShowPageTabs = false;
+        
+         var broadcastEvent = function(show){
+             var eventName = show ? 'menu.show' : 'menu.hide';
+        
+             $rootScope.$broadcast(eventName);
+         };
 
         /**
          * Oculta e exibe a barra lateral (menu esquerdo)

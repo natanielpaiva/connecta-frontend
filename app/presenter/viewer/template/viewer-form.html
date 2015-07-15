@@ -1,1 +1,61 @@
-<am-chart id="myFirstChart" options="amChartOptions" height="400" width="800"></am-chart>
+<div class="row">
+        <div class="col-md-12">
+            <form novalidate name="formulario" ng-submit="submit()">
+    
+                <div class="form-group col-md-6">
+                    <label for="model-nome" translate>LAYOUT.NAME</label>
+                    <input type="text" ng-model="analysisViewer.viewer.name" required class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="model-nome" translate>LAYOUT.DESCRIPTION</label>
+                    <input type="text" ng-model="analysisViewer.viewer.description" required class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.METRIC</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.metrics">
+                                <li ng-repeat="column in analysisViewer.metrics" dnd-draggable="column" dnd-moved="analysisViewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong translate>FILTER_EMPTY</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.DESCRIPTION</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.descriptions">
+                                <li ng-repeat="column in analysisViewer.descriptions" dnd-draggable="column" 
+                                    dnd-moved="analysisViewer.descriptions.splice($index, 1)" 
+                                    dnd-effect-allowed="move" 
+                                    ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong>No results found...</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+    <am-chart-serial-column id="myFirstChart" options="amChartOptions" >
+        
+    </am-chart-serial-column>
+
+                <div class="form-group">
+                    <a href="#/presenter/viewer" class="btn btn-default" translate>
+                        LAYOUT.CANCEL
+                    </a>
+                    <button class="btn btn-primary" translate>
+                        LAYOUT.SAVE
+                    </button>
+                </div>
+            </form>
+        </div>
+</div>
+
