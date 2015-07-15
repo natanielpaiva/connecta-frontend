@@ -26,6 +26,7 @@ define([
                 if ($scope.options.data) {
                     var renderChart = function (amChartOptions) {
                         var option = amChartOptions || $scope.options;
+                        var keys = 0;
 
                         //Tamanho e largura default do gráfico
                         var height = $scope.height || '400px';
@@ -52,8 +53,8 @@ define([
                             var categoryAxis = chart.categoryAxis;
 
                             if (categoryAxis) {
-                                var keys = Object.keys(option.categoryAxis);
-                                for (var i = 0; i < keys.length; i++) {
+                                keys = Object.keys(option.categoryAxis);
+                                for ( i = 0; i < keys.length; i++) {
                                     if (!angular.isObject(option.categoryAxis[keys[i]]) || angular.isArray(option.categoryAxis[keys[i]])) {
                                         categoryAxis[keys[i]] = option.categoryAxis[keys[i]];
                                     } else {
@@ -68,8 +69,8 @@ define([
                         var addValueAxis = function (a) {
                             var valueAxis = new AmCharts.ValueAxis();
 
-                            var keys = Object.keys(a);
-                            for (var i = 0; i < keys.length; i++) {
+                            keys = Object.keys(a);
+                            for (i = 0; i < keys.length; i++) {
                                 if (typeof a[keys[i]] !== 'object') {
                                     valueAxis[keys[i]] = a[keys[i]];
                                 }
@@ -78,8 +79,8 @@ define([
                         };
 
                         if (option.valueAxes && option.valueAxes.length > 0) {
-                            for (var i = 0; i < option.valueAxes.length; i++) {
-                                addValueAxis(option.valueAxes[i])
+                            for ( i = 0; i < option.valueAxes.length; i++) {
+                                addValueAxis(option.valueAxes[i]);
                             }
                         }
 
@@ -92,7 +93,7 @@ define([
                             if (g) {
                                 var keys = Object.keys(g);
                                 // iterate over all of the properties in the graph object and apply them to the new AmGraph
-                                for (var i = 0; i < keys.length; i++) {
+                                for ( i = 0; i < keys.length; i++) {
                                     graph[keys[i]] = g[keys[i]];
                                 }
                             }
@@ -100,7 +101,7 @@ define([
                         };
 
                         if (option.graphs && option.graphs.length > 0) {
-                            for (var i = 0; i < option.graphs.length; i++) {
+                            for ( i = 0; i < option.graphs.length; i++) {
                                 addGraph(option.graphs[i]);
                             }
                         } else {
@@ -109,8 +110,8 @@ define([
 
                         var chartCursor = new AmCharts.ChartCursor();
                         if (option.chartCursor) {
-                            var keys = Object.keys(option.chartCursor);
-                            for (var i = 0; i < keys.length; i++) {
+                            keys = Object.keys(option.chartCursor);
+                            for ( i = 0; i < keys.length; i++) {
                                 if (typeof option.chartCursor[keys[i]] !== 'object') {
                                     chartCursor[keys[i]] = option.chartCursor[keys[i]];
                                 }

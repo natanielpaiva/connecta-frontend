@@ -53,7 +53,7 @@ define([
                             "title": analysisVwColumn[i].analysisColumn.label,
                             "type": "column",
                             "valueField": analysisVwColumn[i].analysisColumn.label
-                        }
+                        };
                         newChart.graphs.push(graph);
                     }
 
@@ -83,7 +83,7 @@ define([
                             "title": analysisVwColumn[i].analysisColumn.label,
                             "type": "column",
                             "valueField": analysisVwColumn[i].analysisColumn.label
-                        }
+                        };
                         newChart.graphs.push(graph);
                     }
 
