@@ -32,8 +32,6 @@ define([
             });
         };
 
-
-
         this.getLayerColumns = function (serverUrl, layerName,scope) {
             var request = $http.get(mapsResources.openlayersProxy.replace("?","") + "?" + serverUrl + "/wfs?version=1.1.0&request=DescribeFeatureType&typeName=" + layerName + "&outputFormat=application/json");
             scope.layerCOLUMNS = '';
@@ -54,7 +52,6 @@ define([
             });
 
         };
-
 
         this.getLayerGeometryType = function (serverUrl, layerName,scope) {
             //http://192.168.2.10:9704/geoserver/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=estados_mira&maxFeatures=1&outputFormat=application/json
@@ -78,11 +75,6 @@ define([
 
         };
 
-
-
-
-
-
         this.list = function () {
             var url = mapsResources.layer;
             return $http.get(url);
@@ -96,8 +88,6 @@ define([
             var url = mapsResources.layer + '/' + id;
             return $http.delete(url);
         };
-
-
 
         this.retirarAcentos = function (string) {
 

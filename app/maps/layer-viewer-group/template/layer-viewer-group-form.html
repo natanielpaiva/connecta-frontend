@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="impl" translate>LAYERVIEWER.IMPL</label>
-                    <select class="form-control" name="impl" ng-model="viewerTypeImplEntity.id" required>
+                    <label for="impl" translate>LAYERVIEWERGROUP.IMPL</label>
+                    <select class="form-control" name="impl" id="viewerTypeImplEntity" ng-model="viewerTypeImplEntity.id" required>
                         <option value="">Selecione</option>
                         <option value="1">OpenLayers</option>
                         <option value="2">ESRI</option>
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <a href="#/maps/layer-viewer"
+            <a href="#/maps/layer-viewer-group"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>

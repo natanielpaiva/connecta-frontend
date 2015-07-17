@@ -269,7 +269,7 @@ define([
                 case '4':
 //                    $scope.analisys = ["option1", "option2", "option3", "option4", "option5"];
 //TESTE DO OBJETO DE ANÁLISES
-console.log("lool");
+                    console.log("lool");
                     $scope.analisys = {
                         "config": [{
                                 "columnLayer": "no_regiao",
@@ -354,7 +354,7 @@ console.log("lool");
             $scope.layerColumns = [];
             $scope.layerViewer.id_layer = "";
             if ($scope.layerViewer.layerViewerTypeEntity.id === "4") {
-                console.log("4444444",$scope.layerViewer.layerEntity);
+                console.log("4444444", $scope.layerViewer.layerEntity);
                 $scope.layerColumns = $scope.layerViewer.layerEntity.txt_columns.split("#");
             }
         };
@@ -386,7 +386,7 @@ console.log("lool");
             $scope.layerViewer.layerEntity = {"id": $scope.layerViewer.layerEntity.id};
 
             switch (parseInt($scope.layerViewer.layerViewerTypeEntity.id)) {
-                case 1:                    
+                case 1:
                     $scope.layerViewer.ds_param_names = "styleName";
 
                     if (typeof angular.element('#file-original').get(0).files[0] != 'undefined') {
@@ -396,7 +396,7 @@ console.log("lool");
                         formData.append('styleName', styleName);
                         formData.append('layerID', $scope.layerViewer.layerEntity.id);
                         formData.append("file", angular.element('#file-original').get(0).files[0]);
-                        LayerViewerService.createStyle(formData);                        
+                        LayerViewerService.createStyle(formData);
                     }
 
                     break;

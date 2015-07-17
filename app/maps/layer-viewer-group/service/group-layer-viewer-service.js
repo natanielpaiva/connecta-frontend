@@ -26,6 +26,11 @@ define([
             var url = mapsResources.groupLayerViewer + "/" + id;
             return $http.get(url);
         };
+        
+        this.getByGroup = function (group) {
+            var url = mapsResources.groupLayerViewer + "/listByGroup?group=" + group;
+            return $http.get(url);
+        };
 
         this.list = function () {
             var url = mapsResources.groupLayerViewer;

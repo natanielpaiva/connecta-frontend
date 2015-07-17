@@ -8,20 +8,30 @@ define([
 ], function (maps) {
     return maps.lazy.controller('LayerViewerGroupViewController', function ($scope, LayerViewerGroupService, GroupLayerViewerService, notify, ConnectaGeoService, $routeParams, $location, $modalTranslate, $translate) {
 
-        GroupLayerViewerService.get($routeParams.id).then(function (response) {
+        GroupLayerViewerService.getByGroup($routeParams.id).then(function (response) {
 
-            $scope.layerViewerGroup = response.data;
+            $scope.layerViewerGroup = response.data[0];
             
+            //id do nome do visualizaedor
+            $scope.idViewer = $scope.layerViewerGroup.layerViewerGroupEntity.id;
+
             $scope.remove = function (id) {
+                
+                //exclusao das layers do visualizador
                 GroupLayerViewerService.delete(id).then(function () {
-                    $translate('LAYERVIEWERGROUP.REMOVE_SUCCESS').then(function (text) {
-                        notify.success(text);
-                        $location.path('maps/layer-viewer-group');
-                    });
-                }, function (response) {
-                    $translate('LAYERVIEWERGROUP.ERROR_REMOVING').then(function (text) {
-                        notify.error(text);
-                        $location.path('maps/layer-viewer-group');
+                    
+                    //exclusao do nome do visualizador
+                    LayerViewerGroupService.delete($scope.idViewer).then(function () {
+                        $translate('LAYERVIEWERGROUP.REMOVE_SUCCESS').then(function (text) {
+                            notify.success(text);
+                            $location.path('maps/layer-viewer-group');
+
+                        });
+                    }, function (response) {
+                        $translate('LAYERVIEWERGROUP.ERROR_REMOVING').then(function (text) {
+                            notify.error(text);
+                            $location.path('maps/layer-viewer-group');
+                        });
                     });
                 });
             };
@@ -40,7 +50,7 @@ define([
             $modalTranslate($scope.modalParams, 'text', 'LAYERVIEWERGROUP.CONFIRM_DELETE');
 
 
-            ConnectaGeoService.showViewer($scope.layerViewerGroup);
+//            ConnectaGeoService.showViewer($scope.layerViewerGroup);
 
         });
 

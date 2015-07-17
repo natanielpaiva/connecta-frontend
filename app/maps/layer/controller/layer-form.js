@@ -29,7 +29,7 @@ define([
                         clearInterval(interval);
                     }
 
-                });
+                },50);
 
             });
         }

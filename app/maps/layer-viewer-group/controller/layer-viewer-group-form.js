@@ -9,8 +9,10 @@ define([
 
         $scope.types = LayerViewerService.getTypes();
 
-        $scope.layerViewerGroup = [];
-        
+        $scope.layerViewerGroup = null;
+
+        $scope.groupLayerViewer = null;
+
         $scope.viewerLayerGroups = [];
 
         $scope.isEditing = false;
@@ -20,10 +22,11 @@ define([
         $scope.layerColumns = [];
 
         $scope.viewerLayer = [];
+
         //escuta o obj de parameters para saber quando se adicionou uma novo combo de intervalo
         $scope.$watch('viewerTypeImplEntity.id', function (val) {
-            console.log("val", val);
 
+            //quando for um novo cadastro
             if (typeof val !== 'undefined') {
 
 
@@ -36,6 +39,36 @@ define([
 
                 }, function () {
                     console.info("ERROR");
+                });
+            } else {
+
+                $scope.isEditing = true;
+
+                GroupLayerViewerService.get($routeParams.id).then(function (result) {
+                    $scope.groupLayerViewer = result.data;
+
+                    $scope.layerViewerGroup = $scope.groupLayerViewer.layerViewerGroupEntity;
+                    console.log("$scope.groupLayerViewer ", $scope.groupLayerViewer);
+                    var dsViewers = $scope.groupLayerViewer.ds_viewers.split("#");
+
+                    var temp = setInterval(function () {
+
+                        //setando o valor do tipo de implementacao
+                        angular.element("#viewerTypeImplEntity").val(1);
+                        angular.element("#viewerTypeImplEntity").change();
+
+                        var temp2 = setInterval(function () {
+
+                            //levando os viewers para o lado escolhido
+                            for (var dsViewer in dsViewers) {
+                                console.log("dsViewers[dsViewer].id", dsViewers[dsViewer]);
+                                angular.element("#" + dsViewers[dsViewer]).click();
+                            }
+                            clearInterval(temp2);
+                        }, 200);
+                        clearInterval(temp);
+                    }, 50);
+
                 });
             }
         });
@@ -77,15 +110,11 @@ define([
         };
 
         $scope.submit = function () {
+            console.log("$scope.layerViewerGroup", $scope.layerViewerGroup);
+            LayerViewerGroupService.save($scope.layerViewerGroup).then(function (data) {
 
-            
-            var objLayerGroup = {"nm_viewer_group": $scope.layerViewerGroup.nm_viewer_group};
-            
-            LayerViewerGroupService.save(objLayerGroup).then(function (data) {
-                console.log("daaaata",data);
-                // preparando os id's das layers
-                var idLayersGroup = "";
-                
+                    var idLayersGroup = "";
+
                 for (var view in $scope.viewerLayerGroups) {
                     if (view === 0 || view === '0') {
                         idLayersGroup += $scope.viewerLayerGroups[view].id;
@@ -93,28 +122,27 @@ define([
                         idLayersGroup += "#" + $scope.viewerLayerGroups[view].id;
                     }
                 }
-//                lool = GroupLayerViewerService.list();
-                
-//                var objLayerGroup = {
-////                    "id_viewer_group": parseInt(data.data.id),
-//                    "id_relation": parseInt(data.data.id),
-//                    "ds_viewers": idLayersGroup
-//                };
-                var objLayerGroup = {
-//                    "id_viewer_group": parseInt(data.data.id),
-                    "layerViewerGroupEntity": {"id": 4},
-                    "ds_viewers": "lala"
-                };
-                GroupLayerViewerService.save(objLayerGroup).then(function (data) {
-                    console.log("ahsuahusha",data);
+                if (!$routeParams.id) {
                     
+                    // criando objeto para novo grupo
+                    $scope.groupLayerViewer = {
+                        "layerViewerGroupEntity": {"id": data.data.id},
+                        "ds_viewers": idLayersGroup
+                    };
+
+                } else {
                     
-                    
+                    // atualizando valor de layers para update
+                    $scope.groupLayerViewer.ds_viewers = idLayersGroup;
+                }
+
+                GroupLayerViewerService.save($scope.groupLayerViewer).then(function (data) {
+
                     $translate('LAYERVIEWERGROUP.ADDED_SUCCESS').then(function (text) {
                         notify.success(text);
                         $location.path('maps/layer-viewer-group');
                     });
-                    
+
                 });
             }, function (response) {
                 notify.error(response);
