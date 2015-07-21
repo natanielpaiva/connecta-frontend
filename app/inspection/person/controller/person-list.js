@@ -1,10 +1,10 @@
 define([
     'connecta.inspection',
-    'inspection/inspection/service/inspection-service',
+    'inspection/person/service/person-service',
     'portal/layout/service/notify'
 ], function (inspection) {
-    return inspection.lazy.controller('InspectionListController', function (
-            $scope, InspectionService, ngTableParams, notify) {
+    return inspection.lazy.controller('PersonListController', function (
+            $scope, PersonService, ngTableParams, notify) {
         
             
         $scope.search = {
@@ -17,7 +17,7 @@ define([
             filter: $scope.search
         }, {
             getData: function ($defer, params) {
-                return InspectionService.list(params.url()).then(function (response) {
+                return PersonService.list(params.url()).then(function (response) {
                     params.total(response.data.totalElements);
                     $defer.resolve(response.data.content);
                 });

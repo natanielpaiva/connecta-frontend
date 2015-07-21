@@ -1,5 +1,7 @@
 {
     "INSPECTION": {
-        "INSPECTION": "Inspeção"
+        "INSPECTION": "Inspeção",
+        "NAME": "Nome",
+        "INSPECTIONS": "Inspeções"
     }
 }
