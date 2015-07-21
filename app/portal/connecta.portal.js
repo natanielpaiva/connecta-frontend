@@ -62,6 +62,10 @@ define([
                 {
                     href: 'inspection',
                     title: 'Inspection'
+                },
+                {
+                    href: 'maps',
+                    title: 'Maps'
                 }
 //                {
 //                    href: 'maps',
