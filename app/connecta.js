@@ -10,6 +10,7 @@ define([
     'connecta.presenter',
     'connecta.maps',
     'connecta.datamodel',
+    'connecta.inspection',
     // Dependências principais
     'angular-route',
     'angular-resource',
@@ -33,7 +34,7 @@ define([
     'bower_components/amcharts/dist/amcharts/amcharts',
     'bower_components/amcharts-angular/dist/amChartsDirective',
     'bower_components/angular-redactor/angular-redactor'
-], function (angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel) {
+], function (angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel, inspection) {
 
     var connecta = angular.module('connecta', [
         'connecta.portal',
@@ -42,6 +43,7 @@ define([
         'connecta.presenter',
         'connecta.maps',
         'connecta.datamodel',
+        'connecta.inspection',
         'ngRoute',
         'ngResource',
         'ngCookies',
@@ -94,6 +96,7 @@ define([
         presenter.lazy = lazy;
         maps.lazy = lazy;
         datamodel.lazy = lazy;
+        inspection.lazy = lazy;
     }
 
     /**
@@ -144,7 +147,7 @@ define([
      * @returns {undefined}
      */
     function configureRoutes($routeProvider) {
-        var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, datamodel);
+        var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, datamodel, inspection);
 
         angular.forEach(allRoutes, function (route, url) {
             if (route.controllerUrl) {

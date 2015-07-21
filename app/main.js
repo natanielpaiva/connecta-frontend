@@ -22,7 +22,8 @@ require.config({
         'connecta.speaknow': 'speaknow/connecta.speaknow',
         'connecta.presenter': 'presenter/connecta.presenter',
         'connecta.maps': 'maps/connecta.maps',
-        'connecta.datamodel': 'datamodel/connecta.datamodel'
+        'connecta.datamodel': 'datamodel/connecta.datamodel',
+        'connecta.inspection': 'inspection/connecta.inspection'
     },
     shim: {
         'angular': {

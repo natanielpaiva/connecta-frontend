@@ -26,5 +26,9 @@
     "datamodel": {
         "title": "Datamodel",
         "host": "http://connectad.cds.com.br/connecta-datamodel"
+    },
+    "inspection": {
+        "title": "Inspection",
+        "host": "http://connectad.cds.com.br/connecta-inspection"
     }
 }

@@ -58,6 +58,10 @@ define([
                 {
                     href: 'speaknow',
                     title: 'Speaknow'
+                },
+                {
+                    href: 'inspection',
+                    title: 'Inspection'
                 }
 //                {
 //                    href: 'maps',
