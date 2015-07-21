@@ -2,7 +2,7 @@ define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $location, $rootScope) {
+    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location) {
         $scope.metrics = [];
         $scope.descriptions = [];
         sidebarService.config({
@@ -15,7 +15,7 @@ define([
             },
             src: 'app/presenter/viewer/template/combo-analysis.html'
         }).show();
-
+//        $scope.$broadcast("sidebarRight.show", false);
         $scope.analysisViewer = {
             "viewer": {
                 "name": "",
@@ -25,7 +25,6 @@ define([
             "metrics": [],
             "descriptions": []
         };
-
         $scope.$watchCollection('analysisViewer.metrics', function () {
             getPreview();
         });
@@ -35,8 +34,11 @@ define([
         });
 
         var getPreview = function () {
+            $scope.analysisViewer.viewer.configuration = $scope.amChartOptions;
+            
             ViewerService.preview($scope.analysisViewer).then(function (response) {
                 var newChart = response.data.analysisViewer.viewer.configuration;
+                var standardGraph = response.data.analysisViewer.viewer.configuration.graphs[0];
                 newChart.data = response.data.result;
                 newChart.graphs = [];
                 var analysisVwColumn = response.data.analysisViewer.analysisVwColumn;
@@ -46,14 +48,10 @@ define([
                     }
 
                     if (analysisVwColumn[i].type === 'METRIC') {
-                        var graph = {
-                            "balloonText": "[[title]] do [[category]] : [[value]]",
-                            "fillAlphas": 1,
-                            "id": "AmGraph-1",
-                            "title": analysisVwColumn[i].analysisColumn.label,
-                            "type": "column",
-                            "valueField": analysisVwColumn[i].analysisColumn.label
-                        };
+                        var graph = standardGraph;
+                        graph.title = analysisVwColumn[i].analysisColumn.label;
+                        graph.valueField = analysisVwColumn[i].analysisColumn.label;
+
                         newChart.graphs.push(graph);
                     }
 
@@ -65,86 +63,114 @@ define([
         };
 
         $scope.submit = function () {
+            $scope.analysisViewer.viewer.configuration = $scope.amChartOptions;
             ViewerService.save($scope.analysisViewer).then(function (response) {
-                var newChart = response.data.analysisViewer.viewer.configuration;
-                newChart.data = response.data.result;
-                newChart.graphs = [];
-                var analysisVwColumn = response.data.analysisViewer.analysisVwColumn;
-                for (var i in analysisVwColumn) {
-                    if (analysisVwColumn[i].type === 'DESCRIPTION') {
-                        newChart.categoryField = analysisVwColumn[i].analysisColumn.label;
-                    }
-
-                    if (analysisVwColumn[i].type === 'METRIC') {
-                        var graph = {
-                            "balloonText": "[[title]] do [[category]] : [[value]]",
-                            "fillAlphas": 1,
-                            "id": "AmGraph-1",
-                            "title": analysisVwColumn[i].analysisColumn.label,
-                            "type": "column",
-                            "valueField": analysisVwColumn[i].analysisColumn.label
-                        };
-                        newChart.graphs.push(graph);
-                    }
-
-                }
-
-                $scope.amChartOptions = "";
-                $scope.amChartOptions = newChart;
-                $scope.$broadcast("amCharts.renderChart", $scope.amChartOptions);
-                //$location.path('presenter/viewer');
-            }, function (response) {
+                $location.path('presenter/viewer');
             });
         };
 
         $scope.amChartOptions = {
             "type": "serial",
             "path": "https://www.amcharts.com/lib/3/",
-            "categoryField": "batata",
+            "categoryField": "category",
             "startDuration": 1,
             "categoryAxis": {
                 "gridPosition": "start"
             },
             "trendLines": [],
-            "graphs": [{
-                    "balloonText": "[[title]]",
+            "graphs": [
+                {
+                    "balloonText": "[[title]] of [[category]]:[[value]]",
                     "fillAlphas": 1,
                     "id": "AmGraph-1",
-                    "title": "Metrica",
+                    "title": "graph 1",
                     "type": "column",
-                    "valueField": "column"
+                    "valueField": "column-1"
+                },
+                {
+                    "balloonText": "[[title]] of [[category]]:[[value]]",
+                    "fillAlphas": 1,
+                    "id": "AmGraph-2",
+                    "title": "graph 2",
+                    "type": "column",
+                    "valueField": "column-2"
                 }
             ],
             "guides": [],
-            "valueAxes": [{
+            "valueAxes": [
+                {
                     "id": "ValueAxis-1",
                     "title": "Axis title"
-                }],
+                }
+            ],
             "allLabels": [],
             "balloon": {},
             "legend": {
                 "useGraphSettings": true
             },
-            "titles": [{
+            "titles": [
+                {
                     "id": "Title-1",
                     "size": 15,
                     "text": "Chart Title"
-                }],
-            "data": [{
-                    "batata": "asdfasfd",
-                    "column": 8
-
-                }, {
-                    "batata": "category 2",
-                    "column": 6
-                }]
+                }
+            ],
+            "data": [
+                {
+                    "category": "category 1",
+                    "column-1": 8,
+                    "column-2": 5
+                },
+                {
+                    "category": "category 2",
+                    "column-1": 6,
+                    "column-2": 7
+                },
+                {
+                    "category": "category 3",
+                    "column-1": 2,
+                    "column-2": 3
+                }
+            ]
         };
 
-//        $scope.$watch('amChartOptions', function (newValue, oldValue) {
-//            console.log(newValue);
-//            console.log(oldValue);
-//        });
+        if ($routeParams.id) {
+            ViewerService.getAnalysisViewer($routeParams.id).then(function (response) {
+                $scope.analysisViewer.viewer.name = response.data.viewer.name;
+                $scope.analysisViewer.viewer.description = response.data.viewer.description;
+                $scope.analysisViewer.id = response.data.id;
 
-        $scope.analysisViewer.viewer.configuration = $scope.amChartOptions;
+                var analysisColumns = response.data.analysisVwColumn;
+
+                for (var k in analysisColumns) {
+                    if (analysisColumns[k].type === "METRIC") {
+                        $scope.analysisViewer.metrics.push(analysisColumns[k].analysisColumn);
+                    }
+
+                    if (analysisColumns[k].type === "DESCRIPTION") {
+                        $scope.analysisViewer.descriptions.push(analysisColumns[k].analysisColumn);
+                    }
+                }
+                $scope.analysisViewer.viewer.configuration = response.data.viewer.configuration;
+                $scope.amChartOptions = response.data.viewer.configuration;
+                getPreview();
+
+            }, function (response) {
+                console.log(response.data);
+            });
+
+        } else {
+            if ($routeParams.template && $routeParams.type) {
+                ViewerService.getTemplates($routeParams.type, $routeParams.template)
+                        .then(function (response) {
+                            var dados = response.data;
+                            dados.data = response.data.dataProvider;
+                            $scope.amChartOptions = dados;
+                            $scope.$broadcast("amCharts.renderChart", $scope.amChartOptions);
+                        });
+            }
+            $scope.analysisViewer.viewer.configuration = $scope.amChartOptions;
+        }
+
     });
 });

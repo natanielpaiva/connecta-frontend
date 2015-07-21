@@ -20,11 +20,16 @@ define([
             controller:function($scope, layoutService) {
                 $scope.showAsFlat = false;
                 $scope.showSidebar = layoutService.isSidebarVisible();
+                $scope.showSidebarRight = layoutService.isSidebarRightVisible();
                 /**
                  * Evento para exibir a barra lateral
                  */
                 $scope.$on('menu.show', function () {
                     $scope.showSidebar = true;
+                });
+                
+                $scope.$on('sidebarRight.show', function () {
+                    $scope.showSidebarRight = true;
                 });
 
                 /**

@@ -46,7 +46,8 @@ define([
             hierarchy: appPresenter.host + '/hierarchy',
             hierarchyItem: appPresenter.host + '/hierarchy/hierarchy-item',
             group: appPresenter.host + '/group',
-            viewer:appPresenter.host + '/analysis-viewer'
+            viewer:appPresenter.host + '/viewer',
+            analysisViewer:appPresenter.host + '/analysis-viewer'
         });
     });
 
@@ -141,7 +142,27 @@ define([
             controllerUrl: 'presenter/hierarchy/controller/hierarchy-view',
             templateUrl: 'app/presenter/hierarchy/template/hierarchy-view.html'
         },
+        '/presenter/viewer/new/:type/:template': {
+            controller: 'ViewerFormController',
+            controllerUrl: 'presenter/viewer/controller/viewer-form',
+            templateUrl: 'app/presenter/viewer/template/viewer-form.html'
+        },
         '/presenter/viewer/new': {
+            controller: 'ViewerFormController',
+            controllerUrl: 'presenter/viewer/controller/viewer-form',
+            templateUrl: 'app/presenter/viewer/template/viewer-form.html'
+        },
+        '/presenter/viewer/template': {
+            controller: 'TemplateController',
+            controllerUrl: 'presenter/viewer/controller/template',
+            templateUrl: 'app/presenter/viewer/template/template.html'
+        },
+        '/presenter/viewer': {
+            controller: 'ViewerListController',
+            controllerUrl: 'presenter/viewer/controller/viewer-list',
+            templateUrl: 'app/presenter/viewer/template/viewer-list.html'
+        },
+        '/presenter/viewer/:id/edit': {
             controller: 'ViewerFormController',
             controllerUrl: 'presenter/viewer/controller/viewer-form',
             templateUrl: 'app/presenter/viewer/template/viewer-form.html'

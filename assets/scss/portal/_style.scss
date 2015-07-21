@@ -168,7 +168,7 @@ blockquote small{
     width: 100%;
     margin: 0;
     padding: 0;
-    /* margin-left: -15px; */
+    margin-left: -15px; 
 }
 
 // Utilizar em links para usar o tamanho todo do container
@@ -193,6 +193,10 @@ blockquote small{
 
 .font-size-big {
     font-size: $fontSizeBig !important;
+}
+
+.font-size-middle {
+    font-size: $fontSizeMiddle !important;
 }
 
 .font-white {

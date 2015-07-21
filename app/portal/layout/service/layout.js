@@ -12,6 +12,7 @@ define([
      */
     return portal.service('layoutService', function ($rootScope, $cookieStore) {
         var SIDEBAR = 'connecta.portal.layout.menu';
+        var SIDEBARRIGHT = true;
 
          var isShowPageTabs = false;
         
@@ -29,6 +30,11 @@ define([
         this.toggleSidebar = function () {
             $cookieStore.put( SIDEBAR, !$cookieStore.get(SIDEBAR) );
             broadcastEvent($cookieStore.get(SIDEBAR));
+        };
+        
+        this.toggleSidebarRight = function () {
+            $cookieStore.put( SIDEBARRIGHT, !$cookieStore.get(SIDEBARRIGHT) );
+            broadcastEvent($cookieStore.get(SIDEBARRIGHT));
         };
         /**
          * Oculta e exibe a lista de páginas abertas
@@ -49,6 +55,10 @@ define([
          */
         this.isSidebarVisible = function(){
             return $cookieStore.get(SIDEBAR);
+        };
+        
+        this.isSidebarRightVisible = function(){
+            return $cookieStore.get(SIDEBARRIGHT);
         };
 
         this.showAsFlat = function(flat){

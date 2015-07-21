@@ -39,7 +39,7 @@ define([
                         }
                         );
             }
-            
+
             delete analysisViewer.metrics;
             delete analysisViewer.descriptions;
 
@@ -47,7 +47,7 @@ define([
 
         this.save = function (analysisViewer) {
             var analysisViewerCopy = angular.copy(analysisViewer);
-            var url = presenterResources.viewer;
+            var url = presenterResources.analysisViewer;
 
             filterAnalysisViewer(analysisViewerCopy);
             console.log(analysisViewerCopy);
@@ -57,18 +57,38 @@ define([
                 return $http.put(url, analysisViewerCopy);
             }
         };
-        
+
         this.preview = function (analysisViewer) {
             var analysisViewerCopy = angular.copy(analysisViewer);
-            var url = presenterResources.viewer + "/preview";
-
+            var url = presenterResources.analysisViewer + "/preview";
             filterAnalysisViewer(analysisViewerCopy);
-            console.log(analysisViewerCopy);
-            if (analysisViewer.id === undefined) {
-                return $http.post(url, analysisViewerCopy);
-            } else {
-                return $http.put(url, analysisViewerCopy);
-            }
+            return $http.post(url, analysisViewerCopy);
+        };
+
+        this.list = function (params) {
+            var url = presenterResources.analysisViewer;
+            return $http.get(url, {
+                params: params
+            });
+        };
+
+        this.getTemplates = function (type, template) {
+            var url = '';
+            if (type !== undefined && template !== undefined)
+                url = presenterResources.viewer + "/chart-template/" + type + "/" + template;
+            else
+                url = presenterResources.viewer + "/chart-template";
+            return $http.get(url);
+        };
+        
+        this.getAnalysisViewer = function (id) {
+            var url = presenterResources.analysisViewer + "/" + id;
+            return $http.get(url);
+        };
+        
+        this.delete= function(id){
+            var url = presenterResources.analysisViewer + "/" +id;
+            return $http.delete(url);
         };
 
     });

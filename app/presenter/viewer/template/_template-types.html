@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h3 class="modal-title">Escolha o gráfico de exemplo</h3>
+</div>
+<div class="modal-body">
+    <tabset  type="pills">
+        <tab ng-repeat="t in templates">
+            <tab-heading>Chart-{{t.id}}</tab-heading>
+            <div class="container-gallery">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <ul class="gallery-view">
+                                <li ng-repeat="types in t.templates" >
+                                    <a ng-click="ok()" href="#/presenter/viewer/new/{{t.id}}/{{types.id}}">
+                                        <span ng-if="t.id === 'column'" class="font-size-middle icon-chart4" ></span>
+                                        <span ng-if="t.id === 'bar'" class="font-size-middle icon-chart6" ></span>
+                                        <span ng-if="t.id === 'line'" class="font-size-middle icon-line-graph" ></span>
+                                        <span ng-if="t.id === 'pie-donut'" class="font-size-middle icon-pie-chart" ></span>
+                                        <span ng-if="t.id === 'area'" class="font-size-middle icon-area-graph" ></span>
+                                        <span ng-if="t.id === 'other'" class="font-size-middle icon-circular-graph" ></span>
+                                        <span ng-if="t.id === 'xy-scatter-bubble'" class="font-size-middle icon-circular-graph" ></span>
+                                        <div>{{types.id}}</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div>

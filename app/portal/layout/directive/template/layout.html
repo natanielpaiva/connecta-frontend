@@ -1,8 +1,7 @@
-<div ng-class="{ 'hide-sidebar' : !showSidebar }">
+<div ng-class="{ 'hide-sidebar' : !showSidebar, 'show-sidebar': showSidebar }" >
     <heading></heading>
     <menu></menu>
     <sidebar>
-    
         <div ng-if="sidebar.controller" ng-controller="sidebar.controller">
         </div>
     </sidebar>
@@ -12,3 +11,4 @@
     </div>
 
 </div>
+
