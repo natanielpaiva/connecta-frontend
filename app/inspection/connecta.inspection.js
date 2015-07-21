@@ -29,6 +29,11 @@ define([
             controller: 'PersonListController',
             controllerUrl: 'inspection/person/controller/person-list',
             templateUrl: 'app/inspection/person/template/person-list.html'
+        },
+        '/inspection/person/new': {
+            controller: 'PersonFormController',
+            controllerUrl: 'inspection/person/controller/person-form',
+            templateUrl: 'app/inspection/person/template/person-form.html'
         }
     };
 

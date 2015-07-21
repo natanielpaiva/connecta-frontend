@@ -8,5 +8,10 @@ define([
             return $http.get(url, {params: params});
         };
         
+        this.save = function (person) {
+            var url = inspectionResource.person;
+            return $http.post(url, person);
+        };
+        
     });
 });

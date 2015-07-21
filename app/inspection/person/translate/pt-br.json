@@ -3,6 +3,15 @@
         "PERSON": "Pessoa",
         "PEOPLE": "Pessoas",
         "NAME": "Name",
-        "TYPE": "Type"
+        "TYPE": "Type",
+        "REGISTER_PERSON":"Adicionar Pessoa",
+        "PHONE":"Telefone",
+        "EMAIL":"Email",
+        "CEP":"CEP",
+        "COUNTRY":"País",
+        "COUNTY":"Município",
+        "STATE":"Estado",
+        "ADDRESS":"Endereço",
+        "REGISTRY":"Registro"
     }
 }
