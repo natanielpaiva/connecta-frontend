@@ -2,9 +2,12 @@ define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location) {
+    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, layoutService) {
         $scope.metrics = [];
         $scope.descriptions = [];
+
+        layoutService.showSidebarRight(true);
+
         sidebarService.config({
             controller: function ($scope) {
                 $scope.analysis = "";
@@ -14,8 +17,17 @@ define([
 
             },
             src: 'app/presenter/viewer/template/combo-analysis.html'
-        }).show();
-//        $scope.$broadcast("sidebarRight.show", false);
+        });
+
+
+
+        $scope.$on("$locationChangeStart", function (event) {
+            layoutService.showSidebarRight(false);
+            sidebarService.config();
+        });
+
+
+
         $scope.analysisViewer = {
             "viewer": {
                 "name": "",
@@ -35,7 +47,7 @@ define([
 
         var getPreview = function () {
             $scope.analysisViewer.viewer.configuration = $scope.amChartOptions;
-            
+
             ViewerService.preview($scope.analysisViewer).then(function (response) {
                 var newChart = response.data.analysisViewer.viewer.configuration;
                 var standardGraph = response.data.analysisViewer.viewer.configuration.graphs[0];

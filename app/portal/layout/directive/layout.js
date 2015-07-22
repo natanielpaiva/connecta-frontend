@@ -20,7 +20,7 @@ define([
             controller:function($scope, layoutService) {
                 $scope.showAsFlat = false;
                 $scope.showSidebar = layoutService.isSidebarVisible();
-//                $scope.showSidebarRight = layoutService.isSidebarRightVisible();
+                $scope.showSidebarRight = false;
                 /**
                  * Evento para exibir a barra lateral
                  */
@@ -28,17 +28,17 @@ define([
                     $scope.showSidebar = true;
                 });
                 
-//                $scope.$on('sidebarRight.show', function () {
-//                    $scope.showSidebarRight = true;
-//                });
+                $scope.$on('sidebarRight.show', function (ev, val) {
+                    $scope.showSidebarRight = val;
+                });
 
                 /**
                  * Evento para ocultar a barra lateral
                  */
-                $scope.$on('menu.hide', function () {
+                $scope.$on('sidebarRight.hide', function () {
                     $scope.showSidebar = false;
                 });
-
+                
                 /**
                  * Evento para mostrar o page container sem fundo
                  * e sem padding
