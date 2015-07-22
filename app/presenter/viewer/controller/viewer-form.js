@@ -23,7 +23,10 @@ define([
 
         $scope.$on("$locationChangeStart", function (event) {
             layoutService.showSidebarRight(false);
-            sidebarService.config();
+            sidebarService.config({
+                controller: function () {
+                }
+            });
         });
 
 
@@ -47,31 +50,31 @@ define([
 
         var getPreview = function () {
             $scope.analysisViewer.viewer.configuration = $scope.amChartOptions;
+            if ($scope.analysisViewer.metrics.length > 0 && $scope.analysisViewer.descriptions.length > 0) {
+                ViewerService.preview($scope.analysisViewer).then(function (response) {
+                    var newChart = response.data.analysisViewer.viewer.configuration;
+                    var standardGraph = response.data.analysisViewer.viewer.configuration.graphs[0];
+                    newChart.data = response.data.result;
+                    newChart.graphs = [];
+                    var analysisVwColumn = response.data.analysisViewer.analysisVwColumn;
+                    for (var i in analysisVwColumn) {
+                        if (analysisVwColumn[i].type === 'DESCRIPTION') {
+                            newChart.categoryField = analysisVwColumn[i].analysisColumn.label;
+                        }
 
-            ViewerService.preview($scope.analysisViewer).then(function (response) {
-                var newChart = response.data.analysisViewer.viewer.configuration;
-                var standardGraph = response.data.analysisViewer.viewer.configuration.graphs[0];
-                newChart.data = response.data.result;
-                newChart.graphs = [];
-                var analysisVwColumn = response.data.analysisViewer.analysisVwColumn;
-                for (var i in analysisVwColumn) {
-                    if (analysisVwColumn[i].type === 'DESCRIPTION') {
-                        newChart.categoryField = analysisVwColumn[i].analysisColumn.label;
+                        if (analysisVwColumn[i].type === 'METRIC') {
+                            var graph = standardGraph;
+                            graph.title = analysisVwColumn[i].analysisColumn.label;
+                            graph.valueField = analysisVwColumn[i].analysisColumn.label;
+
+                            newChart.graphs.push(graph);
+                        }
+
                     }
-
-                    if (analysisVwColumn[i].type === 'METRIC') {
-                        var graph = standardGraph;
-                        graph.title = analysisVwColumn[i].analysisColumn.label;
-                        graph.valueField = analysisVwColumn[i].analysisColumn.label;
-
-                        newChart.graphs.push(graph);
-                    }
-
-                }
-
-                $scope.amChartOptions = newChart;
-                $scope.$broadcast("amCharts.renderChart", $scope.amChartOptions);
-            });
+                    $scope.amChartOptions = newChart;
+                    $scope.$broadcast("amCharts.renderChart", $scope.amChartOptions);
+                });
+            }
         };
 
         $scope.submit = function () {

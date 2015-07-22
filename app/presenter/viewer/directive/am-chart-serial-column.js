@@ -54,7 +54,7 @@ define([
 
                             if (categoryAxis) {
                                 keys = Object.keys(option.categoryAxis);
-                                for ( i = 0; i < keys.length; i++) {
+                                for (i = 0; i < keys.length; i++) {
                                     if (!angular.isObject(option.categoryAxis[keys[i]]) || angular.isArray(option.categoryAxis[keys[i]])) {
                                         categoryAxis[keys[i]] = option.categoryAxis[keys[i]];
                                     } else {
@@ -79,7 +79,7 @@ define([
                         };
 
                         if (option.valueAxes && option.valueAxes.length > 0) {
-                            for ( i = 0; i < option.valueAxes.length; i++) {
+                            for (i = 0; i < option.valueAxes.length; i++) {
                                 addValueAxis(option.valueAxes[i]);
                             }
                         }
@@ -93,7 +93,7 @@ define([
                             if (g) {
                                 var keys = Object.keys(g);
                                 // iterate over all of the properties in the graph object and apply them to the new AmGraph
-                                for ( i = 0; i < keys.length; i++) {
+                                for (i = 0; i < keys.length; i++) {
                                     graph[keys[i]] = g[keys[i]];
                                 }
                             }
@@ -101,7 +101,7 @@ define([
                         };
 
                         if (option.graphs && option.graphs.length > 0) {
-                            for ( i = 0; i < option.graphs.length; i++) {
+                            for (i = 0; i < option.graphs.length; i++) {
                                 addGraph(option.graphs[i]);
                             }
                         } else {
@@ -111,7 +111,7 @@ define([
                         var chartCursor = new AmCharts.ChartCursor();
                         if (option.chartCursor) {
                             keys = Object.keys(option.chartCursor);
-                            for ( i = 0; i < keys.length; i++) {
+                            for (i = 0; i < keys.length; i++) {
                                 if (typeof option.chartCursor[keys[i]] !== 'object') {
                                     chartCursor[keys[i]] = option.chartCursor[keys[i]];
                                 }
@@ -119,7 +119,7 @@ define([
                             chart.addChartCursor(chartCursor);
                         }
 
-
+                        keys = "";
                         // WRITE
                         chart.write(id);
 
