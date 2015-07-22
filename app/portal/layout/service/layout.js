@@ -32,10 +32,10 @@ define([
             broadcastEvent($cookieStore.get(SIDEBAR));
         };
         
-        this.toggleSidebarRight = function () {
-            $cookieStore.put( SIDEBARRIGHT, !$cookieStore.get(SIDEBARRIGHT) );
-            broadcastEvent($cookieStore.get(SIDEBARRIGHT));
-        };
+//        this.toggleSidebarRight = function () {
+//            $cookieStore.put( SIDEBARRIGHT, !$cookieStore.get(SIDEBARRIGHT) );
+//            broadcastEvent($cookieStore.get(SIDEBARRIGHT));
+//        };
         /**
          * Oculta e exibe a lista de páginas abertas
          *
@@ -57,9 +57,9 @@ define([
             return $cookieStore.get(SIDEBAR);
         };
         
-        this.isSidebarRightVisible = function(){
-            return $cookieStore.get(SIDEBARRIGHT);
-        };
+//        this.isSidebarRightVisible = function(){
+//            return $cookieStore.get(SIDEBARRIGHT);
+//        };
 
         this.showAsFlat = function(flat){
           $rootScope.$broadcast('page.flat', flat);
