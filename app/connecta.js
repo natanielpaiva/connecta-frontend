@@ -32,7 +32,6 @@ define([
     'bower_components/angular-messages/angular-messages.min',
     'bower_components/ng-file-upload/angular-file-upload.min',
     'bower_components/amcharts/dist/amcharts/amcharts',
-    'bower_components/amcharts-angular/dist/amChartsDirective',
     'bower_components/angular-redactor/angular-redactor'
 ], function (angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel, inspection) {
 
@@ -50,7 +49,6 @@ define([
         'ngAnimate',
         'ngTouch',
         'ngLocale',
-        'amChartsDirective',
         'ngTable',
         'ngDraggable',
         'ngTagsInput',
@@ -287,7 +285,7 @@ define([
         'portal/layout/filter/data-uri',
         'portal/layout/directive/file-model',
         'portal/layout/directive/conf-modal',
-        'presenter/viewer/directive/am-chart-serial-column',
+        'presenter/viewer/directive/am-chart-serial',
         'inspection/inspection/directive/box-table-inspection'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);

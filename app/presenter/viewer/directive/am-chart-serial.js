@@ -6,7 +6,7 @@ define([
      * Componente usado para renderizar os gráficos de barra
      * @param {type} applicationsService
      */
-    return presenter.directive('amChartSerialColumn', function () {
+    return presenter.directive('amChartSerial', function () {
         return {
             restrict: 'E',
             replace: true,
@@ -15,7 +15,7 @@ define([
                 height: '=',
                 width: '='
             },
-            templateUrl: 'app/presenter/viewer/directive/template/am-chart-serial-column.html',
+            templateUrl: 'app/presenter/viewer/directive/template/am-chart.html',
             link: function ($scope, $el) {
 
                 var id = $el[0].id;
@@ -48,6 +48,9 @@ define([
                                 chart[chartKeys[i]] = option[chartKeys[i]];
                             }
                         }
+
+                        chart.titleField = option.titleField;
+                        chart.valueField = option.valueField;
 
                         if (option.categoryAxis) {
                             var categoryAxis = chart.categoryAxis;
@@ -86,13 +89,10 @@ define([
 
                         var addGraph = function (g) {
                             var graph = new AmCharts.AmGraph();
-                            /** set some default values that amCharts doesnt provide **/
-                            // if a category field is not specified, attempt to use the second field from an object in the array as a default value
                             graph.valueField = g.valueField || Object.keys(option.data[0])[1];
                             graph.balloonText = '<span style="font-size:14px">[[category]]: <b>[[value]]</b></span>';
                             if (g) {
                                 var keys = Object.keys(g);
-                                // iterate over all of the properties in the graph object and apply them to the new AmGraph
                                 for (i = 0; i < keys.length; i++) {
                                     graph[keys[i]] = g[keys[i]];
                                 }
@@ -107,23 +107,16 @@ define([
                         } else {
                             addGraph();
                         }
+                        chart.chartCursor = option.chartCursor;
+                        chart.legend = option.legend;
+                        chart.chartScrollbar = option.chartScrollbar;
 
-                        var chartCursor = new AmCharts.ChartCursor();
-                        if (option.chartCursor) {
-                            keys = Object.keys(option.chartCursor);
-                            for (i = 0; i < keys.length; i++) {
-                                if (typeof option.chartCursor[keys[i]] !== 'object') {
-                                    chartCursor[keys[i]] = option.chartCursor[keys[i]];
-                                }
+                        for (var t in chart) {
+                            if (option[t] !== undefined) {
+                                chart[t] = option[t];
                             }
-                            chart.addChartCursor(chartCursor);
                         }
-
-                        keys = "";
-                        // WRITE
                         chart.write(id);
-
-
                     };
 
                     renderChart();
