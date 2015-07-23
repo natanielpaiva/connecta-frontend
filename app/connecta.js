@@ -287,7 +287,8 @@ define([
         'portal/layout/filter/data-uri',
         'portal/layout/directive/file-model',
         'portal/layout/directive/conf-modal',
-        'presenter/viewer/directive/am-chart-serial-column'
+        'presenter/viewer/directive/am-chart-serial-column',
+        'inspection/inspection/directive/box-table-inspection'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });

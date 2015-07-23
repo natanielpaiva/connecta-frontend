@@ -2,17 +2,18 @@
     <div class="col-md-12">
         <h3 translate>INSPECTION.INSPECTIONS</h3>
 
-        <a class="btn btn-default" href="#/inspection/inspection/new" translate>
+        <a class="btn btn-default" href="#/inspection/new" translate>
             <span class="glyphicon glyphicon-plus"></span>
         </a>
 
-<!--        //TODO filtros e search da Grid-->
+        <!--        //TODO filtros e search da Grid-->
         <div class="margin-top-single">
             <form novalidate name="formulario">
                 <div class="row">
                     <div class="col-md-1">
                         <button type="button" ng-click="filter = !filter" class="btn btn-info" translate>LAYOUT.FILTER</button>
                     </div>
+
                     <div class="col-md-11">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -52,8 +53,8 @@
             <tbody>
                 <tr ng-repeat="inspection in $data">
                     <td>
-					 <input type="checkbox" value="{{inspection.id}}" />
-					</td>
+                        <input type="checkbox" value="{{inspection.id}}" />
+                    </td>
                     <td class="text-left">{{inspection.name}}</td>
                     <td>
                         <div class="btn-group">
