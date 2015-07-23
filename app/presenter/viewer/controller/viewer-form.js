@@ -72,6 +72,7 @@ define([
 
                     }
                     $scope.amChartOptions = newChart;
+                    delete $scope.amChartOptions.dataProvider; 
                     $scope.$broadcast("amCharts.renderChart", $scope.amChartOptions);
                 });
             }
