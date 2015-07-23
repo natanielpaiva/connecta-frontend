@@ -1,0 +1,23 @@
+{
+    "INSTRUMENT": {
+        "INSTRUMENT": "Instrumento",
+        "INSTRUMENTS": "Instrumentos",
+        "ADD": "Adicionar Instrumento",
+        "EDIT": "Editar Instrumento",
+        "VIEW": "Visualizar Instrumento",
+        "CODE": "Código",
+        "NAME": "Nome",
+        "REGISTER_INSTRUMENT": "Adicionar Instrumento",
+        "CERTIFICATE": "Número Certificado",
+        "CALIBRATION_DATE": "Data  Calibração",
+        "VALIDATION_DATE": "Validade",
+        "MANUFACTURER_NAME": "Fabricante",
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Instrumento",
+        "CONFIRM_DELETE": "Deseja realmente excluir o Instrumento?",
+        "DATEPICKER_TODAY":"Hoje",
+        "DATEPICKER_CLEAR":"Limpar",
+        "DATEPICKER_CLOSE":"Fechar"
+    }
+}

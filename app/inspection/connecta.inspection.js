@@ -1,11 +1,12 @@
 define([
     'angular'
 ], function (angular) {
-    var inspection = angular.module('connecta.inspection', []);
+    var inspection = angular.module('connecta.inspection', ['ui.bootstrap']);
 
     inspection.config(function ($translatePartialLoaderProvider) {
         $translatePartialLoaderProvider.addPart('inspection/inspection');
         $translatePartialLoaderProvider.addPart('inspection/person');
+        $translatePartialLoaderProvider.addPart('inspection/instrument');
     });
 
     inspection.run(function (applications) {
@@ -14,7 +15,8 @@ define([
         inspection.lazy.value('inspectionResource', {
             base: appInspection.host,
             inspection: appInspection.host + '/inspection',
-            person: appInspection.host + '/person'
+            person: appInspection.host + '/person',
+            instrument: appInspection.host + '/instrument'
         });
 
     });
@@ -34,19 +36,46 @@ define([
             controller: 'PersonFormController',
             controllerUrl: 'inspection/person/controller/person-form',
             templateUrl: 'app/inspection/person/template/person-form.html'
+        },
+        '/inspection/instrument': {
+            controller: 'InstrumentListController',
+            controllerUrl: 'inspection/instrument/controller/instrument-list',
+            templateUrl: 'app/inspection/instrument/template/instrument-list.html'
+        },
+        '/inspection/instrument/new': {
+            controller: 'InstrumentFormController',
+            controllerUrl: 'inspection/instrument/controller/instrument-form',
+            templateUrl: 'app/inspection/instrument/template/instrument-form.html'
+        },
+        '/inspection/instrument/:id': {
+            controller: 'InstrumentViewController',
+            controllerUrl: 'inspection/instrument/controller/instrument-view',
+            templateUrl: 'app/inspection/instrument/template/instrument-view.html'
+        },
+        '/inspection/instrument/:id/edit': {
+            controller: 'InstrumentFormController',
+            controllerUrl: 'inspection/instrument/controller/instrument-form',
+            templateUrl: 'app/inspection/instrument/template/instrument-form.html'
         }
+
     };
 
     inspection._menu = [
         {
             href: 'inspection',
-            title: 'INSPECTION.INSPECTIONS3',
+            title: 'INSPECTION.INSPECTIONS',
             icon: 'icon-settings',
             children: []
         },
         {
             href: 'inspection/person',
             title: 'PERSON.PEOPLE',
+            icon: 'icon-settings',
+            children: []
+        },
+        {
+            href: 'inspection/instrument',
+            title: 'INSTRUMENT.INSTRUMENTS',
             icon: 'icon-settings',
             children: []
         }
