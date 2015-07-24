@@ -285,7 +285,11 @@ define([
         'portal/layout/filter/data-uri',
         'portal/layout/directive/file-model',
         'portal/layout/directive/conf-modal',
+        'presenter/viewer/directive/am-charts',
         'presenter/viewer/directive/am-chart-serial',
+        'presenter/viewer/directive/am-chart-pie-donut',
+        'presenter/viewer/directive/am-chart-xy',
+        'presenter/viewer/directive/am-chart-radar',
         'inspection/inspection/directive/box-table-inspection'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
