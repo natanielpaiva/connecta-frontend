@@ -1,12 +1,12 @@
 define([
     'connecta.presenter',
-    'bower_components/amcharts/dist/amcharts/pie'
+    'bower_components/amcharts/dist/amcharts/gauge'
 ], function (presenter) {
     /**
      * Componente usado para renderizar os gráficos de barra
      * @param {type} applicationsService
      */
-    return presenter.directive('amChartPieDonut', function () {
+    return presenter.directive('amChartGauge', function () {
         return {
             restrict: 'E',
             replace: true,
@@ -30,13 +30,11 @@ define([
                 $el.attr('id', id);
                 var chart;
 
-                if ($scope.options.data) {
                     //Função que renderiza o gráfico na tela
                     var renderChart = function (amChartOptions) {
                         var option = amChartOptions || $scope.options;
-                        //Instanciando o chart de pie
-                        chart = new AmCharts.AmPieChart();
-                        chart.dataProvider = option.data;
+                        //Instanciando o chart de gauge
+                        chart = new AmCharts.AmAngularGauge();
 
                         //Colocando no objeto chart todos as propriedades que vierem no option
                         var chartKeys = Object.keys(option);
@@ -58,7 +56,6 @@ define([
                             renderChart(amChartOptions);
                         }
                     });
-                }
             }
         };
     });

@@ -1,12 +1,12 @@
 define([
     'connecta.presenter',
-    'bower_components/amcharts/dist/amcharts/pie'
+    'bower_components/amcharts/dist/amcharts/funnel'
 ], function (presenter) {
     /**
      * Componente usado para renderizar os gráficos de barra
      * @param {type} applicationsService
      */
-    return presenter.directive('amChartPieDonut', function () {
+    return presenter.directive('amChartFunnel', function () {
         return {
             restrict: 'E',
             replace: true,
@@ -34,8 +34,8 @@ define([
                     //Função que renderiza o gráfico na tela
                     var renderChart = function (amChartOptions) {
                         var option = amChartOptions || $scope.options;
-                        //Instanciando o chart de pie
-                        chart = new AmCharts.AmPieChart();
+                        //Instanciando o chart de funnel
+                        chart = new AmCharts.AmFunnelChart();
                         chart.dataProvider = option.data;
 
                         //Colocando no objeto chart todos as propriedades que vierem no option

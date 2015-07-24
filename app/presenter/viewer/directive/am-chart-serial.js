@@ -3,124 +3,55 @@ define([
     'bower_components/amcharts/dist/amcharts/serial'
 ], function (presenter) {
     /**
-     * Componente usado para renderizar os gráficos de barra
-     * @param {type} applicationsService
+     * Componente usado para renderizar os gráficos de type serial
      */
     return presenter.directive('amChartSerial', function () {
         return {
             restrict: 'E',
             replace: true,
             scope: {
-                options: '=',
-                height: '=',
-                width: '='
+                options: '='
             },
             templateUrl: 'app/presenter/viewer/directive/template/am-chart.html',
             link: function ($scope, $el) {
+                //Gerando um uid para colocar no elemento
+                var guid = function guid() {
+                    function s4() {
+                        return Math.floor((1 + Math.random()) * 0x10000)
+                                .toString(16)
+                                .substring(1);
+                    }
+                    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                            s4() + '-' + s4() + s4() + s4();
+                };
 
-                var id = $el[0].id;
+                var id = guid();
                 $el.attr('id', id);
-
                 var chart;
 
                 if ($scope.options.data) {
+                    //Função que renderiza o gráfico na tela
                     var renderChart = function (amChartOptions) {
                         var option = amChartOptions || $scope.options;
-                        var keys = 0;
-
-                        //Tamanho e largura default do gráfico
-                        var height = $scope.height || '20rem';
-                        var width = $scope.width || '50rem';
-
-//                        $el.css({
-//                            'height': height,
-//                            'width': width
-//                        });
-
                         //Instanciando o chart de serial
                         chart = new AmCharts.AmSerialChart();
-
                         chart.dataProvider = option.data;
 
+                        //Colocando no objeto chart todos as propriedades que vierem no option
                         var chartKeys = Object.keys(option);
                         for (var i = 0; i < chartKeys.length; i++) {
                             if (typeof option[chartKeys[i]] !== 'object' && typeof option[chartKeys[i]] !== 'function') {
                                 chart[chartKeys[i]] = option[chartKeys[i]];
+                            } else {
+                                chart[chartKeys[i]] = angular.copy(option[chartKeys[i]]);
                             }
                         }
-
-                        chart.titleField = option.titleField;
-                        chart.valueField = option.valueField;
-
-                        if (option.categoryAxis) {
-                            var categoryAxis = chart.categoryAxis;
-
-                            if (categoryAxis) {
-                                keys = Object.keys(option.categoryAxis);
-                                for (i = 0; i < keys.length; i++) {
-                                    if (!angular.isObject(option.categoryAxis[keys[i]]) || angular.isArray(option.categoryAxis[keys[i]])) {
-                                        categoryAxis[keys[i]] = option.categoryAxis[keys[i]];
-                                    } else {
-                                        console.log('Stripped categoryAxis obj ' + keys[i]);
-                                    }
-                                }
-                                chart.categoryAxis = categoryAxis;
-                            }
-
-                        }
-
-                        var addValueAxis = function (a) {
-                            var valueAxis = new AmCharts.ValueAxis();
-
-                            keys = Object.keys(a);
-                            for (i = 0; i < keys.length; i++) {
-                                if (typeof a[keys[i]] !== 'object') {
-                                    valueAxis[keys[i]] = a[keys[i]];
-                                }
-                            }
-                            chart.addValueAxis(valueAxis);
-                        };
-
-                        if (option.valueAxes && option.valueAxes.length > 0) {
-                            for (i = 0; i < option.valueAxes.length; i++) {
-                                addValueAxis(option.valueAxes[i]);
-                            }
-                        }
-
-                        var addGraph = function (g) {
-                            var graph = new AmCharts.AmGraph();
-                            graph.valueField = g.valueField || Object.keys(option.data[0])[1];
-                            graph.balloonText = '<span style="font-size:14px">[[category]]: <b>[[value]]</b></span>';
-                            if (g) {
-                                var keys = Object.keys(g);
-                                for (i = 0; i < keys.length; i++) {
-                                    graph[keys[i]] = g[keys[i]];
-                                }
-                            }
-                            chart.addGraph(graph);
-                        };
-
-                        if (option.graphs && option.graphs.length > 0) {
-                            for (i = 0; i < option.graphs.length; i++) {
-                                addGraph(option.graphs[i]);
-                            }
-                        } else {
-                            addGraph();
-                        }
-                        chart.chartCursor = angular.copy(option.chartCursor);
-                        chart.legend = angular.copy(option.legend);
-                        chart.chartScrollbar = angular.copy(option.chartScrollbar);
-
-                        for (var t in chart) {
-                            if (option[t] !== undefined) {
-                                chart[t] = angular.copy(option[t]);
-                            }
-                        }
+                        //Método do objeto Amchart para rendererizar o gráfico
                         chart.write(id);
                     };
 
                     renderChart();
-
+                    //Evento para renderizar os gráficos de qualquer controller
                     $scope.$on('amCharts.renderChart', function (event, amChartOptions, id) {
                         if (id === $el[0].id || !id) {
                             renderChart(amChartOptions);
