@@ -5,7 +5,7 @@ define([
     'portal/layout/service/autocomplete'
 ], function (presenter) {
 
-    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http) {
+    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, $rootScope) {
         this.getAnalysis = function (value) {
             return $autocomplete(presenterResources.analysis + "/autocomplete", {
                 name: value
@@ -46,11 +46,11 @@ define([
         };
 
         this.save = function (analysisViewer) {
+            
             var analysisViewerCopy = angular.copy(analysisViewer);
             var url = presenterResources.analysisViewer;
 
             filterAnalysisViewer(analysisViewerCopy);
-            console.log(analysisViewerCopy);
             if (analysisViewer.id === undefined) {
                 return $http.post(url, analysisViewerCopy);
             } else {

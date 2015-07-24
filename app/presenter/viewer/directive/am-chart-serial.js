@@ -29,13 +29,13 @@ define([
                         var keys = 0;
 
                         //Tamanho e largura default do gráfico
-                        var height = $scope.height || '400px';
-                        var width = $scope.width || '800px';
+                        var height = $scope.height || '20rem';
+                        var width = $scope.width || '50rem';
 
-                        $el.css({
-                            'height': height,
-                            'width': width
-                        });
+//                        $el.css({
+//                            'height': height,
+//                            'width': width
+//                        });
 
                         //Instanciando o chart de serial
                         chart = new AmCharts.AmSerialChart();
@@ -107,13 +107,13 @@ define([
                         } else {
                             addGraph();
                         }
-                        chart.chartCursor = option.chartCursor;
-                        chart.legend = option.legend;
-                        chart.chartScrollbar = option.chartScrollbar;
+                        chart.chartCursor = angular.copy(option.chartCursor);
+                        chart.legend = angular.copy(option.legend);
+                        chart.chartScrollbar = angular.copy(option.chartScrollbar);
 
                         for (var t in chart) {
                             if (option[t] !== undefined) {
-                                chart[t] = option[t];
+                                chart[t] = angular.copy(option[t]);
                             }
                         }
                         chart.write(id);
