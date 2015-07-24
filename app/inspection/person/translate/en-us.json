@@ -3,6 +3,20 @@
         "PERSON": "Person",
         "PEOPLE": "People",
         "NAME": "Name",
-        "TYPE": "Type"
+        "TYPE": "Type",
+        "REGISTER_PERSON":"Register Person",
+        "PHONE":"Phone",
+        "EMAIL":"Email",
+        "CEP":"CEP",
+        "COUNTRY":"Country",
+        "COUNTY":"County",
+        "STATE":"State",
+        "ADDRESS":"Address",
+        "REGISTRY":"Registry",
+        "CPF":"CPF",
+        "PERSON_TYPE":{
+            "COMPANY":"Company",
+            "PHYSICAL":"Person"
+        }
     }
 }

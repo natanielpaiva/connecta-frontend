@@ -4,9 +4,37 @@ define([
     'portal/layout/service/notify'
 ], function (inspection) {
     return inspection.lazy.controller('PersonListController', function (
-            $scope, PersonService, ngTableParams, notify) {
+            $scope, PersonService, ngTableParams, notify, $translate, $location) {
         
+        
+        $scope.persons=null;
             
+            
+        $scope.remove = function (id) {
+            console.info("REMOVE", id);
+            PersonService.delete(id).then(function () {
+                $translate('PERSON.REMOVE_SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $location.path('inspection/person');
+                });
+            }, function (response) {
+                $translate('PERSON.ERROR_REMOVING').then(function (text) {
+                    notify.error(text);
+                    $location.path('inspection/person');
+                });
+            });
+        };
+
+
+        //Parâmetros da Modal
+        $scope.modalParams = {
+            title: "",
+            text: "",
+            size: 'sm',
+            success: $scope.remove
+        };
+
+        
         $scope.search = {
             name: ''
         };
@@ -23,6 +51,13 @@ define([
                 });
             },
             counts: [10, 30, 50, 100]
+        });
+        
+        
+        
+          PersonService.list().then(function (response) {
+            $scope.persons = response.data;
+        }, function (response) {
         });
         
     });

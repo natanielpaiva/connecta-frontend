@@ -9,34 +9,18 @@
         <form novalidate name="formulario" ng-submit="submit()">
             
             <div class="form-group">
-                <label for="nome" translate>PERSON.NAME</label>
-                <input type="text" class="form-control" id="name" name="nome"
-                       ng-model="person.name" required/>
-                <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
-                     ng-messages-include="portal-error-messages"></div>
-            </div>
-            
-            <div class="form-group">
-                <label for="type" translate>PERSON.TYPE</label>
-                <input type="type" class="form-control" id="type" name="type"
-                       ng-model="person.type" required/>
-                <div ng-show="formulario.type.$touched" ng-messages="formulario.type.$error"
-                     ng-messages-include="portal-error-messages"></div>
-            </div>
-            
-            <div class="form-group">
                 <label for="cpf" translate>PERSON.CPF</label>
                 <input type="cpf" class="form-control" id="cpf" name="cpf"
                        ng-model="person.cpf" required/>
                 <div ng-show="formulario.cpf.$touched" ng-messages="formulario.cpf.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
-            
+
             <div class="form-group">
-                <label for="phone" translate>PERSON.PHONE</label>
-                <input type="text" class="form-control" id="phone" name="phone"
-                       ng-model="person.phone" ui-mask="+99 (99) 99999-999?9" required/>
-                <div ng-show="formulario.phone.$touched" ng-messages="formulario.phone.$error"
+                <label for="nome" translate>PERSON.NAME</label>
+                <input type="text" class="form-control" id="name" name="nome"
+                       ng-model="person.name" required/>
+                <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
             
@@ -47,44 +31,26 @@
                 <div ng-show="formulario.email.$touched" ng-messages="formulario.email.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
-            
+
             <div class="form-group">
-                <label for="cep" translate>PERSON.CEP</label>
-                <input type="cep" class="form-control" id="cep" name="cep"
-                       ng-model="person.cep" required/>
-                <div ng-show="formulario.cep.$touched" ng-messages="formulario.cep.$error"
+                <label for="type" translate>PERSON.TYPE</label>
+                <select class="form-control" 
+                        name="type" 
+                        ng-model="person.type"
+                        id="type" 
+                        required>
+                    <option value="JURIDICA" translate>PERSON.PERSON_TYPE.COMPANY</option>
+                    <option value="FISICA" translate>PERSON.PERSON_TYPE.PHYSICAL</option>
+                </select>    
+                <div ng-show="formulario.type.$touched" ng-messages="formulario.type.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
-            
+
             <div class="form-group">
-                <label for="country" translate>PERSON.COUNTRY</label>
-                <input type="country" class="form-control" id="country" name="country"
-                       ng-model="person.country" required/>
-                <div ng-show="formulario.country.$touched" ng-messages="formulario.country.$error"
-                     ng-messages-include="portal-error-messages"></div>
-            </div>
-            
-            <div class="form-group">
-                <label for="county" translate>PERSON.COUNTY</label>
-                <input type="county" class="form-control" id="county" name="county"
-                       ng-model="person.county" required/>
-                <div ng-show="formulario.county.$touched" ng-messages="formulario.county.$error"
-                     ng-messages-include="portal-error-messages"></div>
-            </div>
-            
-            <div class="form-group">
-                <label for="state" translate>PERSON.STATE</label>
-                <input type="state" class="form-control" id="state" name="state"
-                       ng-model="person.state" required/>
-                <div ng-show="formulario.state.$touched" ng-messages="formulario.state.$error"
-                     ng-messages-include="portal-error-messages"></div>
-            </div>
-            
-            <div class="form-group">
-                <label for="address" translate>PERSON.ADDRESS</label>
-                <input type="address" class="form-control" id="address" name="address"
-                       ng-model="person.address" required/>
-                <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
+                <label for="phone" translate>PERSON.PHONE</label>
+                <input type="text" class="form-control" id="phone" name="phone"
+                       ng-model="person.phone" ui-mask="+99 (99) 99999-999?9" required/>
+                <div ng-show="formulario.phone.$touched" ng-messages="formulario.phone.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
             
@@ -95,10 +61,48 @@
                 <div ng-show="formulario.registry.$touched" ng-messages="formulario.registry.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
+
+            <div class="form-group">
+                <label for="address" translate>PERSON.ADDRESS</label>
+                <input type="address" class="form-control" id="address" name="address"
+                       ng-model="person.address" required/>
+                <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
             
+            <div class="form-group">
+                <label for="cep" translate>PERSON.CEP</label>
+                <input type="cep" class="form-control" id="cep" name="cep"
+                       ng-model="person.cep" required/>
+                <div ng-show="formulario.cep.$touched" ng-messages="formulario.cep.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="country" translate>PERSON.COUNTRY</label>
+                <input type="country" class="form-control" id="country" name="country"
+                       ng-model="person.country" required/>
+                <div ng-show="formulario.country.$touched" ng-messages="formulario.country.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
             
-            
-            <a href="#/speaknow/contact"
+            <div class="form-group">
+                <label for="state" translate>PERSON.STATE</label>
+                <input type="state" class="form-control" id="state" name="state"
+                       ng-model="person.state" required/>
+                <div ng-show="formulario.state.$touched" ng-messages="formulario.state.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="county" translate>PERSON.COUNTY</label>
+                <input type="county" class="form-control" id="county" name="county"
+                       ng-model="person.county" required/>
+                <div ng-show="formulario.county.$touched" ng-messages="formulario.county.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <a href="#/inspection/person"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>

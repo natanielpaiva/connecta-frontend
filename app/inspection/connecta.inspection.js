@@ -42,6 +42,16 @@ define([
             controllerUrl: 'inspection/person/controller/person-form',
             templateUrl: 'app/inspection/person/template/person-form.html'
         },
+        '/inspection/person/:id': {
+            controller: 'PersonViewController',
+            controllerUrl: 'inspection/person/controller/person-view',
+            templateUrl: 'app/inspection/person/template/person-view.html'
+        },
+        '/inspection/person/:id/edit': {
+            controller: 'PersonFormController',
+            controllerUrl: 'inspection/person/controller/person-form',
+            templateUrl: 'app/inspection/person/template/person-form.html'
+        },
         '/inspection/instrument': {
             controller: 'InstrumentListController',
             controllerUrl: 'inspection/instrument/controller/instrument-list',

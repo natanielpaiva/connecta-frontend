@@ -2,8 +2,8 @@
     "PERSON": {
         "PERSON": "Pessoa",
         "PEOPLE": "Pessoas",
-        "NAME": "Name",
-        "TYPE": "Type",
+        "NAME": "Nome",
+        "TYPE": "Tipo",
         "REGISTER_PERSON":"Adicionar Pessoa",
         "PHONE":"Telefone",
         "EMAIL":"Email",
@@ -12,6 +12,11 @@
         "COUNTY":"Município",
         "STATE":"Estado",
         "ADDRESS":"Endereço",
-        "REGISTRY":"Registro"
+        "REGISTRY":"Registro",
+        "CPF":"CPF",
+        "PERSON_TYPE":{
+            "COMPANY":"Juridica",
+            "PHYSICAL":"Física"
+        }
     }
 }
