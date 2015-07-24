@@ -290,6 +290,8 @@ define([
         'presenter/viewer/directive/am-chart-pie-donut',
         'presenter/viewer/directive/am-chart-xy',
         'presenter/viewer/directive/am-chart-radar',
+        'presenter/viewer/directive/am-chart-gauge',
+        'presenter/viewer/directive/am-chart-funnel',
         'inspection/inspection/directive/box-table-inspection'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
