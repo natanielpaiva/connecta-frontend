@@ -5,10 +5,8 @@ define([
 ], function (person) {
     return person.lazy.controller('PersonViewController', function ($scope, PersonService, notify, $routeParams, $location, $translate) {
 
-        PersonService.get($routeParams.id).then(function (response) {
-            
-            
-
+        PersonService.get($routeParams.id).success(function (data) {
+            $scope.person = data;
         });
 
     });
