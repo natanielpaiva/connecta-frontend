@@ -48,21 +48,21 @@ define([
 
                     // se estiver selecionada
                     if (angular.element(angular.element(".combo_layers")[i]).is(':checked')) {
-                        flag += 1;
+                        flag = 1 + flag;
                         objLayersFlag.push(elem.currentTarget.value);
                         layersActivas.push(angular.element(angular.element(".combo_layers")[i]).val());
                     }
                 }
                 
                 // caso nenhum esteja selecionado, o fundo de legendas fica invisivel
-                if (flag == 0) {
+                if (flag === 0) {
                     angular.element("#legendMap").css("display", "none");
                 } else {
                     angular.element("#legendMap").css("display", "");
                 }
                 
                 // caso exista 2 combos selecionadas, botão de swipe aparece != desaparece
-                if (flag == 2) {
+                if (flag === 2) {
                     angular.element("#icon_swipe").css("display", "");
                 } else {
 

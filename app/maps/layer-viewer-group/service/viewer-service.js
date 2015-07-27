@@ -15,7 +15,35 @@ define([
             var that = this;
 
             for (var layerViewer in layerViewers) {
-                // servico que retorna os visualizadores
+                this.loool(layerViewers, layerViewer,  objViewers, objViewersGroup, layerViewerConfig, configLayer, that, map);
+            }
+
+            var createControlSwipe = setInterval(function () {
+                console.log("map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName",map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName);
+                console.log("map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName",map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName);
+                if (objViewersGroup.length > 1 && typeof map.__getLayerByName(map.__objLayers[map.__objLayers.length-1].__layerObj.layerName) != 'undefined') {
+                    var controlSwipe = {
+                        name: 'Swipe Control',
+                        type: 'Swipe',
+                        layerName: map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName,
+                        layerName2: map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName
+                    };
+                    map.__createControl(controlSwipe);
+                    clearInterval(createControlSwipe);
+                }
+
+            }, 5000);
+            lool = map;
+            var temp2 = setInterval(function () {
+
+                MenuService.renderMenu(objViewersGroup, map);
+
+                clearInterval(temp2);
+            }, 500);
+        };
+
+        this.loool = function (layerViewers, layerViewer,  objViewers, objViewersGroup, layerViewerConfig, configLayer, that, map) {
+            // servico que retorna os visualizadores
                 LayerViewerService.get(layerViewers[layerViewer]).then(function (data) {
 
                     objViewers = data.data;
@@ -49,33 +77,7 @@ define([
                     that.renderViewer(configLayer, map);
 
                 });
-            }
-
-            var createControlSwipe = setInterval(function () {
-                console.log("map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName",map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName);
-                console.log("map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName",map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName);
-                if (objViewersGroup.length > 1 && typeof map.__getLayerByName(map.__objLayers[map.__objLayers.length-1].__layerObj.layerName) != 'undefined') {
-                    var controlSwipe = {
-                        name: 'Swipe Control',
-                        type: 'Swipe',
-                        layerName: map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName,
-                        layerName2: map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName
-                    };
-                    map.__createControl(controlSwipe);
-                    clearInterval(createControlSwipe);
-                }
-
-            }, 5000);
-            lool = map;
-            var temp2 = setInterval(function () {
-
-                MenuService.renderMenu(objViewersGroup, map);
-
-                clearInterval(temp2);
-            }, 500);
         };
-
-
         this.createDefaultViewer = function (configViewer) {
             
             console.log("configVIewer", configViewer);

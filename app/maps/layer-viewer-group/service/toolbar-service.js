@@ -51,7 +51,7 @@ define([
         
         this.layerVisibility = function(layerName, visibility) {
             this.map.__getLayerByName(layerName).__setLayerVisibility(visibility);
-        }        
+        };        
     });
 
 });
