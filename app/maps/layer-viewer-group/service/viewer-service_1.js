@@ -9,17 +9,15 @@ define([
 
             var layerViewers = layerViewerGroup.ds_viewers.split("#");
             var objViewers = null;
-            var objViewersGroup = [];
             var layerViewerConfig = null;
             var configLayer = "";
             var that = this;
-
+            var lol = 0;
             for (var layerViewer in layerViewers) {
                 // servico que retorna os visualizadores
                 LayerViewerService.get(layerViewers[layerViewer]).then(function (data) {
 
                     objViewers = data.data;
-                    objViewersGroup.push(data.data);
 
                     // preparacao do objeto para mandar para o renderizador
                     layerViewerConfig = {
@@ -35,6 +33,7 @@ define([
                     // tipo de layer
                     switch (layerViewerConfig.type) {
                         case 1:
+
                             configLayer = that.createDefaultViewer(layerViewerConfig);
                             break;
                         case 2:
@@ -47,47 +46,27 @@ define([
 
                     // renderizar a layer
                     that.renderViewer(configLayer, map);
+                    
+//                    if (lol < 1) {
+                        // rederizar o menu
+                        MenuService.renderMenu(layerViewerConfig, map);
+//                        ++lol;
+//                    }
 
                 });
             }
-
-            var createControlSwipe = setInterval(function () {
-                console.log("map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName",map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName);
-                console.log("map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName",map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName);
-                if (objViewersGroup.length > 1 && typeof map.__getLayerByName(map.__objLayers[map.__objLayers.length-1].__layerObj.layerName) != 'undefined') {
-                    var controlSwipe = {
-                        name: 'Swipe Control',
-                        type: 'Swipe',
-                        layerName: map.__getLayerByName(map.__objLayers[0].__layerObj.layerName).__layerObj.layerName,
-                        layerName2: map.__getLayerByName(map.__objLayers[1].__layerObj.layerName).__layerObj.layerName
-                    };
-                    map.__createControl(controlSwipe);
-                    clearInterval(createControlSwipe);
-                }
-
-            }, 5000);
-            lool = map;
-            var temp2 = setInterval(function () {
-
-                MenuService.renderMenu(objViewersGroup, map);
-
-                clearInterval(temp2);
-            }, 500);
         };
 
 
         this.createDefaultViewer = function (configViewer) {
-            
-            console.log("configVIewer", configViewer);
-            
             //Cria div para renderizar a legenda
             this.__element = document.createElement('div');
             this.__element.id = configViewer.name + 'Legend';
-            document.getElementById("legendMap").appendChild(this.__element);
-//            this.__element.style.float = 'right';
-//            this.__element.style.bottom = '30px';
-//            this.__element.style.position = 'absolute';
-//            this.__element.style.zIndex = '9999';
+            document.getElementById("map-view").appendChild(this.__element);
+            this.__element.style.float = 'right';
+            this.__element.style.bottom = '30px';
+            this.__element.style.position = 'absolute';
+            this.__element.style.zIndex = '9999';
 
 
 
@@ -175,7 +154,7 @@ define([
             var interval = setInterval(function () {
                 if (typeof map !== 'undefined') {
                     map.__createLayer(configLayer);
-                    lool = map;
+
                     if (configLayer.type === 'WMS') {
                         var controlInfo = {
                             name: 'WMSInfo',
@@ -187,11 +166,11 @@ define([
                             name: 'SpatialFilter',
                             type: 'SpatialFilter'
                         };
-
                         //Create Controls for WMS
                         map.__createControl(controlInfo);
                         map.__createControl(controlSpatialFilter);
                     }
+
 
                     clearInterval(interval);
                 }

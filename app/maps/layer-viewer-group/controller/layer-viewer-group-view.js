@@ -50,7 +50,7 @@ define([
             $modalTranslate($scope.modalParams, 'text', 'LAYERVIEWERGROUP.CONFIRM_DELETE');
 
 
-//            ConnectaGeoService.showViewer($scope.layerViewerGroup);
+            ConnectaGeoService.showViewer($scope.layerViewerGroup);
 
         });
 

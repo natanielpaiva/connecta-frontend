@@ -1,5 +1,5 @@
 define([
-    'connecta.maps'    
+    'connecta.maps'
 ], function (maps) {
     return maps.lazy.service('ToolBarService', function (mapsResources, $http) {
 
@@ -8,7 +8,6 @@ define([
         this.setMap = function (Map) {
             this.map = Map;
         };
-
 
         this.zoomMapToMaxExtent = function () {
             this.map.__zoomMapToMaxExtent();
@@ -24,15 +23,6 @@ define([
             }
         };
 
-
-        this.changeBaseMap = function (baseMap) {
-            this.map.__switchBaseLayer(baseMap);
-        };
-
-        this.changeLayerOpacity = function (opacity) {
-            this.map.__objLayers[0].__setLayerOpacity(opacity);
-        };
-
         this.toggleInfo = function () {
             var control = this.map.__getControlByName("WMSInfo");
             if (control.__controlObj.__control.active === null || !control.__controlObj.__control.active) {
@@ -42,30 +32,26 @@ define([
             }
         };
 
+        this.activateSwipe = function (layer1, layer2) {
+            var control = this.map.__getControlByName("Swipe Control");
+            console.log("control swipe", control);
 
-        this.toggleSpatialFilter = function (filterType) {
-            var control = this.map.__getControlByName("SpatialFilter");
-            if (filterType !== "") {
-                if (control.__controlObj.__ObjFilterType === filterType && control.__controlObj.__control.active !== null) {
-                    control.__deactivateControl();
-                } else {
-                    control.__controlObj.__switchFiltertype(filterType);
-                    control.__activateControl();
-
-                }
-            } else {
-                control.__controlObj.__removeSpatialFilter();
-                if (control.__controlObj.__control.active) {
-                    control.__deactivateControl();
-                }
-            }
+            control.__controlObj.__setLayer(layer1, layer2);
+            control.__activateControl();
+            //aparece com a linha de divisao da funcionalidade
+            angular.element("#divisionSwipe").css("display","");
         };
+        this.deactivateSwipe = function () {
+            var control = this.map.__getControlByName("Swipe Control");
 
-
-        this.toggleLegend = function () {
-            angular.element("#" + this.map.__objLayers[0].__layerObj.__legend.__imgLegend).toggle();
+            control.__deactivateControl();
+            //desaparece com a linha de divisao da funcionalidade
+            angular.element("#divisionSwipe").css("display","none");
         };
-
+        
+        this.layerVisibility = function(layerName, visibility) {
+            this.map.__getLayerByName(layerName).__setLayerVisibility(visibility);
+        }        
     });
 
 });

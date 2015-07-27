@@ -3,7 +3,6 @@ define([
 ], function (maps) {
     return maps.lazy.service('MapService', function (mapsResources, $http) {
 
-
         this.__connectaGeo = null;
 
         this.setConnectaGeo = function (connectaGeo) {
@@ -11,14 +10,14 @@ define([
         };
 
         this.createMap = function (mapTypeId) {
-            var that=this;
+            var that = this;
             var configMap = null;
             //Openlayers
             if (mapTypeId == 1) {
                 configMap = this.__connectaGeo.__mapsConfig.Openlayers.Map.configMap;
                 configMap.divMap = "map-view";
-                this.__connectaGeo.__createObjMap(configMap,"__createControl",this.__connectaGeo.__mapsConfig.Openlayers.Controls.controlZB);
-                                                                                
+                this.__connectaGeo.__createObjMap(configMap, "__createControl", this.__connectaGeo.__mapsConfig.Openlayers.Controls.controlZB);
+
                 var interval = setInterval(function () {
                     if (typeof that.__connectaGeo.__getObjMapByName(configMap.name) != 'undefined') {
                         that.setMap(that.__connectaGeo.__getObjMapByName(configMap.name));
@@ -26,16 +25,11 @@ define([
                     }
                 }, 20);
             }
-            
         };
 
-
-        this.setMap = function(Map){
-          this.map = Map;  
+        this.setMap = function (Map) {
+            this.map = Map;
         };
-
-
-
 
     });
 });

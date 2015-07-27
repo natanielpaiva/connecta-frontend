@@ -1,198 +1,125 @@
 define([
     'connecta.maps',
-    'maps/layer-viewer/service/toolbar-service'
+    'maps/layer-viewer-group/service/toolbar-service',
+    'maps/layer-viewer-group/service/group-layer-viewer-service'
 ], function (maps) {
-    return maps.lazy.service('MenuService', function (mapsResources, ToolBarService, $http) {
-        
-        
+    return maps.lazy.service('MenuService', function (mapsResources, ToolBarService, GroupLayerViewerService, $http) {
 
-
-
-        this.addEvents = function (elementId) {
-
-            //MENU INTEIRO LATERAL DIREITA;
-            angular.element('#' + elementId).find('#link-active-bar').on('click', function () {
-
-                //ESCONDER TODOS OS SUB-MENU's
-                angular.element('#' + elementId).find('.menu-right-nivel-2').css("display", "none");
-                var menuRigth = angular.element('#' + elementId).find('#menu-right');
-                if (menuRigth.hasClass('menu-right-off')) {
-                    menuRigth.removeClass('menu-right-off').addClass('menu-right-on');
-                    
-                } else {
-                    //desativa tudo que que esta selecionado CSS
-                    menuRigth.removeClass('menu-right-on').addClass('menu-right-off');
-                    angular.element('#' + elementId).find('.tool-active').removeClass('tool-active');
-                    angular.element('#' + elementId).find('.submenu-active').removeClass("submenu-active");                    
+        this.addEvents = function () {
+            var comboLayers = setInterval(function(){
+                if(typeof angular.element(".combo_layers") != 'undefined'){
+                    angular.element(".combo_layers").click();
+                    clearInterval(comboLayers);
                 }
-
+            }, 5000);
+            
+            // aparecer/desaparecer menu de legenda
+            angular.element("#button-legend").on("click", function () {
+                angular.element(".legend").toggle();
             });
-            //DESATIVAR CSS DE ICONE DE MENU ATIVO
-            angular.element('#' + elementId).find('.item-menu-right').on('click', function (elementMenu) {
-
-                //ESCONDER TODOS OS SUB-MENU's
-                angular.element('#' + elementId).find('.menu-right-nivel-2').css("display", "none");
-                if (angular.element('#' + elementId).find('#' + elementMenu.currentTarget.id).hasClass('tool-active')) {
-                    angular.element('#' + elementId).find('#' + elementMenu.currentTarget.id).removeClass('tool-active');
-                } else {
-                    //desativa o botao CSS
-                    angular.element('#' + elementId).find('.tool-active').removeClass('tool-active');
-                    angular.element('#' + elementId).find('.submenu-active').removeClass("submenu-active");
-                    angular.element('#' + elementId).find('.link-sub-nivel-2-active').removeClass('link-sub-nivel-2-active');
-                    //ativa o botao CSS do clique
-                    elementMenu.currentTarget.className = 'tool-active item-menu-right';
-                }
+            
+            // controle de zoom em área
+            angular.element("#ico_find").on("click", function () {
+                ToolBarService.toggleZoomArea();
             });
-            //DESATIVAR CSS DE INCONE DO SUB MENU ATIVO
-            angular.element('#' + elementId).find('.link-sub-nivel-2').on('click', function (elementSubMenu) {
-                if (angular.element('#' + elementId).find('#' + elementSubMenu.currentTarget.id).hasClass('link-sub-nivel-2-active')) {
-                    angular.element('#' + elementId).find('#' + elementSubMenu.currentTarget.id).removeClass('link-sub-nivel-2-active');
-                } else {
-                    //desativa o botao CSS
-                    angular.element('#' + elementId).find('.link-sub-nivel-2-active').removeClass('link-sub-nivel-2-active');
-                    //ativa o botao CSS do clique
-                    elementSubMenu.currentTarget.className = 'link-sub-nivel-2 link-sub-nivel-2-active';
-                }
+            
+            // controle de zooom maximo nas layers
+            angular.element("#ico_redimensionar_camada").on("click", function () {
+                ToolBarService.zoomMapToMaxExtent();
             });
-            angular.element('#' + elementId).find('.sub-item').on('click', function (obj) {
-
-                var idSubMenu = angular.element(angular.element('#' + elementId).find('#' + obj.currentTarget.id).parent()).find('div').attr('id');
-                if (angular.element('#' + elementId).find('#' + idSubMenu).hasClass("submenu-active")) {
-                    angular.element('#' + elementId).find('#' + idSubMenu).removeClass("submenu-active");
-                    angular.element('#' + elementId).find('#' + idSubMenu).css("display", "none");
-                } else {
-                    angular.element('#' + elementId).find('#' + idSubMenu).addClass("submenu-active");
-                    angular.element('#' + elementId).find('#' + idSubMenu).css("display", "block");
-                }
-
+            
+            // controle de informação
+            angular.element("#ico_info").on("click", function () {
+                ToolBarService.toggleInfo();
             });
-        };
-
-
-        this.addSubMenuItemAction = function (itemType, itemID, action, param) {            
-            if (itemType == "img") {
-                angular.element('#' + itemID).click(function () {
-                    ToolBarService[action](param);
-                });
-
-            } else {
-                angular.element('#' + itemID).val(param);
-                angular.element('#' + itemID).on('input change', function () {
-                    ToolBarService[action](document.getElementById(itemID).value);
-                });
-
-            }
-
-        };
-
-
-        this.addMenuItemAction = function (itemID, action) {
-            var that = this;
-            angular.element('#' + itemID).click(function () {
-                ToolBarService.__mapName = that.__mapName;
-                ToolBarService[action]();
-            });
-        };
-
-        this.addSubMenuItem = function (itemID, elem, item) {
-            elem.innerHTML += "<div class='menu-right-nivel-2 sub-menu' id='" + item.id + "'><ul></ul></div>";
-            var subMenuItems = item.items;
-            var action = item.action;
-            var subMenuId = item.id;
-            var subItemId = "";
-            var itemType = item.type;
-            var subItemParam = "";
-            for (var itemObj in subMenuItems) {
-
-                subItemId = itemID + '_' + subMenuItems[itemObj].id;
-                var li = document.createElement("li");
-
-                angular.element("#" + subMenuId + ">ul").append(li);
-
-                if (itemType == "img") {
-                    subItemParam = subMenuItems[itemObj].param;
-                    li.innerHTML = "<a  id = '" + subItemId + "'  class='link-sub-nivel-2' style='cursor:pointer;'>\n\<img src = '" + subMenuItems[itemObj].img + "' alt = 'ico_" + subMenuItems[itemObj].id + "' style='cursor:pointer;'> " + subMenuItems[itemObj].span + "</a>";
-                } else {
-                    subItemParam = subMenuItems[itemObj].max;
-                    li.innerHTML = "<span>" + subMenuItems[itemObj].span + "</span>\n\<input id = '" + subItemId + "' type=range min='" + subMenuItems[itemObj].min + "' max='" + subMenuItems[itemObj].max + "' step='" + subMenuItems[itemObj].step + "' class='range-maps'/>";
-                }
-
-                this.addSubMenuItemAction(itemType, subItemId, action, subItemParam);
-
-
-            }
-
-        };
-
-
-
-
-
-        this.addMenuItem = function (divName, elem, item) {
-            var itemID = "";
-            if (typeof item.items != 'undefined') {                
-                itemID = divName + '_' + item.span;
-                elem.innerHTML = "<a id='" + itemID + "' class='item-menu-right sub-item ' style='cursor:pointer;'>\n\<img src='" + item.img + "' 'ico_" + item.id + "'></a>";
-                this.addSubMenuItem(itemID, elem, item);
-            } else {
-                itemID = divName + '_' + item.id;
-                elem.innerHTML = "<a  id = '" + itemID + "' class = 'item-menu-right' style='cursor:pointer;'>\n\<img src = '" + item.img + "' alt = 'ico_" + item.id + "'></a>";
-                //define evento para o item do menu
-                this.addMenuItemAction(itemID, item.action);
-            }
-
-        };
-
-
-        this.createMenu = function (divName) {
-            var that = this;
-            var li = "";
-            $http.get('app/maps/layer-viewer/template/menu.json').success(function (data) {
+            
+            // controle de quantos checkbox estão marcados para habilitar a funcionalidade de swipe
+            angular.element(".combo_layers").on("click", function (elem) {
                 
-                //$.getJSON("app/maps/layer-viewer/template/menu.json", function (data) {
-                    
+                // funcao de visibilidade de uma layer com sua respectiva legenda
+                ToolBarService.layerVisibility(elem.currentTarget.value, elem.currentTarget.checked);
+                
+                var flag = 0;
+                var layersActivas = [];
+                objLayersFlag = [];
 
-                for (var elem in data.menuItems) {
+                // verificar quantas combos estao selecionadas
+                for (var i = 0; i < angular.element(".combo_layers").length; i++) {
 
-                    if (typeof data.menuItems[elem].id != 'undefined') {                                                
-                        li = document.createElement('li');
-                        angular.element('#' + divName).find('#menu-right-data>ul').append(li);
-                        that.addMenuItem(divName, li, data.menuItems[elem]);
-
-                    }
-
-                }
-
-                if (that.__layerViewerType == 1) {
-                    var defaultViewerItems = data.menuItems[data.menuItems.length - 1].defaultViewerItems;
-                    li = "";
-                    for (var obj in defaultViewerItems) {
-                        li = document.createElement('li');
-                        angular.element('#' + divName).find('#menu-right-data>ul').append(li);
-                        that.addMenuItem(divName, li, defaultViewerItems[obj]);
+                    // se estiver selecionada
+                    if (angular.element(angular.element(".combo_layers")[i]).is(':checked')) {
+                        flag += 1;
+                        objLayersFlag.push(elem.currentTarget.value);
+                        layersActivas.push(angular.element(angular.element(".combo_layers")[i]).val());
                     }
                 }
                 
+                // caso nenhum esteja selecionado, o fundo de legendas fica invisivel
+                if (flag == 0) {
+                    angular.element("#legendMap").css("display", "none");
+                } else {
+                    angular.element("#legendMap").css("display", "");
+                }
                 
-                 that.addEvents(that.__element.id);
+                // caso exista 2 combos selecionadas, botão de swipe aparece != desaparece
+                if (flag == 2) {
+                    angular.element("#icon_swipe").css("display", "");
+                } else {
+
+                    ToolBarService.deactivateSwipe();
+                    //css de icone ativo ou nao
+                    angular.element("#icon_swipe").removeClass("icon_swipe_active");
+                    angular.element(".divisionSwipe").css("display", "none");
+                    angular.element("#icon_swipe").css("display", "none");
+                }
+
             });
+
+            // verificar e executar o Swipe
+            angular.element("#icon_swipe").on("click", function () {
+                if (angular.element("#icon_swipe").hasClass("icon_swipe_active")) {
+                    ToolBarService.deactivateSwipe();
+                } else {
+
+                    // chama a funcao de toggle para o controle de swipe
+                    ToolBarService.activateSwipe(objLayersFlag[0], objLayersFlag[1]);
+                }
+
+                //css de icone ativo ou nao
+                angular.element("#icon_swipe").toggleClass("icon_swipe_active");
+
+            });
+        };
+
+        this.createMenu = function (divName, layerConfig) {
+            var that = this;
+            var elem = "";
+            var temp = setInterval(function () {
+                for (var config in layerConfig) {
+                    console.log("ahusuasuhahusas", layerConfig[config]);
+                    elem = '<p><input type="checkbox" id="' + layerConfig[config].layerEntity.nm_layer + '" class="combo_layers" style="margin: -5px 0px 5px 15px;" value="' + layerConfig[config].nm_viewer + '"/>   ' + layerConfig[config].nm_viewer + '</p>';
+                    angular.element(".legend").append(elem);
+                }
+
+                //setar os eventos do menu
+                that.addEvents();
+                clearInterval(temp);
+            }, 100);
         };
 
         this.renderMenu = function (layerViewerConfig, mapComponent) {
-            
+            console.log("layer menu config", layerViewerConfig);
             ToolBarService.setMap(mapComponent);
 
-            this.__layerViewerType = layerViewerConfig.layerViewer.layerViewerTypeEntity.id;           
+//            this.__layerViewerType = layerViewerConfig.layerViewer.layerViewerTypeEntity.id;           
+            this.__layerViewerType = 3;
             this.__element = document.createElement('div');
-            this.__element.id = layerViewerConfig.name.replace(/ /gi, "") + 'MENU';
+            this.__element.id = layerViewerConfig[0].ds_param_values.replace(/ /gi, "") + 'MENU';
             document.getElementById("map-view").appendChild(this.__element);
-            angular.element("#" + this.__element.id).load('app/maps/layer-viewer/template/menu_template.html');
-            
-            this.createMenu(this.__element.id);
+            angular.element("#" + this.__element.id).load('app/maps/layer-viewer-group/template/menu_template.html');
+
+            this.createMenu(this.__element.id, layerViewerConfig);
         };
-
-
-
 
     });
 
