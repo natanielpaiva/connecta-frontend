@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>SUPPLIER.VIEW</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group">
+            <button class="btn btn-default">
+                <span class="icon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default">
+                <span class="icon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>    
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single margin-bottom-single">
+
+
+            <p ng-if="supplier.cnpj">
+                <strong translate>SUPPLIER.CNPJ</strong>:
+                {{supplier.cnpj}}
+            </p>
+
+            <p ng-if="supplier.name">
+                <strong translate>SUPPLIER.NAME</strong>:
+                {{supplier.name}}
+            </p>
+
+            <p ng-if="supplier.fantasyName">
+                <strong translate>SUPPLIER.FANTASY_NAME</strong>:
+                {{supplier.fantasyName}}
+            </p>
+
+            <p ng-if="supplier.stateRegistration">
+                <strong translate>SUPPLIER.STATE_REGISTRATION</strong>:
+                {{supplier.stateRegistration}}
+            </p>
+
+            <p ng-if="supplier.countyRegistration">
+                <strong translate>SUPPLIER.COUNTY_REGISTRATION</strong>:
+                {{supplier.countyRegistration}}
+            </p>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="#/inspection/supplier" role="button" class="btn btn-default" translate>
+            LAYOUT.BACK
+        </a>
+    </div>
+</div>

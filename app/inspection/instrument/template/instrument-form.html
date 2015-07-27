@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">        
-        <h3 translate>{{isEditing ? 'INSTRUMENT.EDIT' : 'INSTRUMENT.REGISTER_INSTRUMENT'}}</h3>
+        <h3 translate>{{isEditing ? 'INSTRUMENT.EDIT' : 'INSTRUMENT.ADD'}}</h3>
     </div>
 </div>
 
@@ -10,7 +10,7 @@
 
             <div class="form-group">
                 <label for="code" translate>INSTRUMENT.CODE</label>
-                <input type="text"  class="form-control" id="code" name="code"
+                <input type="number"  class="form-control" id="code" name="code"
                        ng-model="instrument.code" required/>
                 <div ng-show="formulario.code.$touched" ng-messages="formulario.code.$error"
                      ng-messages-include="portal-error-messages"></div>

@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>SUPPLIER_ADDRESS.VIEW</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group">
+            <button class="btn btn-default">
+                <span class="icon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default">
+                <span class="icon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>    
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single margin-bottom-single">                       
+            
+
+            <p ng-if="supplierAddress.description">
+                <strong translate>SUPPLIER.DESCRIPTION</strong>:
+                {{supplierAddress.description}}
+            </p>
+
+            <p ng-if="supplierAddress.cep">
+                <strong translate>SUPPLIER.CEP</strong>:
+                {{supplierAddress.cep}}
+            </p>
+
+            <p ng-if="supplierAddress.county">
+                <strong translate>SUPPLIER.CITY</strong>:
+                {{supplierAddress.county}}
+            </p>
+
+            <p ng-if="supplierAddress.state">
+                <strong translate>SUPPLIER.STATE</strong>:
+                {{supplierAddress.state}}
+            </p>
+
+            <p ng-if="supplierAddress.country">
+                <strong translate>SUPPLIER.COUNTRY</strong>:
+                {{supplierAddress.country}}
+            </p>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="#/inspection/supplier-address" role="button" class="btn btn-default" translate>
+            LAYOUT.BACK
+        </a>
+    </div>
+</div>

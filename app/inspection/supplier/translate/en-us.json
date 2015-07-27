@@ -1,0 +1,19 @@
+{
+    "SUPPLIER": {
+        "SUPPLIER": "Supplier",
+        "SUPPLIERS": "Suppliers",
+        "ADD": "Add Supplier",
+        "EDIT": "Edit Supplier",
+        "VIEW": "View Supplier",
+        "CNPJ": "CNPJ",
+        "SOCIAL_NAME": "Social Name",
+        "FANTASY_NAME": "Fantasy Name",
+        "STATE_REGISTRATION": "State Registration",
+        "COUNTY_REGISTRATION": "County Registration",
+        "ADDRESSES": "Addresses",
+        "REMOVE_SUCCESS": "Successfully Removed",
+        "ERROR_REMOVING": "Error Removing",
+        "TITLE_CONFIRM_DELETE": "Supplier Delete",
+        "CONFIRM_DELETE": "Do you really want to delete Supplier?"
+    }
+}

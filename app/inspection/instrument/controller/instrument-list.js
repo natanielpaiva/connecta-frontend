@@ -15,6 +15,7 @@ define([
                 $translate('INSTRUMENT.REMOVE_SUCCESS').then(function (text) {
                     notify.success(text);
                     $location.path('inspection/instrument');
+                    $scope.tableParams.reload();
                 });
             }, function (response) {
                 $translate('INSTRUMENT.ERROR_REMOVING').then(function (text) {
@@ -51,23 +52,28 @@ define([
             getData: function ($defer, params) {
                 return InstrumentService.list(params.url()).then(function (response) {
                     params.total(response.data.totalElements);
-                    $defer.resolve(response.data.content);
+                    //converte datas para format brasileiro DD/MM/YYYY
+                    for (var i in response.data) {
+                        response.data[i].calibrationDate = new Date(response.data[i].calibrationDate).toLocaleDateString("pt-BR");
+                        response.data[i].dueDate = new Date(response.data[i].dueDate).toLocaleDateString("pt-BR");
+                    }
+                    $defer.resolve(response.data);
                 });
             },
             counts: [10, 30, 50, 100]
         });
 
-        InstrumentService.list().then(function (response) {
-            //converte datas para format brasileiro DD/MM/YYYY
-            for (var i in response.data) {
-                response.data[i].calibrationDate = new Date(response.data[i].calibrationDate).toLocaleDateString("pt-BR");
-                response.data[i].dueDate = new Date(response.data[i].dueDate).toLocaleDateString("pt-BR");
-            }
-            $scope.instruments = response.data;
-
-
-        }, function (response) {
-        });
+//        InstrumentService.list().then(function (response) {
+//            //converte datas para format brasileiro DD/MM/YYYY
+//            for (var i in response.data) {
+//                response.data[i].calibrationDate = new Date(response.data[i].calibrationDate).toLocaleDateString("pt-BR");
+//                response.data[i].dueDate = new Date(response.data[i].dueDate).toLocaleDateString("pt-BR");
+//            }
+//            $scope.instruments = response.data;
+//
+//
+//        }, function (response) {
+//        });
 
     });
 });

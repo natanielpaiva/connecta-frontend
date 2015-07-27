@@ -7,6 +7,8 @@ define([
         $translatePartialLoaderProvider.addPart('inspection/inspection');
         $translatePartialLoaderProvider.addPart('inspection/person');
         $translatePartialLoaderProvider.addPart('inspection/instrument');
+        $translatePartialLoaderProvider.addPart('inspection/supplier');
+        $translatePartialLoaderProvider.addPart('inspection/supplier-address');
     });
 
     inspection.run(function (applications) {
@@ -16,7 +18,9 @@ define([
             base: appInspection.host,
             inspection: appInspection.host + '/inspection',
             person: appInspection.host + '/person',
-            instrument: appInspection.host + '/instrument'
+            instrument: appInspection.host + '/instrument',
+            supplier: appInspection.host + '/supplier',
+            supplierAddress: appInspection.host + '/supplierAddress'
         });
 
     });
@@ -71,6 +75,46 @@ define([
             controller: 'InstrumentFormController',
             controllerUrl: 'inspection/instrument/controller/instrument-form',
             templateUrl: 'app/inspection/instrument/template/instrument-form.html'
+        },
+        '/inspection/supplier': {
+            controller: 'SupplierListController',
+            controllerUrl: 'inspection/supplier/controller/supplier-list',
+            templateUrl: 'app/inspection/supplier/template/supplier-list.html'
+        },
+        '/inspection/supplier/new': {
+            controller: 'SupplierFormController',
+            controllerUrl: 'inspection/supplier/controller/supplier-form',
+            templateUrl: 'app/inspection/supplier/template/supplier-form.html'
+        },
+        '/inspection/supplier/:id': {
+            controller: 'SupplierViewController',
+            controllerUrl: 'inspection/supplier/controller/supplier-view',
+            templateUrl: 'app/inspection/supplier/template/supplier-view.html'
+        },
+        '/inspection/supplier/:id/edit': {
+            controller: 'SupplierFormController',
+            controllerUrl: 'inspection/supplier/controller/supplier-form',
+            templateUrl: 'app/inspection/supplier/template/supplier-form.html'
+        },
+        '/inspection/supplier-address': {
+            controller: 'SupplierAddressListController',
+            controllerUrl: 'inspection/supplier-address/controller/supplier-address-list',
+            templateUrl: 'app/inspection/supplier-address/template/supplier-address-list.html'
+        },
+        '/inspection/supplier-address/new': {
+            controller: 'SupplierAddressFormController',
+            controllerUrl: 'inspection/supplier-address/controller/supplier-address-form',
+            templateUrl: 'app/inspection/supplier-address/template/supplier-address-form.html'
+        },
+        '/inspection/supplier-address/:id': {
+            controller: 'SupplierAddressViewController',
+            controllerUrl: 'inspection/supplier-address/controller/supplier-address-view',
+            templateUrl: 'app/inspection/supplier-address/template/supplier-address-view.html'
+        },
+        '/inspection/supplier-address/:id/edit': {
+            controller: 'SupplierAddressFormController',
+            controllerUrl: 'inspection/supplier-address/controller/supplier-address-form',
+            templateUrl: 'app/inspection/supplier-address/template/supplier-address-form.html'
         }
 
     };
@@ -91,6 +135,12 @@ define([
         {
             href: 'inspection/instrument',
             title: 'INSTRUMENT.INSTRUMENTS',
+            icon: 'icon-settings',
+            children: []
+        },
+        {
+            href: 'inspection/supplier',
+            title: 'SUPPLIER.SUPPLIERS',
             icon: 'icon-settings',
             children: []
         }

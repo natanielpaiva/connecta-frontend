@@ -1,0 +1,18 @@
+{
+    "SUPPLIER_ADDRESS": {
+        "SUPPLIER_ADDRESS": "Supplier Address",
+        "SUPPLIER_ADDRESSES": "Supplier Addresses",
+        "ADD": "Add  Supplier Address",
+        "EDIT": "Edit Supplier Address",
+        "VIEW": "View Supplier Address",
+        "DESCRIPTION": "Address",
+        "CEP": "CEP",
+        "CITY": "City",
+        "STATE": "State",
+        "COUNTRY": "Country",
+        "REMOVE_SUCCESS": "Successfully Removed",
+        "ERROR_REMOVING": "Error Removing",
+        "TITLE_CONFIRM_DELETE": "Supplier Address Delete",
+        "CONFIRM_DELETE": "Do you really want to delete Supplier Address?"
+    }
+}

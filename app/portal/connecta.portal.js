@@ -54,6 +54,18 @@ define([
                 {
                     href: 'application',
                     title: 'APPLICATION.MODULES'
+                },
+                {
+                    href: 'speaknow',
+                    title: 'Speaknow'
+                },
+                {
+                    href: 'inspection',
+                    title: 'Inspection'
+                },
+                {
+                    href: 'maps',
+                    title: 'Maps'
                 }
 //                {
 //                    href: 'maps',

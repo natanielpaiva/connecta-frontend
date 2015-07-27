@@ -48,7 +48,6 @@ define([
 
         $scope.submit = function () {
             InstrumentService.save($scope.instrument).then(function () {
-
                 $location.path('inspection/instrument');
             }, function (response) {
             });
