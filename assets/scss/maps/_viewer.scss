@@ -47,23 +47,25 @@
 /*quadro de dados de visualizador agrupado*/
 .quadroEsquerdo {
     border: thin solid silver;
-    margin-top: 15px;
     margin-bottom: 25px;
+    margin-left: 14px;
+    margin-top: 15px;
     max-height: 200px;
     min-height: 35px;
     overflow: auto;
-    width: 45%;
+    width: 47%;
 }
 .quadroDireito {
     border: thin solid silver;
     float: right;
-    margin-top: 15px;
     margin-bottom: 25px;
+    margin-right: 17px;
+    margin-top: 15px;
     max-height: 200px;
     min-height: 35px;
     overflow: auto;
     text-align: right;
-    width: 45%;
+    width: 47%;
 }
 
 .btn_data_viewerGroup {
@@ -79,4 +81,17 @@
 .btnMargin{
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.legendMap {
+    position: absolute;
+    float: left;
+    z-index: 9999;
+    overflow-y: scroll;
+    bottom: 40px;
+    border-color: gray;
+    left: 43px;
+    max-height: 300px;
+    background-color: white;
+    padding: 10px;
 }

@@ -18,7 +18,7 @@ configOpenlayers["Map"] = {
          x: -47,
          y: -15
       },
-      baseLayer: 'All' //Google,Bing,Osm ou All
+      baseLayer: 'Osm' //Google,Bing,Osm ou All
    },
    configBounds: {
       minX: -47,
