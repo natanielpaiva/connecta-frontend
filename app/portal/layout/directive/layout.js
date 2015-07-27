@@ -35,7 +35,7 @@ define([
                 /**
                  * Evento para ocultar a barra lateral
                  */
-                $scope.$on('sidebarRight.hide', function () {
+                $scope.$on('menu.hide', function () {
                     $scope.showSidebar = false;
                 });
                 
