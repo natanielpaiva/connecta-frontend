@@ -6,7 +6,7 @@ define([
             restrict: 'E',
             transclude: true,
             scope: { 
-                title:'@',
+                title:'@'
             },
             templateUrl: 'app/inspection/inspection/directive/template/box-table-inspection.html'
         };

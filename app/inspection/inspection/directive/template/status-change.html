@@ -1,0 +1,15 @@
+<div popover-template="path" 
+     popover-placement="left"
+     popover-trigger="click"
+     class="popoverClose">
+    <span class="{{getIconByState(object.status)}}" style="margin-right: 5px;"></span>
+    {{object.status}} 
+</div>
+<script type="text/ng-template" id="popoverConfig.html">
+    <ul class="popover-status-change">
+        <li ng-repeat="(index, type) in types" ng-click="changeStatus(type, $event)">
+        <span class="{{type.icon}}"></span>
+            {{type.name}}
+        </li>
+    </ul>
+</script>
