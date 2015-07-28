@@ -1,311 +1,386 @@
 // Scrollbar
 ::-webkit-scrollbar {
-    width:0.6em;
-    background-color:transparent;
+  width: 0.6em;
+  background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: lighten($bs-gray-light, 25%);
-    border-radius:1em;
-    &:hover {
-        background-color: $bs-gray-light;
-    }
-    &:active {
-        background-color: $bs-gray;
-    }
+  background-color: lighten($bs-gray-light, 25%);
+  border-radius: 1em;
+  &:hover {
+    background-color: $bs-gray-light;
+  }
+  &:active {
+    background-color: $bs-gray;
+  }
 }
 
 /* Reset */
-html{
-    font-size: 100%;
-    height:100%;
+html {
+  font-size: 100%;
+  height: 100%;
 }
-
 body {
-    font-family: 'Open Sans';
-    font-size: 13px;
-    padding: 0px !important;
-    margin: 0px !important;
-    line-height: 1.5;
-    font-style: normal;
-    font-weight: normal;
-    background-repeat: no-repeat;
-    background-color: $backgroundGray;
-    background-position-y: 60px;
-    // Necessário para as animações de slide-out
-    // não gerarem uma barra de rolagem momentânea
-    overflow-x: hidden;
-}
+  font-family: 'Open Sans';
+  font-size: 13px;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1.5;
+  font-style: normal;
+  font-weight: normal;
+  background-repeat: no-repeat;
+  background-color: $backgroundGray;
+  background-position-y: 60px;
 
-h3 small, h4 small, h5 small {
-    font-family: 'Open Sans';
-    font-weight: 300;
-    color: #444;
+  // Necessário para as animações de slide-out
+  // não gerarem uma barra de rolagem momentânea
+  overflow-x: hidden;
 }
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Open Sans';
-    font-weight: 300;
-    /*color: #505458;*/
+h3 small,
+h4 small,
+h5 small {
+  font-family: 'Open Sans';
+  font-weight: 300;
+  color: #444;
 }
-
-h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
-    padding-bottom: 10px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans';
+  font-weight: 300;
+  /*color: #505458;*/
 }
-
+h1.block,
+h2.block,
+h3.block,
+h4.block,
+h5.block,
+h6.block {
+  padding-bottom: 10px;
+}
 a {
-    text-shadow: none !important;
-    color: #0d638f;
-    transition: color 0.1s linear 0s,background-color 0.1s linear 0s  !important;
+  text-shadow: none !important;
+  color: #0d638f;
+  transition: color 0.1s linear 0s,background-color 0.1s linear 0s !important;
 }
-
-a,a:focus, a:hover, a:active {
-    outline: 0;
-    text-decoration:none;
+a,
+a:focus,
+a:hover,
+a:active {
+  outline: 0;
+  text-decoration: none;
 }
-i{
-    font-size:14px
+i {
+  font-size: 14px;
 }
-label.inline{
-    display:inline-block;
-    position:relative;
-    top:0px;
-    font-size: 13px;
-
+label.inline {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  font-size: 13px;
 }
 ul > li {
-    padding-left:6px;
-    line-height:20px;
+  padding-left: 6px;
+  line-height: 20px;
 }
-address{
-    margin-bottom:0px;
+address {
+  margin-bottom: 0;
 }
-blockquote{
-    padding: 0 0 0 18px;
-    border-left: 5px solid #EEEEEE;
+blockquote {
+  padding: 0 0 0 18px;
+  border-left: 5px solid #eee;
 }
-blockquote p{
-    font-size:16px
+blockquote p {
+  font-size: 16px;
 }
-blockquote small:before{
-    content: "";
+blockquote small:before {
+  content: "";
 }
-blockquote.pull-right small:after{
-    content: "";
+blockquote.pull-right small:after {
+  content: "";
 }
-blockquote small{
-    line-height: 29px;
-    color:#8b91a0;
+blockquote small {
+  line-height: 29px;
+  color: #8b91a0;
 }
-.logo{
-    margin:18px 14px;
+.logo {
+  margin: 18px 14px;
 }
-
-.normal{
-    font-weight:normal;
+.normal {
+  font-weight: normal;
 }
-
-.semi-bold{
-    font-weight:600;
+.semi-bold {
+  font-weight: 600;
 }
-
-.bold{
-    font-weight:bold;
+.bold {
+  font-weight: bold;
 }
-
-.all-caps{
-    text-transform:uppercase;
+.all-caps {
+  text-transform: uppercase;
 }
-.light{
-    font-weight:300 !important;
+.light {
+  font-weight: 300 !important;
 }
-.text-extra-small{
-    font-size:10.5px !important;
+.text-extra-small {
+  font-size: 10.5px !important;
 }
-.small-text{
-    font-size:12px !important;
+.small-text {
+  font-size: 12px !important;
 }
-
-.normal-text{
-    font-size:13px !important;
+.normal-text {
+  font-size: 13px !important;
 }
-
-.large-text{
-    font-size:15px !important;
+.large-text {
+  font-size: 15px !important;
 }
-.center-text{
-    text-align:center !important;
+.center-text {
+  text-align: center !important;
 }
-
-
-.text-success{
-    color:#0AA699 !important;
+.text-success {
+  color: #0aa699 !important;
 }
-.text-info{
-    color:#0090D9 !important;
+.text-info {
+  color: #0090d9 !important;
 }
-.text-warning{
-    color:#fbb05e !important;
+.text-warning {
+  color: #fbb05e !important;
 }
-.text-error{
-    color:#F35958 !important;
+.text-error {
+  color: #f35958 !important;
 }
-.text-white-opacity{
-    color:rgba(255,255,255,0.6);
+.text-white-opacity {
+  color: rgba(255,255,255,0.6);
 }
-.text-right{
-    text-align:right !important;
+.text-right {
+  text-align: right !important;
 }
-
-.text-left{
-    text-align:left !important;
+.text-left {
+  text-align: left !important;
 }
-
-.text-center{
-    text-align:center !important;
+.text-center {
+  text-align: center !important;
 }
-
-.container{
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    margin-left: -15px; 
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* margin-left: -15px; */
 }
 
 // Utilizar em links para usar o tamanho todo do container
 .full-size-block {
-    display: block;
-    width: 100%;
-    color: inherit;
-    height: 100%;
+  display: block;
+  width: 100%;
+  color: inherit;
+  height: 100%;
 }
-
 .link-no-state {
-    &:hover, &:active {
-        color:initial;
-    }
+  color: initial;
+  &:hover,
+  &:active {
+    color: initial;
+  }
 }
-
 .image-on-background {
-    display: block;
-    background-size: cover;
-    background-position: center center;
+  display: block;
+  background-size: cover;
+  background-position: center center;
 }
-
 .font-size-big {
-    font-size: $fontSizeBig !important;
+  font-size: $fontSizeBig !important;
 }
-
-.font-size-middle {
-    font-size: $fontSizeMiddle !important;
-}
-
 .font-white {
-    color:$white;
+  color: $white;
 }
-
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 // Usar para inverter um ícone horizontalmente
 .invert-horizontal {
-    transform: scaleX(-1);
+  transform: scaleX(-1);
 }
+
 // Usar para inverter um ícone verticalmente
 .invert-vertical {
-    transform: scaleY(-1);
+  transform: scaleY(-1);
 }
 
 // Usar para rodar um ícone
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
 .rotate-infinite {
-    animation: rotate infinite 1s linear;
+  animation: rotate infinite 1s linear;
 }
 
 // Usar para preencher a div pai que tem position: relative;
 .fill-parent {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 // Gatos feiosos enquanto não adiciona o bootstrap-sass
 .btn {
-    border-radius: 0.15em;
-
-    &.btn-default {
-        border-color: $lightGray;
-        background-color: lighten($lighterGray, 4%);
-        &:hover, &:active {
-            border-color: $lightGray;
-        }
+  border-radius: 0.15em;
+  &.btn-default {
+    border-color: $lightGray;
+    background-color: lighten($lighterGray, 4%);
+    &:hover,
+    &:active {
+      border-color: $lightGray;
     }
+  }
 
-    &:not(.btn-default):hover, &:not(.btn-default):active {
-        outline:0 !important;
+  &:not(.btn-default),
+  &:not(.btn-default):hover,
+  &:not(.btn-default):active {
+    outline: 0 !important;
+  }
+  &.btn-icon-only {
+    background-color: initial;
+    border-radius: 50%;
+    width:2em;
+    height:2em;
+
+    &:hover {
+      background-color: $lighterGray;
     }
+  }
 }
-
 .well {
-    box-shadow: none;
+  box-shadow: none;
 }
-
 .reset-spacing {
-    margin: 0 !important;
-    padding: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
-
 .table {
-    thead {
-        tr {
-            td, th {
-                background-color: $black;
-                color: white;
-                font-weight: normal;
-                border: none !important;
-            }
-        }
+  thead {
+    tr {
+      td,
+      th {
+        background-color: $black;
+        color: white;
+        font-weight: normal;
+        border: none !important;
+      }
     }
-    thead, tbody, tfoot {
-        tr {
-            td {
-                border: none !important;
-                padding:0;
-                line-height: 3em;
-            }
-        }
+  }
+  thead,
+  tbody,
+  tfoot {
+    tr {
+      td {
+        border: none !important;
+        padding: 0;
+        line-height: 3em;
+      }
     }
-    &.table-striped {
-        & > tbody > tr:nth-of-type(even) td {
-            background-color: $table-bg-accent;
-        }
-        & > tbody > tr:nth-of-type(odd) td {
-            background-color: transparent;
-        }
+  }
+  &.table-striped {
+    & > tbody > tr:nth-of-type(even) td {
+      background-color: $table-bg-accent;
     }
-    &.table-hover {
-        & > tbody > tr:hover td {
-            background-color: $table-bg-hover;
-        }
+    & > tbody > tr:nth-of-type(odd) td {
+      background-color: transparent;
     }
+  }
+  &.table-hover {
+    & > tbody > tr:hover td {
+      background-color: $table-bg-hover;
+    }
+  }
+}
+.icon {
+  &.status-active {
+    color: $status-active;
+  }
+  &.status-inactive {
+    color: $status-inactive;
+  }
+}
+[layout] {
+  &.fullscreen {
+    #menu-top {
+      display: none;
+    }
+    .connecta-menu {
+      display: none;
+    }
+    .page-container {
+      margin: 0;
+      background: none;
+    }
+    .container-fluid {
+      padding: 0;
+    }
+  }
+}
+.background-gray {
+  background-color: lighten($bs-gray, 2.5%);
+}
+.background-blue {
+  background-color: lighten($bs-brand-primary, 2.5%);
+}
+.background-green {
+  background-color: lighten($bs-brand-success, 2.5%);
+}
+.background-yellow {
+  background-color: lighten($bs-brand-warning, 2.5%);
+}
+.background-red {
+  background-color: lighten($bs-brand-danger, 2.5%);
 }
 
-.icon {
-    &.status-active {
-        color: $status-active;
+
+// Bootstrap Tabs
+.nav-tabs{
+  & > li.active {
+    &::after {
+      /* Se você está pensando que eu fiz esse pixel só pra fechar certinho
+       * a borda da tab ativa do bootstrap que não fecha só porque eu fiquei
+       * extremamante incomodado com isso, você está totalmente certo.
+       */
+      content:' ';
+      background:$lighterGray;
+      width:1px;
+      height:1px;
+      position:absolute;
+      bottom:0;
+      right:0;
     }
-    
-    &.status-inactive {
-        color: $status-inactive;
+  }
+
+  & > li:first-of-type {
+    margin-left:0;
+    padding-left:0;
+  }
+  & > li {
+    & > a,
+    & > a:hover,
+    & > a:focus{
+      border-radius:0;
+      margin:0;
+      padding:0 1em;
+      color:$darkerGray;
+      line-height:2.5em;
+      text-align: center;
     }
+  }
+}
+.tab-content {
+  border:solid 1px $lighterGray;
+  border-top:none;
+  background-color: $white;
 }

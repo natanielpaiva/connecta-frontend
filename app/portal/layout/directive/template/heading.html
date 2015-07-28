@@ -16,38 +16,42 @@
 
     </div>
 
-    <div class="navbar-collapse collapse dashboard">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="#/dashboard" title="{{'LAYOUT.DASHBOARD' | translate}}">
-            <span class="icon-view-quilt"></span>
-          </a>
-        </li>
-      </ul>
+    <div class="navbar-collapse collapse dashboard pull-left">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="#/dashboard" title="{{'LAYOUT.DASHBOARD'| translate}}">
+                    <span class="icon-view-quilt"></span>
+                </a>
+            </li>
+        </ul>
     </div>
 
-    <div class="navbar-collapse collapse">
-        <!--            <ul class="nav navbar-nav">
-                        <li ng-repeat="application in applications"
-                            class="logo-app {{application.name}}"
-                            ng-if="(application.name !== appInstance.name)">
-                            <a
-                                href="#/{{application.name}}"
-                                class="app-icon logo"
-                                title="{{application.title}}"
-                                >
-                            </a>
-                        </li>
-                    </ul>-->
+    <div class="navbar-collapse collapse pull-right navbar-options">
 
-<!--        <div class="pull-right">
-            <ul class="nav navbar-nav menu">
-                <li>
-                    <button class="btn app-icon" ng-click="togglePageTabs()">
-                        <span class="fa fa-th-large"></span>
-                    </button>
-                </li>
-            </ul>
-        </div>-->
+        <ul class="nav navbar-nav">
+            <li class="applications-icon">
+                <a href="javascript:void(0);" title="{{'APPLICATION.MODULES'| translate}}">
+                    <span class="icon-now-widgets"></span>
+                </a>
+            </li>
+            <li class="image-on-background user-image"
+                style="background-image: url(http://goo.gl/UWIKKY)">
+            </li>
+            <!--                <li ng-repeat="application in applications"
+                                class="logo-app {{application.name}}"
+                                ng-if="(application.name !== appInstance.name)">
+                                <a
+                                    href="#/{{application.name}}"
+                                    class="app-icon logo"
+                                    title="{{application.title}}"
+                                    >
+                                </a>
+                            </li>-->
+<!--            <li>
+                <button class="btn app-icon" ng-click="togglePageTabs()">
+                    <span class="fa fa-th-large"></span>
+                </button>
+            </li>-->
+        </ul>
     </div>
 </div>

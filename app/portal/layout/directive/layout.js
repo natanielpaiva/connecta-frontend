@@ -12,20 +12,21 @@ define([
      *
      * @returns {undefined}
      */
-    return portal.directive('appLayout', function () {
+    return portal.directive('layout', function () {
         return {
             restrict: 'A',
             replace: true,
             templateUrl: 'app/portal/layout/directive/template/layout.html',
             controller:function($scope, layoutService) {
                 $scope.showAsFlat = false;
-                $scope.showSidebar = layoutService.isSidebarVisible();
+                $scope.fullscreen = false;
+                $scope.showMenu = layoutService.isSidebarVisible();
                 $scope.showSidebarRight = false;
                 /**
                  * Evento para exibir a barra lateral
                  */
                 $scope.$on('menu.show', function () {
-                    $scope.showSidebar = true;
+                    $scope.showMenu = true;
                 });
                 
                 $scope.$on('sidebarRight.show', function (ev, val) {
@@ -36,7 +37,7 @@ define([
                  * Evento para ocultar a barra lateral
                  */
                 $scope.$on('menu.hide', function () {
-                    $scope.showSidebar = false;
+                    $scope.showMenu = false;
                 });
                 
                 /**
@@ -45,6 +46,13 @@ define([
                  */
                 $scope.$on('page.flat', function (ev, val) {
                     $scope.showAsFlat = val;
+                });
+                /**
+                 * Evento para mostrar o page container sem fundo
+                 * e sem padding
+                 */
+                $scope.$on('page.fullscreen', function (ev, val) {
+                    $scope.fullscreen = val;
                 });
             },
             link: function (scope, element) {

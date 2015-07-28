@@ -176,7 +176,7 @@ define([
      * @param {type} $menu
      */
     function configureMenuRouteChangeListener($rootScope, $menu) {
-        
+
         $rootScope.$on('$routeChangeSuccess', function ($event, $route) {
             if ($route.$$route && $route.$$route.module) {
                 $menu.set(angular.module($route.$$route.module)._menu);
@@ -279,6 +279,8 @@ define([
         //'portal/layout/directive/sidebar',
         // 'portal/layout/service/search',
         'portal/layout/directive/debug',
+        'portal/layout/directive/scroll-to',
+        'portal/layout/directive/random-class',
         'portal/layout/directive/key-value',
         'portal/layout/directive/file-model',
         'portal/layout/directive/input-timeout',

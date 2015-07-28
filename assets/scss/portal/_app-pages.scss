@@ -21,85 +21,15 @@ $pageGutter:1em;
     padding:0;
   }
 }
-.hide-sidebar .page-container {
+.hide-menu .page-container {
     margin-left: $miniSidebarSize;
 }
-.hide-sidebar .page-container.flat {
+.hide-menu .page-container.flat {
     margin-left: $miniSidebarSize - 1.15;
 }
 
 .show-tabs .page-container {
     margin-right: $sidebarSize;
-}
-
-#page-switcher-wrapper {
-    background-color: #1B1E25;
-    transition: all 0.3s;
-    position: fixed;
-    right: -300px;
-    width: 250px;
-    height: 100%;
-    overflow: hidden;
-    z-index: 5;
-    top: 0;
-    padding: 0 10px;
-    padding-top: 60px;
-}
-
-.show-tabs #page-switcher-wrapper{
-    right: 0px;
-}
-
-#page-switcher-wrapper h3{
-    font-size: 18px;
-    color: #fff;
-}
-
-#page-switcher-wrapper h4{
-    font-size: 16px;
-}
-
-#page-switcher-wrapper ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-#page-switcher-wrapper ul li{
-    margin-bottom: 10px;
-}
-
-#page-switcher-wrapper .page-shot{
-    background-color: #fff;
-    position: relative;
-    opacity: 0.7;
-    transition: all 0.3s;
-}
-
-#page-switcher-wrapper .page-shot:hover{
-    opacity: 1;
-}
-
-#page-switcher-wrapper .page-shot .btn-close{
-    position: absolute;
-    top: 0;
-    right: 2px;
-    color: #494F5B;
-    transition: all 0.3s;
-}
-
-#page-switcher-wrapper .page-shot .btn-close:hover{
-    color: #000;
-}
-
-#page-switcher-wrapper .page-shot .btn-close i{
-    font-size: 22px;
-}
-
-#page-switcher-wrapper .footer{
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
 }
 
 /*** Page title ***/

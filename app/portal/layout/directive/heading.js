@@ -6,7 +6,7 @@ define([
      */
     return portal.directive('heading', function(layoutService, applicationsService) {
         return {
-            restrict: 'AE',
+            restrict: 'E',
             replace: true,
             templateUrl: 'app/portal/layout/directive/template/heading.html',
             link: function(scope) {

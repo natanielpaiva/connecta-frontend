@@ -61,5 +61,9 @@ define([
             $rootScope.$broadcast('sidebarRight.show', val);
         };
         
+        this.setFullscreen = function(fullscreen) {
+          $rootScope.$broadcast('page.fullscreen', fullscreen);
+        };
+        
     });
 });

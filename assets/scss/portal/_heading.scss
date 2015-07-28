@@ -68,28 +68,66 @@ $headerHeight: 4em;
     }
 
     .dashboard {
-      ul.nav.navbar-nav {
-        li {
-          a {
-            padding:0;
-            margin:0;
-            height:100%;
-            text-align:center;
-            line-height:1.55em;
-            font-size:3em;
-            width:1.5em;
-            display:block;
-            float:left;
+        ul.nav.navbar-nav {
+            li {
+                a {
+                    padding:0;
+                    margin:0;
+                    height:100%;
+                    text-align:center;
+                    line-height:1.55em;
+                    font-size:3em;
+                    width:1.5em;
+                    display:block;
+                    float:left;
 
-            .icon-view-quilt {
-              color:$lightBlack;
-              // font-size:3em;
-              // line-height:1.55em;
-              // text-align:center;
+                    .icon-view-quilt {
+                        color:$lightBlack;
+                        // font-size:3em;
+                        // line-height:1.55em;
+                        // text-align:center;
+                    }
+                }
             }
-          }
         }
-      }
+    }
+
+    .navbar-options {
+        ul.nav.navbar-nav {
+            li {
+                margin:0;
+                line-height:1.85em;
+                font-size:2.5em;
+                text-align:center;
+                a {
+                    padding:0;
+                    height:100%;
+                    text-align:center;
+                    line-height:inherit;
+                    
+                    width:1.5em;
+                    display:block;
+                    float:left;
+
+                    .icon-now-widgets {
+                        color:$lightBlack;
+                    }
+                }
+                
+                &.applications-icon a {
+                    width:2em;
+                }
+                
+                &.user-image {
+                    @extend .cursor-pointer;
+                    margin: 0.3em;
+                    height:1.25em;
+                    width:1.25em;
+                    border-radius: 50%;
+                    border: solid 0.075em $lightBlack;
+                }
+            }
+        }
     }
 }
 

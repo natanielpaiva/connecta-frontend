@@ -1,27 +1,33 @@
 {
-    "VALIDATION":{
-        "REQUIRED":"This field is required",
-        "EMAIL": "Must be a valid email address",
-        "MINLENGTH": "The field is too short",
-        "MAXLENGTH": "The field is too long"
-    },
-    "LAYOUT": {
-        "HOME" : "Home",
-        "ADD" : "Add",
-        "EDIT" : "Edit",
-        "DELETE" : "Delete",
-        "SAVE":  "Save",
-        "BACK":  "Back",
-        "NEXT": "Next",
-        "CANCEL":"Cancel",
-        "APPLY": "Apply",
-        "FILTER": "Filter",
-        "SELECT" : "Choose an option",
-        "SEARCH" : "Search",
-        "DONE": "Done",
-        "DASHBOARD": "Dashboard"
-    },
-    "KEY_VALUE": {
-        "NO_ITEM" : "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."
-    }
+  "VALIDATION": {
+    "REQUIRED": "This field is required",
+    "EMAIL": "Must be a valid email address",
+    "MINLENGTH": "The field is too short",
+    "MAXLENGTH": "The field is too long"
+  },
+  "LAYOUT": {
+    "HOME": "Home",
+    "ADD": "Add",
+    "NEW_M" : "New",
+    "NEW_F" : "New",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "SAVE": "Save",
+    "BACK": "Back",
+    "NEXT": "Next",
+    "CANCEL": "Cancel",
+    "APPLY": "Apply",
+    "FILTER": "Filter",
+    "SELECT": "Choose an option",
+    "SEARCH": "Search",
+    "DONE": "Done",
+    "DASHBOARD": "Dashboard",
+    "FILTER":"Filter",
+    "SHOW_GRID" : "Show grid",
+    "SHOW_LIST" : "Show list",
+    "SETTINGS" : "Settings"
+  },
+  "KEY_VALUE": {
+    "NO_ITEM": "Nothing yet. Click '{{LAYOUT.ADD}}' to add a new item."
+  }
 }

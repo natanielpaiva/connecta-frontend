@@ -76,7 +76,7 @@ module.exports = function(grunt) {
           war_dist_folder: '.',
           war_name: 'dist/connecta',
           webxml_welcome: 'index.html',
-          webxml_display_name: 'Connecta Frontend'
+          webxml_display_name: 'Connecta'
         },
         files: [{
           expand: true,

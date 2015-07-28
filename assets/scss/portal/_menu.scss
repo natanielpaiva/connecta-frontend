@@ -19,8 +19,6 @@ $miniSidebarSize: 4em;
     transition: width $defaultAnimationDuration;
 
     & > ul {
-        margin-top:1em;
-
         & > li {
             padding: 0;
 
@@ -104,7 +102,7 @@ $miniSidebarSize: 4em;
 }
 
 // Minimiza a barra lateral para mostrar apenas os ícones
-.hide-sidebar {
+.hide-menu {
     .connecta-menu {
         width: $miniSidebarSize;
 
