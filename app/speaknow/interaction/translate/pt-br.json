@@ -1,14 +1,19 @@
 
 {
     "INTERACTION": {
-        "ADD_INTERACTION": "Adicionar Interação",
+        "INTERACTIONS": "Interações",
         "ACTIONS": "Ações",
+        "ADD": "Adicionar Interação",
+        "EDIT": "Editar Interação",
+        "VIEW": "Visualizar Interação",
         "NAME": "Nome",
+        "INTERACTION_NAME": "Nome da interação",
         "MESSAGE": "Mensagem",
-        "IMAGE" : "Imagem",
-        "ICON" : "Ícone",
-        "TYPE" : "Tipo",
-        "DESCRIPTION" : "Descrição",
-        "DROP_FILE_HERE": "Arraste ou clique aqui"
+        "IMAGE": "Imagem",
+        "ICON": "Ícone",
+        "TYPE": "Tipo",
+        "DESCRIPTION": "Descrição",
+        "DROP_FILE_HERE": "Arraste ou clique aqui",
+        "SEARCH_EMPTY":"Nenhum resultado encontrado"
     }
 }

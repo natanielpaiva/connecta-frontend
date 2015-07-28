@@ -66,18 +66,18 @@ define([
             $scope.companyContacts.contacts = [];
             
             var contactPhone = {
-                'name':$scope.company.name + " Phone",
+                'name': "Phone",
                 'type': 0,
                 'value': $scope.phone
             };
             
             var contactEmail = {
-                'name':$scope.company.name + " Email",
+                'name': "Email",
                 'type': 1,
                 'value': $scope.email
             };
             
-            $scope.companyContacts.name = $scope.company.name + " Contacts";
+            $scope.companyContacts.name = $scope.company.name;
             $scope.companyContacts.contacts.push(contactPhone);
             $scope.companyContacts.contacts.push(contactEmail);
             $scope.company.companyContacts.push($scope.companyContacts);

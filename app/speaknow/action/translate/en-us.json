@@ -1,21 +1,23 @@
 {
     "ACTION": {
+        "YES":"Yes",
+        "NO":"No",
         "ADD": "Add Action",
         "EDIT": "Edit Action",
         "VIEW": "View Action",
         "NAME": "Name",
         "ACTION_NAME": "Action Name",
         "WHATSAPP_CONFIG":"Whatsapp Config",
-        "ALL_CONTACTS":"Enviar para todos os contatos",
+        "ALL_CONTACTS":"Send to all contacts",
         "PHONE": "Phone",
         "ACTIONS": "Actions",
         "CONTACT": "Contact",
-        "ANSWER_SEPARATOR":"Separador entre resposta",
-        "QUESTION_SEPARATOR":"Separador entre pergunta",
+        "ANSWER_SEPARATOR":"Separator between responses",
+        "QUESTION_SEPARATOR":"Separator between questions",
         "EMAIL": "Email",
-        "WHATSAPP_DEFAULT":"Enquete padrão",
-        "WHATSAPP_ACC_NAME":"Conta Whatsapp",
-        "WHATSAPP_ACC_NUMBER":"Numero Whatsapp",
+        "WHATSAPP_DEFAULT":"Poll default",
+        "WHATSAPP_ACC_NAME":"Whatsapp Account",
+        "WHATSAPP_ACC_NUMBER":"Whatsapp Number",
         "ICON": "Icon",
         "TYPE": "Type",
         "DONE": "Done",
@@ -70,8 +72,8 @@
                     "CHECKBOX": "Checkbox",
                     "VIDEO":"Video",
                     "GEO_LOCATION": "Geolocation",
-                    "UNIQUE_ANWER":"Única resposta",
-                    "MULTI_ANSWER":"Múltipla respostas"
+                    "UNIQUE_ANWER":"Only answer",
+                    "MULTI_ANSWER":"Multiple answers"
                 }
             }
         },

@@ -13,6 +13,7 @@
         "ICON" : "Icon",
         "TYPE" : "Type",
         "DESCRIPTION" : "Description",
-        "DROP_FILE_HERE": "Drop file here"
+        "DROP_FILE_HERE": "Drop file here",
+        "SEARCH_EMPTY":"No results found"
     }
 }

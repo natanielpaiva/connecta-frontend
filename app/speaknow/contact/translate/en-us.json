@@ -4,6 +4,8 @@
         "NAME": "Name",
         "EMAIL":"Email",
         "PHONE":"Phone",
-        "REGISTER_CONTACT": "Register Contact"
+        "REGISTER_CONTACT": "Register Contact",
+        "SAVE_SUCCESS": "Contato adicionado com sucesso.",
+        "EDIT":"Edit Contact"
     }
 }

@@ -52,7 +52,7 @@ define([
         };
         
         this.getIcons = function(){
-            var url = "assets/fonts/connecta/selection.json";
+            var url = "assets/fonts/speaknow/selection.json";
             return $http.get(url);
         };
         

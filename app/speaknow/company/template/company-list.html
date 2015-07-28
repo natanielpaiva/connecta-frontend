@@ -10,12 +10,12 @@
         <div class="margin-top-single">
             <form novalidate name="formulario">
                 <div class="row">
-                    <div class="col-md-1">
+<!--                    <div class="col-md-1">
                         <button type="button" ng-click="filter = !filter" class="btn btn-info" translate>LAYOUT.FILTER</button>
-                    </div>
+                    </div>-->
                     <div class="col-md-11">
                         <div class="input-group">
-                            <span class="input-group-addon">
+                            <span class="input-group-addon btn-search-speaknow">
                                 <span class="glyphicon glyphicon-search"></span>
                             </span>
                             <input type="text" class="form-control" name="name"
@@ -44,7 +44,6 @@
         <table ng-table="tableParams" class="table table-striped margin-top-single">
             <thead>
                 <tr>
-                    <th></th>
                     <th translate >COMPANY.NAME</th>
                     <th translate>COMPANY.EMAIL</th>
                     <th translate>COMPANY.TYPE</th>
@@ -53,11 +52,8 @@
             </thead>
             <tbody>
                 <tr ng-repeat="company in $data">
-                    <td>
-					 <input type="checkbox" value="{{company.id}}" />
-					</td>
                     <td class="text-left" name="name">{{company.name}}</td>
-                    <td class="text-left">{{company.mail}}</td>
+                    <td class="text-left">{{company.mainContacts[1].value}}</td>
                     <td class="text-left">{{company.type}}</td>
                     <td>
                         <div class="btn-group">

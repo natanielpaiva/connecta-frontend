@@ -5,6 +5,8 @@
         "REMOVE_SUCCESS": "Contato removido com sucesso.",
         "EMAIL":"Email",
         "PHONE":"Telefone",
-        "REGISTER_CONTACT": "Adicionar Contato"
+        "REGISTER_CONTACT": "Adicionar Contato",
+        "SAVE_SUCCESS": "Registered contact successfully.",
+        "EDIT":"Editar Contato"
     }
 }

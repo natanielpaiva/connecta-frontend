@@ -10,7 +10,7 @@
             <div class="form-group">
                 <label class="required" for="name" translate>INTERACTION.NAME</label>
                 <input type="text" class="form-control" id="name" name="name"
-                       ng-model="interaction.name" required />
+                       ng-model="interaction.name" required maxlength="100" />
                 <div ng-show="interaction_form.$submitted || interaction_form.name.$touched" 
                      ng-messages="interaction_form.name.$error"
                      ng-messages-include="portal-error-messages">
@@ -59,7 +59,7 @@
             <div class="form-group">
                 <label for="descriptionItem" translate>INTERACTION.DESCRIPTION</label>
                 <textarea class="form-control" id="descriptionItem" name="descriptionItem"
-                          ng-model="interaction.description"></textarea>
+                          ng-model="interaction.description" maxlength="300"></textarea>
             </div>
             <a href="#/speaknow/interaction" class="btn btn-default" translate>
                 LAYOUT.BACK

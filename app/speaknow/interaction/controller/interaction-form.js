@@ -42,7 +42,7 @@ define([
         $scope.icons = [];
         //Recupera a lista de icones do selection.json
         ActionService.getIcons().success(function (data) {
-            $scope.icons = data.icons.slice(0, 100);
+            $scope.icons = data.icons;
         });
 
         // Executa a modal para escolha de ícones
@@ -106,7 +106,6 @@ define([
         
         $scope.save = function () {
             InteractionService.save($scope.interaction, $scope.fileImage).success(function () {
-                console.info("Interaction Salva com sucesso!");
                 $location.path('speaknow/interaction');
             });
         };

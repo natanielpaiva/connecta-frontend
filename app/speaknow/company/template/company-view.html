@@ -40,6 +40,10 @@
                         <strong translate>COMPANY.ICON</strong>: 
                         <span class="icon-{{company.icon}}"></span>
                     </p>
+                    <p ng-if="company.address">
+                        <strong translate>COMPANY.ADDRESS</strong>: 
+                        {{company.address}}
+                    </p>
                     <p ng-if="company.type">
                         <strong translate>COMPANY.TYPE</strong>: 
                         {{company.type}}
@@ -63,7 +67,6 @@
         <table ng-table="tableParams" class="table table-striped margin-top-single">
             <thead>
                 <tr>
-                    <th></th>
                     <th translate>COMPANY.NAME</th>
                     <th translate>COMPANY.DESCRIPTION</th>
                     <th></th>
@@ -71,7 +74,6 @@
             </thead>
             <tbody>
                 <tr ng-repeat="contactGroup in $data">
-                    <td><input type="checkbox" value="{{contactGroup.id}}" /></td>
                     <td class="text-left">{{contactGroup.name}}</td>
                     <td class="text-left">{{contactGroup.description}}</td>
                     <td>

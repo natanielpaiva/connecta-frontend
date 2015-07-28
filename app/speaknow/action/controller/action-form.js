@@ -86,13 +86,14 @@ define([
             $scope.isAnswerSeparator = type != "SELECT" && $scope.isMultiple(type);
         };
 
-        var sections = $scope.action.sections;
         $scope.addSection = function () {
+            var sections = $scope.action.sections;
             $scope.minifyCard(sections);
             sections.push(angular.copy(section));
         };
 
         $scope.removeSection = function (section) {
+            var sections = $scope.action.sections;
             sections.splice(sections.indexOf(section), 1);
         };
 
@@ -105,7 +106,7 @@ define([
         $scope.icons = [];
         //Recupera a lista de icones do selection.json
         ActionService.getIcons().success(function (data) {
-            $scope.icons = data.icons.slice(0, 100);
+            $scope.icons = data.icons;
         });
 
         $scope.isEditing = false;
@@ -114,6 +115,12 @@ define([
             $scope.isEditing = true;
             ActionService.get($routeParams.id).success(function (data) {
                 $scope.action = data;
+                $scope.isWhatsapp = $scope.action.whatsappAccount != undefined;
+                if($scope.action.contacts.length > 0){
+                    $scope.allContacts = false;
+                    $scope.whatsappAccount = $scope.action.whatsappAccount;
+                    $scope.contacts = $scope.action.contacts;
+                }
             });
         }
 
@@ -155,6 +162,12 @@ define([
             ActionService.getParamTypes().then(function (response) {
                 $scope.paramTypes = response.data;
             });
+        };
+        
+        $scope.verifyType = function(){
+            if($scope.action.type == 'SERVICE'){
+                $scope.isWhatsapp = false;
+            }
         };
         
         $scope.setParamTypesWhatsApp = function(){

@@ -74,12 +74,14 @@
                         <div class="btn-group">
                             
                             <button type="button" class="btn btn-sm" ng-class="{'icon-star2': action.default, 'icon-star-outline': !action.default}"
-                                    conf-modal="modalSetDefault" conf-modal-args="[action.id]">
+                                    conf-modal="modalSetDefault" conf-modal-args="[action.id]"  title="Favorito"
+                                    ng-disabled="!action.whatsappAccount">
                                 <span aria-hidden="true"></span>
                             </button>
 
                             <button type="button" class="btn btn-sm icon-send"
-                                    conf-modal="modalSendWhats" conf-modal-args="[action.id]">
+                                    conf-modal="modalSendWhats" conf-modal-args="[action.id]" title="Enviar Enquete"
+                                    ng-disabled="!action.whatsappAccount">
                                 <span aria-hidden="true"></span>
                             </button>
                             <!-- <a href="#/speaknow/action/{{action.id}}/data" role="button" class="btn btn-sm btn-default">
