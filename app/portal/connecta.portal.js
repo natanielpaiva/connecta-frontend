@@ -71,20 +71,14 @@ define([
 
     portal.run(function ($http, $templateCache, applications) {
 
-        var appPortal = applications.portal;
-        portal.lazy.value('portalConfig', appPortal);
-
         portal.lazy.value('portalResources', {
-            dashboard: applications.portal.host + '/dashboard'
+            dashboard: applications.portal.host + '/dashboard',
+            base: applications.portal.host,
+            login: applications.portal.host + '/auth'
         });
 
         $http.get('app/portal/layout/template/portal-error-messages.html').then(function (response) {
             $templateCache.put('portal-error-messages', response.data);
-        });
-
-        portal.lazy.value('portalResources', {
-            base: appPortal.host,
-            login: appPortal.host + '/auth'
         });
 
     });
