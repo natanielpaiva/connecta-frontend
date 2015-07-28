@@ -38,7 +38,7 @@ define([
 
                 $scope.submit = function () {
                     $scope.product.subcategory = angular.fromJson($scope.subcategory);
-                    if($scope.newProductReference){
+                    if ($scope.newProductReference) {
                         $scope.product.productReference.name = $scope.product.name;
                     }
                     ProductService.save($scope.product, $scope.productImage).then(function () {
@@ -61,6 +61,7 @@ define([
 
                 $scope.search = function () {
                     ProductService.searchProductReference($scope.productName).then(function (response) {
+                        $scope.reset();
                         if (response.data.length > 0) {
                             $scope.productReference = null;
                             $scope.product.name = null;
@@ -101,13 +102,18 @@ define([
                         $scope.tableParams.reload();
                     });
                 };
-                
-                $scope.showForm = function(){
+
+                $scope.showForm = function () {
                     var isService = $scope.product.type == 'SERVICE';
                     var isNewOrReferenceExists = $scope.newProductReference || $scope.product.productReference !== null;
                     var isProduct = $scope.product.type == 'PRODUCT';
-                    return isService ||  (isNewOrReferenceExists && isProduct);
+                    return isService || (isNewOrReferenceExists && isProduct);
                 };
-
+                
+                $scope.reset = function(){
+                    $scope.newProductReference = null;
+                    $scope.product.productReference = null;
+                };
+                
             });
 });

@@ -32,6 +32,7 @@ define([
     'bower_components/angular-messages/angular-messages.min',
     'bower_components/ng-file-upload/angular-file-upload.min',
     'bower_components/amcharts/dist/amcharts/amcharts',
+    'bower_components/angular-currency-mask/angular-currency-mask',
     'bower_components/angular-redactor/angular-redactor'
 ], function (angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel, inspection) {
 
@@ -58,7 +59,8 @@ define([
         'ui.tree',
         'ui.mask',
         'pascalprecht.translate',
-        'angularFileUpload'
+        'angularFileUpload',
+        'currencyMask'
     ]);
 
     // Configuração do backend dos módulos

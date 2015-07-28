@@ -248,12 +248,12 @@ define([
     };
 
     speaknow._menu = [
-        {
-            href: 'speaknow/config',
-            title: 'CONFIG.CONFIG',
-            icon: 'icon-settings',
-            children: []
-        },
+//        {
+//            href: 'speaknow/config',
+//            title: 'CONFIG.CONFIG',
+//            icon: 'icon-settings',
+//            children: []
+//        },
         {
             href: 'speaknow/contact',
             title: 'CONTACT.CONTACTS',

@@ -12,13 +12,13 @@
                    title="Cadastrar Produto">
                 <input type="radio" class="portal-type-switcher-input" name="type" 
                        ng-model="product.type" value="PRODUCT"/>
-                <span class="icon-box2"></span>
+                <span class="icon-box2"  ng-click="reset()"></span>
             </label>
             <label class="radio-inline portal-type-switcher-item"
                    title="Cadastrar Serviço"> 
                 <input type="radio" class="portal-type-switcher-input" name="type" 
                        ng-model="product.type" value="SERVICE"/>
-                <span class="icon-tools2"></span>
+                <span class="icon-tools2" ng-click="reset()"></span>
             </label>
         </div>
 
@@ -52,48 +52,58 @@
                 <div class="form-group">
                     <label for="name" translate>PRODUCT.NAME</label>
                     <input type="text" class="form-control" id="name" name="name" ng-model="product.name" required/>
-                    <div ng-show="formulario.name.$touched" ng-messages="formulario.price.$error"
+                    <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
                          ng-messages-include="portal-error-messages"></div>
                 </div>
 
                 <div class="form-group" ng-show="newProductReference">
-                    <label for="name" translate>PRODUCT.CODE</label>
-                    <input type="text" class="form-control" id="name" name="name" ng-model="product.productReference.code"/>
-                    <div ng-show="formulario.name.$touched" ng-messages="formulario.price.$error"
+                    <label for="code" translate>PRODUCT.CODE</label>
+                    <input type="text" class="form-control" id="code" name="code" ng-model="product.productReference.code" required/>
+                    <div ng-show="formulario.code.$touched" ng-messages="formulario.code.$error"
                          ng-messages-include="portal-error-messages"></div>
                 </div>
                 
                 <div class="form-group">
                     <label for="measureType" translate>PRODUCT.TYPE</label>
-                    <select id="measureType" name="measureType" class="form-control" ng-model="product.demand">
+                    <select id="productType" name="productType" class="form-control" ng-model="product.demand" required>
                         <option value="false">{{'PRODUCT.OFFER' | translate}}</option>
                         <option value="true">{{'PRODUCT.DEMAND' | translate}}</option>
                     </select>
+                    <div ng-show="formulario.productType.$touched" ng-messages="formulario.productType.$error"
+                         ng-messages-include="portal-error-messages"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="price" translate>PRODUCT.PRICE</label>
-                    <input type="text" class="form-control" id="price" name="price" ng-model="product.price" required/>
+                    <input type="text" class="form-control" 
+                           id="price" name="price" 
+                           ng-model="product.price" 
+                           currency-mask
+                           required/>
                     <div ng-show="formulario.price.$touched" ng-messages="formulario.price.$error"
                          ng-messages-include="portal-error-messages"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="measureType" translate>PRODUCT.MEASURE</label>
-                    <select id="measureType" name="measureType" class="form-control" ng-model="product.measureType">
+                    <select id="measureType" name="measureType" class="form-control" ng-model="product.measureType" required>
                         <option ng-repeat="measureType in measureTypes" value="{{measureType}}">
                             {{'PRODUCT.' + measureType| translate}}
                         </option>
                     </select>
+                    <div ng-show="formulario.measureType.$touched" ng-messages="formulario.measureType.$error"
+                         ng-messages-include="portal-error-messages"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="category" translate>PRODUCT.CATEGORY</label>
-                    <select id="category" name="category" class="form-control" ng-model="subcategory">
+                    <select id="category" name="category" class="form-control" ng-model="subcategory" required>
                         <option ng-repeat="category in categories" value="{{category}}">
                             {{category.name}}
                         </option>
                     </select>
+                    <div ng-show="formulario.category.$touched" ng-messages="formulario.category.$error"
+                         ng-messages-include="portal-error-messages"></div>
                 </div>
 
                 <div class="form-group">
