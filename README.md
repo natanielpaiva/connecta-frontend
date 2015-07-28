@@ -30,6 +30,19 @@ Para instalar o Sass é necessário apenas rodar o comando:
 gem install sass
 ```
 
+Instalar o Git com o comando:
+
+```
+sudo apt-get install git
+```
+
+Instalar o Bower, o Grunt e o Karma:
+
+```
+npm install -g bower grunt-cli karma-cli
+```
+
+
 ### Instalação das dependências no Windows
 
 Baixar o instalador .msi do site https://nodejs.org/download/, e instalar normalmente.
@@ -39,6 +52,15 @@ pelo link: http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551
 utilizar a versão rubyinstaller-1.9.3
 
 O Ruby installer já instala o Ruby Gems. A instalação do Sass no windows é o mesmo comando do Linux.
+
+Baixar e instalar o  http://git-scm.com/.
+
+Na rede interna, utilizar o comando abaixo para usar o protocolo HTTPS ao invés de git://, que não funciona aqui.
+
+```
+git config --global url."https://".insteadOf git://
+```
+
 
 ### Instalação do Connecta
 
