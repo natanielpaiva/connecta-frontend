@@ -4,3 +4,9 @@ $speaknowImagePath:'#{$imagePath}speaknow';
 @import "action-form";
 @import "company-form";
 @import "product-form";
+
+.btn-search-speaknow {
+    background-color: #5bc0de;  
+    border-color: #269abc; 
+    color: white;
+}
