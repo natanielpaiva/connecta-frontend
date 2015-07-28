@@ -36,6 +36,7 @@ Baixar o instalador .msi do site https://nodejs.org/download/, e instalar normal
 
 Baixar o Ruby Installer no site oficial (http://rubyinstaller.org/downloads/)
 pelo link: http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe
+utilizar a versão rubyinstaller-1.9.3
 
 O Ruby installer já instala o Ruby Gems. A instalação do Sass no windows é o mesmo comando do Linux.
 
