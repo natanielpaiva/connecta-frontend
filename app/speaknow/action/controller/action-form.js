@@ -115,7 +115,7 @@ define([
             $scope.isEditing = true;
             ActionService.get($routeParams.id).success(function (data) {
                 $scope.action = data;
-                $scope.isWhatsapp = $scope.action.whatsappAccount != undefined;
+                $scope.isWhatsapp = $scope.action.whatsappAccount !== undefined;
                 if($scope.action.contacts.length > 0){
                     $scope.allContacts = false;
                     $scope.whatsappAccount = $scope.action.whatsappAccount;
