@@ -236,6 +236,10 @@ define([
         });
     }
 
+    function configureCredentialsOptions($httpProvider){
+        $httpProvider.defaults.withCredentials = true;
+    }   
+
     /**
      * Configura o whitelist de todos os protocolos que podem ser usados
      * em links no HTML (retira o unsafe:... da frente do protocolo)
@@ -251,6 +255,7 @@ define([
         configureTranslations($translateProvider, window.navigator);
         configureRoutes($routeProvider);
         configureRequestInterceptors($httpProvider);
+        configureCredentialsOptions($httpProvider);
         configureHTTPWhitelist($compileProvider, $sceProvider);
 
         //$locationProvider.html5Mode(true);

@@ -52,6 +52,11 @@ define([
             controller: 'DashboardFormController',
             controllerUrl: 'portal/dashboard/controller/dashboard-form',
             templateUrl: 'app/portal/dashboard/template/dashboard-form.html'
+        },
+        '/login': {
+            controller: 'LoginController',
+            controllerUrl: 'portal/login/controller/login',
+            templateUrl: 'app/portal/login/template/login.html'
         }
     };
 
@@ -66,7 +71,8 @@ define([
 
     portal.run(function ($http, $templateCache, applications) {
 
-        portal.lazy.value('portalConfig', applications.portal);
+        var appPortal = applications.portal;
+        portal.lazy.value('portalConfig', appPortal);
 
         portal.lazy.value('portalResources', {
             dashboard: applications.portal.host + '/dashboard'
@@ -74,6 +80,11 @@ define([
 
         $http.get('app/portal/layout/template/portal-error-messages.html').then(function (response) {
             $templateCache.put('portal-error-messages', response.data);
+        });
+
+        portal.lazy.value('portalResources', {
+            base: appPortal.host,
+            login: appPortal.host + '/auth'
         });
 
     });
