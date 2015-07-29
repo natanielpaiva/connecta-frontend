@@ -7,10 +7,17 @@ define([
 
         this.setMap = function (Map) {
             this.map = Map;
+            mapp = this.map;
         };
 
         this.zoomMapToMaxExtent = function () {
             this.map.__zoomMapToMaxExtent();
+        };
+        
+        this.setLayerOpacity = function (layer, opacity) {
+            console.log("layer",layer);
+            console.log("opacity",opacity);
+            this.map.__getLayerByName(layer).__setLayerOpacity(opacity);
         };
 
         this.toggleZoomArea = function () {

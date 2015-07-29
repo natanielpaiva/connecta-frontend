@@ -33,6 +33,12 @@ define([
                 ToolBarService.toggleInfo();
             });
             
+            // controle de opacidade
+            angular.element(".opacityRange").on("change", function (elem) {
+                console.log("eleeeem range", elem);
+                ToolBarService.setLayerOpacity(elem.currentTarget.title, parseFloat(elem.currentTarget.value/100));
+            });
+            
             // controle de quantos checkbox estão marcados para habilitar a funcionalidade de swipe
             angular.element(".combo_layers").on("click", function (elem) {
                 
@@ -97,7 +103,8 @@ define([
             var temp = setInterval(function () {
                 for (var config in layerConfig) {
                     console.log("ahusuasuhahusas", layerConfig[config]);
-                    elem = '<p><input type="checkbox" id="' + layerConfig[config].layerEntity.nm_layer + '" class="combo_layers" style="margin: -5px 0px 5px 15px;" value="' + layerConfig[config].nm_viewer + '"/>   ' + layerConfig[config].nm_viewer + '</p>';
+                    elem = '<p><input type="checkbox" id="' + layerConfig[config].layerEntity.nm_layer + '" class="combo_layers" style="margin: -5px 0px 5px 15px;" value="' + layerConfig[config].nm_viewer + '"/>   ' + layerConfig[config].nm_viewer;
+                    elem += '<input type="range" title="' + layerConfig[config].nm_viewer + '"class="opacityRange" min="0" max="100" step="5" value="100" style="margin-left: 15px; width: 200px;"/></p>';
                     angular.element(".legend").append(elem);
                 }
 
