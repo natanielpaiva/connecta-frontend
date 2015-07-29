@@ -38,7 +38,9 @@ define([
                 dateModel: "="
             },
             link: function($scope){
-                $scope.dateModel = new Date();
+                if($scope.dateModel === undefined){
+                    $scope.dateModel = new Date();
+                }
             },
             templateUrl: 'app/inspection/inspection/directive/template/inspect-datepicker.html'
         };
