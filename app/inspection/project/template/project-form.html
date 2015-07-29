@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{isEditing ? 'PROJECT.EDIT' : 'PROJECT.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+
+            <div class="form-group">
+                <label for="project" translate>PROJECT.CLIENT</label>
+                <input type="project" class="form-control" id="project" name="project"
+                       ng-model="productItem.project" required/>
+                <div ng-show="formulario.project.$touched" ng-messages="formulario.project.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="code" translate>PROJECT.PURCHASE_ORDER</label>
+                <input type="text" class="form-control" id="name" name="code"
+                       ng-model="productItem.code" required/>
+                <div ng-show="formulario.code.$touched" ng-messages="formulario.code.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" translate>PROJECT.NAME</label>
+                <input type="name" class="form-control" id="name" name="name"
+                       ng-model="productItem.name" required/>
+                <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="supplier" translate>PROJECT.DESCRIPTION</label>
+                <input type="text" class="form-control" id="supplier" name="supplier"
+                       ng-model="productItem.supplier" required/>
+                <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="supplier" translate>PROJECT.DOCUMENTS</label>
+                <input type="text" class="form-control" id="supplier" name="supplier"
+                       ng-model="productItem.supplier" required/>
+                <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <a href="#/inspection/person"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

@@ -10,6 +10,7 @@ define([
         $translatePartialLoaderProvider.addPart('inspection/supplier');
         $translatePartialLoaderProvider.addPart('inspection/supplier-address');
         $translatePartialLoaderProvider.addPart('inspection/product-item');
+        $translatePartialLoaderProvider.addPart('inspection/project');
     });
 
     inspection.run(function (applications) {
@@ -22,7 +23,8 @@ define([
             person: appInspection.host + '/person',
             instrument: appInspection.host + '/instrument',
             supplier: appInspection.host + '/supplier',
-            supplierAddress: appInspection.host + '/supplierAddress'
+            supplierAddress: appInspection.host + '/supplierAddress',
+            project: appInspection.host + '/project'
         });
 
     });
@@ -140,6 +142,29 @@ define([
             controller: 'ProductItemFormController',
             controllerUrl: 'inspection/product-item/controller/product-item-form',
             templateUrl: 'app/inspection/product-item/template/product-item-form.html'
+        },
+        /**
+         * Project
+         */
+        '/inspection/project': {
+            controller: 'ProjectListController',
+            controllerUrl: 'inspection/project/controller/project-list',
+            templateUrl: 'app/inspection/project/template/project-list.html'
+        },
+        '/inspection/project/new': {
+            controller: 'ProjectFormController',
+            controllerUrl: 'inspection/project/controller/project-form',
+            templateUrl: 'app/inspection/project/template/project-form.html'
+        },
+        '/inspection/project/:id': {
+            controller: 'ProjectViewController',
+            controllerUrl: 'inspection/product-item/controller/project-view',
+            templateUrl: 'app/inspection/product-item/template/project-view.html'
+        },
+        '/inspection/project/:id/edit': {
+            controller: 'ProjectFormController',
+            controllerUrl: 'inspection/product-item/controller/project-form',
+            templateUrl: 'app/inspection/product-item/template/project-form.html'
         }
 
     };
@@ -160,6 +185,12 @@ define([
         {
             href: 'inspection/instrument',
             title: 'INSTRUMENT.INSTRUMENTS',
+            icon: 'icon-settings',
+            children: []
+        },
+        {
+            href: 'inspection/project',
+            title: 'PROJECT.PROJECT',
             icon: 'icon-settings',
             children: []
         },
