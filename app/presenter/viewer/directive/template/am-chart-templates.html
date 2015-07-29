@@ -1,12 +1,6 @@
-<am-chart-xy ng-if='options.type == "xy"' options='options'>
-</am-chart-xy>
-<am-chart-serial ng-if='options.type == "serial"' options='options'>
-</am-chart-serial>
-<am-chart-pie-donut ng-if='options.type == "pie"' options='options'>
-</am-chart-pie-donut>
-<am-chart-radar ng-if='options.type == "radar"' options='options'>
-</am-chart-radar>
-<am-chart-gauge ng-if='options.type == "gauge"' options='options'>
-</am-chart-gauge>
-<am-chart-funnel ng-if='options.type == "funnel"' options='options'>
-</am-chart-funnel>
+<div ng-switch="options.type" ng-if="options">
+    <am-chart-pie-donut ng-switch-when="pie" ng-model='options'>
+    </am-chart-pie-donut>
+    <am-chart-serial ng-switch-when="serial" ng-model='options'>
+    </am-chart-serial>
+</div>

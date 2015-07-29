@@ -48,9 +48,10 @@
                     </div>
                 </div>
             </div>
-            <am-charts options="serialColumn">
+            <am-charts ng-model="analysisViewer.viewer.configuration">
+                
             </am-charts>
-            
+
             <div class="form-group">
                 <a href="#/presenter/viewer" class="btn btn-default" translate>
                     LAYOUT.CANCEL

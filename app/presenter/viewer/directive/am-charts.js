@@ -7,8 +7,9 @@ define([
      */
     return presenter.directive('amCharts', function () {
         return {
+            require: "ngModel",
             scope: {
-                options: '='
+                options: '=ngModel'
             },
             templateUrl: 'app/presenter/viewer/directive/template/am-chart-templates.html'
         };

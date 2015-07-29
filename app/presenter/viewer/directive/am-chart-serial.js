@@ -7,13 +7,12 @@ define([
      */
     return presenter.directive('amChartSerial', function () {
         return {
-            restrict: 'E',
             replace: true,
             scope: {
-                options: '='
+                options: '=ngModel'
             },
             templateUrl: 'app/presenter/viewer/directive/template/am-chart.html',
-            link: function ($scope, $el) {
+            link: function (scope, $el) {
                 //Gerando um uid para colocar no elemento
                 var guid = function guid() {
                     function s4() {
@@ -29,10 +28,10 @@ define([
                 $el.attr('id', id);
                 var chart;
 
-                if ($scope.options.data) {
+                if (scope.options) {
                     //Função que renderiza o gráfico na tela
                     var renderChart = function (amChartOptions) {
-                        var option = amChartOptions || $scope.options;
+                        var option = amChartOptions || scope.options;
                         //Instanciando o chart de serial
                         chart = new AmCharts.AmSerialChart();
                         chart.dataProvider = option.data;
@@ -51,12 +50,11 @@ define([
                     };
 
                     renderChart();
-                    //Evento para renderizar os gráficos de qualquer controller
-                    $scope.$on('amCharts.renderChart', function (event, amChartOptions, id) {
+                    scope.$watch('options', function (newValue, oldValue) {
                         if (id === $el[0].id || !id) {
-                            renderChart(amChartOptions);
+                            renderChart(newValue);
                         }
-                    });
+                    }, true);
                 }
 
             }
