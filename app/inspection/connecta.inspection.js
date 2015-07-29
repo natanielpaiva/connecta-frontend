@@ -9,6 +9,7 @@ define([
         $translatePartialLoaderProvider.addPart('inspection/instrument');
         $translatePartialLoaderProvider.addPart('inspection/supplier');
         $translatePartialLoaderProvider.addPart('inspection/supplier-address');
+        $translatePartialLoaderProvider.addPart('inspection/product-item');
     });
 
     inspection.run(function (applications) {
@@ -17,6 +18,7 @@ define([
         inspection.lazy.value('inspectionResource', {
             base: appInspection.host,
             inspection: appInspection.host + '/inspection',
+            productItem: appInspection.host + '/product-item',
             person: appInspection.host + '/person',
             instrument: appInspection.host + '/instrument',
             supplier: appInspection.host + '/supplier',
@@ -115,6 +117,29 @@ define([
             controller: 'SupplierAddressFormController',
             controllerUrl: 'inspection/supplier-address/controller/supplier-address-form',
             templateUrl: 'app/inspection/supplier-address/template/supplier-address-form.html'
+        },
+        /**
+         * Product Item
+         */
+        '/inspection/product/item': {
+            controller: 'ProductItemListController',
+            controllerUrl: 'inspection/product-item/controller/product-item-list',
+            templateUrl: 'app/inspection/product-item/template/product-item-list.html'
+        },
+        '/inspection/product/item/new': {
+            controller: 'ProductItemFormController',
+            controllerUrl: 'inspection/product-item/controller/product-item-form',
+            templateUrl: 'app/inspection/product-item/template/product-item-form.html'
+        },
+        '/inspection/product/item/:id': {
+            controller: 'ProductItemViewController',
+            controllerUrl: 'inspection/product-item/controller/product-item-view',
+            templateUrl: 'app/inspection/product-item/template/product-item-view.html'
+        },
+        '/inspection/product/item/:id/edit': {
+            controller: 'ProductItemFormController',
+            controllerUrl: 'inspection/product-item/controller/product-item-form',
+            templateUrl: 'app/inspection/product-item/template/product-item-form.html'
         }
 
     };
@@ -135,6 +160,12 @@ define([
         {
             href: 'inspection/instrument',
             title: 'INSTRUMENT.INSTRUMENTS',
+            icon: 'icon-settings',
+            children: []
+        },
+        {
+            href: 'inspection/product/item',
+            title: 'PRODUCT_ITEM.PRODUCT_ITEM',
             icon: 'icon-settings',
             children: []
         },

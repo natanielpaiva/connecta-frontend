@@ -1,7 +1,7 @@
 define([
-    'connecta.speaknow'
-], function (speaknow) {
-    return speaknow.lazy.service('PersonService', function (inspectionResource, $http) {
+    'connecta.inspection'
+], function (inspection) {
+    return inspection.lazy.service('PersonService', function (inspectionResource, $http) {
 
         
         this.get = function(id){
