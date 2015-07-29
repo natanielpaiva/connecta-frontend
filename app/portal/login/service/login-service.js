@@ -23,7 +23,7 @@ define([
         };   
 
         this.doGet = function(){
-            return $http.get('http://localhost:7002/connecta-portal/dashboard');           
+            return $http.get('http://localhost:7002/connecta-inspection/instrument');           
         };        
 
     });
