@@ -22,9 +22,5 @@ define([
             return $http(req);
         };   
 
-        this.doGet = function(){
-            return $http.get('http://localhost:7002/connecta-inspection/instrument');           
-        };        
-
     });
 });
