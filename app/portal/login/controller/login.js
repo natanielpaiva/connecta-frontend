@@ -9,7 +9,7 @@ define([
             LoginService.doLogin($scope.credentials).success(function(response){
                 console.log(response.token);
                 console.log($http);
-                $http.defaults.headers.common['Authorization'] = response.token;
+                $http.defaults.headers.common.Authorization = response.token;
                 $cookieStore.put('Authorization', response.token);
             });
         };
