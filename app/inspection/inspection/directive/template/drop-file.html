@@ -1,0 +1,24 @@
+<div class="well drop-box set-file dropzone dropzone-inspection" >
+    <div 
+        class="drop-box set-file dropzone dropzone-file"
+        ng-file-drop 
+        ng-file-select
+        ng-multiple="false"
+        ng-file-change="fileDropped($files, $event, $rejectedFiles)" 
+        ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'" 
+        ng-model-rejected="rejFiles" 
+        allow-dir="false" 
+        drag-over-class="{accept:'accept', reject:'reject'}"
+        style="margin-top: 5px; margin-bottom: 5px;">+</div>
+
+    <div ng-repeat="file in files" class="dropzone-file">
+        <div class="file-remove" ng-click="removeFile(file)">
+            <p>x</p>
+        </div>
+        <img ng-if="isImage(file)" class="file-item" ng-src="{{file.image}}" />
+        <div class="file" ng-if="!isImage(file)">
+            <p>{{file.name.substring(0,15)}}</p>
+            <img class="file-item file-item-others" ng-src="{{file.image}}" />
+        </div>
+    </div>
+</div>

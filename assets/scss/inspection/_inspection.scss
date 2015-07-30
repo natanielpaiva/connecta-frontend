@@ -3,3 +3,10 @@ $inspectionColor:'#5f0202';
 @import "inspection-form";
 @import "box-table-inspection";
 @import "popover-status-change";
+@import "dropzone-inspection";
+
+.btn-search-inspection {
+    background-color: #5bc0de;  
+    border-color: #269abc; 
+    color: white;
+}

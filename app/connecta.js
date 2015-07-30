@@ -299,7 +299,8 @@ define([
         'presenter/viewer/directive/am-chart-funnel',
         'inspection/inspection/directive/box-table-inspection',
         'inspection/inspection/directive/status-change',
-        'inspection/inspection/directive/inspect-datepicker'
+        'inspection/inspection/directive/inspect-datepicker',
+        'inspection/inspection/directive/drop-file'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });

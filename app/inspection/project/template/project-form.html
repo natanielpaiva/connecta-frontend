@@ -39,11 +39,10 @@
                 <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
-            
+
             <div class="form-group">
                 <label for="supplier" translate>PROJECT.DOCUMENTS</label>
-                <input type="text" class="form-control" id="supplier" name="supplier"
-                       ng-model="productItem.supplier" required/>
+                <drop-file files="files" />
                 <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
