@@ -4,7 +4,7 @@ define([
     /**
      * Componente usado para renderizar e manter o header do portal
      */
-    return portal.directive('heading', function(layoutService, applicationsService) {
+    return portal.directive('heading', function(LayoutService, applicationsService) {
         return {
             restrict: 'E',
             replace: true,
@@ -20,7 +20,7 @@ define([
                  * @returns {undefined}
                  */
                 scope.toggleSidebar = function() {
-                    layoutService.toggleSidebar();
+                    LayoutService.toggleSidebar();
                 };
 
                 /**
@@ -29,7 +29,7 @@ define([
                  * @returns {undefined}
                  */
                 scope.togglePageTabs = function() {
-                    layoutService.togglePageTabs();
+                    LayoutService.togglePageTabs();
                     return false;
                 };
 

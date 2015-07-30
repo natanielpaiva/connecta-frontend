@@ -1,4 +1,4 @@
-<div class="dashboard-form">
+<form ng-submit="save()" class="dashboard-form">
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
@@ -8,11 +8,11 @@
       </div>
     </div>
     <div class="col-md-6 text-right">
-      <button class="btn btn-default">
+      <button class="btn btn-default" type="button">
         <span class="icon-cog"></span>
         {{'LAYOUT.SETTINGS' | translate}}
       </button>
-      <button class="btn btn-primary" ng-click="save()">
+      <button class="btn btn-primary" type="submit">
         {{'LAYOUT.SAVE' | translate}}
       </button>
     </div>
@@ -44,4 +44,4 @@
       </tab-heading>
     </tab>
   </tabset>
-</div>
+</form>

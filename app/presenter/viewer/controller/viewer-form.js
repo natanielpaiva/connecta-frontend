@@ -3,12 +3,12 @@ define([
     'presenter/viewer/service/viewer-service',
     'presenter/viewer/directive/am-chart-pie-donut'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, layoutService) {
+    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, LayoutService) {
         $scope.state = {loaded: false};
 
         $scope.metrics = [];
         $scope.descriptions = [];
-        layoutService.showSidebarRight(true);
+        LayoutService.showSidebarRight(true);
         sidebarService.config({
             controller: function ($scope) {
                 $scope.analysis = "";
@@ -19,7 +19,7 @@ define([
             src: 'app/presenter/viewer/template/combo-analysis.html'
         });
         $scope.$on("$locationChangeStart", function (event) {
-            layoutService.showSidebarRight(false);
+            LayoutService.showSidebarRight(false);
             sidebarService.config({
                 controller: function () {
                 }

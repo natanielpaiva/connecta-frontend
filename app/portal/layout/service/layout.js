@@ -10,16 +10,13 @@ define([
      * @param {type} $cookieStore
      * @returns {undefined}
      */
-    return portal.service('layoutService', function ($rootScope, $cookieStore) {
+    return portal.service('LayoutService', function ($rootScope, $cookieStore) {
         var SIDEBAR = 'connecta.portal.layout.menu';
 
-         var isShowPageTabs = false;
-        
-         var broadcastEvent = function(show){
-             var eventName = show ? 'menu.show' : 'menu.hide';
-        
-             $rootScope.$broadcast(eventName);
-         };
+        var broadcastEvent = function (show) {
+            var eventName = show ? 'menu.show' : 'menu.hide';
+            $rootScope.$broadcast(eventName);
+        };
 
         /**
          * Oculta e exibe a barra lateral (menu esquerdo)
@@ -27,43 +24,32 @@ define([
          * @returns {undefined}
          */
         this.toggleSidebar = function () {
-            $cookieStore.put( SIDEBAR, !$cookieStore.get(SIDEBAR) );
+            $cookieStore.put(SIDEBAR, !$cookieStore.get(SIDEBAR));
             broadcastEvent($cookieStore.get(SIDEBAR));
-        };
-        
-        
-        /**
-         * Oculta e exibe a lista de páginas abertas
-         *
-         * @returns {undefined}
-         */
-        this.togglePageTabs = function () {
-            isShowPageTabs = !isShowPageTabs;
-            if (isShowPageTabs) {
-                $rootScope.$broadcast('page.showTabs');
-            } else {
-                $rootScope.$broadcast('page.hideTabs');
-            }
+            return this;
         };
 
         /**
          * Informa se a barra lateral está aberta
          */
-        this.isSidebarVisible = function(){
+        this.isSidebarVisible = function () {
             return $cookieStore.get(SIDEBAR);
         };
-        
-        this.showAsFlat = function(flat){
-          $rootScope.$broadcast('page.flat', flat);
+
+        this.showAsFlat = function (flat) {
+            $rootScope.$broadcast('page.flat', flat);
+            return this;
         };
-        
-        this.showSidebarRight = function(val){
+
+        this.showSidebarRight = function (val) {
             $rootScope.$broadcast('sidebarRight.show', val);
+            return this;
         };
-        
-        this.setFullscreen = function(fullscreen) {
-          $rootScope.$broadcast('page.fullscreen', fullscreen);
+
+        this.setFullscreen = function (fullscreen) {
+            $rootScope.$broadcast('page.fullscreen', fullscreen);
+            return this;
         };
-        
+
     });
 });

@@ -8,6 +8,11 @@ define([
      */
     var _tempSelectedClasses = [];
 
+    /**
+     * Último índice utilizado no sequencial
+     */
+    var _useCount = -1;
+
     return {
       scope: {
         classes: '=randomClass',
@@ -39,14 +44,17 @@ define([
           return selected;
         }
 
-        if (scope.sequential) {
-          element.addClass(scope.classes[
-            scope.list.indexOf(scope.item) % scope.classes.length
-          ]);
+        /**
+         * Retorna a próxima classe sequencialmente
+         */
+        function _nextSequentialClass() {
+          return scope.classes[
+            ++_useCount % scope.classes.length
+          ];
+        }
 
-          element.addClass(scope.classes[
-            scope.list.indexOf(scope.item) % scope.classes.length
-          ]);
+        if (scope.sequential) {
+          element.addClass(_nextSequentialClass());
         } else {
           element.addClass(_randomClass());
         }

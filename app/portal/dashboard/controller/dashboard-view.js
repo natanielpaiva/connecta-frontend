@@ -3,13 +3,13 @@ define([
   'portal/dashboard/service/dashboard-service',
   'portal/layout/service/layout'
 ], function(portal) {
-  return portal.lazy.controller('DashboardViewController', function($scope, DashboardService, $routeParams, layoutService, $location) {
+  return portal.lazy.controller('DashboardViewController', function($scope, DashboardService, $routeParams, LayoutService, $location, $filter) {
     $scope.dashboard = {};
 
-    layoutService.setFullscreen(true);
+    LayoutService.setFullscreen(true);
 
     $scope.$on("$locationChangeStart", function(event) {
-      layoutService.setFullscreen(false);
+      LayoutService.setFullscreen(false);
     });
 
     $scope.gridsterItemConfig = {
@@ -20,6 +20,9 @@ define([
     };
 
     DashboardService.get($routeParams.id).then(function(response) {
+
+      response.data.sections = $filter('orderBy')(response.data.sections, 'order');
+
       angular.forEach(response.data.sections, function(section) {
         section.config = {
           draggable: {
@@ -30,6 +33,7 @@ define([
           }
         };
       });
+      
       $scope.dashboard = response.data;
     });
   });

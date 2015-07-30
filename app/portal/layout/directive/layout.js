@@ -17,10 +17,10 @@ define([
             restrict: 'A',
             replace: true,
             templateUrl: 'app/portal/layout/directive/template/layout.html',
-            controller:function($scope, layoutService) {
+            controller:function($scope, LayoutService) {
                 $scope.showAsFlat = false;
                 $scope.fullscreen = false;
-                $scope.showMenu = layoutService.isSidebarVisible();
+                $scope.showMenu = LayoutService.isSidebarVisible();
                 $scope.showSidebarRight = false;
                 /**
                  * Evento para exibir a barra lateral

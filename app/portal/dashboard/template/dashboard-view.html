@@ -1,4 +1,4 @@
-<div class="dashboard-view-page" ng-if="dashboard.displayMode=='VERTICAL'">
+<div class="dashboard-view-page" ng-if="dashboard.displayMode==='VERTICAL'">
   <h1 class="clearfix">
     <a href="#dashboard" class="pull-left" title="{{'LAYOUT.BACK'|translate}}">
       <span class="icon-arrow-left"></span>
@@ -10,7 +10,7 @@
       <span class="icon-pencil"></span>
     </a>
   </h1>
-  <div class="dashboard-section" ng-repeat="(index, section) in dashboard.sections | orderBy:'order'">
+  <div class="dashboard-section" ng-repeat="(index, section) in dashboard.sections">
     <h2 id="dashboard-section-{{index}}">
       <a href="javascript:void(0);" scroll-to="#dashboard-section-{{index}}">
         <span class="icon-link"></span>
@@ -26,9 +26,8 @@
   </div>
 
   <ul class="list-unstyled section-menu">
-    <li class="section-menu-item" ng-repeat="(index, section) in dashboard.sections | orderBy:'order'"
+    <li class="section-menu-item" ng-repeat="(index, section) in dashboard.sections"
       random-class="['background-green','background-blue','background-yellow','background-red','background-gray']"
-      random-class-list="dashboard.sections" random-class-item="section"
       random-class-sequential="true">
       <a href="javascript:void(0);" scroll-to="#dashboard-section-{{index}}">
         <span class="icon-link"></span>
