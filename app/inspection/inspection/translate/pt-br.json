@@ -1,9 +1,11 @@
 {
     "INSPECTION": {
-        "INSPECTION": "Inspeção",
-        "NAME": "Nome",
-        "INSPECTIONS": "Inspeções",
-        "REGISTER_INSPECTION":"Cadastrar Inspeção",
-        "NAME":"Nome"
+        "INSPECTION": "Inspection",
+        "NAME": "Name",
+        "INSPECTIONS": "Inspections",
+        "SCHEDULING": "Scheduling",
+        "COSTS": "Costs",
+        "REQUISITION": "Requisition",
+        "PLANNING": "Planning"
     }
 }

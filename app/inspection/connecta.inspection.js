@@ -205,6 +205,28 @@ define([
             title: 'SUPPLIER.SUPPLIERS',
             icon: 'icon-settings',
             children: []
+        },
+        {
+            title: 'INSPECTION.PLANNING',
+            icon: 'icon-settings',
+            children: [
+                {
+                    href:'inspection/',
+                    title:'INSPECTION.SCHEDULING'
+                },
+                {
+                    href:'inspection/',
+                    title:'INSPECTION.COSTS'
+                },
+                {
+                    href:'inspection/',
+                    title:'INSPECTION.INSPECTIONS'
+                },
+                {
+                    href:'inspection/',
+                    title:'INSPECTION.REQUISITION'
+                }
+            ]
         }
     ];
 

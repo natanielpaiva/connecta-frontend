@@ -2,6 +2,10 @@
     "INSPECTION": {
         "INSPECTION": "Inspection",
         "NAME": "Name",
-        "INSPECTIONS": "Inspections"
+        "INSPECTIONS": "Inspections",
+        "SCHEDULING": "Scheduling",
+        "COSTS": "Costs",
+        "REQUISITION": "Requisition",
+        "PLANNING": "Planning"
     }
 }
