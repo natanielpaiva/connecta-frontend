@@ -33,20 +33,20 @@ define([
 
                 $scope.setImageFile = function (document) {
                     switch (document.type){
-                        case "docx":
+                        case "DOCX":
                             document.image = "assets/img/inspection/file-word-o.png";
                             break;
                         
-                        case "ppt":
+                        case "PPT":
                             document.image = "assets/img/inspection/file-excel-o.png";
                             break;
                         
-                        case "txt":
+                        case "TXT":
                             document.image = "assets/img/inspection/file-text-o.png";
                             break;
                         
-                        case "jpg":
-                            document.image = document.document;
+                        case "JPG":
+                            document.image = document.file;
                             break;
                     }
                 };
@@ -57,14 +57,13 @@ define([
 
                     return {
                         name: file.name,
-                        type: type,
-                        document: event.target.result
+                        type: type.toUpperCase(),
+                        file: event.target.result
                     };
                 };
                 
-                $scope.count = 0;
                 $scope.isImage = function(file){
-                    if(file.type === "jpg"){
+                    if(file.type === "JPG"){
                         return true;
                     }
                     

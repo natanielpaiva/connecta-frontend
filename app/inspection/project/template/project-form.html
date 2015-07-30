@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="project" translate>PROJECT.CLIENT</label>
                 <input type="project" class="form-control" id="project" name="project"
-                       ng-model="productItem.project" required/>
+                       ng-model="project.client"/>
                 <div ng-show="formulario.project.$touched" ng-messages="formulario.project.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="code" translate>PROJECT.PURCHASE_ORDER</label>
                 <input type="text" class="form-control" id="name" name="code"
-                       ng-model="productItem.code" required/>
+                       ng-model="project.purchaseOrderNumber" required/>
                 <div ng-show="formulario.code.$touched" ng-messages="formulario.code.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label for="name" translate>PROJECT.NAME</label>
                 <input type="name" class="form-control" id="name" name="name"
-                       ng-model="productItem.name" required/>
+                       ng-model="project.name" required/>
                 <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
@@ -35,14 +35,14 @@
             <div class="form-group">
                 <label for="supplier" translate>PROJECT.DESCRIPTION</label>
                 <input type="text" class="form-control" id="supplier" name="supplier"
-                       ng-model="productItem.supplier" required/>
+                       ng-model="project.description" required/>
                 <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
             <div class="form-group">
                 <label for="supplier" translate>PROJECT.DOCUMENTS</label>
-                <drop-file files="files" />
+                <drop-file files="project.documents" />
                 <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>

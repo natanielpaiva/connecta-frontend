@@ -6,8 +6,9 @@ define([
     return inspection.lazy.controller('ProjectFormController', function (
             $scope, $routeParams, ProjectService, notify, $location, $translate) {
 
-        $scope.project = {};
-        $scope.files = [];
+        $scope.project = {
+            documents:[]
+        };
 
         if ($routeParams.id) {
             ProjectService.get($routeParams.id).success(function (data) {
@@ -18,6 +19,7 @@ define([
 
 
         $scope.submit = function () {
+            console.log($scope.project, " <<<<<<<<<");
             ProjectService.save($scope.project).then(function () {
                 $translate('PROJECT.SAVE_SUCCESS').then(function (text) {
                     notify.success(text);
