@@ -171,12 +171,7 @@ define([
 
     inspection._menu = [
         {
-            href:'inspection',
-            icon: 'icon-settings',
-            title:'INSPECTION.INSPECTIONS'
-        },
-        {
-            title: 'INSPECTION.FORMS',
+            title: 'INSPECTION.FORM',
             icon: 'icon-settings',
             children: [
                 {
@@ -212,7 +207,7 @@ define([
             ]
         },
         {
-            title: 'INSPECTION.PLANNING',
+            title: 'INSPECTION.INSPECTION',
             icon: 'icon-settings',
             children: [
                 {
@@ -226,6 +221,34 @@ define([
                 {
                     href:'inspection/',
                     title:'INSPECTION.REQUISITION'
+                },
+                {
+                    href:'inspection',
+                    icon: 'icon-settings',
+                    title:'INSPECTION.INSPECTIONS'
+                }
+            ]
+        },
+        {
+            title: 'INSPECTION.DILIGENCE',
+            icon: 'icon-settings',
+            children: [
+                {
+                    href:'inspection/',
+                    title:'INSPECTION.SCHEDULING'
+                },
+                {
+                    href:'inspection/',
+                    title:'INSPECTION.COSTS'
+                },
+                {
+                    href:'inspection/',
+                    title:'INSPECTION.REQUISITION'
+                },
+                {
+                    href:'inspection',
+                    icon: 'icon-settings',
+                    title:'INSPECTION.DILIGENCES'
                 }
             ]
         }

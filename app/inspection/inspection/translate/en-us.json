@@ -7,6 +7,8 @@
         "COSTS": "Costs",
         "REQUISITION": "Requisition",
         "PLANNING": "Planning",
-        "FORMS": "Forms"
+        "FORM": "Form",
+        "DILIGENCE": "Diligence",
+        "DILIGENCES": "Diligences"
     }
 }
