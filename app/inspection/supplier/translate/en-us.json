@@ -11,9 +11,17 @@
         "STATE_REGISTRATION": "State Registration",
         "COUNTY_REGISTRATION": "County Registration",
         "ADDRESSES": "Addresses",
+        "ACTIONS":"Actions",
         "REMOVE_SUCCESS": "Successfully Removed",
         "ERROR_REMOVING": "Error Removing",
         "TITLE_CONFIRM_DELETE": "Supplier Delete",
-        "CONFIRM_DELETE": "Do you really want to delete Supplier?"
+        "CONFIRM_DELETE": "Do you really want to delete Supplier?",
+        "RESPONSIBLE":"Responsible",
+        "RESPONSIBLE_SELECT":"Select Responsible",
+        "RESPONSIBLE_NAME": "Name",        
+        "RESPONSIBLE_REGISTER": "Add Responsible",
+        "RESPONSIBLE_PHONE": "PHONE",
+        "RESPONSIBLE_EMAIL": "Email",
+        "RESPONSIBLE_CPF": "CPF"
     }
 }

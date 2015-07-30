@@ -1,18 +1,29 @@
 define([
     'connecta.inspection',
     'inspection/supplier/service/supplier-service',
+    'inspection/person/service/person-service',
     'inspection/supplier-address/service/supplier-address-service',
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (inspection) {
     return inspection.lazy.controller('SupplierFormController', function (
-            $scope, $routeParams, SupplierService, SupplierAddressService, notify, $location, $modal, $rootScope) {
+            $scope, $routeParams, SupplierService, PersonService, SupplierAddressService, notify, $location, $modal, $rootScope) {
 
         $scope.supplier = null;
         $scope.isEditing = false;
         $rootScope.supplierAddresses = [];
+        $rootScope.responsibles = [];
 
         $scope.deleteSupplierAddress = function (supplierAddress) {
+
+            if ($scope.isEditing) {
+                SupplierAddressService.delete(supplierAddress.id).then(function () {
+
+                }, function () {
+
+                });
+            }
+
             var objAddress = null;
             for (var obj in $rootScope.supplierAddresses) {
                 if ($rootScope.supplierAddresses[obj].description == supplierAddress.description) {
@@ -22,6 +33,9 @@ define([
             var index = $rootScope.supplierAddresses.indexOf(objAddress);
             $rootScope.supplierAddresses.splice(index, 1);
         };
+
+
+
 
         $scope.openModal = function (address) {
             if (typeof address != 'undefined') {
@@ -41,7 +55,7 @@ define([
                     $scope.ok = function (supplierAddress) {
                         if (typeof address != 'undefined') {
                             var index = $rootScope.supplierAddresses.indexOf(sAddress);
-                            $rootScope.supplierAddresses.splice(index, 1);                            
+                            $rootScope.supplierAddresses.splice(index, 1);
                         }
                         $rootScope.supplierAddresses.push(supplierAddress);
                         modalInstance.dismiss();
@@ -55,11 +69,66 @@ define([
 
         };
 
-        //Options para BO
+
+        $scope.deleteResponsible = function (responsible) {
+            var objResponsible = null;
+            for (var obj in $rootScope.responsibles) {
+                if ($rootScope.responsibles[obj].name == responsible.name) {
+                    objResponsible = $rootScope.responsibles[obj];
+                }
+            }
+            var index = $rootScope.responsibles.indexOf(objResponsible);
+            $rootScope.responsibles.splice(index, 1);
+        };
+
+        $scope.openModalResponsible = function (responsible) {
+            if (typeof responsible != 'undefined') {
+                var objResponsible = "";
+                for (var obj in $rootScope.responsibles) {
+                    if ($rootScope.responsibles[obj].name == responsible.name) {
+                        objResponsible = $rootScope.responsibles[obj];
+                    }
+                }
+            }
+
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: "app/inspection/supplier/template/supplier-responsible-form.html",
+                controller: function ($scope, $rootScope) {
+                    PersonService.list().then(function (response) {
+                        $scope.responsibles = response.data;
+                    }, function (response) {
+                        console.info("error", response);
+                    });
+
+
+                    $scope.responsible = responsible;
+                    $scope.ok = function (responsible) {
+
+                        if (typeof responsible != 'undefined') {
+                            var index = $rootScope.responsibles.indexOf(objResponsible);
+                            $rootScope.responsibles.splice(index, 1);
+                        }
+
+                        $rootScope.responsibles.push(responsible);
+                        modalInstance.dismiss();
+                    };
+
+                    $scope.cancel = function () {
+                        modalInstance.dismiss();
+                    };
+                }
+            });
+
+        };
+
         if ($routeParams.id) {
             $scope.isEditing = true;
             SupplierService.get($routeParams.id).success(function (data) {
                 $scope.supplier = data;
+                $rootScope.supplierAddresses = $scope.supplier.supplierAddresses;
+                $rootScope.responsibles = $scope.supplier.people;
+
             });
         }
 
@@ -67,8 +136,17 @@ define([
             $scope.supplier.supplierAddresses = $rootScope.supplierAddresses;
 
 
+            SupplierService.save($scope.supplier).then(function (response) {
 
-            SupplierService.save($scope.supplier).then(function () {
+                if (!$scope.isEditing) {
+                    $scope.supplier = response.data;
+                    $scope.supplier.people = $rootScope.responsibles;
+                    SupplierService.save($scope.supplier).then(function () {
+                        
+                    }, function () {
+                        
+                    });
+                }
                 $location.path('inspection/supplier');
             }, function () {
 

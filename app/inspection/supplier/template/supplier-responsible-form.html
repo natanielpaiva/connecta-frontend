@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-12">        
+        <h3 translate>SUPPLIER.RESPONSIBLE_REGISTER</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+
+            <div class="form-group">
+                <label for="description" translate>SUPPLIER.RESPONSIBLE</label>
+                 <select class="form-control" 
+                        name="responsible" 
+                        ng-model="responsible"
+                        id="responsible" 
+                        ng-options="responsible.name for responsible in responsibles" required>
+                    <option value="" translate> SUPPLIER.RESPONSIBLE_SELECT</option>
+                </select>
+                <div ng-show="formulario.description.$touched" ng-messages="formulario.description.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+                     
+   
+            <a href="" ng-click="cancel();"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid" ng-click="ok(responsible);">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

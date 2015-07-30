@@ -35,8 +35,8 @@ define([
 
 
         //translate das propriedades da modal
-        $modalTranslate($scope.modalParams, 'title', 'INSTRUMENT.TITLE_CONFIRM_DELETE');
-        $modalTranslate($scope.modalParams, 'text', 'INSTRUMENT.CONFIRM_DELETE');
+        $modalTranslate($scope.modalParams, 'title', 'SUPPLIER.TITLE_CONFIRM_DELETE');
+        $modalTranslate($scope.modalParams, 'text', 'SUPPLIER.CONFIRM_DELETE');
 
 
         $scope.search = {
