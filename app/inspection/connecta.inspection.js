@@ -171,40 +171,45 @@ define([
 
     inspection._menu = [
         {
-            href: 'inspection',
-            title: 'INSPECTION.INSPECTIONS',
+            href:'inspection',
             icon: 'icon-settings',
-            children: []
+            title:'INSPECTION.INSPECTIONS'
         },
         {
-            href: 'inspection/person',
-            title: 'PERSON.PEOPLE',
+            title: 'INSPECTION.FORMS',
             icon: 'icon-settings',
-            children: []
-        },
-        {
-            href: 'inspection/instrument',
-            title: 'INSTRUMENT.INSTRUMENTS',
-            icon: 'icon-settings',
-            children: []
-        },
-        {
-            href: 'inspection/project',
-            title: 'PROJECT.PROJECT',
-            icon: 'icon-settings',
-            children: []
-        },
-        {
-            href: 'inspection/product/item',
-            title: 'PRODUCT_ITEM.PRODUCT_ITEM',
-            icon: 'icon-settings',
-            children: []
-        },
-        {
-            href: 'inspection/supplier',
-            title: 'SUPPLIER.SUPPLIERS',
-            icon: 'icon-settings',
-            children: []
+            children: [
+                {
+                    href: 'inspection/person',
+                    title: 'PERSON.PEOPLE',
+                    icon: 'icon-settings',
+                    children: []
+                },
+                {
+                    href: 'inspection/instrument',
+                    title: 'INSTRUMENT.INSTRUMENTS',
+                    icon: 'icon-settings',
+                    children: []
+                },
+                {
+                    href: 'inspection/project',
+                    title: 'PROJECT.PROJECT',
+                    icon: 'icon-settings',
+                    children: []
+                },
+                {
+                    href: 'inspection/product/item',
+                    title: 'PRODUCT_ITEM.PRODUCT_ITEM',
+                    icon: 'icon-settings',
+                    children: []
+                },
+                {
+                    href: 'inspection/supplier',
+                    title: 'SUPPLIER.SUPPLIERS',
+                    icon: 'icon-settings',
+                    children: []
+                }
+            ]
         },
         {
             title: 'INSPECTION.PLANNING',
@@ -217,10 +222,6 @@ define([
                 {
                     href:'inspection/',
                     title:'INSPECTION.COSTS'
-                },
-                {
-                    href:'inspection/',
-                    title:'INSPECTION.INSPECTIONS'
                 },
                 {
                     href:'inspection/',

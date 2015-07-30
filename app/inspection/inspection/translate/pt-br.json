@@ -1,11 +1,12 @@
 {
     "INSPECTION": {
-        "INSPECTION": "Inspection",
-        "NAME": "Name",
-        "INSPECTIONS": "Inspections",
-        "SCHEDULING": "Scheduling",
-        "COSTS": "Costs",
-        "REQUISITION": "Requisition",
-        "PLANNING": "Planning"
+        "INSPECTION": "Inspeção",
+        "NAME": "Nome",
+        "INSPECTIONS": "Inspeções",
+        "SCHEDULING": "Agendamento",
+        "COSTS": "Custos",
+        "REQUISITION": "Solicitação",
+        "PLANNING": "Planejamento",
+        "FORMS": "Cadastros"
     }
 }
