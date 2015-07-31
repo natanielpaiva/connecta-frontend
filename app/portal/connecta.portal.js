@@ -1,87 +1,81 @@
 define([
-    'angular',
-    'bower_components/angular-gridster/src/angular-gridster'
-], function (angular) {
-    var portal = angular.module('connecta.portal', [
-        'pascalprecht.translate',
-        'ngCookies',
-        'gridster',
-        'angular-redactor'
-    ]);
+  'angular',
+  'bower_components/angular-gridster/src/angular-gridster'
+], function(angular) {
+  var portal = angular.module('connecta.portal', [
+    'pascalprecht.translate',
+    'ngCookies',
+    'gridster',
+    'angular-redactor'
+  ]);
 
-    portal.config(function ($translatePartialLoaderProvider, redactorOptions) {
-        $translatePartialLoaderProvider.addPart('portal/layout');
-        $translatePartialLoaderProvider.addPart('portal/application');
-        $translatePartialLoaderProvider.addPart('portal/dashboard');
+  portal.config(function($translatePartialLoaderProvider, redactorOptions) {
+    $translatePartialLoaderProvider.addPart('portal/layout');
+    $translatePartialLoaderProvider.addPart('portal/application');
+    $translatePartialLoaderProvider.addPart('portal/dashboard');
+    $translatePartialLoaderProvider.addPart('portal/auth');
 
-        var _redactorOptions = {
-            // buttons: ['formatting', '|', 'bold', 'italic'],
-            toolbarFixed: true
-        };
-
-        angular.extend(redactorOptions, _redactorOptions);
-    });
-
-    portal._routes = {
-        '/': {
-            controller: 'HomeController',
-            controllerUrl: 'portal/layout/controller/home',
-            templateUrl: 'app/portal/layout/template/home.html'
-        },
-        '/application': {
-            controller: 'HomeController',
-            controllerUrl: 'portal/layout/controller/home',
-            templateUrl: 'app/portal/layout/template/home.html'
-        },
-        '/dashboard': {
-            controller: 'DashboardListController',
-            controllerUrl: 'portal/dashboard/controller/dashboard-list',
-            templateUrl: 'app/portal/dashboard/template/dashboard-list.html'
-        },
-        '/dashboard/new': {
-            controller: 'DashboardFormController',
-            controllerUrl: 'portal/dashboard/controller/dashboard-form',
-            templateUrl: 'app/portal/dashboard/template/dashboard-form.html'
-        },
-        '/dashboard/:id': {
-            controller: 'DashboardViewController',
-            controllerUrl: 'portal/dashboard/controller/dashboard-view',
-            templateUrl: 'app/portal/dashboard/template/dashboard-view.html'
-        },
-        '/dashboard/:id/edit': {
-            controller: 'DashboardFormController',
-            controllerUrl: 'portal/dashboard/controller/dashboard-form',
-            templateUrl: 'app/portal/dashboard/template/dashboard-form.html'
-        },
-        '/login': {
-            controller: 'LoginController',
-            controllerUrl: 'portal/login/controller/login',
-            templateUrl: 'app/portal/login/template/login.html'
-        }
+    var _redactorOptions = {
+      // buttons: ['formatting', '|', 'bold', 'italic'],
+      toolbarFixed: true
     };
 
-    portal._menu = [
-        {
-            href: '/',
-            title: 'LAYOUT.HOME',
-            icon: 'icon-home',
-            children: []
-        }
-    ];
+    angular.extend(redactorOptions, _redactorOptions);
+  });
 
-    portal.run(function ($http, $templateCache, applications) {
+  portal._routes = {
+    '/': {
+      controller: 'HomeController',
+      controllerUrl: 'portal/layout/controller/home',
+      templateUrl: 'app/portal/layout/template/home.html'
+    },
+    '/application': {
+      controller: 'HomeController',
+      controllerUrl: 'portal/layout/controller/home',
+      templateUrl: 'app/portal/layout/template/home.html'
+    },
+    '/dashboard': {
+      controller: 'DashboardListController',
+      controllerUrl: 'portal/dashboard/controller/dashboard-list',
+      templateUrl: 'app/portal/dashboard/template/dashboard-list.html'
+    },
+    '/dashboard/new': {
+      controller: 'DashboardFormController',
+      controllerUrl: 'portal/dashboard/controller/dashboard-form',
+      templateUrl: 'app/portal/dashboard/template/dashboard-form.html'
+    },
+    '/dashboard/:id': {
+      controller: 'DashboardViewController',
+      controllerUrl: 'portal/dashboard/controller/dashboard-view',
+      templateUrl: 'app/portal/dashboard/template/dashboard-view.html'
+    },
+    '/dashboard/:id/edit': {
+      controller: 'DashboardFormController',
+      controllerUrl: 'portal/dashboard/controller/dashboard-form',
+      templateUrl: 'app/portal/dashboard/template/dashboard-form.html'
+    }
+  };
 
-        portal.lazy.value('portalResources', {
-            dashboard: applications.portal.host + '/dashboard',
-            base: applications.portal.host,
-            login: applications.portal.host + '/auth'
-        });
+  portal._menu = [{
+    href: '/',
+    title: 'LAYOUT.HOME',
+    icon: 'icon-home',
+    children: []
+  }];
 
-        $http.get('app/portal/layout/template/portal-error-messages.html').then(function (response) {
-            $templateCache.put('portal-error-messages', response.data);
-        });
+  portal.run(function($http, $templateCache, applications) {
 
+    portal.lazy.value('portalResources', {
+      dashboard: applications.portal.host + '/dashboard',
+      base: applications.portal.host,
+      login: applications.portal.host + '/auth'
     });
 
-    return portal;
+    $http.get('app/portal/layout/template/portal-error-messages.html').then(function(response) {
+      $templateCache.put('portal-error-messages', response.data);
+    });
+
+  });
+
+  return portal;
 });

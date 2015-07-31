@@ -1,0 +1,30 @@
+<section>
+  <div id="header-login">
+    <div id="logo">
+      <img src="assets/img/logo-connecta-negative.png"
+        alt="logo" id="logo-app-master" />
+    </div>
+    <div id="version-app">
+      v0.0.1
+    </div>
+  </div>
+  <div id="form-login">
+    <form name="loginForm" ng-submit="submit()" novalidate>
+      <div class="line-form">
+        <img src="assets/img/icon-user.png" alt="icon">
+        <input type="text" class="field-text"
+           placeholder="{{'AUTH.USER' | translate}}"
+           ng-model="credentials.username" required autofocus />
+      </div>
+      <div class="line-form">
+        <img src="assets/img/icon-password.png" alt="icon">
+        <input type="password" class="field-text"
+           placeholder="{{'AUTH.PASSWORD' | translate}}"
+           ng-model="credentials.password" required />
+      </div>
+      <div class="line-form">
+        <button id="btn-login" translate>AUTH.LOGIN</button>
+      </div>
+    </form>
+  </div>
+</section>
