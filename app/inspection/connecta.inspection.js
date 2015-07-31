@@ -11,6 +11,9 @@ define([
         $translatePartialLoaderProvider.addPart('inspection/supplier-address');
         $translatePartialLoaderProvider.addPart('inspection/product-item');
         $translatePartialLoaderProvider.addPart('inspection/project');
+        $translatePartialLoaderProvider.addPart('inspection/client');
+        $translatePartialLoaderProvider.addPart('inspection/client-address');
+        
     });
 
     inspection.run(function (applications) {
@@ -24,7 +27,9 @@ define([
             instrument: appInspection.host + '/instrument',
             supplier: appInspection.host + '/supplier',
             supplierAddress: appInspection.host + '/supplierAddress',
-            project: appInspection.host + '/project'
+            project: appInspection.host + '/project',
+            client: appInspection.host + '/client',
+            clientAddress: appInspection.host + '/clientAddress'
         });
 
     });
@@ -59,6 +64,26 @@ define([
             controller: 'PersonFormController',
             controllerUrl: 'inspection/person/controller/person-form',
             templateUrl: 'app/inspection/person/template/person-form.html'
+        },
+        '/inspection/client': {
+            controller: 'ClientListController',
+            controllerUrl: 'inspection/client/controller/client-list',
+            templateUrl: 'app/inspection/client/template/client-list.html'
+        },
+        '/inspection/client/new': {
+            controller: 'ClientFormController',
+            controllerUrl: 'inspection/client/controller/client-form',
+            templateUrl: 'app/inspection/client/template/client-form.html'
+        },
+        '/inspection/client/:id': {
+            controller: 'ClientViewController',
+            controllerUrl: 'inspection/client/controller/client-view',
+            templateUrl: 'app/inspection/client/template/client-view.html'
+        },
+        '/inspection/client/:id/edit': {
+            controller: 'ClientFormController',
+            controllerUrl: 'inspection/client/controller/client-form',
+            templateUrl: 'app/inspection/client/template/client-form.html'
         },
         '/inspection/instrument': {
             controller: 'InstrumentListController',
@@ -201,6 +226,12 @@ define([
                 {
                     href: 'inspection/supplier',
                     title: 'SUPPLIER.SUPPLIERS',
+                    icon: 'icon-settings',
+                    children: []
+                },
+                {
+                    href: 'inspection/client',
+                    title: 'CLIENT.CLIENTS',
                     icon: 'icon-settings',
                     children: []
                 }
