@@ -3,7 +3,6 @@ define([
 ], function (inspection) {
     return inspection.lazy.service('ClientService', function (inspectionResource, $http) {
 
-        
         this.get = function(id){
             var url = inspectionResource.client + "/" + id;
             return $http.get(url);

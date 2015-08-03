@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-12">
-        <h3 translate>PERSON.VIEW</h3>
+        <h3 translate>{{productItem.name}}</h3>
     </div>
 </div>
 
-<div class="row">
+<!--<div class="row">
     <div class="col-md-2">
         <div class="btn-group">
             <button class="btn btn-default">
@@ -15,65 +15,50 @@
             </button>
         </div>
     </div>    
-</div>
+</div>-->
 
 <div class="row">
     <div class="col-md-12">
         <div class="well margin-top-single margin-bottom-single">
       
-            <p ng-if="person.cpf">
-                <strong translate>PERSON.CPF</strong>:
-                {{person.cpf}}
+            <p ng-if="productItem.name">
+                <strong translate>PRODUCT_ITEM.NAME</strong>:
+                {{productItem.name}}
             </p>
             
-            <p ng-if="person.name">
-                <strong translate>PERSON.NAME</strong>:
-                {{person.name}}
+            <p ng-if="productItem.serialNumber">
+                <strong translate>PRODUCT_ITEM.SERIAL</strong>:
+                {{productItem.serialNumber}}
             </p>
             
-            <p ng-if="person.email">
-                <strong translate>PERSON.EMAIL</strong>:
-                {{person.email}}
+            <p ng-if="productItem.description">
+                <strong translate>PRODUCT_ITEM.DESCRIPTION</strong>:
+                {{productItem.description}}
             </p>
             
-            <p ng-if="person.type">
-                <strong translate>PERSON.TYPE</strong>:
-                {{person.type}}
+            <p ng-if="productItem.code">
+                <strong translate>PRODUCT_ITEM.CODE</strong>:
+                {{productItem.code}}
             </p>
             
-            <p ng-if="person.phone">
-                <strong translate>PERSON.PHONE</strong>:
-                {{person.phone}}
+            <p ng-if="productItem.project.name">
+                <strong translate>PRODUCT_ITEM.PROJECT</strong>:
+                {{productItem.project.name}}
             </p>
             
-            <p ng-if="person.registry">
-                <strong translate>PERSON.REGISTRY</strong>:
-                {{person.registry}}
+            <p ng-if="productItem.quantity">
+                <strong translate>PRODUCT_ITEM.QUANT</strong>:
+                {{productItem.quantity}}
             </p>
             
-            <p ng-if="person.address">
-                <strong translate>PERSON.ADDRESS</strong>:
-                {{person.address}}
+            <p ng-if="productItem.expectedDeliveryDate">
+                <strong translate>PRODUCT_ITEM.DT_PREV</strong>:
+                {{productItem.expectedDeliveryDate}}
             </p>
             
-            <p ng-if="person.cep">
-                <strong translate>PERSON.CEP</strong>:
-                {{person.cep}}
-            </p>
-            
-            <p ng-if="person.country">
-                <strong translate>PERSON.COUNTRY</strong>:
-                {{person.country}}
-            </p>
-            
-            <p ng-if="person.state">
-                <strong translate>PERSON.STATE</strong>:
-                {{person.state}}
-            </p>
-            
-            <p ng-if="person.county">
-                <strong translate>PERSON.COUNTY</strong>:
-                {{person.county}}
+            <p ng-if="productItem.contractualDate">
+                <strong translate>PRODUCT_ITEM.DT_CONTR</strong>:
+                {{productItem.contractualDate}}
             </p>
             
         </div>
@@ -82,7 +67,7 @@
 
 <div class="row">
     <div class="col-md-12 text-right">
-        <a href="#/inspection/person" role="button" class="btn btn-default" translate>
+        <a href="#/inspection/product/item" role="button" class="btn btn-default" translate>
             LAYOUT.BACK
         </a>
     </div>

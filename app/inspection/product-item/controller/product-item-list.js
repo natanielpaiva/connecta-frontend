@@ -42,7 +42,7 @@ define([
             getData: function ($defer, params) {
                 return ProductItemService.list(params.url()).then(function (response) {
                     params.total(response.data.totalElements);
-                    $defer.resolve(response.data.content);
+                    $defer.resolve(response.data);
                 });
             },
             counts: [10, 30, 50, 100]

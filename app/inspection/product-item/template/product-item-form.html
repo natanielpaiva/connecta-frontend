@@ -10,8 +10,10 @@
 
             <div class="form-group">
                 <label for="project" translate>PRODUCT_ITEM.PROJECT</label>
-                <input type="project" class="form-control" id="project" name="project"
-                       ng-model="productItem.project" required/>
+                <select id="project" name="project" class="form-control" 
+                        ng-options="project as project.name for project in projects track by project.id"
+                        ng-model="productItem.project" required/>
+                </select>
                 <div ng-show="formulario.project.$touched" ng-messages="formulario.project.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
@@ -29,6 +31,22 @@
                 <input type="name" class="form-control" id="name" name="name"
                        ng-model="productItem.name" required/>
                 <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="description" translate>PRODUCT_ITEM.DESCRIPTION</label>
+                <input type="description" class="form-control" id="description" name="description"
+                       ng-model="productItem.description" required/>
+                <div ng-show="formulario.description.$touched" ng-messages="formulario.description.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="serialNumber" translate>PRODUCT_ITEM.SERIAL</label>
+                <input type="serialNumber" class="form-control" id="serialNumber" name="serialNumber"
+                       ng-model="productItem.serialNumber" required/>
+                <div ng-show="formulario.serialNumber.$touched" ng-messages="formulario.serialNumber.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
@@ -56,13 +74,15 @@
 
             <div class="form-group">
                 <label for="supplier" translate>PRODUCT_ITEM.SUPPLIER</label>
-                <input type="text" class="form-control" id="supplier" name="supplier"
-                       ng-model="productItem.supplier" required/>
+                <select id="project" name="supplier" class="form-control" 
+                        ng-options="supplier as supplier.name for supplier in supplies track by supplier.id"
+                        ng-model="productItem.supplier" required/>
+                </select>
                 <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
-            <a href="#/inspection/person"
+            <a href="#/inspection/product/item"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>

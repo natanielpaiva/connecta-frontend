@@ -1,6 +1,7 @@
 {
     "PROJECT": {
         "PROJECT": "Projeto",
+        "PROJECTS": "Projetos",
         "ADD":"Cadastrar Projeto",
         "EDIT":"Editar Projeto",
         "NAME":"Nome",

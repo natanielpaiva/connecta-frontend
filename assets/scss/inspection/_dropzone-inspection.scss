@@ -2,27 +2,37 @@
     padding: 5px;
     float: left;
     width: 100%;
-
 }
 
 .file-item {
-    height: 100px;
-    width: 150px;
+    width: 140px;
+    height: 140px;
     margin: 5px 5px;
 }
 
+.dropzone-box {
+    height: 139px !important;
+    width: 138px !important;
+    margin: 7px 0px 0px 8px !important;
+}
+
 .dropzone-file {
-    margin: 0px;
-    padding: 0px;
-    width: 15%;
+    width: 140px;
+    height: 140px;
+    margin: 3px 3px;
     padding: 0px;
     float: left;
     border-radius: 0px;
+
+    .dropzone-plus{
+        font-size: 70px;
+        line-height: 1.8em;
+    }
 }
 
 .file-remove {
-    height: 100px;
-    width: 150px;
+    width: 140px;
+    height: 140px;
     margin: 5px 5px;
     position: absolute;
     z-index: 1;
@@ -31,22 +41,21 @@
     opacity: 0;
 
     p {
-        margin-top: 15px;
+        margin-top: 25px;
     }
 
 }
 
 .file {
-    height: 100px;
-    width: 150px;
+    width: 140px;
+    height: 140px;
     margin: 5px 5px;
-    /*position: absolute;*/
     z-index: 1;
     background: #ccc;
     font-size: 50px;
 
     p{
-        margin: 60px 5px;
+        margin: 100px 5px;
         padding: 0px;
         font-size: 15px;
         position: absolute;

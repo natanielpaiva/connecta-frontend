@@ -4,6 +4,8 @@
         "ADD":"Cadastrar Item de Produto",
         "EDIT":"Editar Item de Produto",
         "NAME":"Nome",
+        "DESCRIPTION": "Descrição",
+        "SERIAL":"Serial",
         "CODE":"Código",
         "PROJECT":"Projeto",
         "QUANT":"Quantidade",
