@@ -191,7 +191,30 @@ define([
             controller: 'ProjectFormController',
             controllerUrl: 'inspection/product-item/controller/project-form',
             templateUrl: 'app/inspection/product-item/template/project-form.html'
-        }
+        },
+        /**
+         * DOCUMENT
+         */
+         '/inspection/document': {
+            controller: 'DocumentListController',
+            controllerUrl: 'inspection/document/controller/document-list',
+            templateUrl: 'app/inspection/document/template/document-list.html'
+        },
+        '/inspection/document/new': {
+            controller: 'DocumentFormController',
+            controllerUrl: 'inspection/document/controller/document-form',
+            templateUrl: 'app/inspection/document/template/document-form.html'
+        },
+        '/inspection/document/:id': {
+            controller: 'DocumentViewController',
+            controllerUrl: 'inspection/document/controller/document-view',
+            templateUrl: 'app/inspection/document/template/document-view.html'
+        },
+        '/inspection/document/:id/edit': {
+            controller: 'DocumentFormController',
+            controllerUrl: 'inspection/document/controller/document-form',
+            templateUrl: 'app/inspection/document/template/document-form.html'
+        },
 
     };
 

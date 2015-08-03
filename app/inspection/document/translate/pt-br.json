@@ -1,5 +1,9 @@
 {
     "DOCUMENT": {
-        "DOCUMENT":"Documento"
+        "DOCUMENT":"Documento",
+        "DOCUMENTS":"Documentos",
+        "NAME":"Nome",
+        "TYPE":"Tipo",
+        "PROJECT":"Projeto"
     }
 }
