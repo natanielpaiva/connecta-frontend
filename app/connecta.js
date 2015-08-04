@@ -170,22 +170,7 @@ define([
       $routeProvider.when(url, route);
     });
   }
-
-  /**
-   * Configura o listener da mudança de rotas para recarregar o menu
-   * específico da aplicação
-   * @param {type} $rootScope
-   * @param {type} $menu
-   */
-  function configureMenuRouteChangeListener($rootScope, $menu) {
-
-    $rootScope.$on('$routeChangeSuccess', function($event, $route) {
-      if ($route.$$route && $route.$$route.module) {
-        $menu.set(angular.module($route.$$route.module)._menu);
-      }
-    });
-  }
-
+  
   /**
    * Configura os padrões de tratamento de Request e Response dos serviços REST
    * @param {type} $httpProvider
@@ -193,37 +178,26 @@ define([
    */
   function configureRequestInterceptors($httpProvider) {
     $httpProvider.defaults.withCredentials = true;
-    $httpProvider.interceptors.push(function($log, $q) {
+    $httpProvider.interceptors.push(function($log, $q, $rootScope) {
       return {
-        'request': function(config) {
-          return config;
-        },
-        'response': function(response) {
-          return response;
-        },
-        'responseError': function(rejection) {
-          $log.debug('Received response: ', rejection.status);
+        responseError: function(rejection) {
+          $log.warn(rejection.status+': '+rejection.statusText, rejection);
 
           var responseInterceptors = {
-            400: function(rejection) {
-              // BAD REQUEST
-              $log.debug('Erro de neǵocio: ', rejection.data);
+            400: function(rejection) { // BAD REQUEST
+              
             },
-            401: function(rejection) {
-              // UNAUTHORIZED
-              $log.debug('Não autorizado: ', rejection.data);
+            401: function(rejection) { // UNAUTHORIZED
+              $rootScope.$broadcast('login.request_unathorized');
             },
-            403: function(rejection) {
-              // FORBIDDEN
-              $log.debug('Acesso negado: ', rejection.data);
+            403: function(rejection) { // FORBIDDEN
+              
             },
-            404: function(rejection) {
-              // PAGE NOT FOUND
-              $log.debug('Recurso não encontrado: ', rejection.data);
+            404: function(rejection) { // PAGE NOT FOUND
+              
             },
-            500: function(rejection) {
-              // INTERNAL SERVER ERROR
-              $log.debug('Ocorreu um erro: ', rejection.data);
+            500: function(rejection) { // INTERNAL SERVER ERROR
+              
             }
           };
 
@@ -240,13 +214,44 @@ define([
   /**
    * Configura o whitelist de todos os protocolos que podem ser usados
    * em links no HTML (retira o unsafe:... da frente do protocolo)
+   * @param {type} $compileProvider
+   * @param {type} $sceProvider
    */
   function configureHTTPWhitelist($compileProvider, $sceProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|javascript):/);
     $sceProvider.enabled(false);
   }
+  
+  /**
+   * Configura o listener da mudança de rotas para recarregar o menu
+   * específico da aplicação
+   * @param {type} $rootScope
+   * @param {type} $menu
+   */
+  function configureMenuRouteChangeListener($rootScope, $menu) {
 
-  connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider, $locationProvider) {
+    $rootScope.$on('$routeChangeSuccess', function($event, $route) {
+      if ($route.$$route && $route.$$route.module) {
+        $menu.set(angular.module($route.$$route.module)._menu);
+      }
+    });
+  }
+  
+  /**
+   * Configura um request transformer para todos os requests pra incluir o
+   * token de autenticação no cabeçalho
+   * 
+   * @param {type} $http
+   * @param {type} LoginService
+   * @returns {undefined}
+   */
+  function configureAuthenticationRequestListener($http, LoginService){
+    $http.defaults.transformRequest.push(function(data, getHeaders){
+      getHeaders().Authorization = LoginService.getAuthenticationToken();
+    });
+  }
+
+  connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider) {
 
     configureLazyProviders($controllerProvider, $compileProvider, $provide, $filterProvider);
     configureTranslations($translateProvider, window.navigator);
@@ -257,10 +262,11 @@ define([
     //$locationProvider.html5Mode(true);
   });
 
-  connecta.run(function($rootScope, $menu) {
-
+  connecta.run(function($rootScope, $menu, $http, LoginService) {
+    
+    configureAuthenticationRequestListener($http, LoginService);
     configureMenuRouteChangeListener($rootScope, $menu);
-
+    
   });
 
   /**
@@ -276,11 +282,8 @@ define([
     'portal/layout/controller/main',
     'portal/layout/controller/home',
     'portal/layout/service/applications',
-    //'portal/layout/service/pages',
     'portal/layout/service/menu',
     'portal/layout/service/layout',
-    //'portal/layout/directive/sidebar',
-    // 'portal/layout/service/search',
     'portal/auth/directive/login',
     'portal/layout/directive/debug',
     'portal/layout/directive/scroll-to',

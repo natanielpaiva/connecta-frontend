@@ -2,9 +2,9 @@
   'hide-menu' : !showMenu,
   'fullscreen' : fullscreen,
   'show-sidebar': showSidebarRight,
-  'login' : authenticated
+  'login' : !authenticated
   }">
-  <login></login>
+  <login class="am-slide-top" ng-if="!authenticated"></login>
   <heading></heading>
   <menu></menu>
   <sidebar>

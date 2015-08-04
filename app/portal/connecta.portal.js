@@ -1,13 +1,20 @@
 define([
   'angular',
+  'json!applications.json',
   'bower_components/angular-gridster/src/angular-gridster'
-], function(angular) {
+], function(angular, applications) {
   var portal = angular.module('connecta.portal', [
     'pascalprecht.translate',
     'ngCookies',
     'gridster',
     'angular-redactor'
   ]);
+  
+  portal.constant('portalResources', {
+    base: applications.portal.host,
+    dashboard: applications.portal.host + '/dashboard',
+    login: applications.portal.host + '/auth'
+  });
 
   portal.config(function($translatePartialLoaderProvider, redactorOptions) {
     $translatePartialLoaderProvider.addPart('portal/layout');
@@ -21,6 +28,14 @@ define([
     };
 
     angular.extend(redactorOptions, _redactorOptions);
+  });
+
+  portal.run(function($http, $templateCache) {
+
+    $http.get('app/portal/layout/template/portal-error-messages.html').then(function(response) {
+      $templateCache.put('portal-error-messages', response.data);
+    });
+
   });
 
   portal._routes = {
@@ -62,20 +77,6 @@ define([
     icon: 'icon-home',
     children: []
   }];
-
-  portal.run(function($http, $templateCache, applications) {
-
-    portal.lazy.value('portalResources', {
-      dashboard: applications.portal.host + '/dashboard',
-      base: applications.portal.host,
-      login: applications.portal.host + '/auth'
-    });
-
-    $http.get('app/portal/layout/template/portal-error-messages.html').then(function(response) {
-      $templateCache.put('portal-error-messages', response.data);
-    });
-
-  });
 
   return portal;
 });
