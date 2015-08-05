@@ -7,7 +7,7 @@ define([
     'portal/layout/service/modalTranslate'
 ], function (inspection) {
     return inspection.lazy.controller('SupplierFormController', function (
-            $scope, $routeParams, SupplierService, PersonService, SupplierAddressService, notify, $location, $modal, $rootScope) {
+            $scope, $routeParams, SupplierService, PersonService, SupplierAddressService, notify, $translate,$location, $modal, $rootScope) {
 
         $scope.supplier = null;
         $scope.isEditing = false;
@@ -142,13 +142,24 @@ define([
                     $scope.supplier = response.data;
                     $scope.supplier.people = $rootScope.responsibles;
                     SupplierService.save($scope.supplier).then(function () {
-                        
+
                     }, function () {
-                        
+
                     });
                 }
-                $location.path('inspection/supplier');
+
+                $translate('SUPPLIER.SAVE_SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $location.path('inspection/supplier');
+                    $scope.tableParams.reload();
+                });
+
             }, function () {
+                
+                $translate('SUPPLIER.ERROR_SAVING').then(function (text) {
+                    notify.error(text);
+                    $location.path('inspection/supplier');
+                });
 
             });
         };
