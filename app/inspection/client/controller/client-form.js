@@ -1,16 +1,39 @@
 define([
     'connecta.inspection',
     'inspection/client/service/client-service',
+    'inspection/person/service/person-service',
     'inspection/client-address/service/client-address-service',
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (inspection) {
     return inspection.lazy.controller('ClientFormController', function (
-            $scope, $routeParams, ClientService, ClientAddressService, notify, $location, $modal, $rootScope) {
+            $scope, $routeParams, ClientService, ClientAddressService, notify, $location, $modal, $rootScope, PersonService) {
 
         $scope.client = null;
         $scope.isEditing = false;
         $rootScope.clientAddresses = [];
+        $scope.typesRoading = [];
+        $scope.typesFeeding =[];
+        $scope.typesLodging =[];
+        $scope.typesAerialTransport =[];
+
+        ClientService.getRoading().then(function (response) {
+            $scope.typesRoading = response.data;
+        });
+        
+        ClientService.getFeeding().then(function (response) {
+            $scope.typesFeeding = response.data;
+        });
+        
+        ClientService.getLodging().then(function (response) {
+            $scope.typesLodging = response.data;
+        });
+        
+        ClientService.getAerialTransport().then(function (response) {
+            $scope.typesAerialTransport = response.data;
+        });
+        
+        
 
         $scope.deleteClientAddress = function (clientAddress) {
             var objAddress = null;
@@ -80,7 +103,7 @@ define([
                 animation: $scope.animationsEnabled,
                 templateUrl: "app/inspection/client/template/client-responsible-form.html",
                 controller: function ($scope, $rootScope) {
-                    ClientService.list().then(function (response) {
+                    PersonService.list().then(function (response) {
                         $scope.responsibles = response.data;
                     }, function (response) {
                         console.info("error", response);
@@ -90,9 +113,11 @@ define([
                     $scope.responsible = responsible;
                     $scope.ok = function (responsible) {
 
-                        if (typeof responsible != 'undefined') {
+                        if (typeof $rootScope.responsibles != 'undefined') {
                             var index = $rootScope.responsibles.indexOf(objResponsible);
                             $rootScope.responsibles.splice(index, 1);
+                        } else {
+                            $rootScope.responsibles = [];
                         }
 
                         $rootScope.responsibles.push(responsible);
@@ -116,9 +141,7 @@ define([
         }
 
         $scope.submit = function () {
-            $scope.supplier.clientAddresses = $rootScope.clientAddresses;
-
-
+            $scope.client.addresses = $rootScope.clientAddresses;
 
             ClientService.save($scope.client).then(function () {
                 $location.path('inspection/client');

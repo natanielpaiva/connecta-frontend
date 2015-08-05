@@ -10,7 +10,7 @@
 
             <div class="form-group">
                 <label for="cnpj" translate>CLIENT.CNPJ</label>
-                <input type="number"  class="form-control" id="code" name="cnpj"
+                <input type="number"  class="form-control" id="cnpj" name="cnpj"
                        ng-model="client.cnpj" required/>
                 <div ng-show="formulario.cnpj.$touched" ng-messages="formulario.cnpj.$error"
                      ng-messages-include="portal-error-messages"></div>
@@ -26,26 +26,26 @@
 
             <div class="form-group">
                 <label for="fantasyName" translate>CLIENT.FANTASY_NAME</label>
-                <input type="text" class="form-control" id="certificateNumber" name="fantasyName"
+                <input type="text" class="form-control" id="fantasyName" name="fantasyName"
                        ng-model="client.fantasyName" required/>
                 <div ng-show="formulario.fantasyName.$touched" ng-messages="formulario.fantasyName.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>                  
 
             <div class="form-group">
-                <label for="stateRegistration" translate>CLIENT.STATE_REGISTRATION</label>
-                <input type="number" class="form-control" id="manufacturer" name="stateRegistration"
-                       ng-model="client.stateRegistration" required/>
-                <div ng-show="formulario.stateRegistration.$touched" ng-messages="formulario.stateRegistration.$error"
+                <label for="stateRegistry" translate>CLIENT.STATE_REGISTRATION</label>
+                <input type="number" class="form-control" id="stateRegistry" name="stateRegistry"
+                       ng-model="client.stateRegistry" required/>
+                <div ng-show="formulario.stateRegistry.$touched" ng-messages="formulario.stateRegistration.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
 
             <div class="form-group">
-                <label for="countyRegistration" translate>CLIENT.COUNTY_REGISTRATION</label>
-                <input type="number" class="form-control" id="countyRegistration" name="countyRegistration"
-                       ng-model="client.countyRegistration" required/>
-                <div ng-show="formulario.countyRegistration.$touched" ng-messages="formulario.countyRegistration.$error"
+                <label for="countyRegistry" translate>CLIENT.COUNTY_REGISTRATION</label>
+                <input type="number" class="form-control" id="countyRegistry" name="countyRegistry"
+                       ng-model="client.countyRegistry" required/>
+                <div ng-show="formulario.countyRegistry.$touched" ng-messages="formulario.countyRegistration.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>            
 
@@ -182,14 +182,13 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="roadingUnit" translate>CLIENT.TP_UNID_DES_ROD</label>
-                        <select class="form-control" 
-                                name="roadingUnit" 
-                                ng-model="client.roadingUnit"
+                        <select class="form-control"
+                                name="roadingUnit"  
                                 id="roadingUnit" 
+                                ng-model="client.roadingUnit" 
                                 required>
-                            <option value="KM" translate>CLIENT.TP_UNID_DES_ROD</option>
-                            <option value="KM" translate>CLIENT.TP_UNID_DES_ROD</option>
-                        </select>    
+                            <option ng-repeat ="type in typesRoading" value="{{type}}">{{type}}</option>
+                        </select>
                         <div ng-show="formulario.roadingUnit.$touched" ng-messages="formulario.roadingUnit.$error"
                              ng-messages-include="portal-error-messages"></div>
                     </div>
@@ -198,11 +197,10 @@
                         <label for="feedingUnit" translate>CLIENT.TP_UNID_ALIMENTACAO</label>
                         <select class="form-control" 
                                 name="feedingUnit" 
-                                ng-model="client.feedingUnit"
                                 id="feedingUnit" 
+                                ng-model="client.feedingUnit"
                                 required>
-                            <option value="Diária" translate>CLIENT.TP_UNID_ALIMENTACAO</option>
-                            <option value="Diária" translate>CLIENT.TP_UNID_ALIMENTACAO</option>
+                            <option ng-repeat ="type in typesFeeding" value="{{type}}">{{type}}</option>
                         </select>    
                         <div ng-show="formulario.feedingUnit.$touched" ng-messages="formulario.feedingUnit.$error"
                              ng-messages-include="portal-error-messages"></div>
@@ -212,11 +210,10 @@
                         <label for="lodgingUnit" translate>CLIENT.TP_UNID_HOTEL</label>
                         <select class="form-control" 
                                 name="lodgingUnit" 
-                                ng-model="client.lodgingUnit"
                                 id="feedingUnit" 
+                                ng-model="client.lodgingUnit"
                                 required>
-                            <option value="%" translate>CLIENT.TP_UNID_HOTEL</option>
-                            <option value="%" translate>CLIENT.TP_UNID_HOTEL</option>
+                            <option ng-repeat ="type in typesLodging" value="{{type}}">{{type}}</option>
                         </select>    
                         <div ng-show="formulario.lodgingUnit.$touched" ng-messages="formulario.lodgingUnit.$error"
                              ng-messages-include="portal-error-messages"></div>
@@ -226,11 +223,10 @@
                         <label for="aerialTransportUnit" translate>CLIENT.TP_UNID_DES_AEREO</label>
                         <select class="form-control" 
                                 name="aerialTransportUnit" 
-                                ng-model="client.aerialTransportUnit"
                                 id="aerialTransportUnit" 
+                                ng-model="client.aerialTransportUnit"
                                 required>
-                            <option value="%" translate>CLIENT.TP_UNID_DES_AEREO</option>
-                            <option value="%" translate>CLIENT.TP_UNID_DES_AEREO</option>
+                            <option ng-repeat ="type in typesAerialTransport" value="{{type}}">{{type}}</option>
                         </select>    
                         <div ng-show="formulario.aerialTransportUnit.$touched" ng-messages="formulario.aerialTransportUnit.$error"
                              ng-messages-include="portal-error-messages"></div>
@@ -278,7 +274,7 @@
                 </div>
             </div>
 
-            <a href="#/inspection/supplier"
+            <a href="#/inspection/client"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>
