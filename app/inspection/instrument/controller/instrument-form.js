@@ -5,7 +5,7 @@ define([
     'portal/layout/service/modalTranslate'
 ], function (inspection) {
     return inspection.lazy.controller('InstrumentFormController', function (
-            $scope, $routeParams, InstrumentService, notify, $location, $filter,$modalTranslate) {
+            $scope, $routeParams, InstrumentService, notify, $location, $translate,$filter,$modalTranslate) {
 
         $scope.instrument = null;
         $scope.isEditing = false;
@@ -48,8 +48,16 @@ define([
 
         $scope.submit = function () {
             InstrumentService.save($scope.instrument).then(function () {
-                $location.path('inspection/instrument');
+                 $translate('INSTRUMENT.SAVE_SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $location.path('inspection/instrument');
+                    $scope.tableParams.reload();
+                });
             }, function (response) {
+                 $translate('INSTRUMENT.ERROR_SAVING').then(function (text) {
+                    notify.error(text);
+                    $location.path('inspection/instrument');
+                });
             });
         };
 

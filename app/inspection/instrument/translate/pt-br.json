@@ -11,6 +11,8 @@
         "CALIBRATION_DATE": "Data  Calibração",
         "VALIDATION_DATE": "Validade",
         "MANUFACTURER_NAME": "Fabricante",
+        "SAVE_SUCCESS": "Salvo com sucesso!",
+        "ERROR_SAVING": "Erro ao salvar!",
         "REMOVE_SUCCESS": "Removido com sucesso!",
         "ERROR_REMOVING": "Erro ao remover!",
         "TITLE_CONFIRM_DELETE": "Exclusão de Instrumento",
