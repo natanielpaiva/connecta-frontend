@@ -12,8 +12,9 @@ define([
         $translatePartialLoaderProvider.addPart('inspection/product-item');
         $translatePartialLoaderProvider.addPart('inspection/project');
         $translatePartialLoaderProvider.addPart('inspection/client');
-        $translatePartialLoaderProvider.addPart('inspection/document');
         $translatePartialLoaderProvider.addPart('inspection/client-address');
+        $translatePartialLoaderProvider.addPart('inspection/document');
+        $translatePartialLoaderProvider.addPart('inspection/medias');
         
     });
 
@@ -30,7 +31,8 @@ define([
             supplierAddress: appInspection.host + '/supplierAddress',
             project: appInspection.host + '/project',
             client: appInspection.host + '/client',
-            clientAddress: appInspection.host + '/clientAddress'
+            clientAddress: appInspection.host + '/clientAddress',
+            document: appInspection.host + '/document'
         });
 
     });
@@ -215,6 +217,29 @@ define([
             controllerUrl: 'inspection/document/controller/document-form',
             templateUrl: 'app/inspection/document/template/document-form.html'
         },
+        /**
+         * MEDIA
+         */
+         '/inspection/medias': {
+            controller: 'MediaListController',
+            controllerUrl: 'inspection/medias/controller/media-list',
+            templateUrl: 'app/inspection/medias/template/media-list.html'
+        },
+        '/inspection/medias/new': {
+            controller: 'MediaFormController',
+            controllerUrl: 'inspection/medias/controller/media-form',
+            templateUrl: 'app/inspection/medias/template/media-form.html'
+        },
+        '/inspection/medias/:id': {
+            controller: 'MediaViewController',
+            controllerUrl: 'inspection/medias/controller/media-view',
+            templateUrl: 'app/inspection/medias/template/media-view.html'
+        },
+        '/inspection/medias/:id/edit': {
+            controller: 'MediaFormController',
+            controllerUrl: 'inspection/medias/controller/media-form',
+            templateUrl: 'app/inspection/medias/template/media-form.html'
+        }
 
     };
 
@@ -250,6 +275,12 @@ define([
                 {
                     href: 'inspection/product/item',
                     title: 'PRODUCT_ITEM.PRODUCT_ITEM',
+                    icon: 'icon-settings',
+                    children: []
+                },
+                {
+                    href: 'inspection/medias',
+                    title: 'MEDIA.MEDIA',
                     icon: 'icon-settings',
                     children: []
                 },

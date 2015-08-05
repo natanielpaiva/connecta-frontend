@@ -1,9 +1,15 @@
 {
     "DOCUMENT": {
+        "ADD":"Adicionar Documento",
         "DOCUMENT":"Documento",
         "DOCUMENTS":"Documentos",
         "NAME":"Nome",
         "TYPE":"Tipo",
-        "PROJECT":"Projeto"
+        "DESCRIPTION":"Descrição",
+        "PROJECT":"Projeto",
+        "DROP_FILE_HERE": "Arraste ou clique aqui",
+        "INVALID_DOCUMENT":"Documento inválido.",
+        "VIEW":"Visualizar Documento",
+        "EXTENSION":"Extensão"
     }
 }

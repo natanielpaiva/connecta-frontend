@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h3 translate>DOCUMENT.VIEW</h3>
+        <h3 translate>MEDIA.VIEW</h3>
     </div>
 </div>
 
@@ -20,24 +20,24 @@
 <div class="row">
     <div class="col-md-12">
         <div class="well margin-top-single margin-bottom-single">
-            <p ng-if="document.name">
-                <strong translate>DOCUMENT.NAME</strong>:
-                {{document.name}}
+            <p ng-if="media.name">
+                <strong translate>MEDIA.NAME</strong>:
+                    {{media.name}}
             </p>
             
-            <p ng-if="document.type">
-                <strong translate>DOCUMENT.TYPE</strong>:
-                {{document.type}}
+            <p ng-if="media.type">
+                <strong translate>MEDIA.TYPE</strong>:
+                {{media.type}}
             </p>
             
-            <p ng-if="document.extension">
-                <strong translate>DOCUMENT.EXTENSION</strong>:
-                {{document.extension}}
+            <p ng-if="media.extension">
+                <strong translate>MEDIA.EXTENSION</strong>:
+                {{media.extension}}
             </p>
             
-            <p ng-if="document.description">
-                <strong translate>DOCUMENT.DESCRIPTION</strong>:
-                {{document.description}}
+            <p ng-if="media.description">
+                <strong translate>MEDIA.DESCRIPTION</strong>:
+                {{media.description}}
             </p>
         </div>
     </div>
@@ -45,7 +45,7 @@
 
 <div class="row">
     <div class="col-md-12 text-right">
-        <a href="#/inspection/document" role="button" class="btn btn-default" translate>
+        <a href="#/inspection/medias" role="button" class="btn btn-default" translate>
             LAYOUT.BACK
         </a>
     </div>

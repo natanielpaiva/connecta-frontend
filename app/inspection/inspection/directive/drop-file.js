@@ -81,11 +81,8 @@ define([
                 };
 
                 $scope.isImage = function (file) {
-                    if ((file.extension === "JPG") || (file.extension === "PNG")) {
-                        return true;
-                    }
-
-                    return false;
+                    var images = ['JPG', 'PNG'];
+                    return images.indexOf(file.extension) > -1;
                 };
 
             },

@@ -1,15 +1,12 @@
 define([
     'connecta.inspection',
-    'inspection/instrument/service/instrument-service',
+    'inspection/document/service/document-service',
     'portal/layout/service/notify'
 ], function (inspection) {
-    return inspection.lazy.controller('DocumentViewController', function ($scope, InstrumentService, notify, $routeParams, $location, $translate) {
+    return inspection.lazy.controller('DocumentViewController', function ($scope, DocumentService, $routeParams, $location, $translate) {
 
-
-        InstrumentService.get($routeParams.id).then(function (response) {
-            response.data.calibrationDate = new Date(response.data.calibrationDate).toLocaleDateString("pt-BR");
-            response.data.dueDate = new Date(response.data.dueDate).toLocaleDateString("pt-BR");
-            $scope.instrument = response.data;
+        DocumentService.get($routeParams.id).then(function (response) {
+            $scope.document = response.data;
         });
 
     });

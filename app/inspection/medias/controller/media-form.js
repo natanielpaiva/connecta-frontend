@@ -1,21 +1,21 @@
 define([
     'connecta.inspection',
-    'inspection/document/service/document-service',
+    'inspection/medias/service/media-service',
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (inspection) {
-    return inspection.lazy.controller('DocumentFormController', function (
-            $scope, DocumentService, notify, $location, $translate, $routeParams) {
+    return inspection.lazy.controller('MediaFormController', function (
+            $scope, MediaService, notify, $location, $translate, $routeParams) {
 
-        $scope.document = {
+        $scope.media = {
             type: "TEST"
         };
         $scope.file = null;
 
         if ($routeParams.id) {
-            DocumentService.get($routeParams.id).success(function (data) {
+            MediaService.get($routeParams.id).success(function (data) {
                 $scope.isEditing = true;
-                $scope.document = data;
+                $scope.media = data;
             });
         }
 
@@ -24,11 +24,11 @@ define([
             if ($scope.file) {
                 var type = $scope.file.name.split('.');
                 type = type[type.length - 1];
-                $scope.document.extension = type.toUpperCase();
+                $scope.media.extension = type.toUpperCase();
             }
 
-            DocumentService.save($scope.document, $scope.file).then(function () {
-                $location.path('inspection/document');
+            MediaService.save($scope.media, $scope.file).then(function () {
+                $location.path('inspection/medias');
             }, function (response) {
             });
         };

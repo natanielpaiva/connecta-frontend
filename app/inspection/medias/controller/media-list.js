@@ -1,11 +1,11 @@
 define([
     'connecta.inspection',
-    'inspection/document/service/document-service',
+    'inspection/medias/service/media-service',
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (inspection) {
-    return inspection.lazy.controller('DocumentListController', function (
-            $scope, DocumentService, ngTableParams) {
+    return inspection.lazy.controller('MediaListController', function (
+            $scope, MediaService, ngTableParams) {
 
         $scope.tableParams = new ngTableParams({
             count: 10,
@@ -13,7 +13,7 @@ define([
             filter: $scope.search
         }, {
             getData: function ($defer, params) {
-                return DocumentService.list(params.url()).then(function (response) {
+                return MediaService.list(params.url()).then(function (response) {
                     params.total(response.data.totalElements);
                     $defer.resolve(response.data);
                 });
