@@ -94,10 +94,17 @@ OpenLayers.Control.Swipe = OpenLayers.Class(OpenLayers.Control, {
      * e - {Object} The mousemove event.
      */
     onMousemove: function(e) {
+        var line = 0;
+        var deslocamento = 0;
+        if(angular.element(".connecta-menu").css("width") == '52px'){
+            line = 72;
+            deslocamento= 140;
+        } else {
+            line = 280;
+            deslocamento= 348;
+        }
 
-                
-
-        document.getElementById("divisionSwipe").style.left=(e.clientX-4) + 'px';
+        document.getElementById("divisionSwipe").style.left=(e.clientX - line) + 'px';
 
 
 
@@ -119,7 +126,7 @@ OpenLayers.Control.Swipe = OpenLayers.Class(OpenLayers.Control, {
         var top = offsetYLayer2;
         var left = -(this.map.getSize().w - offsetXLayer2);
         var bottom = this.map.getSize().h + offsetYLayer2;
-        var right = offsetXLayer2;
+        var right = offsetXLayer2 - deslocamento;
 
 
         this.div2.style.clip = 'rect(' + top + 'px ' + right + 'px ' + bottom + 'px ' + left + 'px)';
