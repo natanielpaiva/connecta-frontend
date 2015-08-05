@@ -12,6 +12,8 @@
         "COUNTY_REGISTRATION": "County Registration",
         "ADDRESSES": "Addresses",
         "ACTIONS":"Actions",
+        "SAVE_SUCCESS": "Successfully Saving",
+        "ERROR_SAVING": "Error Saving!",
         "REMOVE_SUCCESS": "Successfully Removed",
         "ERROR_REMOVING": "Error Removing",
         "TITLE_CONFIRM_DELETE": "Supplier Delete",
