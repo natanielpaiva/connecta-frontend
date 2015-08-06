@@ -1,57 +1,55 @@
-<div id="menu-top" class="navbar navbar-fixed-top" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed">
-            <span class="sr-only">Toggle navigation</span>
-        </button>
+<div class="navbar navbar-fixed-top" id="menu-top" role="navigation">
+  <div class="navbar-header">
+    <button class="navbar-toggle collapsed" type="button">
+      <span class="sr-only">Toggle navigation</span>
+    </button>
 
-        <!--<a href="#" class="navbar-toggle collapsed connecta-ico-menu"></a>-->
+<!--<a href="#" class="navbar-toggle collapsed connecta-ico-menu"></a>-->
 
-        <div class="navbar-brand {{appInstance.name}}">
-            <button type="button" class="navbar-toggle toggle-menu" ng-click="toggleSidebar()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-menu"></span>
-            </button>
-            <div class="current-app" title="{{appInstance.title}}"></div>
+    <div class="navbar-brand {{appInstance.name}}">
+      <button class="navbar-toggle toggle-menu" ng-click="toggleSidebar()" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-menu"></span>
+      </button>
+      <div class="current-app" title="{{appInstance.title}}"></div>
+    </div>
+  </div>
+
+  <div class="navbar-collapse collapse dashboard pull-left">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="#/dashboard" title="{{'LAYOUT.DASHBOARD'| translate}}">
+          <span class="icon-view-quilt"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="navbar-collapse collapse pull-right navbar-options">
+    <ul class="nav navbar-nav">
+      <li class="applications-icon">
+        <a href="javascript:void(0);" title="{{'APPLICATION.APPS'| translate}}"
+          ng-click="toggleApps()">
+          <span class="icon-now-widgets"></span>
+        </a>
+        <div class="apps" ng-if="showApps">
+          <div class="apps-title" translate>APPLICATION.APPS</div>
+          <div class="apps-content">
+            <a href="{{application.home}}" title="{{application.title}}"
+              style="background-image:url({{application.icon}})"
+              ng-click="toggleApps()"
+              ng-repeat="(id, application) in applications | filter:shownModules | orderBy:'title'"></a>
+          </div>
         </div>
-
-    </div>
-
-    <div class="navbar-collapse collapse dashboard pull-left">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="#/dashboard" title="{{'LAYOUT.DASHBOARD'| translate}}">
-                    <span class="icon-view-quilt"></span>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="navbar-collapse collapse pull-right navbar-options">
-
-        <ul class="nav navbar-nav">
-            <li class="applications-icon">
-                <a href="javascript:void(0);" title="{{'APPLICATION.MODULES'| translate}}">
-                    <span class="icon-now-widgets"></span>
-                </a>
-            </li>
-            <li class="image-on-background user-image"
-                style="background-image: url(https://pbs.twimg.com/profile_images/1105145471/tiririca_normal.jpg)">
-            </li>
-            <!--                <li ng-repeat="application in applications"
-                                class="logo-app {{application.name}}"
-                                ng-if="(application.name !== appInstance.name)">
-                                <a
-                                    href="#/{{application.name}}"
-                                    class="app-icon logo"
-                                    title="{{application.title}}"
-                                    >
-                                </a>
-                            </li>-->
-<!--            <li>
-                <button class="btn app-icon" ng-click="togglePageTabs()">
-                    <span class="fa fa-th-large"></span>
-                </button>
-            </li>-->
-        </ul>
-    </div>
+      </li>
+      <li>
+        <a href="javascript:void(0);" title="{{'LAYOUT.NOTIFICATIONS'| translate}}">
+          <span class="icon-notifications"></span>
+        </a>
+      </li>
+      <li class="image-on-background user-image"
+        style="background-image: url(http://goo.gl/UWIKKY)">
+      </li>
+    </ul>
+  </div>
 </div>

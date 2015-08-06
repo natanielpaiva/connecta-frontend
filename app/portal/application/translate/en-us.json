@@ -1,5 +1,5 @@
 {
-    "APPLICATION": {
-        "MODULES":"Modules"
-    }
+  "APPLICATION": {
+    "APPS": "Apps"
+  }
 }

@@ -33,7 +33,7 @@
     <div class="col-sm-6">
       <div class="form-group has-feedback">
         <input class="form-control" type="text"
-          placeholder="{{'LAYOUT.SEARCH' | translate}}" />
+          placeholder="{{'LAYOUT.SEARCH' | translate}}" autofocus />
         <span class="glyphicon glyphicon-search form-control-feedback">
         </span>
       </div>
@@ -47,8 +47,6 @@
         id="item-{{dashboard.id}}" />
       <label class="thumbnail-grid-item-inner hidden-checkbox-label"
         for="item-{{dashboard.id}}">
-
-
 
         <a href="#/dashboard/{{dashboard.id}}" class="thumbnail-grid-item-name">
           {{dashboard.name}}

@@ -1,147 +1,174 @@
 $headerHeight: 4em;
-
 #menu-top {
-    background: $white;
-
-    box-shadow: 0em 0em 1em $black;
-
-    line-height: $headerHeight;
-    border: none;
-
-    .navbar-toggle {
-        padding:0;
-        margin:0;
-        width:1.5em;
-        height:100%;
+  background: $white;
+  box-shadow: 0 0 1em $black;
+  line-height: $headerHeight;
+  border: none;
+  .navbar-toggle {
+    padding: 0;
+    margin: 0;
+    width: 1.5em;
+    height: 100%;
+    color: $white;
+    font-size: 2.8em;
+    &:active {
+      color: $lighterGray;
+    }
+    &.toggle-menu {
+      display: block;
+      float: left;
+    }
+  }
+  .navbar-nav {
+    li {
+      padding: 0;
+      & > a {
+        line-height: 30px;
+      }
+    }
+    &.menu > li > a {
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+  .navbar-header {
+    background-color: $lightBlack;
+    .navbar-brand {
+      font-size: 13px;
+      height: 60px;
+      width: 20em;
+      margin: 0;
+      padding: 0;
+      a {
+        line-height: 30px;
+        padding: 15px 15px 15px 10px;
+        display: block;
+        float: left;
         color: $white;
-        font-size: 2.8em;
-
-        &:active {
-            color: $lighterGray;
-        }
-
-        &.toggle-menu {
-            display: block;
-            float: left;
-        }
-
+        width: 16px;
+      }
     }
-
-    .navbar-nav {
-
-        li {
+  }
+  .dashboard {
+    ul.nav.navbar-nav {
+      li {
+        a {
+          padding: 0;
+          margin: 0;
+          height: 100%;
+          text-align: center;
+          line-height: 1.55em;
+          font-size: 3em;
+          width: 1.5em;
+          display: block;
+          float: left;
+          .icon-view-quilt {
+            color: $lightBlack;
+          }
+        }
+      }
+    }
+  }
+  .navbar-options {
+    ul.nav.navbar-nav {
+      & > li {
+        margin: 0;
+        line-height: 1.85em;
+        font-size: 2.5em;
+        text-align: center;
+        & > a {
+          padding: 0;
+          height: 100%;
+          text-align: center;
+          line-height: inherit;
+          width: 1.6em;
+          display: block;
+          float: left;
+          .icon-now-widgets, .icon-notifications {
+            color: $lightBlack;
+          }
+        }
+        &.applications-icon {
+          & > a {
+            width: 1.8em;
+          }
+          .apps {
+            margin: 0;
             padding: 0;
+            width: 8.15em;
+            background-color: $white;
+            border: solid 0.075em $lightBlack;
+            border-top: none;
+            position: fixed;
+            top: 1.8em;
+            right: 0.35em;
+            height: auto;
+            box-shadow: 0em 0.1em 0.5em 0.1em $gray;
 
-            & > a {
-                line-height: 30px;
+            &:before {
+              position: absolute;
+              top: -0.275em;
+              left: 50%;
+              margin-left:-0.15em;
+              content: ' ';
+              display: block;
+              border-style: solid;
+              border-color: transparent transparent $lightBlack transparent;
+              border-width: 0 .3em .3em .3em;
             }
-        }
 
-        &.menu > li > a {
-            font-size: 14px;
-            text-align: center;
-        }
-    }
+            .apps-title {
+              font-size: 0.45em;
+              line-height: 2.5em;
+              color: $white;
+              background-color: $lightBlack;
+            }
 
-    .navbar-header {
-        background-color: $lightBlack;
-
-        .navbar-brand {
-            font-size: 13px;
-            height: 60px;
-            width: 20em;
-
-            margin:0;padding:0;
+            .apps-content {
+              @include clearfix();
+              margin: 0;
+              padding: 0.15em;
+            }
 
             a {
-                line-height: 30px;
-
-                padding: 15px;
-                padding-left: 10px;
-
-                display: block;
-                float: left;
-                color: $white;
-                width: 16px;
+              @extend .image-on-background;
+              background-size: 85% auto;
+              padding: 0;
+              margin: 0.15em;
+              height: 2.275em;
+              width: 2.275em;
+              display: block;
+              float: left;
+              &:hover {
+                background-color: $lighterGray;
+              }
             }
+          }
         }
-    }
-
-    .dashboard {
-        ul.nav.navbar-nav {
-            li {
-                a {
-                    padding:0;
-                    margin:0;
-                    height:100%;
-                    text-align:center;
-                    line-height:1.55em;
-                    font-size:3em;
-                    width:1.5em;
-                    display:block;
-                    float:left;
-
-                    .icon-view-quilt {
-                        color:$lightBlack;
-                        // font-size:3em;
-                        // line-height:1.55em;
-                        // text-align:center;
-                    }
-                }
-            }
+        &.user-image {
+          @extend .cursor-pointer;
+          margin: 0.2em;
+          height: 1.4em;
+          width: 1.4em;
+          border-radius: 50%;
         }
+      }
     }
-
-    .navbar-options {
-        ul.nav.navbar-nav {
-            li {
-                margin:0;
-                line-height:1.85em;
-                font-size:2.5em;
-                text-align:center;
-                a {
-                    padding:0;
-                    height:100%;
-                    text-align:center;
-                    line-height:inherit;
-                    
-                    width:1.5em;
-                    display:block;
-                    float:left;
-
-                    .icon-now-widgets {
-                        color:$lightBlack;
-                    }
-                }
-                
-                &.applications-icon a {
-                    width:2em;
-                }
-                
-                &.user-image {
-                    @extend .cursor-pointer;
-                    margin: 0.3em;
-                    height:1.25em;
-                    width:1.25em;
-                    border-radius: 50%;
-                    border: solid 0.075em $lightBlack;
-                }
-            }
-        }
-    }
+  }
 }
 
 /*Ícones das aplicações*/
 .current-app {
-    width: 11em;
-    height: 100%;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 11em auto;
-    margin-right: 3em;
-    transition: all 0.3s;
-    float: right;
-    //Temporário
-    background-image: url('../img/logo-connecta.png');
+  width: 11em;
+  height: 100%;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 11em auto;
+  margin-right: 3em;
+  transition: all 0.3s;
+  float: right;
+
+  //Temporário
+  background-image: url("../img/logo-connecta.png");
 }

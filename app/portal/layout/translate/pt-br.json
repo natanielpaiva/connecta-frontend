@@ -25,7 +25,8 @@
     "FILTER":"Filtro",
     "SHOW_GRID" : "Mostrar miniaturas",
     "SHOW_LIST" : "Mostrar como lista",
-    "SETTINGS" : "Configurações"
+    "SETTINGS" : "Configurações",
+    "NOTIFICATIONS" : "Notificações"
   },
   "KEY_VALUE": {
     "NO_ITEM": "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."

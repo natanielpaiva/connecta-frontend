@@ -25,7 +25,8 @@
     "FILTER":"Filter",
     "SHOW_GRID" : "Show grid",
     "SHOW_LIST" : "Show list",
-    "SETTINGS" : "Settings"
+    "SETTINGS" : "Settings",
+    "NOTIFICATIONS" : "Notifications"
   },
   "KEY_VALUE": {
     "NO_ITEM": "Nothing yet. Click '{{LAYOUT.ADD}}' to add a new item."

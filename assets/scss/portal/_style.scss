@@ -187,6 +187,7 @@ blockquote small {
   display: block;
   background-size: cover;
   background-position: center center;
+  background-repeat: no-repeat;
 }
 .font-size-big {
   font-size: $fontSizeBig !important;

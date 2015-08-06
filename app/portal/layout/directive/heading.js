@@ -4,13 +4,26 @@ define([
   /**
    * Componente usado para renderizar e manter o header do portal
    */
-  return portal.directive('heading', function(LayoutService, applicationsService) {
+  return portal.directive('heading', function(LayoutService) {
     return {
       restrict: 'E',
       templateUrl: 'app/portal/layout/directive/template/heading.html',
       controller: function($scope, applications) {
+        function _mapToArray(map) {
+          var array = [];
+          angular.forEach(map, function(value,key){
+            value.id = key;
+            array.push(value);
+          });
+          return array;
+        }
         // adiciona a lista de aplicações no escopo
-        $scope.applications = applications;
+        $scope.applications = _mapToArray(applications);
+
+        $scope.showApps = false;
+        $scope.toggleApps = function(){
+          $scope.showApps = !$scope.showApps;
+        };
         /**
          * Oculta e exibe a barra lateral
          *
@@ -19,21 +32,10 @@ define([
         $scope.toggleSidebar = function() {
           LayoutService.toggleSidebar();
         };
-        // /**
-        //  * Oculta e exibe a lista de páginas abertas
-        //  *
-        //  * @returns {undefined}
-        //  */
-        // $scope.togglePageTabs = function() {
-        //   LayoutService.togglePageTabs();
-        //   return false;
-        // };
-        // // Evento ao atualizar a aplicação em execução
-        // $scope.$on('applications.change', function(event) {
-        //   // Adiciona os estilos personalizados da aplicação atual
-        //   var appInstance = applicationsService.getInstance();
-        //   scope.appInstance = appInstance;
-        // });
+
+        $scope.shownModules = function(obj){
+          return obj.hide ? false : true;
+        };
       }
     };
   });
