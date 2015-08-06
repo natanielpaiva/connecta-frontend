@@ -1,49 +1,34 @@
 define([
     'connecta.inspection',
     'inspection/inspection/service/inspection-service',
-    'portal/layout/service/notify'
+    'portal/layout/service/notify',
+    'portal/layout/service/modalTranslate'
 ], function (inspection) {
     return inspection.lazy.controller('InspectionFormController', function (
-            $scope, InspectionService, notify) {
+            $scope, InspectionService, notify, $routeParams, $translate, $location, $modalTranslate) {
 
-        $scope.list = [
-            {
-                id: 0,
-                name: "Nome",
-                desc: "descrição da ação",
-                status: "Aberto"
-            },
-            {
-                id: 1,
-                name: "Nome",
-                desc: "descrição da ação",
-                status: "Pendente"
-            },
-            {
-                id: 2,
-                name: "Nome",
-                desc: "descrição da ação",
-                status: "Fechado"
-            }
-        ];
+        $scope.inspection = {
+            
+        };
+        $scope.prevDocuments = [];
+        $scope.contDocuments = [];
+        $scope.standards = [];
 
-        $scope.status = [
-            {
-                name: "Aberto",
-                icon: "icon-heatmap"
-            },
-            {
-                name: "Pendente",
-                icon: "icon-analysis"
-            },
-            {
-                name: "Fechado",
-                icon: "icon-cluster"
-            }
-        ];
-        
-        $scope.callbackStatus = function(obj){
-            console.log(obj);
+        if ($routeParams.id) {
+            InspectionService.get($routeParams.id).success(function (data) {
+                $scope.isEditing = true;
+                $scope.inspection = data;
+            });
+        }
+
+        $scope.submit = function () {
+            InspectionService.save($scope.project, $scope.files).then(function () {
+                $translate('INSPECTION.SAVE_SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $location.path('inspection');
+                });
+            }, function (response) {
+            });
         };
 
     });

@@ -1,11 +1,11 @@
 <div class="well drop-box set-file dropzone dropzone-inspection" >
     <div 
-        class="drop-box set-file dropzone dropzone-file dropzone-box"
+        class="drop-box set-file dropzone dropzone-file"
         ng-file-drop 
         ng-file-select
         ng-multiple="false"
         ng-file-change="fileDropped($files, $event, $rejectedFiles)" 
-        ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.pdf'" 
+        ng-accept="filesType" 
         ng-model-rejected="rejFiles" 
         allow-dir="false" 
         drag-over-class="{accept:'accept', reject:'reject'}">

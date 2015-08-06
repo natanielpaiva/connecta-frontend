@@ -44,7 +44,10 @@
 
             <div class="form-group">
                 <label for="supplier" translate>PROJECT.DOCUMENTS</label>
-                <drop-file files="files" documents="project.documents" type="TEST" />
+                <drop-file files="files" 
+                           documents="project.documents"
+                           files-type=".jpeg,.jpg,.png"
+                           type="TEST" />
                 <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>

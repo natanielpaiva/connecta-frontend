@@ -1,3 +1,10 @@
+/**
+ * @param {files} Array que os objetos de Imagem irão ficar
+ * @param {documents} Array de objectos Documents
+ * @param {filesType} Tipos de file que serão aceitos
+ * @param {type} Tipo do documento
+ */
+
 define([
     'connecta.inspection',
 ], function (inspection) {
@@ -89,9 +96,13 @@ define([
             scope: {
                 files: "=",
                 documents: "=",
-                type:"@"
+                type:"@",
+                filesType: "@"
             },
             link: function ($scope) {
+                if($scope.documents === undefined){
+                    $scope.documents = [];
+                }
                 var unbindWatcher = $scope.$watch('documents', function (value) {
                     if ($scope.documents.length > 0) {
                         for (var i in $scope.documents) {

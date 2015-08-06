@@ -10,6 +10,46 @@
         "FORM": "Cadastro",
         "DILIGENCE": "Diligênciamento",
         "DILIGENCES": "Diligências",
-        "FILES": "Arquivos"
+        "FILES": "Arquivos",
+        "ADD":"Adicionar Inspeção",
+        "EDIT":"Editar Inspeção",
+        "NU_RI":"Número RI",
+        "CLIENT":"Cliente",
+        "DT_CONVOCATION":"Data de Convocação",
+        "DT_INSPECTION":"Data Inspeção",
+        "TYPE":"Tipo de Inspeção",
+        "CATEGORY":"Categoria de Inspeção",
+        "TIME":"Tempo de Inspeção",
+        "REVISION":"Revisão",
+        "CONVOCATION_TYPE":"Tipo de Convocação",
+        "INSPECTION_LOCATION":"Local da Inspeção",
+        "REQUESTER":"Requisitante",
+        "PLAN_AP":"Plano Inspeção Aplicável",
+        "NU_DRAFT":"Número Desenho",
+        "OBJECTIVE":"Objetivo",
+        "PRODUCTS":"Produtos",
+        "PRODUCT":{
+            "ITEM":"Item",
+            "QTD":"Qtd Requerida",
+            "TAM":"Tamanho Amostra",
+            "DESC":"Descrição",
+            "NU_SE":"Número Série",
+            "APRS":"Apresentado",
+            "LIB":"Liberado",
+            "SLD":"Saldo"
+        },
+        "PARTICIPANTS":{
+            "PARTICIPANTS":"Participantes",
+            "NAME":"Name",
+            "CPF":"CPF",
+            "EMAIL":"E-mail",
+            "PHONE":"Telefone",
+            "PAPER":"Papel"
+        },
+        "ACTIONS":"Ações",
+        "PREVIOUS_DOCUMENTS":"Documentos Anteriores",
+        "CONTRACTUAL_DOCUMENTS":"Documentos Contratuais",
+        "STANDARDS":"Normas"
+        
     }
 }

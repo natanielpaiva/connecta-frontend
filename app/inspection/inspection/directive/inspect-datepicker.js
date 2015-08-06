@@ -1,5 +1,5 @@
 define([
-    'connecta.inspection'
+    'connecta.inspection',
 ], function (inspection) {
 
     return inspection.directive('inspectDatepicker', function () {
