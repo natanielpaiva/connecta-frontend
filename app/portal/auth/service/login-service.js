@@ -53,16 +53,7 @@ define([
      * @returns {Promise}
      */
     this.doLogin = function(credentials) {
-      var req = {
-        method:'POST',
-        url: portalResources.login,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: credentials
-      };
-
-      var promise = $http(req).then(function(response){
+      var promise = $http.post(portalResources.login, credentials).then(function(response){
         $cookieStore.put('Authorization', response.data.token);
         loginService.setAuthenticated(true);
       }, function(){
