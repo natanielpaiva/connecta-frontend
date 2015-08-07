@@ -13,7 +13,7 @@ define([
         this.isAuthenticated()
       );
     };
-    
+
     /**
      * Recupera o token da autenticação
      * @returns {String}
@@ -29,7 +29,7 @@ define([
     this.setAuthenticated = function(authenticated){
       $rootScope.$broadcast('login.authenticated', authenticated);
     };
-    
+
     /**
      * Remove o cookie guardado da autenticação
      * e alerta o escopo do app que falta autenticar
@@ -38,7 +38,7 @@ define([
       $cookieStore.remove('Authorization');
       loginService.setAuthenticated(false);
     };
-    
+
     /**
      * Retorna se o app está autenticado ou não
      * @returns {Boolean}
@@ -57,27 +57,21 @@ define([
         method:'POST',
         url: portalResources.login,
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         },
-        data: credentials,
-        transformRequest: function(obj) {
-          var str = [];
-          for (var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-          return str.join("&");
-        }
+        data: credentials
       };
-      
+
       var promise = $http(req).then(function(response){
         $cookieStore.put('Authorization', response.data.token);
         loginService.setAuthenticated(true);
       }, function(){
         loginService.setAuthenticated(false);
       });
-      
+
       return promise;
     };
-    
+
     $rootScope.$on('login.request_unathorized', function(){
       loginService.unauthenticate();
     });

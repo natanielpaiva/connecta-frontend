@@ -9,11 +9,11 @@ define([
     'gridster',
     'angular-redactor'
   ]);
-  
+
   portal.constant('portalResources', {
     base: applications.portal.host,
     dashboard: applications.portal.host + '/dashboard',
-    login: applications.portal.host + '/auth'
+    login: applications.portal.host + '/public/auth'
   });
 
   portal.config(function($translatePartialLoaderProvider, redactorOptions) {

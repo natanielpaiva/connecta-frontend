@@ -170,7 +170,7 @@ define([
       $routeProvider.when(url, route);
     });
   }
-  
+
   /**
    * Configura os padrões de tratamento de Request e Response dos serviços REST
    * @param {type} $httpProvider
@@ -185,19 +185,19 @@ define([
 
           var responseInterceptors = {
             400: function(rejection) { // BAD REQUEST
-              
+
             },
             401: function(rejection) { // UNAUTHORIZED
               $rootScope.$broadcast('login.request_unathorized');
             },
             403: function(rejection) { // FORBIDDEN
-              
+
             },
             404: function(rejection) { // PAGE NOT FOUND
-              
+
             },
             500: function(rejection) { // INTERNAL SERVER ERROR
-              
+
             }
           };
 
@@ -221,7 +221,7 @@ define([
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|javascript):/);
     $sceProvider.enabled(false);
   }
-  
+
   /**
    * Configura o listener da mudança de rotas para recarregar o menu
    * específico da aplicação
@@ -236,11 +236,11 @@ define([
       }
     });
   }
-  
+
   /**
    * Configura um request transformer para todos os requests pra incluir o
    * token de autenticação no cabeçalho
-   * 
+   *
    * @param {type} $http
    * @param {type} LoginService
    * @returns {undefined}
@@ -248,6 +248,7 @@ define([
   function configureAuthenticationRequestListener($http, LoginService){
     $http.defaults.transformRequest.push(function(data, getHeaders){
       getHeaders().Authorization = LoginService.getAuthenticationToken();
+      return data;
     });
   }
 
@@ -263,10 +264,10 @@ define([
   });
 
   connecta.run(function($rootScope, $menu, $http, LoginService) {
-    
+
     configureAuthenticationRequestListener($http, LoginService);
     configureMenuRouteChangeListener($rootScope, $menu);
-    
+
   });
 
   /**
