@@ -36,7 +36,9 @@
             "NU_SE":"Número Série",
             "APRS":"Apresentado",
             "LIB":"Liberado",
-            "SLD":"Saldo"
+            "SLD":"Saldo",
+            "PRODUCT":"Produto",
+            "ADD":"Adicionar Produto"
         },
         "PARTICIPANTS":{
             "PARTICIPANTS":"Participantes",

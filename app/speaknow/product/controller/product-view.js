@@ -10,8 +10,10 @@ define([
         $scope.baseUrl = speaknowResources.base;
         
         if ($routeParams.id) {
-            ProductService.get($routeParams.id).success(function(data){
-                $scope.product = data;
+            ProductService.get($routeParams.id).then(function(response){
+                $scope.product = response.data;
+            }, function(){
+                $location.path('speaknow/product');
             });
         } else {
             $location.path('speaknow/product');
@@ -20,7 +22,7 @@ define([
         $scope.delete = function(id){
              ProductService.delete(id).success(function () {
                 notify.success("Produto removido com sucesso");
-                $scope.tableParams.reload();
+                $location.path('speaknow/product');
             });
         };
         

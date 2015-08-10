@@ -274,7 +274,7 @@ define([
         },
         {
             href: 'speaknow/product',
-            title: 'PRODUCT.PRODUCT',
+            title: 'PRODUCT.PRODUCT_SERVICE',
             icon: 'icon-box2',
             children: []
         },

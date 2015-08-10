@@ -1,6 +1,8 @@
 {
     "PRODUCT": {
-        "PRODUCT": "Produtos e Serviços",
+        "PRODUCT_SERVICE": "Produtos e Serviços",
+        "PRODUCT": "Produto",
+        "SERVICE": "Serviço",
         "NAME": "Nome",
         "IMAGE": "Foto",
         "PRICE": "Preço",
@@ -9,6 +11,8 @@
         "HOUR": "HOUR",
         "CRATE": "CRATE",
         "PIECE": "PIECE",
+        "CODE":"Código de Barras",
+        "TYPE":"Tipo",
         "EACH": "EACH",
         "GRAMS": "GRAMS",
         "MILIGRAMS": "MILIGRAMS",
@@ -19,6 +23,20 @@
         "POUND": "POUND",
         "MEASURE": "Medida",
         "CATEGORY":"Categoria",
-        "CREATE":"Criar Produto"
+        "CREATE":"Criar Produto",
+        "DEMAND":"Demanda",
+        "OFFER":"Oferta",
+        "UNIT": "Unidade",
+        "HOUR": "Hora",
+        "CRATE": "Caixa",
+        "PIECE": "Peça",
+        "EACH": "Cada",
+        "GRAMS": "Gramas",
+        "MILIGRAMS": "Miligramas",
+        "KILO": "Quilo",
+        "MILLILITER": "Mililitro",
+        "LITER": "Litro",
+        "OUNCE": "Onça",
+        "POUND": "Libra"
     }
 }

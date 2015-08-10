@@ -1,2 +1,17 @@
 {
+    "WHATSAPP": {
+    	"ADD": "Adicionar Conta",
+    	"EDIT": "Editar Conta",
+    	"ACCOUNTS": "Contas",
+    	"WHATSAPP_ACCOUNTS": "Whatsapp",
+    	"ACCOUNTS_DEFAULT": "Interações padrão",
+    	"NAME": "Nome",
+    	"ACCOUNT_NAME": "Nome",
+    	"NUMBER": "Número",
+    	"ACCOUNT_NUMBER": "Número",
+    	"PASSWORD": "Senha",
+    	"ACTIVE": "Ativa",
+        "WHATSAPP": "Whatsapp",
+        "LISTENERS": "Ouvintes"
+    }
 }

@@ -3,7 +3,8 @@
     "REQUIRED": "Esse campo é obrigatório",
     "EMAIL": "Deve ser um endereço de email válido",
     "MINLENGTH": "Deve ter mais letras",
-    "MAXLENGTH": "Deve ter menos letras"
+    "MAXLENGTH": "Deve ter menos letras",
+    "NUMBER":"Deve ser um número"
   },
   "LAYOUT": {
     "HOME": "Página inicial",

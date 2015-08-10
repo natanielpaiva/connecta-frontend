@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h3 translate>PRODUCT.PRODUCT</h3>
+        <h3 translate>PRODUCT.PRODUCT_SERVICE</h3>
     </div>
 </div>
 
@@ -58,16 +58,16 @@
 
                 <div class="form-group" ng-show="newProductReference">
                     <label for="code" translate>PRODUCT.CODE</label>
-                    <input type="text" class="form-control" id="code" name="code" ng-model="product.productReference.code" required/>
+                    <input type="number" class="form-control" id="code" name="code" ng-model="product.productReference.code" ng-required="newProductReference"/>
                     <div ng-show="formulario.code.$touched" ng-messages="formulario.code.$error"
                          ng-messages-include="portal-error-messages"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="measureType" translate>PRODUCT.TYPE</label>
                     <select id="productType" name="productType" class="form-control" ng-model="product.demand" required>
-                        <option value="false">{{'PRODUCT.OFFER' | translate}}</option>
-                        <option value="true">{{'PRODUCT.DEMAND' | translate}}</option>
+                        <option value="false">{{'PRODUCT.OFFER'| translate}}</option>
+                        <option value="true">{{'PRODUCT.DEMAND'| translate}}</option>
                     </select>
                     <div ng-show="formulario.productType.$touched" ng-messages="formulario.productType.$error"
                          ng-messages-include="portal-error-messages"></div>
@@ -97,10 +97,9 @@
 
                 <div class="form-group">
                     <label for="category" translate>PRODUCT.CATEGORY</label>
-                    <select id="category" name="category" class="form-control" ng-model="subcategory" required>
-                        <option ng-repeat="category in categories" value="{{category}}">
-                            {{category.name}}
-                        </option>
+                    <select id="category" name="category" class="form-control" 
+                            ng-options="category as category.name for category in categories track by category.id"
+                            ng-model="product.subcategory" required/>
                     </select>
                     <div ng-show="formulario.category.$touched" ng-messages="formulario.category.$error"
                          ng-messages-include="portal-error-messages"></div>
@@ -130,8 +129,8 @@
                            drag-over-class="{accept:'accept', reject:'reject'}" >
                         <translate>{{productImage.name ? productImage.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
                     </label>
-                    <img class="img-company-quad" ng-if="product.image || productImage" 
-                         ng-src="{{product.image && productImage == undefined ? baseUrl + product.image : image}}" />
+                    <img class="img-company-quad" ng-if="product.id || productImage" 
+                         ng-src="{{product.id && productImage == undefined ? product.image : image}}" />
                     <p ng-show="rectInvalid" class="help-block ng-binding ng-scope">
                         Esse campo é obrigatório
                     </p>

@@ -10,7 +10,8 @@ define([
                     name: "",
                     code: "",
                     type: "",
-                    productReference: null
+                    productReference: null,
+                    image: speaknowResources.base + "/product/image/"
                 };
                 $scope.productImage = null;
                 $scope.image = null;
@@ -37,11 +38,18 @@ define([
                 });
 
                 $scope.submit = function () {
-                    $scope.product.subcategory = angular.fromJson($scope.subcategory);
                     if ($scope.newProductReference) {
                         $scope.product.productReference.name = $scope.product.name;
                     }
-                    ProductService.save($scope.product, $scope.productImage).then(function () {
+                    if($scope.productImage === null){
+                        notify.warning("Cadastre uma imagem para o Produto");
+                        return null;
+                    }
+                    ProductService.save($scope.product, $scope.productImage).then(function (data) {
+                        if (data.data === "") {
+                            notify.warning("Código de barras já cadastrado, forneça um código de barras não cadastrado.");
+                            return null;
+                        }
                         $location.path('speaknow/product');
                     }, function (response) {
                     });
@@ -109,11 +117,12 @@ define([
                     var isProduct = $scope.product.type == 'PRODUCT';
                     return isService || (isNewOrReferenceExists && isProduct);
                 };
-                
-                $scope.reset = function(){
+
+                $scope.reset = function () {
                     $scope.newProductReference = null;
                     $scope.product.productReference = null;
+                    $scope.product.name = null;
                 };
-                
+
             });
 });

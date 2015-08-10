@@ -39,7 +39,6 @@
         <table ng-table="tableParams" class="table table-striped margin-top-single">
             <thead>
                 <tr>
-                    <th></th>
                     <th translate>COMPANY_MESSAGE.SUBJECT</th>
                     <th translate>COMPANY_MESSAGE.FEELING</th>
                     <th translate>COMPANY_MESSAGE.MESSAGE</th>
@@ -48,15 +47,20 @@
             </thead>
             <tbody>
                 <tr ng-repeat="message in $data">
-                    <td>{{message.id}}</td>
                     <td class="text-left">{{message.subject}}</td>
                     <td class="text-left">{{message.feeling}}</td>
-                    <td class="text-left">{{message.message}}</td>
+                    <td class="text-left">{{message.message.length > 50 
+                        ? message.message.substring(0, 50) + "...."
+                        : message.message}}</td>
                     <td>
                         <div class="btn-group">
                             <a href="#/speaknow/company/message/{{message.id}}" role="button" class="btn btn-sm btn-info">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </a>
+                            <button type="button" class="btn btn-sm btn-danger"
+                                    conf-modal="modalParams" conf-modal-args="[message.id]">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
                         </div>
                     </td>
                 </tr>

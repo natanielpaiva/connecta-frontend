@@ -3,7 +3,8 @@
     "REQUIRED": "This field is required",
     "EMAIL": "Must be a valid email address",
     "MINLENGTH": "The field is too short",
-    "MAXLENGTH": "The field is too long"
+    "MAXLENGTH": "The field is too long",
+    "NUMBER":"Field must contain only numbers"
   },
   "LAYOUT": {
     "HOME": "Home",

@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label class="required" for="number" translate>WHATSAPP.NUMBER</label>
                 <input type="text" class="form-control" id="number" name="number"
-                       ng-model="whatsapp.number" required />
+                       ng-model="whatsapp.number" ui-mask="+99 (99) 99999-999?9" required />
                 <div ng-show="whatsapp_form.$submitted || whatsapp_form.number.$touched" 
                      ng-messages="whatsapp_form.number.$error"
                      ng-messages-include="portal-error-messages">
@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label class="required" for="password" translate>WHATSAPP.PASSWORD</label>
                 <input type="password" class="form-control" id="password" name="password"
-                       ng-model="whatsapp.password" required />
+                       ng-model="whatsapp.pass" required />
                 <div ng-show="whatsapp_form.$submitted || whatsapp_form.password.$touched" 
                      ng-messages="whatsapp_form.password.$error"
                      ng-messages-include="portal-error-messages">

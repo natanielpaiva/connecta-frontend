@@ -12,6 +12,11 @@ define([
             var url = speaknowResources.companyMessage + "/" + id;
             return $http.get(url);
         };
+        
+        this.delete = function(id){
+            var url = speaknowResources.companyMessage + "/" + id;
+            return $http.delete(url);
+        };
 
         this.save = function (companyMessage) {
             var url = speaknowResources.companyMessage;

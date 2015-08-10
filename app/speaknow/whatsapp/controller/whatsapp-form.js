@@ -18,7 +18,6 @@ define([
         }
 
         $scope.submit = function(){
-            console.log($scope.whatsapp);
             WhatsappService.save($scope.whatsapp).success(function(response){
                 $location.path('speaknow/whatsapp');
             });

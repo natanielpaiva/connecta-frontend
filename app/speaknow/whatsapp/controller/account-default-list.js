@@ -6,7 +6,9 @@ define([
             $scope, ActionService, ngTableParams
             ) {
 
-        
+        $scope.search = {
+            name:''
+        };
         $scope.tableParams = new ngTableParams({ 
             count: 10,
             page: 1,
