@@ -1,8 +1,10 @@
 define([
   'connecta.portal'
 ], function(portal) {
-  return portal.service('LoginService', function(portalResources, $http, $rootScope, $cookieStore) {
+  return portal.service('LoginService', function(portalResources, $http, $rootScope, $cookieStore, $route) {
     var loginService = this;
+    
+    var _reloadNeeded = false;
 
     /**
      * Atualiza o escopo da autenticação de acordo
@@ -48,7 +50,7 @@ define([
     };
 
     /**
-     * Tenta autenticar o usuário passado
+     * Tenta autenticar o usuário informado
      * @param {Object} credentials
      * @returns {Promise}
      */
@@ -56,6 +58,12 @@ define([
       var promise = $http.post(portalResources.login, credentials).then(function(response){
         $cookieStore.put('Authorization', response.data.token);
         loginService.setAuthenticated(true);
+        
+        if ( _reloadNeeded ) {
+          // TODO Fazer o retry dos requests, ao invés de dar um reload
+          _reloadNeeded = false;
+          $route.reload();
+        }
       }, function(){
         loginService.setAuthenticated(false);
       });
@@ -64,6 +72,7 @@ define([
     };
 
     $rootScope.$on('login.request_unathorized', function(){
+      _reloadNeeded = true;
       loginService.unauthenticate();
     });
 

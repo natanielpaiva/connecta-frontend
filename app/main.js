@@ -157,7 +157,7 @@ require.config({
                 'jquery',
                 'bower_components/jquery-ui-custom/index',
                 'bower_components/bootstrap/dist/js/bootstrap.min',
-                'search-expression'
+//                'search-expression'
             ]
         }
     }

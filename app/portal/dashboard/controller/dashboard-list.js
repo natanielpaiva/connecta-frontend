@@ -13,8 +13,8 @@ define([
       count: 50,
       page: 1
     };
-
-    DashboardService.list($scope.searchParams).then(function(response) {
+    
+    DashboardService.list($scope.searchParams).then(function(response){
       $scope.dashboards = response.data.content;
     });
   });

@@ -176,19 +176,31 @@ define([
    * @param {type} $httpProvider
    * @returns {undefined}
    */
-  function configureRequestInterceptors($httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
-    $httpProvider.interceptors.push(function($log, $q, $rootScope) {
+  function configureRequestInterceptors($httpProvider, applications) {
+    $httpProvider.interceptors.push(function($q, $rootScope) {
       return {
+        request: function(config) {
+          if ( new RegExp("^http.*$").test(config.url) ) {
+            var matched = false;
+            angular.forEach(applications, function(app, id){
+              if (!matched) {
+                matched = new RegExp("^"+app.host+".*$").test(config.url);
+              }
+            });
+            
+            if (matched) {
+              config.withCredentials = true;
+            }
+          }
+          return config;
+        },
         responseError: function(rejection) {
-          $log.warn(rejection.status+': '+rejection.statusText, rejection);
-
           var responseInterceptors = {
             400: function(rejection) { // BAD REQUEST
 
             },
             401: function(rejection) { // UNAUTHORIZED
-              $rootScope.$broadcast('login.request_unathorized');
+              $rootScope.$broadcast('login.request_unathorized', rejection);
             },
             403: function(rejection) { // FORBIDDEN
 
@@ -252,12 +264,12 @@ define([
     });
   }
 
-  connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider) {
+  connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider, applications) {
 
     configureLazyProviders($controllerProvider, $compileProvider, $provide, $filterProvider);
     configureTranslations($translateProvider, window.navigator);
     configureRoutes($routeProvider);
-    configureRequestInterceptors($httpProvider);
+    configureRequestInterceptors($httpProvider, applications);
     configureHTTPWhitelist($compileProvider, $sceProvider);
 
     //$locationProvider.html5Mode(true);
