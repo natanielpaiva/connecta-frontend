@@ -8,48 +8,106 @@
         <form novalidate name="formulario" ng-submit="submit()">
 
             <div class="form-group col-md-6">
-                <label for="model-nome" translate>LAYOUT.NAME</label>
+                <label for="model-nome" translate>VIEWER.NAME</label>
                 <input type="text" ng-model="analysisViewer.viewer.name" required class="form-control" />
             </div>
             <div class="form-group col-md-6">
-                <label for="model-nome" translate>LAYOUT.DESCRIPTION</label>
+                <label for="model-nome" translate>VIEWER.DESCRIPTION</label>
                 <input type="text" ng-model="analysisViewer.viewer.description" required class="form-control" />
             </div>
-            <div class="col-md-6">
-                <div class="columnsViewer">
-                    <label translate>VIEWER.METRIC</label>
-                    <div class="sidebarViewer">
-                        <ul dnd-list="analysisViewer.metrics">
-                            <li ng-repeat="column in analysisViewer.metrics" dnd-draggable="column" dnd-moved="analysisViewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
-                                {{column.label}}
-                            </li>
-                            <li class="animate-repeat" ng-if="results.length === 0">
-                                <strong translate>FILTER_EMPTY</strong>
-                            </li>
-                        </ul>
+            <div ng-if="analysisViewer.viewer.configuration.type == 'serial' || 
+                        analysisViewer.viewer.configuration.type == 'pie' || 
+                        analysisViewer.viewer.configuration.type == 'funnel' ||
+                        analysisViewer.viewer.configuration.type == 'radar'"> 
+                <div class="col-md-3">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.METRIC</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.metrics">
+                                <li ng-repeat="column in analysisViewer.metrics" dnd-draggable="column" dnd-moved="analysisViewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong translate>FILTER_EMPTY</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.DESCRIPTION</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.descriptions">
+                                <li ng-repeat="column in analysisViewer.descriptions" dnd-draggable="column" 
+                                    dnd-moved="analysisViewer.descriptions.splice($index, 1)" 
+                                    dnd-effect-allowed="move" 
+                                    ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong>No results found...</strong>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="columnsViewer">
-                    <label translate>VIEWER.DESCRIPTION</label>
-                    <div class="sidebarViewer">
-                        <ul dnd-list="analysisViewer.descriptions">
-                            <li ng-repeat="column in analysisViewer.descriptions" dnd-draggable="column" 
-                                dnd-moved="analysisViewer.descriptions.splice($index, 1)" 
-                                dnd-effect-allowed="move" 
-                                ng-attr-style="background-image:url({{column.label}})">
-                                {{column.label}}
-                            </li>
-                            <li class="animate-repeat" ng-if="results.length === 0">
-                                <strong>No results found...</strong>
-                            </li>
-                        </ul>
+            <div ng-if="analysisViewer.viewer.configuration.type == 'xy'"> 
+                <div class="col-md-3">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.XFIELD</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.xfields">
+                                <li ng-repeat="column in analysisViewer.xfields" dnd-draggable="column" dnd-moved="analysisViewer.xfields.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong translate>FILTER_EMPTY</strong>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-md-3">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.YFIELD</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.yfields">
+                                <li ng-repeat="column in analysisViewer.yfields" dnd-draggable="column" 
+                                    dnd-moved="analysisViewer.yfields.splice($index, 1)" 
+                                    dnd-effect-allowed="move" 
+                                    ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong>No results found...</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.VALUEFIELD</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.valueFields">
+                                <li ng-repeat="column in analysisViewer.valueFields" dnd-draggable="column" 
+                                    dnd-moved="analysisViewer.valueFields.splice($index, 1)" 
+                                    dnd-effect-allowed="move" 
+                                    ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong>No results found...</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> 
             <am-charts ng-model="analysisViewer.viewer.configuration">
-                
+
             </am-charts>
 
             <div class="form-group">

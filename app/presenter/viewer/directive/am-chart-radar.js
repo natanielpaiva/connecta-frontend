@@ -8,13 +8,13 @@ define([
      */
     return presenter.directive('amChartRadar', function () {
         return {
-            restrict: 'E',
             replace: true,
+            require: "ngModel",
             scope: {
-                options: '='
+                options: '=ngModel'
             },
             templateUrl: 'app/presenter/viewer/directive/template/am-chart.html',
-            link: function ($scope, $el) {
+            link: function (scope, $el) {
                 //Gerando um uid para colocar no elemento
                 var guid = function guid() {
                     function s4() {
@@ -30,11 +30,11 @@ define([
                 $el.attr('id', id);
                 var chart;
 
-                if ($scope.options.data) {
+                if (scope.options) {
                     //Função que renderiza o gráfico na tela
                     var renderChart = function (amChartOptions) {
-                        var option = amChartOptions || $scope.options;
-                        //Instanciando o chart de radar
+                        var option = amChartOptions || scope.options;
+                        //Instanciando o chart de pie
                         chart = new AmCharts.AmRadarChart();
                         chart.dataProvider = option.data;
 
@@ -52,12 +52,13 @@ define([
                     };
 
                     renderChart();
-                    //Evento para renderizar os gráficos de qualquer controller
-                    $scope.$on('amCharts.renderChart', function (event, amChartOptions, id) {
+                    //Escutando o objeto para que quando o mesmo for alterado reflita no gráfico
+                    scope.$watch('options', function (newValue, oldValue) {
                         if (id === $el[0].id || !id) {
-                            renderChart(amChartOptions);
+                            renderChart(newValue);
                         }
-                    });
+                    }, true);
+                    
                 }
             }
         };
