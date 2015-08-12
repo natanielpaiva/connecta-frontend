@@ -16,8 +16,10 @@ define([
         };
 
         if ($routeParams.id) {
-            InteractionService.get($routeParams.id).success(function (data) {
-                $scope.interaction = data;
+            InteractionService.get($routeParams.id).then(function (response) {
+                    $scope.interaction = response.data;
+            }, function(response){
+                redirectToInteraction();
             });
         } else {
             console.error("Id da interaction não informado na url");

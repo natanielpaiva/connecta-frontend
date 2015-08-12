@@ -19,7 +19,6 @@ define([
             fd.append('image', fileImage);
             fd.append('interaction', JSON.stringify(interaction));
             return $http.post(url, fd, {
-                transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             });
         };

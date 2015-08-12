@@ -8,8 +8,10 @@ define([
             ) {
 
         if ($routeParams.id) {
-            ActionService.get($routeParams.id).success(function (data) {
-                $scope.action = data;
+            ActionService.get($routeParams.id).then(function (response) {
+                $scope.action = response.data;
+            }, function(error){
+                $location.path('speaknow/interaction');
             });
         } else {
             console.error("Id da interaction não informado na url");
