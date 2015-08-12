@@ -187,7 +187,7 @@ define([
                 matched = new RegExp("^"+app.host+".*$").test(config.url);
               }
             });
-            
+
             if (matched) {
               config.withCredentials = true;
             }
@@ -259,7 +259,7 @@ define([
    */
   function configureAuthenticationRequestListener($http, LoginService){
     $http.defaults.transformRequest.push(function(data, getHeaders){
-      getHeaders().Authorization = LoginService.getAuthenticationToken();
+      getHeaders()["X-Authorization-Token"] = LoginService.getAuthenticationToken();
       return data;
     });
   }

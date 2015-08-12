@@ -3,7 +3,7 @@ define([
 ], function(portal) {
   return portal.service('LoginService', function(portalResources, $http, $rootScope, $cookieStore, $route) {
     var loginService = this;
-    
+
     var _reloadNeeded = false;
 
     /**
@@ -21,7 +21,7 @@ define([
      * @returns {String}
      */
     this.getAuthenticationToken = function(){
-      return $cookieStore.get('Authorization');
+      return $cookieStore.get('X-Authorization-Token');
     };
 
     /**
@@ -37,7 +37,7 @@ define([
      * e alerta o escopo do app que falta autenticar
      */
     this.unauthenticate = function(){
-      $cookieStore.remove('Authorization');
+      $cookieStore.remove('X-Authorization-Token');
       loginService.setAuthenticated(false);
     };
 
@@ -46,7 +46,7 @@ define([
      * @returns {Boolean}
      */
     this.isAuthenticated = function(){
-      return $cookieStore.get('Authorization') ? true : false;
+      return $cookieStore.get('X-Authorization-Token') ? true : false;
     };
 
     /**
@@ -56,9 +56,9 @@ define([
      */
     this.doLogin = function(credentials) {
       var promise = $http.post(portalResources.login, credentials).then(function(response){
-        $cookieStore.put('Authorization', response.data.token);
+        $cookieStore.put('X-Authorization-Token', response.data.token);
         loginService.setAuthenticated(true);
-        
+
         if ( _reloadNeeded ) {
           // TODO Fazer o retry dos requests, ao invés de dar um reload
           _reloadNeeded = false;
