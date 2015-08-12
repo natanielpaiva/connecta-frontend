@@ -182,7 +182,7 @@ define([
             templateUrl: 'app/speaknow/company-contact-group/template/contact-group-form.html'
         },
         /**
-         * URL COMPANY CONTACT 
+         * URL COMPANY CONTACT
          */
         '/speaknow/company/contact/new': {
             controller: 'CompanyContactFormController',
@@ -273,6 +273,12 @@ define([
             children: []
         },
         {
+            href: 'speaknow/company/message',
+            title: 'COMPANY_MESSAGE.COMPANY_MESSAGE',
+            icon: 'icon-message',
+            children: []
+        },
+        {
             href: 'speaknow/product',
             title: 'PRODUCT.PRODUCT_SERVICE',
             icon: 'icon-box2',
@@ -291,12 +297,6 @@ define([
                     title: 'WHATSAPP.ACCOUNTS_DEFAULT'
                 }
             ]
-        },
-        {
-            href: 'speaknow/company/message',
-            title: 'COMPANY_MESSAGE.COMPANY_MESSAGE',
-            icon: 'icon-message',
-            children: []
         }
     ];
 
