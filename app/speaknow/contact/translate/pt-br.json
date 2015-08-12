@@ -6,7 +6,7 @@
         "EMAIL":"Email",
         "PHONE":"Telefone",
         "REGISTER_CONTACT": "Adicionar Contato",
-        "SAVE_SUCCESS": "Registered contact successfully.",
+        "SAVE_SUCCESS": "Contato adicionado com sucesso.",
         "EDIT":"Editar Contato"
     }
 }

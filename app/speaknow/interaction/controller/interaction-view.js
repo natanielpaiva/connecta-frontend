@@ -90,8 +90,8 @@ define([
         };
 
         $scope.modalSetDefault = {
-            title: 'Status da Action',
-            text: 'Deseja marcar a Action como padrão?',
+            title: 'Status da Ação',
+            text: 'Deseja marcar a Ação como padrão?',
             size: 'sm',
             success: $scope.updateDefault
         };
@@ -104,8 +104,8 @@ define([
         };
 
         $scope.modalRemoveAction = {
-            title: 'Excluir Action',
-            text: 'Deseja realmente remover a action?',
+            title: 'Excluir Ação',
+            text: 'Deseja realmente remover a ação?',
             size: 'sm',
             success: $scope.delete
         };

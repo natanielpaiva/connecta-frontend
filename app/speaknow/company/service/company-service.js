@@ -20,7 +20,6 @@ define([
             fd.append('fileRect', fileRect);
             fd.append('company', JSON.stringify(company));
             return $http.post(url, fd, {
-                transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             });
         };
@@ -37,7 +36,14 @@ define([
         
         this.getLatLong = function(address){
             var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address;
-            return $http.get(url);
+            return $http.get(url,
+            {
+                transformRequest: angular.identity,
+                headers: {
+                    'Content-Type': undefined,
+                },
+                'withCredentials': false
+            });
         };
     });
 });
