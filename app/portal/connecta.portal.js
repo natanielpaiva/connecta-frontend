@@ -13,7 +13,7 @@ define([
   portal.constant('portalResources', {
     base: applications.portal.host,
     dashboard: applications.portal.host + '/dashboard',
-    login: applications.portal.host + '/public/auth'
+    login: applications.portal.host + '/auth'
   });
 
   portal.config(function($translatePartialLoaderProvider, redactorOptions) {
