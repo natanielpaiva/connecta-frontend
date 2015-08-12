@@ -25,18 +25,6 @@
         "CATEGORY":"Categoria",
         "CREATE":"Criar Produto",
         "DEMAND":"Demanda",
-        "OFFER":"Oferta",
-        "UNIT": "Unidade",
-        "HOUR": "Hora",
-        "CRATE": "Caixa",
-        "PIECE": "Peça",
-        "EACH": "Cada",
-        "GRAMS": "Gramas",
-        "MILIGRAMS": "Miligramas",
-        "KILO": "Quilo",
-        "MILLILITER": "Mililitro",
-        "LITER": "Litro",
-        "OUNCE": "Onça",
-        "POUND": "Libra"
+        "OFFER":"Oferta"
     }
 }
