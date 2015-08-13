@@ -1,10 +1,12 @@
 define([
-  'connecta.portal'
-], function(portal) {
+  'angular',
+  'connecta.portal',
+  'portal/auth/service/login-service'
+], function(angular, portal) {
   /**
    * Componente usado para renderizar e manter o header do portal
    */
-  return portal.directive('heading', function(LayoutService) {
+  return portal.directive('heading', function(LayoutService, LoginService) {
     return {
       restrict: 'E',
       templateUrl: 'app/portal/layout/directive/template/heading.html',
@@ -17,10 +19,22 @@ define([
           });
           return array;
         }
+        
         // adiciona a lista de aplicações no escopo
         $scope.applications = _mapToArray(applications);
+        
+        $scope.$on('login.authenticated', function($event, isAuthenticated){
+          if (isAuthenticated) {
+            LoginService.getCurrentUser().then(function(user){
+              $scope.user = user;
+            });
+          }
+        });
+        
+        LoginService.checkAuthentication();
 
         $scope.showApps = false;
+        
         $scope.toggleApps = function(){
           $scope.showApps = !$scope.showApps;
         };

@@ -38,7 +38,7 @@
             <a href="{{application.home}}" title="{{application.title}}"
               style="background-image:url({{application.icon}})"
               ng-click="toggleApps()"
-              ng-repeat="(id, application) in applications | filter:shownModules | orderBy:'title'"></a>
+              ng-repeat="application in applications | filter:shownModules | orderBy:'title'"></a>
           </div>
         </div>
       </li>
@@ -47,8 +47,8 @@
           <span class="icon-notifications"></span>
         </a>
       </li>
-      <li class="image-on-background user-image"
-        style="background-image: url(https://yt3.ggpht.com/-v7OcDBhDadM/AAAAAAAAAAI/AAAAAAAAAAA/GdeeekCsV2g/s88-c-k-no/photo.jpg)">
+      <li class="image-on-background user-image" title="{{user.firstName}} {{user.lastName}}"
+        style="background-image: url({{user.avatarUrl}})">
       </li>
     </ul>
   </div>

@@ -1,10 +1,11 @@
 define([
   'connecta.portal'
 ], function(portal) {
-  return portal.service('LoginService', function(portalResources, $http, $rootScope, $cookieStore, $route) {
+  return portal.service('LoginService', function(portalResources, $http, $rootScope, $cookieStore, $route, $q, $timeout) {
+    
     var loginService = this;
-
     var _reloadNeeded = false;
+    var _currentUser = null;
 
     /**
      * Atualiza o escopo da autenticação de acordo
@@ -21,7 +22,27 @@ define([
      * @returns {String}
      */
     this.getAuthenticationToken = function(){
-      return $cookieStore.get('X-Authorization-Token');
+      return $cookieStore.get('Authorization');
+    };
+    
+    /**
+     * 
+     * @returns {Object}
+     */
+    this.getCurrentUser = function(){
+      var deferred = $q.defer();
+      if ( !_currentUser ) {
+        $http.get(portalResources.login+'/'+$cookieStore.get('Authorization')).then(function(response){
+          _currentUser = response.data;
+          deferred.resolve(_currentUser);
+        });
+      } else {
+        $timeout(function(){
+          deferred.resolve(_currentUser);
+        });
+      }
+      
+      return deferred.promise;
     };
 
     /**
@@ -37,7 +58,7 @@ define([
      * e alerta o escopo do app que falta autenticar
      */
     this.unauthenticate = function(){
-      $cookieStore.remove('X-Authorization-Token');
+      $cookieStore.remove('Authorization');
       loginService.setAuthenticated(false);
     };
 
@@ -46,7 +67,7 @@ define([
      * @returns {Boolean}
      */
     this.isAuthenticated = function(){
-      return $cookieStore.get('X-Authorization-Token') ? true : false;
+      return $cookieStore.get('Authorization') ? true : false;
     };
 
     /**
@@ -56,7 +77,9 @@ define([
      */
     this.doLogin = function(credentials) {
       var promise = $http.post(portalResources.login, credentials).then(function(response){
-        $cookieStore.put('X-Authorization-Token', response.data.token);
+        _currentUser = response.data;
+        $cookieStore.put('Authorization', response.data.token);
+        
         loginService.setAuthenticated(true);
 
         if ( _reloadNeeded ) {
