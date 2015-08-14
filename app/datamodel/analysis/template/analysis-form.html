@@ -63,21 +63,21 @@
         <div class="col-md-12">
             <div class="clearfix well">
                 <div ng-repeat="at in attributes" >
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-4 form-group">
                         <label for="" translate>ANALYSIS.ATTRIBUTE</label>
                         <input type="text" name="params" id="params" class="form-control" 
                                ng-model="p.params" />
                         <div ng-if="formulario.$dirty" ng-messages="formulario.params.$error"
                              ng-messages-include="portal-error-messages"></div>
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-4 form-group">
                         <label for="valor" translate>ANALYSIS.VALUE</label>
                         <input type="text" class="form-control"
                                ng-model="p.value" />
                         <div ng-if="formulario.$dirty" ng-messages="formulario.method.$error"
                              ng-messages-include="portal-error-messages"></div>
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-4 form-group">
                         <label for="valor" translate>ANALYSIS.TYPE</label>
                         <select ng-options="ty for ty in attributeTypes"
                                 ng-model="at.type">

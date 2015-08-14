@@ -8,18 +8,18 @@
         <form novalidate name="formulario" ng-submit="submit()">
 
             <div class="form-group col-md-6">
-                <label for="model-nome" translate>VIEWER.NAME</label>
+                <label translate>VIEWER.NAME</label>
                 <input type="text" ng-model="analysisViewer.viewer.name" required class="form-control" />
             </div>
             <div class="form-group col-md-6">
-                <label for="model-nome" translate>VIEWER.DESCRIPTION</label>
+                <label translate>VIEWER.DESCRIPTION</label>
                 <input type="text" ng-model="analysisViewer.viewer.description" required class="form-control" />
             </div>
-            <div ng-if="analysisViewer.viewer.configuration.type == 'serial' || 
-                        analysisViewer.viewer.configuration.type == 'pie' || 
-                        analysisViewer.viewer.configuration.type == 'funnel' ||
-                        analysisViewer.viewer.configuration.type == 'radar'"> 
-                <div class="col-md-3">
+            <div ng-if="analysisViewer.viewer.configuration.type == 'serial' ||
+                                    analysisViewer.viewer.configuration.type == 'pie' ||
+                                    analysisViewer.viewer.configuration.type == 'funnel' ||
+                                    analysisViewer.viewer.configuration.type == 'radar'"> 
+                <div class="boxViewer">
                     <div class="columnsViewer">
                         <label translate>VIEWER.METRIC</label>
                         <div class="sidebarViewer">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="boxViewer">
                     <div class="columnsViewer">
                         <label translate>VIEWER.DESCRIPTION</label>
                         <div class="sidebarViewer">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div ng-if="analysisViewer.viewer.configuration.type == 'xy'"> 
-                <div class="col-md-3">
+                <div class="boxViewer">
                     <div class="columnsViewer">
                         <label translate>VIEWER.XFIELD</label>
                         <div class="sidebarViewer">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="boxViewer">
                     <div class="columnsViewer">
                         <label translate>VIEWER.YFIELD</label>
                         <div class="sidebarViewer">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="boxViewer">
                     <div class="columnsViewer">
                         <label translate>VIEWER.VALUEFIELD</label>
                         <div class="sidebarViewer">
@@ -107,7 +107,6 @@
                 </div>
             </div> 
             <am-charts ng-model="analysisViewer.viewer.configuration">
-
             </am-charts>
 
             <div class="form-group">

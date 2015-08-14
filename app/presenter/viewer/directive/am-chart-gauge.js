@@ -42,7 +42,7 @@ define([
                         var chartKeys = Object.keys(option);
                         for (var i = 0; i < chartKeys.length; i++) {
                             if (typeof option[chartKeys[i]] !== 'object' && typeof option[chartKeys[i]] !== 'function') {
-                                chart[chartKeys[i]] = option[chartKeys[i]];
+                                chart[chartKeys[i]] = angular.copy(option[chartKeys[i]]);
                             } else {
                                 chart[chartKeys[i]] = angular.copy(option[chartKeys[i]]);
                             }
