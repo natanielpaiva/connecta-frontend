@@ -120,11 +120,16 @@ require.config({
             deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
             exports: 'AmCharts.AmXYChart'
         },
-        'bower_components/amcharts-angular/dist/amChartsDirective': {
-            deps: [
-                'angular',
-                'bower_components/amcharts/dist/amcharts/amcharts'
-            ]
+        'bower_components/angular-amchart/src/amchart': {
+            deps: [ 'angular',
+                    'bower_components/amcharts/dist/amcharts/amcharts',
+                    'bower_components/amcharts/dist/amcharts/pie',
+                    'bower_components/amcharts/dist/amcharts/serial',
+                    'bower_components/amcharts/dist/amcharts/xy',
+                    'bower_components/amcharts/dist/amcharts/radar',
+                    'bower_components/amcharts/dist/amcharts/gauge',
+                    'bower_components/amcharts/dist/amcharts/funnel'
+                   ]
         },
         'angular-ng-table': {
             deps: ['angular']

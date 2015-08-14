@@ -45,7 +45,8 @@
     "angular-gridster": "~0.13.4",
     "angular-redactor": "~1.1.4",
     "imperavi-redactor": "~10.0.9",
-    "angular-currency-mask": "0.1.0-alpha"
+    "angular-currency-mask": "0.1.0-alpha",
+    "angular-amchart": "~1.0.5"
   },
   "authors": [],
   "moduleType": [

@@ -1,7 +1,6 @@
 define([
     'connecta.presenter',
-    'presenter/viewer/service/viewer-service',
-    'presenter/viewer/directive/am-chart-pie-donut'
+    'presenter/viewer/service/viewer-service'
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, LayoutService) {
         $scope.state = {loaded: false};

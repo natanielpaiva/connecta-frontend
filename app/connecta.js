@@ -33,7 +33,8 @@ define([
   'bower_components/ng-file-upload/angular-file-upload.min',
   'bower_components/amcharts/dist/amcharts/amcharts',
   'bower_components/angular-currency-mask/angular-currency-mask',
-  'bower_components/angular-redactor/angular-redactor'
+  'bower_components/angular-redactor/angular-redactor',
+  'bower_components/angular-amchart/src/amchart'
 ], function(angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel, inspection) {
 
   var connecta = angular.module('connecta', [
@@ -60,7 +61,8 @@ define([
     'ui.mask',
     'pascalprecht.translate',
     'angularFileUpload',
-    'currencyMask'
+    'currencyMask',
+    'AngularAmChart'
   ]);
 
   // Configuração do backend dos módulos
@@ -307,13 +309,6 @@ define([
     'portal/layout/filter/data-uri',
     'portal/layout/directive/file-model',
     'portal/layout/directive/conf-modal',
-    'presenter/viewer/directive/am-charts',
-    'presenter/viewer/directive/am-chart-serial',
-    'presenter/viewer/directive/am-chart-pie-donut',
-    'presenter/viewer/directive/am-chart-xy',
-    'presenter/viewer/directive/am-chart-radar',
-    'presenter/viewer/directive/am-chart-gauge',
-    'presenter/viewer/directive/am-chart-funnel',
     'inspection/inspection/directive/box-table-inspection',
     'inspection/inspection/directive/status-change',
     'inspection/inspection/directive/inspect-datepicker',

@@ -8,7 +8,6 @@ define([
 
 ], function (angular) {
     var presenter = angular.module('connecta.presenter', [
-
     ]);
 
     presenter.config(function ($translatePartialLoaderProvider) {
