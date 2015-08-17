@@ -18,7 +18,7 @@
             <div class="form-group">
                 <label for="address" translate>COMPANY.ADDRESS</label>
                 <input type="text" class="form-control" id="address" name="address" 
-                       ng-model="company.address" required/>
+                       ng-model="company.address" ng-blur="validateAddress()" required/>
                 <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>

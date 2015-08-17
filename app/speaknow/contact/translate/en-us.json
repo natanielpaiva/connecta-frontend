@@ -6,6 +6,7 @@
         "PHONE":"Phone",
         "REGISTER_CONTACT": "Register Contact",
         "SAVE_SUCCESS": "Registered contact successfully.",
+        "SAVE_ERROR":"Number already registered.",
         "EDIT":"Edit Contact"
     }
 }

@@ -122,7 +122,7 @@
                                     <div class="form-group" ng-show="isServiceAction()">
                                         <label for="param-name" translate>ACTION.SECTION.PARAM.NAME</label>
                                         <input type="text" class="form-control" id="param-name" name="section{{sec_index}}_param_name_{{index}}"
-                                               ng-model="param.name" required />
+                                               ng-model="param.name" ng-required="isServiceAction()"/>
 
                                         <div ng-show="actionForm.$submitted || actionForm.section{{sec_index}}_param_name_{{index}}.$touched"
                                              ng-messages="actionForm.section{{sec_index}}_param_name_{{index}}.$error"
@@ -203,7 +203,7 @@
 
                     <div class="form-group group-checkbox-label">
                         <input type="checkbox" class="checkbox-with-label" id="default" name="default"
-                               ng-model="action.default" required/>
+                               ng-model="action.default"/>
                         <label for="default" class="label-checkbox" translate>ACTION.DEFAULT</label>
                     </div>
 
@@ -216,7 +216,7 @@
                     <div class="form-group" ng-show="isAnswerSeparator">
                         <label for="answerSeparator" class="required" translate>ACTION.ANSWER_SEPARATOR</label>
                         <input type="text" class="form-control" id="name" name="answerSeparator"
-                               ng-model="action.answerSeparator" maxlength="1" required />
+                               ng-model="action.answerSeparator" maxlength="1" ng-required="isAnswerSeparator" />
                         <div ng-show="actionForm.answerSeparator.$touched" ng-messages="actionForm.answerSeparator.$error"
                             ng-messages-include="portal-error-messages"></div>
                     </div>
@@ -226,7 +226,7 @@
                         <label for="account" translate>ACTION.WHATSAPP_ACC</label>
                         <select id="account" name="account" class="form-control" 
                                ng-options="acc as acc.name for acc in whatsappAccounts track by acc.id"
-                               ng-model="whatsappAccount" required>
+                               ng-model="whatsappAccount" ng-required="isWhatsapp">
                         </select>
                         <div ng-show="actionForm.account.$touched" ng-messages="actionForm.account.$error"
                             ng-messages-include="portal-error-messages"></div>
@@ -234,14 +234,15 @@
 
                     <div class="form-group group-checkbox-label">
                         <input type="checkbox" class="checkbox-with-label" id="allContacts" name="allContacts"
-                               ng-model="allContacts" required/>
-                        <label for="allContacts" class="label-checkbox" translate>ACTION.ALL_CONTACTS</label>
+                               ng-model="allContacts"/>
+                        <label for="allContacts" class="label-checkbox" translate>ACTION.SEND_ALL_CONTACTS</label>
                     </div>
 
                     <div class="form-group" ng-show="!allContacts">
                         <label for="contacts" translate>ACTION.CONTACT</label>
                         <input type="text" name="contacts" id="contacts" class="form-control" typeahead-on-select="addContact()"
-                               ng-model="contact" typeahead="contact as contact.name for contact in getContacts($viewValue)" typeahead-loading="loadingAttributes" required  />
+                               ng-model="contact" typeahead="contact as contact.name for contact in getContacts($viewValue)" typeahead-loading="loadingAttributes"
+                               />
                         <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
                     </div>
 
@@ -276,7 +277,7 @@
                 <button type="button" onclick="window.history.back()" class="btn btn-default" translate>
                     LAYOUT.BACK                     
                 </button>
-                <button type="submit" class="btn btn-primary" translate>
+                <button type="submit" class="btn btn-primary" ng-disabled="actionForm.$invalid" translate>
                     LAYOUT.SAVE
                 </button>
         </form>

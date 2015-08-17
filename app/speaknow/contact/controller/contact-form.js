@@ -20,7 +20,11 @@ define([
                     notify.success(text);
                     $location.path('speaknow/contact');
                 });
-            }, function (response) {});
+            }, function (response) {
+                $translate('CONTACT.SAVE_ERROR').then(function (text) {
+                    notify.error(text);
+                });
+            });
         };
     });
 });

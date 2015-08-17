@@ -82,6 +82,9 @@
                             <li ng-repeat="contact in action.contacts">{{contact.name + ' - ' + contact.phone}}</li>
                         </ul>
                     </div>
+                    <div ng-show="action.contacts.length > 0">
+                        <strong translate>ACTION.ALL_CONTACTS</strong>
+                    </div>
                 </div>
             </div>
         </div>

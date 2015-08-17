@@ -45,8 +45,8 @@
             <thead>
                 <tr>
                     <th translate>PRODUCT.IMAGE</th>
-                    <th translate>PRODUCT.TYPE</th>
                     <th translate>PRODUCT.NAME</th>
+                    <th translate>PRODUCT.TYPE</th>
                     <th translate>PRODUCT.PRICE</th>
                     <th></th>
                 </tr>
@@ -54,8 +54,8 @@
             <tbody>
                 <tr ng-repeat="product in $data">
                     <td class="text-left"><img src="{{product.image}}" class="icon-product-list" /></td>
-                    <td class="text-left" translate>{{'PRODUCT.' + product.type}}</td>
                     <td class="text-left">{{product.name}}</td>
+                    <td class="text-left" translate>{{'PRODUCT.' + product.type}}</td>
                     <td class="text-left">{{product.price | currency : "R$ " : 2}}</td>
                     <td>
                         <div class="btn-group">

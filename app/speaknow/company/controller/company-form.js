@@ -25,23 +25,11 @@ define([
         }
 
         $scope.submit = function () {
-            $scope.prepareToSave();
-        };
-        
-        $scope.prepareToSave = function(){
             if($scope.validateForm()){
-                CompanyService.getLatLong($scope.company.address).then(function(result){
-                    if(result.data.status === "OK"){
-                        $scope.company.lat = result.data.results[0].geometry.location.lat;
-                        $scope.company.lng = result.data.results[0].geometry.location.lng;
-                        $scope.save();
-                    } else {
-                        notify.warning("COMPANY.VALIDATION.ADDRESS");
-                    }
-                });
+                $scope.save();
             }
         };
-
+        
         $scope.save = function () {
             CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function () {
                 $translate('COMPANY.SUCCESS').then(function (text) {
@@ -78,6 +66,7 @@ define([
             };
             
             $scope.companyContacts.name = $scope.company.name;
+            $scope.companyContacts.description = "Grupo de Contatos Padrão";
             $scope.companyContacts.contacts.push(contactPhone);
             $scope.companyContacts.contacts.push(contactEmail);
             $scope.company.companyContacts.push($scope.companyContacts);
@@ -97,6 +86,10 @@ define([
                     }
                 };
                 reader.readAsDataURL(files[0]);
+            } else {
+                $translate('COMPANY.VALIDATION.INVALID_DOCUMENT').then(function (text) {
+                    notify.warning(text);
+                });
             }
         };
         
@@ -118,7 +111,7 @@ define([
         
         $scope.validateForm = function(){
             var isValid = true;
-            if($scope.fileRect === undefined){
+            if($scope.fileRect === undefined && !$scope.isEditing){
                 $scope.rectInvalid = true;
                 isValid = false;
             } else {
@@ -129,6 +122,17 @@ define([
                 }
             }
             return isValid;
+        };
+        
+        $scope.validateAddress = function () {
+            CompanyService.getLatLong($scope.company.address).then(function (result) {
+                if (result.data.status === "OK") {
+                    $scope.company.lat = result.data.results[0].geometry.location.lat;
+                    $scope.company.lng = result.data.results[0].geometry.location.lng;
+                } else {
+                    notify.warning("COMPANY.VALIDATION.ADDRESS");
+                }
+            });
         };
     });
 });

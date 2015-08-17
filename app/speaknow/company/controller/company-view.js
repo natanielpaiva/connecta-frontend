@@ -66,7 +66,7 @@ define([
                 };
 
                 $scope.modalParams = {
-                    title: 'Exclusão de Company',
+                    title: 'Exclusão de Empresa',
                     text: 'Deseja realmente excluir esta empresa?',
                     size: 'sm',
                     success: $scope.delete

@@ -3,14 +3,15 @@ define([
     'speaknow/action/service/action-service',
     'speaknow/interaction/service/interaction-service',
     'speaknow/whatsapp/service/whatsapp-service',
-    'speaknow/action/controller/action-modal'
+    'speaknow/action/controller/action-modal',
+    'portal/layout/service/notify'
 ], function (speaknow) {
     /* //TODO
      * validar formulario
      * regras de uplaod de arquivo
      */
     return speaknow.lazy.controller('ActionFormController', function ($scope,
-            InteractionService, ActionService, WhatsappService, $location, $routeParams, $modal, $translate) {
+            InteractionService, ActionService, WhatsappService, notify, $location, $routeParams, $modal, $translate) {
 
         $scope.interaction = ActionService.getInteraction();
         $scope.contact = null;
@@ -116,7 +117,7 @@ define([
             ActionService.get($routeParams.id).success(function (data) {
                 $scope.action = data;
                 $scope.isWhatsapp = $scope.action.whatsappAccount !== undefined;
-                if($scope.action.contacts.length > 0){
+                if ($scope.action.contacts.length > 0) {
                     $scope.allContacts = false;
                     $scope.whatsappAccount = $scope.action.whatsappAccount;
                     $scope.contacts = $scope.action.contacts;
@@ -158,38 +159,43 @@ define([
 
         // Recupera os tipos de parametros (enum InteractionParameterType)
         $scope.paramTypes = [];
-        $scope.getParamTypes = function(){
+        $scope.getParamTypes = function () {
             ActionService.getParamTypes().then(function (response) {
                 $scope.paramTypes = response.data;
             });
         };
-        
-        $scope.verifyType = function(){
-            if($scope.action.type == 'SERVICE'){
+
+        $scope.verifyType = function () {
+            if ($scope.action.type == 'SERVICE') {
                 $scope.isWhatsapp = false;
             }
         };
-        
-        $scope.setParamTypesWhatsApp = function(){
+
+        $scope.setParamTypesWhatsApp = function () {
             $scope.paramTypes = ["MULTI_SELECT", "SELECT", "TEXT"];
         };
-        
-        $scope.setParameterType = function(){
-            if($scope.isWhatsapp){
+
+        $scope.setParameterType = function () {
+            if ($scope.isWhatsapp) {
                 $scope.setParamTypesWhatsApp();
             } else {
                 $scope.getParamTypes();
             }
         };
-        
+
         $scope.getParamTypes();
 
         $scope.submit = function () {
-            if($scope.contacts.length > 0){
-                $scope.action.contacts = $scope.contacts;
-            }
             //Verifica se esta action possui Whatsapp
             if ($scope.isWhatsapp) {
+                if ($scope.contacts.length > 0) {
+                    $scope.action.contacts = $scope.contacts;
+                } else if (!$scope.allContacts) {
+                    $translate('ACTION.CONTACTS_NULL').then(function (text) {
+                        notify.error(text);
+                    });
+                    return;
+                }
                 $scope.action.whatsappAccount = angular.fromJson($scope.whatsappAccount);
                 $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
             }
@@ -234,7 +240,8 @@ define([
             var form = $scope.actionForm;
             var title = form['section' + sec_index + '_param_title_' + index];
 
-            if (!title) return;
+            if (!title)
+                return;
 
             title = form['section' + sec_index + '_param_title_' + index].$valid;
             var name = $scope.isServiceAction() ? form['section' + sec_index + '_param_name_' + index].$valid : true;

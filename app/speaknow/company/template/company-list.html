@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h3>{{company.name}}</h3>
+        <h3 translate>COMPANY.COMPNANIES</h3>
 
         <a class="btn btn-default" href="#/speaknow/company/new" translate>
             <span class="glyphicon glyphicon-plus"></span>
@@ -53,7 +53,7 @@
             <tbody>
                 <tr ng-repeat="company in $data">
                     <td class="text-left" name="name">{{company.name}}</td>
-                    <td class="text-left">{{company.mainContacts[1].value}}</td>
+                    <td class="text-left">{{getEmail(company)}}</td>
                     <td class="text-left">{{company.type}}</td>
                     <td>
                         <div class="btn-group">

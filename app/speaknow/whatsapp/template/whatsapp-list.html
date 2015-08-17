@@ -44,7 +44,6 @@
         <table ng-table="tableParams" class="table table-striped margin-top-single">
             <thead>
                 <tr>
-                    <th></th>
                     <th translate>WHATSAPP.NAME</th>
                     <th translate>WHATSAPP.NUMBER</th>
                     <th translate>WHATSAPP.ACTIVE</th>
@@ -53,9 +52,6 @@
             </thead>
             <tbody>
                 <tr ng-repeat="account in $data">
-                    <td>
-                     <input type="checkbox" value="{{account.id}}" />
-                    </td>
                     <td class="text-left">{{account.name}}</td>
                     <td class="text-left">{{account.number}}</td>
                     <td class="text-left">

@@ -24,7 +24,6 @@ define([
             fd.append('image', image);
             fd.append('product', JSON.stringify(product));
             return $http.post(url, fd, {
-                transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             });
         };

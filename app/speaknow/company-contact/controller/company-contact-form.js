@@ -11,9 +11,18 @@ define([
                 $scope.isPhone = false;
                 $scope.isEmail = false;
 
+                $scope.createInputValue = function () {
+                    if ($scope.companyContact.type == "PHONE") {
+                        $scope.isPhone = true;
+                    } else {
+                        $scope.isPhone = false;
+                    }
+                };
+
                 if ($routeParams.id) {
                     CompanyContactService.get($routeParams.id).success(function (data) {
                         $scope.companyContact = data;
+                        $scope.createInputValue();
                     });
                 }
 
@@ -31,12 +40,5 @@ define([
                     });
                 };
 
-                $scope.createInputValue = function () {
-                    if ($scope.companyContact.type == "PHONE") {
-                        $scope.isPhone = true;
-                    } else {
-                        $scope.isPhone = false;
-                    }
-                };
             });
 });
