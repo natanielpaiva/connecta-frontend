@@ -76,7 +76,17 @@ define([
      * @returns {Promise}
      */
     this.doLogin = function(credentials) {
-      var promise = $http.post(portalResources.login, credentials).then(function(response){
+
+      var userDTO = {
+        "profile":{
+          "id": credentials.username
+        },
+        "credentials":{
+          "password": credentials.password
+        }
+      };
+
+      var promise = $http.post(portalResources.login, userDTO).then(function(response){
         _currentUser = response.data;
         $cookieStore.put('Authorization', response.data.token);
         
