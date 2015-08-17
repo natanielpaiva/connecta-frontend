@@ -34,7 +34,7 @@ define([
                     return company.mainContacts[i].value;
                 }
             }
-        }
+        };
 
         $scope.delete = function (id) {
             CompanyService.delete(id).success(function () {
