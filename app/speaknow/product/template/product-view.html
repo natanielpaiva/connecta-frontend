@@ -49,6 +49,10 @@
                         <strong translate>PRODUCT.TYPE</strong>:
                         <strong translate> {{'PRODUCT.' + product.type}}</strong>
                     </p>
+                    <p ng-if="product.type">
+                        <strong translate>PRODUCT.CATEGORY</strong>:
+                        <strong translate> {{'PRODUCT.' + product.subcategory.name}}</strong>
+                    </p>
                     <p ng-if="product.price">
                         <strong translate>PRODUCT.PRICE</strong>:
                         {{product.price | currency : "R$ " : 2}}
