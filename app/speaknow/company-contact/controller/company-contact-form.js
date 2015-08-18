@@ -21,6 +21,7 @@ define([
 
                 if ($routeParams.id) {
                     CompanyContactService.get($routeParams.id).success(function (data) {
+                        $scope.isEdit = true;
                         $scope.companyContact = data;
                         $scope.createInputValue();
                     });

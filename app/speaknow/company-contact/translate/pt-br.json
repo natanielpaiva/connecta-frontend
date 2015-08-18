@@ -2,6 +2,7 @@
     "COMPANY_CONTACT": {
         "TYPE": "Tipo",
         "REGISTER_CONTACT": "Adicionar Contato",
+        "EDIT_CONTACT":"Atualizar Contato",
         "NAME": "Nome",
         "VALUE": "Valor"
     }

@@ -2,6 +2,7 @@
     "COMPANY_CONTACT": {
         "TYPE": "Type",
         "REGISTER_CONTACT": "Register Contact",
+        "EDIT_CONTACT":"Edit Contact",
         "NAME": "Name",
         "VALUE": "Value"
     }
