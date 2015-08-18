@@ -6,7 +6,7 @@
         <div class="margin-top-single">
             <a href="#/speaknow/product"
                class="btn btn-default" translate>
-                LAYOUT.BACK                     
+                LAYOUT.BACK
             </a>
             <!--//TODO previous e back nos items (ouch)-->
 <!--            <button type="button" class="btn btn-default" >
@@ -14,7 +14,7 @@
             <button type="button" class="btn btn-default" >
                 <span class="icon-arrow-bold-right"></span></button>-->
 
-            <button type="button" class="btn btn-default" 
+            <button type="button" class="btn btn-default"
                     conf-modal="modalParams" conf-modal-args="[product.id]">
                 <span class="icon-dump"></span>
             </button>
@@ -28,33 +28,33 @@
             <div class="col-md-12">
                 <div class="well margin-top-single margin-bottom-single">
                     <p ng-if="product.name">
-                        <strong translate>PRODUCT.NAME</strong>: 
+                        <strong translate>PRODUCT.NAME</strong>:
                         {{product.name}}
                     </p>
                     <p ng-if="product.image">
-                        <strong translate>PRODUCT.IMAGE</strong>: 
+                        <strong translate>PRODUCT.IMAGE</strong>:
                     </p>
                     <p>
                         <img class="img-company-quad" ng-src="{{product.image}}" />
                     </p>
                     <p ng-if="product.description">
-                        <strong translate>PRODUCT.DESCRIPTION</strong>: 
+                        <strong translate>PRODUCT.DESCRIPTION</strong>:
                         {{product.description}}
                     </p>
                     <p ng-if="product.measureType">
-                        <strong translate>PRODUCT.MEASURE</strong>: 
-                        {{product.measureType}}
+                        <strong translate>PRODUCT.MEASURE</strong>:
+                        <strong translate> {{'PRODUCT.' + measureType}}</strong>
                     </p>
                     <p ng-if="product.type">
-                        <strong translate>PRODUCT.TYPE</strong>: 
+                        <strong translate>PRODUCT.TYPE</strong>:
                         <strong translate> {{'PRODUCT.' + product.type}}</strong>
                     </p>
                     <p ng-if="product.price">
-                        <strong translate>PRODUCT.PRICE</strong>: 
+                        <strong translate>PRODUCT.PRICE</strong>:
                         {{product.price | currency : "R$ " : 2}}
                     </p>
                     <p ng-if="product.demand">
-                        <strong translate>PRODUCT.CODE</strong>: 
+                        <strong translate>PRODUCT.CODE</strong>:
                         {{product.demand}}
                     </p>
                 </div>
