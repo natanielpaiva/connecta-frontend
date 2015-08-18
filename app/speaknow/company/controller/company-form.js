@@ -34,7 +34,7 @@ define([
             CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function () {
                 $translate('COMPANY.SUCCESS').then(function (text) {
                     notify.success(text);
-                    $location.path('speaknow/company');
+                    $location.path('speaknow/company/view');
                 });
             });
         };

@@ -12,6 +12,16 @@ define([
             var url = speaknowResources.company + "/" + id;
             return $http.get(url);
         };
+        
+        this.getUserCompany = function () {
+            var url = speaknowResources.company + "/userCompany";
+            return $http.get(url);
+        };
+
+        this.getUserCompany = function () {
+            var url = speaknowResources.company + "/userCompany";
+            return $http.get(url);
+        };
 
         this.save = function (fileQuad, fileRect, company) {
             var url = speaknowResources.company + "/save";

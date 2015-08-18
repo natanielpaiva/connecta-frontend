@@ -11,15 +11,23 @@ define([
                 $scope.company = {};
                 $scope.baseUrl = speaknowResources.base;
 
-                if ($routeParams.id) {
-                    CompanyService.get($routeParams.id).success(function (data) {
-                        $scope.company = data;
-                        $scope.getGroups();
-                        ContactGroupService.setCompany($scope.company);
-                    });
-                } else {
-                    $location.path('speaknow/company');
-                }
+//                if ($routeParams.id) {
+//                    CompanyService.get($routeParams.id).then(function (data) {
+//                        $scope.company = data;
+//                        $scope.getGroups();
+//                        ContactGroupService.setCompany($scope.company);
+//                    }, function(data){
+//                        $location.path('speaknow/company');
+//                    });
+//                } else {
+//                }
+                CompanyService.getUserCompany().then(function (response) {
+                    $scope.company = response.data;
+                    $scope.getGroups();
+                    ContactGroupService.setCompany($scope.company);
+                }, function (data) {
+                    $location.path('speaknow/company/new');
+                });
 
                 $scope.getGroups = function () {
                     $scope.tableParams = new ngTableParams({
@@ -40,7 +48,7 @@ define([
                     CompanyService.delete(id).success(function () {
                         $translate('COMPANY.REMOVE_SUCCESS').then(function (text) {
                             notify.success(text);
-                            $location.path('speaknow/company/');
+                            $location.path('speaknow/company/new');
                         });
                     });
                 };

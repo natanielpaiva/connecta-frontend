@@ -3,7 +3,8 @@ define([
     'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, $translate, speaknowResources) {
+    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, 
+    $translate, speaknowResources, $location) {
 
         $scope.companies = null;
         $scope.search = {
@@ -16,11 +17,13 @@ define([
         }, {
             getData: function ($defer, params) {
                 return CompanyService.list(params.url()).then(function (response) {
-                    if (response.data.content.length === 0) {
-                        $translate('COMPANY.NO_RESULT').then(function (text) {
-                            notify.warning(text);
-                        });
-                    }
+//                    Código para search desativado enquanto o usuário só tem uma company
+//                    if (response.data.content.length === 0 
+//                            && $scope.search.name.length > 0) {
+//                        $translate('COMPANY.NO_RESULT').then(function (text) {
+//                            notify.warning(text);
+//                        });
+//                    }
                     params.total(response.data.totalElements);
                     $defer.resolve(response.data.content);
                 });

@@ -23,6 +23,7 @@ define([
 
                 if ($routeParams.id) {
                     ProductService.get($routeParams.id).success(function (data) {
+                        $scope.isEdit = true;
                         $scope.product = data;
                         $scope.product.demand = $scope.product.demand.toString();
                         $scope.productReference = data;
@@ -41,7 +42,7 @@ define([
                     if ($scope.newProductReference) {
                         $scope.product.productReference.name = $scope.product.name;
                     }
-                    if($scope.productImage === null){
+                    if($scope.productImage === null && !$scope.isEdit){
                         notify.warning("Cadastre uma imagem para o Produto");
                         return null;
                     }

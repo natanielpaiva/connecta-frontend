@@ -153,7 +153,12 @@ define([
             controllerUrl: 'speaknow/company/controller/company-form',
             templateUrl: 'app/speaknow/company/template/company-form.html'
         },
-        '/speaknow/company/:id': {
+//        '/speaknow/company/:id': {
+//            controller: 'CompanyViewController',
+//            controllerUrl: 'speaknow/company/controller/company-view',
+//            templateUrl: 'app/speaknow/company/template/company-view.html'
+//        },
+        '/speaknow/company/view': {
             controller: 'CompanyViewController',
             controllerUrl: 'speaknow/company/controller/company-view',
             templateUrl: 'app/speaknow/company/template/company-view.html'
@@ -267,7 +272,7 @@ define([
             children: []
         },
         {
-            href: 'speaknow/company',
+            href: 'speaknow/company/view',
             title: 'COMPANY.COMPANY',
             icon: 'icon-suitcase',
             children: []
