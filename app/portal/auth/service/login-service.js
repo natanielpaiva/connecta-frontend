@@ -88,7 +88,7 @@ define([
 
       var promise = $http.post(portalResources.login, userDTO).then(function(response){
         _currentUser = response.data;
-        $cookieStore.put('X-Authorization-Token', "f5o8s1f0s71bp0tm8bpff0qvte");
+        $cookieStore.put('X-Authorization-Token', response.data.token);
 
         loginService.setAuthenticated(true);
 
