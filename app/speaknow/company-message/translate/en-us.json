@@ -3,6 +3,7 @@
         "COMPANY_MESSAGE":"Company Messages",
         "SUBJECT": "Subject",
         "FEELING": "Feeling",
-        "MESSAGE": "Message"
+        "MESSAGE": "Message",
+        "REMOVE_SUCCESS":"Company successfully removed"
     }
 }

@@ -1,5 +1,6 @@
 {
     "PRODUCT": {
+        "SAVE_SUCCESS": "Produto salvo com sucesso",
         "PRODUCT_SERVICE": "Produtos e Serviços",
         "PRODUCT": "Produto",
         "SERVICE": "Serviço",

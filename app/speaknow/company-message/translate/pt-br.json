@@ -3,6 +3,7 @@
         "COMPANY_MESSAGE":"Fale Com",
         "SUBJECT": "Assunto",
         "FEELING": "Sentimento",
-        "MESSAGE": "Mensagem"
+        "MESSAGE": "Mensagem",
+        "REMOVE_SUCCESS":"Empresa removida com sucesso"
     }
 }

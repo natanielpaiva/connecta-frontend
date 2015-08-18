@@ -41,13 +41,21 @@
                         <strong translate>PRODUCT.DESCRIPTION</strong>: 
                         {{product.description}}
                     </p>
-                    <p ng-if="contact.price">
-                        <strong translate>PRODUCT.PRICE</strong>: 
-                        {{contact.price}}
+                    <p ng-if="product.measureType">
+                        <strong translate>PRODUCT.MEASURE</strong>: 
+                        {{product.measureType}}
                     </p>
-                    <p ng-if="contact.code">
+                    <p ng-if="product.type">
+                        <strong translate>PRODUCT.TYPE</strong>: 
+                        <strong translate> {{'PRODUCT.' + product.type}}</strong>
+                    </p>
+                    <p ng-if="product.price">
+                        <strong translate>PRODUCT.PRICE</strong>: 
+                        {{product.price | currency : "R$ " : 2}}
+                    </p>
+                    <p ng-if="product.demand">
                         <strong translate>PRODUCT.CODE</strong>: 
-                        {{contact.code}}
+                        {{product.demand}}
                     </p>
                 </div>
             </div>
