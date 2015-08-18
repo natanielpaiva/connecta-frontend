@@ -26,11 +26,11 @@ define([
 
         $scope.delete = function(id){
              ProductService.delete(id).success(function () {
-                notify.success("Produto removido com sucesso");
+                notify.success("Produto/Serviço removido com sucesso");
                 $scope.tableParams.reload();
             });
         };
-        
+
         $scope.modalRemoveProduct = {
             title: 'Excluir Produto',
             text: 'Deseja realmente remover o produto?',

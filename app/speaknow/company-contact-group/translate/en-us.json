@@ -1,12 +1,16 @@
 {
-    "COMPANY_CONTACT": {
-        "COMPANY_CONTACT": "Company Groups",
-        "CONTACTS": "Contacts",
-        "TYPE": "Sector",
-        "REMOVE_SUCCESS":"Removido com sucesso",
-        "IMAGE_QUAD": "Image Square",
-        "IMAGE_RECT": "Image Rectangle",
-        "DROP_FILE_HERE":"Drop or click here",
-        "DESCRIPTION":"Description"
-    }
+  "COMPANYGROUP": {
+    "COMPANYGROUP": "Company Group",
+    "COMPANY": "Company",
+    "CONTACTS": "Contacts",
+    "NAME": "Name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "ADDRESS": "Address",
+    "DROP_FILE_HERE": "Drag or click here",
+    "TYPE": "Type",
+    "IMAGE_QUAD": "Square Image",
+    "IMAGE_RECT": "Rectangular Image",
+    "DESCRIPTION":"Description"
+  }
 }
