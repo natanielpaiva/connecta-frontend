@@ -27,6 +27,11 @@
 
   <div class="navbar-collapse collapse pull-right navbar-options">
     <ul class="nav navbar-nav">
+    <!-- //TOREMOVE Trecho de código adicionado para a apresentação das mulheres executivas
+         A ser removido quando a funcionalidade de diversas companhias ou logo do usuário for implementada-->
+      <li ng-if="user.userId === 'thayse.luchetta@cds.com.br'">
+          <img style="height: 40px;" src="assets/img/speaknow/mex-logo.png" />
+      </li>
       <li class="applications-icon">
         <a href="javascript:void(0);" title="{{'APPLICATION.APPS'| translate}}"
           ng-click="toggleApps()">

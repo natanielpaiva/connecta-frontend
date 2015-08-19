@@ -39,7 +39,7 @@ define([
                 });
 
                 $scope.submit = function () {
-                    if ($scope.newProductReference) {
+                    if ($scope.newProductReference && $scope.product.code) {
                         $scope.product.productReference.name = $scope.product.name;
                     }
                     if ($scope.productImage === null && !$scope.isEdit) {
