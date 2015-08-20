@@ -15,7 +15,7 @@ define([
         
         $scope.submit = function () {
             ContactGroupService.save($scope.contactGroup).then(function () {
-                $location.path('speaknow/company/' + $scope.company.id);
+                $location.path('speaknow/company/view');
             });
         };
     });

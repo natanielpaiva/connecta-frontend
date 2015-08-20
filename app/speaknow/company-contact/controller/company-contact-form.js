@@ -24,6 +24,11 @@ define([
                         $scope.isEdit = true;
                         $scope.companyContact = data;
                         $scope.createInputValue();
+                        if ($scope.companyContact.type == "PHONE") {
+                            $scope.phone = $scope.companyContact.value;
+                        } else {
+                            $scope.email = $scope.companyContact.value;
+                        }
                     });
                 }
 
