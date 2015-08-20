@@ -5,7 +5,9 @@ define([
     return presenter.lazy.controller('ContactGroupFormController', function ($scope, ContactGroupService, $location, $routeParams) {
         
         $scope.company = ContactGroupService.getCompany();
-        $scope.contactGroup = {company:  $scope.company};
+        $scope.contactGroup = {
+            company:  $scope.company
+        };
         
         if ($routeParams.id) {
             ContactGroupService.get($routeParams.id).success(function(data){

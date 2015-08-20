@@ -4,6 +4,8 @@
         "SUBJECT": "Subject",
         "FEELING": "Feeling",
         "MESSAGE": "Message",
-        "REMOVE_SUCCESS":"Company successfully removed"
+        "NO_RESULT":"No Results",
+        "REMOVE_SUCCESS":"Company successfully removed",
+        "COMPANY":"Company"
     }
 }

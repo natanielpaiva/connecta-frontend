@@ -17,6 +17,11 @@ define([
                 }, {
                     getData: function ($defer, params) {
                         return CompanyMessageService.list(params.url()).then(function (response) {
+                            if (response.data.content.length === 0 && $scope.search.name.length > 0) {
+                                $translate('COMPANY_MESSAGE.NO_RESULT').then(function (text) {
+                                    notify.warning(text);
+                                });
+                            }
                             params.total(response.data.totalElements);
                             $defer.resolve(response.data.content);
                         });
@@ -41,4 +46,4 @@ define([
                     success: $scope.delete
                 };
             });
-});
+        });

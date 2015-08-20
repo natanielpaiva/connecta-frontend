@@ -36,7 +36,16 @@ define([
                         filter: $scope.search
                     }, {
                         getData: function ($defer, params) {
-                            var data = $scope.company.companyContacts;
+                            var companyContacts = $scope.company.companyContacts;
+                            for(var i in companyContacts){
+                                if(companyContacts[i].main){
+                                    var other = angular.copy(companyContacts[0]);
+                                    var main = angular.copy(companyContacts[i]);
+                                    companyContacts[0] = main;
+                                    companyContacts[i] = other;
+                                }
+                            }
+                            var data = companyContacts;
                             params.total(data.length);
                             return $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                         },
@@ -79,5 +88,6 @@ define([
                     size: 'sm',
                     success: $scope.delete
                 };
+                
             });
 });

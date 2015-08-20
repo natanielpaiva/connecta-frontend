@@ -19,8 +19,12 @@ define([
             $scope.isEditing = true;
             CompanyService.get($routeParams.id).success(function (data) {
                 $scope.company = data;
-                $scope.phone = $scope.company.companyContacts[0].contacts[0].value;
-                $scope.email = $scope.company.companyContacts[0].contacts[1].value;
+                for(var i in $scope.company.companyContacts){
+                    if($scope.company.companyContacts[i].main){
+                        $scope.phone = $scope.company.companyContacts[i].contacts[0].value;
+                        $scope.email = $scope.company.companyContacts[i].contacts[1].value;
+                    }
+                }
             });
         }
 
