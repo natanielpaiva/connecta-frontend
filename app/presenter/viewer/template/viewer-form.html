@@ -106,6 +106,45 @@
                     </div>
                 </div>
             </div> 
+
+            <div ng-if="analysisViewer.viewer.configuration.type == 'gauge'"> 
+                <div class="boxViewer">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.METRIC</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.metrics">
+                                <li ng-repeat="column in analysisViewer.metrics" dnd-draggable="column" dnd-moved="analysisViewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong translate>FILTER_EMPTY</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-default ng-scope" type="button" ng-click="newInterval()">
+                        <span class="icon-plus"></span>
+                        <translate>LAYOUT.ADD</translate>
+                    </button>
+                </div>    
+                <div ng-repeat="interval in analysisViewer.viewer.configuration.axes[0].bands">
+                    <label translate>VIEWER.INTERVAL</label>
+                    <input type='color' 
+                           ng-model='interval.color'/>
+                    De
+                    <input type='number' style="width: 60px;"
+                           ng-model='interval.startValue'/>
+                    Até
+                    <input type='number' style="width: 60px;"
+                           ng-model='interval.endValue'/>
+                    <button ng-if="iLastInterval > 2" type="button" class="btn btn-default"
+                            ng-click="$parent.deleteInterval($parent.interval)">
+                        <span class="icon-minus"></span>
+                    </button>
+                </div>
+            </div>
             <amchart ng-model="analysisViewer.viewer.configuration">
             </amchart>
 

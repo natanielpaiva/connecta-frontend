@@ -165,6 +165,11 @@ define([
             controller: 'ViewerFormController',
             controllerUrl: 'presenter/viewer/controller/viewer-form',
             templateUrl: 'app/presenter/viewer/template/viewer-form.html'
+        },
+        '/presenter/viewer/:id/view': {
+            controller: 'ViewerViewController',
+            controllerUrl: 'presenter/viewer/controller/viewer-view',
+            templateUrl: 'app/presenter/viewer/template/viewer-view.html'
         }
 
     };

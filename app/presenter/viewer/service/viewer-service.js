@@ -6,6 +6,22 @@ define([
 ], function (presenter) {
 
     return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, $rootScope) {
+
+        var layoutConfig = {
+            PLOAT_AREA: {
+                name: 'PloatArea',
+                template: 'app/presenter/viewer/template/background-and-plot-area/plot-area.html'
+            },
+            MARGINS: {
+                name: 'Margins',
+                template: 'app/presenter/viewer/template/background-and-plot-area/margins.html'
+            }
+        };
+        
+        this.getLayoutConfig = function() {
+            return layoutConfig;
+        };
+
         this.getAnalysis = function (value) {
             return $autocomplete(presenterResources.analysis + "/autocomplete", {
                 name: value
@@ -130,7 +146,23 @@ define([
         this.getPreview = function (analysisViewer, analysisViewerResult) {
             var viewerConfiguration = analysisViewerResult.analysisViewer.viewer.configuration;
             analysisViewer.viewer.configuration = analysisViewerResult.analysisViewer.viewer.configuration;
-            analysisViewer.viewer.configuration.data = analysisViewerResult.result;
+
+            if (viewerConfiguration.type !== "gauge") {
+                analysisViewer.viewer.configuration.data = analysisViewerResult.result;
+            } else {
+                analysisViewer.viewer.configuration.arrows = [];
+                for (var iResult in analysisViewerResult.result) {
+                    for (var key in  analysisViewerResult.result[iResult]) {
+                        var arrows = {
+                            id: key,
+                            value: analysisViewerResult.result[iResult][key],
+                            color: '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
+                        };
+                        analysisViewer.viewer.configuration.arrows.push(arrows);
+                    }
+                }
+            }
+
             switch (viewerConfiguration.type) {
                 case "serial":
                     configureSerialAndRadar(analysisViewer, analysisViewerResult);

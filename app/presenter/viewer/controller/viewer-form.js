@@ -11,12 +11,45 @@ define([
         sidebarService.config({
             controller: function ($scope) {
                 $scope.analysis = "";
+                $scope.analysisBar = "ANALYSIS";
+                $scope.typeBar = "TYPE";
+                $scope.settingsBar = "SETTINGS";
+                $scope.setLayoutConfiguration = false;
+                
+                $scope.layoutConfig = ViewerService.getLayoutConfig();
+                
+                $scope.viewerBar = "ANALYSIS";
                 $scope.getAnalysis = function (val) {
                     return ViewerService.getAnalysis(val);
                 };
+                
+                $scope.disabledLayoutConfig = function(){
+                   $scope.setLayoutConfiguration = false;  
+                };
+                
+                $scope.analysisViewer = getAnalysisViewer();
+                
+                $scope.templateCombo = '/app/presenter/viewer/template/_combo.html';
+                $scope.templateSettings = '/app/presenter/viewer/template/_settings.html';
+                
+                $scope.setLayoutSettings = function(type){
+                    $scope.indexLayoutConfig = type;
+                    $scope.setLayoutConfiguration = true;
+                };
+                
+                $scope.checkViewerBar = function (type) {
+                    $scope.viewerBar = type;
+                };
+
             },
-            src: 'app/presenter/viewer/template/combo-analysis.html'
+            src: 'app/presenter/viewer/template/_settings-and-combo.html'
         });
+
+
+        var getAnalysisViewer = function () {
+            return $scope.analysisViewer;
+        };
+
         $scope.$on("$locationChangeStart", function (event) {
             LayoutService.showSidebarRight(false);
             sidebarService.config({
@@ -38,8 +71,7 @@ define([
         };
 
         var getPreview = function () {
-            if (($scope.analysisViewer.metrics.length > 0 &&
-                    $scope.analysisViewer.descriptions.length > 0) ||
+            if (($scope.analysisViewer.metrics.length > 0) ||
                     ($scope.analysisViewer.xfields.length > 0 &&
                             $scope.analysisViewer.yfields.length > 0)) {
                 ViewerService.preview($scope.analysisViewer).then(function (response) {
@@ -117,6 +149,33 @@ define([
             });
         };
 
+        $scope.newInterval = function () {
+            $scope.iLastInterval = $scope.analysisViewer.viewer.configuration.axes[0].bands.length - 1;
+
+            var interval = {
+                color: "#fff",
+                startValue: $scope.analysisViewer.viewer.configuration.axes[0].bands[$scope.iLastInterval].endValue + 1,
+                endValue: $scope.analysisViewer.viewer.configuration.axes[0].bands[$scope.iLastInterval].endValue + 2
+            };
+
+            $scope.analysisViewer.viewer.configuration.axes[0].bands.push(interval);
+
+        };
+
+        $scope.deleteInterval = function (intervalItem) {
+            $scope.analysisViewer.viewer.configuration.axes[0].bands.splice(
+                    $scope.analysisViewer.viewer.configuration.axes[0].bands.indexOf(intervalItem), 1
+                    );
+        };
+
+        $scope.$watch('analysisViewer.viewer', function () {
+            if ($scope.analysisViewer.viewer.configuration) {
+                if ($scope.analysisViewer.viewer.configuration.type === "gauge") {
+                    var ilastInterval = $scope.analysisViewer.viewer.configuration.axes[0].bands.length - 1;
+                    $scope.analysisViewer.viewer.configuration.axes[0].endValue = angular.copy($scope.analysisViewer.viewer.configuration.axes[0].bands[ilastInterval].endValue);
+                }
+            }
+        }, true);
 
     });
 });
