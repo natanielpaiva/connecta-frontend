@@ -19,10 +19,10 @@ define([
           });
           return array;
         }
-        
+
         // adiciona a lista de aplicações no escopo
         $scope.applications = _mapToArray(applications);
-        
+
         $scope.$on('login.authenticated', function($event, isAuthenticated){
           if (isAuthenticated) {
             LoginService.getCurrentUser().then(function(user){
@@ -30,11 +30,11 @@ define([
             });
           }
         });
-        
+
         LoginService.checkAuthentication();
 
         $scope.showApps = false;
-        
+
         $scope.toggleApps = function(){
           $scope.showApps = !$scope.showApps;
         };
@@ -50,6 +50,14 @@ define([
         $scope.shownModules = function(obj){
           return obj.hide ? false : true;
         };
+
+        $scope.$on('heading.change-logo', function($event, logoSrc){
+          $scope.logoSrc = logoSrc+"?_="+new Date().getTime();
+        });
+
+        $scope.$on('heading.remove-logo', function($event, logoSrc){
+          $scope.logoSrc = null;
+        });
       }
     };
   });

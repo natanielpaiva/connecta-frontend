@@ -6,7 +6,7 @@
         <div class="margin-top-single">
 <!--            <a href="#/speaknow/company"
                class="btn btn-default" translate>
-                LAYOUT.BACK                     
+                LAYOUT.BACK
             </a>-->
             <!--//TODO previous e back nos items (ouch)-->
 <!--            <button type="button" class="btn btn-default" ng-click="previousIntercontactGroup(company.id)">
@@ -27,43 +27,43 @@
             <div class="col-md-12">
                 <div class="well margin-top-single margin-bottom-single">
                     <p ng-if="company.name">
-                        <strong translate>COMPANY.NAME</strong>: 
+                        <strong translate>COMPANY.NAME</strong>:
                         {{company.name}}
                     </p>
                     <p ng-if="company.imageRect">
-                        <strong translate>COMPANY.IMAGE</strong>: 
+                        <strong translate>COMPANY.IMAGE</strong>:
                     </p>
                     <p>
-                        <img class="img-company-rect" ng-src="{{baseUrl + company.imageRect}}" />
+                        <img class="img-company-rect" ng-src="{{getImgUrl()}}" />
                     </p>
                     <p ng-if="company.icon">
-                        <strong translate>COMPANY.ICON</strong>: 
+                        <strong translate>COMPANY.ICON</strong>:
                         <span class="icon-{{company.icon}}"></span>
                     </p>
                     <p ng-if="company.address">
-                        <strong translate>COMPANY.ADDRESS</strong>: 
+                        <strong translate>COMPANY.ADDRESS</strong>:
                         {{company.address}}
                     </p>
                     <p ng-if="company.type">
-                        <strong translate>COMPANY.TYPE</strong>: 
+                        <strong translate>COMPANY.TYPE</strong>:
                         {{company.type}}
                     </p>
                     <p ng-if="company.description">
-                        <strong translate>COMPANY.DESCRIPTION</strong>: 
+                        <strong translate>COMPANY.DESCRIPTION</strong>:
                         {{company.description}}
                     </p>
                 </div>
             </div>
         </div>
-        
+
         <div>
-            <a class="btn btn-default" href="#/speaknow/company/contact/group/new" translate 
+            <a class="btn btn-default" href="#/speaknow/company/contact/group/new" translate
                style=" float: left; margin-right: 10px;">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
             <h3 translate>COMPANY.GROUPS</h3>
         </div>
-        
+
         <table ng-table="tableParams" class="table table-striped margin-top-single">
             <thead>
                 <tr>

@@ -75,6 +75,10 @@ define([
                     });
                 };
 
+                $scope.getImgUrl = function (){
+                  return $scope.baseUrl + $scope.company.imageRect + '?_=' + new Date().getTime();
+                };
+
                 $scope.modalRemoveContactGroup = {
                     title: 'Exclusão de grupo de contatos',
                     text: 'Deseja realmente excluir este grupo?',

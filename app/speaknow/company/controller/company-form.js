@@ -3,7 +3,7 @@ define([
     'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('CompanyFormController', 
+    return speaknow.lazy.controller('CompanyFormController',
             function ($scope, CompanyService, notify, speaknowResources, regexBase64, $location, $routeParams, $translate) {
 
         $scope.baseUrl = speaknowResources.base;
@@ -14,7 +14,7 @@ define([
             'main':true,
             'contacts':[]
         };
-        
+
         if ($routeParams.id) {
             $scope.isEditing = true;
             CompanyService.get($routeParams.id).success(function (data) {
@@ -28,21 +28,25 @@ define([
             });
         }
 
+        $scope.getImgRectUrl = function (){
+          return $scope.baseUrl + $scope.company.imageRect + '?_=' + new Date().getTime();
+        };
+
         $scope.submit = function () {
             if($scope.validateForm()){
                 $scope.save();
             }
         };
-        
+
         $scope.save = function () {
-            CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function () {
-                $translate('COMPANY.SUCCESS').then(function (text) {
-                    notify.success(text);
-                    $location.path('speaknow/company/view');
-                });
-            });
+          CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function (response) {
+              $translate('COMPANY.SUCCESS').then(function (text) {
+                  notify.success(text);
+                  $location.path('speaknow/company/view');
+              });
+          });
         };
-        
+
         $scope.updateContacts = function(){
             for(var index in $scope.company.companyContacts[0].contacts){
                 if($scope.company.companyContacts[0].contacts[index].type == "PHONE"){
@@ -52,23 +56,23 @@ define([
                 }
             }
         };
-        
+
         $scope.registerContacts = function(){
             $scope.company.companyContacts = [];
             $scope.companyContacts.contacts = [];
-            
+
             var contactPhone = {
                 'name': "Phone",
                 'type': 0,
                 'value': $scope.phone
             };
-            
+
             var contactEmail = {
                 'name': "Email",
                 'type': 1,
                 'value': $scope.email
             };
-            
+
             $scope.companyContacts.name = $scope.company.name;
             $scope.companyContacts.description = "Grupo de Contatos Padrão";
             $scope.companyContacts.contacts.push(contactPhone);
@@ -96,7 +100,7 @@ define([
                 });
             }
         };
-        
+
         $scope.validateImage = function(image){
             var isValid = true;
             if(image.total / 1000000 > 1){
@@ -112,7 +116,7 @@ define([
             }
             return isValid;
         };
-        
+
         $scope.validateForm = function(){
             var isValid = true;
             if($scope.fileRect === undefined && !$scope.isEditing){
@@ -127,7 +131,7 @@ define([
             }
             return isValid;
         };
-        
+
         $scope.validateAddress = function () {
             CompanyService.getLatLong($scope.company.address).then(function (result) {
                 if (result.data.status === "OK") {

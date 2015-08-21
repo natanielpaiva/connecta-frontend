@@ -17,7 +17,7 @@
 
             <div class="form-group">
                 <label for="address" translate>COMPANY.ADDRESS</label>
-                <input type="text" class="form-control" id="address" name="address" 
+                <input type="text" class="form-control" id="address" name="address"
                        ng-model="company.address" ng-blur="validateAddress()" required/>
                 <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
                      ng-messages-include="portal-error-messages"></div>
@@ -32,7 +32,7 @@
 
             <div class="form-group">
                 <label for="phone" translate>COMPANY.PHONE</label>
-                <input type="text" class="form-control" id="phone" name="phone" 
+                <input type="text" class="form-control" id="phone" name="phone"
                        ng-model="phone" ui-mask="+99 (99) 99999-999?9" required/>
                 <div ng-show="formulario.phone.$touched" ng-messages="formulario.phone.$error"
                      ng-messages-include="portal-error-messages"></div>
@@ -50,23 +50,23 @@
                 <label translate>COMPANY.IMAGE_QUAD</label>
                 <label id="file-quad"
                        class="well drop-box set-file dropzone"
-                       ng-file-drop 
+                       ng-file-drop
                        ng-file-select
                        ng-multiple="false"
-                       ng-file-change="fileQuadDropped($files, $event, $rejectedFiles)" 
-                       ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'" 
-                       ng-model-rejected="rejFiles" 
-                       allow-dir="false" 
+                       ng-file-change="fileQuadDropped($files, $event, $rejectedFiles)"
+                       ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'"
+                       ng-model-rejected="rejFiles"
+                       allow-dir="false"
                        drag-over-class="{accept:'accept', reject:'reject'}">
                     <translate>{{fileQuad.name ? fileQuad.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
                 </label>
-                <img class="img-company-quad" ng-if="company.imageQuad || imageQuad" 
+                <img class="img-company-quad" ng-if="company.imageQuad || imageQuad"
                      ng-src="{{company.imageQuad && imageQuad === undefined? baseUrl + company.imageQuad : imageQuad}}" />
                 <p ng-show="quadInvalid" class="help-block ng-binding ng-scope">
                         Esse campo é obrigatório
                 </p>
             </div>-->
-            
+
             <div class="form-group">
                 <label translate>COMPANY.IMAGE_RECT</label>
                 <p class="help-block ng-binding ng-scope" translate>
@@ -74,23 +74,23 @@
                 </p>
                 <label id="file-rect"
                        class="well drop-box set-file dropzone"
-                       ng-file-drop 
+                       ng-file-drop
                        ng-file-select
                        ng-multiple="false"
-                       ng-file-change="fileRectDropped($files, $event, $rejectedFiles)" 
-                       ng-accept="'.jpeg,.jpg,.png'" 
-                       ng-model-rejected="rejFiles" 
-                       allow-dir="false" 
+                       ng-file-change="fileRectDropped($files, $event, $rejectedFiles)"
+                       ng-accept="'.jpeg,.jpg,.png'"
+                       ng-model-rejected="rejFiles"
+                       allow-dir="false"
                        drag-over-class="{accept:'accept', reject:'reject'}" >
                     <translate>{{fileRect.name ? fileRect.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
                 </label>
-                <img class="img-company-rect" ng-if="company.imageRect || imageRect" 
-                     ng-src="{{company.imageRect && imageRect === undefined ? baseUrl + company.imageRect : imageRect}}" />
+                <img class="img-company-rect" ng-if="company.imageRect || imageRect"
+                     ng-src="{{company.imageRect && imageRect === undefined ? getImgRectUrl() : imageRect}}" />
                 <p ng-show="rectInvalid" class="help-block ng-binding ng-scope">
                         Esse campo é obrigatório
                 </p>
             </div>
-            <button class="btn btn-primary" translate 
+            <button class="btn btn-primary" translate
                     ng-disabled="formulario.$invalid">
                 LAYOUT.SAVE
             </button>

@@ -237,16 +237,25 @@ define([
   }
 
   /**
-   * Configura o listener da mudança de rotas para recarregar o menu
+   * Configura o listener da mudança de rotas
    * específico da aplicação
    * @param {type} $rootScope
    * @param {type} $menu
    */
-  function configureMenuRouteChangeListener($rootScope, $menu) {
+  function configureRouteChangeListener($rootScope, $menu) {
 
-    $rootScope.$on('$routeChangeSuccess', function($event, $route) {
-      if ($route.$$route && $route.$$route.module) {
-        $menu.set(angular.module($route.$$route.module)._menu);
+    $rootScope.$on('$routeChangeSuccess', function ($event, $destRoute, $originRoute) {
+      var destModule = $destRoute.$$route && $destRoute.$$route.module ? $destRoute.$$route.module : false;
+      var originModule = $originRoute && $originRoute.$$route && $originRoute.$$route.module ? $originRoute.$$route.module : false;
+      var isModuleChange = (!originModule) || (destModule && $originRoute.$$route.module !== $destRoute.$$route.module);
+
+      if (isModuleChange && destModule) {
+        $menu.update();
+        $rootScope.$broadcast(destModule + '.enter', $destRoute);
+
+        if(originModule){
+          $rootScope.$broadcast(originModule + '.leave', $originRoute);
+        }
       }
     });
   }
@@ -259,10 +268,16 @@ define([
    * @param {type} LoginService
    * @returns {undefined}
    */
-  function configureAuthenticationRequestListener($http, LoginService){
+  function configureAuthenticationListener($http, $rootScope, $route, LoginService){
     $http.defaults.transformRequest.push(function(data, getHeaders){
       getHeaders()["X-Authorization-Token"] = LoginService.getAuthenticationToken();
       return data;
+    });
+
+    $rootScope.$on('login.authenticated', function($event, authenticated){
+      if(authenticated){
+        $rootScope.$broadcast($route.current.$$route.module + '.enter', $route.current);
+      }
     });
   }
 
@@ -277,10 +292,10 @@ define([
     //$locationProvider.html5Mode(true);
   });
 
-  connecta.run(function($rootScope, $menu, $http, LoginService) {
+  connecta.run(function($rootScope, $menu, $http, $route, LoginService) {
 
-    configureAuthenticationRequestListener($http, LoginService);
-    configureMenuRouteChangeListener($rootScope, $menu);
+    configureAuthenticationListener($http, $rootScope, $route, LoginService);
+    configureRouteChangeListener($rootScope, $menu);
 
   });
 
@@ -298,8 +313,8 @@ define([
     'portal/layout/controller/home',
     'portal/layout/service/applications',
     'portal/layout/service/menu',
+    'portal/layout/service/heading',
     'portal/layout/service/layout',
-    'portal/auth/directive/login',
     'portal/layout/directive/debug',
     'portal/layout/directive/scroll-to',
     'portal/layout/directive/random-class',
@@ -309,10 +324,12 @@ define([
     'portal/layout/filter/data-uri',
     'portal/layout/directive/file-model',
     'portal/layout/directive/conf-modal',
+    'portal/auth/directive/login',
     'inspection/inspection/directive/box-table-inspection',
     'inspection/inspection/directive/status-change',
     'inspection/inspection/directive/inspect-datepicker',
-    'inspection/inspection/directive/drop-file'
+    'inspection/inspection/directive/drop-file',
+    'speaknow/company/service/company-service'
   ], function(doc) {
     angular.bootstrap(doc, [connecta.name]);
   });

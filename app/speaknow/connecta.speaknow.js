@@ -1,43 +1,66 @@
 define([
-    'angular'
-], function (angular) {
+    'angular',
+    'json!applications.json'
+], function (angular, applications) {
     var speaknow = angular.module('connecta.speaknow', []);
 
+    function registerTranslateParts($translatePartialLoaderProvider) {
+      $translatePartialLoaderProvider.addPart('speaknow/whatsapp');
+      $translatePartialLoaderProvider.addPart('speaknow/contact');
+      $translatePartialLoaderProvider.addPart('speaknow/interaction');
+      $translatePartialLoaderProvider.addPart('speaknow/action');
+      $translatePartialLoaderProvider.addPart('speaknow/company');
+      $translatePartialLoaderProvider.addPart('speaknow/product');
+      $translatePartialLoaderProvider.addPart('speaknow/company-message');
+      $translatePartialLoaderProvider.addPart('speaknow/company-contact');
+      $translatePartialLoaderProvider.addPart('speaknow/company-contact-group');
+      $translatePartialLoaderProvider.addPart('speaknow/config');
+    }
+
+    function initializeSpeaknowResources(applications){
+
+      var appSpeaknow = applications.speaknow;
+      var appSpeaknowBatch = applications.speaknowBatch;
+
+      speaknow.constant('speaknowResources', {
+          base: appSpeaknow.host,
+          action: appSpeaknow.host + '/action',
+          config: appSpeaknow.host + '/config',
+          contact: appSpeaknow.host + '/contact',
+          interaction: appSpeaknow.host + '/interaction',
+          company: appSpeaknow.host + '/company',
+          companyMessage: appSpeaknow.host + '/company/message',
+          product: appSpeaknow.host + '/product',
+          contactGroup: appSpeaknow.host + '/contact/group',
+          companyContact: appSpeaknow.host + '/company/contact',
+          whatsapp: appSpeaknowBatch.host + '/whatsapp',
+          whatsappAccount: appSpeaknow.host + '/whatsapp/account'
+      });
+      speaknow.constant('regexBase64', '.*base64,');
+
+    }
+
+    initializeSpeaknowResources(applications);
+
     speaknow.config(function ($translatePartialLoaderProvider) {
-        $translatePartialLoaderProvider.addPart('speaknow/whatsapp');
-        $translatePartialLoaderProvider.addPart('speaknow/contact');
-        $translatePartialLoaderProvider.addPart('speaknow/interaction');
-        $translatePartialLoaderProvider.addPart('speaknow/action');
-        $translatePartialLoaderProvider.addPart('speaknow/company');
-        $translatePartialLoaderProvider.addPart('speaknow/product');
-        $translatePartialLoaderProvider.addPart('speaknow/company-message');
-        $translatePartialLoaderProvider.addPart('speaknow/company-contact');
-        $translatePartialLoaderProvider.addPart('speaknow/company-contact-group');
-        $translatePartialLoaderProvider.addPart('speaknow/config');
+      registerTranslateParts($translatePartialLoaderProvider);
     });
 
-    speaknow.run(function (applications) {
-        var appSpeaknow = applications.speaknow;
-        var appSpeaknowBatch = applications.speaknowBatch;
-
-        speaknow.lazy.value('speaknowResources', {
-            base: appSpeaknow.host,
-            action: appSpeaknow.host + '/action',
-            config: appSpeaknow.host + '/config',
-            contact: appSpeaknow.host + '/contact',
-            interaction: appSpeaknow.host + '/interaction',
-            company: appSpeaknow.host + '/company',
-            companyMessage: appSpeaknow.host + '/company/message',
-            product: appSpeaknow.host + '/product',
-            contactGroup: appSpeaknow.host + '/contact/group',
-            companyContact: appSpeaknow.host + '/company/contact',
-            whatsapp: appSpeaknowBatch.host + '/whatsapp',
-            whatsappAccount: appSpeaknow.host + '/whatsapp/account'
+    function registerApplicationEvents($rootScope, $heading, CompanyService){
+      $rootScope.$on(speaknow.name + '.enter', function($event, $route){
+        CompanyService.getUserCompanyLogo().then(function(logoSrc){
+          $heading.setLogo(logoSrc);
         });
+      });
 
+      $rootScope.$on(speaknow.name + '.leave', function($event, $route){
+        $heading.clearLogo();
+      });
+    }
+
+    speaknow.run(function ($rootScope, $heading, CompanyService) {
+        registerApplicationEvents($rootScope, $heading, CompanyService);
     });
-
-    speaknow.constant('regexBase64', '.*base64,');
 
     speaknow._routes = {
         '/speaknow': {

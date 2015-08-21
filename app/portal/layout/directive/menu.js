@@ -46,7 +46,7 @@ define([
           return item.opened;
         };
 
-        $scope.menu = [];
+        $scope.menu = $menu.getCurrent();
 
         $scope.$on('menu.change', function(event, newMenu) {
           $scope.menu = newMenu;
