@@ -3,7 +3,7 @@ define([
     'speaknow/contact/service/contact-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('ContactListController', function ($scope, ContactService, notify, ngTableParams, $translate) {
+    return speaknow.lazy.controller('ContactListController', function ($scope, ContactService, notify, ngTableParams, $translate, sortBy) {
 
         $scope.contacts = null;
         $scope.search = {
@@ -17,7 +17,8 @@ define([
             getData: function ($defer, params) {
                 return ContactService.list(params.url()).then(function (response) {
                     params.total(response.data.totalElements);
-                    $defer.resolve(response.data.content);
+                    var result = sortBy(response.data.content, "name");
+                    $defer.resolve(result);
                 });
             },
             counts: [10, 30, 50, 100]

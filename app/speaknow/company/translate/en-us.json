@@ -15,7 +15,9 @@
         "DESCRIPTION":"Description",
         "GROUPS":"Contacts Groups",
         "REMOVE_SUCCESS": "Successfully Removed",
+        "REMOVE_GROUP_SUCCESS": "Successfully Removed",
         "SUCCESS":"Success",
+        "VALIDATE_ADDRESS":"Invalid address",
         "VALIDATION" : {
             "ADDRESS":"Endereço inválido",
             "INVALID_DOCUMENT":"Invalid Image.",

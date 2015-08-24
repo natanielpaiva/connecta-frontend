@@ -24,6 +24,15 @@ define([
                 CompanyService.getUserCompany().then(function (response) {
                     $scope.company = response.data;
                     $scope.getGroups();
+                    $scope.company.companyContacts = $scope.company.companyContacts.sort(function(a, b){
+                        if(a > b){
+                            return -1
+                        } else if(a > b){
+                            return 1
+                        }
+                        
+                        return 0;
+                    })
                     ContactGroupService.setCompany($scope.company);
                 }, function (data) {
                     $location.path('speaknow/company/new');
@@ -64,7 +73,7 @@ define([
 
                 $scope.deleteContactGroup = function (id) {
                     ContactGroupService.delete(id).success(function () {
-                        $translate('COMPANY_CONTACT.REMOVE_SUCCESS').then(function (text) {
+                        $translate('COMPANY.REMOVE_GROUP_SUCCESS').then(function (text) {
                             notify.success(text);
                             CompanyService.get($routeParams.id).success(function (data) {
                                 $scope.company = data;

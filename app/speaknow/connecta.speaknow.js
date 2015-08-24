@@ -61,6 +61,19 @@ define([
     speaknow.run(function ($rootScope, $heading, CompanyService) {
         registerApplicationEvents($rootScope, $heading, CompanyService);
     });
+    speaknow.constant('sortBy', function (array, name) {
+        return array.sort(function (a, b) {
+            var nameA = a[name].toUpperCase();
+            var nameB = b[name].toUpperCase();
+            if (nameA > nameB) {
+                return 1;
+            } else if (nameA < nameB) {
+                return -1;
+            }
+
+            return 0;
+        });
+    });
 
     speaknow._routes = {
         '/speaknow': {

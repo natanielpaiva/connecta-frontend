@@ -3,7 +3,7 @@ define([
     'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, 
+    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, sortBy,
     $translate, speaknowResources, $location) {
 
         $scope.companies = null;
@@ -25,7 +25,8 @@ define([
 //                        });
 //                    }
                     params.total(response.data.totalElements);
-                    $defer.resolve(response.data.content);
+                    var result = sortBy(response.data.content, "name");
+                    $defer.resolve(result);
                 });
             },
             counts: [10, 30, 50, 100]

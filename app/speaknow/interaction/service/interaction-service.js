@@ -7,9 +7,9 @@ define([
             var url = speaknowResources.interaction + "/list";
             return $http.get(url, {params: params});
         };
-        
-        this.get = function(id){
-            var url = speaknowResources.interaction +"/"+ id;
+
+        this.get = function (id) {
+            var url = speaknowResources.interaction + "/" + id;
             return $http.get(url);
         };
 
@@ -23,7 +23,7 @@ define([
             });
         };
 
-        this.delete = function (id){
+        this.delete = function (id) {
             var url = speaknowResources.interaction + "/" + id;
             return $http.delete(url);
         };

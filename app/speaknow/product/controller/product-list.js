@@ -3,7 +3,7 @@ define([
     'speaknow/product/service/product-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('ProductList', function ($scope, ProductService, notify, ngTableParams, $translate, speaknowResources) {
+    return speaknow.lazy.controller('ProductList', function ($scope, ProductService, notify, ngTableParams, $translate, speaknowResources, sortBy) {
 
         $scope.products = null;
         $scope.productUrl = speaknowResources.base;
@@ -18,7 +18,8 @@ define([
             getData: function ($defer, params) {
                 return ProductService.list(params.url()).then(function (response) {
                     params.total(response.data.totalElements);
-                    $defer.resolve(response.data.content);
+                    var result = sortBy(response.data.content, "name");
+                    $defer.resolve(result);
                 });
             },
             counts: [10, 30, 50, 100]

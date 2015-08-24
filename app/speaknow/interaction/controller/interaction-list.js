@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('InteractionListController', function (
-            $scope, InteractionService, ngTableParams, notify, $translate
+            $scope, InteractionService, ngTableParams, notify, $translate, sortBy
             ) {
 
         $scope.search = {
@@ -12,14 +12,15 @@ define([
         };
 
         $scope.tableParams = new ngTableParams({
-            count: 10,
+            count: 4,
             page: 1,
             filter: $scope.search
         }, {
             getData: function ($defer, params) {
                 return InteractionService.list(params.url()).then(function (response) {
                     params.total(response.data.totalElements);
-                    $defer.resolve(response.data.content);
+                    var result = sortBy(response.data.content, "name");
+                    $defer.resolve(result);
                     var key = "filter[name]";
                     if (response.config.params[key] &&
                             response.data.content.length === 0) {
@@ -46,6 +47,5 @@ define([
             size: 'sm',
             success: $scope.delete
         };
-
     });
 });

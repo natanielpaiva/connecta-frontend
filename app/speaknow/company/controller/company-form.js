@@ -7,6 +7,7 @@ define([
             function ($scope, CompanyService, notify, speaknowResources, regexBase64, $location, $routeParams, $translate) {
 
         $scope.baseUrl = speaknowResources.base;
+        $scope.addressValid = true;
         $scope.company = {
             'companyContacts':[]
         };
@@ -135,10 +136,11 @@ define([
         $scope.validateAddress = function () {
             CompanyService.getLatLong($scope.company.address).then(function (result) {
                 if (result.data.status === "OK") {
+                    $scope.addressValid = true;
                     $scope.company.lat = result.data.results[0].geometry.location.lat;
                     $scope.company.lng = result.data.results[0].geometry.location.lng;
                 } else {
-                    notify.warning("COMPANY.VALIDATION.ADDRESS");
+                    $scope.addressValid = false;
                 }
             });
         };
