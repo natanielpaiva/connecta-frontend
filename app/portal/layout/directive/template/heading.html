@@ -1,60 +1,57 @@
 <div class="navbar navbar-fixed-top" id="menu-top" role="navigation">
-  <div class="navbar-header">
-    <button class="navbar-toggle collapsed" type="button">
-      <span class="sr-only">Toggle navigation</span>
-    </button>
+    <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type="button">
+            <span class="sr-only">Toggle navigation</span>
+        </button>
 
-<!--<a href="#" class="navbar-toggle collapsed connecta-ico-menu"></a>-->
+        <!--<a href="#" class="navbar-toggle collapsed connecta-ico-menu"></a>-->
 
-    <div class="navbar-brand {{appInstance.name}}">
-      <button class="navbar-toggle toggle-menu" ng-click="toggleSidebar()" type="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-menu"></span>
-      </button>
-      <div class="current-app" title="{{appInstance.title}}"></div>
-    </div>
-  </div>
-
-  <div class="navbar-collapse collapse dashboard pull-left">
-    <ul class="nav navbar-nav">
-      <li>
-        <a href="#/dashboard" title="{{'LAYOUT.DASHBOARD'| translate}}">
-          <span class="icon-view-quilt"></span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="navbar-collapse collapse pull-right navbar-options">
-    <ul class="nav navbar-nav">
-    <!-- //TOREMOVE Trecho de código adicionado para a apresentação das mulheres executivas
-         A ser removido quando a funcionalidade de diversas companhias ou logo do usuário for implementada-->
-      <li ng-if="logoSrc">
-          <img style="height: 40px;" ng-src="{{logoSrc}}" />
-      </li>
-      <li class="applications-icon">
-        <a href="javascript:void(0);" title="{{'APPLICATION.APPS'| translate}}"
-          ng-click="toggleApps()">
-          <span class="icon-now-widgets"></span>
-        </a>
-        <div class="apps" ng-if="showApps">
-          <div class="apps-title" translate>APPLICATION.APPS</div>
-          <div class="apps-content">
-            <a href="{{application.home}}" title="{{application.title}}"
-              style="background-image:url({{application.icon}})"
-              ng-click="toggleApps()"
-              ng-repeat="application in applications | filter:shownModules | orderBy:'title'"></a>
-          </div>
+        <div class="navbar-brand {{appInstance.name}}">
+            <button class="navbar-toggle toggle-menu" ng-click="toggleSidebar()" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-menu"></span>
+            </button>
+            <div class="current-app" title="{{appInstance.title}}"></div>
         </div>
-      </li>
-      <li>
-        <a href="javascript:void(0);" title="{{'LAYOUT.NOTIFICATIONS'| translate}}">
-          <span class="icon-notifications"></span>
-        </a>
-      </li>
-      <li class="image-on-background user-image" title="{{user.firstName}} {{user.lastName}}"
-        style="background-image: url({{user.avatarUrl}})">
-      </li>
+    </div>
+
+    <div class="navbar-collapse collapse dashboard pull-left">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="#/dashboard" title="{{'LAYOUT.DASHBOARD'| translate}}">
+                    <span class="icon-view-quilt"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="navbar-collapse collapse pull-right navbar-options">
+        <ul class="nav navbar-nav">
+            <li class="applications-icon">
+                <a href="javascript:void(0);" title="{{'APPLICATION.APPS'| translate}}"
+                   ng-click="toggleApps()">
+                    <span class="icon-now-widgets"></span>
+                </a>
+                <div class="apps" ng-if="showApps">
+                    <div class="apps-title" translate>APPLICATION.APPS</div>
+                    <div class="apps-content">
+                        <a href="{{application.home}}" title="{{application.title}}"
+                           style="background-image:url({{application.icon}})"
+                           ng-click="toggleApps()"
+                           ng-repeat="application in applications | filter:shownModules | orderBy:'title'"></a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:void(0);" title="{{'LAYOUT.NOTIFICATIONS'| translate}}">
+                    <span class="icon-notifications"></span>
+                </a>
+            </li>
+            <li class="image-on-background user-image" title="{{user.firstName}} {{user.lastName}}"
+                <!--style="background-image: url({{user.avatarUrl}})">-->
+                style="background-image: url(http://rafaelreboucas.com.br/wp-content/uploads/2012/03/75374_1218297953604_4871656_n-150x150.jpg)">
+
+        </li>
     </ul>
-  </div>
+</div>
 </div>
