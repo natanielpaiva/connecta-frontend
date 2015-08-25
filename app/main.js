@@ -96,6 +96,26 @@ require.config({
         'bower_components/amcharts/dist/amcharts/amcharts': {
             exports: 'AmCharts'
         },
+        'bower_components/amcharts/dist/amcharts/themes/black': {
+            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
+            exports: 'AmCharts.themes.black'
+        },
+        'bower_components/amcharts/dist/amcharts/themes/chalk': {
+            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
+            exports: 'AmCharts.themes.chalk'
+        },
+        'bower_components/amcharts/dist/amcharts/themes/dark': {
+            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
+            exports: 'AmCharts.themes.dark'
+        },
+        'bower_components/amcharts/dist/amcharts/themes/light': {
+            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
+            exports: 'AmCharts.themes.light'
+        },
+        'bower_components/amcharts/dist/amcharts/themes/patterns': {
+            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
+            exports: 'AmCharts.themes.patterns'
+        },
         'bower_components/amcharts/dist/amcharts/funnel': {
             deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
             exports: 'AmCharts.AmFunnelChart'
@@ -121,15 +141,15 @@ require.config({
             exports: 'AmCharts.AmXYChart'
         },
         'bower_components/angular-amchart/src/amchart': {
-            deps: [ 'angular',
-                    'bower_components/amcharts/dist/amcharts/amcharts',
-                    'bower_components/amcharts/dist/amcharts/pie',
-                    'bower_components/amcharts/dist/amcharts/serial',
-                    'bower_components/amcharts/dist/amcharts/xy',
-                    'bower_components/amcharts/dist/amcharts/radar',
-                    'bower_components/amcharts/dist/amcharts/gauge',
-                    'bower_components/amcharts/dist/amcharts/funnel'
-                   ]
+            deps: ['angular',
+                'bower_components/amcharts/dist/amcharts/amcharts',
+                'bower_components/amcharts/dist/amcharts/pie',
+                'bower_components/amcharts/dist/amcharts/serial',
+                'bower_components/amcharts/dist/amcharts/xy',
+                'bower_components/amcharts/dist/amcharts/radar',
+                'bower_components/amcharts/dist/amcharts/gauge',
+                'bower_components/amcharts/dist/amcharts/funnel'
+            ]
         },
         'angular-ng-table': {
             deps: ['angular']

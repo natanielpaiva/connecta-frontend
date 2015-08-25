@@ -4,8 +4,12 @@ define([
     'bower_components/amcharts/dist/amcharts/gauge',
     'bower_components/amcharts/dist/amcharts/pie',
     'bower_components/amcharts/dist/amcharts/radar',
-    'bower_components/amcharts/dist/amcharts/xy'
-
+    'bower_components/amcharts/dist/amcharts/themes/black',
+    'bower_components/amcharts/dist/amcharts/themes/chalk',
+    'bower_components/amcharts/dist/amcharts/themes/dark',
+    'bower_components/amcharts/dist/amcharts/themes/light',
+    'bower_components/amcharts/dist/amcharts/themes/patterns'
+    
 ], function (angular) {
     var presenter = angular.module('connecta.presenter', [
     ]);
