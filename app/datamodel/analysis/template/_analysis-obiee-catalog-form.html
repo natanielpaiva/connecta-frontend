@@ -13,7 +13,7 @@
     {{item.name}}-->
 </div>
 <ol ui-tree-nodes="options" ng-model="item.items" ng-class="{ hidden: collapsed }">
-    <li ng-repeat="item in item.items" ui-tree-node ng-include="'app/presenter/analysis/template/_analysis-obiee-catalog-form.html'">
+    <li ng-repeat="item in item.items" ui-tree-node ng-include="'app/datamodel/analysis/template/_analysis-obiee-catalog-form.html'">
     </li>
 </ol>
 

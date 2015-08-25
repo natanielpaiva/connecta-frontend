@@ -25,7 +25,7 @@
                 <div ng-repeat="parameter in parametersWebservice" >
                     <div class="col-md-6 form-group">
                         <label for="column" translate>ANALYSIS.PARAMETER</label>
-                        <input type="text"  disabled class="form-control" ng-model="parameter.attributes" />
+                        <input type="text"  disabled class="form-control" ng-model="parameter.params" />
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="valor" translate>ANALYSIS.VALUE</label>
@@ -39,22 +39,20 @@
     </div>
 </div>
 
-
+<debug ng-model="parametersWebservice"></debug>
 
 <div class="row">
     <div class="col-md-12 form-group">
         <label for="domain" translate>ANALYSIS.DIRECTORIES</label>
         <ul class="xml-tree">
             <li ng-repeat="node in webserviceSoapJson.childNodes"
-                ng-include="'app/presenter/analysis/template/_analysis-webservice-soap-xml.html'">
+                ng-include="'app/datamodel/analysis/template/_analysis-webservice-soap-xml.html'">
             </li>
         </ul>
     </div>
 </div>
 
-
 <div>
-
     <div class="row" >
         <div class="col-md-12" >
             <div class="clearfix well" ng-model="webserviceXml" >

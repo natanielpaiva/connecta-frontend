@@ -114,7 +114,7 @@ define([
         };
         
         this.getSoap = function(idDatasouce, operation, parametersWebservice){
-             //console.log("operation ", operation);
+             console.log("operation ", parametersWebservice);
              var parameter = angular.copy(parametersWebservice);
             var url = datamodelResources.analysis + "/" + idDatasouce + "/soap/operation/"+ operation;
             return $http.post(url, parameter);

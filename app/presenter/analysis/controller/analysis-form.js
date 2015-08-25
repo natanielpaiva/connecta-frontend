@@ -11,6 +11,7 @@ define([
             ROOT: 9
         };
 
+
         var datasourceCurrent = null;
 
         //preenche o combo de datasource
@@ -27,6 +28,8 @@ define([
             $scope.component.domain = [];
             $scope.component.typeWebservice = [];
             $scope.component.operationWebservice = [];
+            //$scope.component.webserviceRestJson = [];
+            //$scope.component.webserviceRestJson = {};
         }
         resetComponent();
 
@@ -35,19 +38,16 @@ define([
 
         $scope.attributeTypes = ["Select", "Map", "Date", "Text", "Etc"];
 
-        $scope.attributes = [{params: null, value: "", type: ''}];
-
-
-
-        $scope.addMethodAttribute = function () {
-            var attr = angular.copy($scope.attribute);
-
-            $scope.attributes.push(attr);
-        };
-
-        $scope.removeMethodAttribute = function (attribute) {
-            $scope.attributes.splice($scope.attribute.indexOf(attribute), 1);
-        };
+//        $scope.attributes = [{params: null, value: "", type: ''}];
+//
+//        $scope.addMethodAttribute = function () {
+//            var attr = angular.copy($scope.attribute);
+//            $scope.attributes.push(attr);
+//        };
+//
+//        $scope.removeMethodAttribute = function (attribute) {
+//            $scope.attributes.splice($scope.attribute.indexOf(attribute), 1);
+//        };
 
 
         //################gerando o tipo de template#####################
@@ -62,6 +62,7 @@ define([
                     //console.log("datasourceCurrent: ", datasourceCurrent);
                     //Monta o template de acordo com o datasource
                     $scope.analysis.type = $scope.types[datasourceCurrent.type];
+
                     if ($scope.types[datasourceCurrent.type].start) {
                         resetComponent();
 
@@ -183,8 +184,6 @@ define([
         $scope.operation = null;
         $scope.$watch('analysis.method', function (operation) {
 
-            //console.log("Operation", operation);
-            // console.log("$scope.component.operationWebservice ", $scope.component.operationWebservice[0]);
             for (var ow in $scope.component.operationWebservice) {
                 if ($scope.component.operationWebservice[ow].operation === operation) {
                     //console.log("operation:  ", $scope.component.operationWebservice[ow].operation);
@@ -197,10 +196,13 @@ define([
         });
 
         $scope.getValueWebservice = function () {
+
             return AnalysisService.getSoap(datasourceCurrent.id, $scope.operation, $scope.parametersWebservice).then(function (response) {
                 $scope.webserviceSoapJsonTest = angular.copy(response.data);
                 refParentOnChildren(response.data);
                 $scope.webserviceSoapJson = response.data;
+
+                console.log("$scope.webserviceSoapJson", $scope.webserviceSoapJson);
             });
         };
 
@@ -221,105 +223,258 @@ define([
         }
 
 
+
         $scope.generateXPathTable = function (current, array) {
             var name = current.nodeName;
             array.push(name);
-
             var xpath;
             if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
-
                 xpath = $scope.generateXPathTable(current.parent, array);
             } else {
-               xpath = '/' + array.reverse().join('/');
-              
-               console.log("xpath table: ", xpath);
-               $scope.analysis.tablePath = xpath;
+                xpath = '/' + array.reverse().join('/');
+                $scope.analysis.tablePath = xpath;
             }
         };
 
-//        var column = null;
-//        $scope.generateXPathColumns = function (current, array) {
-//            console.log("generateXPathColumns");
-//            var name = current.nodeName;
-//            
-//            if (current.nodeType===XmlNodeType.ATTRIBUTE) {
-//                console.log("Attribute");
-//                column = name; 
-//                name = "";
-//                console.log("-------------", name );
-//            }
-//            
-//            array.push(name);
-//
-//            var xpath;
-//            if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
-//                
-//                xpath = $scope.generateXPathColumns(current.parent, array);
-//
-//            } else {
-//                
-////               console.log("xcolumn: ", column);
-////               console.log("name: ", name);
-////               
-//                xpath = '/' + array.reverse().join('/') ;
-//                console.log("xpath: ",xpath);
-//                 $scope.component.columns.push({
-//                    name: column,
-//                    label:column,
-//                    formula: xpath.substring(0,(xpath.length - 1)) + "@"+column
-//                });
-//            }
-//
-//            return xpath;
-//        };
-        
-        $scope.generateXPathAttribute = function (current, array) {
-            console.log("generateXPathAttribute");
+        var column = null;
+        $scope.generateXPathColumns = function (current, array) {
             var name = current.nodeName;
-            
-              
-            if (current.nodeType===XmlNodeType.ATTRIBUTE) {
-                console.log("Attribute");
-                column = name; 
-                name = "";
-                console.log("-------------", name );
-            }
-            
-            array.push(name);
 
+            array.push(name);
             var xpath;
             if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
-                
+                xpath = $scope.generateXPathColumns(current.parent, array);
+            } else {
+                column = array.shift();
+                xpath = '/' + array.reverse().join('/');
+                $scope.component.columns.push({
+                    name: '/' + column,
+                    label: column,
+                    formula: xpath + "/" + column
+                });
+            }
+            return xpath;
+        };
+
+        $scope.generateXPathAttribute = function (current, array) {
+            var name = current.nodeName;
+            if (current.nodeType === XmlNodeType.ATTRIBUTE) {
+                column = name;
+                name = "";
+                console.log("-------------", name);
+            }
+            array.push(name);
+            var xpath;
+            if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
                 xpath = $scope.generateXPathAttribute(current.parent, array);
 
             } else {
-                 
-//               console.log("xcolumn: ", column);
-//               console.log("name: ", name);
-//               
-                xpath = '/' + array.reverse().join('/') ;
-                console.log("xpathdess: ",xpath);
-                 $scope.component.columns.push({
-                    name: "@"+column,
-                    label: "@"+column,
-                    formula: xpath.substring(0,(xpath.length - 1)) + "@"+column
+                xpath = '/' + array.reverse().join('/');
+                console.log("xpathdess: ", xpath);
+                $scope.component.columns.push({
+                    name: "@" + column,
+                    label: "@" + column,
+                    formula: xpath.substring(0, (xpath.length - 1)) + "@" + column
                 });
-                
-                console.log("$scope.component.columns ",$scope.component.columns);
             }
-
             return xpath;
         };
 
         $scope.getResultSoap = function () {
-               $scope.analysis.analysisColumns = $scope.component.columns;
-//           console.log("Agora vai: ", $scope.analysis);
+            $scope.analysis.analysisColumns = $scope.component.columns;
+            $scope.analysis.webserviceAnalysisParameter = $scope.parametersWebservice;
+            console.log("Agora vai: ", $scope.analysis);
 //            
             return AnalysisService.getResulApplyingXpath(datasourceCurrent.id, $scope.analysis, $scope.operation).then(function (response) {
-               console.log("Super resposta: ", response.data);
-               $scope.responseWebserviceSoapJson = response.data;
+                console.log("Super resposta: ", response.data);
+                $scope.responseWebserviceSoapJson = response.data;
             });
         };
+
+
+        //Json
+        $scope.$watch('component.webserviceRestJson', function (json) {
+            refParentJson(json);
+        });
+
+
+        function refParentJson(parent) {
+            var current = null;
+            if (typeof parent !== undefined) {
+                if (parent.attributes) {
+                    for (var i = 0; i < parent.attributes.length; i++) {
+                        current = parent.attributes[i];
+                        current.parent = parent;
+                        refParentJson(current);
+                    }
+                }
+                if (parent.values) {
+                    for (var j = 0; j < parent.values.length; j++) {
+                        current = parent.values[j];
+                        current.parent = parent;
+                        refParentJson(current);
+                    }
+                }
+            }
+        }
+
+        $scope.generateJsonPathTable = function (parent, array) {
+            console.log("tabela");
+            if (!angular.isUndefined(parent)) {
+
+                console.log(" --------------- ");
+                console.log("parent entrando: ", parent);
+                console.log("array entrando: ", array);
+
+                var name;
+
+                if (parent.type === "OBJECT") {
+                    console.log("parent.type OBJECT ");
+                    name = parent.name;
+                    console.log("name ", name);
+
+                    if (name !== undefined) {
+                        array.push(name);
+                    }
+                    $scope.generateJsonPathTable(parent.parent, array);
+                }
+
+                if (parent.type === "ARRAY") {
+                    console.log("parent.type ARRAY ");
+                    name = parent.name;
+                    console.log("name ", name);
+                    console.log("typeof name === undefined", typeof name === "undefined");
+
+                    if (typeof name === "undefined") {
+                        //name += '[*]';
+                        array.push('[*]');
+                    } else {
+                        name += '[*]';
+                        array.push(name);
+                    }
+
+                    $scope.generateJsonPathTable(parent.parent, array);
+                }
+
+                if (parent.type === "NUMBER" || parent.type === "BOOLEAN" || parent.type === "STRING" || parent.type === "UNKNOWN") {
+                    console.log("Number, BOOLEAN, STRING, UNKNOWN");
+
+                    name = parent.name;
+                    console.log("name ", name);
+                    array.push(name);
+                    $scope.generateJsonPathTable(parent.parent, array);
+                }
+
+            } else {
+                console.log("sem valor o parent");
+                console.log(" -------Fim---- ");
+                console.log("array: ", array);
+                //console.log("array reverse: ", array.reverse());
+//                
+                var jsonPathTable = array.reverse().join('.');
+//                
+                console.log("jsonPathTable: ", jsonPathTable);
+//                
+                $scope.analysis.tablePath = jsonPathTable;
+            }
+        };
+
+
+
+        $scope.generateJsonPathColumns = function (parent, array) {
+            console.log("coluna");
+            if (!angular.isUndefined(parent)) {
+
+                console.log(" --------------- ");
+                console.log("parent entrando: ", parent);
+                console.log("array entrando: ", array);
+
+                var name;
+
+                if (parent.type === "OBJECT") {
+                    console.log("parent.type OBJECT ");
+                    name = parent.name;
+                    console.log("name ", name);
+
+                    if (name !== undefined) {
+                        array.push(name);
+                    }
+                    $scope.generateJsonPathColumns(parent.parent, array);
+                }
+
+                if (parent.type === "ARRAY") {
+                    console.log("parent.type ARRAY ");
+                    name = parent.name;
+                    console.log("name ", name);
+
+
+                    if (typeof name === "undefined") {
+                        //name += '[*]';
+                        array.push('[*]');
+                    } else {
+                        name += '[*]';
+                        array.push(name);
+                    }
+//                     if (name !== undefined) {
+//                        name += '[*]';
+//                        array.push(name);
+//                    }
+
+                    $scope.generateJsonPathColumns(parent.parent, array);
+                }
+
+                if (parent.type === "NUMBER" || parent.type === "BOOLEAN" || parent.type === "STRING") {
+                    console.log("Number, BOOLEAN, STRING");
+
+                    name = parent.name;
+                    console.log("name ", name);
+                    array.push(name);
+                    $scope.generateJsonPathColumns(parent.parent, array);
+                }
+
+            } else {
+
+                console.log("sem valor o parent");
+                console.log(" -------Fim---- ");
+                console.log("array: ", array);
+
+                var nameColumn = array[0];
+                console.log("nameColumn ", nameColumn);
+
+                var jsonPathColumns = array.reverse().join('.');
+
+                console.log("$scope.analysis.tablePath: ", $scope.analysis.tablePath);
+                console.log("jsonPathColumns: ", jsonPathColumns);
+
+                var x = jsonPathColumns.replace($scope.analysis.tablePath, "");
+
+                console.log("x: ", x);
+                $scope.component.columns.push({
+                    name: nameColumn,
+                    label: nameColumn,
+                    formula: x.replace(".", "")
+                });
+
+                console.log("$scope.component.columns: ", $scope.component.columns);
+            }
+        };
+
+
+        $scope.getResultRest = function () {
+            $scope.analysis.analysisColumns = $scope.component.columns;
+
+            console.log("Agora vai: ", $scope.analysis);
+//            
+            return AnalysisService.getResulApplyingJson(datasourceCurrent.id, $scope.analysis).then(function (response) {
+                console.log("Super resposta: ", response.data);
+
+
+                $scope.responseWebserviceSoapJson = response.data;
+            });
+        };
+
+
+
 
         $scope.submit = function () {
 
@@ -329,36 +484,85 @@ define([
             });
         };
 
+
+
+
+
+//        $scope.generateJsonPath = function (parent, array, type) {
+//            
+//            if (!angular.isUndefined(parent)) {
+//
+//                console.log(" --------------- ");
+//                console.log("parent entrando: ", parent);
+//                console.log("array entrando: ", array);
+//
+//                var name;
+//
+//                if (parent.type === "OBJECT") {
+//                    console.log("parent.type OBJECT ");
+//                    name = parent.name;
+//                    console.log("name ", name);
+//
+//                    if (name !== undefined) {
+//                        array.push(name);
+//                    }
+//                    $scope.generateJsonPath(parent.parent, array, type);
+//                }
+//
+//                if (parent.type === "ARRAY") {
+//                    console.log("parent.type ARRAY ");
+//                    name = parent.name;
+//                    console.log("name ", name);
+//                    
+//                    if (name !== undefined) {
+//                        name += '[*]';
+//                        array.push(name);
+//                    }
+//                    
+//
+//                    array.push(name);
+//                    $scope.generateJsonPath(parent.parent, array, type);
+//                }
+//
+//                if (parent.type === "NUMBER" || parent.type === "BOOLEAN" || parent.type === "STRING") {
+//                    console.log("Number, BOOLEAN, STRING");
+//
+//                    name = parent.name;
+//                    console.log("name ", name);
+//                    array.push(name);
+//                    $scope.generateJsonPath(parent.parent, array, type);
+//                }
+//
+//            } else {
+//                if (type === "columns") {
+//
+//                    var nameColumn = array[0];
+//                    var jsonPathColumns = array.reverse().join('.');
+//                    var formula = jsonPathColumns.replace($scope.analysis.tablePath, "");
+//
+//                    console.log("formula: ", formula);
+//                    $scope.component.columns.push({
+//                        name: nameColumn,
+//                        label: nameColumn,
+//                        formula: formula.replace(".", "")
+//                    });
+//
+//                    console.log("$scope.component.columns: ", $scope.component.columns);
+//
+//                } else if (type === "table") {
+//                    
+//                    var jsonPathTable = array.reverse().join('.');
+//                    console.log("jsonPathTable: ", jsonPathTable);
+//                    $scope.analysis.tablePath = jsonPathTable;
+//
+//                } else {
+//                    console.log("type nao definido");
+//                }
+//            }
+//        };
+
+
+
+
     });
 });
-
-
-    
-                
-
-//               
-
-//        $scope.generateXPath = function(current, array) {
-//            var name = current.nodeName;
-//            
-//            
-//            if (current.isArray) {
-//                name+="[*]";
-//            }
-//            
-//            if (current.nodeType===XmlNodeType.ATTRIBUTE) {
-//                name = "@"+name;
-//            }
-//            
-//            array.push(name);
-//            
-//            var xpath;
-//            if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
-//                xpath = $scope.generateXPath(current.parent, array);
-//            } else {
-//                //console.log(array);
-//                xpath = '/' + array.reverse().join('/');
-//            }
-//            console.log("Campo: ", xpath);
-//            return xpath;
-//        };

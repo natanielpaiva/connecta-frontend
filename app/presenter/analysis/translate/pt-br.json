@@ -32,6 +32,9 @@
         "PARAMETER": "Parâmetro",
         "PARAMETER_METHOD": "Parâmetros do Método",
         "FETCH_DATA": "Buscar Dados",
-        "IS_COLUMN":"Coluna"
+        "IS_COLUMN":"Coluna",
+        "UNTITLED_OBJECT": "Objeto sem nome",
+        "UNTITLED_LIST": "Lista sem nome",
+        "UNKNOWN" : "Desconhecido"
     }
 }

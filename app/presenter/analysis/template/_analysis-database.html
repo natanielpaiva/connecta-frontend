@@ -5,7 +5,7 @@
             <option value="">Selecione</option>
         </select>
         <div ng-if="formulario.$dirty" ng-messages="formulario.driver.$error"
-             ng-messages-include="portal-validation-messages"></div>
+             ng-messages-include="portal-error-messages"></div>
     </div>
     
     <div class="col-xs-3 form-group">
@@ -13,7 +13,7 @@
         <input type="date" name="dataInsertion" class="form-control" id="dataInsertion"
                ng-model="analysis.dataInsertion">
         <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
-             ng-messages-include="portal-validation-messages"></div>
+             ng-messages-include="portal-error-messages"></div>
     </div>
 </div>
 

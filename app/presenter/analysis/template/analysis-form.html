@@ -45,15 +45,15 @@
                     <div class="col-md-6 form-group">
                         <label for="valor" translate>ANALYSIS.DESCRIPTION</label>
                         <input type="text" ng-model="analysisColumns.label" ng-init="analysisColumns.label = analysisColumns.name" class="form-control" />
-<!--                        <input type="hidden" ng-model="analysisColumns.formula" ng-init="analysisColumns.formula = analysisColumns.name" class="form-control" />-->
+                        <!--                        <input type="hidden" ng-model="analysisColumns.formula" ng-init="analysisColumns.formula = analysisColumns.name" class="form-control" />-->
                     </div>
                 </div> 
             </div>
         </div>
     </div>
-    
-    
-<debug ng-model="component.columns"></debug>
+
+
+    <debug ng-model="component.columns"></debug>
 
 
     <!--Adicionar atributos-->
@@ -68,14 +68,14 @@
                         <input type="text" name="params" id="params" class="form-control" 
                                ng-model="p.params" />
                         <div ng-if="formulario.$dirty" ng-messages="formulario.params.$error"
-                             ng-messages-include="portal-validation-messages"></div>
+                             ng-messages-include="portal-error-messages"></div>
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="valor" translate>ANALYSIS.VALUE</label>
                         <input type="text" class="form-control"
                                ng-model="p.value" />
                         <div ng-if="formulario.$dirty" ng-messages="formulario.method.$error"
-                             ng-messages-include="portal-validation-messages"></div>
+                             ng-messages-include="portal-error-messages"></div>
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="valor" translate>ANALYSIS.TYPE</label>

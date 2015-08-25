@@ -35,19 +35,19 @@ define([
 
         $scope.attributeTypes = ["Select", "Map", "Date", "Text", "Etc"];
 
-        $scope.attributes = [{params: null, value: "", type: ''}];
-
-
-
-        $scope.addMethodAttribute = function () {
-            var attr = angular.copy($scope.attribute);
-
-            $scope.attributes.push(attr);
-        };
-
-        $scope.removeMethodAttribute = function (attribute) {
-            $scope.attributes.splice($scope.attribute.indexOf(attribute), 1);
-        };
+//        $scope.attributes = [{params: null, value: "", type: ''}];
+//
+//
+//
+//        $scope.addMethodAttribute = function () {
+//            var attr = angular.copy($scope.attribute);
+//
+//            $scope.attributes.push(attr);
+//        };
+//
+//        $scope.removeMethodAttribute = function (attribute) {
+//            $scope.attributes.splice($scope.attribute.indexOf(attribute), 1);
+//        };
 
 
         //################gerando o tipo de template#####################
@@ -183,8 +183,6 @@ define([
         $scope.operation = null;
         $scope.$watch('analysis.method', function (operation) {
 
-            //console.log("Operation", operation);
-            // console.log("$scope.component.operationWebservice ", $scope.component.operationWebservice[0]);
             for (var ow in $scope.component.operationWebservice) {
                 if ($scope.component.operationWebservice[ow].operation === operation) {
                     //console.log("operation:  ", $scope.component.operationWebservice[ow].operation);
@@ -197,6 +195,7 @@ define([
         });
 
         $scope.getValueWebservice = function () {
+            
             return AnalysisService.getSoap(datasourceCurrent.id, $scope.operation, $scope.parametersWebservice).then(function (response) {
                 $scope.webserviceSoapJsonTest = angular.copy(response.data);
                 refParentOnChildren(response.data);
@@ -224,79 +223,49 @@ define([
         $scope.generateXPathTable = function (current, array) {
             var name = current.nodeName;
             array.push(name);
-
             var xpath;
             if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
-
                 xpath = $scope.generateXPathTable(current.parent, array);
             } else {
                xpath = '/' + array.reverse().join('/');
-              
-               console.log("xpath table: ", xpath);
                $scope.analysis.tablePath = xpath;
             }
         };
 
-//        var column = null;
-//        $scope.generateXPathColumns = function (current, array) {
-//            console.log("generateXPathColumns");
-//            var name = current.nodeName;
-//            
-//            if (current.nodeType===XmlNodeType.ATTRIBUTE) {
-//                console.log("Attribute");
-//                column = name; 
-//                name = "";
-//                console.log("-------------", name );
-//            }
-//            
-//            array.push(name);
-//
-//            var xpath;
-//            if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
-//                
-//                xpath = $scope.generateXPathColumns(current.parent, array);
-//
-//            } else {
-//                
-////               console.log("xcolumn: ", column);
-////               console.log("name: ", name);
-////               
-//                xpath = '/' + array.reverse().join('/') ;
-//                console.log("xpath: ",xpath);
-//                 $scope.component.columns.push({
-//                    name: column,
-//                    label:column,
-//                    formula: xpath.substring(0,(xpath.length - 1)) + "@"+column
-//                });
-//            }
-//
-//            return xpath;
-//        };
+        var column = null;
+        $scope.generateXPathColumns = function (current, array) {
+            var name = current.nodeName;
+         
+            array.push(name);
+            var xpath;
+            if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
+                xpath = $scope.generateXPathColumns(current.parent, array);
+            } else {
+                column = array.shift();
+                xpath = '/' + array.reverse().join('/') ;
+                 $scope.component.columns.push({
+                    name: '/' + column,
+                    label: column,
+                    formula: xpath + "/"+column 
+                });
+            }
+            return xpath;
+        };
         
         $scope.generateXPathAttribute = function (current, array) {
-            console.log("generateXPathAttribute");
             var name = current.nodeName;
-            
-              
             if (current.nodeType===XmlNodeType.ATTRIBUTE) {
                 console.log("Attribute");
                 column = name; 
                 name = "";
                 console.log("-------------", name );
             }
-            
             array.push(name);
-
             var xpath;
             if (current.parent && current.parent.nodeType !== XmlNodeType.ROOT) {
-                
                 xpath = $scope.generateXPathAttribute(current.parent, array);
 
             } else {
-                 
-//               console.log("xcolumn: ", column);
-//               console.log("name: ", name);
-//               
                 xpath = '/' + array.reverse().join('/') ;
                 console.log("xpathdess: ",xpath);
                  $scope.component.columns.push({
@@ -304,16 +273,14 @@ define([
                     label: "@"+column,
                     formula: xpath.substring(0,(xpath.length - 1)) + "@"+column
                 });
-                
-                console.log("$scope.component.columns ",$scope.component.columns);
             }
-
             return xpath;
         };
 
         $scope.getResultSoap = function () {
                $scope.analysis.analysisColumns = $scope.component.columns;
-//           console.log("Agora vai: ", $scope.analysis);
+               $scope.analysis.webserviceAnalysisParameter = $scope.parametersWebservice;
+           console.log("Agora vai: ", $scope.analysis);
 //            
             return AnalysisService.getResulApplyingXpath(datasourceCurrent.id, $scope.analysis, $scope.operation).then(function (response) {
                console.log("Super resposta: ", response.data);
@@ -332,9 +299,6 @@ define([
     });
 });
 
-
-    
-                
 
 //               
 
