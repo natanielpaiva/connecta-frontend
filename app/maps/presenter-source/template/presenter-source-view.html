@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>PRESENTERSOURCE.VIEW</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group">
+            <button class="btn btn-default">
+                <span class="icon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default">
+                <span class="icon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <div class="col-md-offset-8 col-md-2 text-right">
+        <div class="btn-group">
+            <a class="btn btn-default" href="#/maps/presenter-source/{{presenterSource.id}}/edit">
+                <span class="icon-pencil" aria-hidden="true"></span>
+            </a>
+            <button class="btn btn-default"  conf-modal="modalParams" conf-modal-args="[presenterSource.id]">
+                <span class="icon-trash" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single margin-bottom-single">
+            
+
+            <p ng-if="presenterSource.url" >
+                <strong translate>PRESENTERSOURCE.URL</strong>:                
+                {{presenterSource.url}}
+            </p>
+
+            <p ng-if="presenterSource.username">
+                <strong translate>PRESENTERSOURCE.USER</strong>:                
+                    {{presenterSource.username}}                
+            </p>
+
+            <p ng-if="presenterSource.password">
+                <strong translate>PRESENTERSOURCE.PASSWORD</strong>:
+                {{presenterSource.password}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="#/maps/presenter-source" role="button" class="btn btn-default" translate>
+            LAYOUT.BACK
+        </a>
+    </div>
+</div>

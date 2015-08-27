@@ -10,6 +10,7 @@ define([
         $translatePartialLoaderProvider.addPart('maps/layer-viewer');
         $translatePartialLoaderProvider.addPart('maps/layer-viewer-group');
         $translatePartialLoaderProvider.addPart('maps/import');
+        $translatePartialLoaderProvider.addPart('maps/presenter-source');
     });
 
 
@@ -20,6 +21,7 @@ define([
         maps.lazy.value('mapsResources', {
             layerSource: appMaps.host + '/layerSources',
             layerSourceType: appMaps.host + '/layerSourceTypes',
+            presenterSource: appMaps.host + '/presenterSources',
             layer: appMaps.host + '/layers',
             layerViewer: appMaps.host + '/layerViewers',
             layerViewerGroup: appMaps.host + '/layerViewerGroups',
@@ -34,7 +36,9 @@ define([
 
 
 
-
+    /*
+     * Layer-Source
+     */
     maps._routes = {
         '/maps/': {
             controller: 'LayerSourceListController',
@@ -61,6 +65,9 @@ define([
             controllerUrl: 'maps/layer-source/controller/layer-source-form',
             templateUrl: 'app/maps/layer-source/template/layer-source-form.html'
         },
+        /*
+         * Layer
+         */
         '/maps/layer': {
             controller: 'LayerListController',
             controllerUrl: 'maps/layer/controller/layer-list',
@@ -81,6 +88,9 @@ define([
             controllerUrl: 'maps/layer/controller/layer-form',
             templateUrl: 'app/maps/layer/template/layer-form.html'
         },
+        /*
+         * Layer-Viewer
+         */
         '/maps/layer-viewer': {
             controller: 'LayerViewerListController',
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-list',
@@ -101,6 +111,9 @@ define([
             controllerUrl: 'maps/layer-viewer/controller/layer-viewer-form',
             templateUrl: 'app/maps/layer-viewer/template/layer-viewer-form.html'
         },
+        /*
+         * Layer-Viewer-Group
+         */
         '/maps/layer-viewer-group': {
             controller: 'LayerViewerGroupListController',
             controllerUrl: 'maps/layer-viewer-group/controller/layer-viewer-group-list',
@@ -121,10 +134,36 @@ define([
             controllerUrl: 'maps/layer-viewer-group/controller/layer-viewer-group-form',
             templateUrl: 'app/maps/layer-viewer-group/template/layer-viewer-group-form.html'
         },
+        /*
+         * Import-SHP
+         */
         '/maps/import/shp': {
             controller: 'ImportSHPController',
             controllerUrl: 'maps/import/controller/import-shp',
             templateUrl: 'app/maps/import/template/import-shp.html'
+        },
+        /*
+         * Presenter-Source
+         */
+        '/maps/presenter-source': {
+            controller: 'PresenterSourceListController',
+            controllerUrl: 'maps/presenter-source/controller/presenter-source-list',
+            templateUrl: 'app/maps/presenter-source/template/presenter-source-list.html'
+        },
+        '/maps/presenter-source/new': {
+            controller: 'PresenterSourceFormController',
+            controllerUrl: 'maps/presenter-source/controller/presenter-source-form',
+            templateUrl: 'app/maps/presenter-source/template/presenter-source-form.html'
+        },
+        '/maps/presenter-source/:id': {
+            controller: 'PresenterSourceViewController',
+            controllerUrl: 'maps/presenter-source/controller/presenter-source-view',
+            templateUrl: 'app/maps/presenter-source/template/presenter-source-view.html'
+        },
+        '/maps/presenter-source/:id/edit': {
+            controller: 'PresenterSourceFormController',
+            controllerUrl: 'maps/presenter-source/controller/presenter-source-form',
+            templateUrl: 'app/maps/presenter-source/template/presenter-source-form.html'
         }
 
     };
@@ -164,6 +203,12 @@ define([
                     title: 'IMPORT.SHP'
                 }
             ]
+        },
+        {
+            href: 'maps/presenter-source',
+            title: 'PRESENTERSOURCE.PRESENTERSOURCE',
+            icon: 'icon-map',
+            children: []
         }
     ];
     return maps;
