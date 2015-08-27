@@ -44,12 +44,14 @@
         <table ng-table="tableParams" class="table table-striped margin-top-single">
             <thead>
                 <tr>
-                    <th translate>INTERACTION.NAME</th>
                     <th></th>
+                    <th translate>INTERACTION.NAME</th>
+                    <th translate>INTERACTION.ACTIONS</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="interaction in $data | sortBy:'name'">
+                <tr ng-repeat="interaction in $data">
+                    <td class="text-left"><img src="{{getImage(interaction)}}" class="icon-product-list" /></td>
                     <td class="text-left">{{interaction.name}}</td>
                     <td>
                         <div class="btn-group">

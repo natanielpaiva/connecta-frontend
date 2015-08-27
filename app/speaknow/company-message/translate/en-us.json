@@ -6,6 +6,7 @@
         "MESSAGE": "Message",
         "NO_RESULT":"No Results",
         "REMOVE_SUCCESS":"Company successfully removed",
-        "COMPANY":"Company"
+        "COMPANY":"Company",
+        "WITHOUT_COMPANY":"It needs to register a company"
     }
 }

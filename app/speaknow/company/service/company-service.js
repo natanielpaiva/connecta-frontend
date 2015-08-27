@@ -18,11 +18,6 @@ define([
             return $http.get(url);
         };
 
-        this.getUserCompany = function () {
-            var url = speaknowResources.company + "/userCompany";
-            return $http.get(url);
-        };
-
         this.getUserCompanyLogo = function(){
           var deferred = $q.defer();
           var url = speaknowResources.company + "/userCompany";

@@ -1,14 +1,25 @@
 define([
     'connecta.speaknow',
     'speaknow/product/service/product-service',
+    'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('ProductList', function ($scope, ProductService, notify, ngTableParams, $translate, speaknowResources, sortBy) {
+    return speaknow.lazy.controller('ProductList', function ($scope, ProductService, notify,
+            ngTableParams, $translate, speaknowResources, sortBy,
+            $location, CompanyService) {
+
+        CompanyService.getUserCompany().then(function (response) {
+        }, function (data) {
+            $translate('WHATSAPP.WITHOUT_COMPANY').then(function (text) {
+                notify.warning(text);
+                $location.path('speaknow/company/new');
+            });
+        });
 
         $scope.products = null;
         $scope.productUrl = speaknowResources.base;
         $scope.search = {
-            name:''
+            name: ''
         };
         $scope.tableParams = new ngTableParams({
             count: 10,
@@ -25,8 +36,8 @@ define([
             counts: [10, 30, 50, 100]
         });
 
-        $scope.delete = function(id){
-             ProductService.delete(id).success(function () {
+        $scope.delete = function (id) {
+            ProductService.delete(id).success(function () {
                 notify.success("Produto/Serviço removido com sucesso");
                 $scope.tableParams.reload();
             });
@@ -37,6 +48,10 @@ define([
             text: 'Deseja realmente remover o produto?',
             size: 'sm',
             success: $scope.delete
+        };
+        
+        $scope.getImgUrl = function (product) {
+            return product.image + '?_=' + new Date().getTime();
         };
     });
 });

@@ -1,13 +1,23 @@
 define([
     'connecta.speaknow',
     'speaknow/contact/service/contact-service',
+    'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('ContactListController', function ($scope, ContactService, notify, ngTableParams, $translate, sortBy) {
+    return speaknow.lazy.controller('ContactListController', function ($scope, ContactService, CompanyService, notify,  $location, ngTableParams, $translate, sortBy) {
+
+
+        CompanyService.getUserCompany().then(function (response) {
+        }, function (data) {
+            $translate('CONTACT.WITHOUT_COMPANY').then(function (text) {
+                notify.warning(text);
+                $location.path('speaknow/company/new');
+            });
+        });
 
         $scope.contacts = null;
         $scope.search = {
-            name:''
+            name: ''
         };
         $scope.tableParams = new ngTableParams({
             count: 10,
@@ -32,7 +42,7 @@ define([
                 });
             });
         };
-        
+
         $scope.modalParams = {
             title: 'Exclusão de contato',
             text: 'Deseja realmente excluir este contato?',

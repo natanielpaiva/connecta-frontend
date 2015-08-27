@@ -6,6 +6,7 @@
         "MESSAGE": "Mensagem",
         "NO_RESULT":"Nenhum resultado foi encontrado.",
         "REMOVE_SUCCESS":"Empresa removida com sucesso",
-        "COMPANY":"Empresa"
+        "COMPANY":"Empresa",
+        "WITHOUT_COMPANY":"É necessário cadastrar uma empresa."
     }
 }

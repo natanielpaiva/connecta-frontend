@@ -67,13 +67,13 @@ define([
         };
 
         $scope.onFileSelected = function (files) {
-            var file = files[0];
-            $scope.fileImage = file;
-            if (file) {
+            if (files && files.length) {
+                var file = files[0];
+                $scope.fileImage = file;
                 $scope.imgName = file.name;
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    if($scope.validateImage(e)){
+                    if ($scope.validateImage(e)) {
                         $scope.interactionImage = e.target.result;
                         $scope.$apply();
                     } else {
@@ -81,12 +81,16 @@ define([
                     }
                 };
                 reader.readAsDataURL(files[0]);
+            } else {
+                $translate('INTERACTION.INVALID_DOCUMENT').then(function (text) {
+                    notify.warning(text);
+                });
             }
         };
-        
-        var validateForm = function(){
+
+        var validateForm = function () {
             $scope.interaction_form.$submitted = true;
-            if($scope.interactionImage === null){
+            if ($scope.interactionImage === null) {
                 $scope.imageInvalid = true;
                 return false;
             } else {
@@ -96,29 +100,29 @@ define([
         };
 
         $scope.nextStep = function () {
-            if(!validateForm()){
+            if (!validateForm()) {
                 return;
             }
             $scope.interaction.image = $scope.fileImage;
             ActionService.setInteraction($scope.interaction);
             $location.path('speaknow/action/new');
         };
-        
+
         $scope.save = function () {
             InteractionService.save($scope.interaction, $scope.fileImage).success(function () {
                 $location.path('speaknow/interaction');
             });
         };
-        
-        $scope.validateImage = function(image){
+
+        $scope.validateImage = function (image) {
             var isValid = true;
-            if(image.total / 1000000 > 1){
+            if (image.total / 1000000 > 1) {
                 notify.warning("COMPANY.VALIDATION.IMAGESIZE");
                 isValid = false;
             } else {
                 var img = angular.element("<img>")[0];
                 img.src = image.target.result;
-                if(img.height >= img.width){
+                if (img.height >= img.width) {
                     notify.warning("COMPANY.VALIDATION.IMAGEFORM");
                     isValid = false;
                 }

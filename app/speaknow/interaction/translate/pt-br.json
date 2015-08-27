@@ -14,6 +14,8 @@
         "TYPE": "Tipo",
         "DESCRIPTION": "Descrição",
         "DROP_FILE_HERE": "Arraste ou clique aqui",
-        "SEARCH_EMPTY":"Nenhum resultado encontrado"
+        "SEARCH_EMPTY":"Nenhum resultado encontrado",
+        "WITHOUT_COMPANY":"É necessário cadastrar uma empresa.",
+        "INVALID_DOCUMENT":"Imagem inválida."
     }
 }

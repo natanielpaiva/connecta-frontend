@@ -7,6 +7,7 @@
         "REGISTER_CONTACT": "Register Contact",
         "SAVE_SUCCESS": "Registered contact successfully.",
         "SAVE_ERROR":"Number already registered.",
-        "EDIT":"Edit Contact"
+        "EDIT":"Edit Contact",
+        "WITHOUT_COMPANY":"It needs to register a company"
     }
 }

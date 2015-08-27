@@ -1,11 +1,22 @@
 define([
     'connecta.speaknow',
-    'speaknow/action/service/action-service'
+    'speaknow/action/service/action-service',
+    'speaknow/company/service/company-service',
+    'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('AccountDefaultList', function (
-            $scope, ActionService, ngTableParams
+            $scope, ActionService, ngTableParams, CompanyService, $translate, $location,
+            notify  
             ) {
 
+        CompanyService.getUserCompany().then(function (response) {
+        }, function (data) {
+            $translate('PRODUCT.WITHOUT_COMPANY').then(function (text) {
+                notify.warning(text);
+                $location.path('speaknow/company/new');
+            });
+        });
+        
         $scope.search = {
             name:''
         };

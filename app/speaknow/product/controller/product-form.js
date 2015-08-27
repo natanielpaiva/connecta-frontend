@@ -68,6 +68,10 @@ define([
                             $scope.$apply();
                         };
                         reader.readAsDataURL(files[0]);
+                    } else {
+                        $translate('PRODUCT.INVALID_DOCUMENT').then(function (text) {
+                            notify.warning(text);
+                        });
                     }
                 };
 

@@ -53,7 +53,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="product in $data">
-                    <td class="text-left"><img src="{{product.image}}" class="icon-product-list" /></td>
+                    <td class="text-left"><img src="{{getImgUrl(product)}}" class="icon-product-list" /></td>
                     <td class="text-left">{{product.name | limitTo:25}}</td>
                     <td class="text-left" translate>{{'PRODUCT.' + product.type}}</td>
                     <td class="text-left">{{product.price | currency : "R$ " : 2}}</td>

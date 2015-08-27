@@ -1,10 +1,19 @@
 define([
     'connecta.speaknow',
     'speaknow/company-message/service/company-message-service',
+    'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('CompanyMessageListController',
-            function ($scope, CompanyMessageService, ngTableParams, notify, $translate) {
+            function ($scope, CompanyMessageService, ngTableParams, notify, $translate, CompanyService, $location) {
+
+                CompanyService.getUserCompany().then(function (response) {
+                }, function (data) {
+                    $translate('COMPANY_MESSAGE.WITHOUT_COMPANY').then(function (text) {
+                        notify.warning(text);
+                        $location.path('speaknow/company/new');
+                    });
+                });
 
                 $scope.messages = null;
                 $scope.search = {
@@ -46,4 +55,4 @@ define([
                     success: $scope.delete
                 };
             });
-        });
+});

@@ -26,6 +26,8 @@
         "CATEGORY": "Category",
         "CREATE": "Create Product",
         "DEMAND": "Demand",
-        "OFFER": "Offer"
+        "OFFER": "Offer",
+        "WITHOUT_COMPANY":"It needs to register a company",
+        "INVALID_DOCUMENT":"Invalid Image."
     }
 }

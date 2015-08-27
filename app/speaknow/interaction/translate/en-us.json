@@ -14,6 +14,8 @@
         "TYPE" : "Type",
         "DESCRIPTION" : "Description",
         "DROP_FILE_HERE": "Drop file here",
-        "SEARCH_EMPTY":"No results found"
+        "SEARCH_EMPTY":"No results found",
+        "WITHOUT_COMPANY":"It needs to register a company",
+        "INVALID_DOCUMENT":"Invalid Image."
     }
 }

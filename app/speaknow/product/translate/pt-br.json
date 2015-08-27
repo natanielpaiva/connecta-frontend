@@ -26,6 +26,8 @@
         "CATEGORY":"Categoria",
         "CREATE":"Criar Produto",
         "DEMAND":"Demanda",
-        "OFFER":"Oferta"
+        "OFFER":"Oferta",
+        "WITHOUT_COMPANY":"É necessário cadastrar uma empresa.",
+        "INVALID_DOCUMENT":"Imagem inválida."
     }
 }

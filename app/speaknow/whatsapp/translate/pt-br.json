@@ -12,6 +12,7 @@
     	"PASSWORD": "Senha",
     	"ACTIVE": "Ativa",
         "WHATSAPP": "Whatsapp",
-        "LISTENERS": "Ouvintes"
+        "LISTENERS": "Ouvintes",
+        "WITHOUT_COMPANY":"É necessário cadastrar uma empresa."
     }
 }

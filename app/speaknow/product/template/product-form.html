@@ -123,7 +123,7 @@
                            ng-file-select
                            ng-multiple="false"
                            ng-file-change="fileDropped($files, $event, $rejectedFiles)"
-                           ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'"
+                           ng-accept="'.jpeg,.jpg,.png'"
                            ng-model-rejected="rejFiles"
                            allow-dir="false"
                            drag-over-class="{accept:'accept', reject:'reject'}" >
@@ -135,6 +135,10 @@
                         Esse campo é obrigatório
                     </p>
                 </div>
+                <a href="#/speaknow/product"
+                   class="btn btn-default" translate>
+                    LAYOUT.CANCEL
+                </a>
                 <button class="btn btn-primary" translate
                         ng-disabled="formulario.$invalid">
                     LAYOUT.SAVE

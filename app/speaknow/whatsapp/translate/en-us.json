@@ -12,6 +12,7 @@
     	"PASSWORD": "Password",
     	"ACTIVE": "Active",
         "WHATSAPP": "Whatsapp",
-        "LISTENERS": "Listeners"
+        "LISTENERS": "Listeners",
+        "WITHOUT_COMPANY":"It needs to register a company"
     }
 }

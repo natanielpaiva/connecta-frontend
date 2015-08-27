@@ -1,11 +1,23 @@
 define([
     'connecta.speaknow',
     'speaknow/interaction/service/interaction-service',
+    'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('InteractionListController', function (
-            $scope, InteractionService, ngTableParams, notify, $translate, sortBy
+            $scope, InteractionService, ngTableParams, notify, $translate, sortBy,
+            CompanyService, $location, speaknowResources
             ) {
+        
+        $scope.baseUrl = speaknowResources.base;
+
+        CompanyService.getUserCompany().then(function (response) {
+        }, function (data) {
+            $translate('INTERACTION.WITHOUT_COMPANY').then(function (text) {
+                notify.warning(text);
+                $location.path('speaknow/company/new');
+            });
+        });
 
         $scope.search = {
             name: ''
@@ -46,6 +58,10 @@ define([
             text: 'Deseja realmente excluir esta interaçao?',
             size: 'sm',
             success: $scope.delete
+        };
+
+        $scope.getImage = function (interaction) {
+            return $scope.baseUrl + interaction.image + '?_=' + new Date().getTime();
         };
     });
 });
