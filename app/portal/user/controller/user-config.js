@@ -52,7 +52,19 @@ define([
     };
 
     $scope.submit = function () {
-      UserService.updateUser($scope.user, $scope.fileImage).then(function(response){
+      var userDTO = {
+        "profile": {
+          "id": $scope.user.userId,
+          "firstName": $scope.user.firstName,
+          "lastName": $scope.user.lastName,
+          "email": $scope.user.email
+        },
+        "credentials": {
+
+        }
+      };
+
+      UserService.updateUser(userDTO, $scope.fileImage).then(function(response){
         console.log(response);
       });
       // if (!$scope.user.id) {

@@ -10,7 +10,7 @@ define([
       fd.append('image', userImg);
       fd.append('user', JSON.stringify(user));
 
-      return $http.put(url, fd, {
+      return $http.post(url, fd, {
         headers: {'Content-Type': undefined}
       });
     };

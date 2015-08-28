@@ -43,7 +43,7 @@
                   <div class='user-avatar-info'>
                     <span>You can change your avatar here or remove the current avatar to revert to gravatar.com</span>
                     <div class='btn-container'>
-                      <button class='btn btn-primary btn-user-info'
+                      <button type='button' class='btn btn-primary btn-user-info'
                         ng-file-select
                         ng-multiple="false"
                         ng-file-change="onFileSelected($files, $event, $rejectedFiles)"
@@ -53,7 +53,7 @@
                           Escolha uma imagem</button>
                       <span ng-show='imgName'>{{imgName}}</span>
                     </div>
-                    <button class='btn btn-danger btn-user-info' ng-click='removeUserImg()'>Remover imagem</button>
+                    <button type='button' class='btn btn-danger btn-user-info' ng-click='removeUserImg()'>Remover imagem</button>
                   </div>
                 </div>
                 <p ng-show="imageInvalid" class="help-block ng-binding ng-scope">
