@@ -244,9 +244,13 @@ define([
    */
   function configureRouteChangeListener($rootScope, $menu) {
 
+    /**
+     * Verifica mudança de rotas e emite os eventos de entrada e saida dos módulos
+     * Bem como a mudança do menu de contexto de cada módulo
+     */
     $rootScope.$on('$routeChangeSuccess', function ($event, $destRoute, $originRoute) {
-      var destModule = $destRoute.$$route && $destRoute.$$route.module ? $destRoute.$$route.module : false;
-      var originModule = $originRoute && $originRoute.$$route && $originRoute.$$route.module ? $originRoute.$$route.module : false;
+      var destModule = $destRoute.$$route && $destRoute.$$route.module ? $destRoute.$$route.module : null;
+      var originModule = $originRoute && $originRoute.$$route && $originRoute.$$route.module ? $originRoute.$$route.module : null;
       var isModuleChange = (!originModule) || (destModule && $originRoute.$$route.module !== $destRoute.$$route.module);
 
       if (isModuleChange && destModule) {
@@ -275,6 +279,7 @@ define([
     });
 
     $rootScope.$on('login.authenticated', function($event, authenticated){
+      //Ao autenticar emite evento de enter do módulo novamnete
       if(authenticated){
         $rootScope.$broadcast($route.current.$$route.module + '.enter', $route.current);
       }
@@ -321,6 +326,7 @@ define([
     'portal/layout/directive/key-value',
     'portal/layout/directive/file-model',
     'portal/layout/directive/input-timeout',
+    'portal/layout/directive/heading-popover',
     'portal/layout/filter/data-uri',
     'portal/layout/directive/file-model',
     'portal/layout/directive/conf-modal',

@@ -1,0 +1,8 @@
+{
+  "USER": {
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "EMAIL":"Email",
+    "AVATAR": "Avatar"
+  }
+}

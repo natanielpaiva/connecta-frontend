@@ -1,16 +1,19 @@
 define([
   'angular',
   'connecta.portal',
-  'portal/auth/service/login-service'
+  'portal/auth/service/login-service',
+  'portal/layout/service/heading-popover-service'
 ], function(angular, portal) {
   /**
    * Componente usado para renderizar e manter o header do portal
    */
-  return portal.directive('heading', function(LayoutService, LoginService) {
+  return portal.directive('heading', function(LayoutService, LoginService, HeadingPopoverService) {
     return {
       restrict: 'E',
       templateUrl: 'app/portal/layout/directive/template/heading.html',
       controller: function($scope, applications) {
+        var controller = this;
+
         function _mapToArray(map) {
           var array = [];
           angular.forEach(map, function(value,key){
@@ -33,11 +36,42 @@ define([
 
         LoginService.checkAuthentication();
 
-        $scope.showApps = false;
+        $scope.toggleAppsPopOver = function(){
+          var popoverOptions = {
+            id: 'appsPopOver',
+            templateurl: 'app/portal/layout/template/heading-popover-apps.html',
+            controller: function($scope){
+              $scope.applications = _mapToArray(applications);
+            }
+          };
 
-        $scope.toggleApps = function(){
-          $scope.showApps = !$scope.showApps;
+          HeadingPopoverService.active(popoverOptions);
         };
+
+        $scope.closePopOver = function(){
+          HeadingPopoverService.hide();
+        };
+
+        $scope.toggleUserPopOver = function(){
+          var popoverOptions = {
+            id: 'userPopOver',
+            templateurl: 'app/portal/layout/template/heading-popover-user.html',
+            controller: function($scope){
+              $scope.applications = _mapToArray(applications);
+            }
+          };
+
+          HeadingPopoverService.active(popoverOptions);
+        };
+
+        $scope.logoutUser = function(){
+          LoginService.unauthenticate();
+        };
+
+        $scope.toggleNotifications = function(){
+          $scope.showNotifications = !$scope.showNotifications;
+        };
+
         /**
          * Oculta e exibe a barra lateral
          *

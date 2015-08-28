@@ -71,64 +71,68 @@ $headerHeight: 4em;
   }
   .navbar-options {
     ul.nav.navbar-nav {
-      & > li {
+      margin-right: 0.50em;
+
+      div.heading-popover {
         margin: 0;
-        line-height: 1.85em;
-        font-size: 2.5em;
-        text-align: center;
-        & > a {
-          padding: 0;
-          height: 100%;
-          text-align: center;
-          line-height: inherit;
-          width: 1.6em;
-          display: block;
-          float: left;
-          .icon-now-widgets, .icon-notifications {
-            color: $lightBlack;
-          }
+        padding: 0;
+        border-top: none;
+        height: auto;
+
+        &:after {
+            position:fixed;
+            content:' ';
+            top:0;
+            bottom:0;
+            right:0;
+            left:0;
+            // background:rgba(black, 0.5);
+            z-index:-100;
         }
-        &.applications-icon {
-          & > a {
-            width: 1.8em;
+
+        .popover-container {
+          top: 1.88em;
+          box-shadow: 0em 0.1em 0.5em 0.1em #333;
+          position: fixed;
+
+          &:before {
+            position: absolute;
+            top: -0.275em;
+            right: 0.5em;
+            margin-left:-0.15em;
+            content: ' ';
+            display: block;
+            border-style: solid;
+            border-color: transparent transparent $lightBlack transparent;
+            border-width: 0 .3em .3em .3em;
           }
-          .apps {
+
+          .heading-popover-title {
+            font-size: 0.45em;
+            line-height: 2.5em;
+            color: $white;
+            background-color: $lightBlack;
+            padding: 0.1em 1em;
+
+            .heading-popover-h2 {
+              font-size: 1.7em;
+              margin-top: 0.5em;
+              margin-bottom: 0.1em;
+              // font-weight: bold;
+            }
+          }
+
+          .heading-popover-content {
+            @include clearfix();
             margin: 0;
-            padding: 0;
+            padding: 0.15em;
+          }
+
+          &.apps-popover {
             width: 8.15em;
-            background-color: $white;
-            border: solid 0.075em $lightBlack;
-            border-top: none;
-            position: fixed;
-            top: 1.8em;
-            right: 0.35em;
-            height: auto;
-            box-shadow: 0em 0.1em 0.5em 0.1em $gray;
-
-            &:before {
-              position: absolute;
-              top: -0.275em;
-              left: 50%;
-              margin-left:-0.15em;
-              content: ' ';
-              display: block;
-              border-style: solid;
-              border-color: transparent transparent $lightBlack transparent;
-              border-width: 0 .3em .3em .3em;
-            }
-
-            .apps-title {
-              font-size: 0.45em;
-              line-height: 2.5em;
-              color: $white;
-              background-color: $lightBlack;
-            }
-
-            .apps-content {
-              @include clearfix();
-              margin: 0;
-              padding: 0.15em;
-            }
+            background-color: #fff;
+            font-size: 32px;
+            right: 3.45em;
 
             a {
               @extend .image-on-background;
@@ -143,6 +147,77 @@ $headerHeight: 4em;
                 background-color: $lighterGray;
               }
             }
+          }
+
+          &.user-popover {
+            width: 7em;
+            background-color: #fff;
+            right: 0.2em;
+            font-size: 32px;
+
+            .user-popover-content {
+              padding: 0;
+              nav {
+                float:left;
+                width: 100%;
+                height: auto;
+
+                & > ul {
+                  float:left;
+                  width: 100%;
+                  height: auto;
+                  padding:0;
+
+                 & > li {
+                    float: left;
+                    width: 100%;
+                    list-style: none;
+
+                    & > a {
+                      font-size: 0.5em;
+                      line-height: normal;
+                      color: $lightBlack;
+                      width: 100%;
+                      padding: 2%;
+                      display: block;
+
+                      &:hover {
+                        background-color: $lighterGray;
+                      }
+
+                      & > span {
+                        margin-right:0.5em;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      & > li {
+        margin: 0;
+        line-height: 1.85em;
+        font-size: 2.5em;
+        text-align: center;
+        & > a {
+          padding: 0;
+          height: 100%;
+          text-align: center;
+          line-height: inherit;
+          width: 1.6em;
+          display: block;
+          float: left;
+          .icon-now-widgets, .icon-notifications, .icon-user{
+            color: $lightBlack;
+          }
+        }
+
+        &.applications-icon {
+          & > a {
+            width: 1.8em;
           }
         }
         &.user-image {

@@ -1,5 +1,6 @@
 {
   "APPLICATION": {
-    "APPS": "Apps"
+    "APPS": "Apps",
+    "USER": "User"
   }
 }

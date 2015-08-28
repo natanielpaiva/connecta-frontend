@@ -1,4 +1,9 @@
 {
+  "USER":{
+    "ACCOUNT":"Account",
+    "CONFIG":"Configuration",
+    "LOGOUT": "Logout"
+  },
   "VALIDATION": {
     "REQUIRED": "This field is required",
     "EMAIL": "Must be a valid email address",

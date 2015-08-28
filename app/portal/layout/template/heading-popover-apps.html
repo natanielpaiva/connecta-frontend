@@ -1,0 +1,8 @@
+<div class='apps-popover popover-container'>
+  <div class="heading-popover-title" translate>APPLICATION.APPS</div>
+  <div class="heading-popover-content apps-content">
+    <a href="{{application.home}}" title="{{application.title}}"
+    style="background-image:url({{application.icon}})"
+    ng-repeat="application in applications | filter:shownModules | orderBy:'title'"></a>
+  </div>
+</div>

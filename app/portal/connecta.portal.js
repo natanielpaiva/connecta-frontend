@@ -13,7 +13,8 @@ define([
   portal.constant('portalResources', {
     base: applications.portal.host,
     dashboard: applications.portal.host + '/dashboard',
-    login: applications.portal.host + '/auth'
+    login: applications.portal.host + '/auth',
+    user: applications.portal.host + '/user'
   });
 
   portal.config(function($translatePartialLoaderProvider, redactorOptions) {
@@ -21,6 +22,7 @@ define([
     $translatePartialLoaderProvider.addPart('portal/application');
     $translatePartialLoaderProvider.addPart('portal/dashboard');
     $translatePartialLoaderProvider.addPart('portal/auth');
+    $translatePartialLoaderProvider.addPart('portal/user');
 
     var _redactorOptions = {
       // buttons: ['formatting', '|', 'bold', 'italic'],
@@ -68,6 +70,11 @@ define([
       controller: 'DashboardFormController',
       controllerUrl: 'portal/dashboard/controller/dashboard-form',
       templateUrl: 'app/portal/dashboard/template/dashboard-form.html'
+    },
+    '/user/config': {
+      controller: 'UserConfigController',
+      controllerUrl: 'portal/user/controller/user-config',
+      templateUrl: 'app/portal/user/template/user-config.html'
     }
   };
 
