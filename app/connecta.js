@@ -327,6 +327,7 @@ define([
     'portal/layout/directive/file-model',
     'portal/layout/directive/input-timeout',
     'portal/layout/directive/heading-popover',
+    'portal/layout/directive/compareTo',
     'portal/layout/filter/data-uri',
     'portal/layout/directive/file-model',
     'portal/layout/directive/conf-modal',

@@ -3,6 +3,10 @@
     "FIRST_NAME": "Nome",
     "LAST_NAME": "Sobrenome",
     "EMAIL":"Email",
-    "AVATAR": "Avatar"
+    "AVATAR": "Avatar",
+    "PASSWORD":"Senha",
+    "CONFIRM":"Confirmar Senha",
+    "COMPARE_PASS":"As senhas não coincidem.",
+    "ADD":"Criar Usuário"
   }
 }

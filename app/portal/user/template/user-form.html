@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{isEditing ? 'USER.EDIT': 'USER.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="user_config_form" ng-submit="submit()">
+            <div class="form-group">
+                <label for="first_name" translate>USER.FIRST_NAME</label>
+                <input type="text" class="form-control" id="first_name" name="first_name"
+                       ng-model="user.profile.firstName" required maxlength="100"/>
+                <div ng-show="user_config_form.first_name.$touched" ng-messages="user_config_form.first_name.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+            <div class="form-group">
+                <label for="last_name" translate>USER.LAST_NAME</label>
+                <input type="text" class="form-control" id="last_name" name="last_name"
+                       ng-model="user.profile.lastName" required maxlength="100"/>
+                <div ng-show="user_config_form.last_name.$touched" ng-messages="user_config_form.last_name.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" translate>USER.EMAIL</label>
+                <input type="text" class="form-control" id="email" name="email"
+                       ng-model="user.profile.email" required maxlength="100"/>
+                <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" translate>USER.PASSWORD</label>
+                <input type="password" class="form-control" id="password" name="password"
+                       ng-model="user.credentials.password" required maxlength="100"/>
+                <div ng-show="user_config_form.password.$touched" ng-messages="user_config_form.password.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="passwordConf" translate>USER.CONFIRM</label>
+                <input type="password" class="form-control" id="confirm" name="confirm"
+                       ng-model="confirmPass" required maxlength="100" compare-to="user.credentials.password"
+                       ng-model-options="{debounce: 500}"/>
+                <div ng-show="user_config_form.confirm.$touched" ng-messages="user_config_form.confirm.$error"
+                     ng-messages-include="portal-error-messages">
+                         <p ng-message="compareTo" class="help-block">{{'USER.COMPARE_PASS'| translate}}</p>
+                </div>
+            </div>
+
+            <div class="form-group user-avatar-field">
+                <label for="image" translate>USER.AVATAR</label>
+                <div class='user-image-container'>
+                  <div id="image"
+                       class="well drop-box set-file dropzone user-avatar-dropzone"
+                       ng-file-drop
+                       ng-file-select
+                       ng-multiple="false"
+                       ng-file-change="onFileSelected($files, $event, $rejectedFiles)"
+                       ng-accept="'.jpeg,.jpg,.png'"
+                       ng-model-rejected="rejFiles"
+                       allow-dir="false"
+                       drag-over-class="{accept:'accept', reject:'reject'}">
+
+                    <img class="img-user-quad" ng-if="user.image || userImage" ng-src="{{userImage}}" />
+                  </div>
+                  <div class='user-avatar-info'>
+                    <span>You can change your avatar here or remove the current avatar to revert to gravatar.com</span>
+                    <div class='btn-container'>
+                      <button class='btn btn-primary btn-user-info' type='button'
+                        ng-file-select
+                        ng-multiple="false"
+                        ng-file-change="onFileSelected($files, $event, $rejectedFiles)"
+                        ng-accept="'.jpeg,.jpg,.png'"
+                        ng-model-rejected="rejFiles"
+                        allow-dir="false">
+                          Escolha uma imagem</button>
+                      <span ng-show='imgName'>{{imgName}}</span>
+                    </div>
+                    <button type='button' class='btn btn-danger btn-user-info' ng-click='removeUserImg()'>Remover imagem</button>
+                  </div>
+                </div>
+                <p ng-show="imageInvalid" class="help-block ng-binding ng-scope">
+                        Esse campo é obrigatório
+                </p>
+            </div>
+<!--             <a href="#/speaknow/contact"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a> -->
+            <button class="btn btn-primary" translate ng-disabled="user_config_form.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

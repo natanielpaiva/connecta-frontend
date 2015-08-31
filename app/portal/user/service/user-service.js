@@ -14,6 +14,18 @@ define([
         headers: {'Content-Type': undefined}
       });
     };
+    
+    this.save = function(user, image){
+        var url = portalResources.user + '/upload';
+
+      var fd = new FormData();
+      fd.append('image', image);
+      fd.append('user', JSON.stringify(user));
+
+      return $http.post(url, fd, {
+        headers: {'Content-Type': undefined}
+      });
+    };
 
   });
 });
