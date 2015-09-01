@@ -34,7 +34,8 @@ define([
   'bower_components/amcharts/dist/amcharts/amcharts',
   'bower_components/angular-currency-mask/angular-currency-mask',
   'bower_components/angular-redactor/angular-redactor',
-  'bower_components/angular-amchart/src/amchart'
+  'bower_components/angular-amchart/src/amchart',
+  'bower_components/angular-facebook/lib/angular-facebook'
 ], function(angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel, inspection) {
 
   var connecta = angular.module('connecta', [
@@ -336,7 +337,8 @@ define([
     'inspection/inspection/directive/status-change',
     'inspection/inspection/directive/inspect-datepicker',
     'inspection/inspection/directive/drop-file',
-    'speaknow/company/service/company-service'
+    'speaknow/company/service/company-service',
+    'portal/user/service/user-service'
   ], function(doc) {
     angular.bootstrap(doc, [connecta.name]);
   });

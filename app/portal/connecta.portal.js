@@ -7,7 +7,8 @@ define([
     'pascalprecht.translate',
     'ngCookies',
     'gridster',
-    'angular-redactor'
+    'angular-redactor',
+    'facebook'
   ]);
 
   portal.constant('portalResources', {
@@ -17,7 +18,7 @@ define([
     user: applications.portal.host + '/user'
   });
 
-  portal.config(function($translatePartialLoaderProvider, redactorOptions) {
+  portal.config(function($translatePartialLoaderProvider, redactorOptions, FacebookProvider) {
     $translatePartialLoaderProvider.addPart('portal/layout');
     $translatePartialLoaderProvider.addPart('portal/application');
     $translatePartialLoaderProvider.addPart('portal/dashboard');
@@ -31,7 +32,7 @@ define([
 
     angular.extend(redactorOptions, _redactorOptions);
 
-     // FacebookProvider.init('540992702633361');
+      FacebookProvider.init('540992702633361');
   });
 
   /**
