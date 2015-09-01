@@ -1,6 +1,7 @@
 {
   "APPLICATION": {
     "APPS": "Apps",
-    "USER": "User"
+    "USER": "User",
+    "NOTIFICATIONS": "Notifications"
   }
 }

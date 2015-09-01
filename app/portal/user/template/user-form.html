@@ -29,7 +29,7 @@
                 <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
-            
+
             <div class="form-group">
                 <label for="password" translate>USER.PASSWORD</label>
                 <input type="password" class="form-control" id="password" name="password"
@@ -37,7 +37,7 @@
                 <div ng-show="user_config_form.password.$touched" ng-messages="user_config_form.password.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
-            
+
             <div class="form-group">
                 <label for="passwordConf" translate>USER.CONFIRM</label>
                 <input type="password" class="form-control" id="confirm" name="confirm"
@@ -45,7 +45,7 @@
                        ng-model-options="{debounce: 500}"/>
                 <div ng-show="user_config_form.confirm.$touched" ng-messages="user_config_form.confirm.$error"
                      ng-messages-include="portal-error-messages">
-                         <p ng-message="compareTo" class="help-block">{{'USER.COMPARE_PASS'| translate}}</p>
+                         <p ng-message="compareTo" class="help-block">{{'USER.VALIDATION.COMPARE_PASS'| translate}}</p>
                 </div>
             </div>
 

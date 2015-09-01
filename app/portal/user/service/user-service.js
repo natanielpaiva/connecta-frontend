@@ -4,7 +4,7 @@ define([
   portal.lazy.service('UserService', function($http, portalResources){
 
     this.updateUser = function(user, userImg){
-      var url = portalResources.user + '/upload';
+      var url = portalResources.user + '/profile';
 
       var fd = new FormData();
       fd.append('image', userImg);
@@ -14,7 +14,7 @@ define([
         headers: {'Content-Type': undefined}
       });
     };
-    
+
     this.save = function(user, image){
         var url = portalResources.user + '/upload';
 
@@ -25,6 +25,11 @@ define([
       return $http.post(url, fd, {
         headers: {'Content-Type': undefined}
       });
+    };
+
+    this.changePassword = function(credentials){
+      var url = portalResources.user + '/credentials';
+      return $http.put(url, credentials);
     };
 
   });

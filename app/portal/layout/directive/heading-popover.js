@@ -22,8 +22,8 @@ define([
       },
       controller: function($scope, $timeout){
         $scope.popover = {
-         controller: function($scope) {},
-         templateurl: null
+          controller: function($scope) {},
+          templateurl: null
         };
 
         $scope.popOverActive = false;

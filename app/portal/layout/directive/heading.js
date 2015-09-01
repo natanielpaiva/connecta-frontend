@@ -12,7 +12,8 @@ define([
       restrict: 'E',
       templateUrl: 'app/portal/layout/directive/template/heading.html',
       controller: function($scope, applications) {
-        var controller = this;
+
+        $scope.user = {};
 
         function _mapToArray(map) {
           var array = [];
@@ -34,42 +35,67 @@ define([
           }
         });
 
+        $scope.$on('user.avatar-change', function($ev, avatarUrl){
+          $scope.user.avatarUrl = avatarUrl;
+        });
+
         LoginService.checkAuthentication();
 
-        $scope.toggleAppsPopOver = function(){
-          var popoverOptions = {
-            id: 'appsPopOver',
-            templateurl: 'app/portal/layout/template/heading-popover-apps.html',
-            controller: function($scope){
-              $scope.applications = _mapToArray(applications);
+        $scope.getUserAvatarUrl = function(){
+          var avatarUrl = $scope.user.avatarUrl;
+          if(avatarUrl){
+            var regex = new RegExp('^http://gravatar.com', 'i');
+            var isGravatar = regex.test(avatarUrl);
+            if(isGravatar){
+              return avatarUrl;
+            } else {
+              return avatarUrl + '?_=' + new Date().getTime();
             }
-          };
-
-          HeadingPopoverService.active(popoverOptions);
-        };
-
-        $scope.closePopOver = function(){
-          HeadingPopoverService.hide();
-        };
-
-        $scope.toggleUserPopOver = function(){
-          var popoverOptions = {
-            id: 'userPopOver',
-            templateurl: 'app/portal/layout/template/heading-popover-user.html',
-            controller: function($scope){
-              $scope.applications = _mapToArray(applications);
-            }
-          };
-
-          HeadingPopoverService.active(popoverOptions);
+          }
         };
 
         $scope.logoutUser = function(){
           LoginService.unauthenticate();
         };
 
-        $scope.toggleNotifications = function(){
-          $scope.showNotifications = !$scope.showNotifications;
+        $scope.closePopOver = function(){
+          HeadingPopoverService.hide();
+        };
+
+        $scope.toggleAppsPopOver = function(){
+          var popoverOptions = {
+            id: 'appsPopOver',
+            templateurl: 'heading-popover-apps.html',
+            controller: function($scope){
+              $scope.applications = _mapToArray(applications);
+            }
+          };
+
+          HeadingPopoverService.active(popoverOptions);
+        };
+
+        $scope.toggleUserPopOver = function(){
+          var popoverOptions = {
+            id: 'userPopOver',
+            templateurl: 'heading-popover-user.html',
+            controller: function($scope){
+              $scope.applications = _mapToArray(applications);
+            }
+          };
+
+          HeadingPopoverService.active(popoverOptions);
+        };
+
+
+        $scope.toggleNotificationsPopOver = function(){
+          var popoverOptions = {
+            id: 'notificationsPopOver',
+            templateurl: 'heading-popover-notifications.html',
+            controller: function($scope){
+            }
+          };
+
+          HeadingPopoverService.active(popoverOptions);
         };
 
         /**
@@ -91,6 +117,10 @@ define([
 
         $scope.$on('heading.remove-logo', function($event, logoSrc){
           $scope.logoSrc = null;
+        });
+
+        $scope.$on('user.refresh.done', function($event, user){
+          $scope.user = user;
         });
       }
     };

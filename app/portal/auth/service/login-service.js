@@ -46,6 +46,21 @@ define([
     };
 
     /**
+     * Atualiza os dados do usuário
+     */
+    this.refreshCurrentUser = function(){
+      var deferred = $q.defer();
+
+      $http.get(portalResources.login+'/'+$cookieStore.get('X-Authorization-Token')).then(function(response){
+        _currentUser = response.data;
+        deferred.resolve(_currentUser);
+        $rootScope.$broadcast('user.refresh.done', _currentUser);
+      });
+
+      return deferred.promise;
+    };
+
+    /**
      * Alerta o escopo do app se ele está autenticado ou não
      * @param {Boolean} authenticated
      */
@@ -58,6 +73,7 @@ define([
      * e alerta o escopo do app que falta autenticar
      */
     this.unauthenticate = function(){
+      _reloadNeeded = true;
       $cookieStore.remove('X-Authorization-Token');
       loginService.setAuthenticated(false);
     };
@@ -105,8 +121,11 @@ define([
     };
 
     $rootScope.$on('login.request_unathorized', function(){
-      _reloadNeeded = true;
       loginService.unauthenticate();
+    });
+
+    $rootScope.$on('user.refresh-current', function(){
+      loginService.refreshCurrentUser();
     });
 
   });

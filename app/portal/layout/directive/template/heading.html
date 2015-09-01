@@ -38,14 +38,13 @@
       </li>
       <li>
         <a href title="{{'LAYOUT.NOTIFICATIONS'| translate}}"
-          ng-click="toggleNotifyPopOver()">
+          ng-click="toggleNotificationsPopOver()">
           <span class="icon-notifications"></span>
         </a>
       </li>
       <li>
-        <a href title="{{user.firstName}} {{user.lastName}}"
-          ng-click="toggleUserPopOver()">
-          <span class="icon-user" style="color: #252525;"></span>
+        <a class="image-on-background user-avatar" href title="{{user.firstName}} {{user.lastName}}"
+          ng-click="toggleUserPopOver()" ng-if='getUserAvatarUrl()' style="background-image: url('{{getUserAvatarUrl()}}')">
         </a>
       </li>
       <heading-popover></heading-popover>

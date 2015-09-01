@@ -318,7 +318,7 @@ define([
     'portal/layout/controller/home',
     'portal/layout/service/applications',
     'portal/layout/service/menu',
-    'portal/layout/service/heading',
+    'portal/layout/service/heading-service',
     'portal/layout/service/layout',
     'portal/layout/directive/debug',
     'portal/layout/directive/scroll-to',

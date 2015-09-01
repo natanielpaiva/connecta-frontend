@@ -21,7 +21,7 @@
   .img-user-quad {
     width: 180px;
     height: 180px;
-    border-radius: 90px;
+    border-radius: 50%;
     margin-top: 8px;
   }
 
@@ -48,5 +48,9 @@
       width: 170px;
     }
   }
+}
+
+.change-password-container {
+  margin-top: 20px;
 }
 

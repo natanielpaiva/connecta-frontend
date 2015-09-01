@@ -73,6 +73,53 @@ $headerHeight: 4em;
     ul.nav.navbar-nav {
       margin-right: 0.50em;
 
+      & > li {
+        margin: 0;
+        height: 1.85em;
+        line-height: 1.85em;
+        width: 1.85em;
+        font-size: 2.5em;
+        text-align: center;
+
+          &:hover, &:focus {
+            text-decoration: none;
+            background-color: #eee;
+          }
+
+          & > a {
+            padding: 0;
+            height: 1.85em;
+            line-height: 1.85em;
+            text-align: center;
+            width: 1.85em;
+            display: block;
+            float: left;
+
+            &:hover, &:focus {
+              text-decoration: none;
+              background-color: transparent;
+            }
+
+            .icon-now-widgets, .icon-notifications, .icon-user {
+              color: $lightBlack;
+            }
+          }
+
+        &.applications-icon {
+          & > a {
+            width: 1.8em;
+          }
+        }
+
+        .user-avatar {
+          @extend .cursor-pointer;
+          margin: 0.2em;
+          height: 1.4em;
+          width: 1.4em;
+          border-radius: 50%;
+        }
+      }
+
       div.heading-popover {
         margin: 0;
         padding: 0;
@@ -92,13 +139,13 @@ $headerHeight: 4em;
 
         .popover-container {
           top: 1.88em;
-          box-shadow: 0em 0.1em 0.5em 0.1em #333;
+          box-shadow: 0em 0.1em 0.5em 0.1em rgba(0,0,0,0.4);
           position: fixed;
 
           &:before {
             position: absolute;
             top: -0.275em;
-            right: 0.5em;
+            right: 0.68em;
             margin-left:-0.15em;
             content: ' ';
             display: block;
@@ -132,7 +179,11 @@ $headerHeight: 4em;
             width: 8.15em;
             background-color: #fff;
             font-size: 32px;
-            right: 3.45em;
+            right: 3.91em;
+
+            .apps-title {
+              text-align: center;
+            }
 
             a {
               @extend .image-on-background;
@@ -146,6 +197,17 @@ $headerHeight: 4em;
               &:hover {
                 background-color: $lighterGray;
               }
+            }
+          }
+
+          &.notifications-popover {
+            width: 8.15em;
+            background-color: #fff;
+            font-size: 32px;
+            right: 2.025em;
+
+            .notifications-title {
+              text-align: center;
             }
           }
 
@@ -197,37 +259,6 @@ $headerHeight: 4em;
         }
       }
 
-      & > li {
-        margin: 0;
-        line-height: 1.85em;
-        font-size: 2.5em;
-        text-align: center;
-        & > a {
-          padding: 0;
-          height: 100%;
-          text-align: center;
-          line-height: inherit;
-          width: 1.6em;
-          display: block;
-          float: left;
-          .icon-now-widgets, .icon-notifications, .icon-user{
-            color: $lightBlack;
-          }
-        }
-
-        &.applications-icon {
-          & > a {
-            width: 1.8em;
-          }
-        }
-        &.user-image {
-          @extend .cursor-pointer;
-          margin: 0.2em;
-          height: 1.4em;
-          width: 1.4em;
-          border-radius: 50%;
-        }
-      }
     }
   }
 }
