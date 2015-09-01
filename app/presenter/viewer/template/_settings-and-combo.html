@@ -30,17 +30,15 @@
 </div>
 <div ng-if="setLayoutConfiguration">
     <div class="aba-switch-viewer">
-        <div class="switch-viewer" ng-click="disabledLayoutConfig()">
+        <div class="switch-viewer-back" ng-click="disabledLayoutConfig()">
             <div>
                 <span class="icon-arrow-back" ></span>
             </div>
         </div>
         <div class="settings-text">
-             {{layoutConfig[indexLayoutConfig].name}}
+             {{layoutConfig.name}}
         </div>
     </div>
-    <div class="layout-config" ng-include="layoutConfig[indexLayoutConfig].template">
+    <div class="layout-config" ng-include="layoutConfig.template">
     </div>
-    
 </div>
-

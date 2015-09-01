@@ -1,21 +1,12 @@
-<accordion close-others="oneAtATime">
-    <accordion-group heading="+ Appearance" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-        <h5>Appearance</h5>
-        <div class="sidebar-form">
-            <label>Text Color:</label>
-            <input type="color" ng-model="analysisViewer.viewer.configuration.color"/>
-        </div>
-        <div class="sidebar-form">
-            <label>Font family:</label>
-            <input type="text"/>
-        </div>
-    </accordion-group>
-    <accordion-group heading="+ Background and plot area" >
-        <div class="navigation-settings" ng-click="setLayoutSettings('PLOAT_AREA')">
-            PLOAT AREA
-        </div>
-        <div class="navigation-settings" ng-click="setLayoutSettings('MARGINS')">
-            MARGINS
-        </div>
-    </accordion-group>
+<accordion close-others="true">
+    <div ng-repeat="accordion in accordionConfig">
+        <accordion-group ng-if="accordion.children !== ''" heading="{{accordion.heading}}" >
+            <div class="navigation-settings" ng-repeat="item in accordion.children" ng-click="setLayoutSettings(item.config)">
+                {{item.name}}
+            </div>
+        </accordion-group>
+        <accordion-group ng-if="accordion.children === ''" heading="{{accordion.heading}}"
+                         ng-click="setLayoutSettings(accordion.config)">
+        </accordion-group>
+    </div>   
 </accordion>

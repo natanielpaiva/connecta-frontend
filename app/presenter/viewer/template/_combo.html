@@ -7,6 +7,7 @@
                typeahead-min-length="3"
                typeahead-wait-ms="600"
                typeahead-focus-first="true"
+               typeahead-on-select="setAnalysisData($item)"
                />
         <span ng-show="loadingAnalysis" class="glyphicon glyphicon-refresh form-control-feedback"></span>
     </div>
@@ -32,3 +33,10 @@
         </ul>
     </div>
 </div>
+<div ng-if="analysis" class="analysis-button">
+    <button class="btn btn-primary"
+            ng-click="getListAnalysis()" translate>
+        VIEWER.VIEW_ANALYSIS
+    </button>
+</div>
+

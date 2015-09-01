@@ -66,16 +66,46 @@
     margin: 2%;
 }
 
-.sidebarfilter ul[dnd-list] li {
+.sidebarfilter ul{
+    width: 100%;
     background-color: $lighterGray;
     border: 1px solid $lightGray;
-    float:left;
+    padding: 0px !important;
+}
+
+.sidebarfilter ul[dnd-list]{
+    padding:0px;
+    margin:0px;
+    background-color:$lightGray;
+    list-style:none;
+}
+
+.sidebarfilter ul[dnd-list] li{
+    background-color: $lighterGray;
+    border: 1px dashed $lightGray;
     position: relative;
-    display: inline;
-    width: 200px;
-    height:27px;
+    display: block;
+    width: 100%; 
+    height:30px;
+    line-height: 30px;
     cursor: move;
     font-weight: bold;
+}
+
+
+.sidebarfilter{
+    width: 216px;
+    height: 150px;
+    float:left;
+    margin-left: 20px;
+    overflow: auto;
+    background-color: $darkerGray;
+}
+
+.analysis-button button{
+     margin-top: 10px;
+     width: 216px;
+     margin-left: 20px;
 }
 
 .columnsViewer{
@@ -112,6 +142,27 @@
     text-align: center;
 }
 
+.switch-viewer-back{
+    background-color: $darkerGray;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    float:left;
+    width: 20%;
+    margin-right: 10px;
+    color: $white;
+    font-size: 1.8em;
+    line-height: 2em;
+    text-align: center;
+}
+
+.switch-viewer-back div:hover{
+    width: 100%;
+    height: 100%;
+    cursor:pointer;
+    background-color: $gray;
+}
+
 .settings-text{
     font-size: 1em;
     line-height: 3.6em;
@@ -127,13 +178,15 @@
 }
 
 .navigation-settings:hover{
-    width: 100%;
-    height: 50%;
     cursor:pointer;
+    background-color: $gray;
 }
 
 .navigation-settings{
-    padding-top: 5%;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 11%;
 }
 
 .switch-viewer div.active{
@@ -174,6 +227,7 @@
     color: $white !important;
     border:none !important;
     font-family: 'Open Sans' !important;
+    padding: 0px !important;
 }
 
 .sidebar-form{
@@ -184,6 +238,11 @@
 .sidebar-form input[type="text"]{
     width: 80%;
 }
+
+.sidebar-form select{
+    color: $black !important;
+}
+
 .sidebar-form input{
     color: $black;
 }
@@ -198,6 +257,12 @@
     color: $white;
     padding-top: 5%;
 }
+
+.modal-table-analysis{
+   overflow: auto;
+   height: 400px;
+}
+
 
 
 

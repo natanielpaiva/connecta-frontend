@@ -8,6 +8,7 @@
         "METRIC":"Métrica",
         "XFIELD":"Coluna X",
         "YFIELD":"Coluna Y",
-        "VALUEFIELD": "Coluna de valor"
+        "VALUEFIELD": "Coluna de valor",
+        "FONT_SIZE" : "Tamanho da fonte"
     }
 }

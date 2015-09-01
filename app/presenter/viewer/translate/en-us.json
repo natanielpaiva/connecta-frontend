@@ -1,13 +1,14 @@
 {
     "VIEWER": {
-        "VIEWER" : "Viewer",
-        "VIEWERS" : "Viewers",
+        "VIEWER": "Viewer",
+        "VIEWERS": "Viewers",
         "NAME": "Name",
         "TYPE": "Type",
         "DESCRIPTION": "Description",
-        "METRIC":"Metric",
-        "XFIELD":"X Column",
-        "YFIELD":"Y Column",
-        "VALUEFIELD": "Value Column"
+        "METRIC": "Metric",
+        "XFIELD": "X Column",
+        "YFIELD": "Y Column",
+        "VALUEFIELD": "Value Column",
+        "FONT_SIZE": "Font size"
     }
 }

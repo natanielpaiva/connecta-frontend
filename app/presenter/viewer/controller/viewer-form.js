@@ -1,8 +1,9 @@
 define([
     'connecta.presenter',
-    'presenter/viewer/service/viewer-service'
+    'presenter/viewer/service/viewer-service',
+    'presenter/viewer/controller/modal-analysis',
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, LayoutService) {
+    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, LayoutService, $modal) {
         $scope.state = {loaded: false};
 
         $scope.metrics = [];
@@ -15,30 +16,74 @@ define([
                 $scope.typeBar = "TYPE";
                 $scope.settingsBar = "SETTINGS";
                 $scope.setLayoutConfiguration = false;
-                
-                $scope.layoutConfig = ViewerService.getLayoutConfig();
-                
+
+                $scope.accordionConfig = ViewerService.getAccordionConfig();
+
                 $scope.viewerBar = "ANALYSIS";
                 $scope.getAnalysis = function (val) {
                     return ViewerService.getAnalysis(val);
                 };
-                
-                $scope.disabledLayoutConfig = function(){
-                   $scope.setLayoutConfiguration = false;  
+
+                $scope.analysisViewerData = {
+                    viewer: {name: "", description: ""},
+                    analysisVwColumn: []
                 };
-                
+
+                $scope.getListAnalysis = function () {
+                    ViewerService.getListAnalysis($scope.analysisViewerData, $scope.analysisData).then(function (response) {
+
+                        $modal.open({
+                            animation: true,
+                            templateUrl: 'app/presenter/viewer/template/_modal-analysis.html',
+                            controller: 'ModalAnalysis',
+                            size: 'lg',
+                            resolve: {
+                                analysisData: function () {
+                                    return response.data.result;
+                                }
+                            }
+
+                        });
+
+                    }, function (response) {
+                        console.log(response.data);
+                    });
+                };
+
+                $scope.disabledLayoutConfig = function () {
+                    $scope.setLayoutConfiguration = false;
+                };
+
+                $scope.setAnalysisData = function (analysisData) {
+                    $scope.analysisData = analysisData;
+                };
+
                 $scope.analysisViewer = getAnalysisViewer();
-                
+
                 $scope.templateCombo = '/app/presenter/viewer/template/_combo.html';
                 $scope.templateSettings = '/app/presenter/viewer/template/_settings.html';
-                
-                $scope.setLayoutSettings = function(type){
-                    $scope.indexLayoutConfig = type;
+
+                $scope.setLayoutSettings = function (config) {
+                    $scope.layoutConfig = config;
                     $scope.setLayoutConfiguration = true;
                 };
-                
+
                 $scope.checkViewerBar = function (type) {
                     $scope.viewerBar = type;
+                };
+
+                $scope.openedAccordion = 0;
+
+                $scope.openAccordion = function () {
+                    var retorno = false;
+//                    for (var type in types) {
+//                        if ($scope.indexLayoutConfig !== undefined) {
+//                            if (type === $scope.layoutConfig[$scope.indexLayoutConfig].type) {
+//                                retorno = true;
+//                            }
+//                        }
+//                    }
+                    return retorno;
                 };
 
             },
@@ -57,6 +102,8 @@ define([
                 }
             });
         });
+
+
         $scope.analysisViewer = {
             "viewer": {
                 "name": "",
