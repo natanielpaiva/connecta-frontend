@@ -1,13 +1,14 @@
 define([
   'angular',
   'json!applications.json',
-  'bower_components/angular-gridster/src/angular-gridster'
+  'bower_components/angular-gridster/src/angular-gridster',
 ], function(angular, applications) {
   var portal = angular.module('connecta.portal', [
     'pascalprecht.translate',
     'ngCookies',
     'gridster',
-    'angular-redactor'
+    'angular-redactor',
+    'facebook'
   ]);
 
   portal.constant('portalResources', {
@@ -17,7 +18,7 @@ define([
     user: applications.portal.host + '/user'
   });
 
-  portal.config(function($translatePartialLoaderProvider, redactorOptions) {
+  portal.config(function($translatePartialLoaderProvider, redactorOptions, FacebookProvider) {
     $translatePartialLoaderProvider.addPart('portal/layout');
     $translatePartialLoaderProvider.addPart('portal/application');
     $translatePartialLoaderProvider.addPart('portal/dashboard');
@@ -30,6 +31,8 @@ define([
     };
 
     angular.extend(redactorOptions, _redactorOptions);
+    
+     FacebookProvider.init('540992702633361');
   });
 
   portal.run(function($http, $templateCache) {
@@ -75,6 +78,11 @@ define([
       controller: 'UserConfigController',
       controllerUrl: 'portal/user/controller/user-config',
       templateUrl: 'app/portal/user/template/user-config.html'
+    },
+    '/user/new': {
+      controller: 'UserFormController',
+      controllerUrl: 'portal/user/controller/user-form',
+      templateUrl: 'app/portal/user/template/user-form.html'
     }
   };
 
