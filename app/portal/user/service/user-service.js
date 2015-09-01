@@ -16,7 +16,7 @@ define([
     };
 
     this.save = function(user, image){
-        var url = portalResources.user + '/upload';
+        var url = portalResources.user + '/create';
 
       var fd = new FormData();
       fd.append('image', image);

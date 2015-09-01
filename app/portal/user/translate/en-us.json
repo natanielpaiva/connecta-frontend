@@ -19,6 +19,7 @@
     "CONFIRM":"Confirm Password",
     "ADD":"Add User",
     "SAVE_PROFILE": "Save Profile",
+    "GRAVATAR_TEXT": "You can change your avatar here or remove the current avatar to revert to <a href='gravatar.com'>gravatar.com</a>",
     "VALIDATION": {
       "IMAGESIZE": "Maximum image file size: 600Kb",
       "IMAGEFORM": "Avatar image must be quadrangular",

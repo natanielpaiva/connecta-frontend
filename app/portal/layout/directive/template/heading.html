@@ -44,7 +44,7 @@
       </li>
       <li>
         <a class="image-on-background user-avatar" href title="{{user.firstName}} {{user.lastName}}"
-          ng-click="toggleUserPopOver()" ng-if='getUserAvatarUrl()' style="background-image: url('{{getUserAvatarUrl()}}')">
+          ng-click="toggleUserPopOver()" ng-show='avatarUrl' style="background-image: url('{{avatarUrl}}')">
         </a>
       </li>
       <heading-popover></heading-popover>

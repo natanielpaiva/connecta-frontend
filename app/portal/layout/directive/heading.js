@@ -11,9 +11,10 @@ define([
     return {
       restrict: 'E',
       templateUrl: 'app/portal/layout/directive/template/heading.html',
-      controller: function($scope, applications) {
+      controller: function($scope, $timeout, applications) {
 
         $scope.user = {};
+        $scope.avatarUrl = null;
 
         function _mapToArray(map) {
           var array = [];
@@ -31,12 +32,9 @@ define([
           if (isAuthenticated) {
             LoginService.getCurrentUser().then(function(user){
               $scope.user = user;
+              $scope.getUserAvatarUrl();
             });
           }
-        });
-
-        $scope.$on('user.avatar-change', function($ev, avatarUrl){
-          $scope.user.avatarUrl = avatarUrl;
         });
 
         LoginService.checkAuthentication();
@@ -47,9 +45,9 @@ define([
             var regex = new RegExp('^http://gravatar.com', 'i');
             var isGravatar = regex.test(avatarUrl);
             if(isGravatar){
-              return avatarUrl;
+              $scope.avatarUrl = avatarUrl;
             } else {
-              return avatarUrl + '?_=' + new Date().getTime();
+              $scope.avatarUrl = avatarUrl + '?_=' + new Date().getTime();
             }
           }
         };
@@ -121,6 +119,7 @@ define([
 
         $scope.$on('user.refresh.done', function($event, user){
           $scope.user = user;
+          $scope.getUserAvatarUrl();
         });
       }
     };

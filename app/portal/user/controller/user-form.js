@@ -4,9 +4,16 @@ define([
   'portal/user/service/user-service'
 ], function(portal){
 
-  return portal.lazy.controller('UserFormController', function($scope, notify, UserService, LoginService){
+  return portal.lazy.controller('UserFormController', function($scope, $location, notify, UserService, LoginService){
 
-    $scope.onFileSelected = function (files) {
+    $scope.onFileSelected = function (files, ev, rejFiles) {
+      if (rejFiles && rejFiles.length) {
+        $translate('USER.VALIDATION.INVALID_DOCUMENT').then(function (text) {
+          notify.warning(text);
+        });
+        return;
+      }
+
       var file = files[0];
       $scope.fileImage = file;
       if (file) {
@@ -27,6 +34,7 @@ define([
     $scope.removeUserImg = function(){
       $scope.userImage = null;
       $scope.imgName = null;
+      $scope.fileImage = null;
     };
 
     $scope.validateImage = function(image){
@@ -46,10 +54,14 @@ define([
     };
 
     $scope.submit = function () {
+      //Por enquanto o login do usuário será o email (easy unique...)
+      $scope.user.profile.id = $scope.user.profile.email;
+
       UserService.save($scope.user, $scope.fileImage).then(function(response){
+        LoginService.setAuthenticatedUser(response);
+        $location.path('/');
         console.log(response);
       });
     };
   });
-
 });

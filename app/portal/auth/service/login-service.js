@@ -38,7 +38,9 @@ define([
         });
       } else {
         $timeout(function(){
-          deferred.resolve(_currentUser);
+          var userCopy = {};
+          angular.copy(_currentUser, userCopy);
+          deferred.resolve(userCopy);
         });
       }
 
@@ -53,8 +55,10 @@ define([
 
       $http.get(portalResources.login+'/'+$cookieStore.get('X-Authorization-Token')).then(function(response){
         _currentUser = response.data;
-        deferred.resolve(_currentUser);
-        $rootScope.$broadcast('user.refresh.done', _currentUser);
+        var userCopy = {};
+        angular.copy(_currentUser, userCopy);
+        deferred.resolve(userCopy);
+        $rootScope.$broadcast('user.refresh.done', userCopy);
       });
 
       return deferred.promise;
@@ -103,7 +107,16 @@ define([
       };
 
       var promise = $http.post(portalResources.login, userDTO).then(function(response){
-        _currentUser = response.data;
+        loginService.setAuthenticatedUser(response);
+      }, function(){
+        loginService.setAuthenticated(false);
+      });
+
+      return promise;
+    };
+
+    this.setAuthenticatedUser = function(response){
+      _currentUser = response.data;
         $cookieStore.put('X-Authorization-Token', response.data.token);
 
         loginService.setAuthenticated(true);
@@ -113,11 +126,6 @@ define([
           _reloadNeeded = false;
           $route.reload();
         }
-      }, function(){
-        loginService.setAuthenticated(false);
-      });
-
-      return promise;
     };
 
     $rootScope.$on('login.request_unathorized', function(){
