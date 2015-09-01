@@ -7,8 +7,7 @@ define([
     'pascalprecht.translate',
     'ngCookies',
     'gridster',
-    'angular-redactor',
-    'facebook'
+    'angular-redactor'
   ]);
 
   portal.constant('portalResources', {
@@ -31,16 +30,48 @@ define([
     };
 
     angular.extend(redactorOptions, _redactorOptions);
-    
+
      FacebookProvider.init('540992702633361');
   });
 
+  /**
+   * Carrega os templates relativos ao portal no momento do carregamento
+   * ao inves de on-demand
+   * @param  $http
+   * @param  $templateCache
+   * @return
+   */
+  function loadTemplatesIntoCache($http, $templateCache){
+    var templateUrls = [
+      {
+        name: 'portal-error-messages',
+        url: 'app/portal/layout/template/portal-error-messages.html'
+      },
+      {
+        name: 'heading-popover-notifications.html',
+        url: 'app/portal/layout/template/heading-popover-notifications.html'
+      },
+      {
+        name: 'heading-popover-user.html',
+        url: 'app/portal/layout/template/heading-popover-user.html'
+      },
+      {
+        name: 'heading-popover-apps.html',
+        url: 'app/portal/layout/template/heading-popover-apps.html'
+      },
+    ];
+
+    angular.forEach(templateUrls, function(template){
+      $http.get(template.url).then(function(response) {
+        $templateCache.put(template.name, response.data);
+      });
+    });
+  }
+
   portal.run(function($http, $templateCache) {
 
-    $http.get('app/portal/layout/template/portal-error-messages.html').then(function(response) {
-      $templateCache.put('portal-error-messages', response.data);
-    });
-    
+    loadTemplatesIntoCache($http, $templateCache);
+
   });
 
   portal._routes = {
@@ -74,10 +105,10 @@ define([
       controllerUrl: 'portal/dashboard/controller/dashboard-form',
       templateUrl: 'app/portal/dashboard/template/dashboard-form.html'
     },
-    '/user/config': {
-      controller: 'UserConfigController',
-      controllerUrl: 'portal/user/controller/user-config',
-      templateUrl: 'app/portal/user/template/user-config.html'
+    '/user/profile': {
+      controller: 'UserProfileController',
+      controllerUrl: 'portal/user/controller/user-profile',
+      templateUrl: 'app/portal/user/template/user-profile.html'
     },
     '/user/new': {
       controller: 'UserFormController',
