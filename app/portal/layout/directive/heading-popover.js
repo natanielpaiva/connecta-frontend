@@ -30,6 +30,7 @@ define([
 
         $scope.closePopover = function(){
           $timeout(function() {
+            $scope.closeCallback();
             $scope.popover = null;
             $scope.popOverActive = false;
            });
@@ -42,9 +43,15 @@ define([
             $scope.closePopover();
             return;
           }
+
+          $scope.closeCallback();
           $scope.popover = null;
           $scope.popover = options;
-            $scope.popOverActive = true;
+          $scope.popOverActive = true;
+        };
+
+        $scope.closeCallback = function(){
+          $scope.popover && $scope.popover.close && $scope.popover.close($scope.popover); // jshint ignore:line
         };
 
         $scope.$on('popover.activate', function(e, options){

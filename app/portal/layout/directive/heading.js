@@ -61,11 +61,15 @@ define([
         };
 
         $scope.toggleAppsPopOver = function(){
+          $scope.appsPopoverFocus = true;
           var popoverOptions = {
             id: 'appsPopOver',
             templateurl: 'heading-popover-apps.html',
             controller: function($scope){
               $scope.applications = _mapToArray(applications);
+            },
+            close: function(){
+              $scope.appsPopoverFocus = false;
             }
           };
 
@@ -73,11 +77,15 @@ define([
         };
 
         $scope.toggleUserPopOver = function(){
+          $scope.userPopoverFocus = true;
           var popoverOptions = {
             id: 'userPopOver',
             templateurl: 'heading-popover-user.html',
             controller: function($scope){
               $scope.applications = _mapToArray(applications);
+            },
+            close: function(){
+              $scope.userPopoverFocus = false;
             }
           };
 
@@ -86,10 +94,14 @@ define([
 
 
         $scope.toggleNotificationsPopOver = function(){
+          $scope.notificationPopoverFocus = true;
           var popoverOptions = {
             id: 'notificationsPopOver',
             templateurl: 'heading-popover-notifications.html',
             controller: function($scope){
+            },
+            close: function(){
+              $scope.notificationPopoverFocus = false;
             }
           };
 

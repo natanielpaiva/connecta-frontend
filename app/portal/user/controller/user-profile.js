@@ -9,7 +9,6 @@ define([
 
     LoginService.getCurrentUser().then(function(data){
       $scope.user = data;
-      console.log(data);
     });
 
     $scope.credentials = {};

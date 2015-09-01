@@ -30,19 +30,19 @@
       <li ng-if="logoSrc">
           <img style="height: 40px;" ng-src="{{logoSrc}}" />
       </li>
-      <li>
+      <li ng-class="{'heading-item-focus': appsPopoverFocus }">
         <a href title="{{'APPLICATION.APPS'| translate}}"
           ng-click="toggleAppsPopOver()">
           <span class="icon-now-widgets"></span>
         </a>
       </li>
-      <li>
+      <li ng-class="{'heading-item-focus': notificationPopoverFocus }">
         <a href title="{{'LAYOUT.NOTIFICATIONS'| translate}}"
           ng-click="toggleNotificationsPopOver()">
           <span class="icon-notifications"></span>
         </a>
       </li>
-      <li>
+      <li ng-class="{'heading-item-focus': userPopoverFocus }">
         <a class="image-on-background user-avatar" href title="{{user.firstName}} {{user.lastName}}"
           ng-click="toggleUserPopOver()" ng-show='avatarUrl' style="background-image: url('{{avatarUrl}}')">
         </a>
