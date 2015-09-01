@@ -17,7 +17,7 @@ define([
     user: applications.portal.host + '/user'
   });
 
-  portal.config(function($translatePartialLoaderProvider, redactorOptions, FacebookProvider) {
+  portal.config(function($translatePartialLoaderProvider, redactorOptions) {
     $translatePartialLoaderProvider.addPart('portal/layout');
     $translatePartialLoaderProvider.addPart('portal/application');
     $translatePartialLoaderProvider.addPart('portal/dashboard');
@@ -31,7 +31,7 @@ define([
 
     angular.extend(redactorOptions, _redactorOptions);
 
-     FacebookProvider.init('540992702633361');
+     // FacebookProvider.init('540992702633361');
   });
 
   /**
