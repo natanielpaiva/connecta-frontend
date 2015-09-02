@@ -1,4 +1,4 @@
-define([
+define([    
   'angular',
   'jquery',
   // Configuração dos módulos
@@ -11,7 +11,7 @@ define([
   'connecta.maps',
   'connecta.datamodel',
   'connecta.inspection',
-  // Dependências principais
+  // Dependências principais  
   'angular-route',
   'angular-resource',
   'angular-ui-bootstrap',
@@ -35,7 +35,8 @@ define([
   'bower_components/angular-currency-mask/angular-currency-mask',
   'bower_components/angular-redactor/angular-redactor',
   'bower_components/angular-amchart/src/amchart',
-  'bower_components/angular-facebook/lib/angular-facebook'
+  'bower_components/angular-facebook/lib/angular-facebook',
+  'bower_components/ngAutocomplete/src/ngAutocomplete'
 ], function(angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel, inspection) {
 
   var connecta = angular.module('connecta', [
@@ -63,7 +64,7 @@ define([
     'pascalprecht.translate',
     'angularFileUpload',
     'currencyMask',
-    'AngularAmChart'
+    'AngularAmChart'    
   ]);
 
   // Configuração do backend dos módulos

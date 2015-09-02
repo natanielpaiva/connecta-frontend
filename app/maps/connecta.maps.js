@@ -1,7 +1,7 @@
 define([
     'angular'
 ], function (angular) {
-    var maps = angular.module('connecta.maps', []);
+    var maps = angular.module('connecta.maps', ['ngAutocomplete']);
 
 
     maps.config(function ($translatePartialLoaderProvider) {
@@ -11,6 +11,7 @@ define([
         $translatePartialLoaderProvider.addPart('maps/layer-viewer-group');
         $translatePartialLoaderProvider.addPart('maps/import');
         $translatePartialLoaderProvider.addPart('maps/presenter-source');
+        $translatePartialLoaderProvider.addPart('maps/applied-budget');
     });
 
 
@@ -27,6 +28,9 @@ define([
             layerViewerGroup: appMaps.host + '/layerViewerGroups',
             groupLayerViewer: appMaps.host + '/groupLayerViewers',
             layerViewerType: appMaps.host + '/layerViewerTypes',
+            appliedBudget: appMaps.host + '/appliedBudgets',
+            budgetAreaApplication: appMaps.host + '/budgetAreaApplications',
+            municipalBudget: appMaps.host + '/municipalBudgets',
             geo: appMaps.host + '/geoRest',
             openlayersProxy: appMaps.host + '/proxy.jsp?',
             regexBase64: '.*base64,'
@@ -164,6 +168,29 @@ define([
             controller: 'PresenterSourceFormController',
             controllerUrl: 'maps/presenter-source/controller/presenter-source-form',
             templateUrl: 'app/maps/presenter-source/template/presenter-source-form.html'
+        },
+        /*
+         *  Applied Budget
+         */
+        '/maps/applied-budget': {
+            controller: 'AppliedBudgetListController',
+            controllerUrl: 'maps/applied-budget/controller/applied-budget-list',
+            templateUrl: 'app/maps/applied-budget/template/applied-budget-list.html'
+        },
+        '/maps/applied-budget/new': {
+            controller: 'AppliedBudgetFormController',
+            controllerUrl: 'maps/applied-budget/controller/applied-budget-form',
+            templateUrl: 'app/maps/applied-budget/template/applied-budget-form.html'
+        },
+        '/maps/applied-budget/:id': {
+            controller: 'AppliedBudgetViewController',
+            controllerUrl: 'maps/applied-budget/controller/applied-budget-view',
+            templateUrl: 'app/maps/applied-budget/template/applied-budget-view.html'
+        },
+        '/maps/applied-budget/:id/edit': {
+            controller: 'AppliedBudgetFormController',
+            controllerUrl: 'maps/applied-budget/controller/applied-budget-form',
+            templateUrl: 'app/maps/applied-budget/template/applied-budget-form.html'
         }
 
     };
@@ -195,6 +222,18 @@ define([
             children: []
         },
         {
+            href: 'maps/applied-budget',
+            title: 'APPLIEDBUDGET.APPLIEDBUDGET',
+            icon: 'icon-map',
+            children: []
+        },
+        {
+            href: 'maps/presenter-source',
+            title: 'PRESENTERSOURCE.PRESENTERSOURCE',
+            icon: 'icon-map',
+            children: []
+        },
+        {
             title: 'IMPORT.IMPORT',
             icon: 'icon-import-export',
             children: [
@@ -203,13 +242,8 @@ define([
                     title: 'IMPORT.SHP'
                 }
             ]
-        },
-        {
-            href: 'maps/presenter-source',
-            title: 'PRESENTERSOURCE.PRESENTERSOURCE',
-            icon: 'icon-map',
-            children: []
         }
+
     ];
     return maps;
 });

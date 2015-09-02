@@ -10,7 +10,7 @@ require.config({
         'angular-route': '../bower_components/angular-route/angular-route.min',
         'angular-resource': '../bower_components/angular-resource/angular-resource.min',
         'angular-ui-bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
-        'angular-ng-table': '../bower_components/ng-table/ng-table.min',
+        'angular-ng-table': '../bower_components/ng-table/ng-table.min',         
         'angular-facebook': '../bower_components/angular-facebook/lib/angular-facebook',
         'portal': 'portal',
         'collector': 'collector',
@@ -179,6 +179,9 @@ require.config({
         'bower_components/imperavi-redactor/redactor/redactor.min': {
             deps: ['jquery'],
             exports: 'jQuery.fn.redactor'
+        },
+        'bower_components/ngAutocomplete/src/ngAutocomplete': {
+            deps: ['angular','bower_components/connectaGeoJS/index/openlayersImplementation/async/async!//maps.googleapis.com/maps/api/js?sensor=false&region=br&libraries=places']
         },
         'connecta': {
             deps: [

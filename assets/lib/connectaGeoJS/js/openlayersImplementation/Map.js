@@ -1,5 +1,5 @@
 define([ConnectaGeoConfig.baseURL+'AbstractMap', 
-    ConnectaGeoConfig.baseURL+'openlayersImplementation/async/async!googleMaps',
+    //ConnectaGeoConfig.baseURL+'openlayersImplementation/async/async!googleMaps',
     ConnectaGeoConfig.baseURL+'openlayersImplementation/openlayers-api/OpenLayers-2.13.1/OpenLayers'],
 	function(AbstractMap) {
 
