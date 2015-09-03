@@ -127,15 +127,6 @@ define([
                 type: "CHART_CURSOR",
                 children: [
                     {
-                        type: "CHART_CURSOR",
-                        name: "CHART CURSOR",
-                        config: {
-                            name: 'Chart c.',
-                            template: 'app/presenter/viewer/template/chart-cursor/chart-cursor.html',
-                            type: 'CHART_CURSOR'
-                        }
-                    },
-                    {
                         type: "GENERAL_SETTINGS",
                         name: "GENERAL SETTINGS",
                         config: {

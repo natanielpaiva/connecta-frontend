@@ -5,7 +5,7 @@ define([
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, LayoutService, $modal) {
         $scope.state = {loaded: false};
-
+        $scope.chartCursor = {ativo:false};
         $scope.metrics = [];
         $scope.descriptions = [];
         LayoutService.showSidebarRight(true);
@@ -16,8 +16,19 @@ define([
                 $scope.typeBar = "TYPE";
                 $scope.settingsBar = "SETTINGS";
                 $scope.setLayoutConfiguration = false;
+                $scope.chartCursor = getChartCursor();
 
                 $scope.accordionConfig = ViewerService.getAccordionConfig();
+
+                $scope.changeChartCursor = function () {
+                    if ($scope.chartCursor.ativo) {
+                        $scope.analysisViewer.viewer.configuration.chartCursor = {
+                            color: "#FFF"
+                        };
+                    } else {
+                        delete $scope.analysisViewer.viewer.configuration.chartCursor;
+                    }
+                };
 
                 $scope.viewerBar = "ANALYSIS";
                 $scope.getAnalysis = function (val) {
@@ -93,6 +104,10 @@ define([
 
         var getAnalysisViewer = function () {
             return $scope.analysisViewer;
+        };
+        
+        var getChartCursor = function(){
+           return $scope.chartCursor;  
         };
 
         $scope.$on("$locationChangeStart", function (event) {
