@@ -4,7 +4,7 @@ define([
   'portal/user/service/user-service'
 ], function(portal){
 
-  return portal.lazy.controller('UserFormController', function($scope, $location, notify, UserService, LoginService){
+  return portal.lazy.controller('UserFormController', function($scope, $translate, $location, notify, UserService, LoginService){
 
     $scope.onFileSelected = function (files, ev, rejFiles) {
       if (rejFiles && rejFiles.length) {

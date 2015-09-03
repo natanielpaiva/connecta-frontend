@@ -1,7 +1,7 @@
 define([
     'connecta.portal',
 ], function (portal) {
-    return portal.service('FacebookService', function (Facebook, UserService, LoginService) {
+    return portal.service('FacebookService', function (Facebook, UserService, LoginService, $rootScope) {
 
         var authResponse = {};
         var facebookService = this;
@@ -22,8 +22,11 @@ define([
         this.me = function () {
             Facebook.api('/me', function (user) {
                 console.log(user);
-//                user.email = "raphael.vtr@gmail.com";
-                facebookService.createFacebookUser(user);
+                if(user.email){
+                    facebookService.createFacebookUser(user);
+                } else {
+                    $rootScope.$broadcast('facebook-without-email', user);
+                }
 
             });
         };
