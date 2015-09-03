@@ -38,11 +38,10 @@
             <span class="icon-facebook-with-circle"></span>
             Login with Facebook
         </a>
-        <a href class="btn-social btn-google" 
-           data-ng-click="loginWithFacebook()">
-            <span class="icon-google-with-circle"></span>
+        <div id="loginGoogle" class="btn-social btn-google" ng-click="loginWithGoogle()" style="cursor: pointer">
+            <span class="icon icon-google-with-circle"></span>
             Login with Google +
-        </a>
+        </div>
     </div>
     <div id="create-account">
         <a href ng-click="setSection(sections.form)" translate>Create Account</a>

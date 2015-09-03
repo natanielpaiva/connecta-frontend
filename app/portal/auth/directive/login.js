@@ -2,11 +2,12 @@ define([
     'connecta.portal',
     'portal/auth/service/login-service',
     'portal/auth/service/facebook-service',
+    'portal/auth/service/google-plus-service',
 ], function (portal) {
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, $rootScope, LoginService, FacebookService, UserService, $location) {
+            controller: function ($scope, $rootScope, LoginService, FacebookService, UserService, GPlusService, $location) {
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.logged = false;
@@ -17,7 +18,7 @@ define([
                 $scope.currentSection = $scope.sections.login;
 
                 $scope.setSection = function (section) {
-                    $scope.user = {}; 
+                    $scope.user = {};
                     $scope.userImage = undefined;
                     $scope.currentSection = $scope.sections[section];
                 };
@@ -90,6 +91,9 @@ define([
                     });
                 };
 
+                $scope.loginWithGoogle = function(){
+                    GPlusService.loginWithGoogle();
+                };
 
                 $rootScope.$on('facebook-without-email', function (event, userFacebook) {
                     console.log("User: ", userFacebook);
