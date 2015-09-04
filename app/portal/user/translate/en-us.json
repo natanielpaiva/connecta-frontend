@@ -26,6 +26,9 @@
       "COMPARE_PASS": "Passwords do not match.",
       "SHORT_PASS": "Password needs to be at least 8 characters long.",
       "INVALID_DOCUMENT": "Invalid Image"
+    },
+    "ERROR": {
+        "USERNAME_EXISTS": "Email exists"
     }
   }
 }

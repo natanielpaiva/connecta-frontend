@@ -26,6 +26,9 @@
       "COMPARE_PASS": "As senhas não conferem.",
       "SHORT_PASS": "A senha deve ter pelo menos 8 caracteres.",
       "INVALID_DOCUMENT": "Imagem Inválida"
+    },
+    "ERROR": {
+        "USERNAME_EXISTS": "E-mail ja cadastrado"
     }
   }
 }

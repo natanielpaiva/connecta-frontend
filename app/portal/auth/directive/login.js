@@ -3,11 +3,12 @@ define([
     'portal/auth/service/login-service',
     'portal/auth/service/facebook-service',
     'portal/auth/service/google-plus-service',
+    'portal/layout/service/notify'
 ], function (portal) {
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, $rootScope, LoginService, FacebookService, UserService, GPlusService, $location) {
+            controller: function ($scope, $rootScope, LoginService, FacebookService, UserService, GPlusService, $location, notify) {
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.logged = false;
@@ -87,7 +88,8 @@ define([
                     UserService.save($scope.user, $scope.fileImage).then(function (response) {
                         LoginService.setAuthenticatedUser(response);
                         $location.path('/');
-                        console.log(response);
+                    }, function(response){
+                        notify.error(response.data);
                     });
                 };
 

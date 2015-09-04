@@ -2,7 +2,7 @@ define([
     'connecta.portal',
     'bower_components/toastr/toastr.min'
 ], function (portal, toastr) {
-    return portal.lazy.factory("notify", function ($translate) {
+    return portal.factory("notify", function ($translate) {
         toastr.options = {
             "closeButton": true,
             "debug": false,
