@@ -34,7 +34,7 @@
                         <strong translate>COMPANY.IMAGE</strong>:
                     </p>
                     <p>
-                        <img class="img-company-rect" ng-src="{{getImgUrl()}}" />
+                        <img class="img-company-rect" ng-src="{{baseUrl + company.imageRect + '?_=' + currentyDate}}" />
                     </p>
                     <p ng-if="company.icon">
                         <strong translate>COMPANY.ICON</strong>:

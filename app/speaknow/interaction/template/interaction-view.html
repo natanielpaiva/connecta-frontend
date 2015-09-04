@@ -59,15 +59,13 @@
         <table ng-table="tableParams" class="table table-striped margin-top-single">
             <thead>
                 <tr>
-                    <th></th>
                     <th translate>ACTION.NAME</th>
                     <th translate>ACTION.TYPE</th>
-                    <th></th>
+                    <th translate>INTERACTION.ACTIONS</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="action in $data">
-                    <td><input type="checkbox" value="{{action.id}}" /></td>
                     <td class="text-left">{{action.name}}</td>
                     <td class="text-left">{{action.type}}</td>
                     <td>

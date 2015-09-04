@@ -1,7 +1,7 @@
 define([
     'connecta.portal',
 ], function (portal) {
-    return portal.service('GPlusService', function (UserService, LoginService) {
+    return portal.service('GPlusService', function (UserService, LoginService, $location) {
         
         var authResult = {};
         var gplusService = this;

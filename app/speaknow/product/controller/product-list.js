@@ -16,6 +16,7 @@ define([
             });
         });
 
+        $scope.currentyDate = new Date().getTime();
         $scope.products = null;
         $scope.productUrl = speaknowResources.base;
         $scope.search = {
@@ -48,10 +49,6 @@ define([
             text: 'Deseja realmente remover o produto?',
             size: 'sm',
             success: $scope.delete
-        };
-        
-        $scope.getImgUrl = function (product) {
-            return product.image + '?_=' + new Date().getTime();
         };
     });
 });

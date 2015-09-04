@@ -10,6 +10,7 @@ define([
 
                 $scope.company = {};
                 $scope.baseUrl = speaknowResources.base;
+                $scope.currentyDate = new Date().getTime();
 
 //                if ($routeParams.id) {
 //                    CompanyService.get($routeParams.id).then(function (data) {
@@ -82,10 +83,6 @@ define([
                             });
                         });
                     });
-                };
-
-                $scope.getImgUrl = function (){
-                  return $scope.baseUrl + $scope.company.imageRect + '?_=' + new Date().getTime();
                 };
 
                 $scope.modalRemoveContactGroup = {
