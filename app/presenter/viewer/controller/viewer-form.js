@@ -6,6 +6,9 @@ define([
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, LayoutService, $modal) {
         $scope.state = {loaded: false};
         $scope.chartCursor = {ativo:false};
+        $scope.chartScrollbar = {ativo:false};
+        $scope.legend = {ativo:false};
+        
         $scope.metrics = [];
         $scope.descriptions = [];
         LayoutService.showSidebarRight(true);
@@ -17,6 +20,8 @@ define([
                 $scope.settingsBar = "SETTINGS";
                 $scope.setLayoutConfiguration = false;
                 $scope.chartCursor = getChartCursor();
+                $scope.chartScrollbar = getChartScrollbar();
+                $scope.legend = getLegend();
 
                 $scope.accordionConfig = ViewerService.getAccordionConfig();
 
@@ -27,6 +32,25 @@ define([
                         };
                     } else {
                         delete $scope.analysisViewer.viewer.configuration.chartCursor;
+                    }
+                };
+                
+                $scope.changeChartScrollbar = function () {
+                    if ($scope.chartScrollbar.ativo) {
+                        $scope.analysisViewer.viewer.configuration.chartScrollbar = {
+                            color: "#FFF"
+                        };
+                    } else {
+                        delete $scope.analysisViewer.viewer.configuration.chartScrollbar;
+                    }
+                };
+                
+                $scope.changeLegend = function () {
+                    if ($scope.legend.ativo) {
+                        $scope.analysisViewer.viewer.configuration.legend = {
+                        };
+                    } else {
+                        delete $scope.analysisViewer.viewer.configuration.legend;
                     }
                 };
 
@@ -108,6 +132,13 @@ define([
         
         var getChartCursor = function(){
            return $scope.chartCursor;  
+        };
+        
+        var getChartScrollbar = function(){
+           return $scope.chartScrollbar;  
+        };
+        var getLegend = function(){
+           return $scope.legend;  
         };
 
         $scope.$on("$locationChangeStart", function (event) {

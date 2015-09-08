@@ -152,15 +152,6 @@ define([
                 type: "CHART_SCROLLBAR",
                 children: [
                     {
-                        type: "CHART_SCROLLBAR",
-                        name: "CHART SCROLLBAR",
-                        config: {
-                            name: 'Chart S.',
-                            template: 'app/presenter/viewer/template/chart-scrollbar/chart-scrollbar.html',
-                            type: 'CHART_SCROLLBAR'
-                        }
-                    },
-                    {
                         type: "GENERAL_SETTINGS",
                         name: "GENERAL SETTINGS",
                         config: {
@@ -199,7 +190,7 @@ define([
                         name: "POSITION AND MARGINS",
                         config: {
                             name: 'Position and M.',
-                            template: 'app/presenter/viewer/template/legend/general-set.html',
+                            template: 'app/presenter/viewer/template/legend/position-and-margins.html',
                             type: 'GENERAL_SETTINGS'
                         }
                     },
@@ -260,6 +251,18 @@ define([
                     name: 'Title',
                     template: 'app/presenter/viewer/template/title/title.html',
                     type: 'TITLE'
+                }
+
+            },
+            {
+                heading: "+ Graphs",
+                title: "Graphs",
+                type: "GRAPHS",
+                children: "",
+                config: {
+                    name: 'Graphs',
+                    template: 'app/presenter/viewer/template/graphs/graphs.html',
+                    type: 'GRAPHS'
                 }
 
             }
