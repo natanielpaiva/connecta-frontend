@@ -216,13 +216,19 @@ define([
                 $scope.interaction.actions.push($scope.action);
                 InteractionService.save($scope.interaction, image).success(function (response) {
                     ActionService.clearInteraction();
-                    $location.path('/speaknow/interaction/' + response.id);
+                    $translate('INTERACTION.SUCCESS').then(function (text) {
+                        notify.success(text);
+                        $location.path('/speaknow/interaction/' + response.id);
+                    });
                 });
             } else {
                 $scope.action.interaction = $scope.interaction;
                 ActionService.save($scope.action).success(function (response) {
                     ActionService.clearInteraction();
-                    $location.path('/speaknow/interaction/' + $scope.action.interaction.id);
+                    $translate('ACTION.SUCCESS').then(function (text) {
+                        notify.success(text);
+                        $location.path('/speaknow/interaction/' + $scope.action.interaction.id);
+                    });
                 });
             }
         };

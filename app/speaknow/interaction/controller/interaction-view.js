@@ -17,8 +17,8 @@ define([
 
         if ($routeParams.id) {
             InteractionService.get($routeParams.id).then(function (response) {
-                    $scope.interaction = response.data;
-            }, function(response){
+                $scope.interaction = response.data;
+            }, function (response) {
                 redirectToInteraction();
             });
         } else {
@@ -73,7 +73,7 @@ define([
 
         $scope.delete = function (id) {
             ActionService.delete(id).success(function () {
-                notify.success("Action removida com sucesso");
+                notify.success('INTERACTION.REMOVE_ACTION_SUCCESS');
                 InteractionService.get($routeParams.id).success(function (data) {
                     $scope.interaction = data;
                     $scope.tableParams.reload();
@@ -83,7 +83,7 @@ define([
 
         $scope.updateDefault = function (id) {
             ActionService.setDefault(id).success(function () {
-                notify.success("Action padrão alterada com sucesso");
+                notify.success("INTERACTION.ACTION_DEFAULT_SUCCESS");
                 InteractionService.get($routeParams.id).success(function (data) {
                     $scope.interaction = data;
                     $scope.tableParams.reload();
@@ -97,7 +97,7 @@ define([
             size: 'sm',
             success: $scope.updateDefault
         };
-        
+
         $scope.modalSendWhats = {
             title: 'Enviar Whatsapp',
             text: 'Deseja realmente enviar a enquete?',

@@ -4,6 +4,7 @@
         "REGISTER_CONTACT": "Register Contact",
         "EDIT_CONTACT":"Edit Contact",
         "NAME": "Name",
-        "VALUE": "Value"
+        "VALUE": "Value",
+        "REMOVE_SUCCESS":"Contato removido com sucesso"
     }
 }

@@ -5,7 +5,7 @@
         "FEELING": "Sentimento",
         "MESSAGE": "Mensagem",
         "NO_RESULT":"Nenhum resultado foi encontrado.",
-        "REMOVE_SUCCESS":"Empresa removida com sucesso",
+        "REMOVE_SUCCESS":"Mensagem removida com sucesso",
         "COMPANY":"Empresa",
         "WITHOUT_COMPANY":"É necessário cadastrar uma empresa."
     }

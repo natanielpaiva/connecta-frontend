@@ -1,6 +1,7 @@
 {
     "ACTION": {
         "YES":"Yes",
+        "SUCCESS":"Success.",
         "NO":"No",
         "CONTACTS_NULL":"You need one or more contacts",
         "ADD": "Add Action",
@@ -32,6 +33,8 @@
         "PROMOTION": "Promotion",
         "FAQ": "FAQ",
         "SERVICE": "Service",
+        "SECTIONS": "Sections",
+        "OPTIONS":"Options",
         "SECTION": {
             "TITLE": "Section Title",
             "FOOTER": "Footer",

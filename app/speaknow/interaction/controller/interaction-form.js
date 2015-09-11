@@ -35,7 +35,9 @@ define([
             $scope.isEditing = true;
             InteractionService.get($routeParams.id).success(function (data) {
                 $scope.interaction = data;
-                $scope.interactionImage = $scope.baseUrl + $scope.interaction.image;
+                if($scope.interaction.image){
+                    $scope.interactionImage = $scope.baseUrl + $scope.interaction.image;
+                }
             });
         }
 
@@ -44,7 +46,7 @@ define([
         ActionService.getIcons().success(function (data) {
             $scope.icons = data.icons;
         });
-
+        
         // Executa a modal para escolha de ícones
         $scope.openIconModal = function () {
             var modalIcon = $modal.open({
@@ -110,7 +112,10 @@ define([
 
         $scope.save = function () {
             InteractionService.save($scope.interaction, $scope.fileImage).success(function () {
-                $location.path('speaknow/interaction');
+                $translate('INTERACTION.SUCCESS').then(function (text) {
+                    notify.success(text);
+                    $location.path('speaknow/interaction');
+                });
             });
         };
 

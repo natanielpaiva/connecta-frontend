@@ -16,6 +16,10 @@
         "DROP_FILE_HERE": "Arraste ou clique aqui",
         "SEARCH_EMPTY":"Nenhum resultado encontrado",
         "WITHOUT_COMPANY":"É necessário cadastrar uma empresa.",
-        "INVALID_DOCUMENT":"Imagem inválida."
+        "INVALID_DOCUMENT":"Imagem inválida.",
+        "SUCCESS":"Interação cadastrada com sucesso.",
+        "REMOVE_ACTION_SUCCESS":"Ação removida com sucesso",
+        "ACTION_DEFAULT_SUCCESS":"Ação padrão alterada com sucesso",
+        "MIN_NUMBER_ACTIONS":"A interação deve ter pelo menos uma ação"
     }
 }

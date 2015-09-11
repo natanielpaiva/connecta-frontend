@@ -37,9 +37,9 @@ define([
 
                 $scope.delete = function (id) {
                     ContactGroupService.delete(id).success(function () {
-                        $translate('COMPANY_CONTACT.REMOVE_SUCCESS').then(function (text) {
+                        $translate('COMPANYGROUP.REMOVE_SUCCESS').then(function (text) {
                             notify.success(text);
-                            $location.path('speaknow/company/' + $scope.contactGroup.company.id);
+                            $location.path('speaknow/company/view');
                         });
                     });
                 };

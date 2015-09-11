@@ -16,6 +16,10 @@
         "DROP_FILE_HERE": "Drop file here",
         "SEARCH_EMPTY":"No results found",
         "WITHOUT_COMPANY":"It needs to register a company",
-        "INVALID_DOCUMENT":"Invalid Image."
+        "INVALID_DOCUMENT":"Invalid Image.",
+        "SUCCESS":"Success.",
+        "REMOVE_ACTION_SUCCESS":"Action deleted.",
+        "ACTION_DEFAULT_SUCCESS":"Action default successful.",
+        "MIN_NUMBER_ACTIONS":"A interação deve ter pelo menos uma ação"
     }
 }

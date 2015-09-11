@@ -4,6 +4,7 @@
         "REGISTER_CONTACT": "Adicionar Contato",
         "EDIT_CONTACT":"Atualizar Contato",
         "NAME": "Nome",
-        "VALUE": "Valor"
+        "VALUE": "Valor",
+        "REMOVE_SUCCESS":"Contato removido com sucesso"
     }
 }

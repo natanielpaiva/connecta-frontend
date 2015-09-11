@@ -55,7 +55,7 @@
                         <span class="icon-{{action.icon}}"></span>
                     </p>
 
-                    <h3>Sections</h3>
+                    <h3 translate>ACTION.SECTIONS</h3>
                     <ul ng-repeat='section in action.sections'>
                         <li>{{'ACTION.SECTION.TITLE'| translate}}: {{section.title}}</li>
                         <ul ng-if='section.params.length'>
@@ -64,9 +64,9 @@
                                 <li>{{'ACTION.SECTION.PARAM.TITLE'| translate}}: {{param.title}}</li>
                                 <li ng-if='param.name'>{{'PARAM.SECTION.PARAM.NAME'| translate}}: {{param.name}}</li>
                                 <li ng-if='param.tag'>{{'PARAM.SECTION.PARAM.TAG'| translate}}: {{param.tag}}</li>
-                                <li>{{'ACTION.SECTION.PARAM.TYPE'| translate}}: {{param.type}}</li>
+                                <li>{{'ACTION.SECTION.PARAM.TYPE'| translate}}: {{'ACTION.SECTION.PARAM.PARAM_TYPE.' + param.type | translate}}</li>
                                 <ul ng-if="param.options.length">
-                                    <li>Options</li>
+                                    <li translate>ACTION.OPTIONS</li>
                                     <ul>
                                         <li ng-repeat='option in param.options'>{{option.value}}</li>
                                     </ul>

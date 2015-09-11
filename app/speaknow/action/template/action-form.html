@@ -132,8 +132,9 @@
                                     <div class="form-group">
                                         <label for="param-type" translate>ACTION.SECTION.PARAM.TYPE</label>
                                         <select id="type" name="param-type-{{index}}" class="form-control" ng-model="param.type"
-                                                ng-change="onChangeParamType(param.type)">
-                                            <option ng-repeat="paramType in paramTypes" value="{{paramType}}">
+                                                ng-change="onChangeParamType(param.type)" ng-init="onChangeParamType(param.type)">
+                                            <option ng-selected="{{paramType == param.type}}"
+                                                ng-repeat="paramType in paramTypes" value="{{paramType}}">
                                                 {{'ACTION.SECTION.PARAM.PARAM_TYPE.' + paramType| translate}}
                                             </option>
                                         </select>
@@ -213,10 +214,10 @@
                                ng-model="action.questionSeparator" required />
                     </div>-->
 
-                    <div class="form-group" ng-show="isAnswerSeparator">
+                    <div class="form-group" ng-show="isAnswerSeparator && isWhatsapp">
                         <label for="answerSeparator" class="required" translate>ACTION.ANSWER_SEPARATOR</label>
                         <input type="text" class="form-control" id="name" name="answerSeparator"
-                               ng-model="action.answerSeparator" maxlength="1" ng-required="isAnswerSeparator" />
+                               ng-model="action.answerSeparator" maxlength="1" ng-required="isAnswerSeparator && isWhatsapp" />
                         <div ng-show="actionForm.answerSeparator.$touched" ng-messages="actionForm.answerSeparator.$error"
                             ng-messages-include="portal-error-messages"></div>
                     </div>

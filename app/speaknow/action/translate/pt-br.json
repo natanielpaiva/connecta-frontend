@@ -1,6 +1,7 @@
 {
     "ACTION": {
         "YES":"Sim",
+        "SUCCESS":"Ação salva com sucesso.",
         "NO":"Não",
         "CONTACTS_NULL":"É necessário um ou mais contatos.",
         "ADD": "Adicionar Ação",
@@ -32,6 +33,8 @@
         "PROMOTION": "Promoção",
         "FAQ": "FAQ",
         "SERVICE": "Serviço",
+        "SECTIONS": "Seções",
+        "OPTIONS":"Opções",
         "SECTION": {
             "TITLE": "Título da seção",
             "FOOTER": "Rodapé",

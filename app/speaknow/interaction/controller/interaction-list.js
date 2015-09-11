@@ -24,7 +24,7 @@ define([
         };
 
         $scope.tableParams = new ngTableParams({
-            count: 4,
+            count: 10,
             page: 1,
             filter: $scope.search
         }, {

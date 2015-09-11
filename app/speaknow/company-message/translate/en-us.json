@@ -5,7 +5,7 @@
         "FEELING": "Feeling",
         "MESSAGE": "Message",
         "NO_RESULT":"No Results",
-        "REMOVE_SUCCESS":"Company successfully removed",
+        "REMOVE_SUCCESS":"Message successfully removed",
         "COMPANY":"Company",
         "WITHOUT_COMPANY":"It needs to register a company"
     }

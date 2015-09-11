@@ -11,6 +11,7 @@
     "TYPE": "Type",
     "IMAGE_QUAD": "Square Image",
     "IMAGE_RECT": "Rectangular Image",
-    "DESCRIPTION":"Description"
+    "DESCRIPTION":"Description",
+    "REMOVE_SUCCESS":"Grupo de contatos excluído com sucesso."
   }
 }
