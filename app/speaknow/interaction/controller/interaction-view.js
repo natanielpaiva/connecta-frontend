@@ -15,13 +15,7 @@ define([
             $location.path('speaknow/interaction');
         };
 
-        if ($routeParams.id) {
-            InteractionService.get($routeParams.id).then(function (response) {
-                $scope.interaction = response.data;
-            }, function (response) {
-                redirectToInteraction();
-            });
-        } else {
+        if (!$routeParams.id) {
             console.error("Id da interaction não informado na url");
             redirectToInteraction();
         }
@@ -37,9 +31,14 @@ define([
             filter: $scope.search
         }, {
             getData: function ($defer, params) {
-                var data = $scope.interaction.actions;
-                params.total(data.length);
-                return $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                InteractionService.get($routeParams.id).then(function (response) {
+                    $scope.interaction = response.data;
+                    var data = $scope.interaction.actions;
+                    params.total(data.length);
+                    return $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                }, function (response) {
+                    redirectToInteraction();
+                });
             },
             counts: [20, 50, 100]
         });

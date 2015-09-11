@@ -30,6 +30,7 @@ define([
         } else {
             CompanyService.getUserCompany().success(function (response) {
                 $location.path('speaknow/company/view');
+                notify.success('COMPANY.EXITST');
             });
         }
 

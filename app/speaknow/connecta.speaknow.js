@@ -179,11 +179,11 @@ define([
         /**
          * URL COMPANY
          */
-        '/speaknow/company': {
-            controller: 'CompanyListController',
-            controllerUrl: 'speaknow/company/controller/company-list',
-            templateUrl: 'app/speaknow/company/template/company-list.html'
-        },
+//        '/speaknow/company': {
+//            controller: 'CompanyListController',
+//            controllerUrl: 'speaknow/company/controller/company-list',
+//            templateUrl: 'app/speaknow/company/template/company-list.html'
+//        },
         '/speaknow/company/new': {
             controller: 'CompanyFormController',
             controllerUrl: 'speaknow/company/controller/company-form',

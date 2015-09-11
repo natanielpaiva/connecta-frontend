@@ -18,6 +18,7 @@
         "REMOVE_GROUP_SUCCESS": "Successfully Removed",
         "SUCCESS":"Success",
         "VALIDATE_ADDRESS":"Invalid address",
+        "EXITST":"Company exists",
         "VALIDATION" : {
             "ADDRESS":"Endereço inválido",
             "INVALID_DOCUMENT":"Invalid Image.",

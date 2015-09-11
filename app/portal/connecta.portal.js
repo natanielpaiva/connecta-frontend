@@ -32,7 +32,7 @@ define([
 
     angular.extend(redactorOptions, _redactorOptions);
 
-      FacebookProvider.init('540992702633361');
+      FacebookProvider.init('693105304159812');
   });
 
   /**
