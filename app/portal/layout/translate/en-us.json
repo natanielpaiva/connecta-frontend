@@ -27,7 +27,11 @@
     "SHOW_GRID" : "Show grid",
     "SHOW_LIST" : "Show list",
     "SETTINGS" : "Settings",
-    "NOTIFICATIONS" : "Notifications"
+    "NOTIFICATIONS" : "Notifications",
+    "LOGIN_FACEBOOK":"Login with Facebook",
+    "LOGIN_GOOGLE":"Login with Google +",
+    "OR":"or",
+    "ADD_ACC":"Create Account"
   },
   "KEY_VALUE": {
     "NO_ITEM": "Nothing yet. Click '{{LAYOUT.ADD}}' to add a new item."

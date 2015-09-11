@@ -74,13 +74,11 @@ define([
 
                 $scope.deleteContactGroup = function (id) {
                     ContactGroupService.delete(id).success(function () {
-                        $translate('COMPANY.REMOVE_GROUP_SUCCESS').then(function (text) {
-                            notify.success(text);
-                            CompanyService.get($routeParams.id).success(function (data) {
-                                $scope.company = data;
-                                ContactGroupService.setCompany($scope.company);
-                                $scope.tableParams.reload();
-                            });
+                        notify.success('COMPANY.REMOVE_GROUP_SUCCESS');
+                        CompanyService.get($scope.company.id).success(function (data) {
+                            $scope.company = data;
+                            ContactGroupService.setCompany($scope.company);
+                            $scope.tableParams.reload();
                         });
                     });
                 };

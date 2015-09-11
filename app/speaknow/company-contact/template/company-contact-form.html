@@ -23,7 +23,7 @@
                 <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-show="!companyContact.contactGroup.main">
                 <label for="type" translate>COMPANY_CONTACT.TYPE</label>
                 <select id="type" name="type" class="form-control" ng-model="companyContact.type" required 
                         ng-change="createInputValue()">
