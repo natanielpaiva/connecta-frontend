@@ -7,9 +7,12 @@ define([
     return speaknow.lazy.controller('WhatsappAccountList', function (
             $scope, WhatsappService, notify, ngTableParams, CompanyService, $translate, $location
             ) {
-        
+
         CompanyService.getUserCompany().then(function (response) {
         }, function (data) {
+          if(data.status === 401){
+            return;
+          }
             $translate('PRODUCT.WITHOUT_COMPANY').then(function (text) {
                 notify.warning(text);
                 $location.path('speaknow/company/new');
@@ -19,7 +22,7 @@ define([
         $scope.search = {
             name:''
         };
-        $scope.tableParams = new ngTableParams({ 
+        $scope.tableParams = new ngTableParams({
             count: 10,
             page: 1,
             filter: $scope.search
@@ -67,7 +70,7 @@ define([
                 'btn-primary': active,
                 'btn-default': !active
             };
-        }; 
+        };
 
         $scope.statusClasses = function(active){
             return {
@@ -76,6 +79,6 @@ define([
             };
         };
 
-       
+
     });
 });

@@ -9,6 +9,9 @@ define([
 
         CompanyService.getUserCompany().then(function (response) {
         }, function (data) {
+          if(data.status === 401){
+            return;
+          }
             $translate('CONTACT.WITHOUT_COMPANY').then(function (text) {
                 notify.warning(text);
                 $location.path('speaknow/company/new');

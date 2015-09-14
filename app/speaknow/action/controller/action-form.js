@@ -204,8 +204,6 @@ define([
                 return;
             }
             if (!$scope.interaction.id) {
-                //TODO trazer a company da Grid
-                $scope.interaction.company = {id: 1};
                 $scope.interaction.actions = [];
 
                 var image = $scope.interaction.image;

@@ -8,11 +8,15 @@ define([
             $scope, InteractionService, ngTableParams, notify, $translate, sortBy,
             CompanyService, $location, speaknowResources
             ) {
-        
+
         $scope.baseUrl = speaknowResources.base;
 
         CompanyService.getUserCompany().then(function (response) {
         }, function (data) {
+          if(data.status === 401){
+            return;
+          }
+
             $translate('INTERACTION.WITHOUT_COMPANY').then(function (text) {
                 notify.warning(text);
                 $location.path('speaknow/company/new');

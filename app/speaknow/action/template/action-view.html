@@ -6,7 +6,7 @@
         <div class="margin-top-single">
             <a href="#/speaknow/interaction/{{action.interaction.id}}"
                class="btn btn-default" translate>
-                LAYOUT.BACK                     
+                LAYOUT.BACK
             </a>
             <!--//TODO previous e back nos items (ouch)-->
             <!--            <button type="button" class="btn btn-default" ng-click="previousAction(action.id)">
@@ -27,31 +27,31 @@
             <div class="col-md-12">
                 <div class="well margin-top-single margin-bottom-single">
                     <p ng-if="action.name">
-                        <strong translate>ACTION.NAME</strong>: 
+                        <strong translate>ACTION.NAME</strong>:
                         {{action.name}}
                     </p>
                     <p ng-if="action.default != undefined">
-                        <strong translate>ACTION.WHATSAPP_DEFAULT</strong>: 
+                        <strong translate>ACTION.WHATSAPP_DEFAULT</strong>:
                         <span translate>{{action.default == true ? 'ACTION.YES' : 'ACTION.NO'}}</span>
                     </p>
                     <p ng-if="action.whatsappAccount">
-                        <strong translate>ACTION.WHATSAPP_ACC_NAME</strong>: 
+                        <strong translate>ACTION.WHATSAPP_ACC_NAME</strong>:
                         {{action.whatsappAccount.name}}
                     </p>
                     <p ng-if="action.whatsappAccount">
-                        <strong translate>ACTION.WHATSAPP_ACC_NUMBER</strong>: 
+                        <strong translate>ACTION.WHATSAPP_ACC_NUMBER</strong>:
                         {{action.whatsappAccount.number}}
                     </p>
                     <p ng-if="action.type">
-                        <strong translate>ACTION.TYPE</strong>: 
+                        <strong translate>ACTION.TYPE</strong>:
                         {{action.type}}
                     </p>
                     <p ng-if="action.description">
-                        <strong translate>ACTION.DESCRIPTION</strong>: 
+                        <strong translate>ACTION.DESCRIPTION</strong>:
                         {{action.description}}
                     </p>
                     <p ng-if="action.icon">
-                        <strong translate>ACTION.ICON</strong>: 
+                        <strong translate>ACTION.ICON</strong>:
                         <span class="icon-{{action.icon}}"></span>
                     </p>
 
@@ -75,14 +75,14 @@
                         </ul>
                         <li ng-if='section.footer'>{{'ACTION.SECTION.FOOTER'| translate}}: {{section.footer}}</li>
                     </ul>
-                    
+
                     <div ng-show="action.contacts.length > 0">
                         <h3>Contacts</h3>
                         <ul>
                             <li ng-repeat="contact in action.contacts">{{contact.name + ' - ' + contact.phone}}</li>
                         </ul>
                     </div>
-                    <div ng-show="action.contacts.length > 0">
+                    <div ng-show="!action.contacts.length">
                         <strong translate>ACTION.ALL_CONTACTS</strong>
                     </div>
                 </div>

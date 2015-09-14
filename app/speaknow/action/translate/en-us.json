@@ -45,7 +45,7 @@
                 "NAME": "Parameter Name",
                 "TITLE": "Parameter Title",
                 "TAG": "Parameter Tag",
-                "TYPE": "Parameter Type",
+                "TYPE": "Answer Type",
                 "ADD": "Add Parameter",
                 "OPT": "Parameter Option",
                 "PARAM.OPTIONS": "Parameter Options",

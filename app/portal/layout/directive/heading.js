@@ -41,15 +41,14 @@ define([
 
         $scope.getUserAvatarUrl = function(){
           var avatarUrl = $scope.user.avatarUrl;
-          if(avatarUrl){
-            var regex = new RegExp('^http://gravatar.com', 'i');
-            var isGravatar = regex.test(avatarUrl);
-            if(isGravatar){
-              $scope.avatarUrl = avatarUrl;
-            } else {
-              $scope.avatarUrl = avatarUrl + '?_=' + new Date().getTime();
-            }
+          var avatarUrlType = $scope.user.avatarUrlType;
+
+          if(avatarUrlType === 'DATABASE'){
+            $scope.avatarUrl = avatarUrl + '?_=' + new Date().getTime();
+          } else {
+            $scope.avatarUrl = avatarUrl;
           }
+
         };
 
         $scope.logoutUser = function(){
