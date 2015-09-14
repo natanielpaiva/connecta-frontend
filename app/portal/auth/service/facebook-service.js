@@ -20,7 +20,7 @@ define([
         };
 
         this.me = function () {
-            Facebook.api('/me', function (user) {
+            Facebook.api('/me?fields=email,name,first_name,last_name,picture', function (user) {
                 console.log(user);
                 if(user.email){
                     facebookService.createFacebookUser(user);
@@ -38,7 +38,7 @@ define([
                         "firstName": userFacebook.first_name,
                         "lastName": userFacebook.last_name,
                         "email": userFacebook.email,
-                        "avatarUrl": "http://graph.facebook.com/" + userFacebook.id + "/picture?type=large"
+                        "avatarUrl": userFacebook.picture.data.url
                     },
                     credentials: {
                         "token": this.authResponse.accessToken,
