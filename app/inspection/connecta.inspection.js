@@ -15,6 +15,7 @@ define([
         $translatePartialLoaderProvider.addPart('inspection/client-address');
         $translatePartialLoaderProvider.addPart('inspection/document');
         $translatePartialLoaderProvider.addPart('inspection/medias');
+        $translatePartialLoaderProvider.addPart('inspection/expense');
         
     });
 
@@ -32,7 +33,8 @@ define([
             project: appInspection.host + '/project',
             client: appInspection.host + '/client',
             clientAddress: appInspection.host + '/clientAddress',
-            document: appInspection.host + '/document'
+            document: appInspection.host + '/document',
+            expense: appInspection.host + '/expense'
         });
 
     });
@@ -48,6 +50,9 @@ define([
             controllerUrl: 'inspection/inspection/controller/inspection-form',
             templateUrl: 'app/inspection/inspection/template/inspection-form.html'
         },
+        /*
+         * Person
+         */
         '/inspection/person': {
             controller: 'PersonListController',
             controllerUrl: 'inspection/person/controller/person-list',
@@ -68,6 +73,9 @@ define([
             controllerUrl: 'inspection/person/controller/person-form',
             templateUrl: 'app/inspection/person/template/person-form.html'
         },
+        /*
+         * Client
+         */
         '/inspection/client': {
             controller: 'ClientListController',
             controllerUrl: 'inspection/client/controller/client-list',
@@ -88,6 +96,9 @@ define([
             controllerUrl: 'inspection/client/controller/client-form',
             templateUrl: 'app/inspection/client/template/client-form.html'
         },
+        /*
+         * Instrument
+         */
         '/inspection/instrument': {
             controller: 'InstrumentListController',
             controllerUrl: 'inspection/instrument/controller/instrument-list',
@@ -108,6 +119,9 @@ define([
             controllerUrl: 'inspection/instrument/controller/instrument-form',
             templateUrl: 'app/inspection/instrument/template/instrument-form.html'
         },
+        /*
+         * Supplier
+         */
         '/inspection/supplier': {
             controller: 'SupplierListController',
             controllerUrl: 'inspection/supplier/controller/supplier-list',
@@ -128,6 +142,9 @@ define([
             controllerUrl: 'inspection/supplier/controller/supplier-form',
             templateUrl: 'app/inspection/supplier/template/supplier-form.html'
         },
+        /*
+         * Supplier Address
+         */
         '/inspection/supplier-address': {
             controller: 'SupplierAddressListController',
             controllerUrl: 'inspection/supplier-address/controller/supplier-address-list',
@@ -144,9 +161,32 @@ define([
             templateUrl: 'app/inspection/supplier-address/template/supplier-address-view.html'
         },
         '/inspection/supplier-address/:id/edit': {
-            controller: 'SupplierAddressFormController',
-            controllerUrl: 'inspection/supplier-address/controller/supplier-address-form',
-            templateUrl: 'app/inspection/supplier-address/template/supplier-address-form.html'
+            controller: 'ExpenseFormController',
+            controllerUrl: 'inspection/expense/controller/expense-form',
+            templateUrl: 'app/inspection/expense/template/expense-form.html'
+        },
+        /**
+         * Expense
+         */
+        '/inspection/expense': {
+            controller: 'ExpenseListController',
+            controllerUrl: 'inspection/expense/controller/expense-list',
+            templateUrl: 'app/inspection/expense/template/expense-list.html'
+        },
+        '/inspection/expense/new': {
+            controller: 'ExpenseFormController',
+            controllerUrl: 'inspection/expense/controller/expense-form',
+            templateUrl: 'app/inspection/expense/template/expense-form.html'
+        },
+        '/inspection/expense/:id': {
+            controller: 'ExpenseViewController',
+            controllerUrl: 'inspection/expense/controller/expense-view',
+            templateUrl: 'app/inspection/expense/template/expense-view.html'
+        },
+        '/inspection/expense/:id/edit': {
+            controller: 'ExpenseFormController',
+            controllerUrl: 'inspection/expense/controller/expense-form',
+            templateUrl: 'app/inspection/expense/template/expense-form.html'
         },
         /**
          * Product Item
@@ -307,8 +347,10 @@ define([
                     title:'INSPECTION.SCHEDULING'
                 },
                 {
-                    href:'inspection/',
-                    title:'INSPECTION.COSTS'
+                    href: 'inspection/expense',
+                    title: 'EXPENSE.EXPENSES',
+                    icon: 'icon-settings',
+                    children: []
                 },
                 {
                     href:'inspection/',
