@@ -6,12 +6,11 @@ define([
         var authResult = {};
         var gplusService = this;
 
-        var clientIdRaphael = '10907223025-0qpko1kv6me2afevr4amlnaj6j1hnlk0.apps.googleusercontent.com';
-        var clientIdCloud = '341835621722-tl0k8ttfhedql1h9nnlvpifauli7i1gd.apps.googleusercontent.com';
+        var clientId = '341835621722-tl0k8ttfhedql1h9nnlvpifauli7i1gd.apps.googleusercontent.com';
 
         //Inicia o processo de login
         gapi.signin.render('loginGoogle', {
-            'clientid': clientIdCloud,
+            'clientid': clientId,
             'cookiepolicy': 'single_host_origin',
             'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
         });
@@ -30,7 +29,7 @@ define([
         this.loginWithGoogle = function () {
             gapi.signin.render('loginGoogle', {
                 'callback': this.signinCallback,
-                'clientid': clientIdCloud,
+                'clientid': clientId,
                 'cookiepolicy': 'single_host_origin',
                 'requestvisibleactions': 'http://schemas.google.com/AddActivity',
                 'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
