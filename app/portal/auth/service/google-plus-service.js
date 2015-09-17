@@ -6,7 +6,7 @@ define([
         var authResult = {};
         var gplusService = this;
 
-        var clientId = '341835621722-tl0k8ttfhedql1h9nnlvpifauli7i1gd.apps.googleusercontent.com';
+        var clientId = '349516369437-ndi64n2sun9jrl7dupcphvitlhjvgifb.apps.googleusercontent.com';
 
         //Inicia o processo de login
         gapi.signin.render('loginGoogle', {
