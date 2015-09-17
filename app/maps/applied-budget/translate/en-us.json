@@ -18,10 +18,11 @@
         "ADDED_SUCCESS": "Successfully Added",
         "REMOVE_SUCCESS": "Successfully Removed",
         "ERROR_REMOVING": "Error Removing",
-        "BUTTON_CLEAR":"Clear",
+        "BUTTON_CLEAR":"Clear Data",
         "BUTTON_LOCATE":"Locate",
         "BUTTON_SELECT":"Select on Map",
         "BUTTON_DELETE":"Delete",
-        "BUTTON_DRAG":"Drag"
+        "BUTTON_DRAG":"Drag",
+        "BUTTON_INITIAL_VIEW":"Map Initial View"
     }
 }

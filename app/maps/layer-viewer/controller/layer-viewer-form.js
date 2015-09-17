@@ -13,18 +13,28 @@ define([
         $scope.presenterAnalysis = null;
         $scope.layers = [];
         $scope.layerColumns = [];
-        PresenterSourceService.get(3).then(function (response) {
-            $scope.presenterSource = response.data;
-            PresenterSourceService.getUserDomain($scope.presenterSource, $scope);
-        }, function (response) {
-            console.info("error", response);
-        });
+
+        $scope.getPresenterSource = function () {
+            PresenterSourceService.list().then(function (response) {
+                PresenterSourceService.get(response.data[0].id).then(function (response) {
+                    $scope.presenterSource = response.data;
+                    PresenterSourceService.getUserDomain($scope.presenterSource, $scope);
+                }, function (response) {
+                    console.info("error", response);
+                });
+            });
+        };
+
+
         $scope.getAnalysisData = function (idAnalysis) {
+            $scope.analyisisID = idAnalysis;
             $scope.analysisColumns = "";
             $scope.analysisData = "";
             $scope.analysisColumnsMetric = "";
             PresenterSourceService.getAnalysisData($scope, idAnalysis);
         };
+        
+        
         var generateColorHexadecimal = function () {
             var letters = '0123456789ABCDEF'.split('');
             var color = '#';
@@ -45,7 +55,7 @@ define([
             ini_finalColor: "#FFFFFF",
             fim_finalColor: "#FFFFFF",
             opacityInitial: 100,
-            opacityFinal: 100,            
+            opacityFinal: 100,
             parameters: [{
                     int_raioInitial: 5,
                     int_initialColor: generateColorHexadecimal(),
@@ -247,57 +257,8 @@ define([
                     }, 500);
                     break;
                 case '4':
-//                    $scope.analisys = ["option1", "option2", "option3", "option4", "option5"];
-//TESTE DO OBJETO DE ANÁLISES
-                    console.log("lool");
-                    $scope.analisys = {
-                        "config": [{
-                                "columnLayer": "no_regiao",
-                                "columnBoundName": "regiao",
-                                "valueColumn": "NORTE",
-                                "valueMetric": "20",
-                                "objValues": "NORTE",
-                                "color": "#ffff00",
-                                "legend": "20 - 36",
-                                "title": "asfsafa"
-                            }, {
-                                "columnLayer": "no_regiao",
-                                "columnBoundName": "regiao",
-                                "valueColumn": "SUL",
-                                "valueMetric": "40",
-                                "objValues": "SUL",
-                                "color": "#ffbf00",
-                                "legend": "36 - 52",
-                                "title": "asfsafa"
-                            }, {
-                                "columnLayer": "no_regiao",
-                                "columnBoundName": "regiao",
-                                "valueColumn": "CENTRO-OESTE",
-                                "valueMetric": "60",
-                                "objValues": "CENTRO-OESTE",
-                                "color": "#ff8000",
-                                "legend": "52 - 68",
-                                "title": "asfsafa"
-                            }, {
-                                "columnLayer": "no_regiao",
-                                "columnBoundName": "regiao",
-                                "valueColumn": "SUDESTE",
-                                "valueMetric": "80",
-                                "objValues": "SUDESTE",
-                                "color": "#ff4000",
-                                "legend": "68 - 84",
-                                "title": "asfsafa"
-                            }, {
-                                "columnLayer": "no_regiao",
-                                "columnBoundName": "regiao",
-                                "valueColumn": "NORDESTE",
-                                "valueMetric": "100",
-                                "objValues": "NORDESTE",
-                                "color": "#ff0000",
-                                "legend": "84 - 100",
-                                "title": "asfsafa"
-                            }]};
-                    console.info("$scope.analisys", $scope.analisys);
+                    //Carrega dados do presenter
+                    $scope.getPresenterSource();
                     break;
             }
 
@@ -334,27 +295,7 @@ define([
                 $scope.layerColumns = $scope.layerViewer.layerEntity.txt_columns.split("#");
             }
         };
-        $scope.generateIdAnalisy = function () {
-            $scope.id_analisys = ["id_analisy1", "id_analisy2", "id_analisy3", "id_analisy4"];
-        };
-        $scope.generateColorDegradee = function () {
-            $scope.generateAnalyisViewerConfig();
-//            var rangeColor = new colorComponent().calculateDegradee($scope.layerViewer.initialColor, $scope.layerViewer.finalColor, $scope.layerViewer.qtd_classes, 1);
-//
-//            console.info("rangecolors", rangeColor);
-//            if ($scope.layerViewer.qtd_classes > 1) {
-//                $scope.layerViewer.initialColorClass1 = rangeColor[1];
-//            }
-//            if ($scope.layerViewer.qtd_classes > 2) {
-//                $scope.layerViewer.initialColorClass2 = rangeColor[2];
-//            }
-//            if ($scope.layerViewer.qtd_classes > 3) {
-//                $scope.layerViewer.initialColorClass3 = rangeColor[3];
-//            }
-//            if ($scope.layerViewer.qtd_classes > 4) {
-//                $scope.layerViewer.initialColorClass4 = rangeColor[4];
-//            }
-        };
+        
         $scope.generateAnalyisViewerConfig = function () {
             //console.info("ANALYSIS INFO", $scope.analysisColumns, $scope.analysisData, $scope.analysisColumnsMetric);
             var analysisColumnId = angular.element("#analysisColumns>option:selected").val();
@@ -568,8 +509,10 @@ define([
                     if (parseInt($scope.layerViewer.layerViewerTypeEntity.id) === 4) {
                         var interval = setInterval(function () {
                             if (typeof $scope.styleName != 'undefined') {
-                                $scope.layerViewer.ds_param_names = "styleName";
-                                $scope.layerViewer.ds_param_values = $scope.styleName;
+
+                                $scope.layerViewer.ds_param_names = "styleName#analysisID";
+                                $scope.layerViewer.ds_param_values = $scope.styleName + "#" + $scope.analyisisID;
+
                                 LayerViewerService.save($scope.layerViewer).then(function () {
                                     $translate('LAYERVIEWER.ADDED_SUCCESS').then(function (text) {
                                         notify.success(text);

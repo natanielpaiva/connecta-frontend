@@ -30,10 +30,10 @@ define([
                 case 3:
                     configLayer = this.createClusterViewer(layerViewerConfig);
                     break;
-                
+
                 case 4:
 
-                    configLayer = this.createDefaultViewer(layerViewerConfig);
+                    configLayer = this.createAnalysisViewer(layerViewerConfig);
                     break;
             }
 
@@ -51,7 +51,7 @@ define([
             this.__element.id = configViewer.name + 'Legend';
             document.getElementById("map-view").appendChild(this.__element);
             this.__element.style.float = 'right';
-            this.__element.style.bottom = '30px';            
+            this.__element.style.bottom = '30px';
             this.__element.style.position = 'absolute';
             this.__element.style.zIndex = '9999';
 
@@ -101,7 +101,7 @@ define([
             var clusterParams = [];
             var jsonConfig = config.split('@');
             var qtdInterval = parseInt(jsonConfig[jsonConfig.length - 1].substr(jsonConfig[jsonConfig.length - 1].lastIndexOf("~") + 1));
-            
+
             //Initial
             clusterParams.push({
                 "parameterName": "radius#clusterColor#fontColor#opacity",
@@ -109,7 +109,7 @@ define([
             });
 
             //Intervals
-            for (var i = 1; i < qtdInterval + 1; i++) {    
+            for (var i = 1; i < qtdInterval + 1; i++) {
 
                 clusterParams.push({
                     "parameterName": "radius#clusterColor#fontColor#opacity#less#greater",
@@ -117,7 +117,7 @@ define([
                 });
             }
 
-           
+
             //Final
             clusterParams.push({
                 "parameterName": "radius#clusterColor#fontColor#opacity",
@@ -140,18 +140,49 @@ define([
 
 
 
+        this.createAnalysisViewer = function (configViewer) {
+            //Cria div para renderizar a legenda
+            this.__element = document.createElement('div');
+            this.__element.id = configViewer.name + 'Legend';
+            document.getElementById("map-view").appendChild(this.__element);
+            this.__element.style.float = 'right';
+            this.__element.style.bottom = '30px';
+            this.__element.style.position = 'absolute';
+            this.__element.style.zIndex = '9999';
+            
+            var params=configViewer.layerViewer.ds_param_values.split('#');
+
+
+
+            //Default
+            return {
+                type: 'WMS',
+                title: configViewer.title,
+                serverUrl: configViewer.serverUrl + "/wms",
+                layer: configViewer.layerName,
+                style: params[0],
+                name: configViewer.name,
+                divLegend: this.__element.id,
+                filter: ""
+            };
+
+
+        };
+
+
+
 
 
         this.renderViewer = function (configLayer, map) {
             var interval = setInterval(function () {
                 if (typeof map !== 'undefined') {
                     map.__createLayer(configLayer);
-                    
+
                     //Correção paleativa para bug de base layer do Google
-                    map.__map.setBaseLayer(map.__map.getLayersByName("OpenStreetMap Base Layer")[0]);                    
+                    map.__map.setBaseLayer(map.__map.getLayersByName("OpenStreetMap Base Layer")[0]);
                     map.__zoomMapToMaxExtent();
                     map.__map.zoomIn();
-                      
+
                     if (configLayer.type === 'WMS') {
                         var controlInfo = {
                             name: 'WMSInfo',

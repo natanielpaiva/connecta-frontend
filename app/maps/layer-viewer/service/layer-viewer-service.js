@@ -60,6 +60,12 @@ define([
         };
 
 
+        this.getByAnalysisID = function (analysisID) {
+            var url = mapsResources.layerViewer + "/listByAnalysisID?analysisID=" + analysisID;
+            return $http.get(url);
+        };
+
+
         this.getTypes = function () {
             return typeConfig;
         };
@@ -80,9 +86,9 @@ define([
         };
 
 
-        this.createAnalysisStyle = function (configStyle,layerID,scope) {
+        this.createAnalysisStyle = function (configStyle, layerID, scope) {
             var url = mapsResources.geo + "/createStylefromAnalysis";
-                       
+
 
             $http({
                 method: 'POST',
@@ -91,13 +97,13 @@ define([
                 transformRequest: function (obj) {
                     var str = [];
                     for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));                                       
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                     return str.join("&");
                 },
-                data: {data: JSON.stringify({"config": configStyle}),"layerID":layerID}
+                data: {data: JSON.stringify({"config": configStyle}), "layerID": layerID}
             }).success(function (data) {
-                scope.styleName=data;
-                console.info("STYLE",data);
+                scope.styleName = data;
+                console.info("STYLE", data);
             });
         };
 

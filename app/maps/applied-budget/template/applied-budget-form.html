@@ -55,14 +55,17 @@
 
 
             <div class="form-group">
-                <input type="button" id="btn_clearAddress" ng-click="clearAddress();" class="btn btn-primary" value="{{buttonsText.clear}}" style="left:415px;" translate><input type="text"  ng-autocomplete class="form-control" id="searchAddress" ng-model="searchAddress" style="width:400px"  name="searchAddress"/>
-                <input type="button" id="btn_geocode" ng-click="geocodeAddress();" class="btn btn-primary" value="{{buttonsText.locate}}" translate>
-                <input type="button" id="btn_drawMarker" ng-click="toggleDrawMarker();" class="btn btn-primary" value="{{buttonsText.select}}" translate>
-                <input type="button" id="btn_remoteMarker" ng-click="removeMarkers();" class="btn btn-primary" value="{{buttonsText.delete}}" translate>
-                <input type="button" id="btn_dragMarker" ng-click="toggleDragControl();" class="btn btn-primary" value="{{buttonsText.drag}}" translate>
-            </div>
+                <input type="button" id="btn_clearAddress" ng-click="clearAddress();" class="btn btn-primary" value="{{buttonsText.clear}}" style="position:relative;top:-8px;" translate><input type="text"  ng-autocomplete class="form-control" id="searchAddress" ng-model="searchAddress" style="width:400px;"  name="searchAddress"/>
+                <a id="btn_geocode" ng-click="geocodeAddress();" title="{{buttonsText.locate}}" class="btn btn-sm btn-info icon-magnifying-glass" role="button" style="position:relative;left:403px;top:-34px;height:34px;"></a>
+                <div id="buttons_maps" style="float:right;margin-top: -36px;">
+                <a id="btn_mapExtent" ng-click="zoomMapToFullExtent();" title="{{buttonsText.initialView}}" class="btn btn-sm btn-info icon-resize3" role="button" style="height:34px;" ></a>    
+                <a id="btn_dragMarker" ng-click="toggleDragControl();" title="{{buttonsText.locate}}" class="btn btn-sm btn-info icon-open-with" role="button" style="height:34px;" ></a>    
+                <a id="btn_drawMarker" ng-click="toggleDrawMarker();" title="{{buttonsText.select}}" class="btn btn-sm btn-warning icon-place" role="button" style="height:34px;" ></a>   
+                <a id="btn_removeMarker" ng-click="removeMarkers();" title="{{buttonsText.delete}}" class="btn btn-sm btn-danger icon-cancel3" role="button" style="height:34px;" ></a>
+                </div>
+            </div>      
 
-            <div id="map-view" style="height: 430px;"></div>
+            <div id="map-view" style="height: 430px;margin-top:-38px!important;"></div>
 
 
             <a href="#/maps/applied-budget"

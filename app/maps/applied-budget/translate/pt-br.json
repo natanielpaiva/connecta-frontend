@@ -19,10 +19,11 @@
         "ADDED_SUCCESS": "Adicionado com sucesso!",
         "REMOVE_SUCCESS": "Removido com sucesso!",
         "ERROR_REMOVING": "Erro ao remover!",
-        "BUTTON_CLEAR":"Limpar",
+        "BUTTON_CLEAR":"Limpar Dados",
         "BUTTON_LOCATE":"Localizar",
         "BUTTON_SELECT":"Selecionar no Mapa",
         "BUTTON_DELETE":"Excluir",
-        "BUTTON_DRAG":"Arrastar"
+        "BUTTON_DRAG":"Arrastar",
+        "BUTTON_INITIAL_VIEW":"Visão Inicial do Mapa"
     }
 }

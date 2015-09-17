@@ -7,7 +7,7 @@ define([
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (maps) {
-    return maps.lazy.controller('AppliedBudgetFormController', function ($scope, AppliedBudgetService, ConnectaGeoService, MunicipalBudgetService, BudgetAreaApplicationService, notify, $location, $routeParams, $translate, $http,$modalTranslate) {
+    return maps.lazy.controller('AppliedBudgetFormController', function ($scope, AppliedBudgetService, ConnectaGeoService, MunicipalBudgetService, BudgetAreaApplicationService, notify, $location, $routeParams, $translate, $http, $modalTranslate) {
         $scope.appliedBudget = null;
         $scope.isEditing = false;
         $scope.municipalBudgets = null;
@@ -19,14 +19,16 @@ define([
             locate: "BUTTON_LOCATE",
             select: "BUTTON_SELECT",
             delete: "BUTTON_DELETE",
-            drag: "BUTTON_DRAG"
+            drag: "BUTTON_DRAG",
+            initialView:"BUTTON_INITIAL_VIEW"
         };
-        
+
         $modalTranslate($scope.buttonsText, 'clear', 'APPLIEDBUDGET.BUTTON_CLEAR');
         $modalTranslate($scope.buttonsText, 'locate', 'APPLIEDBUDGET.BUTTON_LOCATE');
         $modalTranslate($scope.buttonsText, 'select', 'APPLIEDBUDGET.BUTTON_SELECT');
         $modalTranslate($scope.buttonsText, 'delete', 'APPLIEDBUDGET.BUTTON_DELETE');
         $modalTranslate($scope.buttonsText, 'drag', 'APPLIEDBUDGET.BUTTON_DRAG');
+        $modalTranslate($scope.buttonsText, 'initialView', 'APPLIEDBUDGET.BUTTON_INITIAL_VIEW');
 
 
         //Define variável para comparação se mudou de form
@@ -76,7 +78,7 @@ define([
                     if ($scope.formulario.description.$viewValue !== "") {
                         //angular.element("#municipalBudget").find("option[label='" + $scope.appliedBudget.municipalBudget.elementName + "']").attr('selected', 'true');
                         angular.element("#budgetAreaApplication").find("option[label='" + $scope.appliedBudget.budgetAreaApplication.description + "']").attr('selected', 'true');
-                        angular.element("#municipalBudget").find("option[label='" + $scope.appliedBudget.municipalBudget.programName+ '----> '+$scope.appliedBudget.municipalBudget.activityProjectName + "']").attr('selected', 'true');
+                        angular.element("#municipalBudget").find("option[label='" + $scope.appliedBudget.municipalBudget.programName + '----> ' + $scope.appliedBudget.municipalBudget.activityProjectName + "']").attr('selected', 'true');
                         clearInterval(interval);
                     }
 
@@ -104,6 +106,11 @@ define([
         } else {
             ConnectaGeoService.createMap();
         }
+
+
+        $scope.zoomMapToFullExtent = function () {
+            ConnectaGeoService.zoomMapToInitialView();
+        };
 
 
         $scope.addedMarkers = function () {

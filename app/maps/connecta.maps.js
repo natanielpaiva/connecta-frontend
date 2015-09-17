@@ -218,19 +218,19 @@ define([
         {
             href: 'maps/layer-viewer-group',
             title: 'LAYERVIEWERGROUP.LAYERVIEWERGROUP',
-            icon: 'icon-map',
+            icon: 'icon-group-work',
             children: []
         },
         {
             href: 'maps/applied-budget',
             title: 'APPLIEDBUDGET.APPLIEDBUDGET',
-            icon: 'icon-map',
+            icon: 'icon-edit2',
             children: []
         },
         {
             href: 'maps/presenter-source',
             title: 'PRESENTERSOURCE.PRESENTERSOURCE',
-            icon: 'icon-map',
+            icon: 'icon-database',
             children: []
         },
         {

@@ -143,7 +143,19 @@ define([
         };
 
 
-        this.addMarker = function (config) {           
+        this.zoomMapToInitialView = function () {
+            var mapCenter = {
+                point: {
+                    x: -46.57081,
+                    y: -23.691020
+                }
+            };
+            this.map.__setMapCenter(mapCenter);
+            this.map.__map.zoomTo(6);
+        };
+
+
+        this.addMarker = function (config) {
             var layer = this.map.__getLayerByName("VECTOR");
             if (layer.__layerObj.__layer.features.length > 0) {
                 this.removeMarkers();
@@ -166,9 +178,9 @@ define([
             var layer = this.map.__getLayerByName("VECTOR");
             layer.__layerObj.__removeAllFeatures();
         };
-        
-        
-         this.hasmarkers = function () {
+
+
+        this.hasmarkers = function () {
             var layer = this.map.__getLayerByName("VECTOR");
             return layer.__layerObj.__layer.features.length;
         };
@@ -176,8 +188,8 @@ define([
 
         this.getMarkerWKT = function () {
             var layer = this.map.__getLayerByName("VECTOR");
-            var feature=layer.__layerObj.__layer.features[0];
-            feature.geometry.transform("EPSG:900913","EPSG:4326");
+            var feature = layer.__layerObj.__layer.features[0];
+            feature.geometry.transform("EPSG:900913", "EPSG:4326");
             var wkt = new OpenLayers.Format.WKT();
             var str = wkt.write(feature);
             // not a good idea in general, just for this demo
@@ -185,7 +197,7 @@ define([
             return str;
 
         };
-            
+
 
 
     });

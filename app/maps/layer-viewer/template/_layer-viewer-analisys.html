@@ -43,7 +43,7 @@
             <label for="qtdClasses" translate>LAYERVIEWER.QTDCLASSES</label>
             <select class="form-control" name="qtdClasses"  id="qtdClasses"
                     ng-model="layerViewer.qtd_classes" 
-                    ng-change="generateColorDegradee()">
+                    ng-change="generateAnalyisViewerConfig()">
                 <option translate value="">LAYERVIEWER.SELECT</option>
                 <option translate value="2">2</option>
                 <option translate value="3">3</option>
@@ -58,7 +58,7 @@
                    ng-model="layerViewer.initialColor"/>
             <input type="color" name="initialColor" required class="form-control corColorHeatmap" id="initialColor"
                    ng-model="layerViewer.initialColor"
-                   ng-change="generateColorDegradee()"/>
+                   ng-change="generateAnalyisViewerConfig()"/>
         </div>
 
         <div class="col-xs-2 form-group">
@@ -67,7 +67,7 @@
                    ng-model="layerViewer.finalColor"/>
             <input type="color" name="finalColor" required class="form-control corColorHeatmap" id="finalColor"
                    ng-model="layerViewer.finalColor"
-                   ng-change="generateColorDegradee()"/>
+                   ng-change="generateAnalyisViewerConfig()"/>
         </div>
 
 
