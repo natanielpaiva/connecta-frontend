@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-12 form-group">
         <label for="id_layer" translate>LAYERVIEWER.ID_LAYER</label>
-        <select class="form-control" name="id_layer" 
+        <select class="form-control" name="id_layer" id="id_layer" 
                 ng-model="layerViewer.id_layer" 
                 ng-options="column for column in layerColumns">
             <option translate value="">LAYERVIEWER.SELECT</option>
@@ -9,42 +9,39 @@
     </div>
 
     <div class="col-xs-4 form-group">
-        <label for="analisy" translate>LAYERVIEWER.ANALISY</label>
-        <select class="form-control" name="analisy" 
-                ng-model="layerViewer.analisy" 
-                ng-change="generateIdAnalisy()"
-                ng-options="obj.config as analisy.title for (obj, analisy) in analisys">
+        <label for="analysisList" translate>LAYERVIEWER.ANALISY</label>
+        <select class="form-control"  id="analysisList" name="analysisList" 
+                ng-model="analysisList" 
+                ng-change="getAnalysisData(analysisList.id)"                
+                ng-options="analysisList.title for analysisList in presenterAnalysis">
             <option translate value="">LAYERVIEWER.SELECT</option>
         </select>
     </div>
 
     <div class="col-xs-4 form-group">
-        <label for="id_analisy" translate>LAYERVIEWER.ID_ANALISY</label>
-        <select class="form-control" name="id_analisy" 
-                ng-model="layerViewer.id_analisy" 
+        <label for="analysisColumns" translate>LAYERVIEWER.ID_ANALISY</label>
+        <select class="form-control" id="analysisColumns" name="analysisColumns" 
+                ng-model="analysis" 
                 ng-change=""
-                ng-options="id_analisy for id_analisy in id_analisys">
+                ng-options="columns for columns in analysisColumns">
             <option translate value="">LAYERVIEWER.SELECT</option>
         </select>
     </div>
-
+    
     <div class="col-xs-4 form-group">
-        <label for="metricas" translate>LAYERVIEWER.METRICAS</label>
-        <select class="form-control" name="metricas" 
-                ng-model="layerViewer.metricas" 
-                ng-change="">
+        <label for="analysisColumnsMetric" translate>LAYERVIEWER.METRICAS</label>
+        <select class="form-control" id="analysisColumnsMetric" name="analysisColumnsMetric" 
+                ng-model="metrics" 
+                ng-change=""
+                ng-options="columns for columns in analysisColumnsMetric">
             <option translate value="">LAYERVIEWER.SELECT</option>
-            <option translate value="1">LAYERVIEWER.DEFAULT</option>
-            <option translate value="2">LAYERVIEWER.HEATMAP</option>
-            <option translate value="3">LAYERVIEWER.CLUSTER</option>
-            <option translate value="4">LAYERVIEWER.ANALISYS</option>
         </select>
     </div>
 
-    <div  ng-if="layerViewer.metricas >= 1">
+    <div  >
         <div class="col-xs-4 form-group">
             <label for="qtdClasses" translate>LAYERVIEWER.QTDCLASSES</label>
-            <select class="form-control" name="qtdClasses" 
+            <select class="form-control" name="qtdClasses"  id="qtdClasses"
                     ng-model="layerViewer.qtd_classes" 
                     ng-change="generateColorDegradee()">
                 <option translate value="">LAYERVIEWER.SELECT</option>

@@ -22,6 +22,7 @@
         "OF": "Of:",
         "TO": "To:",
         "FILE_SLD":"SLD File",
+        "ANALYSIS":"Analysis Map",
         "TITLE_CONFIRM_DELETE": "LayerViewer Delete",
         "CONFIRM_DELETE": "Do you really want to delete LayerViewer?",
         "ADDED_SUCCESS": "Successfully Added",

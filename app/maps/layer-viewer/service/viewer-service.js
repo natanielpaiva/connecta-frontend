@@ -30,6 +30,11 @@ define([
                 case 3:
                     configLayer = this.createClusterViewer(layerViewerConfig);
                     break;
+                
+                case 4:
+
+                    configLayer = this.createDefaultViewer(layerViewerConfig);
+                    break;
             }
 
             MenuService.renderMenu(layerViewerConfig, map);

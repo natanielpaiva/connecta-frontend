@@ -24,10 +24,10 @@ define([
                 template: 'app/maps/layer-viewer/template/_layer-viewer-analisys.html',
                 icon: 'icon-analisys'
             }
-            
+
         };
-        
-        
+
+
         this.createStyle = function (formData) {
 
             var url = mapsResources.geo + "/createStyle";
@@ -37,17 +37,17 @@ define([
                 headers: {'Content-Type': undefined}
             }).success(function (data) {
                 //TODO notificação de sucesso
-                console.info("Estilo criado com sucesso", data);                
-            }).error(function(data){
+                console.info("Estilo criado com sucesso", data);
+            }).error(function (data) {
                 //TODO notificação de sucesso
-                
-                console.info("ERRO NA Criação do estilo", data);                
+
+                console.info("ERRO NA Criação do estilo", data);
             });
 
         };
-        
-        
-                
+
+
+
         this.get = function (id) {
             var url = mapsResources.layerViewer + "/" + id;
             return $http.get(url);
@@ -78,6 +78,30 @@ define([
             var url = mapsResources.layerViewer + '/' + id;
             return $http.delete(url);
         };
-                        
+
+
+        this.createAnalysisStyle = function (configStyle,layerID,scope) {
+            var url = mapsResources.geo + "/createStylefromAnalysis";
+                       
+
+            $http({
+                method: 'POST',
+                url: url,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));                                       
+                    return str.join("&");
+                },
+                data: {data: JSON.stringify({"config": configStyle}),"layerID":layerID}
+            }).success(function (data) {
+                scope.styleName=data;
+                console.info("STYLE",data);
+            });
+        };
+
+
+
     });
 });

@@ -3,18 +3,28 @@ define([
     'bower_components/connectaGeoJS/index/utils/colorComponent',
     'maps/layer/service/layer-service',
     'maps/layer-viewer/service/layer-viewer-service',
-    'portal/layout/service/notify'
+    'portal/layout/service/notify',
+    'maps/presenter-source/service/presenter-source-service',
 ], function (maps, colorComponent) {
-    return maps.lazy.controller('LayerViewerFormController', function ($scope, LayerService, notify, LayerViewerService, $location, $routeParams, $translate) {
+    return maps.lazy.controller('LayerViewerFormController', function ($scope, LayerService, notify, LayerViewerService, PresenterSourceService, $location, $routeParams, $translate) {
 
         $scope.types = LayerViewerService.getTypes();
-
         $scope.isEditing = false;
-
+        $scope.presenterAnalysis = null;
         $scope.layers = [];
-
         $scope.layerColumns = [];
-
+        PresenterSourceService.get(3).then(function (response) {
+            $scope.presenterSource = response.data;
+            PresenterSourceService.getUserDomain($scope.presenterSource, $scope);
+        }, function (response) {
+            console.info("error", response);
+        });
+        $scope.getAnalysisData = function (idAnalysis) {
+            $scope.analysisColumns = "";
+            $scope.analysisData = "";
+            $scope.analysisColumnsMetric = "";
+            PresenterSourceService.getAnalysisData($scope, idAnalysis);
+        };
         var generateColorHexadecimal = function () {
             var letters = '0123456789ABCDEF'.split('');
             var color = '#';
@@ -23,7 +33,6 @@ define([
             }
             return color;
         };
-
         $scope.layerViewer = {
             initialColor: "#FF0000",
             finalColor: "#0000FF",
@@ -36,7 +45,7 @@ define([
             ini_finalColor: "#FFFFFF",
             fim_finalColor: "#FFFFFF",
             opacityInitial: 100,
-            opacityFinal: 100,
+            opacityFinal: 100,            
             parameters: [{
                     int_raioInitial: 5,
                     int_initialColor: generateColorHexadecimal(),
@@ -46,7 +55,6 @@ define([
                     int_para: 6
                 }]
         };
-
         var obj = {
             int_raioInitial: 5,
             int_initialColor: "",
@@ -55,13 +63,11 @@ define([
             int_de: 1,
             int_para: 2
         };
-
         $scope.paramInterLayerViewer = function () {
             obj.int_initialColor = generateColorHexadecimal();
             obj.int_finalColor = "#FFFFFF";
             return obj;
         };
-
         var arrayWatch = [];
         //escuta o obj de parameters para saber quando se adicionou uma novo combo de intervalo
         $scope.$watch('layerViewer.parameters.length', function () {
@@ -70,7 +76,6 @@ define([
                 arrayWatch[lol]();
             }
             arrayWatch = [];
-
             //quando existir os campos, setar a propriedade de valor minimo
             var intervalMin = setInterval(function () {
                 if (angular.element(".intervalMin")[0]) {
@@ -85,24 +90,20 @@ define([
                     clearInterval(intervalMinimo);
                 }
             }, 50);
-
             //para quando tiver um intervalo
             arrayWatch.push($scope.$watch('layerViewer.parameters[0].int_de', function (val) {
                 if (val >= $scope.layerViewer.parameters[0].int_para) {
                     $scope.layerViewer.parameters[0].int_para = val + 1;
                 }
             }));
-
             arrayWatch.push($scope.$watch('layerViewer.parameters[0].int_para', function (val) {
                 if (val <= $scope.layerViewer.parameters[0].int_de) {
                     $scope.layerViewer.parameters[0].int_de = val - 1;
                 }
             }));
-
             //para quando tiver dois intervalos
             if ($scope.layerViewer.parameters.length > 1) {
                 console.log("minimo 4", angular.element(".intervalMin"));
-
                 //quando existir os campos, setar a propriedade de valor minimo
                 var intervalMinimo = setInterval(function () {
                     if (angular.element(".intervalMin")[2]) {
@@ -111,14 +112,11 @@ define([
                         clearInterval(intervalMinimo);
                     }
                 }, 50);
-
-
                 arrayWatch.push($scope.$watch('layerViewer.parameters[0].int_para', function (val) {
                     if ($scope.layerViewer.parameters[1]) {
                         $scope.layerViewer.parameters[1].int_de = val + 1;
                     }
                 }));
-
                 arrayWatch.push($scope.$watch('layerViewer.parameters[1].int_de', function (val) {
                     if ($scope.layerViewer.parameters[1]) {
                         $scope.layerViewer.parameters[0].int_para = val - 1;
@@ -127,7 +125,6 @@ define([
                         }
                     }
                 }));
-
                 arrayWatch.push($scope.$watch('layerViewer.parameters[1].int_para', function (val) {
                     if ($scope.layerViewer.parameters[1]) {
                         if (val <= $scope.layerViewer.parameters[1].int_de) {
@@ -148,13 +145,11 @@ define([
                         clearInterval(intervalMin2);
                     }
                 }, 50);
-
                 arrayWatch.push($scope.$watch('layerViewer.parameters[1].int_para', function (val) {
                     if ($scope.layerViewer.parameters[2]) {
                         $scope.layerViewer.parameters[2].int_de = val + 1;
                     }
                 }));
-
                 arrayWatch.push($scope.$watch('layerViewer.parameters[2].int_de', function (val) {
                     if ($scope.layerViewer.parameters[2]) {
                         $scope.layerViewer.parameters[1].int_para = val - 1;
@@ -163,7 +158,6 @@ define([
                         }
                     }
                 }));
-
                 arrayWatch.push($scope.$watch('layerViewer.parameters[2].int_para', function (val) {
                     if ($scope.layerViewer.parameters[2]) {
                         if (val <= $scope.layerViewer.parameters[2].int_de) {
@@ -175,48 +169,38 @@ define([
                 }));
             }
         });
-
         if ($routeParams.id) {
             $scope.isEditing = true;
             LayerViewerService.getById($routeParams.id).then(function (response) {
 
                 $scope.layerViewer = response.data;
                 $scope.layerViewer.parameters = [{}];
-
                 $scope.getLayerByType($scope.layerViewer.layerViewerTypeEntity.id);
-
                 var temp = setInterval(function () {
                     angular.element("#layerEntity").val(angular.element("#layerEntity").find("option[label='" + $scope.layerViewer.layerEntity.ds_layer + "']").val());
                     if ($scope.formulario.layer.$viewValue !== '') {
                         clearInterval(temp);
                     }
                 }, 500);
-
                 var ds_param_values = "";
-
                 switch ($scope.layerViewer.layerViewerTypeEntity.id) {
                     case 1:
                         $scope.layerViewer.ds_param_names = "styleName";
                         break;
                     case 2:
                         ds_param_values = $scope.layerViewer.ds_param_values.split("~");
-
                         $scope.layerViewer.initialColor = ds_param_values[0];
                         $scope.layerViewer.finalColor = ds_param_values[1];
-
                         break;
                     case 3:
 
                         ds_param_values = $scope.layerViewer.ds_param_values.replace(/@/gi, "");
                         ds_param_values = $scope.layerViewer.ds_param_values.split("~");
-
                         var countParamValues = 0;
-
                         $scope.layerViewer.raioInitial = parseInt(ds_param_values[countParamValues]);
                         $scope.layerViewer.ini_initialColor = ds_param_values[++countParamValues];
                         $scope.layerViewer.ini_finalColor = ds_param_values[++countParamValues];
                         $scope.layerViewer.opacityInitial = parseInt(ds_param_values[++countParamValues]);
-
                         for (var item = 0; item < ds_param_values[ds_param_values.length - 1]; item++) {
                             $scope.layerViewer.parameters[item].int_raioInitial = parseInt(ds_param_values[++countParamValues]);
                             $scope.layerViewer.parameters[item].int_initialColor = ds_param_values[++countParamValues];
@@ -224,7 +208,6 @@ define([
                             $scope.layerViewer.parameters[item].int_opacity = parseInt(ds_param_values[++countParamValues]);
                             $scope.layerViewer.parameters[item].int_de = parseInt(ds_param_values[++countParamValues]);
                             $scope.layerViewer.parameters[item].int_para = parseInt(ds_param_values[++countParamValues]);
-
                             if (item + 1 < ds_param_values[ds_param_values.length - 1]) {
                                 $scope.layerViewer.parameters.push({});
                             }
@@ -235,7 +218,6 @@ define([
                         $scope.layerViewer.fim_initialColor = ds_param_values[++countParamValues];
                         $scope.layerViewer.fim_finalColor = ds_param_values[++countParamValues];
                         $scope.layerViewer.opacityFinal = parseInt(ds_param_values[++countParamValues]);
-
                         break;
                 }
 
@@ -252,7 +234,7 @@ define([
                 return false;
             }
 
-            //setando evento para o campo de input file
+//setando evento para o campo de input file
             switch (typeLayer) {
                 case '1':
                     var type1 = setInterval(function () {
@@ -263,9 +245,7 @@ define([
                             clearInterval(type1);
                         }
                     }, 500);
-
                     break;
-
                 case '4':
 //                    $scope.analisys = ["option1", "option2", "option3", "option4", "option5"];
 //TESTE DO OBJETO DE ANÁLISES
@@ -322,16 +302,13 @@ define([
             }
 
 
-            var layerByType = (typeLayer === 1 || typeLayer === "1") ? LayerService.list() : LayerService.getByType(1);
-
+            var layerByType = (typeLayer === 1 || typeLayer === "1" || typeLayer === 4 || typeLayer === "4") ? LayerService.list() : LayerService.getByType(1);
             layerByType.then(function (result) {
                 $scope.layers = result.data;
             }, function () {
                 console.info("ERROR");
             });
-
         };
-
         $scope.validateColorCluster = function (element) {
 //            verificação de campos com cores iguais            
 //            var itens = angular.element(".validate-cluster");
@@ -349,7 +326,6 @@ define([
 //            }
 
         };
-
         $scope.generateComboColumns = function () {
             $scope.layerColumns = [];
             $scope.layerViewer.id_layer = "";
@@ -358,37 +334,140 @@ define([
                 $scope.layerColumns = $scope.layerViewer.layerEntity.txt_columns.split("#");
             }
         };
-
         $scope.generateIdAnalisy = function () {
             $scope.id_analisys = ["id_analisy1", "id_analisy2", "id_analisy3", "id_analisy4"];
         };
-
         $scope.generateColorDegradee = function () {
+            $scope.generateAnalyisViewerConfig();
+//            var rangeColor = new colorComponent().calculateDegradee($scope.layerViewer.initialColor, $scope.layerViewer.finalColor, $scope.layerViewer.qtd_classes, 1);
+//
+//            console.info("rangecolors", rangeColor);
+//            if ($scope.layerViewer.qtd_classes > 1) {
+//                $scope.layerViewer.initialColorClass1 = rangeColor[1];
+//            }
+//            if ($scope.layerViewer.qtd_classes > 2) {
+//                $scope.layerViewer.initialColorClass2 = rangeColor[2];
+//            }
+//            if ($scope.layerViewer.qtd_classes > 3) {
+//                $scope.layerViewer.initialColorClass3 = rangeColor[3];
+//            }
+//            if ($scope.layerViewer.qtd_classes > 4) {
+//                $scope.layerViewer.initialColorClass4 = rangeColor[4];
+//            }
+        };
+        $scope.generateAnalyisViewerConfig = function () {
+            //console.info("ANALYSIS INFO", $scope.analysisColumns, $scope.analysisData, $scope.analysisColumnsMetric);
+            var analysisColumnId = angular.element("#analysisColumns>option:selected").val();
+            var analysisMetricId = angular.element("#analysisColumnsMetric>option:selected").val();
+            //console.info("METRIC ID", analysisMetricId);
+            $scope.dataAnalysisValues = [];
+            $scope.dataAnalysisObjValues = [];
+            for (var data in $scope.analysisData) {
+                //console.info("ANALYSIS DATA OBJ", $scope.analysisData[data][analysisColumnId] + "#" + $scope.analysisData[data][analysisMetricId]);
+                $scope.dataAnalysisValues.push($scope.analysisData[data][analysisMetricId]);
+                $scope.dataAnalysisObjValues.push($scope.analysisData[data][analysisColumnId] + "#" + $scope.analysisData[data][analysisMetricId]);
+            }
 
+            //Ordena array de valores
+            $scope.dataAnalysisValues.sort(function (a, b) {
+                return (a - b);
+            });
+
+            var init = parseInt($scope.dataAnalysisValues[0]);
+            var end = $scope.dataAnalysisValues[$scope.dataAnalysisValues.length - 1];
+            var size = angular.element("#qtdClasses>option:selected").val();
+            var rate = (end - init) / size;
             var rangeColor = new colorComponent().calculateDegradee($scope.layerViewer.initialColor, $scope.layerViewer.finalColor, $scope.layerViewer.qtd_classes, 1);
+            //Limpa o form de métricas
+            var rangeInit, rangeEnd;
+            $scope.analysisViewerRanges = [];
+            for (var i = 1; i < size; i++) {
+                rangeInit = Math.round(init + (rate * i));
+                rangeEnd = Math.round(init + (rate * (i + 1)));
+                var columnName = "numberOF" + i;
+                var columnName2 = "numberTO" + i;
+                var columnLegend = "legend" + i;
+                $scope.layerViewer[columnName] = rangeInit;
+                $scope.layerViewer[columnName2] = rangeEnd;
+                $scope.layerViewer[columnLegend] = rangeInit + '-' + rangeEnd;
+                var legend = $scope.layerViewer[columnLegend];
+                var columnNameColor = "initialColorClass" + i;
+                $scope.layerViewer[columnNameColor] = rangeColor[i];
+                //Ranges
+                $scope.analysisViewerRanges.push({'rangeInit': rangeInit, 'rangeEnd': rangeEnd, 'legend': legend, 'color': rangeColor[i]});
+            }
+        };
 
-            if ($scope.layerViewer.qtd_classes > 1) {
-                $scope.layerViewer.initialColorClass1 = rangeColor[1];
+
+        //Retorna range em que a métrica está enquadrada
+        $scope.returnRange = function (metric) {
+            var rangOBJ = $.grep($scope.analysisViewerRanges, function (element, key) {
+                return element.rangeInit < metric && element.rangeEnd > metric;
+            });
+
+            return rangOBJ;
+        };
+
+        //Retorna itens duplicados
+        $scope.returnDuplicates = function (legend) {
+            var items = $.grep($scope.config, function (elem, key) {
+                return elem.legend == legend;
+            });
+            return items;
+        };
+
+
+        //Ordena array por propriedade
+        $scope.sortArrayByProp = function (prop) {
+
+            return function (a, b) {
+                if (a[prop] > b[prop]) {
+                    return 1;
+                } else if (a[prop] < b[prop]) {
+                    return -1;
+                }
+                return 0;
+            };
+
+        };
+
+        //Agrupa por Ranges em comum
+        $scope.groupRanges = function () {
+            //Agrupa elementos
+            for (var elem in $scope.config) {
+                var objArray = $scope.config[elem];
+                for (var elem2 in $scope.config) {
+                    var objArray2 = $scope.config[elem2];
+                    if (objArray.color === objArray2.color && objArray.valueColumn !== objArray2.valueColumn) {
+                        objArray2.objValues += '#' + objArray.valueColumn;
+                        delete $scope.config[objArray2];
+                    }
+                }
             }
-            if ($scope.layerViewer.qtd_classes > 2) {
-                $scope.layerViewer.initialColorClass2 = rangeColor[2];
-            }
-            if ($scope.layerViewer.qtd_classes > 3) {
-                $scope.layerViewer.initialColorClass3 = rangeColor[3];
-            }
-            if ($scope.layerViewer.qtd_classes > 4) {
-                $scope.layerViewer.initialColorClass4 = rangeColor[4];
+
+            //Remove duplicados
+            $scope.stylesConfigArray = [];
+            for (var obj in $scope.config) {
+                var legend = $scope.config[obj].legend;
+                var items = $scope.returnDuplicates(legend);
+
+                if (items.length > 1) {
+                    if ($scope.stylesConfigArray.indexOf(items[0]) === -1) {
+
+                        $scope.stylesConfigArray.push(items[0]);
+                    }
+                } else {
+                    $scope.stylesConfigArray.push(items[0]);
+                }
             }
         };
 
         $scope.submit = function () {
 
             $scope.layerViewer.layerEntity = {"id": $scope.layerViewer.layerEntity.id};
-
             switch (parseInt($scope.layerViewer.layerViewerTypeEntity.id)) {
                 case 1:
                     $scope.layerViewer.ds_param_names = "styleName";
-
                     if (typeof angular.element('#file-original').get(0).files[0] != 'undefined') {
                         var formData = new FormData();
                         var styleName = $scope.layerViewer.nm_viewer.replace(/ /gi, "_");
@@ -407,7 +486,6 @@ define([
                 case 3:
                     var intervalsCluster = "";
                     var countIntervals = 0;
-
                     for (var item in $scope.layerViewer.parameters) {
                         countIntervals += 1;
                         lol = $scope.layerViewer.parameters[item];
@@ -434,17 +512,89 @@ define([
                             $scope.layerViewer.opacityFinal + "~" +
                             countIntervals;
                     break;
-            }
+                case 4:
+                    $scope.config = [];
+                    var temp = null;
+                    for (var objValue in $scope.dataAnalysisObjValues) {
+                        var obj = null;
+                        obj = {"columnLayer": null,
+                            "columnBoundName": null,
+                            "valueColumn": null,
+                            "valueMetric": null,
+                            "objValues": null,
+                            "color": null,
+                            "legend": null,
+                            //"title": "goiaba_nadal"
+                            "title": $scope.layerViewer.nm_viewer
+                        };
+                        temp = $scope.dataAnalysisObjValues[objValue].split('#');
+                        var columnLayer = angular.element('#id_layer>option:selected').text();
+                        var columnAnalysis = angular.element('#analysisColumns>option:selected').text();
+                        obj.columnLayer = columnLayer;
+                        obj.columnBoundName = columnAnalysis;
+                        obj.valueColumn = temp[0];
+                        obj.objValues = temp[0];
 
-            LayerViewerService.save($scope.layerViewer).then(function () {
-                $translate('LAYERVIEWER.ADDED_SUCCESS').then(function (text) {
-                    notify.success(text);
-                    $location.path('maps/layer-viewer');
-                });
-            }, function (response) {
-                notify.error(response);
-            });
+                        var rangOBJ = $scope.returnRange(temp[1]);
+
+                        if (rangOBJ.length > 0) {
+                            obj.valueMetric = temp[1];
+                            obj.color = rangOBJ[0].color;
+                            obj.legend = rangOBJ[0].legend;
+                        } else {
+
+                            if (temp[1] < $scope.analysisViewerRanges[0].rangeInit) {
+                                obj.valueMetric = temp[1];
+                                obj.color = $scope.layerViewer.initialColor;
+                                obj.legend = "0 - " + $scope.analysisViewerRanges[0].rangeInit;
+                            } else {
+                                obj.valueMetric = temp[1];
+                                obj.color = $scope.layerViewer.finalColor;
+                                obj.legend = ">" + parseInt(temp[1] - 1);
+                            }
+                        }
+                        $scope.config.push(obj);
+                    }
+
+                    //agrupa valores com range em comum                    
+                    $scope.groupRanges();
+
+                    $scope.stylesConfigArray.sort($scope.sortArrayByProp('valueMetric'));
+
+                    console.info("CONFIG STYLE", $scope.stylesConfigArray);
+                    LayerViewerService.createAnalysisStyle($scope.stylesConfigArray, $scope.layerViewer.layerEntity.id, $scope);
+
+
+                    if (parseInt($scope.layerViewer.layerViewerTypeEntity.id) === 4) {
+                        var interval = setInterval(function () {
+                            if (typeof $scope.styleName != 'undefined') {
+                                $scope.layerViewer.ds_param_names = "styleName";
+                                $scope.layerViewer.ds_param_values = $scope.styleName;
+                                LayerViewerService.save($scope.layerViewer).then(function () {
+                                    $translate('LAYERVIEWER.ADDED_SUCCESS').then(function (text) {
+                                        notify.success(text);
+                                        $location.path('maps/layer-viewer');
+                                    });
+                                }, function (response) {
+                                    notify.error(response);
+                                });
+
+                                clearInterval(interval);
+                            }
+                        });
+                    } else {
+
+                        LayerViewerService.save($scope.layerViewer).then(function () {
+                            $translate('LAYERVIEWER.ADDED_SUCCESS').then(function (text) {
+                                notify.success(text);
+                                $location.path('maps/layer-viewer');
+                            });
+                        }, function (response) {
+                            notify.error(response);
+                        });
+                    }
+
+            }
         };
     });
 });
-

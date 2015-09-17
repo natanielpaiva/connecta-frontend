@@ -163,7 +163,7 @@ define([
 
                 }
 
-                if (that.__layerViewerType == 1) {
+                if (that.__layerViewerType == 1 || that.__layerViewerType == 4) {
                     var defaultViewerItems = data.menuItems[data.menuItems.length - 1].defaultViewerItems;
                     li = "";
                     for (var obj in defaultViewerItems) {
