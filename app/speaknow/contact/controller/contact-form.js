@@ -10,7 +10,7 @@ define([
         if ($routeParams.id) {
             ContactService.get($routeParams.id).success(function (data) {
                 $scope.isEditing = true;
-                vvfffr
+                $scope.contact = data;
             });
         } 
         
