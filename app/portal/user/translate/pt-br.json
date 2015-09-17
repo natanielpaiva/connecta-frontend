@@ -25,7 +25,8 @@
       "IMAGEFORM": "A imagem do avatar deve ser quadrada",
       "COMPARE_PASS": "As senhas não conferem.",
       "SHORT_PASS": "A senha deve ter pelo menos 8 caracteres.",
-      "INVALID_DOCUMENT": "Imagem Inválida"
+      "INVALID_DOCUMENT": "Imagem Inválida",
+      "USER_OR_PASS_INVALID":"Usuário ou senha incorreto."
     },
     "ERROR": {
         "USERNAME_EXISTS": "E-mail ja cadastrado"

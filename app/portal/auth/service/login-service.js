@@ -106,13 +106,18 @@ define([
         }
       };
 
-      var promise = $http.post(portalResources.login, userDTO).then(function(response){
-        loginService.setAuthenticatedUser(response);
-      }, function(){
-        loginService.setAuthenticated(false);
+      var deferred = $q.defer();
+
+      $http.post(portalResources.login, userDTO).then(function (response) {
+          loginService.setAuthenticatedUser(response);
+          deferred.resolve(response);
+      }, function (response) {
+          loginService.setAuthenticated(false);
+          deferred.reject(response);
       });
 
-      return promise;
+    return deferred.promise;
+
     };
 
     this.setAuthenticatedUser = function(response){

@@ -12,7 +12,6 @@ define([
                     facebookService.authResponse = response.authResponse;
                     facebookService.me();
                 }
-
             }, {
                 scope: 'email',
                 return_scopes: true
@@ -47,7 +46,6 @@ define([
                 };
                 UserService.saveFacebook(user).then(function (response) {
                     LoginService.setAuthenticatedUser(response);
-                    $location.path('/');
                     console.log(response);
                 });
             } else {

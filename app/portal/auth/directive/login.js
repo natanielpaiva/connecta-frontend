@@ -31,7 +31,10 @@ define([
                 };
 
                 $scope.submit = function () {
-                    LoginService.doLogin($scope.credentials);
+                    LoginService.doLogin($scope.credentials).then(function(response){
+                    }, function(){
+                            notify.warning("USER.VALIDATION.USER_OR_PASS_INVALID");
+                    });
                 };
 
                 $scope.onFileSelected = function (files, ev, rejFiles) {

@@ -25,7 +25,8 @@
       "IMAGEFORM": "Avatar image must be quadrangular",
       "COMPARE_PASS": "Passwords do not match.",
       "SHORT_PASS": "Password needs to be at least 8 characters long.",
-      "INVALID_DOCUMENT": "Invalid Image"
+      "INVALID_DOCUMENT": "Invalid Image",
+      "USER_OR_PASS_INVALID":"User or password invalid."
     },
     "ERROR": {
         "USERNAME_EXISTS": "Email exists"
