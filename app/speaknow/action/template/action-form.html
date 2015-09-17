@@ -208,12 +208,14 @@
                         <label for="default" class="label-checkbox" translate>ACTION.DEFAULT</label>
                     </div>
 
-<!--                    <div class="form-group">
-                        <label for="questionSeparator" class="required" translate>ACTION.QUESTION_SEPARATOR</label>
-                        <input type="text" class="form-control" id="name" name="questionSeparator"
-                               ng-model="action.questionSeparator" required />
-                    </div>-->
-
+                    <div class="form-group" ng-show="isQuestionSeparator && isWhatsapp">
+                        <div class="form-group">
+                            <label for="questionSeparator" class="required" translate>ACTION.QUESTION_SEPARATOR</label>
+                            <input type="text" class="form-control" id="name" name="questionSeparator"
+                                   ng-model="action.questionSeparator" maxlength="1" required />
+                        </div>
+                    </div>
+                    
                     <div class="form-group" ng-show="isAnswerSeparator && isWhatsapp">
                         <label for="answerSeparator" class="required" translate>ACTION.ANSWER_SEPARATOR</label>
                         <input type="text" class="form-control" id="name" name="answerSeparator"

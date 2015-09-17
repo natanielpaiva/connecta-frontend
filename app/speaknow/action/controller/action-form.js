@@ -11,7 +11,7 @@ define([
      * regras de uplaod de arquivo
      */
     return speaknow.lazy.controller('ActionFormController', function ($scope,
-            InteractionService, ActionService, WhatsappService, notify, $location, $routeParams, $modal, $translate) {
+            InteractionService, ActionService, WhatsappService, notify, $location, $routeParams, $modal, $translate, $rootScope) {
 
         $scope.interaction = ActionService.getInteraction();
         $scope.contact = null;
@@ -68,10 +68,12 @@ define([
         $scope.addParam = function (section) {
             $scope.minifyCard(section.params);
             section.params.push(angular.copy(param));
+            $scope.verifyAnswerAndQuestionSeparator();
         };
 
         $scope.removeParam = function (section, param) {
             section.params.splice(section.params.indexOf(param), 1);
+            $scope.verifyAnswerAndQuestionSeparator();
         };
 
         $scope.finishParam = function (sec_index, index, param) {
@@ -84,7 +86,26 @@ define([
 
         $scope.onChangeParamType = function (type) {
             $scope.showParamOpts = $scope.isMultiple(type);
-            $scope.isAnswerSeparator = type != "SELECT" && $scope.isMultiple(type);
+            $scope.verifyAnswerAndQuestionSeparator();
+        };
+        
+        $scope.verifyAnswerAndQuestionSeparator = function(){
+            for(var index in $scope.action.sections){
+                var section = $scope.action.sections[index];
+                if (section.params.length > 1) {
+                    $scope.isQuestionSeparator = true;
+                } else {
+                    $scope.isQuestionSeparator = false;
+                }
+                
+                $scope.isAnswerSeparator = false;
+                for(var i in section.params){
+                    var param = section.params[i];
+                    if(param.type != "SELECT" && $scope.isMultiple(param.type)){
+                        $scope.isAnswerSeparator = true;
+                    }
+                }
+            }
         };
 
         $scope.addSection = function () {
@@ -188,16 +209,9 @@ define([
         $scope.submit = function () {
             //Verifica se esta action possui Whatsapp
             if ($scope.isWhatsapp) {
-                if ($scope.contacts.length > 0) {
-                    $scope.action.contacts = $scope.contacts;
-                } else if (!$scope.allContacts) {
-                    $translate('ACTION.CONTACTS_NULL').then(function (text) {
-                        notify.error(text);
-                    });
+                if(!$scope.validateWhatsapp()){
                     return;
                 }
-                $scope.action.whatsappAccount = angular.fromJson($scope.whatsappAccount);
-                $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
             }
 
             if (!$scope.validateSections()) {
@@ -229,6 +243,28 @@ define([
                     });
                 });
             }
+        };
+
+        $scope.validateWhatsapp = function(){
+            if ($scope.contacts.length > 0) {
+                    $scope.action.contacts = $scope.contacts;
+                } else if (!$scope.allContacts) {
+                    $translate('ACTION.CONTACTS_NULL').then(function (text) {
+                        notify.error(text);
+                    });
+                    return false;
+                }
+                $scope.action.whatsappAccount = angular.fromJson($scope.whatsappAccount);
+                $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+
+                if ($scope.action.messageWhatsapp.length > 500) {
+                    if(!$scope.saveWithoutSend){
+                        $scope.openModalWhatsAppMessage();
+                        return false;
+                    }
+                }
+                
+                return true;
         };
 
         /** Validations */
@@ -360,6 +396,36 @@ define([
             }
 
             return message;
+        };
+
+        $rootScope.$on('save-action', function (event) {
+            $scope.saveWithoutSend = true;
+            $scope.submit();
+        });
+
+        $scope.openModalWhatsAppMessage = function () {
+
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: "app/portal/layout/directive/template/conf-modal-tpl.html",
+                size: 'sm',
+                controller: function ($scope, $rootScope) {
+                    
+                    $scope.params = {
+                        title: 'Atenção',
+                        text: 'Mensagem muito extensa para ser enviada pelo Whatsapp, deseja continuar?'
+                    };
+                    
+                    $scope.ok = function () {
+                        $rootScope.$broadcast('save-action');
+                        modalInstance.dismiss();
+                    };
+
+                    $scope.cancel = function () {
+                        modalInstance.dismiss();
+                    };
+                }
+            });
         };
     });
 });
