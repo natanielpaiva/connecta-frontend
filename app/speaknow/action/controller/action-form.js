@@ -189,6 +189,8 @@ define([
         $scope.verifyType = function () {
             if ($scope.action.type == 'SERVICE') {
                 $scope.isWhatsapp = false;
+            } else if($scope.action.type == 'FAQ'){
+                
             }
         };
 

@@ -64,7 +64,8 @@
                                 <li>{{'ACTION.SECTION.PARAM.TITLE'| translate}}: {{param.title}}</li>
                                 <li ng-if='param.name'>{{'PARAM.SECTION.PARAM.NAME'| translate}}: {{param.name}}</li>
                                 <li ng-if='param.tag'>{{'PARAM.SECTION.PARAM.TAG'| translate}}: {{param.tag}}</li>
-                                <li>{{'ACTION.SECTION.PARAM.TYPE'| translate}}: {{'ACTION.SECTION.PARAM.PARAM_TYPE.' + param.type | translate}}</li>
+                                <li ng-show="action.type !== 'FAQ'">{{'ACTION.SECTION.PARAM.TYPE'| translate}}: {{'ACTION.SECTION.PARAM.PARAM_TYPE.' + param.type | translate}}</li>
+                                <li ng-show="action.type === 'FAQ'">{{'ACTION.SECTION.PARAM.ANSWER'| translate}}: {{param.value}}</li>
                                 <ul ng-if="param.options.length">
                                     <li translate>ACTION.OPTIONS</li>
                                     <ul>

@@ -53,6 +53,7 @@
                 "NEW": "Novo parâmetro",
                 "VALUE": "Valor",
                 "TEXT": "Texto",
+                "ANSWER":"Resposta",
                 "KEY": "Chave",
                 "PARAM_TYPE": {
                     "TEXT": "Texto",
