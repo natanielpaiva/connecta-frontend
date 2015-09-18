@@ -13,6 +13,9 @@ define([
             InteractionService, ActionService, regexBase64, $location, $routeParams, $translate,
             $modal, speaknowResources, notify) {
 
+
+        $scope.imageFile = [];
+        $scope.imageUrl = [];
         $scope.interaction = {
             icon: "dump"
         };
@@ -35,8 +38,9 @@ define([
             $scope.isEditing = true;
             InteractionService.get($routeParams.id).success(function (data) {
                 $scope.interaction = data;
-                if($scope.interaction.image){
+                if ($scope.interaction.image) {
                     $scope.interactionImage = $scope.baseUrl + $scope.interaction.image;
+                    $scope.imageUrl.push({image : $scope.interactionImage, extension: "PNG"});
                 }
             });
         }
@@ -46,7 +50,7 @@ define([
         ActionService.getIcons().success(function (data) {
             $scope.icons = data.icons;
         });
-        
+
         // Executa a modal para escolha de ícones
         $scope.openIconModal = function () {
             var modalIcon = $modal.open({
@@ -121,19 +125,34 @@ define([
 
         $scope.validateImage = function (image) {
             var isValid = true;
-            if (image.total / 1000000 > 1) {
+            if (image.size / 1000000 > 1) {
                 notify.warning("COMPANY.VALIDATION.IMAGESIZE");
+                $scope.clearImage();
                 isValid = false;
             } else {
                 var img = angular.element("<img>")[0];
-                img.src = image.target.result;
+                img.src = $scope.interactionImage;
                 if (img.height >= img.width) {
                     notify.warning("COMPANY.VALIDATION.IMAGEFORM");
+                    $scope.clearImage();
                     isValid = false;
                 }
             }
             return isValid;
         };
-
+        
+        $scope.dropImageCallback = function(){
+            $scope.fileImage = $scope.imageFile[0];
+            $scope.interactionImage = $scope.imageUrl[0].image;
+            $scope.validateImage($scope.imageFile[0]);
+        };
+        
+        $scope.clearImage = function(){
+            $scope.interactionImage = null;
+            $scope.fileImage = null;
+            $scope.imageFile = [];
+            $scope.imageUrl = [];
+        };
+        
     });
 });

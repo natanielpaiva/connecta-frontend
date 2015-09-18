@@ -3,6 +3,7 @@
  * @param {documents} Array de objectos Documents
  * @param {filesType} Tipos de file que serão aceitos
  * @param {type} Tipo do documento
+ * @param {isSingle} true se for possível adicionar apenas um arquivo
  */
 
 define([
@@ -21,11 +22,19 @@ define([
                         reader.onload = function (event) {
                             var document = $scope.createDocument(file);
                             $scope.setImageFile(document, event);
+
                             var index = $scope.files.indexOf(file);
-                            if (index === -1) {
+                            if ($scope.isSingle) {
+                                $scope.files[0] = file;
+                                $scope.documents[0] = document;
+                            } else if (index === -1) {
                                 $scope.files.push(file);
                                 $scope.documents.push(document);
-                                $scope.$apply();
+                            }
+                            $scope.$apply();
+
+                            if ($scope.callback) {
+                                $scope.callback.apply();
                             }
                         };
                         reader.readAsDataURL(files[0]);
@@ -96,11 +105,13 @@ define([
             scope: {
                 files: "=",
                 documents: "=",
-                type:"@",
-                filesType: "@"
+                type: "@",
+                filesType: "@",
+                isSingle: "@",
+                callback: '='
             },
             link: function ($scope) {
-                if($scope.documents === undefined){
+                if ($scope.documents === undefined) {
                     $scope.documents = [];
                 }
                 var unbindWatcher = $scope.$watch('documents', function (value) {
