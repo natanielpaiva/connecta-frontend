@@ -8,7 +8,7 @@ define([
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, $rootScope, LoginService, FacebookService, UserService, GPlusService, $location, notify) {
+            controller: function ($scope, LoginService, FacebookService, UserService, GPlusService, $location, notify) {
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.logged = false;
@@ -100,7 +100,7 @@ define([
                     GPlusService.loginWithGoogle();
                 };
 
-                $rootScope.$on('facebook-without-email', function (event, userFacebook) {
+                $scope.$on('facebook-without-email', function (event, userFacebook) {
                     console.log("User: ", userFacebook);
                     $scope.user = {
                         profile: {

@@ -52,7 +52,6 @@ define([
                 };
                 UserService.saveFacebook(user).then(function (response) {
                     LoginService.setAuthenticatedUser(response);
-                    $location.path('/');
                     console.log(response);
                 });
             } else {

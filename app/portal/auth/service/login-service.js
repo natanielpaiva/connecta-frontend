@@ -1,7 +1,8 @@
 define([
   'connecta.portal'
 ], function(portal) {
-  return portal.service('LoginService', function(portalResources, $http, $rootScope, $cookieStore, $route, $q, $timeout) {
+  return portal.service('LoginService', function(portalResources, $http, $rootScope,
+    $cookieStore, $route, $q, $timeout, $heading) {
 
     var loginService = this;
     var _reloadNeeded = false;
@@ -80,6 +81,7 @@ define([
       _reloadNeeded = true;
       $cookieStore.remove('X-Authorization-Token');
       loginService.setAuthenticated(false);
+      $heading.clearLogo();
     };
 
     /**
