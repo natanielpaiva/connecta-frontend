@@ -4,11 +4,11 @@ define([
     'maps/drill-level/service/drill-level-service',
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
-], function (inspection) {
-    return inspection.lazy.controller('DrillFormController', function (
+], function (maps) {
+    return maps.lazy.controller('DrillFormController', function (
             $scope, $routeParams, DrillService, DrillLevelService, notify, $translate,$location, $modal, $rootScope) {
 
-        $scope.supplier = null;
+        $scope.drill = null;
         $scope.isEditing = false;
         $rootScope.supplierAddresses = [];
         $rootScope.responsibles = [];
@@ -16,7 +16,7 @@ define([
         $scope.deleteSupplierAddress = function (supplierAddress) {
 
             if ($scope.isEditing) {
-                SupplierAddressService.delete(supplierAddress.id).then(function () {
+                DrillService.delete(supplierAddress.id).then(function () {
 
                 }, function () {
 

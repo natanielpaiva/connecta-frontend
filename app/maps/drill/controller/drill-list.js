@@ -1,25 +1,25 @@
 define([
-    'connecta.inspection',
-    'inspection/supplier/service/supplier-service',
+    'connecta.maps',
+    'maps/drill/service/drill-service',
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
-], function (inspection) {
-    return inspection.lazy.controller('DrillListController', function (
-            $scope, SupplierService, ngTableParams, $location, notify, $translate, $modalTranslate) {
+], function (maps) {
+    return maps.lazy.controller('DrillListController', function (
+            $scope, DrillService, ngTableParams, $location, notify, $translate, $modalTranslate) {
 
 
 
         $scope.remove = function (id) {            
-            SupplierService.delete(id).then(function () {
+            DrillService.delete(id).then(function () {
                 $translate('SUPPLIER.REMOVE_SUCCESS').then(function (text) {
                     notify.success(text);                    
-                    $location.path('inspection/supplier');
+                    $location.path('inspection/drill');
                     $scope.tableParams.reload();
                 });
             }, function (response) {
                 $translate('SUPPLIER.ERROR_REMOVING').then(function (text) {
                     notify.error(text);
-                    $location.path('inspection/supplier');
+                    $location.path('inspection/drill');
                 });
             });
         };
@@ -49,7 +49,7 @@ define([
             filter: $scope.search
         }, {
             getData: function ($defer, params) {
-                return SupplierService.list(params.url()).then(function (response) {
+                return DrillService.list(params.url()).then(function (response) {
                     params.total(response.data.totalElements);
                     $defer.resolve(response.data);  
                 });
