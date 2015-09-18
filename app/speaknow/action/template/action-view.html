@@ -44,7 +44,7 @@
                     </p>
                     <p ng-if="action.type">
                         <strong translate>ACTION.TYPE</strong>:
-                        {{action.type}}
+                        {{'ACTION.' + action.type | translate}}
                     </p>
                     <p ng-if="action.description">
                         <strong translate>ACTION.DESCRIPTION</strong>:

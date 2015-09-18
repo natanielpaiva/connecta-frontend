@@ -12,6 +12,7 @@
         "IMAGE": "Imagem",
         "ICON": "Ícone",
         "TYPE": "Tipo",
+        "DELETED":"Interação excluída com sucesso",
         "DESCRIPTION": "Descrição",
         "DROP_FILE_HERE": "Arraste ou clique aqui",
         "SEARCH_EMPTY":"Nenhum resultado encontrado",

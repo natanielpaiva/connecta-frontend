@@ -42,7 +42,7 @@
                     </p>
                     <p ng-if="interaction.type">
                         <strong translate>INTERACTION.TYPE</strong>: 
-                        {{interaction.type}}
+                        {{'ACTION.' + interaction.type | translate}}
                     </p>
                     <p ng-if="interaction.description">
                         <strong translate>INTERACTION.DESCRIPTION</strong>: 
@@ -67,7 +67,7 @@
             <tbody>
                 <tr ng-repeat="action in $data">
                     <td class="text-left">{{action.name}}</td>
-                    <td class="text-left">{{action.type}}</td>
+                    <td class="text-left">{{'ACTION.' + action.type | translate}}</td>
                     <td>
                         <div class="btn-group">
                             

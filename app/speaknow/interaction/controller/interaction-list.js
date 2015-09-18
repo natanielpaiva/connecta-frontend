@@ -52,14 +52,14 @@ define([
         //TODO caixa de dialogo de confirmação do delete
         $scope.delete = function (id) {
             InteractionService.delete(id).success(function () {
-                notify.success("interaçao Deletada com sucesso!");
+                notify.success("INTERACTION.DELETED");
                 $scope.tableParams.reload();
             });
         };
 
         $scope.modalParams = {
             title: 'Exclusão de Interações',
-            text: 'Deseja realmente excluir esta interaçao?',
+            text: 'Deseja realmente excluir esta interação?',
             size: 'sm',
             success: $scope.delete
         };
