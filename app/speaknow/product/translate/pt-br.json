@@ -28,6 +28,7 @@
         "DEMAND":"Demanda",
         "OFFER":"Oferta",
         "WITHOUT_COMPANY":"É necessário cadastrar uma empresa.",
-        "INVALID_DOCUMENT":"Imagem inválida."
+        "INVALID_DOCUMENT":"Imagem inválida.",
+        "VIEW_FORBIDDEN": "Você não tem permissão para visualizar este Produto"
     }
 }

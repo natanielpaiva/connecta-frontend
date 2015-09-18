@@ -7,6 +7,7 @@
         "ADD": "Add Action",
         "EDIT": "Edit Action",
         "VIEW": "View Action",
+        "VIEW_FORBIDDEN": "You don't have permission to view this Action",
         "NAME": "Name",
         "ACTION_NAME": "Action Name",
         "WHATSAPP_CONFIG":"Whatsapp Config",

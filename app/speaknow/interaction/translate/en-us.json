@@ -21,6 +21,8 @@
         "SUCCESS":"Success.",
         "REMOVE_ACTION_SUCCESS":"Action deleted.",
         "ACTION_DEFAULT_SUCCESS":"Action default successful.",
-        "MIN_NUMBER_ACTIONS":"A interação deve ter pelo menos uma ação"
+        "MIN_NUMBER_ACTIONS":"A interação deve ter pelo menos uma ação",
+        "MESSAGE_SUCCESS":"Message Sent",
+        "VIEW_FORBIDDEN": "You don't have permission to access this Interaction"
     }
 }

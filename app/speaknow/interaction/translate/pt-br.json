@@ -21,6 +21,8 @@
         "SUCCESS":"Interação cadastrada com sucesso.",
         "REMOVE_ACTION_SUCCESS":"Ação removida com sucesso",
         "ACTION_DEFAULT_SUCCESS":"Ação padrão alterada com sucesso",
-        "MIN_NUMBER_ACTIONS":"A interação deve ter pelo menos uma ação"
+        "MIN_NUMBER_ACTIONS":"A interação deve ter pelo menos uma ação",
+        "MESSAGE_SUCCESS":"Mensagem enviada com sucesso!",
+        "VIEW_FORBIDDEN": "Você não tem permissão para visualizar esta Interaçao"
     }
 }

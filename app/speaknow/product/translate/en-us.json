@@ -28,6 +28,7 @@
         "DEMAND": "Demand",
         "OFFER": "Offer",
         "WITHOUT_COMPANY":"It needs to register a company",
-        "INVALID_DOCUMENT":"Invalid Image."
+        "INVALID_DOCUMENT":"Invalid Image.",
+        "VIEW_FORBIDDEN": "You don't have permission to view this Product"
     }
 }

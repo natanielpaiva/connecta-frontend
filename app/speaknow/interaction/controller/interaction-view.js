@@ -36,8 +36,14 @@ define([
                     var data = $scope.interaction.actions;
                     params.total(data.length);
                     return $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-                }, function (response) {
-                    redirectToInteraction();
+                }, function (error) {
+                  if(error.status === 403){
+                    $translate("INTERACTION.VIEW_FORBIDDEN").then(function(text){
+                      notify.warning(text);
+                    });
+                  }
+
+                  redirectToInteraction();
                 });
             },
             counts: [20, 50, 100]
@@ -66,7 +72,9 @@ define([
 
         $scope.sendMessage = function (id) {
             ActionService.sendMessage(id).then(function (response) {
-                notify.success("Mensagem enviada com sucesso!");
+                $translate("INTERACTION.MESSAGE_SUCCESS").then(function(text){
+                  notify.success(text);
+                });
             });
         };
 

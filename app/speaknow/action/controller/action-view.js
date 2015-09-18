@@ -11,7 +11,13 @@ define([
             ActionService.get($routeParams.id).then(function (response) {
                 $scope.action = response.data;
             }, function(error){
-                $location.path('speaknow/interaction');
+              if(error.status === 403){
+                $translate("ACTION.VIEW_FORBIDDEN").then(function(text){
+                  notify.warning(text);
+                });
+              }
+
+              $location.path('speaknow/interaction');
             });
         } else {
             console.error("Id da interaction não informado na url");
@@ -23,7 +29,7 @@ define([
                 $location.path('speaknow/interaction/' + $scope.action.interaction.id);
             });
         };
-        
+
         $scope.modalParams = {
             title: 'Excluir Ação',
             text: 'Deseja realmente excluir esta ação?',
