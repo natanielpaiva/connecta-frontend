@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (inspection) {
-    return inspection.lazy.controller('SupplierListController', function (
+    return inspection.lazy.controller('DrillListController', function (
             $scope, SupplierService, ngTableParams, $location, notify, $translate, $modalTranslate) {
 
 

@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (inspection) {
-    return inspection.lazy.controller('SupplierAddressFormController', function (
+    return inspection.lazy.controller('DrillLevelFormController', function (
             $scope, $routeParams, SupplierAddressService, notify, $location) {
 
         $scope.supplierAddress = null;
