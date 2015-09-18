@@ -273,7 +273,7 @@ define([
         },
         {
             href: 'maps/drill',
-            title: 'PRESENTERSOURCE.PRESENTERSOURCE',
+            title: 'DRILL',
             icon: 'icon-traffic-cone',
             children: []
         },
