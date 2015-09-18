@@ -12,6 +12,7 @@ define([
         $translatePartialLoaderProvider.addPart('maps/import');
         $translatePartialLoaderProvider.addPart('maps/presenter-source');
         $translatePartialLoaderProvider.addPart('maps/applied-budget');
+        $translatePartialLoaderProvider.addPart('maps/drill');
     });
 
 
@@ -24,6 +25,7 @@ define([
             layerSourceType: appMaps.host + '/layerSourceTypes',
             presenterSource: appMaps.host + '/presenterSources',
             layer: appMaps.host + '/layers',
+            drill: appMaps.host + '/drills',
             layerViewer: appMaps.host + '/layerViewers',
             layerViewerGroup: appMaps.host + '/layerViewerGroups',
             groupLayerViewer: appMaps.host + '/groupLayerViewers',
@@ -191,6 +193,29 @@ define([
             controller: 'AppliedBudgetFormController',
             controllerUrl: 'maps/applied-budget/controller/applied-budget-form',
             templateUrl: 'app/maps/applied-budget/template/applied-budget-form.html'
+        },
+        /*
+         * Drill
+         */
+        '/maps/drill': {
+            controller: 'DrillViewerController',
+            controllerUrl: 'maps/drill/controller/drill-list',
+            templateUrl: 'app/maps/drill/template/drill-list.html'
+        },
+        '/maps/drill/new': {
+            controller: 'DrillViewerFormController',
+            controllerUrl: 'maps/drill/controller/drill-form',
+            templateUrl: 'app/maps/drill/template/drill-form.html'
+        },
+        '/maps/drill/:id': {
+            controller: 'DrillViewerViewController',
+            controllerUrl: 'maps/drill/controller/drill-view',
+            templateUrl: 'app/maps/drill/template/drill-view.html'
+        },
+        '/maps/drill/:id/edit': {
+            controller: 'DrillViewerFormController',
+            controllerUrl: 'maps/drill/controller/drill-form',
+            templateUrl: 'app/maps/drill/template/drill-form.html'
         }
 
     };
@@ -242,6 +267,12 @@ define([
                     title: 'IMPORT.SHP'
                 }
             ]
+        },
+        {
+            href: 'maps/presenter-source',
+            title: 'PRESENTERSOURCE.PRESENTERSOURCE',
+            icon: 'icon-traffic-cone',
+            children: []
         }
 
     ];

@@ -5,6 +5,7 @@
         "EDIT": "Edit Presenter Source",  
         "VIEW":"View Presenter Sorce",
         "URL":"URL",
+        "USER":"User",
         "PASSWORD": "Password",
         "TITLE_CONFIRM_DELETE":"Presenter Source exclusion",
         "CONFIRM_DELETE":"Really delete the Presenter Source??",
