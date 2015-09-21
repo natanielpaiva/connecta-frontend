@@ -38,6 +38,7 @@
         "OPTIONS":"Opções",
         "PARAMS":"Parâmetros",
         "CONTACTS":"Contatos",
+        "CONTAINS_ANSWER":"Não é possível editar uma ação que já tenha respostas",
         "SECTION": {
             "TITLE": "Título da seção",
             "FOOTER": "Rodapé",

@@ -137,6 +137,15 @@ define([
             $scope.isEditing = true;
             ActionService.get($routeParams.id).success(function (data) {
                 $scope.action = data;
+                
+                ActionService.containsAnswer($scope.action.id).then(function (response) {
+                    if (response.data) {
+                        notify.warning("ACTION.CONTAINS_ANSWER");
+                        $location.path('speaknow/interaction/' + $scope.action.interaction.id);
+                        return;
+                    }
+                });
+                
                 $scope.isWhatsapp = $scope.action.whatsappAccount !== undefined;
                 if ($scope.action.contacts.length > 0) {
                     $scope.allContacts = false;

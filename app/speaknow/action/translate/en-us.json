@@ -38,6 +38,7 @@
         "OPTIONS":"Options",
         "PARAMS":"Params",
         "CONTACTS":"Contacts",
+        "CONTAINS_ANSWER":"Não é possível editar uma ação que já tenha respostas",
         "SECTION": {
             "TITLE": "Section Title",
             "FOOTER": "Footer",

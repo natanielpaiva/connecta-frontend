@@ -56,12 +56,18 @@ define([
         };
 
         $scope.editInteraction = function (id) {
-            $location.path('speaknow/interaction/' + id);
+            ActionService.containsAnswer(id).then(function (response) {
+                if (response.data) {
+                    notify.warning("ACTION.CONTAINS_ANSWER");
+                    return;
+                }
+                ActionService.setInteraction($scope.interaction);
+                $location.path('speaknow/action/' + id + '/edit');
+            });
         };
 
         $scope.redirectToAction = function (id) {
             ActionService.setInteraction($scope.interaction);
-
             if (!id) {
                 return '#/speaknow/action/new';
             } else {
