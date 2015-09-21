@@ -109,6 +109,7 @@ define([
                 return;
             }
             $scope.interaction.image = $scope.fileImage;
+            $scope.interaction.removeImage = $scope.removeImage;
             ActionService.setInteraction($scope.interaction);
             $location.path('speaknow/action/new');
         };

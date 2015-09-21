@@ -115,7 +115,7 @@ define([
 
         $scope.modalRemoveAction = {
             title: 'Excluir Ação',
-            text: 'Deseja realmente remover a ação?',
+            text: 'Deseja realmente excluir a ação?',
             size: 'sm',
             success: $scope.delete
         };

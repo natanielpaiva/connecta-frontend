@@ -237,7 +237,7 @@ define([
                 delete $scope.action.interaction;
 
                 $scope.interaction.actions.push($scope.action);
-                InteractionService.save($scope.interaction, image).success(function (response) {
+                InteractionService.save($scope.interaction, image, $scope.interaction.removeImage).success(function (response) {
                     ActionService.clearInteraction();
                     notify.success('INTERACTION.SUCCESS');
                     $location.path('/speaknow/interaction/' + response.id);
