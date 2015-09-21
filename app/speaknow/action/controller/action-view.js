@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('ActionViewController', function (
-            $scope, ActionService, $routeParams, $location, $translate,notify
+            $scope, ActionService, $routeParams, $location, notify
             ) {
 
         if ($routeParams.id) {
@@ -12,9 +12,7 @@ define([
                 $scope.action = response.data;
             }, function(error){
               if(error.status === 403){
-                $translate("ACTION.VIEW_FORBIDDEN").then(function(text){
-                  notify.warning(text);
-                });
+                notify.warning("ACTION.VIEW_FORBIDDEN");
               }
 
               $location.path('speaknow/interaction');

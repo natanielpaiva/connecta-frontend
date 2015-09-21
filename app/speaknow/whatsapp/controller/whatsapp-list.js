@@ -5,7 +5,7 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('WhatsappAccountList', function (
-            $scope, WhatsappService, notify, ngTableParams, CompanyService, $translate, $location
+            $scope, WhatsappService, notify, ngTableParams, CompanyService, $location
             ) {
 
         CompanyService.getUserCompany().then(function (response) {
@@ -13,10 +13,8 @@ define([
           if(data.status === 401){
             return;
           }
-            $translate('PRODUCT.WITHOUT_COMPANY').then(function (text) {
-                notify.warning(text);
-                $location.path('speaknow/company/new');
-            });
+            notify.warning('PRODUCT.WITHOUT_COMPANY');
+            $location.path('speaknow/company/new');
         });
 
         $scope.search = {

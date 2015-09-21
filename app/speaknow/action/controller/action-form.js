@@ -239,19 +239,15 @@ define([
                 $scope.interaction.actions.push($scope.action);
                 InteractionService.save($scope.interaction, image).success(function (response) {
                     ActionService.clearInteraction();
-                    $translate('INTERACTION.SUCCESS').then(function (text) {
-                        notify.success(text);
-                        $location.path('/speaknow/interaction/' + response.id);
-                    });
+                    notify.success('INTERACTION.SUCCESS');
+                    $location.path('/speaknow/interaction/' + response.id);
                 });
             } else {
                 $scope.action.interaction = $scope.interaction;
                 ActionService.save($scope.action).success(function (response) {
                     ActionService.clearInteraction();
-                    $translate('ACTION.SUCCESS').then(function (text) {
-                        notify.success(text);
-                        $location.path('/speaknow/interaction/' + $scope.action.interaction.id);
-                    });
+                    notify.success('ACTION.SUCCESS');
+                    $location.path('/speaknow/interaction/' + $scope.action.interaction.id);
                 });
             }
         };
@@ -260,9 +256,7 @@ define([
             if ($scope.contacts.length > 0) {
                     $scope.action.contacts = $scope.contacts;
                 } else if (!$scope.allContacts) {
-                    $translate('ACTION.CONTACTS_NULL').then(function (text) {
-                        notify.error(text);
-                    });
+                    notify.error('ACTION.CONTACTS_NULL');
                     return false;
                 }
                 $scope.action.whatsappAccount = angular.fromJson($scope.whatsappAccount);

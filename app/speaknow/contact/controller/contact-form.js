@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function (presenter) {
     return presenter.lazy.controller('ContactFormController', 
-            function ($scope, ContactService, $location, $routeParams, $translate ,notify) {
+            function ($scope, ContactService, $location, $routeParams ,notify) {
         $scope.contact = null;
         
         if ($routeParams.id) {
@@ -16,14 +16,10 @@ define([
         
         $scope.submit = function () {
             ContactService.save($scope.contact).then(function () {
-                $translate('CONTACT.SAVE_SUCCESS').then(function (text) {
-                    notify.success(text);
-                    $location.path('speaknow/contact');
-                });
+                notify.success('CONTACT.SAVE_SUCCESS');
+                $location.path('speaknow/contact');
             }, function (response) {
-                $translate('CONTACT.SAVE_ERROR').then(function (text) {
-                    notify.error(text);
-                });
+                notify.error('CONTACT.SAVE_ERROR');
             });
         };
     });

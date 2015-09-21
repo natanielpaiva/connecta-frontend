@@ -65,10 +65,8 @@ define([
 
                 $scope.delete = function (id) {
                     CompanyService.delete(id).success(function () {
-                        $translate('COMPANY.REMOVE_SUCCESS').then(function (text) {
-                            notify.success(text);
-                            $location.path('speaknow/company/new');
-                        });
+                        notify.success('COMPANY.REMOVE_SUCCESS');
+                        $location.path('speaknow/company/new');
                     });
                 };
 

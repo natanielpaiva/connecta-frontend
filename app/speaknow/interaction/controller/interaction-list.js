@@ -5,9 +5,8 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('InteractionListController', function (
-            $scope, InteractionService, ngTableParams, notify, $translate, sortBy,
-            CompanyService, $location, speaknowResources
-            ) {
+            $scope, InteractionService, ngTableParams, notify, sortBy,
+            CompanyService, $location, speaknowResources) {
 
         $scope.baseUrl = speaknowResources.base;
 
@@ -17,10 +16,8 @@ define([
             return;
           }
 
-            $translate('INTERACTION.WITHOUT_COMPANY').then(function (text) {
-                notify.warning(text);
-                $location.path('speaknow/company/new');
-            });
+            notify.warning('INTERACTION.WITHOUT_COMPANY');
+            $location.path('speaknow/company/new');
         });
 
         $scope.search = {
@@ -39,10 +36,8 @@ define([
                     $defer.resolve(result);
                     var key = "filter[name]";
                     if (response.config.params[key] &&
-                            response.data.content.length === 0) {
-                        $translate('INTERACTION.SEARCH_EMPTY').then(function (text) {
-                            notify.success(text);
-                        });
+                        response.data.content.length === 0) {
+                        notify.success('INTERACTION.SEARCH_EMPTY');
                     }
                 });
             },

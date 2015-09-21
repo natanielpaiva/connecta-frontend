@@ -5,9 +5,8 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('InteractionViewController', function (
-            $scope, InteractionService, speaknowResources, ActionService, $routeParams, $location, ngTableParams,
-            $translate, notify
-            ) {
+            $scope, InteractionService, speaknowResources, ActionService, 
+            $routeParams, $location, ngTableParams, notify) {
 
         $scope.baseUrl = speaknowResources.base;
 
@@ -38,9 +37,7 @@ define([
                     return $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                 }, function (error) {
                   if(error.status === 403){
-                    $translate("INTERACTION.VIEW_FORBIDDEN").then(function(text){
-                      notify.warning(text);
-                    });
+                    notify.warning("INTERACTION.VIEW_FORBIDDEN");
                   }
 
                   redirectToInteraction();
@@ -78,9 +75,7 @@ define([
 
         $scope.sendMessage = function (id) {
             ActionService.sendMessage(id).then(function (response) {
-                $translate("INTERACTION.MESSAGE_SUCCESS").then(function(text){
-                  notify.success(text);
-                });
+                notify.success("INTERACTION.MESSAGE_SUCCESS");
             });
         };
 

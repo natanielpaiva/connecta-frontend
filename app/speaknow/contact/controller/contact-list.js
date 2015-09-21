@@ -4,18 +4,16 @@ define([
     'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('ContactListController', function ($scope, ContactService, CompanyService, notify,  $location, ngTableParams, $translate, sortBy) {
-
+    return speaknow.lazy.controller('ContactListController', function ($scope, 
+        ContactService, CompanyService, notify,  $location, ngTableParams, sortBy) {
 
         CompanyService.getUserCompany().then(function (response) {
         }, function (data) {
           if(data.status === 401){
             return;
           }
-            $translate('CONTACT.WITHOUT_COMPANY').then(function (text) {
-                notify.warning(text);
-                $location.path('speaknow/company/new');
-            });
+            notify.warning('CONTACT.WITHOUT_COMPANY');
+            $location.path('speaknow/company/new');
         });
 
         $scope.contacts = null;
@@ -39,10 +37,8 @@ define([
 
         $scope.delete = function (id) {
             ContactService.delete(id).success(function () {
-                $translate('CONTACT.REMOVE_SUCCESS').then(function (text) {
-                    notify.success(text);
-                    $scope.tableParams.reload();
-                });
+                notify.success('CONTACT.REMOVE_SUCCESS');
+                $scope.tableParams.reload();
             });
         };
 

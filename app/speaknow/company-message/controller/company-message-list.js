@@ -5,14 +5,12 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('CompanyMessageListController',
-            function ($scope, CompanyMessageService, ngTableParams, notify, $translate, CompanyService, $location) {
+            function ($scope, CompanyMessageService, ngTableParams, notify, CompanyService, $location) {
 
                 CompanyService.getUserCompany().then(function (response) {
                 }, function (data) {
-                    $translate('COMPANY_MESSAGE.WITHOUT_COMPANY').then(function (text) {
-                        notify.warning(text);
-                        $location.path('speaknow/company/new');
-                    });
+                    notify.warning('COMPANY_MESSAGE.WITHOUT_COMPANY');
+                    $location.path('speaknow/company/new');
                 });
 
                 $scope.messages = null;
@@ -27,9 +25,7 @@ define([
                     getData: function ($defer, params) {
                         return CompanyMessageService.list(params.url()).then(function (response) {
                             if (response.data.content.length === 0 && $scope.search.name.length > 0) {
-                                $translate('COMPANY_MESSAGE.NO_RESULT').then(function (text) {
-                                    notify.warning(text);
-                                });
+                                notify.warning('COMPANY_MESSAGE.NO_RESULT');
                             }
                             params.total(response.data.totalElements);
                             $defer.resolve(response.data.content);
@@ -41,10 +37,8 @@ define([
 
                 $scope.delete = function (id) {
                     CompanyMessageService.delete(id).success(function () {
-                        $translate('COMPANY_MESSAGE.REMOVE_SUCCESS').then(function (text) {
-                            notify.success(text);
-                            $scope.tableParams.reload();
-                        });
+                        notify.success('COMPANY_MESSAGE.REMOVE_SUCCESS');
+                        $scope.tableParams.reload();
                     });
                 };
 

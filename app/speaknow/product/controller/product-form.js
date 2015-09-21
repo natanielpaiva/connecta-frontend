@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('ProductForm',
-            function ($scope, $routeParams, $location, ProductService, notify, $translate, speaknowResources) {
+            function ($scope, $routeParams, $location, ProductService, notify, speaknowResources) {
 
                 $scope.product = {
                     name: "",
@@ -51,10 +51,8 @@ define([
                             notify.warning("Código de barras já cadastrado, forneça um código de barras não cadastrado.");
                             return null;
                         }
-                        $translate('PRODUCT.SAVE_SUCCESS').then(function (text) {
-                            notify.success(text);
-                            $location.path('speaknow/product');
-                        });
+                        notify.success('PRODUCT.SAVE_SUCCESS');
+                        $location.path('speaknow/product');
                     }, function (response) {
                     });
                 };
@@ -69,9 +67,7 @@ define([
                         };
                         reader.readAsDataURL(files[0]);
                     } else {
-                        $translate('PRODUCT.INVALID_DOCUMENT').then(function (text) {
-                            notify.warning(text);
-                        });
+                        notify.warning('PRODUCT.INVALID_DOCUMENT');
                     }
                 };
 

@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function(speaknow){
     return speaknow.lazy.controller('ProductViewController',
-        function($scope, ProductService, $routeParams, $location, $translate,
+        function($scope, ProductService, $routeParams, $location,
           speaknowResources, notify){
 
         $scope.product = {};
@@ -15,9 +15,7 @@ define([
                 $scope.product = response.data;
             }, function(error){
                 if(error.status === 403){
-                  $translate("PRODUCT.VIEW_FORBIDDEN").then(function(text){
-                    notify.warning(text);
-                  });
+                    notify.warning("PRODUCT.VIEW_FORBIDDEN");
                 }
                 $location.path('speaknow/product');
             });

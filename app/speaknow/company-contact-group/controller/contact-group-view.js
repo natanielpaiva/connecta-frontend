@@ -5,7 +5,8 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('ContactGroupViewController',
-            function ($scope, ContactGroupService, CompanyContactService, $routeParams, $location, ngTableParams, $translate, notify) {
+            function ($scope, ContactGroupService, CompanyContactService, 
+            $routeParams, $location, ngTableParams, notify) {
 
                 $scope.contactGroup = {};
 
@@ -37,22 +38,18 @@ define([
 
                 $scope.delete = function (id) {
                     ContactGroupService.delete(id).success(function () {
-                        $translate('COMPANYGROUP.REMOVE_SUCCESS').then(function (text) {
-                            notify.success(text);
-                            $location.path('speaknow/company/view');
-                        });
+                        notify.success('COMPANYGROUP.REMOVE_SUCCESS');
+                        $location.path('speaknow/company/view');
                     });
                 };
 
                 $scope.deleteContact = function (id) {
                     CompanyContactService.delete(id).success(function () {
-                        $translate('COMPANY_CONTACT.REMOVE_SUCCESS').then(function (text) {
-                            notify.success(text);
-                            ContactGroupService.get($routeParams.id).success(function (data) {
-                                $scope.contactGroup = data;
-                                CompanyContactService.setContactGroup($scope.contactGroup);
-                                $scope.tableParams.reload();
-                            });
+                        notify.success('COMPANY_CONTACT.REMOVE_SUCCESS');
+                        ContactGroupService.get($routeParams.id).success(function (data) {
+                            $scope.contactGroup = data;
+                            CompanyContactService.setContactGroup($scope.contactGroup);
+                            $scope.tableParams.reload();
                         });
                     });
                 };

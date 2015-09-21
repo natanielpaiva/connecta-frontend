@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function(speaknow){
     return speaknow.lazy.controller('ContactViewController', 
-        function($scope, ContactService, $routeParams, $location, $translate, notify){
+        function($scope, ContactService, $routeParams, $location, notify){
         
         $scope.contact = {};
         
@@ -18,10 +18,8 @@ define([
         
         $scope.delete = function (id) {
             ContactService.delete(id).success(function () {
-                $translate('CONTACT.REMOVE_SUCCESS').then(function (text) {
-                    notify.success(text);
-                    $scope.tableParams.reload();
-                });
+                notify.success('CONTACT.REMOVE_SUCCESS');
+                $scope.tableParams.reload();
             });
         };
         

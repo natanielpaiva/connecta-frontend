@@ -10,7 +10,7 @@ define([
      * Criar diretiva para modal para o portal, e para modal de icones do speaknow
      */
     return speaknow.lazy.controller('InteractionFormController', function ($scope,
-            InteractionService, ActionService, regexBase64, $location, $routeParams, $translate,
+            InteractionService, ActionService, $location, $routeParams, $translate,
             $modal, speaknowResources, notify) {
 
 
@@ -89,9 +89,7 @@ define([
                 };
                 reader.readAsDataURL(files[0]);
             } else {
-                $translate('INTERACTION.INVALID_DOCUMENT').then(function (text) {
-                    notify.warning(text);
-                });
+                notify.warning('INTERACTION.INVALID_DOCUMENT');
             }
         };
 
@@ -117,10 +115,8 @@ define([
 
         $scope.save = function () {
             InteractionService.save($scope.interaction, $scope.fileImage, $scope.removeImage).success(function () {
-                $translate('INTERACTION.SUCCESS').then(function (text) {
-                    notify.success(text);
-                    $location.path('speaknow/interaction');
-                });
+                notify.success('INTERACTION.SUCCESS');
+                $location.path('speaknow/interaction');
             });
         };
 

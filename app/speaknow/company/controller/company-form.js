@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('CompanyFormController',
-            function ($scope, CompanyService, notify, speaknowResources, regexBase64, $location, $routeParams, $translate) {
+            function ($scope, CompanyService, notify, speaknowResources, $location, $routeParams) {
 
         $scope.baseUrl = speaknowResources.base;
         $scope.addressValid = true;
@@ -45,12 +45,10 @@ define([
         };
 
         $scope.save = function () {
-          CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function (response) {
-              $translate('COMPANY.SUCCESS').then(function (text) {
-                  notify.success(text);
-                  $location.path('speaknow/company/view');
-              });
-          });
+            CompanyService.save($scope.fileQuad, $scope.fileRect, $scope.company).then(function (response) {
+              notify.success('COMPANY.SUCCESS');
+              $location.path('speaknow/company/view');
+            });
         };
 
         $scope.updateContacts = function(){
@@ -88,10 +86,8 @@ define([
 
         $scope.fileRectDropped = function (files, ev, rejFiles) {
             if (rejFiles && rejFiles.length) {
-              $translate('COMPANY.VALIDATION.INVALID_DOCUMENT').then(function (text) {
-                notify.warning(text);
-              });
-              return;
+                notify.warning('COMPANY.VALIDATION.INVALID_DOCUMENT');
+                return;
             }
 
             if (files && files.length) {

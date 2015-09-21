@@ -5,7 +5,7 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('ProductList', function ($scope, ProductService, notify,
-            ngTableParams, $translate, speaknowResources, sortBy,
+            ngTableParams, speaknowResources, sortBy,
             $location, CompanyService) {
 
         CompanyService.getUserCompany().then(function (response) {
@@ -13,10 +13,8 @@ define([
           if(data.status === 401){
             return;
           }
-            $translate('WHATSAPP.WITHOUT_COMPANY').then(function (text) {
-                notify.warning(text);
-                $location.path('speaknow/company/new');
-            });
+            notify.warning('WHATSAPP.WITHOUT_COMPANY');
+            $location.path('speaknow/company/new');
         });
 
         $scope.currentyDate = new Date().getTime();

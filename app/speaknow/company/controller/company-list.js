@@ -3,8 +3,8 @@ define([
     'speaknow/company/service/company-service',
     'portal/layout/service/notify'
 ], function (speaknow) {
-    return speaknow.lazy.controller('CompanyListController', function ($scope, CompanyService, notify, ngTableParams, sortBy,
-    $translate, speaknowResources, $location) {
+    return speaknow.lazy.controller('CompanyListController', function ($scope, 
+        CompanyService, notify, ngTableParams, sortBy) {
 
         $scope.companies = null;
         $scope.search = {
@@ -42,10 +42,8 @@ define([
 
         $scope.delete = function (id) {
             CompanyService.delete(id).success(function () {
-                $translate('COMPANY.REMOVE_SUCCESS').then(function (text) {
-                    notify.success(text);
-                    $scope.tableParams.reload();
-                });
+                notify.success('COMPANY.REMOVE_SUCCESS');
+                $scope.tableParams.reload();
             });
         };
 

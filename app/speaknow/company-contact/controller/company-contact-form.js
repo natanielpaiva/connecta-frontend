@@ -4,7 +4,7 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('CompanyContactFormController',
-            function ($scope, CompanyContactService, notify, $routeParams, $location, $translate, ngTableParams) {
+            function ($scope, CompanyContactService, notify, $routeParams, $location) {
 
                 $scope.contactGroup = CompanyContactService.getContactGroup();
                 $scope.companyContact = {contactGroup: $scope.contactGroup};
@@ -39,10 +39,8 @@ define([
                         $scope.companyContact.value = $scope.email;
                     }
                     CompanyContactService.save($scope.companyContact).then(function () {
-                        $translate('COMPANY.SUCCESS').then(function (text) {
-                            notify.success(text);
-                            $location.path('speaknow/company/contact/group/' + $scope.contactGroup.id);
-                        });
+                        notify.success('COMPANY.SUCCESS');
+                        $location.path('speaknow/company/contact/group/' + $scope.contactGroup.id);
                     });
                 };
 
