@@ -86,7 +86,14 @@ define([
             $scope.company.companyContacts.push($scope.companyContacts);
         };
 
-        $scope.fileRectDropped = function (files) {
+        $scope.fileRectDropped = function (files, ev, rejFiles) {
+            if (rejFiles && rejFiles.length) {
+              $translate('COMPANY.VALIDATION.INVALID_DOCUMENT').then(function (text) {
+                notify.warning(text);
+              });
+              return;
+            }
+
             if (files && files.length) {
                 $scope.fileRect = files[0];
                 var reader = new FileReader();
@@ -100,10 +107,6 @@ define([
                     }
                 };
                 reader.readAsDataURL(files[0]);
-            } else {
-                $translate('COMPANY.VALIDATION.INVALID_DOCUMENT').then(function (text) {
-                    notify.warning(text);
-                });
             }
         };
 

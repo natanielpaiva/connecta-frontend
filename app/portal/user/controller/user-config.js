@@ -12,7 +12,14 @@ define([
     });
 
 
-    $scope.onFileSelected = function (files) {
+    $scope.onFileSelected = function (files, ev, rejFiles) {
+      if (rejFiles && rejFiles.length) {
+        $translate('USER.VALIDATION.INVALID_DOCUMENT').then(function (text) {
+          notify.warning(text);
+        });
+        return;
+      }
+
       var file = files[0];
       $scope.fileImage = file;
       if (file) {
