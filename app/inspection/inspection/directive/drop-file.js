@@ -49,6 +49,9 @@ define([
                     }
                     var index = $scope.documents.indexOf(document);
                     $scope.documents.splice(index, 1);
+                    if ($scope.callback) {
+                        $scope.callback.apply();
+                    }
                 };
 
                 $scope.setImageFile = function (document, event) {

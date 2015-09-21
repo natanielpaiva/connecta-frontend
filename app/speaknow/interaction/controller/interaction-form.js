@@ -15,6 +15,7 @@ define([
 
 
         $scope.imageFile = [];
+        $scope.removeImage = false;
         $scope.imageUrl = [];
         $scope.interaction = {
             icon: "dump"
@@ -115,7 +116,7 @@ define([
         };
 
         $scope.save = function () {
-            InteractionService.save($scope.interaction, $scope.fileImage).success(function () {
+            InteractionService.save($scope.interaction, $scope.fileImage, $scope.removeImage).success(function () {
                 $translate('INTERACTION.SUCCESS').then(function (text) {
                     notify.success(text);
                     $location.path('speaknow/interaction');
@@ -141,13 +142,19 @@ define([
             return isValid;
         };
         
-        $scope.dropImageCallback = function(){
-            $scope.fileImage = $scope.imageFile[0];
-            $scope.interactionImage = $scope.imageUrl[0].image;
-            $scope.validateImage($scope.imageFile[0]);
+        $scope.dropImageCallback = function () {
+            if ($scope.imageFile.length < 1) {
+                $scope.removeImage = true;
+            } else {
+                $scope.fileImage = $scope.imageFile[0];
+                $scope.interactionImage = $scope.imageUrl[0].image;
+                $scope.validateImage($scope.imageFile[0]);
+                $scope.removeImage = false;
+            }
         };
         
         $scope.clearImage = function(){
+            $scope.removeImage = true;
             $scope.interactionImage = null;
             $scope.fileImage = null;
             $scope.imageFile = [];

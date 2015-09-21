@@ -36,6 +36,8 @@
         "SERVICE": "Service",
         "SECTIONS": "Sections",
         "OPTIONS":"Options",
+        "PARAMS":"Params",
+        "CONTACTS":"Contacts",
         "SECTION": {
             "TITLE": "Section Title",
             "FOOTER": "Footer",

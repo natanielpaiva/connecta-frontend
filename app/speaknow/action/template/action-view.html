@@ -15,7 +15,8 @@
                             <span class="icon-arrow-bold-right"></span></button>-->
 
             <button type="button" class="btn btn-default"
-                    conf-modal="modalParams" conf-modal-args="[action.id]">
+                    conf-modal="modalParams" conf-modal-args="[action.id]"
+                    ng-disabled="action.interaction.actions.length == 1">
                 <span class="icon-dump"></span></button>
 
             <a href="#/speaknow/action/{{action.id}}/edit" class="btn btn-default">
@@ -59,7 +60,7 @@
                     <ul ng-repeat='section in action.sections'>
                         <li>{{'ACTION.SECTION.TITLE'| translate}}: {{section.title}}</li>
                         <ul ng-if='section.params.length'>
-                            <li>Params</li>
+                            <li translate>ACTION.PARAMS</li>
                             <ul ng-repeat="param in section.params">
                                 <li>{{'ACTION.SECTION.PARAM.TITLE'| translate}}: {{param.title}}</li>
                                 <li ng-if='param.name'>{{'PARAM.SECTION.PARAM.NAME'| translate}}: {{param.name}}</li>
@@ -78,12 +79,12 @@
                     </ul>
 
                     <div ng-show="action.contacts.length > 0">
-                        <h3>Contacts</h3>
+                        <h3 translate>ACTION.CONTACTS</h3>
                         <ul>
                             <li ng-repeat="contact in action.contacts">{{contact.name + ' - ' + contact.phone}}</li>
                         </ul>
                     </div>
-                    <div ng-show="!action.contacts.length">
+                    <div ng-show="!action.contacts.length && action.whatsappAccount">
                         <strong translate>ACTION.ALL_CONTACTS</strong>
                     </div>
                 </div>

@@ -36,6 +36,8 @@
         "SERVICE": "Serviço",
         "SECTIONS": "Seções",
         "OPTIONS":"Opções",
+        "PARAMS":"Parâmetros",
+        "CONTACTS":"Contatos",
         "SECTION": {
             "TITLE": "Título da seção",
             "FOOTER": "Rodapé",

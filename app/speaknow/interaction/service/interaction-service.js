@@ -13,10 +13,11 @@ define([
             return $http.get(url);
         };
 
-        this.save = function (interaction, fileImage) {
+        this.save = function (interaction, fileImage, removeImage) {
             var url = speaknowResources.interaction + "/save";
             var fd = new FormData();
             fd.append('image', fileImage);
+            fd.append('removeImage', removeImage);
             fd.append('interaction', JSON.stringify(interaction));
             return $http.post(url, fd, {
                 headers: {'Content-Type': undefined}
