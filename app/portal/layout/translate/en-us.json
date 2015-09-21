@@ -4,7 +4,8 @@
     "EMAIL": "Must be a valid email address",
     "MINLENGTH": "The field is too short",
     "MAXLENGTH": "The field is too long",
-    "NUMBER":"Field must contain only numbers"
+    "NUMBER":"Field must contain only numbers",
+    "INVALID_DOCUMENT":"Invalid file"
   },
   "LAYOUT": {
     "HOME": "Home",

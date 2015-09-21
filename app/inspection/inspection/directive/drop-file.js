@@ -8,13 +8,18 @@
 
 define([
     'connecta.inspection',
+    'portal/layout/service/notify'
 ], function (inspection) {
 
     return inspection.directive('dropFile', function () {
         return {
             restrict: 'E',
-            controller: function ($scope) {
-                $scope.fileDropped = function (files) {
+            controller: function ($scope, notify) {
+                $scope.fileDropped = function (files, ev, rejFiles) {
+                    if (rejFiles && rejFiles.length) {
+                        notify.warning("VALIDATION.INVALID_DOCUMENT");
+                        return;
+                    }
                     var file = null;
                     if (files && files.length) {
                         file = files[0];
