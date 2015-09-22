@@ -46,11 +46,14 @@ define([
       registerTranslateParts($translatePartialLoaderProvider);
     });
 
-    function registerApplicationEvents($rootScope, $heading, CompanyService){
+    function registerApplicationEvents($rootScope, $heading, $location, CompanyService){
       $rootScope.$on(speaknow.name + '.enter', function($event, $route){
         CompanyService.getUserCompanyLogo().then(function(logoSrc){
           $heading.setLogo(logoSrc);
         });
+
+        $location.path('/speaknow');
+
       });
 
       $rootScope.$on(speaknow.name + '.leave', function($event, $route){
@@ -58,8 +61,8 @@ define([
       });
     }
 
-    speaknow.run(function ($rootScope, $heading, CompanyService) {
-        registerApplicationEvents($rootScope, $heading, CompanyService);
+    speaknow.run(function ($rootScope, $heading, $location, CompanyService) {
+        registerApplicationEvents($rootScope, $heading, $location, CompanyService);
     });
     speaknow.constant('sortBy', function (array, name) {
         return array.sort(function (a, b) {
