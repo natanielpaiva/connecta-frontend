@@ -34,7 +34,7 @@ define([
 
         $scope.modalParams = {
             title: 'Excluir Ação',
-            text: 'Deseja realmente excluir esta ação?',
+            text: 'Deseja realmente excluir a ação?',
             size: 'sm',
             success: $scope.delete
         };
