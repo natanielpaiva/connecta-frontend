@@ -323,7 +323,7 @@ define([
             children: []
         },
         {
-            href: 'speaknow/product',
+            href: 'speaknow/product/',
             title: 'PRODUCT.PRODUCT_SERVICE',
             icon: 'icon-box2',
             children: []
@@ -333,7 +333,7 @@ define([
             icon: 'icon-comments',
             children: [
                 {
-                    href: 'speaknow/whatsapp',
+                    href: 'speaknow/whatsapp/',
                     title: 'WHATSAPP.ACCOUNTS'
                 },
                 {

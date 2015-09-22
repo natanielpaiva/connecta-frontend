@@ -13,6 +13,7 @@
     	"ACTIVE": "Ativa",
         "WHATSAPP": "Whatsapp",
         "LISTENERS": "Ouvintes",
-        "WITHOUT_COMPANY":"É necessário cadastrar uma empresa."
+        "WITHOUT_COMPANY":"É necessário cadastrar uma empresa.",
+        "SAVE_SUCCESS":"Conta salva com sucesso."
     }
 }

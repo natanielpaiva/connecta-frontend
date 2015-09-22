@@ -13,6 +13,7 @@
     	"ACTIVE": "Active",
         "WHATSAPP": "Whatsapp",
         "LISTENERS": "Listeners",
-        "WITHOUT_COMPANY":"It needs to register a company"
+        "WITHOUT_COMPANY":"It needs to register a company",
+        "SAVE_SUCCESS":"Conta salva com sucesso."
     }
 }
