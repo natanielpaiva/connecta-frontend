@@ -19,7 +19,7 @@ define([
                 notify.success('CONTACT.SAVE_SUCCESS');
                 $location.path('speaknow/contact');
             }, function (response) {
-                notify.error('CONTACT.SAVE_ERROR');
+                notify.warning('CONTACT.SAVE_ERROR');
             });
         };
     });

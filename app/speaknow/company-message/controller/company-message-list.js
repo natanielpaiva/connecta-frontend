@@ -24,7 +24,7 @@ define([
                 }, {
                     getData: function ($defer, params) {
                         return CompanyMessageService.list(params.url()).then(function (response) {
-                            if (response.data.content.length === 0 && $scope.search.name.length > 0) {
+                            if (response.data.content.length === 0 && $scope.search.subject.length > 0) {
                                 notify.warning('COMPANY_MESSAGE.NO_RESULT');
                             }
                             params.total(response.data.totalElements);
