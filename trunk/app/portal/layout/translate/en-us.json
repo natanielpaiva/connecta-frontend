@@ -32,7 +32,8 @@
     "LOGIN_FACEBOOK":"Login with Facebook",
     "LOGIN_GOOGLE":"Login with Google +",
     "OR":"or",
-    "ADD_ACC":"Create Account"
+    "ADD_ACC":"Create Account",
+    "NO_RESULTS":"Nenhum resultado encontrado"
   },
   "KEY_VALUE": {
     "NO_ITEM": "Nothing yet. Click '{{LAYOUT.ADD}}' to add a new item."

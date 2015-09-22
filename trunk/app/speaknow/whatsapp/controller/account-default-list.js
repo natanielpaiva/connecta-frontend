@@ -28,6 +28,9 @@ define([
         }, {
             getData: function ($defer, params) {
                 return ActionService.listDefaultAccounts(params.url()).then(function (response) {
+                    if (response.data.content.length === 0 && $scope.search.name.length > 0) {
+                        notify.warning('LAYOUT.NO_RESULTS');
+                    }
                     params.total(response.data.totalElements);
                     $defer.resolve(response.data.content);
                 });

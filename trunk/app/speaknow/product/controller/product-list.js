@@ -10,9 +10,9 @@ define([
 
         CompanyService.getUserCompany().then(function (response) {
         }, function (data) {
-          if(data.status === 401){
-            return;
-          }
+            if (data.status === 401) {
+                return;
+            }
             notify.warning('WHATSAPP.WITHOUT_COMPANY');
             $location.path('speaknow/company/new');
         });
@@ -30,6 +30,9 @@ define([
         }, {
             getData: function ($defer, params) {
                 return ProductService.list(params.url()).then(function (response) {
+                    if (response.data.content.length === 0 && $scope.search.name.length > 0) {
+                        notify.warning('LAYOUT.NO_RESULTS');
+                    }
                     params.total(response.data.totalElements);
                     var result = sortBy(response.data.content, "name");
                     $defer.resolve(result);

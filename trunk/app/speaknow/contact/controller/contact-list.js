@@ -27,6 +27,9 @@ define([
         }, {
             getData: function ($defer, params) {
                 return ContactService.list(params.url()).then(function (response) {
+                    if (response.data.content.length === 0 && $scope.search.name.length > 0) {
+                        notify.warning('LAYOUT.NO_RESULTS');
+                    }
                     params.total(response.data.totalElements);
                     var result = sortBy(response.data.content, "name");
                     $defer.resolve(result);
