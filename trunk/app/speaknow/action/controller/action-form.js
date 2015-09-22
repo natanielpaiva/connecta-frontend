@@ -88,7 +88,7 @@ define([
             $scope.showParamOpts = $scope.isMultiple(type);
             $scope.verifyAnswerAndQuestionSeparator();
         };
-        
+
         $scope.verifyAnswerAndQuestionSeparator = function(){
             for(var index in $scope.action.sections){
                 var section = $scope.action.sections[index];
@@ -97,7 +97,7 @@ define([
                 } else {
                     $scope.isQuestionSeparator = false;
                 }
-                
+
                 $scope.isAnswerSeparator = false;
                 for(var i in section.params){
                     var param = section.params[i];
@@ -137,7 +137,7 @@ define([
             $scope.isEditing = true;
             ActionService.get($routeParams.id).success(function (data) {
                 $scope.action = data;
-                
+
                 ActionService.containsAnswer($scope.action.id).then(function (response) {
                     if (response.data) {
                         notify.warning("ACTION.CONTAINS_ANSWER");
@@ -145,7 +145,7 @@ define([
                         return;
                     }
                 });
-                
+
                 $scope.isWhatsapp = $scope.action.whatsappAccount !== undefined;
                 if ($scope.action.contacts.length > 0) {
                     $scope.allContacts = false;
@@ -199,7 +199,7 @@ define([
             if ($scope.action.type == 'SERVICE') {
                 $scope.isWhatsapp = false;
             } else if($scope.action.type == 'FAQ'){
-                
+
             }
         };
 
@@ -240,7 +240,12 @@ define([
                 InteractionService.save($scope.interaction, image, $scope.interaction.removeImage).then(function (response) {
                     ActionService.clearInteraction();
                     notify.success('INTERACTION.SUCCESS');
-                    $location.path('/speaknow/interaction/' + response.id);
+                    if($scope.interaction.id){
+                      $location.path('/speaknow/interaction/' + $scope.interaction.id);
+                    } else {
+                      $location.path('/speaknow/interaction');
+                    }
+
                 }, function(response){
                     if(response.status === 403){
                         notify.success('ACTION.FORBIDDEN');
@@ -276,7 +281,7 @@ define([
                         return false;
                     }
                 }
-                
+
                 return true;
         };
 
@@ -423,12 +428,12 @@ define([
                 templateUrl: "app/portal/layout/directive/template/conf-modal-tpl.html",
                 size: 'sm',
                 controller: function ($scope, $rootScope) {
-                    
+
                     $scope.params = {
                         title: 'Atenção',
                         text: 'Mensagem muito extensa para ser enviada pelo Whatsapp, deseja continuar?'
                     };
-                    
+
                     $scope.ok = function () {
                         $rootScope.$broadcast('save-action');
                         modalInstance.dismiss();
