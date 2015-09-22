@@ -37,7 +37,7 @@ define([
     var appIdConnectaHml = '953657114675501';
     var appIdConnectaLocal = '953794307995115';
 
-    FacebookProvider.init(appIdConnectaCloud);
+    FacebookProvider.init(appIdConnectaLocal);
   });
 
   /**
