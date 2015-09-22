@@ -9,7 +9,7 @@ define([
             $routeParams, $location, ngTableParams, notify) {
 
         $scope.baseUrl = speaknowResources.base;
-
+            
         var redirectToInteraction = function () {
             $location.path('speaknow/interaction');
         };
@@ -18,6 +18,10 @@ define([
             console.error("Id da interaction não informado na url");
             redirectToInteraction();
         }
+        
+        InteractionService.readOnly($routeParams.id).then(function(response){
+            $scope.readOnly = response.data;
+        });
 
         //TODO Vai ter search na view da Interaction pras actions?
         $scope.search = {

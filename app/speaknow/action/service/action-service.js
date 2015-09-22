@@ -90,5 +90,10 @@ define([
             var url = speaknowResources.action + "/" + actionId + "/answers";
             return $http.get(url);
         };
+        
+        this.readOnly = function(id){
+            var url = speaknowResources.action + "/readOnly/" + id;
+            return $http.get(url);
+        };
     });
 });

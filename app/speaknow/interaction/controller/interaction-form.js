@@ -115,9 +115,13 @@ define([
         };
 
         $scope.save = function () {
-            InteractionService.save($scope.interaction, $scope.fileImage, $scope.removeImage).success(function () {
+            InteractionService.save($scope.interaction, $scope.fileImage, $scope.removeImage).then(function () {
                 notify.success('INTERACTION.SUCCESS');
                 $location.path('speaknow/interaction');
+            }, function(response){
+                if(response.status === 403){
+                    notify.success('INTERACTION.FORBIDDEN');
+                }
             });
         };
 

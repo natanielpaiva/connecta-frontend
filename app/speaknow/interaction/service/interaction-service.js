@@ -28,6 +28,11 @@ define([
             var url = speaknowResources.interaction + "/" + id;
             return $http.delete(url);
         };
+        
+        this.readOnly = function(id){
+            var url = speaknowResources.interaction + "/readOnly/" + id;
+            return $http.get(url);
+        };
 
     });
 });

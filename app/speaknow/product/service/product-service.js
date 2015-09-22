@@ -42,5 +42,10 @@ define([
             var url = speaknowResources.product + "/categories";
             return $http.get(url);
         };
+        
+        this.readOnly = function(id){
+            var url = speaknowResources.product + "/readOnly/" + id;
+            return $http.get(url);
+        };
     });
 });

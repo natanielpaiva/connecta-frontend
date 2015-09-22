@@ -237,17 +237,25 @@ define([
                 delete $scope.action.interaction;
 
                 $scope.interaction.actions.push($scope.action);
-                InteractionService.save($scope.interaction, image, $scope.interaction.removeImage).success(function (response) {
+                InteractionService.save($scope.interaction, image, $scope.interaction.removeImage).then(function (response) {
                     ActionService.clearInteraction();
                     notify.success('INTERACTION.SUCCESS');
                     $location.path('/speaknow/interaction/' + response.id);
+                }, function(response){
+                    if(response.status === 403){
+                        notify.success('ACTION.FORBIDDEN');
+                    }
                 });
             } else {
                 $scope.action.interaction = $scope.interaction;
-                ActionService.save($scope.action).success(function (response) {
+                ActionService.save($scope.action).then(function (response) {
                     ActionService.clearInteraction();
                     notify.success('ACTION.SUCCESS');
                     $location.path('/speaknow/interaction/' + $scope.action.interaction.id);
+                }, function(response){
+                    if(response.status === 403){
+                        notify.success('ACTION.FORBIDDEN');
+                    }
                 });
             }
         };

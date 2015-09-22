@@ -54,6 +54,9 @@ define([
                         notify.success('PRODUCT.SAVE_SUCCESS');
                         $location.path('speaknow/product');
                     }, function (response) {
+                        if(response.status === 403){
+                        notify.success('ACTION.FORBIDDEN');
+                    }
                     });
                 };
 

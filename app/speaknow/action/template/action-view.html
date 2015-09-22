@@ -14,12 +14,12 @@
                         <button type="button" class="btn btn-default" ng-click="nextAction(action.id)">
                             <span class="icon-arrow-bold-right"></span></button>-->
 
-            <button type="button" class="btn btn-default"
+            <button type="button" class="btn btn-default" ng-show="!readOnly"
                     conf-modal="modalParams" conf-modal-args="[action.id]"
                     ng-disabled="action.interaction.actions.length == 1">
                 <span class="icon-dump"></span></button>
 
-            <a href="#/speaknow/action/{{action.id}}/edit" class="btn btn-default">
+            <a href="#/speaknow/action/{{action.id}}/edit" class="btn btn-default" ng-show="!readOnly">
                 <span class="icon-pencil"></span>
             </a>
         </div>

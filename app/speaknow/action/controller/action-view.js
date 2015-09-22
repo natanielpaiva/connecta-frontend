@@ -10,17 +10,21 @@ define([
         if ($routeParams.id) {
             ActionService.get($routeParams.id).then(function (response) {
                 $scope.action = response.data;
-            }, function(error){
-              if(error.status === 403){
-                notify.warning("ACTION.VIEW_FORBIDDEN");
-              }
+            }, function (error) {
+                if (error.status === 403) {
+                    notify.warning("ACTION.VIEW_FORBIDDEN");
+                }
 
-              $location.path('speaknow/interaction');
+                $location.path('speaknow/interaction');
             });
         } else {
             console.error("Id da interaction não informado na url");
             $location.path('speaknow/interaction');
         }
+
+        ActionService.readOnly($routeParams.id).then(function (response) {
+            $scope.readOnly = response.data;
+        });
 
         $scope.delete = function (id) {
             ActionService.delete(id).success(function () {

@@ -4,6 +4,7 @@
         "INTERACTIONS": "Interações",
         "ACTIONS": "Ações",
         "ADD": "Adicionar Interação",
+        "FORBIDDEN":"Vocẽ não tem autorização para realizar esta operação",
         "EDIT": "Editar Interação",
         "VIEW": "Visualizar Interação",
         "NAME": "Nome",

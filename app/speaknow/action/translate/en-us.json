@@ -5,6 +5,7 @@
         "NO":"No",
         "CONTACTS_NULL":"You need one or more contacts",
         "ADD": "Add Action",
+        "FORBIDDEN":"Vocẽ não tem autorização para realizar esta operação",
         "EDIT": "Edit Action",
         "VIEW": "View Action",
         "VIEW_FORBIDDEN": "You don't have permission to view this Action",

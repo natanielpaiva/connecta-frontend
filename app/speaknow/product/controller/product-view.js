@@ -22,6 +22,10 @@ define([
         } else {
             $location.path('speaknow/product');
         }
+        
+        ProductService.readOnly($routeParams.id).then(function(response){
+            $scope.readOnly = response.data;
+        });
 
         $scope.delete = function(id){
              ProductService.delete(id).success(function () {

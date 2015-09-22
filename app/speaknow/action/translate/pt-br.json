@@ -6,6 +6,7 @@
         "CONTACTS_NULL":"É necessário um ou mais contatos.",
         "ADD": "Adicionar Ação",
         "EDIT": "Editar Ação",
+        "FORBIDDEN":"Vocẽ não tem autorização para realizar esta operação",
         "VIEW": "Visualizar Ação",
         "VIEW_FORBIDDEN": "Você não tem permissão para visualizar esta Ação",
         "NAME": "Nome",
