@@ -335,6 +335,7 @@ define([
     'portal/layout/directive/conf-modal',
     'portal/auth/directive/login',
     'inspection/inspection/directive/box-table-inspection',
+    'maps/drill/directive/box-table-maps',
     'inspection/inspection/directive/status-change',
     'inspection/inspection/directive/inspect-datepicker',
     'inspection/inspection/directive/drop-file',
