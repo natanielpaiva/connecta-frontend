@@ -32,11 +32,12 @@ define([
 
     angular.extend(redactorOptions, _redactorOptions);
 
-    
+
     var appIdConnectaCloud = '950123895028823';
     var appIdConnectaHml = '953657114675501';
-    
-    FacebookProvider.init(appIdConnectaHml);
+    var appIdConnectaLocal = '953794307995115';
+
+    FacebookProvider.init(appIdConnectaCloud);
   });
 
   /**
