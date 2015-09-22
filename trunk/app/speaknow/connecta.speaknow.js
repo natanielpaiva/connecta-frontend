@@ -328,20 +328,20 @@ define([
             icon: 'icon-box2',
             children: []
         },
-        {
-            title: 'WHATSAPP.WHATSAPP',
-            icon: 'icon-comments',
-            children: [
-                {
-                    href: 'speaknow/whatsapp',
-                    title: 'WHATSAPP.ACCOUNTS'
-                },
-                {
-                    href: 'speaknow/whatsapp/default',
-                    title: 'WHATSAPP.ACCOUNTS_DEFAULT'
-                }
-            ]
-        }
+        // {
+        //     title: 'WHATSAPP.WHATSAPP',
+        //     icon: 'icon-comments',
+        //     children: [
+        //         {
+        //             href: 'speaknow/whatsapp',
+        //             title: 'WHATSAPP.ACCOUNTS'
+        //         },
+        //         {
+        //             href: 'speaknow/whatsapp/default',
+        //             title: 'WHATSAPP.ACCOUNTS_DEFAULT'
+        //         }
+        //     ]
+        // }
     ];
 
     return speaknow;
