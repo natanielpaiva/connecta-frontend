@@ -223,15 +223,19 @@
                     <div class="form-group" ng-show="isQuestionSeparator && isWhatsapp">
                         <div class="form-group">
                             <label for="questionSeparator" class="required" translate>ACTION.QUESTION_SEPARATOR</label>
-                            <input type="text" class="form-control" id="name" name="questionSeparator"
-                                   ng-model="action.questionSeparator" maxlength="1" ng-require="isQuestionSeparator && isWhatsapp" />
+                            <select type="text" class="form-control" id="name" name="questionSeparator"
+                                   ng-model="action.questionSeparator" maxlength="1" ng-require="isQuestionSeparator && isWhatsapp" >
+                                <option value="-">-</option>
+                            </select>
                         </div>
                     </div>
                     
                     <div class="form-group" ng-show="isAnswerSeparator && isWhatsapp">
                         <label for="answerSeparator" class="required" translate>ACTION.ANSWER_SEPARATOR</label>
-                        <input type="text" class="form-control" id="name" name="answerSeparator"
-                               ng-model="action.answerSeparator" maxlength="1" ng-required="isAnswerSeparator && isWhatsapp" />
+                        <select class="form-control" id="name" name="answerSeparator"
+                               ng-model="action.answerSeparator" maxlength="1" ng-required="isAnswerSeparator && isWhatsapp">
+                            <option value=";">;</option>
+                        </select>
                         <div ng-show="actionForm.answerSeparator.$touched" ng-messages="actionForm.answerSeparator.$error"
                             ng-messages-include="portal-error-messages"></div>
                     </div>
@@ -260,8 +264,8 @@
                                />
                         <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
                     </div>
-
-                    <div class="table-contacts" ng-show="contacts.length > 0">
+                    
+                    <div class="table-contacts" ng-show="contacts.length > 0 && !allContacts">
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
@@ -288,6 +292,20 @@
                         </table>
                     </div>
 
+                    <button type="button" class="btn btn-primary edit-whats-message" ng-click="editWhatsappMessage()" translate ng-show="!messageWhatsappEdited">
+                        ACTION.WHATSAPP_MESSAGE_EDIT
+                    </button>
+                    <button type="button" class="btn btn-primary edit-whats-message" ng-click="editWhatsappMessage()" translate ng-show="messageWhatsappEdited">
+                        ACTION.RECOVER_WHATSAPP_MESSAGE
+                    </button>
+                    <div class="form-group" ng-show="messageWhatsappEdited">
+                        <label translate>ACTION.WHATSAPP_MESSAGE</label>
+                        <textarea name="whatsMessage" id="whatsMessage" class="form-control" ng-maxlength="500" ng-model="action.messageWhatsapp"
+                                  style="max-width: 100%;" ng-required="messageWhatsappEdited"/>
+                        <div ng-show="actionForm.whatsMessage.$touched" ng-messages="actionForm.whatsMessage.$error"
+                            ng-messages-include="portal-error-messages"></div>
+                    </div>
+                    
                 </div>
                 <button type="button" onclick="window.history.back()" class="btn btn-default" translate>
                     LAYOUT.BACK                     

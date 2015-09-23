@@ -17,6 +17,7 @@ define([
         $scope.contact = null;
         $scope.contacts = [];
         $scope.allContacts = true;
+        $scope.messageWhatsappEdited = false;
 
         var param = {
             type: "TEXT",
@@ -206,6 +207,11 @@ define([
         $scope.setParamTypesWhatsApp = function () {
             $scope.paramTypes = ["MULTI_SELECT", "SELECT", "TEXT"];
         };
+        
+        $scope.editWhatsappMessage = function(){
+            $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+            $scope.messageWhatsappEdited = true;
+        };
 
         $scope.setParameterType = function () {
             if ($scope.isWhatsapp) {
@@ -273,7 +279,10 @@ define([
                     return false;
                 }
                 $scope.action.whatsappAccount = angular.fromJson($scope.whatsappAccount);
-                $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+                
+                if(!$scope.messageWhatsappEdited){
+                    $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+                }
 
                 if ($scope.action.messageWhatsapp.length > 500) {
                     if(!$scope.saveWithoutSend){
@@ -404,13 +413,13 @@ define([
             }
 
             if (containsMultiselect) {
-                message += "Use " + action.answerSeparator + " para separar as respostas" + "\n";
-                message += "Ex: resposta 1" + action.answerSeparator + " resposta 2...";
+                message += "Use " + action.answerSeparator + " para separar as respostas\n";
+                message += "Ex: resposta 1" + action.answerSeparator + " resposta 2...\n";
             }
 
             if (section.params.length > 1) {
-                message += "Use " + action.questionSeparator + " para separar as questões" + "\n";
-                message += "Ex: questão 1" + action.questionSeparator + " questão 2...";
+                message += "Use " + action.questionSeparator + " para separar as questões\n";
+                message += "Ex: questão 1" + action.questionSeparator + " questão 2...\n";
             }
 
             return message;
