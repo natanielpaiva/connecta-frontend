@@ -59,7 +59,7 @@ define([
                             params.total(data.length);
                             return $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                         },
-                        counts: [20, 50, 100]
+                        counts: [10, 30, 50, 100]
                     });
                 };
 

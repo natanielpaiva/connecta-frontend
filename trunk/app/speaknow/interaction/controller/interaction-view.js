@@ -47,7 +47,7 @@ define([
                   redirectToInteraction();
                 });
             },
-            counts: [20, 50, 100]
+            counts: [10, 30, 50, 100]
         });
 
         $scope.deleteInteraction = function (id) {

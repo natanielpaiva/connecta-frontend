@@ -76,10 +76,10 @@
                         <div class="header-card" ng-click="minifyCard(action.sections); section.max = !section.max">
                             <h4>{{section.title ? section.title : newSectionStr}}</h4>
                             <div class="btn-group pull-right margin-right-single" role="group">
-                                <button type="button" class="btn btn-default">
+                                <button type="button" class="btn btn-default" title="Visualizar">
                                     <span class="icon-eye"/>
                                 </button>
-                                <button type="button" class="btn btn-default" ng-click="removeSection(section)">
+                                <button type="button" class="btn btn-default" ng-click="removeSection(section)" title="Remover">
                                     <span class="icon-trash"/>
                                 </button>
                             </div>
@@ -99,11 +99,11 @@
                                 <div class="header-card" ng-click="minifyCard(section.params);
                                             param.max = true">
                                     <h4>{{param.title ? param.title : newParamStr}}</h4>
-                                    <div class="btn-group pull-right margin-right-single" role="group">
+                                    <div class="btn-group pull-right margin-right-single" role="group" title="Visualizar">
                                         <button class="btn btn-default">
                                             <span class="icon-eye"/>
                                         </button>
-                                        <button type="button" class="btn btn-default" ng-click="removeParam(section, param)">
+                                        <button type="button" class="btn btn-default" ng-click="removeParam(section, param)" title="Remover">
                                             <span class="icon-trash"/>
                                         </button>
                                     </div>
