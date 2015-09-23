@@ -209,8 +209,14 @@ define([
         };
         
         $scope.editWhatsappMessage = function(){
-            $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+            if(!$scope.isEditing){
+                $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+            }
             $scope.messageWhatsappEdited = true;
+        };
+        
+        $scope.recriateMessage = function(){
+            $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
         };
 
         $scope.setParameterType = function () {
