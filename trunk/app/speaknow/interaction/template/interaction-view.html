@@ -53,7 +53,7 @@
         </div>
 
         <h3 translate>INTERACTION.ACTIONS</h3>
-        <a class="btn btn-default" ng-href="{{redirectToAction()}}" href="#/speaknow/action/new" translate>
+        <a class="btn btn-default" ng-href="{{redirectToAction()}}" href="#/speaknow/action/new" translate ng-show="!readOnly">
             <span class="glyphicon glyphicon-plus"></span>
         </a>
         <table ng-table="tableParams" class="table table-striped margin-top-single">
@@ -72,12 +72,12 @@
                         <div class="btn-group">
                             
                             <button type="button" class="btn btn-sm" ng-class="{'icon-star2': action.default, 'icon-star-outline': !action.default}"
-                                    conf-modal="modalSetDefault" conf-modal-args="[action.id]"  title="Favorito"
+                                    conf-modal="modalSetDefault" conf-modal-args="[action.id]"  title="Favorito" ng-show="!readOnly"
                                     ng-disabled="!action.whatsappAccount">
                                 <span aria-hidden="true"></span>
                             </button>
 
-                            <button type="button" class="btn btn-sm icon-send"
+                            <button type="button" class="btn btn-sm icon-send" ng-show="!readOnly"
                                     conf-modal="modalSendWhats" conf-modal-args="[action.id]" title="Enviar Enquete"
                                     ng-disabled="!action.whatsappAccount">
                                 <span aria-hidden="true"></span>
