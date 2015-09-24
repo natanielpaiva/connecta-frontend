@@ -40,6 +40,9 @@
         "PARAMS":"Parâmetros",
         "CONTACTS":"Contatos",
         "CONTAINS_ANSWER":"Não é possível editar uma ação que já tenha respostas",
+        "WHATSAPP_MESSAGE_EDIT":"Editar Mensagem Whatsapp",
+        "WHATSAPP_MESSAGE":"Mensagem Whatsapp",
+        "RECOVER_WHATSAPP_MESSAGE":"Recriar Mensagem",
         "SECTION": {
             "TITLE": "Título da seção",
             "FOOTER": "Rodapé",

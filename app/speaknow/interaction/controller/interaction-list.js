@@ -37,7 +37,7 @@ define([
                     var key = "filter[name]";
                     if (response.config.params[key] &&
                         response.data.content.length === 0) {
-                        notify.success('INTERACTION.SEARCH_EMPTY');
+                        notify.warning('INTERACTION.SEARCH_EMPTY');
                     }
                 });
             },

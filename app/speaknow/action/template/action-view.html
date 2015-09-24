@@ -55,7 +55,16 @@
                         <strong translate>ACTION.ICON</strong>:
                         <span class="icon-{{action.icon}}"></span>
                     </p>
-
+                    <p ng-if="action.answerSeparator">
+                        <strong translate>ACTION.ANSWER_SEPARATOR</strong>:
+                        {{action.answerSeparator}}
+                    </p>
+                    <p ng-if="action.questionSeparator">
+                        <strong translate>ACTION.QUESTION_SEPARATOR</strong>:
+                        {{action.questionSeparator}}
+                    </p>
+                    
+                    
                     <h3 translate>ACTION.SECTIONS</h3>
                     <ul ng-repeat='section in action.sections'>
                         <li>{{'ACTION.SECTION.TITLE'| translate}}: {{section.title}}</li>

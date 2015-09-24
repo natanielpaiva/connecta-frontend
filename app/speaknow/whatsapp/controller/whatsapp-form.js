@@ -1,9 +1,10 @@
 define([
     'connecta.speaknow',
-    'speaknow/whatsapp/service/whatsapp-service'
+    'speaknow/whatsapp/service/whatsapp-service',
+    'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('WhatsappForm', function (
-            $scope, WhatsappService, $location, $routeParams ) {
+            $scope, WhatsappService, $location, $routeParams, notify) {
 
         $scope.whatsapp = {
             active: false
@@ -19,7 +20,8 @@ define([
 
         $scope.submit = function(){
             WhatsappService.save($scope.whatsapp).success(function(response){
-                $location.path('speaknow/whatsapp');
+                notify.success('WHATSAPP.SAVE_SUCCESS');
+                $location.path('speaknow/whatsapp/');
             });
         };
 

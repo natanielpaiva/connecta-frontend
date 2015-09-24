@@ -17,6 +17,7 @@ define([
         $scope.contact = null;
         $scope.contacts = [];
         $scope.allContacts = true;
+        $scope.messageWhatsappEdited = false;
 
         var param = {
             type: "TEXT",
@@ -88,7 +89,7 @@ define([
             $scope.showParamOpts = $scope.isMultiple(type);
             $scope.verifyAnswerAndQuestionSeparator();
         };
-        
+
         $scope.verifyAnswerAndQuestionSeparator = function(){
             for(var index in $scope.action.sections){
                 var section = $scope.action.sections[index];
@@ -97,7 +98,7 @@ define([
                 } else {
                     $scope.isQuestionSeparator = false;
                 }
-                
+
                 $scope.isAnswerSeparator = false;
                 for(var i in section.params){
                     var param = section.params[i];
@@ -137,7 +138,7 @@ define([
             $scope.isEditing = true;
             ActionService.get($routeParams.id).success(function (data) {
                 $scope.action = data;
-                
+
                 ActionService.containsAnswer($scope.action.id).then(function (response) {
                     if (response.data) {
                         notify.warning("ACTION.CONTAINS_ANSWER");
@@ -145,7 +146,7 @@ define([
                         return;
                     }
                 });
-                
+
                 $scope.isWhatsapp = $scope.action.whatsappAccount !== undefined;
                 if ($scope.action.contacts.length > 0) {
                     $scope.allContacts = false;
@@ -199,12 +200,23 @@ define([
             if ($scope.action.type == 'SERVICE') {
                 $scope.isWhatsapp = false;
             } else if($scope.action.type == 'FAQ'){
-                
+
             }
         };
 
         $scope.setParamTypesWhatsApp = function () {
             $scope.paramTypes = ["MULTI_SELECT", "SELECT", "TEXT"];
+        };
+        
+        $scope.editWhatsappMessage = function(){
+            if(!$scope.isEditing){
+                $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+            }
+            $scope.messageWhatsappEdited = true;
+        };
+        
+        $scope.recriateMessage = function(){
+            $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
         };
 
         $scope.setParameterType = function () {
@@ -240,7 +252,12 @@ define([
                 InteractionService.save($scope.interaction, image, $scope.interaction.removeImage).then(function (response) {
                     ActionService.clearInteraction();
                     notify.success('INTERACTION.SUCCESS');
-                    $location.path('/speaknow/interaction/' + response.id);
+                    if($scope.interaction.id){
+                      $location.path('/speaknow/interaction/' + $scope.interaction.id);
+                    } else {
+                      $location.path('/speaknow/interaction');
+                    }
+
                 }, function(response){
                     if(response.status === 403){
                         notify.success('ACTION.FORBIDDEN');
@@ -268,7 +285,10 @@ define([
                     return false;
                 }
                 $scope.action.whatsappAccount = angular.fromJson($scope.whatsappAccount);
-                $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+                
+                if(!$scope.messageWhatsappEdited){
+                    $scope.action.messageWhatsapp = $scope.createWhatsappMessage($scope.action);
+                }
 
                 if ($scope.action.messageWhatsapp.length > 500) {
                     if(!$scope.saveWithoutSend){
@@ -276,7 +296,7 @@ define([
                         return false;
                     }
                 }
-                
+
                 return true;
         };
 
@@ -399,13 +419,13 @@ define([
             }
 
             if (containsMultiselect) {
-                message += "Use " + action.answerSeparator + " para separar as respostas" + "\n";
-                message += "Ex: resposta 1" + action.answerSeparator + " resposta 2...";
+                message += "Use " + action.answerSeparator + " para separar as respostas\n";
+                message += "Ex: resposta 1" + action.answerSeparator + " resposta 2...\n";
             }
 
             if (section.params.length > 1) {
-                message += "Use " + action.questionSeparator + " para separar as questões" + "\n";
-                message += "Ex: questão 1" + action.questionSeparator + " questão 2...";
+                message += "Use " + action.questionSeparator + " para separar as questões\n";
+                message += "Ex: questão 1" + action.questionSeparator + " questão 2...\n";
             }
 
             return message;
@@ -423,12 +443,12 @@ define([
                 templateUrl: "app/portal/layout/directive/template/conf-modal-tpl.html",
                 size: 'sm',
                 controller: function ($scope, $rootScope) {
-                    
+
                     $scope.params = {
                         title: 'Atenção',
                         text: 'Mensagem muito extensa para ser enviada pelo Whatsapp, deseja continuar?'
                     };
-                    
+
                     $scope.ok = function () {
                         $rootScope.$broadcast('save-action');
                         modalInstance.dismiss();

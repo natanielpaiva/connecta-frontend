@@ -246,7 +246,7 @@ define([
         /**
          * URL PRODUCT
          */
-        '/speaknow/product/': {
+        '/speaknow/product': {
             controller: 'ProductList',
             controllerUrl: 'speaknow/product/controller/product-list',
             templateUrl: 'app/speaknow/product/template/product-list.html'
@@ -269,15 +269,15 @@ define([
         /**
          * URL WHATSAPP ACCOUNTS
          */
+        '/speaknow/whatsapp': {
+            controller: 'WhatsappAccountList',
+            controllerUrl: 'speaknow/whatsapp/controller/whatsapp-list',
+            templateUrl: 'app/speaknow/whatsapp/template/whatsapp-list.html'
+        },
         '/speaknow/whatsapp/default': {
             controller: 'AccountDefaultList',
             controllerUrl: 'speaknow/whatsapp/controller/account-default-list',
             templateUrl: 'app/speaknow/whatsapp/template/account-default-list.html'
-        },
-        '/speaknow/whatsapp/': {
-            controller: 'WhatsappAccountList',
-            controllerUrl: 'speaknow/whatsapp/controller/whatsapp-list',
-            templateUrl: 'app/speaknow/whatsapp/template/whatsapp-list.html'
         },
         '/speaknow/whatsapp/new': {
             controller: 'WhatsappForm',
@@ -328,20 +328,20 @@ define([
             icon: 'icon-box2',
             children: []
         },
-        {
-            title: 'WHATSAPP.WHATSAPP',
-            icon: 'icon-comments',
-            children: [
-                {
-                    href: 'speaknow/whatsapp',
-                    title: 'WHATSAPP.ACCOUNTS'
-                },
-                {
-                    href: 'speaknow/whatsapp/default',
-                    title: 'WHATSAPP.ACCOUNTS_DEFAULT'
-                }
-            ]
-        }
+        // {
+        //     title: 'WHATSAPP.WHATSAPP',
+        //     icon: 'icon-comments',
+        //     children: [
+        //         {
+        //             href: 'speaknow/whatsapp',
+        //             title: 'WHATSAPP.ACCOUNTS'
+        //         },
+        //         {
+        //             href: 'speaknow/whatsapp/default',
+        //             title: 'WHATSAPP.ACCOUNTS_DEFAULT'
+        //         }
+        //     ]
+        // }
     ];
 
     return speaknow;
