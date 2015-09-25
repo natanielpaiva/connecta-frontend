@@ -15,12 +15,12 @@
             <button type="button" class="btn btn-default" ng-click="nextContactGroup(contactGroup.id)">
                 <span class="icon-arrow-bold-right"></span></button>-->
 
-            <button type="button" class="btn btn-default" ng-show="!contactGroup.main"
+            <button type="button" class="btn btn-default" ng-show="!contactGroup.main && !readOnly"
                     conf-modal="modalParams" conf-modal-args="[contactGroup.id]">
                 <span class="icon-dump"></span>
             </button>
 
-            <a href="#/speaknow/company/contact/group/{{contactGroup.id}}/edit" class="btn btn-default">
+            <a href="#/speaknow/company/contact/group/{{contactGroup.id}}/edit" class="btn btn-default" ng-show="!readOnly">
                 <span class="icon-pencil"></span>
             </a>
         </div>
@@ -41,8 +41,8 @@
         </div>
         
         <div>
-            <a class="btn btn-default" href="#/speaknow/company/contact/new" translate  ng-show="!contactGroup.main"
-               style=" float: left; margin-right: 10px;">
+            <a class="btn btn-default" href="#/speaknow/company/contact/new" translate  ng-show="!contactGroup.main && !readOnly"
+               style=" float: left; margin-right: 10px;" ng-show="!readOnly">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
             <h3 translate>COMPANYGROUP.CONTACTS</h3>

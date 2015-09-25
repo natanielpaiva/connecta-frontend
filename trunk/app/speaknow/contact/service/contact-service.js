@@ -23,5 +23,10 @@ define([
             return $http.get(url);
         };
         
+        this.readOnly = function(id){
+            var url = speaknowResources.contact + "/readOnly/" + id;
+            return $http.get(url);
+        };
+        
     });
 });

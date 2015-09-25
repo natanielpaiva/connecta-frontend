@@ -5,8 +5,8 @@ define([
     'portal/layout/service/notify'
 ], function (speaknow) {
     return speaknow.lazy.controller('ContactGroupViewController',
-            function ($scope, ContactGroupService, CompanyContactService, 
-            $routeParams, $location, ngTableParams, notify) {
+            function ($scope, ContactGroupService, CompanyContactService,
+                    $routeParams, $location, ngTableParams, notify) {
 
                 $scope.contactGroup = {};
 
@@ -18,6 +18,10 @@ define([
                 } else {
                     $location.path('speaknow/company');
                 }
+
+                ContactGroupService.readOnly($routeParams.id).then(function (response) {
+                    $scope.readOnly = response.data;
+                });
 
                 $scope.tableParams = new ngTableParams({
                     count: 10,
