@@ -1,5 +1,5 @@
 define([
-    'connecta.presenter'
+    'connecta.presenter',
 ], function (presenter) {
 
     return presenter.lazy.service('AnalysisService', function (presenterResources, $http) {
@@ -80,6 +80,22 @@ define([
             }
         };
 
+        //listar todas as analysis
+        this.list = function (params) {
+            var url = presenterResources.analysis;
+            return $http.get(url, {
+                params: params
+            });
+        };
+
+        //remove uma analysis
+        this.remove = function (id) {
+            var url = presenterResources.analysis + '/' + id;
+            return $http.delete(url);
+        };
+
+
+
         this.getTypes = function () {
             return types;
         };
@@ -136,7 +152,7 @@ define([
             var url = presenterResources.analysis + "/" + idDatasouce + "/soap-applying-xpath/operation/" + operation;
             return $http.post(url, analysisCopy);
         };
-        
+
         this.getResulApplyingJson = function (idDatasouce, analysis) {
 
             var analysisCopy = angular.copy(analysis);
@@ -146,6 +162,99 @@ define([
             return $http.post(url, analysisCopy);
         };
 
+
+
+        this.getSolrResultApplyingQuery = function(idDatasouce, query, facet) {
+               var queryPersist = angular.copy({"statement": query});
+               _fixQueryBuilder(queryPersist, false);
+               var url = presenterResources.analysis + "/" + idDatasouce + "/solr-result-applying-query/facet/" + facet;
+               return $http.post(url, queryPersist);
+          };
+          
+          this.saveQueryBuilder = function(query) {
+               var queryBuilder = angular.copy({"statement": query});
+               var urlSaveQuery = presenterResources.group + "/query";
+
+               _fixQueryBuilder(queryBuilder);
+               return $http.post(urlSaveQuery, queryBuilder);
+          };
+
+
+        //solr
+        var _fixQueryBuilder = function (statement, edit) {
+
+            if (statement.type == 'CONDITION_SOLR') {
+                //console.log("queryPersist ", queryPersist);
+                if (statement.predicate === 'EQUAL' ||
+                        statement.predicate === 'NOT_EQUAL' ||
+                        statement.predicate === 'LIKE' ||
+                        statement.predicate === 'NOT_LIKE') {
+
+                    statement.value = agreementValueString(statement.value, edit);
+                }
+
+                if (statement.predicate === 'BETWEEN' ||
+                        statement.predicate === 'NOT_BETWEEN') {
+                    statement.value = agreementValueObject(statement.value, edit);
+                }
+
+                if (statement.predicate === 'IN' ||
+                        statement.predicate === 'NOT_IN') {
+                    statement.value = agreementValueArray(statement.value, edit);
+                }
+
+            } else {
+                var key;
+                if (statement.statement !== undefined) {
+                    for (key in statement.statement.statements) {
+                        _fixQueryBuilder(statement.statement.statements[key]);
+                    }
+                } else {
+                    for (key in statement.statements) {
+                        _fixQueryBuilder(statement.statements[key], edit);
+                    }
+                }
+            }
+
+        };
+        
+        var agreementValueArray = function(value, edit) {
+               var valueArray = [];
+               for (var i in value) {
+                    valueArray.push(value[i].text);
+               }
+               return {
+                    "value": "",
+                    "between": {},
+                    "in": valueArray
+               };
+          };
+        
+        var agreementValueString = function(value, edit) {
+               var retorno = {
+                    "value": value,
+                    "between": {},
+                    "in": []
+               };
+               if (edit) {
+                    retorno = value.value;
+               }
+               return retorno;
+          };
+          
+//          var agreementValueObject = function(value, edit) {
+//
+//               var retorno = {
+//                    "value": "",
+//                    "between": value,
+//                    "in": []
+//               };
+//               if (edit) {
+//                    retorno = {"start": value.between.start, "end": value.between.end};
+//               }
+//               return retorno;
+//
+//          };
 
     });
 });

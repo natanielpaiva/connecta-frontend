@@ -25,13 +25,13 @@ define([
         });
 
         $scope.datasources = [];
-
-        $scope.excluir = function (id) {
-            DatasourceService.excluir(id).then(function(){
-                //Retira um item da lista de datasource
-                $scope.datasources.splice(
-                        $scope.datasources.indexOf(id), 1);
-            });
-        };
+//
+//        $scope.excluir = function (id) {
+//            DatasourceService.excluir(id).then(function(){
+//                //Retira um item da lista de datasource
+//                $scope.datasources.splice(
+//                        $scope.datasources.indexOf(id), 1);
+//            });
+//        };
     });
 });

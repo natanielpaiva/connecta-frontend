@@ -1,3 +1,5 @@
+
+
 <div ng-if="statement.type == 'CONDITION'" class="statement {{ statement.type | lowercase }}">
     Condição
     <input placeholder="Atributo" style="width:100px;" type="text" ng-model="statement.attribute" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes" />

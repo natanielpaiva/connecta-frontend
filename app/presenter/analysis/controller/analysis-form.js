@@ -1,16 +1,16 @@
 define([
     'connecta.presenter',
     'presenter/analysis/service/analysis-service',
-    'presenter/datasource/service/datasource-service'
+    'presenter/datasource/service/datasource-service',
+    'presenter/group/service/group-service'
 ], function (presenter) {
-    return presenter.lazy.controller('AnalysisFormController', function ($scope, AnalysisService, DatasourceService) {
+    return presenter.lazy.controller('AnalysisFormController', function ($scope, AnalysisService, DatasourceService, GroupService) {
 
         var XmlNodeType = {
             ELEMENT: 1,
             ATTRIBUTE: 2,
             ROOT: 9
         };
-
 
         var datasourceCurrent = null;
 
@@ -33,21 +33,9 @@ define([
         }
         resetComponent();
 
-        // $scope.$watch('component.catalog', $log.debug);
-        // $scope.$watch('component.column', $log.debug);
 
         $scope.attributeTypes = ["Select", "Map", "Date", "Text", "Etc"];
 
-//        $scope.attributes = [{params: null, value: "", type: ''}];
-//
-//        $scope.addMethodAttribute = function () {
-//            var attr = angular.copy($scope.attribute);
-//            $scope.attributes.push(attr);
-//        };
-//
-//        $scope.removeMethodAttribute = function (attribute) {
-//            $scope.attributes.splice($scope.attribute.indexOf(attribute), 1);
-//        };
 
 
         //################gerando o tipo de template#####################
@@ -222,8 +210,6 @@ define([
             }
         }
 
-
-
         $scope.generateXPathTable = function (current, array) {
             var name = current.nodeName;
             array.push(name);
@@ -284,15 +270,13 @@ define([
             $scope.analysis.analysisColumns = $scope.component.columns;
             $scope.analysis.webserviceAnalysisParameter = $scope.parametersWebservice;
             console.log("Agora vai: ", $scope.analysis);
-//            
             return AnalysisService.getResulApplyingXpath(datasourceCurrent.id, $scope.analysis, $scope.operation).then(function (response) {
                 console.log("Super resposta: ", response.data);
-                $scope.responseWebserviceSoapJson = response.data;
+                $scope.responseWebservice = response.data;
             });
         };
 
-
-        //Json
+    //Json
         $scope.$watch('component.webserviceRestJson', function (json) {
             refParentJson(json);
         });
@@ -463,106 +447,160 @@ define([
         $scope.getResultRest = function () {
             $scope.analysis.analysisColumns = $scope.component.columns;
 
-            console.log("Agora vai: ", $scope.analysis);
-//            
+            //console.log("Agora vai: ", $scope.analysis);
             return AnalysisService.getResulApplyingJson(datasourceCurrent.id, $scope.analysis).then(function (response) {
                 console.log("Super resposta: ", response.data);
 
 
-                $scope.responseWebserviceSoapJson = response.data;
+                $scope.responseWebservice = response.data;
             });
         };
 
+        //###########################################Sorl##################################################
+
+        //$scope.types = GroupService.getTypes();
+        $scope.queryBuilderTypes = GroupService.getTypes();
+        //$scope.typeFilter = GroupService.getTypeFilter();
+        $scope.queryBuilderTypeFilter = GroupService.getTypeFilter();
+        $scope.group = {};
+        $scope.analysisColumn = {
+            name: ""
+        };
+
+
+        $scope.predicateMap = GroupService.getPredicate();
+        $scope.operatorMap = GroupService.getOperator();
+
+//        $scope.queryInit = function () {
+//            $scope.query = {
+//                statement: {
+//                    "type": "GROUP",
+//                    "operator": "OR",
+//                    "statements": []
+//                }
+//            };
+//        };
+
+        $scope.queryInit = function () {
+
+            $scope.statement = {
+                "type": "GROUP",
+                "operator": "OR",
+                "statements": []
+            };
+        };
+        $scope.queryInit();
+
+        $scope.getAttributes = function (val) {
+            return GroupService.getAttribute(val);
+        };
+
+        $scope.addGroup = function (stmt) {
+            console.log("addGroup stmt: ", stmt);
+            stmt.statements.push({
+                type: 'GROUP',
+                statements: []
+            });
+        };
+        $scope.addCondition = function (stmt) {
+            console.log("addCondition stmt: ", stmt);
+            stmt.statements.push({
+                type: 'CONDITION_SOLR'
+            });
+        };
+        $scope.remove = function (parent, stmt) {
+            parent.statements.splice(
+                    parent.statements.indexOf(stmt),
+                    1
+                    );
+        };
+
+        $scope.getValueSolr = function () {
+            
+            console.log($scope.analysis.facet);
+            return AnalysisService.getSolrResultApplyingQuery(
+                    datasourceCurrent.id, 
+                    $scope.statement,
+                    $scope.analysis.facet ).then(function (response) {
+
+
+                $scope.responseWebserviceSoapJson = response.data;
+                //$scope.responseSolr = response.data;
+
+                $scope.analysis.query = $scope.statement;
+                console.log($scope.analysis);
+            });
+
+        };
+
+
+        $scope.submitSorl = function () {
+
+            var queryCopy = angular.copy($scope.query);
+            //console.log("$scope.query ", $scope.query);
+            console.log("$scope.analysis ", $scope.analysis);
+//            GroupService.saveQueryBuilder(queryCopy).
+//                    success(function (data, status, headers, config) {
+//                        $scope.group.query = {
+//                            "id": data.id
+//                        };
+//
+//                        GroupService.save($scope.group).then(function () {
+//                            console.log("response ", response);
+//                            //$location.path('presenter/group');
+//                        }, function (response) {
+//                            console.log(response);
+//                        });
+//                    }).
+//                    error(function (data, status, headers, config) {
+//
+//                    });
+
+        };
+
+
+        //###############################################################################################
 
 
 
         $scope.submit = function () {
 
             $scope.analysis.analysisColumns = $scope.component.columns;
-            console.log($scope.analysis);
-            AnalysisService.save($scope.analysis).then(function () {
-            });
-        };
+
+            //caso o submit seja Sorl
+           // if ($scope.types.SOLR.name === datasourceCurrent.type) {
+                console.log("$scope.analysis.query ", $scope.analysis.query);
+                var queryCopy = angular.copy($scope.analysis.query);
+
+
+                AnalysisService.saveQueryBuilder(queryCopy).
+                        success(function (data, status, headers, config) {
+                            console.log("Query salva com sucesso");
+
+                            $scope.analysis.query = {
+                                "id": data.id
+                            };
+
+
+                            AnalysisService.save($scope.analysis).then(function () {
+                            });
+
+                        }).
+                        error(function (data, status, headers, config) {
+
+                        });
 
 
 
-
-
-//        $scope.generateJsonPath = function (parent, array, type) {
-//            
-//            if (!angular.isUndefined(parent)) {
-//
-//                console.log(" --------------- ");
-//                console.log("parent entrando: ", parent);
-//                console.log("array entrando: ", array);
-//
-//                var name;
-//
-//                if (parent.type === "OBJECT") {
-//                    console.log("parent.type OBJECT ");
-//                    name = parent.name;
-//                    console.log("name ", name);
-//
-//                    if (name !== undefined) {
-//                        array.push(name);
-//                    }
-//                    $scope.generateJsonPath(parent.parent, array, type);
-//                }
-//
-//                if (parent.type === "ARRAY") {
-//                    console.log("parent.type ARRAY ");
-//                    name = parent.name;
-//                    console.log("name ", name);
-//                    
-//                    if (name !== undefined) {
-//                        name += '[*]';
-//                        array.push(name);
-//                    }
-//                    
-//
-//                    array.push(name);
-//                    $scope.generateJsonPath(parent.parent, array, type);
-//                }
-//
-//                if (parent.type === "NUMBER" || parent.type === "BOOLEAN" || parent.type === "STRING") {
-//                    console.log("Number, BOOLEAN, STRING");
-//
-//                    name = parent.name;
-//                    console.log("name ", name);
-//                    array.push(name);
-//                    $scope.generateJsonPath(parent.parent, array, type);
-//                }
-//
+                        
 //            } else {
-//                if (type === "columns") {
-//
-//                    var nameColumn = array[0];
-//                    var jsonPathColumns = array.reverse().join('.');
-//                    var formula = jsonPathColumns.replace($scope.analysis.tablePath, "");
-//
-//                    console.log("formula: ", formula);
-//                    $scope.component.columns.push({
-//                        name: nameColumn,
-//                        label: nameColumn,
-//                        formula: formula.replace(".", "")
-//                    });
-//
-//                    console.log("$scope.component.columns: ", $scope.component.columns);
-//
-//                } else if (type === "table") {
-//                    
-//                    var jsonPathTable = array.reverse().join('.');
-//                    console.log("jsonPathTable: ", jsonPathTable);
-//                    $scope.analysis.tablePath = jsonPathTable;
-//
-//                } else {
-//                    console.log("type nao definido");
-//                }
+//                console.log("$scope.analysis ", $scope.analysis);
+//                console.log("$scope.types ", $scope.types.SOLR.name);
+//                AnalysisService.save($scope.analysis).then(function () {
+//                });
 //            }
-//        };
 
-
-
+        };
 
     });
 });

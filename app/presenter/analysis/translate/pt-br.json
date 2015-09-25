@@ -35,6 +35,8 @@
         "IS_COLUMN":"Coluna",
         "UNTITLED_OBJECT": "Objeto sem nome",
         "UNTITLED_LIST": "Lista sem nome",
-        "UNKNOWN" : "Desconhecido"
+        "UNKNOWN" : "Desconhecido",
+        "PREVIEW": "Pré-visualização",
+        "FACET": "Facet"
     }
 }

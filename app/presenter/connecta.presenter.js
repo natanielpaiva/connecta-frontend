@@ -100,6 +100,12 @@ define([
             controllerUrl: 'presenter/singlesource/controller/single-source-form',
             templateUrl: 'app/presenter/singlesource/template/single-source-form.html'
         },
+        '/presenter/analysis': {
+            controller: 'AnalysisListController',
+            controllerUrl: 'presenter/analysis/controller/analysis-list',
+            templateUrl: 'app/presenter/analysis/template/analysis-list.html'
+        },
+        
         '/presenter/analysis/new': {
             controller: 'AnalysisFormController',
             controllerUrl: 'presenter/analysis/controller/analysis-form',

@@ -33,6 +33,8 @@
         "FETCH_DATA": "Fetch Data",
         "UNTITLED_OBJECT": "Untitled Object",
         "UNTITLED_LIST": "Untitled List",
-        "UNKNOWN" : "Unknown"
+        "UNKNOWN": "Unknown",
+        "PREVIEW": "Preview",
+        "FACET": "Facet"
     }
 }

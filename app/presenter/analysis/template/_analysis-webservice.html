@@ -109,10 +109,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="r in responseWebserviceSoapJson" class="row">
+                <tr ng-repeat="r in responseWebservice" class="row">
                     <td ng-repeat="col in component.columns" class="text-left">
-<!--                        isso tem que ser verificado-->
-                        {{ r[col.formula]}}
+
                        {{ r[col.name]}}
                     </td>
                 </tr>
