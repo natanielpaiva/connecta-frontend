@@ -16,11 +16,11 @@ define([
         });
 
          
-        $scope.excluir = function (singlesource) {
-            SingleSourceService.delete(singlesource.id).then(function () {
-                var index = $scope.singlesource.indexOf(singlesource);
-                $scope.singlesource.splice(index, 1);
-            });
-        };
+//        $scope.excluir = function (singlesource) {
+//            SingleSourceService.delete(singlesource.id).then(function () {
+//                var index = $scope.singlesource.indexOf(singlesource);
+//                $scope.singlesource.splice(index, 1);
+//            });
+//        };
     });
 });

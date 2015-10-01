@@ -283,10 +283,10 @@ define([
 
             for (var key in analysisViewer.metrics) {
                 analysisViewer
-                        .analysisVwColumn
+                        .analysisViewerColumns
                         .push({
-                            typeColumn: 'NUMBER',
-                            type: 'METRIC',
+                            columnDataType: 'NUMBER',
+                            columnType: 'METRIC',
                             analysisColumn: analysisViewer.metrics[key]
                         }
                         );
@@ -294,10 +294,10 @@ define([
 
             for (key in analysisViewer.descriptions) {
                 analysisViewer
-                        .analysisVwColumn
+                        .analysisViewerColumns
                         .push({
-                            typeColumn: 'TEXT',
-                            type: 'DESCRIPTION',
+                            columnDataType: 'TEXT',
+                            columnType: 'DESCRIPTION',
                             analysisColumn: analysisViewer.descriptions[key]
                         }
                         );
@@ -305,10 +305,10 @@ define([
 
             for (key in analysisViewer.xfields) {
                 analysisViewer
-                        .analysisVwColumn
+                        .analysisViewerColumns
                         .push({
-                            typeColumn: 'NUMBER',
-                            type: 'XFIELD',
+                            columnDataType: 'NUMBER',
+                            columnType: 'XFIELD',
                             analysisColumn: analysisViewer.xfields[key]
                         }
                         );
@@ -316,10 +316,10 @@ define([
 
             for (key in analysisViewer.yfields) {
                 analysisViewer
-                        .analysisVwColumn
+                        .analysisViewerColumns
                         .push({
-                            typeColumn: 'NUMBER',
-                            type: 'YFIELD',
+                            columnDataType: 'NUMBER',
+                            columnType: 'YFIELD',
                             analysisColumn: analysisViewer.yfields[key]
                         }
                         );
@@ -327,10 +327,10 @@ define([
 
             for (key in analysisViewer.valueFields) {
                 analysisViewer
-                        .analysisVwColumn
+                        .analysisViewerColumns
                         .push({
-                            typeColumn: 'NUMBER',
-                            type: 'VALUEFIELD',
+                            columnDataType: 'NUMBER',
+                            columnType: 'VALUEFIELD',
                             analysisColumn: analysisViewer.valueFields[key]
                         }
                         );
@@ -345,26 +345,27 @@ define([
         this.save = function (analysisViewer) {
 
             var analysisViewerCopy = angular.copy(analysisViewer);
-            var url = presenterResources.analysisViewer;
+            var url = presenterResources.viewer;
             filterAnalysisViewer(analysisViewerCopy);
             if (analysisViewer.id === undefined) {
                 return $http.post(url, analysisViewerCopy);
             } else {
+                url = url + "/" + analysisViewer.id;
                 return $http.put(url, analysisViewerCopy);
             }
         };
         this.preview = function (analysisViewer) {
             var analysisViewerCopy = angular.copy(analysisViewer);
-            var url = presenterResources.analysisViewer + "/preview";
+            var url = presenterResources.viewer + "/preview";
             filterAnalysisViewer(analysisViewerCopy);
             return $http.post(url, analysisViewerCopy);
         };
 
         this.getListAnalysis = function (analysisViewerData, analysisData) {
-            analysisViewerData.analysisVwColumn = [];
+            analysisViewerData.analysisViewerColumns = [];
             for (var i in analysisData.analysisColumns) {
                 analysisViewerData
-                        .analysisVwColumn
+                        .analysisViewerColumns
                         .push({
                             typeColumn: 'TEXT',
                             type: 'DESCRIPTION',
@@ -378,7 +379,7 @@ define([
 
 
         this.list = function (params) {
-            var url = presenterResources.analysisViewer;
+            var url = presenterResources.viewer;
             return $http.get(url, {
                 params: params
             });
@@ -392,20 +393,20 @@ define([
             return $http.get(url);
         };
         this.getAnalysisViewer = function (id) {
-            var url = presenterResources.analysisViewer + "/" + id;
+            var url = presenterResources.viewer + "/" + id;
             return $http.get(url);
         };
         this.delete = function (id) {
-            var url = presenterResources.analysisViewer + "/" + id;
+            var url = presenterResources.viewer + "/" + id;
             return $http.delete(url);
         };
-        this.getPreview = function (analysisViewer, analysisViewerResult) {
-            var viewerConfiguration = analysisViewerResult.analysisViewer.viewer.configuration;
-            analysisViewer.viewer.configuration = analysisViewerResult.analysisViewer.viewer.configuration;
+        this.getPreview = function (viewer, analysisViewerResult) {
+            var viewerConfiguration = analysisViewerResult.analysisViewer.configuration;
+            viewer.configuration = analysisViewerResult.analysisViewer.configuration;
             if (viewerConfiguration.type !== "gauge") {
-                analysisViewer.viewer.configuration.data = analysisViewerResult.result;
+                viewer.configuration.data = analysisViewerResult.result;
             } else {
-                analysisViewer.viewer.configuration.arrows = [];
+                viewer.configuration.arrows = [];
                 for (var iResult in analysisViewerResult.result) {
                     for (var key in  analysisViewerResult.result[iResult]) {
                         var arrows = {
@@ -413,31 +414,31 @@ define([
                             value: analysisViewerResult.result[iResult][key],
                             color: '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
                         };
-                        analysisViewer.viewer.configuration.arrows.push(arrows);
+                        viewer.configuration.arrows.push(arrows);
                     }
                 }
             }
 
             switch (viewerConfiguration.type) {
                 case "serial":
-                    configureSerialAndRadar(analysisViewer, analysisViewerResult);
+                    configureSerialAndRadar(viewer, analysisViewerResult);
                     break;
                 case "radar":
-                    configureSerialAndRadar(analysisViewer, analysisViewerResult);
+                    configureSerialAndRadar(viewer, analysisViewerResult);
                     break;
                 case "pie":
-                    configureFunnelAndPie(analysisViewer, analysisViewerResult);
+                    configureFunnelAndPie(viewer, analysisViewerResult);
                     break;
                 case "funnel":
-                    configureFunnelAndPie(analysisViewer, analysisViewerResult);
+                    configureFunnelAndPie(viewer, analysisViewerResult);
                     break;
                 case "xy":
-                    var analysisVwColumn = analysisViewerResult.analysisViewer.analysisVwColumn;
+                    var analysisViewerColumns = analysisViewerResult.analysisViewer.analysisViewerColumns;
                     var qtdXField = 0;
                     var qtdYField = 0;
                     var qtdValueField = 0;
-                    for (var i in analysisVwColumn) {
-                        switch (analysisVwColumn[i].type) {
+                    for (var i in analysisViewerColumns) {
+                        switch (analysisViewerColumns[i].columnType) {
                             case'XFIELD':
                                 qtdXField++;
                                 break;
@@ -452,60 +453,60 @@ define([
 
                     if (qtdXField === qtdYField) {
                         var standardGraph = angular.copy(analysisViewerResult.analysisViewer.viewer.configuration.graphs[0]);
-                        analysisViewer.viewer.configuration.graphs = [];
+                        viewer.configuration.graphs = [];
                         for (var l = 0; l < qtdXField; l++) {
                             var graphXy = angular.copy(standardGraph);
-                            for (i in analysisVwColumn) {
-                                switch (analysisVwColumn[i].type) {
+                            for (i in analysisViewerColumns) {
+                                switch (analysisViewerColumns[i].columnType) {
                                     case'XFIELD':
-                                        graphXy.xField = angular.copy(analysisVwColumn[i].analysisColumn.label);
+                                        graphXy.xField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                                         break;
                                     case'YFIELD':
-                                        graphXy.yField = angular.copy(analysisVwColumn[i].analysisColumn.label);
+                                        graphXy.yField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                                         break;
                                     case'VALUEFIELD':
-                                        graphXy.valueField = angular.copy(analysisVwColumn[i].analysisColumn.label);
+                                        graphXy.valueField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                                         break;
                                 }
                             }
-                            analysisViewer.viewer.configuration.graphs.push(graphXy);
+                            viewer.configuration.graphs.push(graphXy);
                         }
                     }
 
-                    delete analysisViewer.viewer.configuration.dataProvider;
+                    delete viewer.configuration.dataProvider;
                     break;
             }
         };
-        var configureSerialAndRadar = function (analysisViewer, analysisViewerResult) {
-            var standardGraph = analysisViewerResult.analysisViewer.viewer.configuration.graphs[0];
-            analysisViewer.viewer.configuration.graphs = [];
-            var analysisVwColumn = analysisViewerResult.analysisViewer.analysisVwColumn;
-            for (var i in analysisVwColumn) {
-                if (analysisVwColumn[i].type === 'DESCRIPTION') {
-                    analysisViewer.viewer.configuration.categoryField = analysisVwColumn[i].analysisColumn.label;
+        var configureSerialAndRadar = function (viewer, analysisViewerResult) {
+            var standardGraph = analysisViewerResult.analysisViewer.configuration.graphs[0];
+            viewer.configuration.graphs = [];
+            var analysisViewerColumns = analysisViewerResult.analysisViewer.analysisViewerColumns;
+            for (var i in analysisViewerColumns) {
+                if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
+                   viewer.configuration.categoryField = analysisViewerColumns[i].analysisColumn.label;
                 }
 
-                if (analysisVwColumn[i].type === 'METRIC') {
+                if (analysisViewerColumns[i].columnType === 'METRIC') {
                     var graph = angular.copy(standardGraph);
-                    graph.title = angular.copy(analysisVwColumn[i].analysisColumn.label);
-                    graph.valueField = angular.copy(analysisVwColumn[i].analysisColumn.label);
-                    analysisViewer.viewer.configuration.graphs.push(graph);
+                    graph.title = angular.copy(analysisViewerColumns[i].analysisColumn.label);
+                    graph.valueField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
+                    viewer.configuration.graphs.push(graph);
                 }
 
             }
-            delete analysisViewer.viewer.configuration.dataProvider;
+            delete viewer.configuration.dataProvider;
         };
-        var configureFunnelAndPie = function (analysisViewer, analysisViewerResult) {
-            var analysisVwColumn = analysisViewerResult.analysisViewer.analysisVwColumn;
-            for (var i in analysisVwColumn) {
-                if (analysisVwColumn[i].type === 'DESCRIPTION') {
-                    analysisViewer.viewer.configuration.titleField = analysisVwColumn[i].analysisColumn.label;
+        var configureFunnelAndPie = function (viewer, analysisViewerResult) {
+            var analysisViewerColumns = analysisViewerResult.analysisViewer.analysisViewerColumns;
+            for (var i in analysisViewerColumns) {
+                if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
+                    viewer.configuration.titleField = analysisViewerColumns[i].analysisColumn.label;
                 }
-                if (analysisVwColumn[i].type === 'METRIC') {
-                    analysisViewer.viewer.configuration.valueField = analysisVwColumn[0].analysisColumn.label;
+                if (analysisViewerColumns[i].columnType === 'METRIC') {
+                    viewer.configuration.valueField = analysisViewerColumns[0].analysisColumn.label;
                 }
             }
-            delete analysisViewer.viewer.configuration.dataProvider;
+            delete viewer.configuration.dataProvider;
         };
     });
 });
