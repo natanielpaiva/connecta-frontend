@@ -14,6 +14,7 @@ define([
   portal.constant('portalResources', {
     base: applications.portal.host,
     dashboard: applications.portal.host + '/dashboard',
+    dashboardViewers: applications.portal.host + '/dashboard/viewer',
     login: applications.portal.host + '/auth',
     user: applications.portal.host + '/user'
   });

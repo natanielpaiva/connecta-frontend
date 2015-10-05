@@ -9,7 +9,6 @@
     position: relative;
 }
 
-
 .sidebarViewer ul[dnd-list] {
     min-height: 100px;
     padding-left: 0px;
@@ -190,7 +189,7 @@
 }
 
 .switch-viewer div.active{
-    background-color: $red;
+    background-color: $connectaRed;
 }
 
 .accordion-viewer{

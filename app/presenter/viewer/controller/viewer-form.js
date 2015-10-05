@@ -1,7 +1,7 @@
 define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service',
-    'presenter/viewer/controller/modal-analysis',
+    'presenter/viewer/controller/modal-analysis'
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, LayoutService, $modal) {
         $scope.state = {loaded: false};

@@ -20,7 +20,10 @@ define([
           var active = false;
           if (item.href) {
             // Monta uma RegExp e testa contra a url atual removendo a primeira barra
-            active = new RegExp(item.href).test($location.url().replace('/', ''));
+            
+            var regex = item.href+'($|[\/].*)';
+            
+            active = new RegExp(regex).test($location.url().replace('/', ''));
           }
 
           // Caso o menu tenha filhos, verifica recursivamente se

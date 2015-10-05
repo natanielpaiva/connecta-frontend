@@ -1,4 +1,5 @@
-<div class="dashboard-view-page" ng-if="dashboard.displayMode==='VERTICAL'">
+<div class="dashboard-view-page" ng-if="dashboard.displayMode==='VERTICAL'"
+     style="background-color:{{dashboard.backgroundColor?dashboard.backgroundColor:''}}">
   <h1 class="clearfix">
     <a href="#dashboard" class="pull-left" title="{{'LAYOUT.BACK'|translate}}">
       <span class="icon-arrow-left"></span>
@@ -19,8 +20,9 @@
     </h2>
     <div gridster="section.config">
       <div class="dashboard-item" gridster-item="gridsterItemConfig"
+        style="background-color:{{item.backgroundColor?item.backgroundColor:'initial'}};"
         ng-repeat="item in section.items">
-
+          <viewer src="item.viewerUrl"></viewer>
       </div>
     </div>
   </div>

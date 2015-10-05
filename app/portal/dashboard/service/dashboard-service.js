@@ -33,6 +33,15 @@ define([
       var url = portalResources.dashboard + '/' + id;
       return $http.get(url);
     };
+    
+    this.searchViewers = function(term){
+      var url = portalResources.dashboardViewers;
+      return $http.get(url, {
+        params: {
+          text: term
+        }
+      });
+    };
 
   });
 

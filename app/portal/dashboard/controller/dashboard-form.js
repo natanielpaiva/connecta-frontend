@@ -2,9 +2,14 @@
 define([
   'connecta.portal',
   'portal/layout/service/layout',
-  'portal/dashboard/service/dashboard-service'
+  'portal/dashboard/service/dashboard-service',
+  'portal/dashboard/directive/viewer',
+  'presenter/viewer/directive/analysis-viewer',
+  'presenter/viewer/directive/singlesource-viewer',
+  'presenter/viewer/directive/singlesource-group-viewer',
+  'presenter/viewer/directive/combined-viewer'
 ], function(portal) {
-  return portal.lazy.controller('DashboardFormController', function($scope, LayoutService, DashboardService, $routeParams, $location, $filter) {
+  return portal.lazy.controller('DashboardFormController', function($scope, LayoutService, DashboardService, $routeParams, $location, $filter, sidebarService, applications) {
     $scope.dashboard = {};
     
     var _sectionTemplate = {
@@ -14,9 +19,40 @@ define([
     };
 
     LayoutService.showSidebarRight(true);
+    sidebarService.config({
+      controller: function ($scope) {
+        $scope.applications = applications;
+        
+        $scope.search = {
+          terms: "",
+          results:[]
+        };
+        
+        $scope.search.doSearch = function(){
+          DashboardService.searchViewers($scope.search.terms).then(function(response){
+            angular.forEach(response.data, function(obj){
+              var viewerPath = applications[obj.module].host +
+                      applications[obj.module].viewerPath;
+              obj.viewerUrl = viewerPath.replace(':id', obj.id);
+            });
+            
+            $scope.search.results = response.data;
+          });
+        };
+        
+        $scope.$watch('search.terms', function(){
+          $scope.search.doSearch();
+        });
+        
+      },
+      src: 'app/portal/dashboard/template/_dashboard-form-viewer-search.html'
+    });
 
     $scope.$on('$locationChangeStart', function() {
       LayoutService.showSidebarRight(false);
+      sidebarService.config({
+        controller: function(){}
+      });
     });
 
     if ($routeParams.id) {
@@ -56,6 +92,7 @@ define([
       row: 'item.row',
       col: 'item.column'
     };
+    
 
     $scope.addSection = function() {
       if ($scope.dashboard.sections) {

@@ -1,13 +1,14 @@
 <form ng-submit="save()" class="dashboard-form">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="form-group">
-        <label for="dashboard-name" translate>DASHBOARD.DASHBOARD_NAME</label>
+        <label for="dashboard-name" class="sr-only" translate>DASHBOARD.DASHBOARD_NAME</label>
         <input type="text" ng-model="dashboard.name"
+          placeholder="{{'DASHBOARD.DASHBOARD_NAME'|translate}}"
           class="form-control" id="dashboard-name" />
       </div>
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-4 text-right">
       <button class="btn btn-default" type="button">
         <span class="icon-cog"></span>
         {{'LAYOUT.SETTINGS' | translate}}
@@ -25,11 +26,12 @@
           <span class="icon-cog"></span>
         </button>
       </tab-heading>
-      <div gridster="config">
-        <div class="dashboard-item"
+      <div gridster="config" dnd-list="section.items">
+        <div class="dashboard-item" style="background-color:{{item.backgroundColor?item.backgroundColor:'transparent'}};"
           gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
-
+            <viewer src="item.viewerUrl"></viewer>
         </div>
+          
         <div class="dashboard-no-item" ng-if="!section.items.length">
           <span class="icon-area-graph"></span>
           <p translate>

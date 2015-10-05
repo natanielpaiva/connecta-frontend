@@ -6,13 +6,13 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form novalidate name="formulario" ng-submit="submit()">
+        <form novalidate name="singlesourceForm" ng-submit="submit()">
 
             <div class="form-group">
                 <label for="model-nome" translate>SINGLESOURCE.NAME</label>
                 <input type="text" name="nome" ng-model="typeSingleSource.name"
                        id="model-nome" required class="form-control" />
-                <div ng-if="formulario.nome.$dirty" ng-messages="formulario.nome.$error"
+                <div ng-if="singlesourceForm.nome.$dirty" ng-messages="singlesourceForm.nome.$error"
                      ng-messages-include="portal-validation-messages"></div>
             </div>
             
@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
                             <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
-                                    ng-model="$parent.$parent.$item.attributeType" class="form-control">
+                                    ng-model="$parent.$parent.$item.attributeType" class="form-control" required>
                                 <option value="" translate>LAYOUT.SELECT</option>
                             </select>
                         </div>
@@ -63,7 +63,7 @@
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>
-            <button class="btn btn-primary" translate>
+            <button class="btn btn-primary" translate ng-disabled="singlesourceForm.$invalid">
                 LAYOUT.SAVE
             </button>
         </form>

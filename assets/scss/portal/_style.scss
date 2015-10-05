@@ -1,11 +1,12 @@
 // Scrollbar
 ::-webkit-scrollbar {
-  width: 0.6em;
+  width: 7px;
+  height: 7px;
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background-color: lighten($bs-gray-light, 25%);
-  border-radius: 1em;
+  border-radius: 5px;
   &:hover {
     background-color: $bs-gray-light;
   }
@@ -321,10 +322,12 @@ blockquote small {
     }
     .page-container {
       margin: 0;
+      padding:0;
       background: none;
     }
     .container-fluid {
-      padding: 0;
+      padding: 0 !important;
+      margin:0 !important;
     }
   }
 }

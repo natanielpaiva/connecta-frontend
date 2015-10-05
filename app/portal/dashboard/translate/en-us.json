@@ -3,6 +3,7 @@
     "DASHBOARD_LIST":"Dashboards",
     "DASHBOARD_NAME":"Dashboard name",
     "NEW_SECTION" : "New section",
-    "NO_ITEM" : "Nothing yet. Drag a viewer here to start."
+    "NO_ITEM" : "Nothing yet. Drag a viewer here to start.",
+    "SEARCH_VIEWERS" : "Search viewers"
   }
 }

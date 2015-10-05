@@ -3,6 +3,7 @@
     "DASHBOARD_LIST":"Painéis",
     "DASHBOARD_NAME":"Nome do painel",
     "NEW_SECTION" : "Nova seção",
-    "NO_ITEM" : "Nada ainda. Arraste um visualizador para cá para começar."
+    "NO_ITEM" : "Nada ainda. Arraste um visualizador para cá para começar.",
+    "SEARCH_VIEWERS" : "Buscar visualizadores"
   }
 }

@@ -191,9 +191,6 @@ require.config({
                 'bower_components/bootstrap/dist/js/bootstrap.min',
 //                'search-expression'
             ]
-        },
-        'bower_components/json-formatter/dist/json-formatter.mim':{
-             deps: ['angular']
         }
     }
 });

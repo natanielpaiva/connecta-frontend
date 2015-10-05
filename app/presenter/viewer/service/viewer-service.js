@@ -360,6 +360,16 @@ define([
             filterAnalysisViewer(analysisViewerCopy);
             return $http.post(url, analysisViewerCopy);
         };
+        
+        this.result = function (id) {
+            var url = [
+                presenterResources.viewer,
+                id,
+                "result"
+            ].join("/");
+            
+            return $http.get(url);
+        };
 
         this.getListAnalysis = function (analysisViewerData, analysisData) {
             analysisViewerData.analysisViewerColumns = [];

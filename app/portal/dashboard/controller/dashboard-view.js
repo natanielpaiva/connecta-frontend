@@ -1,7 +1,12 @@
 define([
   'connecta.portal',
   'portal/dashboard/service/dashboard-service',
-  'portal/layout/service/layout'
+  'portal/layout/service/layout',
+  'portal/dashboard/directive/viewer',
+  'presenter/viewer/directive/analysis-viewer',
+  'presenter/viewer/directive/singlesource-viewer',
+  'presenter/viewer/directive/singlesource-group-viewer',
+  'presenter/viewer/directive/combined-viewer'
 ], function(portal) {
   return portal.lazy.controller('DashboardViewController', function($scope, DashboardService, $routeParams, LayoutService, $location, $filter) {
     $scope.dashboard = {};
