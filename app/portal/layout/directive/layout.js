@@ -22,6 +22,7 @@ define([
         $scope.fullscreen = false;
         $scope.showMenu = LayoutService.isSidebarVisible();
         $scope.showSidebarRight = false;
+        $scope.sidebarMini = false;
         $scope.authenticated = false;
 
         /**
@@ -48,6 +49,12 @@ define([
          */
         $scope.$on('sidebarRight.show', function(ev, val) {
           $scope.showSidebarRight = val;
+        });
+        /**
+         * Evento para minimizar a barra lateral
+         */
+        $scope.$on('sidebar.mini', function(ev, val) {
+          $scope.sidebarMini = val;
         });
         /**
          * Evento para mostrar o page container sem fundo

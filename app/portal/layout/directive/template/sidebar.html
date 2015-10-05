@@ -1,3 +1,6 @@
-<div class="connecta-sidebar">
+<div class="connecta-sidebar" ng-class="{
+    'connecta-sidebar-mini': sidebar.mini
+}">
+    <div class="connecta-sidebar-mini-handle" ng-click="toggleMiniBar()"></div>
     <ng-include ng-if="sidebar.src" src="sidebar.src" ng-controller="sidebar.controller" ></ng-include>
 </div>

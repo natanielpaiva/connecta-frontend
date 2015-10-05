@@ -14,9 +14,15 @@ define([
                     $scope.sidebar = {
                          controller: function($scope) {
                          },
-                         src: ''
-
+                         src: '',
+                         mini:false
                     };
+                    
+                    $scope.toggleMiniBar = function(){
+                        $scope.sidebar.mini=!$scope.sidebar.mini;
+                        $scope.$broadcast('sidebar.mini', $scope.sidebar.mini);
+                    };
+                    
                     $scope.$on('sidebar.config', function(event, sidebar) {
                          $scope.sidebar.controller = null;
                          $timeout(function() {

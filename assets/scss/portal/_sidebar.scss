@@ -1,5 +1,5 @@
 // Sidebar do Connecta
-.show-sidebar{
+.show-sidebar {
     .connecta-sidebar {
         font-family: 'Open Sans';
         width: $sidebarSize;
@@ -9,6 +9,39 @@
         right: 0;
         top: 0;
         bottom: 0;
+        transition:margin-right ease 250ms;
+        
+        &.connecta-sidebar-mini {
+            margin-right: -20em;
+        }
+
+        .connecta-sidebar-mini-handle {
+            position:absolute;
+            width:1em;
+            height:5em;
+            top:50%;
+            margin-top: -2.5em;
+            background-color: $black;
+            left:-1em;
+            border-top-left-radius: 0.8em;
+            border-bottom-left-radius: 0.8em;
+            @extend .cursor-pointer;
+
+            &:after {
+                position:absolute;
+                content:' ';
+                display:block;
+                border:solid .5em transparent;
+                border-left-width: 0;
+                border-right-color: $white;
+                width:0;
+                height:0;
+                top:50%;
+                left:50%;
+                margin-top:-0.5em;
+                margin-left:-0.25em;
+            }
+        }
     }
     .form-sidebar label {
         color: $white;
@@ -33,5 +66,10 @@
     }
     .page-container{
         margin-right: $sidebarSize;
+    }
+}
+.sidebar-mini {
+    .page-container {
+        margin-right:initial;
     }
 }

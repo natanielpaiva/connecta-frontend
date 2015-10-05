@@ -21,6 +21,9 @@ $pageGutter:1em;
     padding:0;
   }
 }
+.sidebar-mini .page-container {
+    margin-right: 0;
+}
 .hide-menu .page-container {
     margin-left: $miniSidebarSize;
 }
@@ -28,9 +31,9 @@ $pageGutter:1em;
     margin-left: $miniSidebarSize - 1.15;
 }
 
-.show-tabs .page-container {
+/*.show-tabs .page-container {
     margin-right: $sidebarSize;
-}
+}*/
 
 /*** Page title ***/
 .page-title {

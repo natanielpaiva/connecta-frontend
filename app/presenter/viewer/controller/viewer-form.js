@@ -3,7 +3,7 @@ define([
     'presenter/viewer/service/viewer-service',
     'presenter/viewer/controller/modal-analysis'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, sidebarService, $routeParams, $location, LayoutService, $modal) {
+    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, LayoutService, $modal) {
         $scope.state = {loaded: false};
         $scope.chartCursor = {ativo: false};
         $scope.chartScrollbar = {ativo: false};
@@ -12,7 +12,7 @@ define([
         $scope.metrics = [];
         $scope.descriptions = [];
         LayoutService.showSidebarRight(true);
-        sidebarService.config({
+        SidebarService.config({
             controller: function ($scope) {
                 $scope.analysis = "";
                 $scope.analysisBar = "ANALYSIS";
@@ -138,7 +138,7 @@ define([
 
         $scope.$on("$locationChangeStart", function (event) {
             LayoutService.showSidebarRight(false);
-            sidebarService.config({
+            SidebarService.config({
                 controller: function () {
                 }
             });

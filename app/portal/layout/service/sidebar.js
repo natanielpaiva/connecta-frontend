@@ -2,12 +2,17 @@ define([
     'connecta.portal'
 ], function (portal) {
 
-  return portal.service('sidebarService', function($rootScope){
+  return portal.service('SidebarService', function($rootScope){
     this.config =  function(obj){
       $rootScope.$broadcast('sidebar.config', obj);
       return this;
     };
 
+    this.show =  function(obj){
+      $rootScope.$broadcast('sidebar.show', obj);
+      return this;
+    };
+    
     this.show =  function(obj){
       $rootScope.$broadcast('sidebar.show', obj);
       return this;

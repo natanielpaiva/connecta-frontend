@@ -9,7 +9,7 @@ define([
   'presenter/viewer/directive/singlesource-group-viewer',
   'presenter/viewer/directive/combined-viewer'
 ], function(portal) {
-  return portal.lazy.controller('DashboardFormController', function($scope, LayoutService, DashboardService, $routeParams, $location, $filter, sidebarService, applications) {
+  return portal.lazy.controller('DashboardFormController', function($scope, LayoutService, DashboardService, $routeParams, $location, $filter, SidebarService, applications) {
     $scope.dashboard = {};
     
     var _sectionTemplate = {
@@ -19,7 +19,7 @@ define([
     };
 
     LayoutService.showSidebarRight(true);
-    sidebarService.config({
+    SidebarService.config({
       controller: function ($scope) {
         $scope.applications = applications;
         
@@ -50,7 +50,7 @@ define([
 
     $scope.$on('$locationChangeStart', function() {
       LayoutService.showSidebarRight(false);
-      sidebarService.config({
+      SidebarService.config({
         controller: function(){}
       });
     });
