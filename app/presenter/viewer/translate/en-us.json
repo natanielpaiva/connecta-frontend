@@ -9,6 +9,7 @@
         "XFIELD": "X Column",
         "YFIELD": "Y Column",
         "VALUEFIELD": "Value Column",
-        "FONT_SIZE": "Font size"
+        "FONT_SIZE": "Font size",
+        "VIEW_ANALYSIS" : "Analysis result"
     }
 }

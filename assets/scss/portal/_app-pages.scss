@@ -2,24 +2,25 @@ $pageGutter:1em;
 
 // Configurando o container das views
 .page-container {
-  background-color: rgba($white, 0.9);
-  margin-left: $sidebarSize;
-  margin-top: $headerHeight + (2*$pageGutter);
-  transition: margin $defaultAnimationDuration;
-  padding:$pageGutter;
-  border-radius:0.25em;
-  @include clearfix();
+    overflow-x: hidden;
+    background-color: rgba($white, 0.9);
+    margin-left: $sidebarSize;
+    margin-top: $headerHeight + (2*$pageGutter);
+    transition: margin $defaultAnimationDuration;
+    padding:$pageGutter;
+    border-radius:0.25em;
+    @include clearfix();
 
-  h1, h3 {
-      @extend .margin-top-zero;
-  }
+    h1, h3 {
+        @extend .margin-top-zero;
+    }
 
-  &.flat {
-    margin-left: ($sidebarSize - 1);
-    margin-top: ($headerHeight + (2*$pageGutter)) - 1.4;
-    background-color: transparent;
-    padding:0;
-  }
+    &.flat {
+        margin-left: ($sidebarSize - 1);
+        margin-top: ($headerHeight + (2*$pageGutter)) - 1.4;
+        background-color: transparent;
+        padding:0;
+    }
 }
 .sidebar-mini .page-container {
     margin-right: 0;

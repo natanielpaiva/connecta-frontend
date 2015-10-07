@@ -34,6 +34,7 @@ define([
               var viewerPath = applications[obj.module].host +
                       applications[obj.module].viewerPath;
               obj.viewerUrl = viewerPath.replace(':id', obj.id);
+              delete obj.id;
             });
             
             $scope.search.results = response.data;
@@ -70,7 +71,8 @@ define([
       $scope.dashboard = {
         sections: [
           section
-        ]
+        ],
+        displayMode:'VERTICAL'
       };
     }
 

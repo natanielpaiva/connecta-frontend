@@ -177,8 +177,8 @@ define([
 
   /**
    * Configura os padrões de tratamento de Request e Response dos serviços REST
-   * @param {type} $httpProvider
-   * @returns {undefined}
+   * @param {object} $httpProvider
+   * @param {object} applications
    */
   function configureRequestInterceptors($httpProvider, applications) {
     $httpProvider.interceptors.push(function($q, $rootScope) {
