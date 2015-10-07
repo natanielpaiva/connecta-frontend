@@ -17,10 +17,11 @@
             <div class="form-group">
                 <label for="description" translate>DATASOURCE.DESCRIPTION</label>
                 <textarea class="form-control" id="description" name="description"
+                          placeholder="{{'DATASOURCE.DESCRIPTION'|translate}}"
                           ng-model="datasource.description"></textarea>
             </div>
 
-            <div class="portal-type-switcher">
+            <div class="portal-type-switcher margin-bottom-single">
                 <label ng-repeat="(key, tp) in types" class="radio-inline portal-type-switcher-item"
                        title="{{tp.name}}">
                     <input type="radio" class="portal-type-switcher-input" name="type" 
@@ -35,13 +36,15 @@
                  class="am-fade-and-slide-bottom">
             </div>
 
-            <a href="#/presenter/datasource"
-               class="btn btn-default" translate>
-                LAYOUT.CANCEL
-            </a>
-            <button class="btn btn-primary" translate>
-                LAYOUT.SAVE
-            </button>
+            <div class="pull-right">
+                <a href="#/presenter/datasource"
+                   class="btn btn-default" translate>
+                    LAYOUT.CANCEL
+                </a>
+                <button class="btn btn-primary" translate>
+                    LAYOUT.SAVE
+                </button>
+            </div>
         </form>
     </div>
 </div>

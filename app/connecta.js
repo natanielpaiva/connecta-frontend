@@ -322,6 +322,7 @@ define([
     'portal/layout/service/layout',
     'portal/layout/directive/debug',
     'portal/layout/directive/scroll-to',
+    'portal/layout/directive/select-all',
     'portal/layout/directive/random-class',
     'portal/layout/directive/key-value',
     'portal/layout/directive/file-model',

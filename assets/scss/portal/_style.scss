@@ -190,9 +190,17 @@ blockquote small {
   background-position: center center;
   background-repeat: no-repeat;
 }
+
+.font-size-small {
+  font-size: $fontSizeMin !important;
+}
+.font-size-medium {
+  font-size: $fontSizeMiddle !important;
+}
 .font-size-big {
   font-size: $fontSizeBig !important;
 }
+
 .font-white {
   color: $white;
 }
@@ -267,6 +275,15 @@ blockquote small {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+.search-header {
+    .has-feedback {
+        .form-control-feedback {
+            top:0;
+        }
+    }
+}
+
 .table {
   thead {
     tr {
@@ -283,10 +300,28 @@ blockquote small {
   tbody,
   tfoot {
     tr {
-      td {
+      td, th {
         border: none !important;
         padding: 0;
         line-height: 3em;
+        transition:background-color ease 250ms, color ease 250ms;
+      }
+      
+      &.selected {
+        td {
+          transition:background-color ease 250ms;
+          background-color:rgba($connectaRed, 0.95) !important;
+          * {
+            color:$white !important;
+          }
+          // FIXME Estilo temporário, futuramente não haverá botão para excluir
+          button {
+            background-color:$white;
+            span {
+              color:initial !important;
+            }
+          }
+        }
       }
     }
   }
@@ -302,6 +337,13 @@ blockquote small {
     & > tbody > tr:hover td {
       background-color: $table-bg-hover;
     }
+  }
+  
+  .bulk-actions-checkbox {
+      user-select:none;
+      display: block;
+      font-size: 1.8em;
+      line-height:1.6em;
   }
 }
 .icon {
