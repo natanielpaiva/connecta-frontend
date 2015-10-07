@@ -1,7 +1,7 @@
-<div class="form-sidebar" >
+<div class="form-sidebar" ng-if="viewer.type == 'ANALYSIS'" >
     <div class="form-group">
         <label for="nome" translate>ANALYSIS.ANALYSIS</label>
-        <input type="text" class="form-control" ng-model="analysis"
+        <input type="text" class="form-control" ng-model="analysisData"
                typeahead="analysis as analysis.name for analysis in getAnalysis($viewValue)"
                typeahead-loading="loadingAnalysis"
                typeahead-min-length="3"
@@ -12,19 +12,19 @@
         <span ng-show="loadingAnalysis" class="glyphicon glyphicon-refresh form-control-feedback"></span>
     </div>
 </div>
-<div ng-if="analysis">
+<div ng-if="analysisData">
     <div class="form-sidebar-filter" >
         <label for="columns" translate>ANALYSIS.COLUMNS</label>
         <input type="search" ng-model="q" placeholder="filtrar colunas..." aria-label="filtrar colunas"
                class="form-control" />
     </div>
     <div class="sidebarfilter"> 
-        <ul dnd-list="analysis.analysisColumns" >
+        <ul dnd-list="analysisData.analysisColumns" >
             <li
-                ng-repeat="column in analysis.analysisColumns| filter:q as results"
+                ng-repeat="column in analysisData.analysisColumns| filter:q as results"
                 dnd-draggable="column"
                 dnd-effect-allowed="move"
-                dnd-moved="analysis.analysisColumns.splice($index, 1)">
+                dnd-moved="analysisData.analysisColumns.splice($index, 1)">
                 {{column.label}}
             </li>
             <li  ng-if="results.length == 0">
@@ -33,7 +33,7 @@
         </ul>
     </div>
 </div>
-<div ng-if="analysis" class="analysis-button">
+<div ng-if="analysisDataView" class="analysis-button">
     <button class="btn btn-primary"
             ng-click="getListAnalysis()" translate>
         VIEWER.VIEW_ANALYSIS

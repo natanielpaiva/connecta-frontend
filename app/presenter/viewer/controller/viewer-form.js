@@ -60,14 +60,14 @@ define([
                 };
 
                 $scope.analysisViewerData = {
-                    name: "", 
+                    name: "",
                     description: "",
                     type: "ANALYSIS",
                     analysisViewerColumns: []
                 };
 
                 $scope.getListAnalysis = function () {
-                    ViewerService.getListAnalysis($scope.analysisViewerData, $scope.analysisData).then(function (response) {
+                    ViewerService.getListAnalysis($scope.analysisViewerData, $scope.analysisDataView).then(function (response) {
 
                         $modal.open({
                             animation: true,
@@ -93,12 +93,13 @@ define([
 
                 $scope.setAnalysisData = function (analysisData) {
                     $scope.analysisData = analysisData;
+                    $scope.analysisDataView = angular.copy(analysisData);
                 };
 
                 $scope.viewer = getViewer();
 
-                $scope.templateCombo = '/app/presenter/viewer/template/_combo.html';
-                $scope.templateSettings = '/app/presenter/viewer/template/_settings.html';
+                $scope.templateCombo = '/app/presenter/viewer/template/_viewer-form-sidebar-analysis-combo.html';
+                $scope.templateSettings = '/app/presenter/viewer/template/_viewer-form-sidebar-analysis-settings.html';
 
                 $scope.setLayoutSettings = function (config) {
                     $scope.layoutConfig = config;
@@ -117,7 +118,7 @@ define([
                 };
 
             },
-            src: 'app/presenter/viewer/template/_settings-and-combo.html'
+            src: 'app/presenter/viewer/template/_viewer-form-sidebar-analysis.html'
         });
 
 
@@ -148,7 +149,7 @@ define([
         $scope.viewer = {
             "name": "",
             "description": "",
-            "type" : "ANALYSIS",
+            "type": "ANALYSIS",
             "analysisViewerColumns": [],
             "metrics": [],
             "descriptions": [],
@@ -183,20 +184,20 @@ define([
                 $scope.viewer.description = data.description;
                 $scope.viewer.id = data.id;
                 var analysisColumns = data.analysisViewerColumns;
-                
+
                 var arrays = {
-                    METRIC:$scope.viewer.metrics,
-                    DESCRIPTION:$scope.viewer.descriptions,
-                    XFIELD:$scope.viewer.xfields,
-                    YFIELD:$scope.viewer.yfields,
-                    VALUEFIELD:$scope.viewer.valueFields,
+                    METRIC: $scope.viewer.metrics,
+                    DESCRIPTION: $scope.viewer.descriptions,
+                    XFIELD: $scope.viewer.xfields,
+                    YFIELD: $scope.viewer.yfields,
+                    VALUEFIELD: $scope.viewer.valueFields,
                 };
-                
+
                 for (var k in analysisColumns) {
                     var columnType = analysisColumns[k].columnType;
                     arrays[columnType].push(analysisColumns[k].analysisColumn);
                 }
-                
+
                 $scope.viewer.configuration = data.configuration;
                 getPreview();
                 load();
@@ -205,13 +206,21 @@ define([
             });
         } else {
             if ($routeParams.template && $routeParams.type) {
-                ViewerService.getTemplates($routeParams.type, $routeParams.template)
-                        .then(function (response) {
-                            var dados = response.data;
-                            dados.data = response.data.dataProvider;
-                            $scope.viewer.configuration = dados;
-                            load();
-                        });
+                switch ($routeParams.template) {
+                    case "other-singlesource":
+                        $scope.viewer.type = "SINGLESOURCE";
+                        break;
+                    default:
+                        ViewerService.getTemplates($routeParams.type, $routeParams.template)
+                                .then(function (response) {
+                                    var dados = response.data;
+                                    dados.data = response.data.dataProvider;
+                                    $scope.viewer.configuration = dados;
+                                    load();
+                                });
+                        break;
+                }
+
             }
 
         }

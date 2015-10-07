@@ -145,8 +145,16 @@
                     </button>
                 </div>
             </div>
-            <amchart ng-model="viewer.configuration">
-            </amchart>
+
+            <div ng-switch="viewer.type">
+                <div ng-swith-when="ANALYSIS">
+                    <amchart  ng-model="viewer.configuration">
+                    </amchart>
+                </div>
+                <div ng-swith-when="SINGLESOURCE">
+                    BATATA
+                </div>
+            </div>
 
             <div class="form-group">
                 <a href="#/presenter/viewer" class="btn btn-default" translate>
