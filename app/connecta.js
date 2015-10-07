@@ -9,7 +9,6 @@ define([
   'connecta.speaknow',
   'connecta.presenter',
   'connecta.maps',
-  'connecta.datamodel',
   'connecta.inspection',
   // Dependências principais  
   'angular-route',
@@ -37,7 +36,7 @@ define([
   'bower_components/angular-amchart/src/amchart',
   'bower_components/angular-facebook/lib/angular-facebook',
   'bower_components/ngAutocomplete/src/ngAutocomplete'
-], function(angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel, inspection) {
+], function(angular, $, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
   var connecta = angular.module('connecta', [
     'connecta.portal',
@@ -45,7 +44,6 @@ define([
     'connecta.speaknow',
     'connecta.presenter',
     'connecta.maps',
-    'connecta.datamodel',
     'connecta.inspection',
     'ngRoute',
     'ngResource',
@@ -99,7 +97,7 @@ define([
     speaknow.lazy = lazy;
     presenter.lazy = lazy;
     maps.lazy = lazy;
-    datamodel.lazy = lazy;
+//    datamodel.lazy = lazy;
     inspection.lazy = lazy;
   }
 
@@ -151,7 +149,7 @@ define([
    * @returns {undefined}
    */
   function configureRoutes($routeProvider) {
-    var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, datamodel, inspection);
+    var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, inspection);
 
     angular.forEach(allRoutes, function(route, url) {
       if (route.controllerUrl) {
