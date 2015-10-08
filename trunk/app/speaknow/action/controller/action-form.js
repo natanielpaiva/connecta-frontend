@@ -184,8 +184,9 @@ define([
             $scope.action.type = response.data[0];
         });
 
-        WhatsappService.listActive().then(function (response) {
-            $scope.whatsappAccounts = response.data.content;
+        WhatsappService.list().then(function (response) {
+            $scope.whatsappAccounts = response.data;
+            console.log("Response: ", $scope.whatsappAccounts);
         });
 
         // Recupera os tipos de parametros (enum InteractionParameterType)
