@@ -2,28 +2,44 @@
     Created on : 27/02/2015, 18:45:42
     Author     : Vinicius Pires <vinicius.pires@cds.com.br>
 */
+
+$size:1.5em;
+
 .portal-type-switcher {
     .portal-type-switcher-item {
         margin:0 !important;
         padding:0;
+        position:relative;
         
-        *:not(.portal-type-switcher-input) {
+        .portal-type-switcher-icon {
             padding:0;
             background-color:$lightGray;
             border-radius: 0.05em;
             color:$white;
-            width:1.1em;
-            line-height:1.1em;
+            width:$size;
+            height:$size;
             display:inline-block;
             margin:0 0.1em 0 0;
             font-size:$fontSizeBig;
             text-align:center;
         }
+        .portal-type-switcher-icon {
+            padding-top:0.1em;
+        }
+        .portal-type-switcher-title {
+            display:block;
+            text-align:center;
+            font-size:$fontSizeMin*0.8;
+            margin-top:-1.6em;
+            margin-left:-0.3em;
+            color:$white;
+            font-weight:600;
+        }
     }
     .portal-type-switcher-input {
         opacity:0;
 
-        &:checked ~ *:not(.portal-type-switcher-input) {
+        &:checked ~ .portal-type-switcher-icon {
             background-color:$presenterBlue;
         }
     }

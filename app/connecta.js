@@ -97,7 +97,6 @@ define([
     speaknow.lazy = lazy;
     presenter.lazy = lazy;
     maps.lazy = lazy;
-//    datamodel.lazy = lazy;
     inspection.lazy = lazy;
   }
 
@@ -199,19 +198,20 @@ define([
         responseError: function(rejection) {
           var responseInterceptors = {
             400: function(rejection) { // BAD REQUEST
-
+              $rootScope.$broadcast('layout.notify', rejection.data);
             },
             401: function(rejection) { // UNAUTHORIZED
               $rootScope.$broadcast('login.request_unathorized', rejection);
+              $rootScope.$broadcast('layout.notify', rejection.data);
             },
             403: function(rejection) { // FORBIDDEN
-
+              $rootScope.$broadcast('layout.notify', rejection.data);
             },
             404: function(rejection) { // PAGE NOT FOUND
-
+              $rootScope.$broadcast('layout.notify', rejection.data);
             },
             500: function(rejection) { // INTERNAL SERVER ERROR
-              
+              $rootScope.$broadcast('layout.notify', rejection.data);
             }
           };
 
@@ -325,6 +325,7 @@ define([
     'portal/layout/directive/select-all',
     'portal/layout/directive/random-class',
     'portal/layout/directive/key-value',
+    'portal/layout/directive/type-switcher',
     'portal/layout/directive/file-model',
     'portal/layout/directive/input-timeout',
     'portal/layout/directive/heading-popover',

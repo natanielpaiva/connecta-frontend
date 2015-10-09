@@ -1,8 +1,8 @@
 {
     "HIERARCHY": {
-        "HIERARCHY_LIST": "Hierarquia",
-        "HIERARCHY": "Hierarquia",
-        "HIERARCHY_VIEW": "View Hierarcchy",
+        "HIERARCHY_LIST": "Hierarchy",
+        "HIERARCHY": "Hierarchy",
+        "HIERARCHY_VIEW": "View Hierarchy",
         "REGISTER_HIERARCHY": "Register Hierarchy",
         "NAME": "Name",
         "SEARCH_TERM": "Search term"

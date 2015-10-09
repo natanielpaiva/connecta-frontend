@@ -10,7 +10,7 @@
         "PATH": "Path",
         "USERNAME": "User name",
         "PASSWORD": "Password",
-        "DRIVER_NAME": "Driver name",
+        "DRIVER_NAME": "Driver",
         "HOST": "Host",
         "PORT": "Port",
         "DATABASE": "Database",

@@ -22,19 +22,17 @@
             </div>
 
             <div class="portal-type-switcher margin-bottom-single">
-                <label ng-repeat="(key, tp) in types" class="radio-inline portal-type-switcher-item"
-                       title="{{tp.name}}">
+                <label ng-repeat="(key, type) in types | orderBy:'order'" class="radio-inline portal-type-switcher-item"
+                       title="{{type.name}}">
                     <input type="radio" class="portal-type-switcher-input" name="type" 
-                           ng-model="datasource.type" id="datasource-type-{{key}}"
+                           ng-model="datasource.type"
                            ng-value="key" />
-                    <span class="{{tp.icon}}"></span>
+                    <span class="portal-type-switcher-icon {{type.icon}}"></span>
+                    <span class="portal-type-switcher-title">{{type.name}}</span>
                 </label>
             </div>
-
-            <div ng-if="types[datasource.type].template"
-                 ng-include="types[datasource.type].template"
-                 class="am-fade-and-slide-bottom">
-            </div>
+            
+            <type-switcher ng-model="datasource.type" config="types"></type-switcher>
 
             <div class="pull-right">
                 <a href="#/presenter/datasource"

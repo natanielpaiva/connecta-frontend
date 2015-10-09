@@ -10,7 +10,7 @@
         "PATH": "Caminho",
         "USERNAME": "Nome de usuário",
         "PASSWORD": "Senha",
-        "DRIVER_NAME": "Nome do Driver",
+        "DRIVER_NAME": "Driver de conexão",
         "HOST": "Endereço (Host)",
         "PORT": "Porta",
         "DATABASE": "Banco de Dados",

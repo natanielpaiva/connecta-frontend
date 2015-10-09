@@ -1,3 +1,5 @@
+/* global require, module */
+
 module.exports = function(grunt) {
 
   var port = grunt.option('port') || 9001;
@@ -126,7 +128,7 @@ module.exports = function(grunt) {
         files: ['app/**/*.js'],
         tasks: ['jshint'],
         options: {
-          livereload: grunt.option('reload'),
+          livereload: grunt.option('reload')
         }
       },
       css: {
@@ -134,9 +136,9 @@ module.exports = function(grunt) {
         tasks: ['sass']
       },
       livereload: {
-        files: ['assets/css/*.css', 'app/**/*.html'],
+        files: ['assets/css/*.css', 'app/**/*.html', 'app/**/*.json'],
         options: {
-          livereload: grunt.option('reload'),
+          livereload: grunt.option('reload')
         }
       }
     }
