@@ -5,7 +5,7 @@ define([
     'portal/layout/service/modalTranslate',
     'portal/layout/service/notify'
 ], function (maps) {
-    return maps.lazy.controller('AppliedBudgetViewController', function ($scope, AppliedBudgetService, ConnectaGeoService, notify, $routeParams, $location, $modalTranslate, $translate) {
+    return maps.lazy.controller('AppliedBudgetViewController', function ($scope, AppliedBudgetService, ConnectaGeoServiceAppliedBudget, notify, $routeParams, $location, $modalTranslate, $translate) {
 
 
         AppliedBudgetService.get($routeParams.id).then(function (response) {
@@ -28,11 +28,11 @@ define([
 
 
 
-            ConnectaGeoService.createMap();
+            ConnectaGeoServiceAppliedBudget.createMap();
             var interval2 = setInterval(function () {
-                if ((typeof ConnectaGeoService.map !== 'undefined' && ConnectaGeoService.map !== null) && ConnectaGeoService.map.__objLayers.length > 0) {
+                if ((typeof ConnectaGeoServiceAppliedBudget.map !== 'undefined' && ConnectaGeoServiceAppliedBudget.map !== null) && ConnectaGeoServiceAppliedBudget.map.__objLayers.length > 0) {
 
-                    ConnectaGeoService.addMarker(featurePoint);
+                    ConnectaGeoServiceAppliedBudget.addMarker(featurePoint);
                     clearInterval(interval2);
                 }
             }, 500);

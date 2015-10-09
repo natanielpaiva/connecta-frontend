@@ -7,7 +7,7 @@ define([
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (maps) {
-    return maps.lazy.controller('AppliedBudgetFormController', function ($scope, AppliedBudgetService, ConnectaGeoService, MunicipalBudgetService, BudgetAreaApplicationService, notify, $location, $routeParams, $translate, $http, $modalTranslate) {
+    return maps.lazy.controller('AppliedBudgetFormController', function ($scope, AppliedBudgetService, ConnectaGeoServiceAppliedBudget, MunicipalBudgetService, BudgetAreaApplicationService, notify, $location, $routeParams, $translate, $http, $modalTranslate) {
         $scope.appliedBudget = null;
         $scope.isEditing = false;
         $scope.municipalBudgets = null;
@@ -57,7 +57,7 @@ define([
             $scope.isEditing = true;
 
             AppliedBudgetService.get($routeParams.id).success(function (data) {
-                $scope.appliedBudget = data;
+                $scope.appliedBudget = data;               
                 var longitude = $scope.appliedBudget.geomWKT.substring(6, $scope.appliedBudget.geomWKT.indexOf(" "));
                 var latitude = $scope.appliedBudget.geomWKT.substring($scope.appliedBudget.geomWKT.indexOf(" ") + 1, $scope.appliedBudget.geomWKT.indexOf(")"));
 
@@ -75,10 +75,12 @@ define([
 
 
                 var interval = setInterval(function () {
-                    if ($scope.formulario.description.$viewValue !== "") {
+                    if (typeof $scope.formulario !=='undefined' && $scope.formulario.description.$viewValue !== "") {
                         //angular.element("#municipalBudget").find("option[label='" + $scope.appliedBudget.municipalBudget.elementName + "']").attr('selected', 'true');
-                        angular.element("#budgetAreaApplication").find("option[label='" + $scope.appliedBudget.budgetAreaApplication.description + "']").attr('selected', 'true');
+                        angular.element("#budgetAreaApplication").find("option[label='" + $scope.appliedBudget.budgetApplicationArea.description + "']").attr('selected', 'true');
+                        angular.element("#budgetAreaApplication").trigger('change');
                         angular.element("#municipalBudget").find("option[label='" + $scope.appliedBudget.municipalBudget.programName + '----> ' + $scope.appliedBudget.municipalBudget.activityProjectName + "']").attr('selected', 'true');
+                        angular.element("#municipalBudget").trigger('change');
                         clearInterval(interval);
                     }
 
@@ -88,11 +90,11 @@ define([
                 var int2 = setInterval(function () {
                     //if (angular.element('.row.ng-scope:first>div>h3').text() == "Editar Camada") {
                     if (angular.element('.row.ng-scope:first>div>h3').text() === $scope.editText) {
-                        ConnectaGeoService.createMap();
+                        ConnectaGeoServiceAppliedBudget.createMap();
 
                         var interval2 = setInterval(function () {
-                            if ((typeof ConnectaGeoService.map !== 'undefined' && ConnectaGeoService.map !== null) && ConnectaGeoService.map.__objLayers.length > 0) {
-                                ConnectaGeoService.addMarker(featurePoint);
+                            if ((typeof ConnectaGeoServiceAppliedBudget.map !== 'undefined' && ConnectaGeoServiceAppliedBudget.map !== null) && ConnectaGeoServiceAppliedBudget.map.__objLayers.length > 0) {
+                                ConnectaGeoServiceAppliedBudget.addMarker(featurePoint);
                                 clearInterval(interval2);
                             }
                         }, 500);
@@ -104,17 +106,17 @@ define([
 
             });
         } else {
-            ConnectaGeoService.createMap();
+            ConnectaGeoServiceAppliedBudget.createMap();
         }
 
 
         $scope.zoomMapToFullExtent = function () {
-            ConnectaGeoService.zoomMapToInitialView();
+            ConnectaGeoServiceAppliedBudget.zoomMapToInitialView();
         };
 
 
         $scope.addedMarkers = function () {
-            if (ConnectaGeoService.hasmarkers() > 0) {
+            if (ConnectaGeoServiceAppliedBudget.map !== null && ConnectaGeoServiceAppliedBudget.hasmarkers() > 0) {
                 return false;
             } else {
                 return true;
@@ -168,30 +170,30 @@ define([
                 }
             };
 
-            ConnectaGeoService.addMarker(featurePoint);
+            ConnectaGeoServiceAppliedBudget.addMarker(featurePoint);
         };
 
 
 
         $scope.toggleDragControl = function () {
-            ConnectaGeoService.toggleDragMarker();
+            ConnectaGeoServiceAppliedBudget.toggleDragMarker();
         };
 
 
         $scope.toggleDrawMarker = function () {
-            ConnectaGeoService.toggleDrawMarker();
+            ConnectaGeoServiceAppliedBudget.toggleDrawMarker();
         };
 
 
 
         $scope.removeMarkers = function () {
-            ConnectaGeoService.removeMarkers();
+            ConnectaGeoServiceAppliedBudget.removeMarkers();
         };
 
 
 
         $scope.submit = function () {
-            $scope.appliedBudget.geomWKT = ConnectaGeoService.getMarkerWKT();
+            $scope.appliedBudget.geomWKT = ConnectaGeoServiceAppliedBudget.getMarkerWKT();
             $scope.appliedBudget.municipalBudget = {"id": $scope.appliedBudget.municipalBudget.id};
             $scope.appliedBudget.budgetAreaApplication = {"id": $scope.appliedBudget.budgetAreaApplication.id};
             AppliedBudgetService.save($scope.appliedBudget).then(function () {

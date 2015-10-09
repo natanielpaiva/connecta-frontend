@@ -1,7 +1,7 @@
 define([
     'connecta.maps'
 ], function (maps) {
-    return maps.lazy.service('MapService', function (mapsResources, $http) {
+    return maps.lazy.service('MapServiceLayerViewerGroup', function (mapsResources, $http) {
 
         this.__connectaGeo = null;
 
@@ -15,7 +15,7 @@ define([
             //Openlayers
             if (mapTypeId == 1) {
                 configMap = this.__connectaGeo.__mapsConfig.Openlayers.Map.configMap;
-                configMap.divMap = "map-view";
+                configMap.divMap = "map-view-layer-viewer-group";
                 this.__connectaGeo.__createObjMap(configMap, "__createControl", this.__connectaGeo.__mapsConfig.Openlayers.Controls.controlZB);
 
                 var interval = setInterval(function () {

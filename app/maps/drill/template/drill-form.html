@@ -17,39 +17,39 @@
             </div>
 
             <div class="form-group">
-                <label for="drill" translate>DRILL.ANALYSIS</label>
+                <label for="analysis" translate>DRILL.ANALYSIS</label>
                 <select class="form-control" 
                         name="analysis" 
-                        ng-model="responsible"
-                        id="responsible" 
-                        ng-options="analysis.name for analysis in analyses" required>
+                        ng-model="drill.analysis"
+                        id="analysis" 
+                        ng-options="analysis.title for analysis in presenterAnalysis" required>
                     <option value="" translate> DRILL.ANALYSIS_SELECT</option>
                 </select>
-                <div ng-show="formulario.description.$touched" ng-messages="formulario.description.$error"
+                <div ng-show="formulario.analysis.$touched" ng-messages="formulario.analysis.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
 
             <box-table-maps title="DrillLevel">
-                <a type="button"  class="btn btn-inspection" href="" ng-click="openModal();">Adicionar</a>
+                <a type="button"  class="btn btn-maps" href="" ng-click="openModal();">Adicionar</a>
                 <table ng-table="tableParams">
                     <thead>
                         <tr>
                             <th translate>DRILL_LEVEL.NAME</th>
-                            <th translate>DRILL_LEVEL.PARENT</th>
-                            <th translate>DRILL_LEVEL.PARENT_COLUMN</th>
-                            <th translate>DRILL_LEVEL.CHILD</th>
-                            <th translate>DRILL_LEVEL.CHILD_COLUMN</th>
+                            <th translate>DRILL_LEVEL.PARENT_LEVEL</th>
+                            <th translate>DRILL_LEVEL.PARENT_LEVEL_COLUMN</th>
+                            <th translate>DRILL_LEVEL.CHILD_LEVEL</th>
+                            <th translate>DRILL_LEVEL.CHILD_LEVEL_COLUMN</th>
                             <th translate>DRILL_LEVEL.ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="drillLevel in drillLevels">
                             <td class="text-left">{{drillLevel.name}}</td>
-                            <td class="text-left">{{drillLevel.parent}}</td>
-                            <td class="text-left">{{drillLevel.parent_column}}</td>
-                            <td class="text-left">{{drillLevel.child}}</td>
-                            <td class="text-left">{{drillLevel.chid_column}}</td>
+                            <td class="text-left">{{drillLevel.parentViewer.nm_viewer}}</td>
+                            <td class="text-left">{{drillLevel.parentColumn.columnName}}</td>
+                            <td class="text-left">{{drillLevel.childViewer.nm_viewer}}</td>
+                            <td class="text-left">{{drillLevel.childColumn.columnName}}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="" role="button" class="btn btn-sm btn-danger" ng-click="openModal({{drillLevel}});">
@@ -71,7 +71,7 @@
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>
-            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid || drillLevels.length == 0">
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid || drillLevels.length <= 1">
                 LAYOUT.SAVE
             </button>            
         </form>

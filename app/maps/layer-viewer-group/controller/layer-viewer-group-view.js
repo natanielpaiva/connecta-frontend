@@ -6,7 +6,7 @@ define([
     'portal/layout/service/modalTranslate',
     'portal/layout/service/notify'
 ], function (maps) {
-    return maps.lazy.controller('LayerViewerGroupViewController', function ($scope, LayerViewerGroupService, GroupLayerViewerService, notify, ConnectaGeoService, $routeParams, $location, $modalTranslate, $translate) {
+    return maps.lazy.controller('LayerViewerGroupViewController', function ($scope, LayerViewerGroupService, GroupLayerViewerService, notify, ConnectaGeoServiceLayerViewerGroup, $routeParams, $location, $modalTranslate, $translate) {
 
         GroupLayerViewerService.getByGroup($routeParams.id).then(function (response) {
 
@@ -50,7 +50,7 @@ define([
             $modalTranslate($scope.modalParams, 'text', 'LAYERVIEWERGROUP.CONFIRM_DELETE');
 
 
-            ConnectaGeoService.showViewer($scope.layerViewerGroup);
+            ConnectaGeoServiceLayerViewerGroup.showViewer($scope.layerViewerGroup);
 
         });
 

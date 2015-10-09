@@ -1,7 +1,7 @@
 define([
     'connecta.maps'
 ], function (maps) {
-    return maps.lazy.service('MapService', function (mapsResources, $http) {
+    return maps.lazy.service('MapServiceAppliedBudget', function (mapsResources, $http) {
 
 
         this.__connectaGeo = null;
@@ -16,7 +16,7 @@ define([
             //Openlayers
             if (mapTypeId == 1) {
                 configMap = this.__connectaGeo.__mapsConfig.Openlayers.Map.configMap;
-                configMap.divMap = "map-view";
+                configMap.divMap = "map-view-applied-budget";
                 configMap.initialZoom='6';
                 configMap.center.x=-46.57081;
                 configMap.center.y=-23.691020;                                                

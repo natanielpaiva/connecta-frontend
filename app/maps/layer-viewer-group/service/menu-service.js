@@ -3,7 +3,7 @@ define([
     'maps/layer-viewer-group/service/toolbar-service',
     'maps/layer-viewer-group/service/group-layer-viewer-service'
 ], function (maps) {
-    return maps.lazy.service('MenuService', function (mapsResources, ToolBarService, GroupLayerViewerService, $http) {
+    return maps.lazy.service('MenuServiceLayerViewerGroup', function (mapsResources, ToolBarServiceLayerViewerGroup, GroupLayerViewerService, $http) {
 
         this.addEvents = function () {
             var comboLayers = setInterval(function(){
@@ -20,30 +20,30 @@ define([
             
             // controle de zoom em área
             angular.element("#ico_find").on("click", function () {
-                ToolBarService.toggleZoomArea();
+                ToolBarServiceLayerViewerGroup.toggleZoomArea();
             });
             
             // controle de zooom maximo nas layers
             angular.element("#ico_redimensionar_camada").on("click", function () {
-                ToolBarService.zoomMapToMaxExtent();
+                ToolBarServiceLayerViewerGroup.zoomMapToMaxExtent();
             });
             
             // controle de informação
             angular.element("#ico_info").on("click", function () {
-                ToolBarService.toggleInfo();
+                ToolBarServiceLayerViewerGroup.toggleInfo();
             });
             
             // controle de opacidade
             angular.element(".opacityRange").on("change", function (elem) {
                 console.log("eleeeem range", elem);
-                ToolBarService.setLayerOpacity(elem.currentTarget.title, parseFloat(elem.currentTarget.value/100));
+                ToolBarServiceLayerViewerGroup.setLayerOpacity(elem.currentTarget.title, parseFloat(elem.currentTarget.value/100));
             });
             
             // controle de quantos checkbox estão marcados para habilitar a funcionalidade de swipe
             angular.element(".combo_layers").on("click", function (elem) {
                 
                 // funcao de visibilidade de uma layer com sua respectiva legenda
-                ToolBarService.layerVisibility(elem.currentTarget.value, elem.currentTarget.checked);
+                ToolBarServiceLayerViewerGroup.layerVisibility(elem.currentTarget.value, elem.currentTarget.checked);
                 
                 var flag = 0;
                 var layersActivas = [];
@@ -72,7 +72,7 @@ define([
                     angular.element("#icon_swipe").css("display", "");
                 } else {
 
-                    ToolBarService.deactivateSwipe();
+                    ToolBarServiceLayerViewerGroup.deactivateSwipe();
                     //css de icone ativo ou nao
                     angular.element("#icon_swipe").removeClass("icon_swipe_active");
                     angular.element(".divisionSwipe").css("display", "none");
@@ -84,11 +84,11 @@ define([
             // verificar e executar o Swipe
             angular.element("#icon_swipe").on("click", function () {
                 if (angular.element("#icon_swipe").hasClass("icon_swipe_active")) {
-                    ToolBarService.deactivateSwipe();
+                    ToolBarServiceLayerViewerGroup.deactivateSwipe();
                 } else {
 
                     // chama a funcao de toggle para o controle de swipe
-                    ToolBarService.activateSwipe(objLayersFlag[0], objLayersFlag[1]);
+                    ToolBarServiceLayerViewerGroup.activateSwipe(objLayersFlag[0], objLayersFlag[1]);
                 }
 
                 //css de icone ativo ou nao
@@ -116,13 +116,13 @@ define([
 
         this.renderMenu = function (layerViewerConfig, mapComponent) {
             console.log("layer menu config", layerViewerConfig);
-            ToolBarService.setMap(mapComponent);
+            ToolBarServiceLayerViewerGroup.setMap(mapComponent);
 
 //            this.__layerViewerType = layerViewerConfig.layerViewer.layerViewerTypeEntity.id;           
             this.__layerViewerType = 3;
             this.__element = document.createElement('div');
             this.__element.id = layerViewerConfig[0].ds_param_values.replace(/ /gi, "") + 'MENU';
-            document.getElementById("map-view").appendChild(this.__element);
+            document.getElementById("map-view-layer-viewer-group").appendChild(this.__element);
             angular.element("#" + this.__element.id).load('app/maps/layer-viewer-group/template/menu_template.html');
 
             this.createMenu(this.__element.id, layerViewerConfig);

@@ -2,7 +2,7 @@ define([
     'connecta.maps',
     'maps/layer-viewer/service/toolbar-service'
 ], function (maps) {
-    return maps.lazy.service('MenuService', function (mapsResources, ToolBarService, $http) {
+    return maps.lazy.service('MenuServiceLayerViewer', function (mapsResources, ToolBarService, $http) {
         
         
 

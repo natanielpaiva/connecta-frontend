@@ -17,38 +17,60 @@
             </div>
 
             <div class="form-group">
-                <label for="parent" translate>DRILL_LEVEL.PARENT</label>
-                <input type="text" class="form-control" id="parent" name="parent"
-                       ng-model="drillLevel.parent" required/>
-                <div ng-show="formulario.parent.$touched" ng-messages="formulario.parent.$error"
+                <label for="parent" translate>DRILL_LEVEL.PARENT_LEVEL</label>
+                <select class="form-control" 
+                        name="parent" 
+                        ng-model="drillLevel.parentViewer"
+                        ng-change="getLayerColumnsFromViewer(drillLevel.parentViewer, 'parent')"
+                        id="parent" 
+                        ng-options="parentViewer.nm_viewer for parentViewer in viewers" required>
+                    <option value="" translate> DRILL.ANALYSIS_SELECT</option>
+                </select>
+                <div ng-show="formulario.parent.$touched && formulario.parent.$invalid" ng-messages="formulario.parent.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
             <div class="form-group">
-                <label for="parentcolumn" translate>DRILL_LEVEL.PARENT_COLUMN</label>
-                <input type="text" class="form-control" id="parentcolumn" name="parentcolumn"
-                       ng-model="drillLevel.parentcolumn" required/>
+                <label for="parentcolumn" translate>DRILL_LEVEL.PARENT_LEVEL_COLUMN</label>
+                <select class="form-control" 
+                        name="parentcolumn" 
+                        ng-model="drillLevel.parentColumn"                        
+                        id="parentColumn" 
+                        ng-options="column.columnName for column in parentColumns" required>
+                    <option value="" translate> DRILL.ANALYSIS_SELECT</option>
+                </select>
                 <div ng-show="formulario.parentcolumn.$touched" ng-messages="formulario.parentcolumn.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>                  
 
             <div class="form-group">
-                <label for="child" translate>DRILL_LEVEL.CHILD</label>
-                <input type="text" class="form-control" id="child" name="child"
-                       ng-model="drillLevel.child" required/>
+                <label for="child" translate>DRILL_LEVEL.CHILD_LEVEL</label>
+                <select class="form-control" 
+                        name="child" 
+                        ng-model="drillLevel.childViewer"
+                        ng-change="getLayerColumnsFromViewer(drillLevel.childViewer, 'child')"
+                        id="child" 
+                        ng-options="childViewer.nm_viewer for childViewer in viewers" required>
+                    <option value="" translate> DRILL.ANALYSIS_SELECT</option>
+                </select>
                 <div ng-show="formulario.child.$touched" ng-messages="formulario.child.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
 
             <div class="form-group">
-                <label for="chidcolumn" translate>DRILL_LEVEL.CHILD_COLUMN</label>
-                <input type="text" class="form-control" id="chidcolumn" name="chidcolumn"
-                       ng-model="drillLevel.chidcolumn" required/>
+                <label for="chidcolumn" translate>DRILL_LEVEL.CHILD_LEVEL_COLUMN</label>
+                <select class="form-control" 
+                        name="childcolumn" 
+                        ng-model="drillLevel.childColumn"                        
+                        id="childColumn" 
+                        ng-options="column.columnName for column in childColumns" required>
+                    <option value="" translate> DRILL.ANALYSIS_SELECT</option>
+                </select>
                 <div ng-show="formulario.chidcolumn.$touched" ng-messages="formulario.chidcolumn.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>            
-   
+
 
 
             <a href="" ng-click="cancel();"

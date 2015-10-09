@@ -2,7 +2,7 @@ define([
     'connecta.maps',
     'maps/drill/service/toolbar-service'
 ], function (maps) {
-    return maps.lazy.service('MenuService', function (mapsResources, ToolBarService, $http) {
+    return maps.lazy.service('MenuServiceDrill', function (mapsResources, ToolBarServiceDrill, $http) {
         
         
 
@@ -14,24 +14,24 @@ define([
             angular.element('#' + elementId).find('#link-active-bar').on('click', function () {
 
                 //ESCONDER TODOS OS SUB-MENU's
-                angular.element('#' + elementId).find('.menu-right-nivel-2').css("display", "none");
-                var menuRigth = angular.element('#' + elementId).find('#menu-right');
-                if (menuRigth.hasClass('menu-right-off')) {
-                    menuRigth.removeClass('menu-right-off').addClass('menu-right-on');
+                angular.element('#' + elementId).find('.menu-right-drill-nivel-2').css("display", "none");
+                var menuRigth = angular.element('#' + elementId).find('#menu-right-drill');
+                if (menuRigth.hasClass('menu-right-drill-off')) {
+                    menuRigth.removeClass('menu-right-drill-off').addClass('menu-right-drill-on');
                     
                 } else {
                     //desativa tudo que que esta selecionado CSS
-                    menuRigth.removeClass('menu-right-on').addClass('menu-right-off');
+                    menuRigth.removeClass('menu-right-drill-on').addClass('menu-right-drill-off');
                     angular.element('#' + elementId).find('.tool-active').removeClass('tool-active');
                     angular.element('#' + elementId).find('.submenu-active').removeClass("submenu-active");                    
                 }
 
             });
             //DESATIVAR CSS DE ICONE DE MENU ATIVO
-            angular.element('#' + elementId).find('.item-menu-right').on('click', function (elementMenu) {
+            angular.element('#' + elementId).find('.item-menu-right-drill').on('click', function (elementMenu) {
 
                 //ESCONDER TODOS OS SUB-MENU's
-                angular.element('#' + elementId).find('.menu-right-nivel-2').css("display", "none");
+                angular.element('#' + elementId).find('.menu-right-drill-nivel-2').css("display", "none");
                 if (angular.element('#' + elementId).find('#' + elementMenu.currentTarget.id).hasClass('tool-active')) {
                     angular.element('#' + elementId).find('#' + elementMenu.currentTarget.id).removeClass('tool-active');
                 } else {
@@ -40,7 +40,7 @@ define([
                     angular.element('#' + elementId).find('.submenu-active').removeClass("submenu-active");
                     angular.element('#' + elementId).find('.link-sub-nivel-2-active').removeClass('link-sub-nivel-2-active');
                     //ativa o botao CSS do clique
-                    elementMenu.currentTarget.className = 'tool-active item-menu-right';
+                    elementMenu.currentTarget.className = 'tool-active item-menu-right-drill';
                 }
             });
             //DESATIVAR CSS DE INCONE DO SUB MENU ATIVO
@@ -72,13 +72,13 @@ define([
         this.addSubMenuItemAction = function (itemType, itemID, action, param) {            
             if (itemType == "img") {
                 angular.element('#' + itemID).click(function () {
-                    ToolBarService[action](param);
+                    ToolBarServiceDrill[action](param);
                 });
 
             } else {
                 angular.element('#' + itemID).val(param);
                 angular.element('#' + itemID).on('input change', function () {
-                    ToolBarService[action](document.getElementById(itemID).value);
+                    ToolBarServiceDrill[action](document.getElementById(itemID).value);
                 });
 
             }
@@ -89,13 +89,13 @@ define([
         this.addMenuItemAction = function (itemID, action) {
             var that = this;
             angular.element('#' + itemID).click(function () {
-                ToolBarService.__mapName = that.__mapName;
-                ToolBarService[action]();
+                ToolBarServiceDrill.__mapName = that.__mapName;
+                ToolBarServiceDrill[action]();
             });
         };
 
         this.addSubMenuItem = function (itemID, elem, item) {
-            elem.innerHTML += "<div class='menu-right-nivel-2 sub-menu' id='" + item.id + "'><ul></ul></div>";
+            elem.innerHTML += "<div class='menu-right-drill-nivel-2 sub-menu' id='" + item.id + "'><ul></ul></div>";
             var subMenuItems = item.items;
             var action = item.action;
             var subMenuId = item.id;
@@ -132,11 +132,11 @@ define([
             var itemID = "";
             if (typeof item.items != 'undefined') {                
                 itemID = divName + '_' + item.span;
-                elem.innerHTML = "<a id='" + itemID + "' class='item-menu-right sub-item ' style='cursor:pointer;'>\n\<img src='" + item.img + "' 'ico_" + item.id + "'></a>";
+                elem.innerHTML = "<a id='" + itemID + "' class='item-menu-right-drill sub-item ' style='cursor:pointer;'>\n\<img src='" + item.img + "' 'ico_" + item.id + "'></a>";
                 this.addSubMenuItem(itemID, elem, item);
             } else {
                 itemID = divName + '_' + item.id;
-                elem.innerHTML = "<a  id = '" + itemID + "' class = 'item-menu-right' style='cursor:pointer;'>\n\<img src = '" + item.img + "' alt = 'ico_" + item.id + "'></a>";
+                elem.innerHTML = "<a  id = '" + itemID + "' class = 'item-menu-right-drill' style='cursor:pointer;'>\n\<img src = '" + item.img + "' alt = 'ico_" + item.id + "'></a>";
                 //define evento para o item do menu
                 this.addMenuItemAction(itemID, item.action);
             }
@@ -147,7 +147,7 @@ define([
         this.createMenu = function (divName) {
             var that = this;
             var li = "";
-            $http.get('app/maps/layer-viewer/template/menu.json').success(function (data) {
+            $http.get('app/maps/drill/template/menu.json').success(function (data) {
                 
                 //$.getJSON("app/maps/layer-viewer/template/menu.json", function (data) {
                     
@@ -156,7 +156,7 @@ define([
 
                     if (typeof data.menuItems[elem].id != 'undefined') {                                                
                         li = document.createElement('li');
-                        angular.element('#' + divName).find('#menu-right-data>ul').append(li);
+                        angular.element('#' + divName).find('#menu-right-drill-data>ul').append(li);
                         that.addMenuItem(divName, li, data.menuItems[elem]);
 
                     }
@@ -168,7 +168,7 @@ define([
                     li = "";
                     for (var obj in defaultViewerItems) {
                         li = document.createElement('li');
-                        angular.element('#' + divName).find('#menu-right-data>ul').append(li);
+                        angular.element('#' + divName).find('#menu-right-drill-data>ul').append(li);
                         that.addMenuItem(divName, li, defaultViewerItems[obj]);
                     }
                 }
@@ -180,13 +180,13 @@ define([
 
         this.renderMenu = function (layerViewerConfig, mapComponent) {
             
-            ToolBarService.setMap(mapComponent);
+            ToolBarServiceDrill.setMap(mapComponent);
 
             this.__layerViewerType = layerViewerConfig.layerViewer.layerViewerTypeEntity.id;           
             this.__element = document.createElement('div');
             this.__element.id = layerViewerConfig.name.replace(/ /gi, "") + 'MENU';
-            document.getElementById("map-view").appendChild(this.__element);
-            angular.element("#" + this.__element.id).load('app/maps/layer-viewer/template/menu_template.html');
+            document.getElementById("map-view-drill").appendChild(this.__element);
+            angular.element("#" + this.__element.id).load('app/maps/drill/template/menu_template.html');
             
             this.createMenu(this.__element.id);
         };

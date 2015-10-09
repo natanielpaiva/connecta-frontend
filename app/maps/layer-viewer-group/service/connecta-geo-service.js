@@ -6,7 +6,7 @@ define([
     'maps/layer-viewer-group/service/map-service',
     'maps/layer-viewer-group/service/viewer-service'
 ], function (maps, connectaGeoJS, mapsConfig) {
-    return maps.lazy.service('ConnectaGeoService', function (mapsResources, $http, MapService, ViewerService) {
+    return maps.lazy.service('ConnectaGeoServiceLayerViewerGroup', function (mapsResources, $http, MapServiceLayerViewerGroup, ViewerServiceLayerViewerGroup) {
 
         //Bse URL Framework
         mapsConfig.baseURL = "bower_components/connectaGeoJS/index/";
@@ -14,23 +14,23 @@ define([
         //mapsConfig.proxyURLOpenlayers = "http://localhost:7001/connecta-maps/proxy.jsp?";
 
         this.__connectaGeo = new connectaGeoJS();
-        MapService.setConnectaGeo(this.__connectaGeo);
+        MapServiceLayerViewerGroup.setConnectaGeo(this.__connectaGeo);
 
 
         this.showViewer = function (layerViewerGroup) {
 
             if (this.__connectaGeo.__objMaps.length > 0) {
                 this.__connectaGeo.__destroyObjMap(this.__connectaGeo.__objMaps[0]);
-                delete MapService.map;
+                delete MapServiceLayerViewerGroup.map;
             }
 
             //tipo de implementação do visualizador
 //            MapService.createMap(layerViewer.viewerTypeImplEntity.id);
-            MapService.createMap(1);
+            MapServiceLayerViewerGroup.createMap(1);
 
             var interval = setInterval(function () {
-                if (typeof MapService.map !== 'undefined') {
-                    ViewerService.getViewerConfig(layerViewerGroup, MapService.map);
+                if (typeof MapServiceLayerViewerGroup.map !== 'undefined') {
+                    ViewerServiceLayerViewerGroup.getViewerConfig(layerViewerGroup, MapServiceLayerViewerGroup.map);
                     clearInterval(interval);
                 }
 

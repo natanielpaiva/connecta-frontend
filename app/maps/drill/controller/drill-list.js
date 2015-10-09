@@ -13,13 +13,13 @@ define([
             DrillService.delete(id).then(function () {
                 $translate('SUPPLIER.REMOVE_SUCCESS').then(function (text) {
                     notify.success(text);                    
-                    $location.path('inspection/drill');
+                    $location.path('maps/drill');
                     $scope.tableParams.reload();
                 });
             }, function (response) {
                 $translate('SUPPLIER.ERROR_REMOVING').then(function (text) {
                     notify.error(text);
-                    $location.path('inspection/drill');
+                    $location.path('maps/drill');
                 });
             });
         };
