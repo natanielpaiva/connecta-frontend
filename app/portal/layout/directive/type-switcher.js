@@ -7,10 +7,8 @@ define([
             templateUrl: "app/portal/layout/directive/template/type-switcher.html",
             scope: {
                 ngModel: '=ngModel',
-                config:'='
-            },
-            controller: function ($scope, $log) {
-                
+                config:'=',
+                object:'='
             }
         };
     });

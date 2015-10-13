@@ -2,21 +2,21 @@
 <div class="form-group">
     <label for="server" translate>DATASOURCE.SERVER</label>
     <input type="text" name="server" id="server" class="form-control" 
-           ng-model="datasource.server"/>
+           ng-model="object.server"/>
     <div ng-if="formulario.$dirty" ng-messages="formulario.server.$error"
          ng-messages-include="portal-validation-messages"></div>
 </div>
 <div class="form-group">
     <label for="port" translate>DATASOURCE.PORT</label>
     <input type="text" name="port" id="port" class="form-control"
-           ng-model="datasource.port"/>
+           ng-model="object.port"/>
     <div ng-if="formulario.$dirty" ng-messages="formulario.port.$error"
          ng-messages-include="portal-validation-messages"></div>
 </div>
 <div class="form-group">
     <label for="path" translate>DATASOURCE.PATH</label>
     <input type="text" name="path" id="path" class="form-control"
-           ng-model="datasource.path"/>
+           ng-model="object.path"/>
     <div ng-if="formulario.$dirty" ng-messages="formulario.path.$error"
          ng-messages-include="portal-validation-messages"></div>
 </div>
