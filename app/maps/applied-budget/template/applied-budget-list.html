@@ -28,9 +28,9 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th translate>APPLIEDBUDGET.APPLICATION_AREA</th>
-                    <th translate>APPLIEDBUDGET.DESCRIPTION</th>                    
-                    <th></th>
+                    <th class="text-center" translate>APPLIEDBUDGET.APPLICATION_AREA</th>
+                    <th class="text-center" translate>APPLIEDBUDGET.DESCRIPTION</th>                    
+                    <th class="text-center"></th>
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +38,7 @@
                     <td><input type="checkbox" value="{{appliedBudget.id}}" /></td>
                     <td class="text-center" >
                         <a class="full-size-block link-no-state" href="#/maps/applied-budget/{{appliedBudget.id}}">
-                        {{appliedBudget.budgetAreaApplication.description}}
+                        {{appliedBudget.budgetApplicationArea.description}}
                         </a>
                     </td>   
                     <td class="text-center" ><a class="full-size-block link-no-state" href="#/maps/applied-budget/{{appliedBudget.id}}">
