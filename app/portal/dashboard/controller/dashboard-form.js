@@ -103,8 +103,14 @@ define([
         $scope.dashboard.sections.push(section);
       }
     };
+    
+    $scope.renameSection = function($event, section, edit) {
+      $event.preventDefault();
+      section.edit = edit;
+    };
 
-    $scope.removeSection = function(section) {
+    $scope.removeSection = function($event, section) {
+      $event.preventDefault();
       $scope.dashboard.sections.splice(
         $scope.dashboard.sections.indexOf(section), 1
       );

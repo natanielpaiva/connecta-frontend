@@ -21,17 +21,21 @@
   <tabset>
     <tab ng-repeat="section in dashboard.sections | orderBy:'order'" active="section.active">
       <tab-heading>
-        {{section.name}}
-        <button class="btn btn-xs btn-icon-only">
-          <span class="icon-cog"></span>
+        <span ng-if="!section.edit" ng-dblclick="renameSection($event, section, true)"
+              class="dashboard-form-section-name">
+            {{section.name}}
+        </span>
+        <input class="dashboard-form-section-name-edit" ng-model="section.name"
+             ng-if="section.edit" ng-blur="renameSection($event, section, false)" />
+        <button class="btn btn-xs btn-icon-only" ng-click="removeSection($event, section)" type="button">
+          <span class="icon-close"></span>
         </button>
       </tab-heading>
       <div gridster="config" dnd-list="section.items">
-        <div class="dashboard-item" style="background-color:{{item.backgroundColor?item.backgroundColor:'transparent'}};"
+        <div class="dashboard-item" style="background-color:{{item.backgroundColor?item.backgroundColor:''}};"
           gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
             <viewer src="item.viewerUrl"></viewer>
         </div>
-          
         <div class="dashboard-no-item" ng-if="!section.items.length">
           <span class="icon-area-graph"></span>
           <p translate>

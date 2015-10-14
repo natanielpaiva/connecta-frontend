@@ -2,7 +2,7 @@ $pageGutter:1em;
 
 // Configurando o container das views
 .page-container {
-    overflow-x: hidden;
+    overflow: hidden;
     background-color: rgba($white, 0.9);
     margin-left: $sidebarSize;
     margin-top: $headerHeight + (2*$pageGutter);
