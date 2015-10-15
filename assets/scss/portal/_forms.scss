@@ -106,8 +106,25 @@ input, textarea, select{
     box-shadow:none;
 }
 /*** Form stuff ***/
-form legend {
-    margin: 15px 0px 10px 0px !important;
+fieldset.radio-fieldset {
+    margin:0;
+    padding:0;
+    legend {
+        border:none;
+        font-size:1em;
+        font-weight: bold;
+        margin:0;
+        padding:0;
+    }
+    .radio {
+        font-weight: normal;
+        display: inline-block;
+        margin-right:1em;
+
+        &:last-of-type {
+            margin-right:0;
+        }
+    }
 }
 .column-seperation > div[class*="col-md"]{
     border-right:1px solid #ddd;
