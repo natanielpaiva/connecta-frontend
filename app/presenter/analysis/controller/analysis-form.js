@@ -147,7 +147,7 @@ define([
                 console.log("$scope.types ", $scope.types.SOLR.name);
                 AnalysisService.save($scope.analysis).then(function () {
                     
-                     $location.path('presenter/datasource');
+                     $location.path('presenter/analysis');
                 });
             }
             
