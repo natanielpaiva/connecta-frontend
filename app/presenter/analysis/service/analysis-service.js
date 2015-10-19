@@ -1,18 +1,34 @@
 define([
     'connecta.presenter',
-], function (presenter) {
-
+    'presenter/analysis/controller/_analysis-database',
+    'presenter/analysis/controller/_analysis-endeca',
+    'presenter/analysis/controller/_analysis-sorl',
+    'presenter/analysis/controller/_analysis-webservice',
+    'presenter/analysis/controller/_analysis-csv',
+    'presenter/analysis/controller/_analysis-obiee',
+    'presenter/analysis/controller/_analysis-hdfs',
+], function (presenter, 
+            DatabaseAnalysisFormController,
+            EndecaAnalysisFormController,
+            SolrAnalysisFormController,
+            WebserviceAnalysisFormController,
+            CsvAnalysisFormController,
+            ObieeAnalysisFormController,
+            HdfsAnalysisFormController) {
+    
     return presenter.lazy.service('AnalysisService', function (presenterResources, $http) {
         var types = {
             DATABASE: {
                 id: 'database',
                 name: 'Database',
-                template: '_analysis-database.html'
+                template: '_analysis-database.html',
+                controller: DatabaseAnalysisFormController
             },
             ENDECA: {
                 id: 'endeca',
                 name: 'Endeca',
                 template: '_analysis-endeca.html',
+                controller: EndecaAnalysisFormController,
                 start: function (idDatasouce, component) {
                     var url = presenterResources.analysis + "/" + idDatasouce + "/domains-endeca";
                     $http.get(url).then(function (response) {
@@ -23,13 +39,15 @@ define([
             HDFS: {
                 id: 'hdfs',
                 name: 'HDFS',
-                template: '_analysis-hdfs.html'
+                template: '_analysis-hdfs.html',
+                controller: HdfsAnalysisFormController
             },
             BI: {
                 id: 'bi',
                 name: 'BI',
                 template: '_analysis-obiee.html',
                 field: "catalog",
+                controller: ObieeAnalysisFormController,
                 start: function (idDatasouce, component) {
                     var url = presenterResources.analysis + "/" + idDatasouce + "/catalog-obiee";
                     $http.post(url, {'path': null}).then(function (response) {
@@ -41,17 +59,20 @@ define([
                 id: 'solr',
                 name: 'SOLR',
                 template: '_analysis-solr.html',
-                start: function (datasouce, component) {
-                    var url = presenterResources.analysis + "/" + datasouce.id + "/columns-sorl";
-                    $http.get(url).then(function (response) {
-                        component.columns = response.data;
-                    });
-                }
+                controller: SolrAnalysisFormController
+                
+//                start: function (datasouce, component) {
+//                    var url = presenterResources.analysis + "/" + datasouce.id + "/columns-sorl";
+//                    $http.get(url).then(function (response) {
+//                        component.columns = response.data;
+//                    });
+//                }
             },
             WEBSERVICE: {
                 id: 'webservice',
                 name: 'WebService',
                 template: '_analysis-webservice.html',
+                controller: WebserviceAnalysisFormController,
                 start: function (datasouce, component) {
 
                     component.typeWebservice = datasouce.typeWebservice;
@@ -76,7 +97,8 @@ define([
             CSV: {
                 id: 'csv',
                 name: 'CSV',
-                template: '_analysis-csv.html'
+                template: '_analysis-csv.html', 
+                controller: CsvAnalysisFormController
             }
         };
 
@@ -112,10 +134,18 @@ define([
             return $http.get(url);
         };
 
+
+        this.getAnalysis = function (idAnalysis) {
+            var url = presenterResources.analysis + "/" + idAnalysis ;
+            return $http.get(url);
+        };
+
+
         this.save = function (analysis) {
             var url = presenterResources.analysis;
             var analysisCopy = angular.copy(analysis);
-            analysisCopy.type = analysisCopy.type.id.toUpperCase();
+            console.log("analysisCopy ", analysisCopy);
+            //analysisCopy.type = analysisCopy.type.id.toUpperCase();
             return $http.post(url, analysisCopy);
         };
 
@@ -143,13 +173,11 @@ define([
             var url = presenterResources.analysis + "/" + idDatasouce + "/soap/operation/" + operation;
             return $http.post(url, parameter);
         };
-
-        this.getResulApplyingXpath = function (idDatasouce, analysis, operation) {
-
+        
+        //Soap
+        this.getResulApplyingXpath = function ( analysis, operation) {
             var analysisCopy = angular.copy(analysis);
-            console.log("analysis ", analysisCopy);
-            analysisCopy.type = analysisCopy.type.id.toUpperCase();
-            var url = presenterResources.analysis + "/" + idDatasouce + "/soap-applying-xpath/operation/" + operation;
+            var url = presenterResources.analysis + "/" + analysis.datasource.id + "/soap-applying-xpath/operation/" + operation;
             return $http.post(url, analysisCopy);
         };
 
@@ -157,13 +185,13 @@ define([
 
             var analysisCopy = angular.copy(analysis);
             console.log("analysis ", analysisCopy);
-            analysisCopy.type = analysisCopy.type.id.toUpperCase();
+            //analysisCopy.type = analysisCopy.type.id.toUpperCase();
             var url = presenterResources.analysis + "/" + idDatasouce + "/rest-get-applying-jsonPath";
             return $http.post(url, analysisCopy);
         };
 
 
-
+           //solr
         this.getSolrResultApplyingQuery = function(idDatasouce, query, facet) {
                var queryPersist = angular.copy({"statement": query});
                _fixQueryBuilder(queryPersist, false);
@@ -178,13 +206,25 @@ define([
                _fixQueryBuilder(queryBuilder);
                return $http.post(urlSaveQuery, queryBuilder);
           };
+          
+           this.formatQueryBuiderEdit = function(query) {
+               _fixQueryBuilder(query.statement, true);
+               return query;
+          };
+
+
+        this.getColumnsSorl = function(id){
+            
+            var url = presenterResources.analysis + "/" + id + "/columns-sorl";
+            return $http.get(url);
+        };
 
 
         //solr
         var _fixQueryBuilder = function (statement, edit) {
 
-            if (statement.type == 'CONDITION_SOLR') {
-                //console.log("queryPersist ", queryPersist);
+            //console.log("statement ", statement.type);
+            if (statement.type === 'CONDITION_SOLR') {
                 if (statement.predicate === 'EQUAL' ||
                         statement.predicate === 'NOT_EQUAL' ||
                         statement.predicate === 'LIKE' ||
@@ -204,6 +244,7 @@ define([
                 }
 
             } else {
+                
                 var key;
                 if (statement.statement !== undefined) {
                     for (key in statement.statement.statements) {
@@ -242,19 +283,19 @@ define([
                return retorno;
           };
           
-//          var agreementValueObject = function(value, edit) {
-//
-//               var retorno = {
-//                    "value": "",
-//                    "between": value,
-//                    "in": []
-//               };
-//               if (edit) {
-//                    retorno = {"start": value.between.start, "end": value.between.end};
-//               }
-//               return retorno;
-//
-//          };
+          var agreementValueObject = function(value, edit) {
+
+               var retorno = {
+                    "value": "",
+                    "between": value,
+                    "in": []
+               };
+               if (edit) {
+                    retorno = {"start": value.between.start, "end": value.between.end};
+               }
+               return retorno;
+
+          };
 
     });
 });

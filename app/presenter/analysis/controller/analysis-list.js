@@ -2,7 +2,7 @@ define([
     'connecta.presenter',
     'presenter/analysis/service/analysis-service'
 ], function (presenter) {
-    return presenter.lazy.controller('AnalysisListController', function ($scope, AnalysisService, ngTableParams) {
+    return presenter.lazy.controller('AnalysisListController', function ($scope, AnalysisService, ngTableParams, $location) {
 
         
          $scope.tableParams = new ngTableParams({
@@ -26,9 +26,9 @@ define([
                 AnalysisService.remove(id).then(function(){
                
                console.log("$scope.analysis ",$scope.analysis.content);
-                    $scope.analysis.content.splice(
-                            $scope.analysis.content.indexOf(id), 1);
-                    //$location.path('presenter/analysis');
+//                    $scope.analysis.content.splice(
+//                            $scope.analysis.content.indexOf(id), 1);
+                    $location.path('presenter/analysis');
                 });
             };
 

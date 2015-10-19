@@ -36,6 +36,8 @@
         "UNTITLED_LIST": "Untitled List",
         "UNKNOWN": "Unknown",
         "PREVIEW": "Preview",
-        "FACET": "Facet"
+        "FACET": "Facet",
+        "RESPONSE_XML": "Response XML",
+        "RESULTS_OF_THE_ANALYSIS": "Results of the analysis"
     }
 }

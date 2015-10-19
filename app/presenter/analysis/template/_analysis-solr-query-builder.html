@@ -1,19 +1,18 @@
 <!-- Solr --> 
 
-<div ng-if="statement.type == 'CONDITION_SOLR'" class="statement {{ statement.type | lowercase }}">
+<div ng-if="statement.type === 'CONDITION_SOLR'" class="statement {{ statement.type | lowercase }}">
     Condição
-<!--    <input placeholder="Atributo" style="width:100px;" type="text" ng-model="statement.attribute" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes" />-->
 
-    <select ng-model="statement.name" >
+<!--<debug ng-model="statement"></debug>-->
+<!--   <debug ng-model="analysis.analysisColumns"></debug>-->
+   
+
+    <select  ng-model="statement.name" >
         <option value="">Selecione</option>
-        <option ng-repeat="cl in component.columns" value="{{cl.name}}">{{cl.label}}</option>
+        <option title="{{statement.name}}" ng-repeat="cl in analysis.analysisColumns" ng-selected="{{statement.name === cl.name}}" value="{{cl.name}}">{{cl.name}}</option>
     </select>
 
-    <select ng-model="statement.predicate" ng-options="key as value.name for (key, value) in predicateMap">
-<!--        <option value="">
-            Selecione
-        </option>-->
-    </select>
+    <select ng-model="statement.predicate" ng-options="key as value.name for (key, value) in predicateMap"></select>
     <!-- Like, EQUAL -->
     <input ng-if="statement.predicate != 'BETWEEN' && statement.predicate != 'NOT_BETWEEN'
                             && statement.predicate != 'IN' && statement.predicate != 'NOT_IN'" placeholder="Valor" style="width:100px;" type="text" ng-model="statement.value" />

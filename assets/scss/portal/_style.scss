@@ -338,6 +338,19 @@ blockquote small {
       background-color: $table-bg-hover;
     }
   }
+
+  &.table-single-line {
+      tr  {
+        td {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width:20em;
+         
+        }
+      }
+  }
+
   
   .bulk-actions-checkbox {
       user-select:none;
@@ -345,6 +358,7 @@ blockquote small {
       font-size: 1.8em;
       line-height:1.6em;
   }
+
 }
 .icon {
   &.status-active {

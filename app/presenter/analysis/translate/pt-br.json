@@ -37,6 +37,8 @@
         "UNTITLED_LIST": "Lista sem nome",
         "UNKNOWN" : "Desconhecido",
         "PREVIEW": "Pré-visualização",
-        "FACET": "Facet"
+        "FACET": "Facet",
+        "RESPONSE_XML": "Resposta XML",
+        "RESULTS_OF_THE_ANALYSIS": "Resultado da Análise"
     }
 }
