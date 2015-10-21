@@ -11,7 +11,7 @@ define([
      * @returns {undefined}
      */
     return portal.service('LayoutService', function ($rootScope, $cookieStore) {
-        var SIDEBAR = 'connecta.portal.layout.menu';
+        var MENU = 'connecta.portal.layout.menu';
 
         var broadcastEvent = function (show) {
             var eventName = show ? 'menu.show' : 'menu.hide';
@@ -24,16 +24,16 @@ define([
          * @returns {undefined}
          */
         this.toggleSidebar = function () {
-            $cookieStore.put(SIDEBAR, !$cookieStore.get(SIDEBAR));
-            broadcastEvent($cookieStore.get(SIDEBAR));
+            $cookieStore.put(MENU, !$cookieStore.get(MENU));
+            broadcastEvent($cookieStore.get(MENU));
             return this;
         };
 
         /**
          * Informa se a barra lateral está aberta
          */
-        this.isSidebarVisible = function () {
-            return $cookieStore.get(SIDEBAR);
+        this.isMenuVisible = function () {
+            return $cookieStore.get(MENU);
         };
 
         this.showAsFlat = function (flat) {
@@ -41,8 +41,8 @@ define([
             return this;
         };
 
-        this.showSidebarRight = function (val) {
-            $rootScope.$broadcast('sidebarRight.show', val);
+        this.showSidebar = function (val) {
+            $rootScope.$broadcast('sidebar.show', val);
             return this;
         };
 

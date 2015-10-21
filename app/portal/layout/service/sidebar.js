@@ -1,29 +1,43 @@
 define([
-    'connecta.portal'
+    'connecta.portal',
+    'portal/layout/service/layout'
 ], function (portal) {
 
-  return portal.service('SidebarService', function($rootScope){
-    this.config =  function(obj){
-      $rootScope.$broadcast('sidebar.config', obj);
-      return this;
-    };
+    return portal.service('SidebarService', function ($rootScope, $cookieStore, LayoutService) {
+        var SIDEBAR = 'connecta.portal.layout.sidebar.mini';
+        var SidebarService = this;
 
-    this.show =  function(obj){
-      $rootScope.$broadcast('sidebar.show', obj);
-      return this;
-    };
-    
-    this.show =  function(obj){
-      $rootScope.$broadcast('sidebar.show', obj);
-      return this;
-    };
+        SidebarService.config = function (obj) {
+            $rootScope.$broadcast('sidebar.config', obj);
+            return SidebarService;
+        };
 
-    this.hide =  function(obj){
-      $rootScope.$broadcast('sidebar.hide', obj);
-      return this;
-    };
+        SidebarService.show = function (obj) {
+            $rootScope.$broadcast('sidebar.show', obj);
+            LayoutService.showSidebar(true);
 
+            return SidebarService;
+        };
+        
+        SidebarService.hide = function (obj) {
+            SidebarService.config({
+                controller: function () {
+                }
+            });
 
-  });
+            $rootScope.$broadcast('sidebar.hide', obj);
+            LayoutService.showSidebar(false);
 
+            return SidebarService;
+        };
+        
+        SidebarService.toggleMini = function(mini){
+            $cookieStore.put(SIDEBAR, !mini);
+            $rootScope.$broadcast('sidebar.mini', !mini);
+        };
+        
+        SidebarService.isSidebarMini = function () {
+            return $cookieStore.get(SIDEBAR);
+        };
+    });
 });

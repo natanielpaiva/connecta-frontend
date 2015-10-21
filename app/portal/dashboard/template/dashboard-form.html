@@ -1,3 +1,9 @@
+<style>
+[gridster] {
+    {{dashboard.backgroundColor?'background-color:'+dashboard.backgroundColor:''}};
+}
+</style>
+
 <form ng-submit="save()" class="dashboard-form">
   <div class="row">
     <div class="col-md-8">
@@ -9,7 +15,7 @@
       </div>
     </div>
     <div class="col-md-4 text-right">
-      <button class="btn btn-default" type="button" ng-click="open()">
+      <button class="btn btn-default" type="button" ng-click="config()">
         <span class="icon-cog"></span>
         {{'LAYOUT.SETTINGS' | translate}}
       </button>
@@ -32,7 +38,7 @@
         </button>
       </tab-heading>
       <div gridster="section" dnd-list="section.items">
-        <div class="dashboard-item" style="background-color:{{item.backgroundColor?item.backgroundColor:''}};"
+        <div class="dashboard-item" ng-style="{'background-color':item.backgroundColor?item.backgroundColor:''}"
           gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
             <viewer src="item.viewerUrl"></viewer>
         </div>

@@ -4,23 +4,21 @@ define([
 ], function(portal) {
      /**
       * Componente usado para renderizar e manter o sidebar
-      * @param {type} applicationsService
       */
      return portal.directive('sidebar', function() {
           return {
                replace: true,
                templateUrl: 'app/portal/layout/directive/template/sidebar.html',
-               controller: function($scope, $timeout) {
+               controller: function($scope, $timeout, SidebarService) {
+                    $scope.mini = SidebarService.isSidebarMini();
+                    
                     $scope.sidebar = {
-                         controller: function($scope) {
-                         },
-                         src: '',
-                         mini:false
+                         controller:function(){},
+                         src: ''
                     };
                     
-                    $scope.toggleMiniBar = function(){
-                        $scope.sidebar.mini=!$scope.sidebar.mini;
-                        $scope.$broadcast('sidebar.mini', $scope.sidebar.mini);
+                    $scope.toggleMini = function(){
+                        SidebarService.toggleMini($scope.mini);
                     };
                     
                     $scope.$on('sidebar.config', function(event, sidebar) {
@@ -28,6 +26,10 @@ define([
                          $timeout(function() {
                               $scope.sidebar = sidebar;
                          });
+                    });
+                    
+                    $scope.$on('sidebar.mini', function(event, mini){
+                        $scope.mini = mini;
                     });
                }
           };

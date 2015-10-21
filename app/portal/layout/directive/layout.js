@@ -17,12 +17,12 @@ define([
       restrict: 'AE',
       replace: true,
       templateUrl: 'app/portal/layout/directive/template/layout.html',
-      controller: function($scope, LayoutService) {
+      controller: function($scope, LayoutService, SidebarService) {
         $scope.showAsFlat = false;
         $scope.fullscreen = false;
-        $scope.showMenu = LayoutService.isSidebarVisible();
-        $scope.showSidebarRight = false;
-        $scope.sidebarMini = false;
+        $scope.showMenu = LayoutService.isMenuVisible();
+        $scope.showSidebar = false;
+        $scope.sidebarMini = SidebarService.isSidebarMini();
         $scope.authenticated = false;
 
         /**
@@ -47,8 +47,8 @@ define([
         /**
          * Evento para mostrar a barra lateral
          */
-        $scope.$on('sidebarRight.show', function(ev, val) {
-          $scope.showSidebarRight = val;
+        $scope.$on('sidebar.show', function(ev, val) {
+          $scope.showSidebar = val;
         });
         /**
          * Evento para minimizar a barra lateral

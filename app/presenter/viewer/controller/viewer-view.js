@@ -2,22 +2,17 @@ define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerViewController', function ($scope, ViewerService, SidebarService, $routeParams, $location, LayoutService) {
+    return presenter.lazy.controller('ViewerViewController', function ($scope, ViewerService, SidebarService, $routeParams) {
 
-        LayoutService.showSidebarRight(true);
         SidebarService.config({
             controller: function ($scope) {
                 $scope.analysisViewer = getAnalysisViewer();
             },
             src: 'app/presenter/viewer/template/_settings.html'
-        });
-        $scope.$on("$locationChangeStart", function (event) {
-            LayoutService.showSidebarRight(false);
-            SidebarService.config({
-                controller: function () {
-                    
-                }
-            });
+        }).show();
+        
+        $scope.$on("$locationChangeStart", function(){
+            SidebarService.hide();
         });
 
         $scope.analysisViewer = {

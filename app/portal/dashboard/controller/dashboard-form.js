@@ -1,7 +1,6 @@
 /* global angular */
 define([
   'connecta.portal',
-  'portal/layout/service/layout',
   'portal/dashboard/service/dashboard-service',
   'portal/dashboard/directive/viewer',
   'presenter/viewer/directive/analysis-viewer',
@@ -9,8 +8,8 @@ define([
   'presenter/viewer/directive/singlesource-group-viewer',
   'presenter/viewer/directive/combined-viewer'
 ], function(portal) {
-  return portal.lazy.controller('DashboardFormController', function($scope, LayoutService,
-      DashboardService, $routeParams, $location, $filter, SidebarService, applications, $modal) {
+  return portal.lazy.controller('DashboardFormController', function(
+      $scope, DashboardService, $routeParams, $location, $filter, SidebarService, applications, $modal) {
     $scope.dashboard = {};
     
     var _sectionTemplate = {
@@ -19,7 +18,6 @@ define([
       active: true
     };
 
-    LayoutService.showSidebarRight(true);
     SidebarService.config({
       controller: function ($scope) {
         $scope.applications = applications;
@@ -48,13 +46,11 @@ define([
         
       },
       src: 'app/portal/dashboard/template/_dashboard-form-viewer-search.html'
-    });
+    }).show();
 
     $scope.$on('$locationChangeStart', function() {
-      LayoutService.showSidebarRight(false);
-      SidebarService.config({
-        controller: function(){}
-      });
+      
+      SidebarService.hide();
     });
 
     if ($routeParams.id) {
@@ -166,7 +162,7 @@ define([
       });
     };
     
-    $scope.open = function () {
+    $scope.config = function () {
       var $parentScope = $scope;
       $modal.open({
         animation: true,
@@ -185,8 +181,6 @@ define([
             'SLIDE_RIGHT',
             'SLIDE_LEFT'
           ];
-          
-          console.log($scope.dashboard);
         },
         size: 'lg'
       });

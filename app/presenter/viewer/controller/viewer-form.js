@@ -11,7 +11,7 @@ define([
 
         $scope.metrics = [];
         $scope.descriptions = [];
-        LayoutService.showSidebarRight(true);
+        
         SidebarService.config({
             controller: function ($scope) {
                 $scope.analysis = "";
@@ -119,7 +119,7 @@ define([
 
             },
             src: 'app/presenter/viewer/template/_viewer-form-sidebar-analysis.html'
-        });
+        }).show();
 
 
         var getViewer = function () {
@@ -137,12 +137,8 @@ define([
             return $scope.legend;
         };
 
-        $scope.$on("$locationChangeStart", function (event) {
-            LayoutService.showSidebarRight(false);
-            SidebarService.config({
-                controller: function () {
-                }
-            });
+        $scope.$on("$locationChangeStart", function(){
+            SidebarService.hide();
         });
 
 
@@ -169,12 +165,12 @@ define([
                 });
             }
         };
+        
         $scope.submit = function () {
             ViewerService.save($scope.viewer).then(function (response) {
                 $location.path('presenter/viewer');
             });
         };
-
 
         if ($routeParams.id) {
             ViewerService.getAnalysisViewer($routeParams.id).then(function (response) {
