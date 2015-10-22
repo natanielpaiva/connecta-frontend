@@ -1,53 +1,49 @@
-<div class="navbar navbar-fixed-top" id="menu-top" role="navigation">
-  <div class="navbar-header">
+<div class="navbar-header">
     <button class="navbar-toggle collapsed" type="button">
-      <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">Toggle navigation</span>
     </button>
 
-<!--<a href="#" class="navbar-toggle collapsed connecta-ico-menu"></a>-->
-
     <div class="navbar-brand {{appInstance.name}}">
-      <button class="navbar-toggle toggle-menu" ng-click="toggleSidebar()" type="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-menu"></span>
-      </button>
-      <div class="current-app" title="{{appInstance.title}}"></div>
+        <button class="navbar-toggle toggle-menu" ng-click="toggleSidebar()" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-menu"></span>
+        </button>
+        <div class="current-app" title="{{appInstance.title}}"></div>
     </div>
-  </div>
+</div>
 
-  <div class="navbar-collapse collapse dashboard pull-left">
+<div class="navbar-collapse collapse dashboard pull-left">
     <ul class="nav navbar-nav">
-      <li>
-        <a href="#/dashboard" title="{{'LAYOUT.DASHBOARD'| translate}}">
-          <span class="icon-view-quilt"></span>
-        </a>
-      </li>
+        <li>
+            <a href="#/dashboard" title="{{'LAYOUT.DASHBOARD'| translate}}">
+                <span class="icon-view-quilt"></span>
+            </a>
+        </li>
     </ul>
-  </div>
+</div>
 
-  <div class="navbar-collapse collapse pull-right navbar-options">
+<div class="navbar-collapse collapse pull-right navbar-options">
     <ul class="nav navbar-nav">
-      <li ng-if="logoSrc" class="logo-src">
-          <img style="height: 40px;" ng-src="{{logoSrc}}" />
-      </li>
-      <li ng-class="{'heading-item-focus': appsPopoverFocus }">
-        <a href title="{{'APPLICATION.APPS'| translate}}"
-          ng-click="toggleAppsPopOver()">
-          <span class="icon-now-widgets"></span>
-        </a>
-      </li>
-      <li ng-class="{'heading-item-focus': notificationPopoverFocus }">
-        <a href title="{{'LAYOUT.NOTIFICATIONS'| translate}}"
-          ng-click="toggleNotificationsPopOver()">
-          <span class="icon-notifications"></span>
-        </a>
-      </li>
-      <li ng-class="{'heading-item-focus': userPopoverFocus }">
-        <a class="image-on-background user-avatar" href title="{{user.firstName}} {{user.lastName}}"
-          ng-click="toggleUserPopOver()" ng-show='avatarUrl' style="background-image: url('{{avatarUrl}}')">
-        </a>
-      </li>
-      <heading-popover></heading-popover>
+        <li ng-if="logoSrc" class="logo-src">
+            <img style="height: 40px;" ng-src="{{logoSrc}}" />
+        </li>
+        <li ng-class="{'heading-item-focus': appsPopoverFocus }">
+            <a href title="{{'APPLICATION.APPS'| translate}}"
+               ng-click="toggleAppsPopOver()">
+                <span class="icon-now-widgets"></span>
+            </a>
+        </li>
+        <li ng-class="{'heading-item-focus': notificationPopoverFocus }">
+            <a href title="{{'LAYOUT.NOTIFICATIONS'| translate}}"
+               ng-click="toggleNotificationsPopOver()">
+                <span class="icon-notifications"></span>
+            </a>
+        </li>
+        <li ng-class="{'heading-item-focus': userPopoverFocus }">
+            <a class="image-on-background user-avatar" href title="{{user.firstName}} {{user.lastName}}"
+               ng-click="toggleUserPopOver()" ng-show='avatarUrl' style="background-image: url('{{avatarUrl}}')">
+            </a>
+        </li>
+        <heading-popover></heading-popover>
     </ul>
-  </div>
 </div>

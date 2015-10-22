@@ -1,288 +1,292 @@
 $headerHeight: 4em;
-#menu-top {
-  background: $white;
-  box-shadow: 0 0 1em $black;
-  line-height: $headerHeight;
-  border: none;
-  .navbar-toggle {
-    padding: 0;
-    margin: 0;
-    width: 1.5em;
-    height: 100%;
-    color: $white;
-    font-size: 2.8em;
-    &:active {
-      color: $lighterGray;
-    }
-    &.toggle-menu {
-      display: block;
-      float: left;
-    }
-  }
-  .navbar-nav {
-    li {
-      padding: 0;
-      & > a {
-        line-height: 30px;
-      }
-    }
-    &.menu > li > a {
-      font-size: 14px;
-      text-align: center;
-    }
-  }
-  .navbar-header {
-    background-color: $lightBlack;
-    .navbar-brand {
-      font-size: 13px;
-      height: 60px;
-      width: 20em;
-      margin: 0;
-      padding: 0;
-      a {
-        line-height: 30px;
-        padding: 15px 15px 15px 10px;
-        display: block;
-        float: left;
-        color: $white;
-        width: 16px;
-      }
-    }
-  }
-  .dashboard {
-    ul.nav.navbar-nav {
-      li {
-        a {
-          padding: 0;
-          margin: 0;
-          height: 100%;
-          text-align: center;
-          line-height: 1.55em;
-          font-size: 3em;
-          width: 1.5em;
-          display: block;
-          float: left;
-          .icon-view-quilt {
-            color: $lightBlack;
-          }
-        }
-      }
-    }
-  }
-  .navbar-options {
-    ul.nav.navbar-nav {
-      margin-right: 0.50em;
 
-      & > li {
+heading {
+    display:block;
+    width:100%;
+    background-color: $white;
+    box-shadow: 0 0 .5em $black;
+    line-height: $headerHeight;
+    border: none !important;
+    
+    .navbar-toggle {
+        padding: 0;
         margin: 0;
-        height: 1.85em;
-        line-height: 1.85em;
-        width: 1.85em;
-        font-size: 2.5em;
-        text-align: center;
-
-          &:hover, &.heading-item-focus {
-            text-decoration: none;
-            background-color: #eee;
-          }
-
-          & > a {
-            padding: 0;
-            height: 1.85em;
-            line-height: 1.85em;
-            text-align: center;
-            width: 1.85em;
+        width: 1.5em;
+        height: 100%;
+        color: $white;
+        font-size: 2.8em;
+        &:active {
+            color: $lighterGray;
+        }
+        &.toggle-menu {
             display: block;
             float: left;
-
-            &:hover, &:focus {
-              text-decoration: none;
-              background-color: transparent;
-            }
-
-            .icon-now-widgets, .icon-notifications, .icon-user {
-              color: $lightBlack;
-            }
-          }
-
-        &.applications-icon {
-          & > a {
-            width: 1.8em;
-          }
         }
-
-        .user-avatar {
-          @extend .cursor-pointer;
-          margin: 0.2em;
-          height: 1.4em;
-          width: 1.4em;
-          border-radius: 50%;
-        }
-      }
-      
-      .logo-src {
-            width: 2.85em;
-      }
-      
-      .logo-src:hover {
-            background: transparent !important;
-      }
-      
-      div.heading-popover {
-        margin: 0;
-        padding: 0;
-        border-top: none;
-        height: auto;
-
-        &:after {
-            position:fixed;
-            content:' ';
-            top:0;
-            bottom:0;
-            right:0;
-            left:0;
-            // background:rgba(black, 0.5);
-            z-index:-100;
-        }
-
-        .popover-container {
-          top: 1.88em;
-          box-shadow: 0em 0.1em 0.5em 0.1em rgba(0,0,0,0.4);
-          position: fixed;
-
-          &:before {
-            position: absolute;
-            top: -0.275em;
-            right: 0.68em;
-            margin-left:-0.15em;
-            content: ' ';
-            display: block;
-            border-style: solid;
-            border-color: transparent transparent $lightBlack transparent;
-            border-width: 0 .3em .3em .3em;
-          }
-
-          .heading-popover-title {
-            font-size: 0.45em;
-            line-height: 2.5em;
-            color: $white;
-            background-color: $lightBlack;
-            padding: 0.1em 1em;
-
-            .heading-popover-h2 {
-              font-size: 1.7em;
-              margin-top: 0.5em;
-              margin-bottom: 0.1em;
-              // font-weight: bold;
+    }
+    .navbar-nav {
+        li {
+            padding: 0;
+            & > a {
+                line-height: 30px;
             }
-          }
-
-          .heading-popover-content {
-            @include clearfix();
+        }
+        &.menu > li > a {
+            font-size: 14px;
+            text-align: center;
+        }
+    }
+    .navbar-header {
+        background-color: $lightBlack;
+        .navbar-brand {
+            font-size: 13px;
+            height: 60px;
+            width: 20em;
             margin: 0;
-            padding: 0.15em;
-          }
-
-          &.apps-popover {
-            width: 8.15em;
-            background-color: #fff;
-            font-size: 32px;
-            right: 3.91em;
-
-            .apps-title {
-              text-align: center;
-            }
-
+            padding: 0;
             a {
-              @extend .image-on-background;
-              background-size: 85% auto;
-              padding: 0;
-              margin: 0.15em;
-              height: 2.275em;
-              width: 2.275em;
-              display: block;
-              float: left;
-              &:hover {
-                background-color: $lighterGray;
-              }
+                line-height: 30px;
+                padding: 15px 15px 15px 10px;
+                display: block;
+                float: left;
+                color: $white;
+                width: 16px;
             }
-          }
-
-          &.notifications-popover {
-            width: 8.15em;
-            background-color: #fff;
-            font-size: 32px;
-            right: 2.025em;
-
-            .notifications-title {
-              text-align: center;
+        }
+    }
+    .dashboard {
+        ul.nav.navbar-nav {
+            li {
+                a {
+                    padding: 0;
+                    margin: 0;
+                    height: 100%;
+                    text-align: center;
+                    line-height: 1.55em;
+                    font-size: 3em;
+                    width: 1.5em;
+                    display: block;
+                    float: left;
+                    .icon-view-quilt {
+                        color: $lightBlack;
+                    }
+                }
             }
-          }
+        }
+    }
+    .navbar-options {
+        ul.nav.navbar-nav {
+            margin-right: 0.50em;
 
-          &.user-popover {
-            width: 7em;
-            background-color: #fff;
-            right: 0.2em;
-            font-size: 32px;
+            & > li {
+                margin: 0;
+                height: 1.85em;
+                line-height: 1.85em;
+                width: 1.85em;
+                font-size: 2.5em;
+                text-align: center;
 
-            .user-popover-content {
-              padding: 0;
-              nav {
-                float:left;
-                width: 100%;
+                &:hover, &.heading-item-focus {
+                    text-decoration: none;
+                    background-color: #eee;
+                }
+
+                & > a {
+                    padding: 0;
+                    height: 1.85em;
+                    line-height: 1.85em;
+                    text-align: center;
+                    width: 1.85em;
+                    display: block;
+                    float: left;
+
+                    &:hover, &:focus {
+                        text-decoration: none;
+                        background-color: transparent;
+                    }
+
+                    .icon-now-widgets, .icon-notifications, .icon-user {
+                        color: $lightBlack;
+                    }
+                }
+
+                &.applications-icon {
+                    & > a {
+                        width: 1.8em;
+                    }
+                }
+
+                .user-avatar {
+                    @extend .cursor-pointer;
+                    margin: 0.2em;
+                    height: 1.4em;
+                    width: 1.4em;
+                    border-radius: 50%;
+                }
+            }
+
+            .logo-src {
+                width: 2.85em;
+            }
+
+            .logo-src:hover {
+                background: transparent !important;
+            }
+
+            div.heading-popover {
+                margin: 0;
+                padding: 0;
+                border-top: none;
                 height: auto;
 
-                & > ul {
-                  float:left;
-                  width: 100%;
-                  height: auto;
-                  padding:0;
-
-                 & > li {
-                    float: left;
-                    width: 100%;
-                    list-style: none;
-
-                    & > a {
-                      font-size: 0.5em;
-                      line-height: normal;
-                      color: $lightBlack;
-                      width: 100%;
-                      padding: 2%;
-                      display: block;
-
-                      &:hover {
-                        background-color: $lighterGray;
-                      }
-
-                      & > span {
-                        margin-right:0.5em;
-                      }
-                    }
-                  }
+                &:after {
+                    position:fixed;
+                    content:' ';
+                    top:0;
+                    bottom:0;
+                    right:0;
+                    left:0;
+                    // background:rgba(black, 0.5);
+                    z-index:-100;
                 }
-              }
-            }
-          }
-        }
-      }
 
+                .popover-container {
+                    top: 1.88em;
+                    box-shadow: 0em 0.1em 0.5em 0.1em rgba(0,0,0,0.4);
+                    position: fixed;
+
+                    &:before {
+                        position: absolute;
+                        top: -0.275em;
+                        right: 0.68em;
+                        margin-left:-0.15em;
+                        content: ' ';
+                        display: block;
+                        border-style: solid;
+                        border-color: transparent transparent $lightBlack transparent;
+                        border-width: 0 .3em .3em .3em;
+                    }
+
+                    .heading-popover-title {
+                        font-size: 0.45em;
+                        line-height: 2.5em;
+                        color: $white;
+                        background-color: $lightBlack;
+                        padding: 0.1em 1em;
+
+                        .heading-popover-h2 {
+                            font-size: 1.7em;
+                            margin-top: 0.5em;
+                            margin-bottom: 0.1em;
+                            // font-weight: bold;
+                        }
+                    }
+
+                    .heading-popover-content {
+                        @include clearfix();
+                        margin: 0;
+                        padding: 0.15em;
+                    }
+
+                    &.apps-popover {
+                        width: 8.15em;
+                        background-color: #fff;
+                        font-size: 32px;
+                        right: 3.91em;
+
+                        .apps-title {
+                            text-align: center;
+                        }
+
+                        a {
+                            @extend .image-on-background;
+                            background-size: 85% auto;
+                            padding: 0;
+                            margin: 0.15em;
+                            height: 2.275em;
+                            width: 2.275em;
+                            display: block;
+                            float: left;
+                            &:hover {
+                                background-color: $lighterGray;
+                            }
+                        }
+                    }
+
+                    &.notifications-popover {
+                        width: 8.15em;
+                        background-color: #fff;
+                        font-size: 32px;
+                        right: 2.025em;
+
+                        .notifications-title {
+                            text-align: center;
+                        }
+                    }
+
+                    &.user-popover {
+                        width: 7em;
+                        background-color: #fff;
+                        right: 0.2em;
+                        font-size: 32px;
+
+                        .user-popover-content {
+                            padding: 0;
+                            nav {
+                                float:left;
+                                width: 100%;
+                                height: auto;
+
+                                & > ul {
+                                    float:left;
+                                    width: 100%;
+                                    height: auto;
+                                    padding:0;
+
+                                    & > li {
+                                        float: left;
+                                        width: 100%;
+                                        list-style: none;
+
+                                        & > a {
+                                            font-size: 0.5em;
+                                            line-height: normal;
+                                            color: $lightBlack;
+                                            width: 100%;
+                                            padding: 2%;
+                                            display: block;
+
+                                            &:hover {
+                                                background-color: $lighterGray;
+                                            }
+
+                                            & > span {
+                                                margin-right:0.5em;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
     }
-  }
 }
 
 /*Ícones das aplicações*/
 .current-app {
-  width: 11em;
-  height: 100%;
-  overflow: hidden;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 11em auto;
-  margin-right: 3em;
-  transition: all 0.3s;
-  float: right;
+    width: 11em;
+    height: 100%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 11em auto;
+    margin-right: 3em;
+    transition: all 0.3s;
+    float: right;
 
-  //Temporário
-  background-image: url("../img/logo-connecta.png");
+    //Temporário
+    background-image: url("../img/logo-connecta.png");
 }

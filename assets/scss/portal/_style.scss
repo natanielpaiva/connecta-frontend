@@ -368,25 +368,7 @@ blockquote small {
     color: $status-inactive;
   }
 }
-[layout] {
-  &.fullscreen {
-    #menu-top {
-      display: none;
-    }
-    .connecta-menu {
-      display: none;
-    }
-    .page-container {
-      margin: 0;
-      padding:0;
-      background: none;
-    }
-    .container-fluid {
-      padding: 0 !important;
-      margin:0 !important;
-    }
-  }
-}
+
 .background-gray {
   background-color: lighten($bs-gray, 2.5%);
 }
@@ -443,4 +425,9 @@ blockquote small {
   border:solid 1px $lighterGray;
   border-top:none;
   background-color: $white;
+}
+
+// Removendo os créditos do AmCharts
+a[href="http://www.amcharts.com/javascript-charts/"] {
+    display: none !important;
 }

@@ -74,3 +74,31 @@ $pageGutter:1em;
 .page-title .actions{
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+[layout] {
+    /*, menu*/
+    heading {
+        transition:transform $defaultAnimationDuration;
+    }
+    
+    &.fullscreen {
+        heading {
+            transition:transform $defaultAnimationDuration;
+            transform: translateY(-6em);
+        }
+        menu {
+            transition:transform $defaultAnimationDuration;
+            transform: translate(-6em, -6em);
+        }
+        .page-container {
+            margin: 0;
+            padding:0;
+            background: none;
+        }
+        .container-fluid {
+            background: none;
+            padding: 0 !important;
+            margin:0 !important;
+        }
+    }
+}
