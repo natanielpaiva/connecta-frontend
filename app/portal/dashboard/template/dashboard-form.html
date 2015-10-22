@@ -1,6 +1,6 @@
 <style>
 [gridster] {
-    {{dashboard.backgroundColor?'background-color:'+dashboard.backgroundColor:''}};
+    {{dashboard.backgroundColor?'background-color:'+dashboard.backgroundColor+';':''}}
 }
 </style>
 
@@ -38,7 +38,7 @@
         </button>
       </tab-heading>
       <div gridster="section" dnd-list="section.items">
-        <div class="dashboard-item" ng-style="{'background-color':item.backgroundColor?item.backgroundColor:''}"
+        <div class="dashboard-item" ng-style="{'background-color':(item.backgroundColor?item.backgroundColor:'')}"
           gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
             <viewer src="item.viewerUrl"></viewer>
         </div>
