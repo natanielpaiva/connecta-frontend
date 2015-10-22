@@ -11,7 +11,7 @@ define([
         $scope.appliedBudget = null;
         $scope.isEditing = false;
         $scope.municipalBudgets = null;
-        $scope.budgetApplicationAreas = null;
+        $scope.budgetAreaApplications = null;
 
         //translate buttons text
         $scope.buttonsText = {
@@ -46,7 +46,7 @@ define([
 
 
         BudgetAreaApplicationService.list().then(function (response) {
-            $scope.budgetApplicationAreas = response.data;
+            $scope.budgetAreaApplications = response.data;
         }, function (response) {
             console.info("error", response);
         });

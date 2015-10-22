@@ -27,18 +27,16 @@
         <table ng-table class="table table-striped margin-top-single">
             <thead>
                 <tr>
-                    <th></th>
                     <th class="text-center" translate>APPLIEDBUDGET.APPLICATION_AREA</th>
                     <th class="text-center" translate>APPLIEDBUDGET.DESCRIPTION</th>                    
                     <th class="text-center"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="appliedBudget in appliedBudgets">
-                    <td><input type="checkbox" value="{{appliedBudget.id}}" /></td>
+                <tr ng-repeat="appliedBudget in appliedBudgets">                    
                     <td class="text-center" >
                         <a class="full-size-block link-no-state" href="#/maps/applied-budget/{{appliedBudget.id}}">
-                        {{appliedBudget.budgetApplicationArea.description}}
+                        {{appliedBudget.budgetAreaApplication.description}}
                         </a>
                     </td>   
                     <td class="text-center" ><a class="full-size-block link-no-state" href="#/maps/applied-budget/{{appliedBudget.id}}">

@@ -7,7 +7,13 @@ define([
 ], function (maps) {
     return maps.lazy.controller('DrillViewController', function ($scope, DrillService, ConnectaGeoServiceDrill, notify, $routeParams, $location, $translate, $modalTranslate) {
 
-
+        
+        var parentDrillViewer= $scope;                  
+        window.mapsScope=parentDrillViewer;
+        window.presenterApp=parent.window.app;
+        
+        
+        
         $scope.actualDrillLevel = 0;
 
         DrillService.get($routeParams.id).then(function (response) {

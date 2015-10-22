@@ -17,7 +17,7 @@
                         ng-model="appliedBudget.municipalBudget"
                         id="municipalBudget" 
                         ng-options="municipalBudget.programName + '----> '+ municipalBudget.activityProjectName  for municipalBudget in municipalBudgets" required>
-                    <option value="" translate> APPLIEDBUDGET.SELECT_MUNICIPALBUDGET</option>
+                    <option value="" translate> APPLIEDBUDGET.SELECT</option>
                 </select>                
                 <div ng-show="formulario.$submitted || formulario.municipalBudget.$touched" 
                      ng-messages="formulario.municipalBudget.$error"
@@ -26,17 +26,17 @@
             </div>
 
             <div class="form-group">
-                <label for="budgetApplicationArea" translate>APPLIEDBUDGET.APPLICATION_AREA</label>
+                <label for="budgetAreaApplication" translate>APPLIEDBUDGET.APPLICATION_AREA</label>
 
                 <select class="form-control" 
-                        name="budgetApplicationArea" 
+                        name="budgetAreaApplication" 
                         ng-model="appliedBudget.budgetAreaApplication"
                         id="budgetAreaApplication" 
-                        ng-options="budgetApplicationArea.description for budgetApplicationArea in budgetApplicationAreas" required>
-                    <option value="" translate> APPLIEDBUDGET.SELECT_APPLICATION_AREA</option>
+                        ng-options="budgetAreaApplication.description for budgetAreaApplication in budgetAreaApplications" required>
+                    <option value="" translate> APPLIEDBUDGET.SELECT</option>
                 </select>                
-                <div ng-show="formulario.$submitted || formulario.budgetApplicationArea.$touched" 
-                     ng-messages="formulario.budgetApplicationArea.$error"
+                <div ng-show="formulario.$submitted || formulario.budgetAreaApplication.$touched" 
+                     ng-messages="formulario.budgetAreaApplication.$error"
                      ng-messages-include="portal-error-messages">
                 </div>      
             </div>
@@ -59,7 +59,7 @@
                 <a id="btn_geocode" ng-click="geocodeAddress();" title="{{buttonsText.locate}}" class="btn btn-sm btn-info icon-magnifying-glass" role="button" style="position:relative;left:403px;top:-34px;height:34px;"></a>
                 <div id="buttons_maps" style="float:right;margin-top: -36px;">
                 <a id="btn_mapExtent" ng-click="zoomMapToFullExtent();" title="{{buttonsText.initialView}}" class="btn btn-sm btn-info icon-resize3" role="button" style="height:34px;" ></a>    
-                <a id="btn_dragMarker" ng-click="toggleDragControl();" title="{{buttonsText.locate}}" class="btn btn-sm btn-info icon-open-with" role="button" style="height:34px;" ></a>    
+                <a id="btn_dragMarker" ng-click="toggleDragControl();" title="{{buttonsText.drag}}" class="btn btn-sm btn-info icon-open-with" role="button" style="height:34px;" ></a>    
                 <a id="btn_drawMarker" ng-click="toggleDrawMarker();" title="{{buttonsText.select}}" class="btn btn-sm btn-warning icon-place" role="button" style="height:34px;" ></a>   
                 <a id="btn_removeMarker" ng-click="removeMarkers();" title="{{buttonsText.delete}}" class="btn btn-sm btn-danger icon-cancel3" role="button" style="height:34px;" ></a>
                 </div>
