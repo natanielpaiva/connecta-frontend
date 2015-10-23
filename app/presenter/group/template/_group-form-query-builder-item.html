@@ -33,6 +33,6 @@
     <button type="button" ng-click="addGroup(statement)">+grupo</button>
     <button type="button" ng-click="addCondition(statement)">+condicao</button>
     <button type="button" ng-if="parent!=null" ng-click="remove(parent, statement)">-</button>
-    <div ng-repeat="stmt in statement.statements" ng-init="prnt=statement" ng-include="'app/presenter/group/template/_group-select-item.html'" onload="statement=stmt;parent=prnt">
+    <div ng-repeat="stmt in statement.statements" ng-init="prnt=statement" ng-include="'app/presenter/group/template/_group-form-query-builder-item.html'" onload="statement=stmt;parent=prnt">
     </div>
 </div>

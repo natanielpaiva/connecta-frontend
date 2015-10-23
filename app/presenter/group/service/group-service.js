@@ -15,11 +15,11 @@ define([
           var typeFilter = [{
                id: 'GROUP.SELECT_FILE',
                name: 'GROUP.SELECT_FILE',
-               template: '_group-select-file.html'
+               template: '_group-form-sidebar.html'
           }, {
                id: 'GROUP.FILTER',
                name: 'GROUP.FILTER',
-               template: '_group-select.html'
+               template: '_group-form-query-builder.html'
           }];
 
           var predicateMap = {

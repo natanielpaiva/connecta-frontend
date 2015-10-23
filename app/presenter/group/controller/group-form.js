@@ -91,16 +91,14 @@ define([
 
             if ($scope.group.typeFilter.id === "GROUP.FILTER") {
                 var queryCopy = angular.copy($scope.query);
-console.log("$scope.query ",$scope.query);
                 GroupService.saveQueryBuilder(queryCopy).
                         success(function (data, status, headers, config) {
                             $scope.group.query = {
                                 "id": data.id
                             };
 
-                            GroupService.save($scope.group).then(function () {
-                                console.log("response ",response);
-                                //$location.path('presenter/group');
+                            GroupService.save($scope.group).then(function (response) {
+                                $location.path('presenter/group');
                             }, function (response) {
                                 console.log(response);
                             });

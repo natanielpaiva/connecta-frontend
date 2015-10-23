@@ -3,16 +3,16 @@
         <div ng-if="item.type === 'FILE'" >
             <div ng-switch="fileExtensions[item.fileType].fileType">
                 <div  class="col-md-10 font-size-big" ng-switch-when="BINARY" >
-                    <a href="{{item.binaryFile}}">
+                    <a  ng-attr-href="{{item.binaryFile}}">
                         <span  class="icon-file3"></span>
                     </a>
                 </div>
                 <div ng-switch-when="IMAGE" >
-                    <img style="width: 340px;" alt="" src="{{item.binaryFile}}" />
+                    <img style="width: 340px;" alt=""  ng-src="{{item.binaryFile}}" />
                 </div>
                 <div ng-switch-when="VIDEO" >
                     <video controls>
-                        <source src="{{item.binaryFile}}" type="video/mp4">
+                        <source  ng-src="{{item.binaryFile}}" type="video/mp4">
                         Your browser does not support HTML5 video.
                     </video>
                 </div>
