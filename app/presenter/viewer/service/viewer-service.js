@@ -7,6 +7,22 @@ define([
 
     return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, $rootScope) {
 
+        var templateSidebar = [
+            {
+                type: "ANALYSIS",
+                template: "/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis.html"
+            },
+            {
+                type: "SINGLESOURCE",
+                template: "/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-singlesource.html"
+            },
+            {
+                type: "SINGLESOURCE_GROUP",
+                template: ""
+            }
+        ];
+
+
         var accordionConfig = [
             {
                 heading: "+ Appearance",
@@ -267,9 +283,15 @@ define([
 
             }
         ];
+
+        this.getTemplateSidebar = function () {
+            return templateSidebar;
+        };
+
         this.getAccordionConfig = function () {
             return accordionConfig;
         };
+
         this.getAnalysis = function (value) {
             return $autocomplete(presenterResources.analysis + "/autocomplete", {
                 name: value
@@ -279,62 +301,99 @@ define([
                 });
             });
         };
+
+        this.getSinglesourceAutoComplete = function (value) {
+            return $autocomplete(presenterResources.singlesource + "/auto-complete", {
+                name: value
+            }).then(function (response) {
+                return response.data.map(function (item) {
+                    return item;
+                });
+            });
+        };
+
+        this.getSinglesourceList = function (value) {
+            return  $autocomplete(presenterResources.singlesource + "/auto-complete", {name: value})
+                    .then(function (response) {
+                        return response.data;
+                    });
+        };
+
+        this.getSinglesource = function (id) {
+            var url = presenterResources.singlesource + "/" + id;
+            return $http.get(url);    
+        };
+
+        this.getBinaryFile = function (singlesource) {
+            return presenterResources.singlesource + '/' + singlesource.id + '/binary';
+        };
+
         var filterAnalysisViewer = function (analysisViewer) {
+            switch (analysisViewer.type) {
+                case 'SINGLESOURCE':
+                    for (var key in analysisViewer.singlesource.list) {
+                        analysisViewer.singleSource.id = analysisViewer.singlesource.list[key].id;
+                    }
+                    delete analysisViewer.singlesource;
+                    break;
+                default:
+                    for ( key in analysisViewer.metrics) {
+                        analysisViewer
+                                .analysisViewerColumns
+                                .push({
+                                    columnDataType: 'NUMBER',
+                                    columnType: 'METRIC',
+                                    analysisColumn: analysisViewer.metrics[key]
+                                }
+                                );
+                    }
 
-            for (var key in analysisViewer.metrics) {
-                analysisViewer
-                        .analysisViewerColumns
-                        .push({
-                            columnDataType: 'NUMBER',
-                            columnType: 'METRIC',
-                            analysisColumn: analysisViewer.metrics[key]
-                        }
-                        );
+                    for (key in analysisViewer.descriptions) {
+                        analysisViewer
+                                .analysisViewerColumns
+                                .push({
+                                    columnDataType: 'TEXT',
+                                    columnType: 'DESCRIPTION',
+                                    analysisColumn: analysisViewer.descriptions[key]
+                                }
+                                );
+                    }
+
+                    for (key in analysisViewer.xfields) {
+                        analysisViewer
+                                .analysisViewerColumns
+                                .push({
+                                    columnDataType: 'NUMBER',
+                                    columnType: 'XFIELD',
+                                    analysisColumn: analysisViewer.xfields[key]
+                                }
+                                );
+                    }
+
+                    for (key in analysisViewer.yfields) {
+                        analysisViewer
+                                .analysisViewerColumns
+                                .push({
+                                    columnDataType: 'NUMBER',
+                                    columnType: 'YFIELD',
+                                    analysisColumn: analysisViewer.yfields[key]
+                                }
+                                );
+                    }
+
+                    for (key in analysisViewer.valueFields) {
+                        analysisViewer
+                                .analysisViewerColumns
+                                .push({
+                                    columnDataType: 'NUMBER',
+                                    columnType: 'VALUEFIELD',
+                                    analysisColumn: analysisViewer.valueFields[key]
+                                }
+                                );
+                    }
+                    break;
             }
 
-            for (key in analysisViewer.descriptions) {
-                analysisViewer
-                        .analysisViewerColumns
-                        .push({
-                            columnDataType: 'TEXT',
-                            columnType: 'DESCRIPTION',
-                            analysisColumn: analysisViewer.descriptions[key]
-                        }
-                        );
-            }
-
-            for (key in analysisViewer.xfields) {
-                analysisViewer
-                        .analysisViewerColumns
-                        .push({
-                            columnDataType: 'NUMBER',
-                            columnType: 'XFIELD',
-                            analysisColumn: analysisViewer.xfields[key]
-                        }
-                        );
-            }
-
-            for (key in analysisViewer.yfields) {
-                analysisViewer
-                        .analysisViewerColumns
-                        .push({
-                            columnDataType: 'NUMBER',
-                            columnType: 'YFIELD',
-                            analysisColumn: analysisViewer.yfields[key]
-                        }
-                        );
-            }
-
-            for (key in analysisViewer.valueFields) {
-                analysisViewer
-                        .analysisViewerColumns
-                        .push({
-                            columnDataType: 'NUMBER',
-                            columnType: 'VALUEFIELD',
-                            analysisColumn: analysisViewer.valueFields[key]
-                        }
-                        );
-            }
 
             delete analysisViewer.metrics;
             delete analysisViewer.descriptions;
@@ -360,14 +419,14 @@ define([
             filterAnalysisViewer(analysisViewerCopy);
             return $http.post(url, analysisViewerCopy);
         };
-        
+
         this.result = function (id) {
             var url = [
                 presenterResources.viewer,
                 id,
                 "result"
             ].join("/");
-            
+
             return $http.get(url);
         };
 
@@ -387,13 +446,13 @@ define([
             return $http.post(url, analysisViewerData);
         };
 
-
         this.list = function (params) {
             var url = presenterResources.viewer;
             return $http.get(url, {
                 params: params
             });
         };
+
         this.getTemplates = function (type, template) {
             var url = '';
             if (type !== undefined && template !== undefined)
@@ -402,6 +461,7 @@ define([
                 url = presenterResources.viewer + "/chart-template";
             return $http.get(url);
         };
+
         this.getAnalysisViewer = function (id) {
             var url = presenterResources.viewer + "/" + id;
             return $http.get(url);
@@ -493,7 +553,7 @@ define([
             var analysisViewerColumns = analysisViewerResult.analysisViewer.analysisViewerColumns;
             for (var i in analysisViewerColumns) {
                 if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
-                   viewer.configuration.categoryField = analysisViewerColumns[i].analysisColumn.label;
+                    viewer.configuration.categoryField = analysisViewerColumns[i].analysisColumn.label;
                 }
 
                 if (analysisViewerColumns[i].columnType === 'METRIC') {

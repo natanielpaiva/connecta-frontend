@@ -1,1 +1,27 @@
-SINGLE SOURCE VIEWER
+<div class="singlesource-viewer" dnd-list="model.singlesource.list"  >
+    <div ng-if="model.singlesource.list.length > 0" ng-repeat="item in model.singlesource.list">
+        <div ng-if="item.type === 'FILE'" >
+            <div ng-switch="fileExtensions[item.fileType].fileType">
+                <div  class="col-md-10 font-size-big" ng-switch-when="BINARY" >
+                    <a href="{{item.binaryFile}}">
+                        <span  class="icon-file3"></span>
+                    </a>
+                </div>
+                <div ng-switch-when="IMAGE" >
+                    <img style="width: 340px;" alt="" src="{{item.binaryFile}}" />
+                </div>
+                <div ng-switch-when="VIDEO" >
+                    <video controls>
+                        <source src="{{item.binaryFile}}" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="singlesource-drag-here" ng-if="model.singlesource.list.length === 0">
+        <label translate>
+            VIEWER.DRAG_HERE
+        </label>
+    </div>
+</div>

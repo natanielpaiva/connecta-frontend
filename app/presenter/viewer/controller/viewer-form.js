@@ -1,6 +1,11 @@
 define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service',
+    'portal/dashboard/directive/viewer',
+    'presenter/viewer/directive/analysis-viewer',
+    'presenter/viewer/directive/singlesource-viewer',
+    'presenter/viewer/directive/singlesource-group-viewer',
+    'presenter/viewer/directive/combined-viewer',
     'presenter/viewer/controller/modal-analysis'
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, LayoutService, $modal) {
@@ -12,114 +17,158 @@ define([
         $scope.metrics = [];
         $scope.descriptions = [];
         
-        SidebarService.config({
-            controller: function ($scope) {
-                $scope.analysis = "";
-                $scope.analysisBar = "ANALYSIS";
-                $scope.typeBar = "TYPE";
-                $scope.settingsBar = "SETTINGS";
-                $scope.setLayoutConfiguration = false;
-                $scope.chartCursor = getChartCursor();
-                $scope.chartScrollbar = getChartScrollbar();
-                $scope.legend = getLegend();
 
-                $scope.accordionConfig = ViewerService.getAccordionConfig();
 
-                $scope.changeChartCursor = function () {
-                    if ($scope.chartCursor.ativo) {
-                        $scope.viewer.configuration.chartCursor = {
-                            color: "#FFF"
-                        };
-                    } else {
-                        delete $scope.viewer.configuration.chartCursor;
-                    }
-                };
+        var sidebarSinglesource = function () {
+            SidebarService.config({
+                controller: function ($scope) {
+                    $scope.templateSidebar = ViewerService.getTemplateSidebar();
+                    $scope.viewer = getViewer();
+                    
+                    $scope.setSinglesourceData = function (singlesourceData) {
+                        $scope.singlesourceData = singlesourceData;
+                        $scope.singlesourceList = [];
+                        $scope.singlesourceList.push(singlesourceData);
+                    };
+                    
+                    $scope.getSinglesource = function (val) {
+                        return ViewerService.getSinglesourceAutoComplete(val);
+                    };
 
-                $scope.changeChartScrollbar = function () {
-                    if ($scope.chartScrollbar.ativo) {
-                        $scope.viewer.configuration.chartScrollbar = {
-                            color: "#FFF"
-                        };
-                    } else {
-                        delete $scope.viewer.configuration.chartScrollbar;
-                    }
-                };
+                    $scope.search = {
+                        name: "",
+                        results: []
+                    };
 
-                $scope.changeLegend = function () {
-                    if ($scope.legend.ativo) {
-                        $scope.viewer.configuration.legend = {
-                        };
-                    } else {
-                        delete $scope.viewer.configuration.legend;
-                    }
-                };
-
-                $scope.viewerBar = "ANALYSIS";
-                $scope.getAnalysis = function (val) {
-                    return ViewerService.getAnalysis(val);
-                };
-
-                $scope.analysisViewerData = {
-                    name: "",
-                    description: "",
-                    type: "ANALYSIS",
-                    analysisViewerColumns: []
-                };
-
-                $scope.getListAnalysis = function () {
-                    ViewerService.getListAnalysis($scope.analysisViewerData, $scope.analysisDataView).then(function (response) {
-
-                        $modal.open({
-                            animation: true,
-                            templateUrl: 'app/presenter/viewer/template/_modal-analysis.html',
-                            controller: 'ModalAnalysis',
-                            size: 'lg',
-                            resolve: {
-                                analysisData: function () {
-                                    return response.data.result;
-                                }
+                    $scope.search.doSearch = function () {
+                        ViewerService.getSinglesourceList($scope.search.name).then(function (response) {
+                            $scope.search.results = response;
+                            for (var key in $scope.search.results) {
+                                $scope.search.results[key].binaryFile = ViewerService.getBinaryFile($scope.search.results[key]);
                             }
-
                         });
+                    };
 
-                    }, function (response) {
-                        console.log(response.data);
+                    $scope.$watch('search.name', function () {
+                        $scope.search.doSearch();
                     });
-                };
+                },
+                src: 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar.html'
+            }).show();
+        };
 
-                $scope.disabledLayoutConfig = function () {
+        var sidebarAnalysis = function () {
+
+            SidebarService.config({
+                controller: function ($scope) {
+                    $scope.analysis = "";
+                    $scope.analysisBar = "ANALYSIS";
+                    $scope.typeBar = "TYPE";
+                    $scope.settingsBar = "SETTINGS";
                     $scope.setLayoutConfiguration = false;
-                };
+                    $scope.chartCursor = getChartCursor();
+                    $scope.chartScrollbar = getChartScrollbar();
+                    $scope.legend = getLegend();
 
-                $scope.setAnalysisData = function (analysisData) {
-                    $scope.analysisData = analysisData;
-                    $scope.analysisDataView = angular.copy(analysisData);
-                };
+                    $scope.accordionConfig = ViewerService.getAccordionConfig();
+                    $scope.templateSidebar = ViewerService.getTemplateSidebar();
 
-                $scope.viewer = getViewer();
+                    $scope.changeChartCursor = function () {
+                        if ($scope.chartCursor.ativo) {
+                            $scope.viewer.configuration.chartCursor = {
+                                color: "#FFF"
+                            };
+                        } else {
+                            delete $scope.viewer.configuration.chartCursor;
+                        }
+                    };
 
-                $scope.templateCombo = '/app/presenter/viewer/template/_viewer-form-sidebar-analysis-combo.html';
-                $scope.templateSettings = '/app/presenter/viewer/template/_viewer-form-sidebar-analysis-settings.html';
+                    $scope.changeChartScrollbar = function () {
+                        if ($scope.chartScrollbar.ativo) {
+                            $scope.viewer.configuration.chartScrollbar = {
+                                color: "#FFF"
+                            };
+                        } else {
+                            delete $scope.viewer.configuration.chartScrollbar;
+                        }
+                    };
 
-                $scope.setLayoutSettings = function (config) {
-                    $scope.layoutConfig = config;
-                    $scope.setLayoutConfiguration = true;
-                };
+                    $scope.changeLegend = function () {
+                        if ($scope.legend.ativo) {
+                            $scope.viewer.configuration.legend = {
+                            };
+                        } else {
+                            delete $scope.viewer.configuration.legend;
+                        }
+                    };
 
-                $scope.checkViewerBar = function (type) {
-                    $scope.viewerBar = type;
-                };
+                    $scope.viewerBar = "ANALYSIS";
+                    $scope.getAnalysis = function (val) {
+                        return ViewerService.getAnalysis(val);
+                    };
 
-                $scope.openedAccordion = 0;
 
-                $scope.openAccordion = function () {
-                    var retorno = false;
-                    return retorno;
-                };
+                    $scope.analysisViewerData = {
+                        name: "",
+                        description: "",
+                        type: "ANALYSIS",
+                        analysisViewerColumns: []
+                    };
 
-            },
-            src: 'app/presenter/viewer/template/_viewer-form-sidebar-analysis.html'
-        }).show();
+                    $scope.getListAnalysis = function () {
+                        ViewerService.getListAnalysis($scope.analysisViewerData, $scope.analysisDataView).then(function (response) {
+
+                            $modal.open({
+                                animation: true,
+                                templateUrl: 'app/presenter/viewer/template/_modal-analysis.html',
+                                controller: 'ModalAnalysis',
+                                size: 'lg',
+                                resolve: {
+                                    analysisData: function () {
+                                        return response.data.result;
+                                    }
+                                }
+
+                            });
+
+                        }, function (response) {
+                        });
+                    };
+
+                    $scope.disabledLayoutConfig = function () {
+                        $scope.setLayoutConfiguration = false;
+                    };
+
+                    $scope.setAnalysisData = function (analysisData) {
+                        $scope.analysisData = analysisData;
+                        $scope.analysisDataView = angular.copy(analysisData);
+                    };
+
+                    $scope.viewer = getViewer();
+
+                    $scope.templateCombo = '/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-combo.html';
+                    $scope.templateSettings = '/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-settings.html';
+
+                    $scope.setLayoutSettings = function (config) {
+                        $scope.layoutConfig = config;
+                        $scope.setLayoutConfiguration = true;
+                    };
+
+                    $scope.checkViewerBar = function (type) {
+                        $scope.viewerBar = type;
+                    };
+
+                    $scope.openedAccordion = 0;
+
+                    $scope.openAccordion = function () {
+                        var retorno = false;
+                        return retorno;
+                    };
+
+                },
+                src: 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar.html'
+            }).show();
+        };
 
 
         var getViewer = function () {
@@ -142,6 +191,24 @@ define([
         });
 
 
+        var getPreview = function () {
+            if (($scope.viewer.metrics.length > 0) ||
+                    ($scope.viewer.xfields.length > 0 &&
+                            $scope.viewer.yfields.length > 0)) {
+                ViewerService.preview($scope.viewer).then(function (response) {
+                    ViewerService.getPreview($scope.viewer, response.data);
+                }, function (response) {
+                });
+            }
+        };
+        
+        $scope.submit = function () {
+
+            ViewerService.save($scope.viewer).then(function (response) {
+                $location.path('presenter/viewer');
+            });
+        };
+
         $scope.viewer = {
             "name": "",
             "description": "",
@@ -153,60 +220,78 @@ define([
             "yfields": [],
             "valueFields": []
         };
-
-        var getPreview = function () {
-            if (($scope.viewer.metrics.length > 0) ||
-                    ($scope.viewer.xfields.length > 0 &&
-                            $scope.viewer.yfields.length > 0)) {
-                ViewerService.preview($scope.viewer).then(function (response) {
-                    ViewerService.getPreview($scope.viewer, response.data);
-                }, function (response) {
-                    console.log(response.data);
-                });
-            }
-        };
         
-        $scope.submit = function () {
-            ViewerService.save($scope.viewer).then(function (response) {
-                $location.path('presenter/viewer');
-            });
-        };
-
         if ($routeParams.id) {
             ViewerService.getAnalysisViewer($routeParams.id).then(function (response) {
+
                 var data = response.data;
-                $scope.viewer.configuration = data.configuration;
+                $scope.viewer.id = data.id;
                 $scope.viewer.name = data.name;
                 $scope.viewer.description = data.description;
-                $scope.viewer.id = data.id;
-                var analysisColumns = data.analysisViewerColumns;
 
-                var arrays = {
-                    METRIC: $scope.viewer.metrics,
-                    DESCRIPTION: $scope.viewer.descriptions,
-                    XFIELD: $scope.viewer.xfields,
-                    YFIELD: $scope.viewer.yfields,
-                    VALUEFIELD: $scope.viewer.valueFields,
-                };
 
-                for (var k in analysisColumns) {
-                    var columnType = analysisColumns[k].columnType;
-                    arrays[columnType].push(analysisColumns[k].analysisColumn);
+                switch (data.type) {
+                    case 'SINGLESOURCE':
+                        $scope.viewer = {
+                            singleSource: {id: data.singleSource.id},
+                            singlesource: {list: []},
+                            name: data.name,
+                            description: data.description,
+                            type: "SINGLESOURCE",
+                            id: data.id
+                        };
+                        sidebarSinglesource();
+
+                        ViewerService.getSinglesource(data.singleSource.id).then(function (response) {
+                            var data = response.data;
+                            data.binaryFile = ViewerService.getBinaryFile(data);
+                            $scope.viewer.singlesource.list.push(data);
+                        });
+
+                        break;
+                    default:
+
+                        $scope.viewer.configuration = data.configuration;
+                        var analysisColumns = data.analysisViewerColumns;
+
+                        var arrays = {
+                            METRIC: $scope.viewer.metrics,
+                            DESCRIPTION: $scope.viewer.descriptions,
+                            XFIELD: $scope.viewer.xfields,
+                            YFIELD: $scope.viewer.yfields,
+                            VALUEFIELD: $scope.viewer.valueFields,
+                        };
+
+                        for (var k in analysisColumns) {
+                            var columnType = analysisColumns[k].columnType;
+                            arrays[columnType].push(analysisColumns[k].analysisColumn);
+                        }
+                        sidebarAnalysis();
+                        $scope.viewer.configuration = data.configuration;
+                        getPreview();
+                        load();
+                        break;
                 }
 
-                $scope.viewer.configuration = data.configuration;
-                getPreview();
-                load();
+
             }, function (response) {
-                console.log(response.data);
             });
         } else {
+
             if ($routeParams.template && $routeParams.type) {
                 switch ($routeParams.template) {
                     case "other-singlesource":
-                        $scope.viewer.type = "SINGLESOURCE";
+                        $scope.viewer = {
+                            singleSource: {id: ""},
+                            singlesource: {list: []},
+                            name: "",
+                            description: "",
+                            type: "SINGLESOURCE"
+                        };
+                        sidebarSinglesource();
                         break;
                     default:
+                        sidebarAnalysis();
                         ViewerService.getTemplates($routeParams.type, $routeParams.template)
                                 .then(function (response) {
                                     var dados = response.data;

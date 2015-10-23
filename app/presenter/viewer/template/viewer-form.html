@@ -145,26 +145,23 @@
                     </button>
                 </div>
             </div>
-
-            <div ng-switch="viewer.type">
-                <div ng-swith-when="ANALYSIS">
-                    <amchart  ng-model="viewer.configuration">
-                    </amchart>
-                </div>
-                <div ng-swith-when="SINGLESOURCE">
-                    BATATA
-                </div>
-            </div>
-
-            <div class="form-group">
-                <a href="#/presenter/viewer" class="btn btn-default" translate>
-                    LAYOUT.CANCEL
-                </a>
-                <button class="btn btn-primary" translate>
-                    LAYOUT.SAVE
-                </button>
-            </div>
         </form>
+    </div>
+</div>
+<div class="row">
+    <div class="viewer-directive">
+        <viewer ng-model="viewer">
+        </viewer>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group">
+        <a href="#/presenter/viewer" class="btn btn-default" translate>
+            LAYOUT.CANCEL
+        </a>
+        <button class="btn btn-primary" translate>
+            LAYOUT.SAVE
+        </button>
     </div>
 </div>
 
