@@ -14,7 +14,8 @@
                 "SET_MEDIA":"Mídia",
                 "MEDIAS":"Mídias",
                 "GROUP_VIEW":"Visualizar Grupo",
-                "SEARCH":"Buscar"
+                "SEARCH":"Buscar",
+                "SEARCH_SINGLESOURCE":"Buscar Mídia"
                 
             }
 

@@ -14,7 +14,8 @@
                 "SET_MEDIA":"Media",
                 "MEDIAS":"Media",
                 "GROUP_VIEW":"Group view",
-                "SEARCH":"Search"
+                "SEARCH":"Search",
+                "SEARCH_SINGLESOURCE":"Media search"
             }
 }
 
