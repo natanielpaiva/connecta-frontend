@@ -10,7 +10,11 @@
                 "ATTRIBUTE TYPE" : "Tipo de atributo",
                 "SELECT_FILE" : "Selecionar arquivos",
                 "FILTER" : "Agrupar por filtros",
-                "GROUPS" : "Grupos"
+                "GROUPS" : "Grupos",
+                "SET_MEDIA":"Mídia",
+                "MEDIAS":"Mídias",
+                "GROUP_VIEW":"Visualizar Grupo",
+                "SEARCH":"Buscar"
                 
             }
 

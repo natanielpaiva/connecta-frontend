@@ -2,10 +2,11 @@ define([
     'connecta.presenter',
     'presenter/group/service/group-service'
 ], function (presenter) {
-    return presenter.lazy.controller('GroupFormController', function ($scope, GroupService, $routeParams, $location, fileExtensions, $autocomplete, presenterResources) {
+    return presenter.lazy.controller('GroupFormController', function ($scope, GroupService,
+            $routeParams, $location, fileExtensions, $autocomplete,
+            presenterResources, SidebarService) {
 
-        $scope.types = GroupService.getTypes();
-        $scope.typeFilter = GroupService.getTypeFilter();
+        $scope.types = GroupService.getTypeFilter();
         $scope.group = {};
         $scope.attribute = {
             name: ""
@@ -89,7 +90,7 @@ define([
 
         $scope.submit = function () {
 
-            if ($scope.group.typeFilter.id === "GROUP.FILTER") {
+            if ($scope.group.type.id === "FILTER") {
                 var queryCopy = angular.copy($scope.query);
                 GroupService.saveQueryBuilder(queryCopy).
                         success(function (data, status, headers, config) {
@@ -117,6 +118,43 @@ define([
 
         };
 
+        var sidebar = function () {
+            SidebarService.config({
+                controller: function ($scope) {
+
+                    $scope.setSinglesourceData = function (singlesourceData) {
+                        $scope.singlesourceData = singlesourceData;
+                        $scope.singlesourceList = [];
+                        $scope.singlesourceList.push(singlesourceData);
+                    };
+
+                    $scope.getSinglesource = function (val) {
+                        return GroupService.getSinglesourceAutoComplete(val);
+                    };
+
+                    $scope.search = {
+                        name: "",
+                        results: []
+                    };
+
+                    $scope.search.doSearch = function () {
+                        GroupService.getSinglesourceList($scope.search.name).then(function (response) {
+                            $scope.search.results = response;
+                            for (var key in $scope.search.results) {
+                                $scope.search.results[key].binaryFile = GroupService.getBinaryFile($scope.search.results[key]);
+                            }
+                        });
+                    };
+
+                    $scope.$watch('search.name', function () {
+                        $scope.search.doSearch();
+                    });
+                },
+                src: 'app/presenter/group/template/_group-sidebar.html'
+            }).show();
+        };
+
+
         $scope.group.singleSource = {
             selected: null,
             lists: {
@@ -129,25 +167,20 @@ define([
 
             GroupService.getById($routeParams.id).then(function (response) {
 
-                var type = $scope.types.filter(function (value) {
-                    return value.id.toUpperCase() === response.data.type;
-                }).pop();
-
-                var typeFilterSelect = $scope.typeFilter.filter(function (value) {
-                    if (response.data.query === undefined) {
-                        return value.id.toUpperCase() === 'GROUP.SELECT_FILE';
+                var typeFilterSelect = $scope.types.filter(function (value) {
+                    if (response.data.type === 'SELECT') {
+                        return value.id.toUpperCase() === 'SELECT';
 
                     } else {
-                        return value.id.toUpperCase() === 'GROUP.FILTER';
+                        return value.id.toUpperCase() === 'FILTER';
                     }
                 }).pop();
 
                 $scope.group.name = response.data.name;
                 $scope.group.description = response.data.description;
-                $scope.group.type = type;
-                $scope.group.typeFilter = typeFilterSelect;
+                $scope.group.type = typeFilterSelect;
                 $scope.group.id = $routeParams.id;
-                if (response.data.query === undefined) {
+                if (response.data.type === 'SELECT') {
                     $scope.setEditGroup($routeParams.id);
                 } else {
                     GroupService.getQueryById(response.data.query.id).
@@ -164,37 +197,30 @@ define([
                 }
             });
         } else {
-            $scope.group.typeFilter = $scope.typeFilter[0];
-            $scope.group.path = "";
             $scope.group.type = $scope.types[0];
+            $scope.group.path = "";
 
             $scope.predicateMap = GroupService.getPredicate();
             $scope.operatorMap = GroupService.getOperator();
             $scope.queryInit();
 
         }
-
-        $scope.change = function () {
-            if ($scope.attribute.name.id !== undefined) {
-
-                $scope.group.singleSource.lists.singleSourceGet = [];
-                GroupService.getSingleSourceById($scope.attribute.name.id)
-                        .then(function (response) {
-                            if (response.data.type === 'FILE') {
-                                $scope.group.singleSource.lists.singleSourceGet[0] = {};
-                                $scope.group.singleSource.lists.singleSourceGet[0].path = GroupService
-                                        .getFileById(response.data.id);
-                                $scope.group.singleSource.lists.singleSourceGet[0].fileType = fileExtensions[response.data.fileType].fileType;
-                                $scope.group.singleSource.lists.singleSourceGet[0].id = response.data.id;
-                                $scope.group.singleSource.lists.singleSourceGet[0].tamanho = 0;
-
-                            }
-
-                        }, function (response) {
-                            console.log(response);
-                        });
+        
+        var sidebarConfig = function(){
+            if ($scope.group.type.id === 'FILTER') {
+                SidebarService.config({}).hide();
+            } else {
+                sidebar();
             }
         };
+        
+        $scope.$watch('group.type', function(){
+            sidebarConfig();
+        });
+        
+        $scope.$on("$locationChangeStart", function(){
+            SidebarService.hide();
+        });
 
         $scope.setGallery = function (data) {
             var indice = $scope.group.singleSource.lists.singleSourceGet.length;
@@ -246,7 +272,7 @@ define([
                                     .lists.singleSourceSet[singleSourceGroup[indice].numOrder] = {};
                             $scope.group.singleSource
                                     .lists.singleSourceSet[singleSourceGroup[indice].numOrder]
-                                    .path = GroupService.getFileById(
+                                    .binaryFile = GroupService.getFileById(
                                             singleSourceGroup[indice].singleSource.id);
 
                             $scope.group.singleSource

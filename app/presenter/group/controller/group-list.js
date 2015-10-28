@@ -3,7 +3,6 @@ define([
     'presenter/group/service/group-service'
 ], function (presenter) {
     return presenter.lazy.controller('GroupListController', function ($scope, GroupService) {
-        $scope.types = GroupService.getTypes();
 
         $scope.filter = false;
 

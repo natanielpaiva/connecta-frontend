@@ -10,7 +10,11 @@
                 "ATTRIBUTE TYPE" : "Attribute Type",
                 "SELECT_FILE" : "Select File",
                 "FILTER" : "Filter",
-                "GROUPS" : "Groups"
+                "GROUPS" : "Groups",
+                "SET_MEDIA":"Media",
+                "MEDIAS":"Media",
+                "GROUP_VIEW":"Group view",
+                "SEARCH":"Search"
             }
 }
 

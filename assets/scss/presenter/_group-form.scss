@@ -100,3 +100,10 @@
     left: 0;
     line-height: 2.5em;
 }
+
+.statement {
+    line-height: 2em;
+    padding-left: 1em;
+    &.group {}
+    &.condition {}
+}
