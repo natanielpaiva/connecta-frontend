@@ -15,6 +15,12 @@ define([
             //console.log(response);
         });
 
+	$scope.getType = function(ss){
+		return $scope.types.filter(function(type){
+			return type.id == ss.type;
+		}).pop();
+	};
+
          
 //        $scope.excluir = function (singlesource) {
 //            SingleSourceService.delete(singlesource.id).then(function () {

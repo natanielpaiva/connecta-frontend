@@ -10,8 +10,8 @@
         "IMAGE": "Imagem",
         "ATTRIBUTE_NAME": "Nome do atributo",
         "ATTRIBUTE_VALUE": "Valor do atributo",
-        "ATTRIBUTE TYPE": "Tipo de atributo"
-
+        "ATTRIBUTE TYPE": "Tipo de atributo",
+        "URL": "URL"
     }
 
 }

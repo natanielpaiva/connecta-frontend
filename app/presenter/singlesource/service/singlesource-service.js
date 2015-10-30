@@ -8,11 +8,13 @@ define([
             {
                 id: 'FILE',
                 name: 'FILE',
+                icon:'icon-file3',
                 template: '_single-source-file.html'
             },
             {
                 id: 'URL',
                 name: 'URL',
+                icon:'icon-link',
                 template: '_single-source-url.html'
             }
         ];
