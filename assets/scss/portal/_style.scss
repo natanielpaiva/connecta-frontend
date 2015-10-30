@@ -287,6 +287,12 @@ blockquote small {
     }
 }
 
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .table {
     thead {
         tr {
