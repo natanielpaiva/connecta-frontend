@@ -6,6 +6,8 @@
         "NO_ITEM": "Nothing yet. Drag a viewer here to start.",
         "SEARCH_VIEWERS": "Search viewers",
         "DASHBOARD_SETTINGS": "Dashboard settings",
+        "DASHBOARD_ITEM_SETTINGS": "Item settings",
+        "REMOVE_ITEM": "Remove item",
         "MAX_ROWS": "Maximum of rows",
         "ROW_HEIGHT": "Row height",
         "COLUMNS": "Columns",
@@ -22,6 +24,9 @@
         "SLIDE_UP":"Slide up",
         "SLIDE_DOWN":"Slide down",
         "SLIDE_RIGHT":"Slide right",
-        "SLIDE_LEFT":"Slide left"
+        "SLIDE_LEFT":"Slide left",
+        "CONTENT_HEIGHT":"Content height",
+        "CONTENT_WIDTH":"Content width",
+        "OPACITY":"Opacity"
     }
 }

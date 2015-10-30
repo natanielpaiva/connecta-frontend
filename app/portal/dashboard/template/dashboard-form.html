@@ -1,12 +1,13 @@
 <style>
 [gridster] {
     {{dashboard.backgroundColor?'background-color:'+dashboard.backgroundColor+';':''}}
+    background-image:{{getImage(dashboard.backgroundImage)}};
 }
 </style>
 
 <form ng-submit="save()" class="dashboard-form">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-xs-8">
       <div class="form-group">
         <label for="dashboard-name" class="sr-only" translate>DASHBOARD.DASHBOARD_NAME</label>
         <input type="text" ng-model="dashboard.name"
@@ -14,13 +15,14 @@
           class="form-control" id="dashboard-name" />
       </div>
     </div>
-    <div class="col-md-4 text-right">
+    <div class="col-xs-4 text-right">
       <button class="btn btn-default" type="button" ng-click="config()">
         <span class="icon-cog"></span>
-        {{'LAYOUT.SETTINGS' | translate}}
+        <translate class="hidden-xs">LAYOUT.SETTINGS</translate>
       </button>
       <button class="btn btn-primary" type="submit">
-        {{'LAYOUT.SAVE' | translate}}
+          <span class="icon-save hidden-lg hidden-md hidden-sm"></span>
+          <translate class="hidden-xs">LAYOUT.SAVE</translate>
       </button>
     </div>
   </div>
@@ -37,10 +39,16 @@
           <span class="icon-close"></span>
         </button>
       </tab-heading>
-      <div gridster="section" dnd-list="section.items">
-        <div class="dashboard-item" ng-style="{'background-color':(item.backgroundColor?item.backgroundColor:'')}"
-          gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
-            <viewer src="item.viewerUrl"></viewer>
+      <div gridster="section" dnd-list="section.items" class="image-on-background">
+        <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
+            <viewer src="item.viewerUrl" class="image-on-background" ng-style="{
+                'background-color':toRGBA(item.backgroundColor,item.opacity),
+                'background-image':getImage(item.backgroundImage)
+            }"></viewer>
+            <button class="btn btn-icon-only dashboard-form-item-edit"
+                    type="button" ng-click="itemConfig(item, section)">
+                <span class="icon-pencil"></span>
+            </button>
         </div>
         <div class="dashboard-no-item" ng-if="!section.items.length">
           <span class="icon-area-graph"></span>

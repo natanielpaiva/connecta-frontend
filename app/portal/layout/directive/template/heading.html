@@ -24,9 +24,7 @@
 
 <div class="navbar-collapse collapse pull-right navbar-options">
     <ul class="nav navbar-nav">
-        <li ng-if="logoSrc" class="logo-src">
-            <img style="height: 40px;" ng-src="{{logoSrc}}" />
-        </li>
+        <li ng-if="logoSrc" class="logo-src" ng-style="{'background-image':'url('+logoSrc+')'}"></li>
         <li ng-class="{'heading-item-focus': appsPopoverFocus }">
             <a href title="{{'APPLICATION.APPS'| translate}}"
                ng-click="toggleAppsPopOver()">

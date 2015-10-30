@@ -1,6 +1,5 @@
 .dashboard-form {
     .dashboard-item {
-        background: darken($white, 1%);
         border:dashed 0.16em rgba($lighterGray, 0.75);
 
         &.gridster-item {
@@ -9,6 +8,19 @@
             &:hover {
                 .gridster-item-resizable-handler.handle-se {
                     border-color:transparent rgba($lighterGray,0.75) rgba($lighterGray,0.75) transparent;
+                }
+            }
+
+            .dashboard-form-item-edit {
+                position:absolute;
+                top:.25em;
+                right:.25em;
+                text-align:center;
+                padding:0;
+                color:$gray;
+                z-index:10;
+                &:hover {
+                    color:$lightBlack;
                 }
             }
         }
@@ -23,7 +35,7 @@
         li {
             a {
                 padding:0 2em 0 1em !important;
-                
+
                 tab-heading {
 
                     input.dashboard-form-section-name-edit {
@@ -62,25 +74,24 @@
 
     .dashboard-no-item {
         display: block;
-        line-height: 1.5em;
-        padding-top:1em;
-        font-size: 1.5em;
+        width:100%;
         text-align: center;
         color:$lighterGray;
+
+        line-height: 1.5em;
+        font-size: 1.5em;
+
         position:absolute;
-        left:50%;
         top:50%;
-        margin-left:-10em;
-        margin-top:-3.8em;
+        margin-top:-3em;
+        user-select:none;
 
         .icon-area-graph {
             font-size: 4em;
         }
-    }
-
-    // Widgets
-    .redactor-editor {
-        padding:5px !important;
+        p {
+            cursor:default;
+        }
     }
 
     .dndPlaceholder {
@@ -94,7 +105,43 @@
         position:absolute;
         border: dashed 0.2em $lightGray;
     }
+
+    
+    .remove-item {
+        position: absolute;
+        top:0.4em;
+        right: 1.5em;
+        padding: 0;
+        margin:0;
+        line-height: 1em;
+    }
 }
+
+.dashboard-config-modal {
+    .dashboard-background-preview {
+        text-align:center;
+    }
+    .corColorCluster {
+        right:15px;
+    }
+    .dropzone {
+        line-height:6em;
+        img {
+            max-height:6em;
+        }
+    }
+
+    .modal-body {
+        padding-bottom:0;
+    }
+    .modal-footer {
+        margin-top:0;
+    }
+    input[type=range] {
+        height:2.5em;
+    }
+}
+
 
 // Estilos da sidebar de pesquisa de visualizadores
 .dashboard-form-viewer-search {
@@ -128,11 +175,11 @@
             }
 
             .module-icon {
-                width:3em;
-                height:3em;
+                width:2em;
+                height:2em;
                 position:absolute;
-                top:0;
-                right:0;
+                top:.25em;
+                right:.25em;
             }
             .viewer-name {
                 background-color: rgba($black, 0.75);
@@ -155,12 +202,25 @@
 }
 
 .dashboard-view-page {
-    background-color:$bs-gray-lighter;
+    @extend .image-on-background;
+
+    background-attachment: fixed;
+    margin:0;
+    width:100%;
     padding:1em;
+
+    .dashboard-view-edit {
+        font-size:0.6em;
+        padding:0;
+        margin:0;
+        line-height:2em;
+    }
+
     h1 {
         margin-left: 10px;
         font-size: 2.25em;
         font-weight: bold;
+        padding-right:0.25em;
 
         a {
             display: block;
@@ -170,7 +230,8 @@
             font-size: 0;
             color:$gray;
             opacity: 0;
-            transition: opacity ease-in 250ms, font-size ease-in-out 250ms;
+            transition: opacity ease-in $defaultAnimationDuration,
+                font-size ease-in-out $defaultAnimationDuration;
         }
 
         &:hover {
@@ -196,8 +257,7 @@
         }
     }
     .dashboard-item {
-        background: $white;
-
+        @extend .image-on-background;
         &.gridster-item {
             overflow:hidden;
         }
@@ -237,7 +297,7 @@
             border-bottom-left-radius: 0;
             box-shadow: 0.25em 0.25em 0 rgba($black, 0.25);
 
-            transition: transform ease-in-out 250ms;
+            transition: transform ease-in-out $defaultAnimationDuration;
 
             &:hover {
                 transform:translateX(9.5em);
@@ -313,4 +373,10 @@
     .hidden-checkbox-show-when-checked {
         display: none;
     }
+}
+
+viewer {
+    display:block;
+    width:100%;
+    height:auto;
 }

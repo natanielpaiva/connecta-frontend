@@ -13,11 +13,6 @@ define([
     return portal.service('LayoutService', function ($rootScope, $cookieStore) {
         var MENU = 'connecta.portal.layout.menu';
 
-        var broadcastEvent = function (show) {
-            var eventName = show ? 'menu.show' : 'menu.hide';
-            $rootScope.$broadcast(eventName);
-        };
-
         /**
          * Oculta e exibe a barra lateral (menu esquerdo)
          *
@@ -25,7 +20,7 @@ define([
          */
         this.toggleSidebar = function () {
             $cookieStore.put(MENU, !$cookieStore.get(MENU));
-            broadcastEvent($cookieStore.get(MENU));
+            $rootScope.$broadcast('menu.mini', $cookieStore.get(MENU));
             return this;
         };
 
@@ -50,6 +45,5 @@ define([
             $rootScope.$broadcast('page.fullscreen', fullscreen);
             return this;
         };
-
     });
 });

@@ -7,7 +7,7 @@ heading {
     box-shadow: 0 0 .5em $black;
     line-height: $headerHeight;
     border: none !important;
-    
+
     .navbar-toggle {
         padding: 0;
         margin: 0;
@@ -126,10 +126,7 @@ heading {
 
             .logo-src {
                 width: 2.85em;
-            }
-
-            .logo-src:hover {
-                background: transparent !important;
+                @extend .image-on-background;
             }
 
             div.heading-popover {

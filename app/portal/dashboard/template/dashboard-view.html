@@ -1,40 +1,45 @@
-<div class="dashboard-view-page" ng-if="dashboard.displayMode==='VERTICAL'"
-     style="background-color:{{dashboard.backgroundColor?dashboard.backgroundColor:''}}">
-  <h1 class="clearfix">
-    <a href="#dashboard" class="pull-left" title="{{'LAYOUT.BACK'|translate}}">
-      <span class="icon-arrow-left"></span>
-      {{dashboard.name}}
-    </a>
+<div class="dashboard-view-page" ng-if="dashboard.displayMode === 'VERTICAL'"
+     ng-style="{
+         'background-color':toRGBA(dashboard.backgroundColor, dashboard.opacity),
+         'background-image':getImage(dashboard.backgroundImage)
+     }">
+    <h1 class="clearfix">
+        <a href="#dashboard" class="pull-left" title="{{'LAYOUT.BACK'|translate}}">
+            <span class="icon-arrow-left"></span>
+            {{dashboard.name}}
+        </a>
 
-    <a href="#dashboard/{{dashboard.id}}/edit"
-      class="btn btn-default pull-right" title="{{'LAYOUT.EDIT'|translate}}">
-      <span class="icon-pencil"></span>
-    </a>
-  </h1>
-  <div class="dashboard-section" ng-repeat="(index, section) in dashboard.sections">
-    <h2 id="dashboard-section-{{index}}">
-      <a href="javascript:void(0);" scroll-to="#dashboard-section-{{index}}">
-        <span class="icon-link"></span>
-        {{section.name}}
-      </a>
-    </h2>
-    <div gridster="section.config">
-      <div class="dashboard-item" gridster-item="gridsterItemConfig"
-           style="background-color:{{item.backgroundColor?item.backgroundColor:''}};"
-        ng-repeat="item in section.items">
-          <viewer src="item.viewerUrl"></viewer>
-      </div>
+        <a href="#dashboard/{{dashboard.id}}/edit"
+           class="btn btn-icon-only pull-right dashboard-view-edit" title="{{'LAYOUT.EDIT'|translate}}">
+            <span class="icon-pencil"></span>
+        </a>
+    </h1>
+    <div class="dashboard-section" ng-repeat="(index, section) in dashboard.sections">
+        <h2 id="dashboard-section-{{index}}">
+            <a href="javascript:void(0);" scroll-to="#dashboard-section-{{index}}">
+                <span class="icon-link"></span>
+                {{section.name}}
+            </a>
+        </h2>
+        <div gridster="section.config">
+            <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items"
+                 ng-style="{
+            'background-color':toRGBA(item.backgroundColor, item.opacity),
+            'background-image':getImage(item.backgroundImage)
+           }">
+                <viewer src="item.viewerUrl"></viewer>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <ul class="list-unstyled section-menu">
-    <li class="section-menu-item" ng-repeat="(index, section) in dashboard.sections"
-      random-class="['background-green','background-blue','background-yellow','background-red','background-gray']"
-      random-class-sequential="true">
-      <a href="javascript:void(0);" scroll-to="#dashboard-section-{{index}}">
-        <span class="icon-link"></span>
-        {{section.name}}
-      </a>
-    </li>
-  </ul>
+    <ul class="list-unstyled section-menu">
+        <li class="section-menu-item" ng-repeat="(index, section) in dashboard.sections"
+            random-class="['background-green','background-blue','background-yellow','background-red','background-gray']"
+            random-class-sequential="true">
+            <a href="javascript:void(0);" scroll-to="#dashboard-section-{{index}}">
+                <span class="icon-link"></span>
+                {{section.name}}
+            </a>
+        </li>
+    </ul>
 </div>

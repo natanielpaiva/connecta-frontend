@@ -6,6 +6,8 @@
         "NO_ITEM": "Nada ainda. Arraste um visualizador para cá para começar.",
         "SEARCH_VIEWERS": "Buscar visualizadores",
         "DASHBOARD_SETTINGS": "Configurações do Painel",
+        "DASHBOARD_ITEM_SETTINGS": "Configurações do Item",
+        "REMOVE_ITEM": "Remover item",
         "MAX_ROWS": "Máximo de linhas",
         "ROW_HEIGHT": "Altura da linha",
         "COLUMNS": "Quantidade de colunas",
@@ -22,6 +24,7 @@
         "SLIDE_UP":"Deslizar para cima",
         "SLIDE_DOWN":"Deslizar para baixo",
         "SLIDE_RIGHT":"Deslizar para direita",
-        "SLIDE_LEFT":"Deslizar para esquerda"
+        "SLIDE_LEFT":"Deslizar para esquerda",
+        "OPACITY":"Opacidade"
     }
 }

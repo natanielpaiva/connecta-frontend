@@ -96,14 +96,18 @@ menu {
                 opacity: 0;
                 font-size: 0;
                 line-height: 0;
-                transition: opacity linear 0s, font-size linear $defaultAnimationDuration, line-height linear $defaultAnimationDuration;
+                transition: opacity linear 0s,
+                    font-size linear $defaultAnimationDuration,
+                    line-height linear $defaultAnimationDuration;
                 transition-delay: 0;
             }
             .menu-item-arrow {
                 opacity: 0;
                 font-size: 0;
                 line-height: 0;
-                transition: opacity linear 0s, font-size linear $defaultAnimationDuration, line-height linear $defaultAnimationDuration;
+                transition: opacity linear 0s,
+                    font-size linear $defaultAnimationDuration,
+                    line-height linear $defaultAnimationDuration;
                 transition-delay: 0;
             }
         }

@@ -24,24 +24,17 @@ define([
         $scope.showSidebar = false;
         $scope.sidebarMini = SidebarService.isSidebarMini();
         $scope.authenticated = false;
-
+        
         /**
          * Evento para exibir o menu
          */
-        $scope.$on('menu.show', function() {
-          $scope.showMenu = true;
-        });
-        /**
-         * Evento para ocultar o menu
-         * TODO Remover esse e receber o boolean pelo evento
-         */
-        $scope.$on('menu.hide', function() {
-          $scope.showMenu = false;
+        $scope.$on('menu.mini', function(ev, show) {
+          $scope.showMenu = show;
         });
         /**
          * Evento para mostrar o form de login
          */
-        $scope.$on('login.authenticated', function($event, authenticated) {
+        $scope.$on('login.authenticated', function(ev, authenticated) {
           $scope.authenticated = authenticated;
         });
         /**

@@ -2,6 +2,7 @@ define([
   'angular',
   'connecta.portal',
   'portal/auth/service/login-service',
+  'portal/layout/service/layout',
   'portal/layout/service/heading-popover-service'
 ], function(angular, portal) {
   /**
@@ -98,6 +99,7 @@ define([
             id: 'notificationsPopOver',
             templateurl: 'heading-popover-notifications.html',
             controller: function($scope){
+                $scope.notifications = [];
             },
             close: function(){
               $scope.notificationPopoverFocus = false;

@@ -1,0 +1,59 @@
+<div class="dashboard-config-modal">
+    <div class="modal-header">
+        <h3 class="modal-title" translate>DASHBOARD.DASHBOARD_ITEM_SETTINGS</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="background-color" translate>DASHBOARD.BACKGROUND_COLOR</label>
+
+                        <input type="text" class="form-control" autofocus
+                               ng-model="item.backgroundColor" />
+                        <input type="color" ng-model="item.backgroundColor"
+                               class="form-control corColorCluster" id="background-color" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"> 
+                       <label for="opacity">
+                            <translate>DASHBOARD.OPACITY</translate>
+                            <small>({{item.opacity}}%)</small>
+                        </label>
+                        <input type="range" min="0" max="100" id="opacity"
+                               ng-init="item.opacity = item.opacity || 100"
+                               ng-model="item.opacity" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" ng-init="item.backgroundImage=item.backgroundImage?item.backgroundImage:{}">
+                        <label class="dropzone" ng-file-drop ng-file-select
+                               ng-accept="'.jpeg,.jpg,.png'"
+                               ng-file-change="fileDropped($files, item)"
+                               drag-over-class="{accept:'accept', reject:'reject'}">
+                            <translate ng-if="!item.backgroundImage">DASHBOARD.BACKGROUND_IMAGE</translate>
+                            <img ng-if="item.backgroundImage"
+                                 ng-src="{{item.backgroundImage| dataUri }}" />
+                        </label>
+                        <button class="btn btn-icon-only remove-item"
+                            ng-show="item.backgroundImage"
+                            ng-click="item.backgroundImage=null"
+                            title="{{'LAYOUT.DELETE'|translate}}">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger pull-left" type="button" ng-click="removeItem($close)">
+            <span class="icon-trash"></span>
+            <translate>DASHBOARD.REMOVE_ITEM</translate>
+        </button>
+        <button class="btn btn-default" type="button" ng-click="$close()" translate>
+            LAYOUT.CLOSE
+        </button>
+    </div>
+</div>
