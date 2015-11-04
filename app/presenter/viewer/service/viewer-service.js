@@ -25,45 +25,45 @@ define([
 
         var accordionConfig = [
             {
-                heading: "+ Appearance",
+                heading: "VIEWER._APPEARANCE",
                 title: "Appearance",
                 type: "APPEARANCE",
                 children: "",
                 config: {
-                    name: 'Appearance',
+                    name: 'VIEWER.APPEARANCE',
                     template: 'app/presenter/viewer/template/appearance/appearance.html',
                     type: 'APPEARANCE'
                 }
 
             },
             {
-                heading: "+ Background and plot area",
+                heading: "VIEWER._BACKGROUND_AND_PLOT_AREA",
                 title: "Background and plot area",
                 type: "BACKGROUND",
                 children: [
                     {
-                        type: "PLOAT_AREA",
-                        name: "PLOAT AREA",
+                        type: "PLOT_AREA",
+                        name: "VIEWER.PLOT_AREA",
                         config: {
-                            name: 'PloatArea',
+                            name: 'VIEWER.PLOT_AREA',
                             template: 'app/presenter/viewer/template/background-and-plot-area/plot-area.html',
-                            type: 'PLOAT_AREA'
+                            type: 'PLOT_AREA'
                         }
                     },
                     {
                         type: "MARGINS",
-                        name: "MARGINS",
+                        name: "VIEWER.MARGINS",
                         config: {
-                            name: 'Margins',
+                            name: 'VIEWER.MARGINS',
                             template: 'app/presenter/viewer/template/background-and-plot-area/margins.html',
                             type: 'MARGINS'
                         }
                     },
                     {
                         type: "BACKGROUND_AND_BORDER",
-                        name: "BACKGROUND AND BORDER",
+                        name: "VIEWER.BACKGROUND_AND_BORDER",
                         config: {
-                            name: 'Background',
+                            name: 'VIEWER.BACKGROUND_AND_BORDER',
                             template: 'app/presenter/viewer/template/background-and-plot-area/background-and-border.html',
                             type: 'BACKGROUND_AND_BORDER'
                         }
@@ -72,53 +72,53 @@ define([
 
             },
             {
-                heading: "+ General Settings",
-                title: "General Settings",
+                heading: "VIEWER._GENERAL_SETTINGS",
+                title: "VIEWER.GENERAL_SETTINGS",
                 type: "GENERAL_SETTINGS",
                 children: "",
                 config: {
-                    name: 'General S.',
+                    name: 'VIEWER.GENERAL_SETTINGS',
                     template: 'app/presenter/viewer/template/general-settings/general-settings.html',
                     type: 'GENERAL_SETTINGS'
                 }
             },
             {
-                heading: "+ Miscellaneous",
-                title: "Miscellaneous",
+                heading: "VIEWER._MISCELLANEOUS",
+                title: "VIEWER.MISCELLANEOUS",
                 type: "MISCELLANEOUS",
                 children: [
                     {
                         type: "OTHER",
-                        name: "OTHER",
+                        name: "VIEWER.OTHER",
                         config: {
-                            name: 'Other',
+                            name: 'VIEWER.OTHER',
                             template: 'app/presenter/viewer/template/miscellaneous/other.html',
                             type: 'OTHER'
                         }
                     },
                     {
                         type: "COLUMNS",
-                        name: "COLUMNS",
+                        name: "VIEWER.COLUMNS",
                         config: {
-                            name: 'Columns',
+                            name: 'VIEWER.COLUMNS',
                             template: 'app/presenter/viewer/template/miscellaneous/columns.html',
                             type: 'COLUMNS'
                         }
                     },
                     {
                         type: "ZOOMING",
-                        name: "ZOOMING",
+                        name: "VIEWER.ZOOMING",
                         config: {
-                            name: 'Zooming',
+                            name: 'VIEWER.ZOOMING',
                             template: 'app/presenter/viewer/template/miscellaneous/zooming.html',
                             type: 'ZOOMING'
                         }
                     },
                     {
                         type: "ANIMATION",
-                        name: "ANIMATION",
+                        name: "VIEWER.ANIMATION",
                         config: {
-                            name: 'Animation',
+                            name: 'VIEWER.ANIMATION',
                             template: 'app/presenter/viewer/template/miscellaneous/animation.html',
                             type: 'ANIMATION'
                         }
@@ -126,36 +126,36 @@ define([
                 ]
             },
             {
-                heading: "+ Number formatting",
+                heading: "VIEWER._NUMBER_FORMATTING",
                 title: "Number formatting",
-                type: "NUMBER_FORMATTING",
+                type: "VIEWER.NUMBER_FORMATTING",
                 children: "",
                 config: {
-                    name: 'Number f.',
+                    name: 'VIEWER.NUMBER_FORMATTING',
                     template: 'app/presenter/viewer/template/number-formating/number-formating.html',
                     type: 'NUMBER_FORMATTING'
                 }
 
             },
             {
-                heading: "+ Chart cursor",
-                title: "Chart cursor",
+                heading: "VIEWER._CHART_CURSOR",
+                title: "VIEWER.CHART_CURSOR",
                 type: "CHART_CURSOR",
                 children: [
                     {
                         type: "GENERAL_SETTINGS",
-                        name: "GENERAL SETTINGS",
+                        name: "VIEWER.CHART_CURSOR",
                         config: {
-                            name: 'General S.',
+                            name: 'VIEWER.CHART_CURSOR',
                             template: 'app/presenter/viewer/template/chart-cursor/general-settings.html',
                             type: 'GENERAL_SETTINGS'
                         }
                     },
                     {
                         type: "APPEARANCE",
-                        name: "APPEARANCE",
+                        name: "VIEWER.APPEARANCE",
                         config: {
-                            name: 'Appearance',
+                            name: 'VIEWER.APPEARANCE',
                             template: 'app/presenter/viewer/template/chart-cursor/appearance.html',
                             type: 'APPEARANCE'
                         }
@@ -163,24 +163,24 @@ define([
                 ]
             },
             {
-                heading: "+ Chart scrollbar",
-                title: "Chart scrollbar",
+                heading: "VIEWER._CHART_SCROLLBAR",
+                title: "VIEWER.CHART_SCROLLBAR",
                 type: "CHART_SCROLLBAR",
                 children: [
                     {
                         type: "GENERAL_SETTINGS",
-                        name: "GENERAL SETTINGS",
+                        name: "VIEWER.GENERAL_SETTINGS",
                         config: {
-                            name: 'General S.',
+                            name: 'VIEWER.GENERAL_SETTINGS',
                             template: 'app/presenter/viewer/template/chart-scrollbar/general-settings.html',
                             type: 'GENERAL_SETTINGS'
                         }
                     },
                     {
                         type: "APPEARANCE",
-                        name: "APPEARANCE",
+                        name: "VIEWER.APPEARANCE",
                         config: {
-                            name: 'Appearance',
+                            name: 'VIEWER.APPEARANCE',
                             template: 'app/presenter/viewer/template/chart-scrollbar/appearance.html',
                             type: 'APPEARANCE'
                         }
@@ -188,42 +188,42 @@ define([
                 ]
             },
             {
-                heading: "+ Legend",
-                title: "Legend",
+                heading: "VIEWER._LEGEND",
+                title: "VIEWER.LEGEND",
                 type: "LEGEND",
                 children: [
                     {
                         type: "GENERAL_SETTINGS",
-                        name: "GENERAL SETTINGS",
+                        name: "VIEWER.GENERAL_SETTINGS",
                         config: {
-                            name: 'General S.',
+                            name: 'VIEWER.GENERAL_SETTINGS',
                             template: 'app/presenter/viewer/template/legend/general-settings.html',
                             type: 'GENERAL_SETTINGS'
                         }
                     },
                     {
                         type: "POSITION_AND_MARGINS",
-                        name: "POSITION AND MARGINS",
+                        name: "VIEWER.POSITION_AND_MARGINS",
                         config: {
-                            name: 'Position and M.',
+                            name: 'VIEWER.POSITION_AND_MARGINS',
                             template: 'app/presenter/viewer/template/legend/position-and-margins.html',
                             type: 'GENERAL_SETTINGS'
                         }
                     },
                     {
                         type: "APPEARANCE",
-                        name: "APPEARANCE",
+                        name: "VIEWER.APPEARANCE",
                         config: {
-                            name: 'Appearance',
+                            name: 'VIEWER.APPEARANCE',
                             template: 'app/presenter/viewer/template/legend/appearance.html',
                             type: 'APPEARANCE'
                         }
                     },
                     {
                         type: "MARKERS",
-                        name: "MARKERS",
+                        name: "VIEWER.MARKERS",
                         config: {
-                            name: 'Markers',
+                            name: 'VIEWER.MARKERS',
                             template: 'app/presenter/viewer/template/legend/markers.html',
                             type: 'MARKERS'
                         }
@@ -232,24 +232,24 @@ define([
                 ]
             },
             {
-                heading: "+ Ballon",
-                title: "Ballon",
+                heading: "VIEWER._BALLON",
+                title: "VIEWER.BALLON",
                 type: "BALLON",
                 children: [
                     {
                         type: "GENERAL_SETTINGS",
-                        name: "GENERAL SETTINGS",
+                        name: "VIEWER.GENERAL_SETTINGS",
                         config: {
-                            name: 'General S.',
+                            name: 'VIEWER.GENERAL_SETTINGS',
                             template: 'app/presenter/viewer/template/ballon/general-settings.html',
                             type: 'GENERAL_SETTINGS'
                         }
                     },
                     {
                         type: "APPEARANCE",
-                        name: "APPEARANCE",
+                        name: "VIEWER.APPEARANCE",
                         config: {
-                            name: 'Appearance',
+                            name: 'VIEWER.APPEARANCE',
                             template: 'app/presenter/viewer/template/ballon/appearance.html',
                             type: 'APPEARANCE'
                         }
@@ -259,24 +259,24 @@ define([
 
             },
             {
-                heading: "+ Title",
-                title: "Title",
+                heading: "VIEWER._TITLE",
+                title: "VIEWER.TITLE",
                 type: "TITLE",
                 children: "",
                 config: {
-                    name: 'Title',
+                    name: 'VIEWER.TITLE',
                     template: 'app/presenter/viewer/template/title/title.html',
                     type: 'TITLE'
                 }
 
             },
             {
-                heading: "+ Graphs",
-                title: "Graphs",
+                heading: "VIEWER._GRAPHS",
+                title: "VIEWER.GRAPHS",
                 type: "GRAPHS",
                 children: "",
                 config: {
-                    name: 'Graphs',
+                    name: 'VIEWER.GRAPHS',
                     template: 'app/presenter/viewer/template/graphs/graphs.html',
                     type: 'GRAPHS'
                 }

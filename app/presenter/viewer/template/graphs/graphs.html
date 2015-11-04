@@ -1,5 +1,4 @@
 <div class="graphs" ng-repeat="obj in viewer.configuration.graphs track by $index">
-    <h5> Graphs {{$index}} </h5>
     <div class="sidebar-form">
         <label translate>VIEWER.BALLON_COLOR</label>
         <input type="color" ng-model="viewer.configuration.graphs[$index].ballonColor" />

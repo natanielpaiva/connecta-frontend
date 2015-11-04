@@ -1,11 +1,11 @@
 <accordion close-others="true">
     <div ng-repeat="accordion in accordionConfig">
-        <accordion-group ng-if="accordion.children !== ''" heading="{{accordion.heading}}" >
-            <div class="navigation-settings" ng-repeat="item in accordion.children" ng-click="setLayoutSettings(item.config)">
-                {{item.name}}
+        <accordion-group ng-if="accordion.children !== ''" heading="{{accordion.heading | translate}}" >
+            <div class="navigation-settings" ng-repeat="item in accordion.children" ng-click="setLayoutSettings(item.config)" >
+                {{item.name | translate}}
             </div>
         </accordion-group>
-        <accordion-group ng-if="accordion.children === ''" heading="{{accordion.heading}}"
+        <accordion-group ng-if="accordion.children === ''" heading="{{accordion.heading | translate}}"
                          ng-click="setLayoutSettings(accordion.config)">
         </accordion-group>
     </div>   
