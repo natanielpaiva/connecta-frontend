@@ -7,13 +7,41 @@ define([
 ], function (maps) {
     return maps.lazy.controller('DrillViewController', function ($scope, DrillService, ConnectaGeoServiceDrill, notify, $routeParams, $location, $translate, $modalTranslate) {
 
-        
-        var parentDrillViewer= $scope;                  
-        window.mapsScope=parentDrillViewer;
-        window.presenterApp=parent.window.app;
-        
-        
-        
+
+        var parentDrillViewer = $scope;
+
+
+        //Acessar Maps pelo Presenter
+        window.mapsScope = parentDrillViewer;
+        var hasPresenter = false;
+
+        if (typeof parent.window.app != 'undefined') {
+            var interval = setInterval(function () {
+                if (angular.element('#map-view-drill').length > 0 && angular.element(".well.margin-top-single.margin-bottom-single").length > 0 && angular.element(".page-container").length > 0) {
+                    //Estiliza div para exibição no Presenter 1.0
+                    var divMap = document.getElementById('map-view-drill');
+                    document.body.appendChild(divMap);
+                    divMap.style.height = "100%";
+                    divMap.style.width = "100%";
+                    divMap.style.position = "absolute";
+                    divMap.style.top = 0;
+                    angular.element(".page-container").children()[0].remove();
+                    angular.element(".page-container").children()[0].remove();
+                    angular.element(".page-container").children()[1].remove();
+                    angular.element('.connecta-menu').remove();
+                    angular.element("#menu-top").remove();
+                    angular.element(".well.margin-top-single.margin-bottom-single").children()[0].remove();
+                    clearInterval(interval);
+                }
+
+            }, 50);
+            //Acessar Presenter pelo Maps
+            window.presenterApp = parent.window.app;
+            hasPresenter = true;
+        }
+
+
+
         $scope.actualDrillLevel = 0;
 
         DrillService.get($routeParams.id).then(function (response) {
@@ -68,8 +96,11 @@ define([
             //Lógica de Drills e Níveis de Drill
             console.info("DRILL Object", $scope.drill, $scope.drill.drillLevels, $scope.drill.drillLevels[$scope.actualDrillLevel], $scope.drill.drillLevels[$scope.actualDrillLevel].parentViewer);
             $scope.currentDrillLevel = 0;
-            $scope.drill.drillLevels[$scope.actualDrillLevel].parentViewer.filter = "";
-            ConnectaGeoServiceDrill.showViewer($scope.drill.drillLevels[$scope.actualDrillLevel].parentViewer);
+            if (typeof $scope.drill.drillLevels[$scope.actualDrillLevel] !== 'undefined') {
+                $scope.drill.drillLevels[$scope.actualDrillLevel].parentViewer.filter = "";
+                ConnectaGeoServiceDrill.showViewer($scope.drill.drillLevels[$scope.actualDrillLevel].parentViewer);
+            }
+
         };
 
 
@@ -172,7 +203,7 @@ define([
 
 
 
-        $scope.drillDown = function (prop) {
+        $scope.drillDown = function (prop, presenterDrill) {
             console.info("PROP DRILL DPOWN", prop);
             $scope.drill.drillLevels[$scope.actualDrillLevel].childViewer.filter = $scope.drill.drillLevels[$scope.actualDrillLevel].childViewerColumn + "='" + prop.toUpperCase() + "'";
             $scope.MAP.__removeLayer($scope.MAP.__objLayers[0]);
@@ -181,6 +212,17 @@ define([
             ConnectaGeoServiceDrill.showViewer($scope.drill.drillLevels[$scope.actualDrillLevel].childViewer);
             //TODO
             //recriar menu e legenda
+
+
+            if (hasPresenter && typeof presenterDrill == 'undefined') {
+                if (window.presenterApp.ViewerController.analysisColum.indexOf("FFFFFF") > -1) {
+                    window.presenterApp.ViewerController.analysisColum.splice(window.presenterApp.ViewerController.analysisColum.indexOf("FFFFFF"), 1);
+
+                }
+
+                window.presenterApp.ViewerController.execDrillDown(prop.toUpperCase(), window.presenterApp.ViewerController.__config.drill.drillLevels[$scope.actualDrillLevel].columnName, true);
+            }
+
             $scope.actualDrillLevel++;
             console.info("DRIIL LEVEL", $scope.actualDrillLevel);
             if (typeof $scope.configSetCenter !== 'undefined') {
@@ -194,14 +236,27 @@ define([
         $scope.drillUp = function () {
             if (typeof $scope.drill.drillLevels[$scope.actualDrillLevel - 2] !== 'undefined') {
                 $scope.drill.drillLevels[$scope.actualDrillLevel - 1].parentViewer.filter = $scope.drill.drillLevels[$scope.actualDrillLevel - 2].childViewer.filter;
-            } else {
+            } else if (typeof $scope.drill.drillLevels[$scope.actualDrillLevel - 1] !== 'undefined') {
                 //Level 0
                 $scope.drill.drillLevels[$scope.actualDrillLevel - 1].parentViewer.filter = "";
 
             }
-            $scope.MAP.__removeLayer($scope.MAP.__objLayers[0]);
-            ConnectaGeoServiceDrill.showViewer($scope.drill.drillLevels[$scope.actualDrillLevel - 1].parentViewer);
+
+            //Remove a camada
+            if (typeof $scope.MAP.__objLayers[0] !== 'undefined') {
+                $scope.MAP.__removeLayer($scope.MAP.__objLayers[0]);
+            }
+
+            //Exibe o Visualizador
+            if (typeof $scope.drill.drillLevels[$scope.actualDrillLevel - 1] !== 'undefined') {
+                ConnectaGeoServiceDrill.showViewer($scope.drill.drillLevels[$scope.actualDrillLevel - 1].parentViewer);
+
+            }
             $scope.actualDrillLevel--;
+
+            if (hasPresenter && window.presenterApp.ViewerController.nivelDrill > $scope.actualDrillLevel) {
+                window.presenterApp.ViewerController.execDrillUp();
+            }
             console.info("ZOOM LEVEL", $scope.actualDrillLevel);
             if (typeof $scope.configSetCenter !== 'undefined' && $scope.actualDrillLevel > 0) {
                 $scope.configSetCenter.zoom = parseInt($scope.configSetCenter.zoom - 4);
@@ -210,6 +265,9 @@ define([
             } else {
                 $scope.MAP.__zoomMapToMaxExtent();
             }
+
+
+
 
         };
 
