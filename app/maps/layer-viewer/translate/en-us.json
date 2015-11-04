@@ -27,6 +27,6 @@
         "CONFIRM_DELETE": "Do you really want to delete LayerViewer?",
         "ADDED_SUCCESS": "Successfully Added",
         "REMOVE_SUCCESS":"Successfully removed",
-        "ERROR_REMOVING": "Error Removing"
+        "ERROR_REMOVING": "Error Removing LayerViewer"
     }
 }

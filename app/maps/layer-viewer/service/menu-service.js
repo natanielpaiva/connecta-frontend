@@ -87,7 +87,7 @@ define([
 
 
         this.addMenuItemAction = function (itemID, action) {
-            var that = this;
+            var that = this;            
             angular.element('#' + itemID).click(function () {
                 ToolBarService.__mapName = that.__mapName;
                 ToolBarService[action]();
@@ -132,11 +132,11 @@ define([
             var itemID = "";
             if (typeof item.items != 'undefined') {                
                 itemID = divName + '_' + item.span;
-                elem.innerHTML = "<a id='" + itemID + "' class='item-menu-right sub-item ' style='cursor:pointer;'>\n\<img src='" + item.img + "' 'ico_" + item.id + "'></a>";
+                elem.innerHTML = "<a id='" + itemID + "' class='item-menu-right sub-item ' style='cursor:pointer;' title='"+item.hint+"'>\n\<img src='" + item.img + "' 'ico_" + item.id + "'></a>";
                 this.addSubMenuItem(itemID, elem, item);
             } else {
                 itemID = divName + '_' + item.id;
-                elem.innerHTML = "<a  id = '" + itemID + "' class = 'item-menu-right' style='cursor:pointer;'>\n\<img src = '" + item.img + "' alt = 'ico_" + item.id + "'></a>";
+                elem.innerHTML = "<a  id = '" + itemID + "' class = 'item-menu-right' style='cursor:pointer;' title='"+item.hint+"'>\n\<img src = '" + item.img + "' alt = 'ico_" + item.id + "'></a>";
                 //define evento para o item do menu
                 this.addMenuItemAction(itemID, item.action);
             }

@@ -59,14 +59,14 @@ define([
             $scope.isEditing = true;
             DrillService.get($routeParams.id).success(function (data) {
                 $scope.drill = data;
-                $rootScope.drillLevels=$scope.drill.drillLevels;
-                for(var dLevel in $rootScope.drillLevels){
-                    $rootScope.drillLevels[dLevel].parentColumn="";
-                    $rootScope.drillLevels[dLevel].parentColumn={'columnName':$rootScope.drillLevels[dLevel].parentViewerColumn};
-                    $rootScope.drillLevels[dLevel].childColumn={'columnName':$rootScope.drillLevels[dLevel].childViewerColumn};
+                $rootScope.drillLevels = $scope.drill.drillLevels;
+                for (var dLevel in $rootScope.drillLevels) {
+                    $rootScope.drillLevels[dLevel].parentColumn = "";
+                    $rootScope.drillLevels[dLevel].parentColumn = {'columnName': $rootScope.drillLevels[dLevel].parentViewerColumn};
+                    $rootScope.drillLevels[dLevel].childColumn = {'columnName': $rootScope.drillLevels[dLevel].childViewerColumn};
                 }
-                                
-                $scope.drill.drillLevels=$rootScope.drillLevels;
+
+                $scope.drill.drillLevels = $rootScope.drillLevels;
 
                 //define o valor da análise selecionada
                 var interval = setInterval(function () {
@@ -133,6 +133,8 @@ define([
                                     angular.element("#parent").trigger('change');
                                     angular.element("#parentColumn").find("option[label='" + $rootScope.drillLevels[$rootScope.drillLevels.length - 1].childColumn.columnName + "']").attr('selected', 'true');
                                     angular.element("#parentColumn").trigger('change');
+                                    angular.element("#parent").attr('disabled', true);
+                                    angular.element("#parentColumn").attr('disabled', true);
                                     clearInterval(interval);
 
                                 } else if (isEdit && typeof $scope.formulario.name.$viewValue != 'undefined') {
