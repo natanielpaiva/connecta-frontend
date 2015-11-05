@@ -133,7 +133,12 @@ define([
             var url = presenterResources.analysis + "/" + idDataSource + "/columns-datasource";
             return $http.get(url);
         };
-
+        
+        this.executSqlDataBase = function(analysis){
+            var analysisCopy = angular.copy(analysis);
+            var url = presenterResources.analysis + "/" + analysisCopy.datasource.id + "/execut-sql";
+            return $http.post(url, analysisCopy);
+        };
 
         this.getAnalysis = function (idAnalysis) {
             var url = presenterResources.analysis + "/" + idAnalysis ;
