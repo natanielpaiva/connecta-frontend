@@ -368,6 +368,11 @@ blockquote small {
         line-height:1.6em;
     }
 
+    .list-icon-for-type {
+        font-size:1.25em;
+        transform: translateY(2px);
+        display:inline-block;
+    }
 }
 .icon {
     &.status-active {

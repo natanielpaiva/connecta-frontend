@@ -1,6 +1,6 @@
 {
     "GROUP": {
-        "REGISTER_GROUP": "Cadastro de Grupos",
+        "REGISTER_GROUP": "Grupos",
         "NAME": "Nome",
         "TYPE": "Tipo",
         "DESCRIPTION": "Descrição",
@@ -15,8 +15,5 @@
         "GROUP_VIEW": "Visualizar Grupo",
         "SEARCH": "Buscar",
         "SEARCH_SINGLESOURCE": "Buscar Mídia"
-
     }
-
 }
-

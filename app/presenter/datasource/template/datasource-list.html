@@ -68,7 +68,7 @@
     </div>
 </div>
 
-<div class="row margin-top-single">
+<div class="row">
     <div class="col-md-12">
         <table class="table table-striped table-hover" ng-table="tableParams" show-filter="true">
             <thead>
@@ -104,20 +104,15 @@
                     </td>
                     <td class="col-lg-8 col-md-7 col-sm-5 col-xs-10">
                         <a href="#/presenter/datasource/{{ds.id}}" class="full-size-block link-no-state">
-                            <span class="visible-xs-inline hidden-sm hidden-md hidden-lg {{types[ds.type].icon}}"
+                            <span class="list-icon-for-type visible-xs-inline hidden-sm hidden-md hidden-lg {{types[ds.type].icon}}"
                                   title="{{types[ds.type].name}}"></span>
                             {{ds.name}}
                         </a>
                     </td>
                     <td class="col-lg-2 col-md-3 col-sm-5 hidden-xs">
                         <a href="#/presenter/datasource/{{ds.id}}" class="full-size-block link-no-state">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-2 col-xs-1">
-                                    <span class="{{types[ds.type].icon}}"></span>
-                                </div>
-                                <div class="col-md-9 col-sm-10 col-xs-8">
-                                    {{types[ds.type].name}}
-                                </div>
+                                <span class="list-icon-for-type {{types[ds.type].icon}}"></span>
+                                {{types[ds.type].name}}
                             </div>
                         </a>
                     </td>
