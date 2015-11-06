@@ -1,20 +1,45 @@
-<div class="sidebar-form">
-    <label translate>VIEWER.ALPHA</label>
-    <input type="number" ng-model="viewer.configuration.titles[0].alpha"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.ALPHA</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.titles[0].alpha"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.BOLD</label>
-    <input type="checkbox" ng-model="viewer.configuration.titles[0].bold"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.BOLD
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.titles[0].bold" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.COLOR</label>
-    <input type="color" ng-model="viewer.configuration.titles[0].color"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.COLOR</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.titles[0].color"/>
+            <input class="form-control input-sm corColorCluster" type="color" ng-model="viewer.configuration.titles[0].color"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.SIZE</label>
-    <input type="number" ng-model="viewer.configuration.titles[0].size"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.SIZE</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.titles[0].size"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.TEXT</label>
-    <input type="text" ng-model="viewer.configuration.titles[0].text"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.TEXT</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.titles[0].text"/>
+        </div>
+    </div>
 </div>

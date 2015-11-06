@@ -1,65 +1,130 @@
-<div class="sidebar-form">
-    <label translate>VIEWER.BACKGROUND_ALPHA</label>
-    <input type="number" ng-model="viewer.configuration.chartScrollbar.backgroundAlpha"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.BACKGROUND_ALPHA</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartScrollbar.backgroundAlpha"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.BACKGROUND_COLOR</label>
-    <input type="color" ng-model="viewer.configuration.chartScrollbar.backgroundColor"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.BACKGROUND_COLOR</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.chartScrollbar.backgroundColor"/>
+            <input class="form-control input-sm corColorCluster" type="color" ng-model="viewer.configuration.chartScrollbar.backgroundColor"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.TEXT_COLOR</label>
-    <input type="color" ng-model="viewer.configuration.chartScrollbar.color"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.TEXT_COLOR</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.chartScrollbar.color"/>
+            <input class="form-control input-sm corColorCluster" type="color" ng-model="viewer.configuration.chartScrollbar.color"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.BALLOON_POINTER_ORIENTATION</label>
-    <select ng-model="viewer.configuration.chartScrollbar.dragIcon">
-        <option value="dragIconRoundBig" translate>VIEWER.DRAG_ICON_ROUND_BIG</option>
-        <option value="dragIconRectBig" translate>VIEWER.DRAG_ICON_RECT_BIG</option>
-        <option value="dragIconRectBigBlack" translate>VIEWER.DRAG_ICON_RECT_BIG_BLACK</option>
-        <option value="dragIconRectSmall" translate>VIEWER.DRAG_ICON_RECT_SMALL</option>
-        <option value="dragIconRectSmallBlack" translate>VIEWER.DRAG_ICON_RECT_SMALL_BLACK</option>
-        <option value="dragIconRoundBigBlack" translate>VIEWER.DRAG_ICON_ROUND_BIG_BLACK</option>
-        <option value="dragIconRoundSmall" translate>VIEWER.DRAG_ICON_ROUND_SMALL</option>
-        <option value="dragIconRoundSmallBlack" translate>VIEWER.DRAG_ICON_ROUND_SMALL_BLACK</option>
-    </select>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.BALLOON_POINTER_ORIENTATION</label>
+            <select ng-model="viewer.configuration.chartScrollbar.backgroundAlpha">
+                <option value="dragIconRoundBig" translate>VIEWER.DRAG_ICON_ROUND_BIG</option>
+                <option value="dragIconRectBig" translate>VIEWER.DRAG_ICON_RECT_BIG</option>
+                <option value="dragIconRectBigBlack" translate>VIEWER.DRAG_ICON_RECT_BIG_BLACK</option>
+                <option value="dragIconRectSmall" translate>VIEWER.DRAG_ICON_RECT_SMALL</option>
+                <option value="dragIconRectSmallBlack" translate>VIEWER.DRAG_ICON_RECT_SMALL_BLACK</option>
+                <option value="dragIconRoundBigBlack" translate>VIEWER.DRAG_ICON_ROUND_BIG_BLACK</option>
+                <option value="dragIconRoundSmall" translate>VIEWER.DRAG_ICON_ROUND_SMALL</option>
+                <option value="dragIconRoundSmallBlack" translate>VIEWER.DRAG_ICON_ROUND_SMALL_BLACK</option>
+            </select>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.DRAG_ICON_HEIGHT</label>
-    <input type="number" ng-model="viewer.configuration.chartScrollbar.dragIconHeight"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.DRAG_ICON_HEIGHT</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartScrollbar.dragIconHeight"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.DRAG_ICON_WIDTH</label>
-    <input type="number" ng-model="viewer.configuration.chartScrollbar.dragIconWidth"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.DRAG_ICON_WIDTH</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartScrollbar.dragIconWidth"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.GRAPH_FILL_ALPHA</label>
-    <input type="number" ng-model="viewer.configuration.chartScrollbar.graphFillAlpha"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.GRAPH_FILL_ALPHA</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartScrollbar.graphFillAlpha"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.GRAPH_FILL_COLOR</label>
-    <input type="color" ng-model="viewer.configuration.chartScrollbar.graphFillColor"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.GRAPH_FILL_COLOR</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.chartScrollbar.graphFillColor"/>
+            <input class="form-control input-sm corColorCluster" type="color" ng-model="viewer.configuration.chartScrollbar.color"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.GRAPH_LINE_ALPHA</label>
-    <input type="number" ng-model="viewer.configuration.chartScrollbar.graphLineAlpha"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.GRAPH_LINE_ALPHA</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartScrollbar.graphLineAlpha"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.GRAPH_LINE_COLOR</label>
-    <input type="color" ng-model="viewer.configuration.chartScrollbar.graphLineColor"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.GRAPH_LINE_COLOR</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.chartScrollbar.graphLineColor"/>
+            <input class="form-control input-sm corColorCluster" type="color" ng-model="viewer.configuration.chartScrollbar.graphLineColor"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.GRID_ALPHA</label>
-    <input type="number" ng-model="viewer.configuration.chartScrollbar.gridAlpha"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.GRID_ALPHA</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartScrollbar.gridAlpha"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.IGNORE_CUSTOM_COLORS</label>
-    <input type="checkbox" ng-model="viewer.configuration.chartScrollbar.ignoreCustomColors"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.IGNORE_CUSTOM_COLORS
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartScrollbar.ignoreCustomColors" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.SELECT_BACKGROUND_ALPHA</label>
-    <input type="number" ng-model="viewer.configuration.chartScrollbar.selectBackgroundAlpha"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.SELECT_BACKGROUND_ALPHA</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartScrollbar.selectBackgroundAlpha"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.SELECT_BACKGROUND_COLOR</label>
-    <input type="color" ng-model="viewer.configuration.chartScrollbar.selectBackgroundColor"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.SELECT_BACKGROUND_COLOR</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.chartScrollbar.selectBackgroundColor"/>
+            <input class="form-control input-sm corColorCluster" type="color" ng-model="viewer.configuration.chartScrollbar.selectBackgroundColor"/>
+        </div>
+    </div>
 </div>

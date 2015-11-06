@@ -1,79 +1,207 @@
-<div class="sidebar-form">
-    <label translate>VIEWER.CHART_CURSOR</label>
-    <input type="checkbox" ng-model="chartCursor.ativo" ng-click="changeChartCursor()"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.CHART_CURSOR
+                </translate>
+                <input  type="checkbox" ng-model="chartCursor.ativo" ng-click="changeChartCursor()"/>
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.ANIMATION_DURATION</label>
-    <input type="number" ng-model="viewer.configuration.chartCursor.animationDuration"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.ANIMATION_DURATION</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartCursor.animationDuration"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.AVOID_BALLOON_OVERLAPPING</label>
-    <input type="checkbox" ng-model="viewer.configuration.chartCursor.avoidBalloonOverlapping"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.AVOID_BALLOON_OVERLAPPING
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.avoidBalloonOverlapping" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.BALLOON_POINTER_ORIENTATION</label>
-    <select ng-model="viewer.configuration.chartCursor.balloonPointerOrientation">
-        <option value="" translate>VIEWER.HORIZONTAL</option>
-        <option value="vertical" translate>VIEWER.VERTICAL</option>
-    </select>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.BALLOON_POINTER_ORIENTATION</label>
+            <select ng-model="viewer.configuration.chartCursor.animationDuration">
+                <option value="" translate>VIEWER.HORIZONTAL</option>
+                <option value="vertical" translate>VIEWER.VERTICAL</option>
+            </select>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.BULLETS_ENABLED</label>
-    <input type="checkbox" ng-model="viewer.configuration.chartCursor.bulletsEnabled"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.BULLETS_ENABLED
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.bulletsEnabled" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.GATEGORY_BALLOON_ENABLED</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.categoryBalloonEnabled"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.GATEGORY_BALLOON_ENABLED
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.categoryBalloonEnabled" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.CURSOR_POSITION</label>
-    <select ng-model="viewer.configuration.chartCursor.cursorPosition">
-        <option value="" translate>VIEWER.MIDDLE</option>
-        <option value="start" translate>VIEWER.START</option>
-        <option value="mouse" translate>VIEWER.MOUSE</option>
-    </select>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.CURSOR_POSITION</label>
+            <select ng-model="viewer.configuration.chartCursor.animationDuration">
+                <option value="" translate>VIEWER.MIDDLE</option>
+                <option value="start" translate>VIEWER.START</option>
+                <option value="mouse" translate>VIEWER.MOUSE</option>
+            </select>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.FULL_WIDTH</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.fullWidth"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.FULL_WIDTH
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.fullWidth" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.LEAVE_CURSOR</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.leaveCursor"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.LEAVE_CURSOR
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.leaveCursor" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.ONE_BALLOON_ONLY</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.oneBalloonOnly"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.ONE_BALLOON_ONLY
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.oneBalloonOnly" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.PAN</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.pan"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.PAN
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.pan" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.SELECT_WITHOUT_ZOOMING</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.selectWithoutZooming"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.SELECT_WITHOUT_ZOOMING
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.selectWithoutZooming" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.SHOW_NEXT_AVAILABLE</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.showNextAvailable"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.SHOW_NEXT_AVAILABLE
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.showNextAvailable" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.VALUE_BALLOONS_ENABLED</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.valueBalloonsEnabled"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.VALUE_BALLOONS_ENABLED
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.valueBalloonsEnabled" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.VALUE_LINE_ALPHA</label>
-    <input type="number"  ng-model="viewer.configuration.chartCursor.valueLineAlpha"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.VALUE_LINE_ALPHA</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.chartCursor.valueLineAlpha"/>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.VALUE_LINE_BALLOON_ENABLED</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.valueLineBalloonEnabled"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.VALUE_LINE_BALLOON_ENABLED
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.valueLineBalloonEnabled" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.VALUE_LINE_ENABLED</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.valueLineEnabled"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.VALUE_LINE_ENABLED
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.valueLineEnabled" />
+            </label>
+        </div>
+    </div>
 </div>
-<div class="sidebar-form">
-    <label translate>VIEWER.ZOOMABLE</label>
-    <input type="checkbox"  ng-model="viewer.configuration.chartCursor.zoomable"/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label> 
+                <translate>
+                    VIEWER.ZOOMABLE
+                </translate>
+                <input  type="checkbox" ng-model="viewer.configuration.chartCursor.zoomable" />
+            </label>
+        </div>
+    </div>
 </div>
