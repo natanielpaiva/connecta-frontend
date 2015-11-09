@@ -33,7 +33,8 @@
         "LOGIN_FACEBOOK": "Entrar com Facebook",
         "LOGIN_GOOGLE": "Entrar com Google +",
         "OR":"ou",
-        "ADD_ACC":"Criar conta"
+        "ADD_ACC":"Criar conta",
+        "NO_RESULTS": "Nenhum resultado encontrado"
     },
     "KEY_VALUE": {
         "NO_ITEM": "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."

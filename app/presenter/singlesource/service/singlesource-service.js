@@ -8,7 +8,7 @@ define([
             {
                 id: 'FILE',
                 name: 'FILE',
-                icon:'icon-file3',
+                icon:'icon-insert-drive-file',
                 template: '_single-source-file.html'
             },
             {

@@ -16,7 +16,7 @@
         "DELETE": "Delete",
         "SAVE": "Save",
         "BACK": "Back",
-        "CLOSE": "Fechar",
+        "CLOSE": "Close",
         "NEXT": "Next",
         "CANCEL": "Cancel",
         "APPLY": "Apply",
@@ -34,7 +34,7 @@
         "LOGIN_GOOGLE": "Login with Google +",
         "OR": "or",
         "ADD_ACC": "Create Account",
-        "NO_RESULTS": "Nenhum resultado encontrado"
+        "NO_RESULTS": "No result found"
     },
     "KEY_VALUE": {
         "NO_ITEM": "Nothing yet. Click '{{LAYOUT.ADD}}' to add a new item."

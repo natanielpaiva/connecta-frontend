@@ -311,7 +311,7 @@ blockquote small {
         tr {
             td, th {
                 border: none !important;
-                padding: 0;
+                padding: 0 1em;
                 line-height: 3em;
                 transition:background-color ease 250ms, color ease 250ms;
             }

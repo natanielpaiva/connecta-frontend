@@ -11,7 +11,8 @@
         "ATTRIBUTE_NAME": "Attribute Name",
         "ATTRIBUTE_VALUE": "Attribute Value",
         "ATTRIBUTE TYPE": "Attribute Type",
-        "URL": "URL"
+        "URL": "URL",
+        "DOWNLOAD":"Download"
     }
 }
 

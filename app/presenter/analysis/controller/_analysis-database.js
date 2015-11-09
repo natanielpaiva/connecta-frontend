@@ -13,8 +13,10 @@ define([
             if ($scope.analysis.table) {
                 $scope.databaseForm.type = 'Table';
                 $scope.databaseForm.selectSourceOfdata = 'table';
-                AnalysisService.executSqlDataBase($scope.analysis).then(function (response) {
-                    $scope.responseDataBaseTable = response.data;
+                    AnalysisService.executSqlDataBase($scope.analysis).then(function (response) {
+                    $scope.responseDataBase = response.data;
+                      console.log($scope.responseDataBase);
+                    
                 });
 
 
@@ -22,7 +24,9 @@ define([
                 $scope.databaseForm.type = 'SQL';
                 $scope.databaseForm.selectSourceOfdata = 'sql';
                 AnalysisService.executSqlDataBase($scope.analysis).then(function (response) {
-                    $scope.responseDataBaseSql = response.data;
+                    $scope.responseDataBase = response.data;
+                      console.log($scope.responseDataBase);
+                    
                 });
             }
             $scope.component.columns = $scope.analysis.analysisColumns;
@@ -60,11 +64,6 @@ define([
                             formula: table.tableName + "." + table.columns[tb].name
                         });
                     }
-
-                    AnalysisService.executSqlDataBase($scope.analysis).then(function (response) {
-                        $scope.responseDataBaseTable = response.data;
-
-                    });
                 }
             });
         }
@@ -73,7 +72,7 @@ define([
         $scope.executSQL = function () {
 
             AnalysisService.executSqlDataBase($scope.analysis).then(function (response) {
-                $scope.responseDataBaseSql = response.data;
+                $scope.responseDataBase = response.data;
                 $scope.analysis.analysisColumns = [];
                 for (var cl in response.data[0]) {
                     //var name = cl.split(".");
