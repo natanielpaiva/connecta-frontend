@@ -1,6 +1,6 @@
 define([
     'presenter/analysis/service/analysis-service'
-], function () {
+], function () {//atividade interna
     return function DatabaseAnalysisFormController($scope, AnalysisService) {
 
         $scope.databaseForm = {
@@ -13,17 +13,16 @@ define([
             if ($scope.analysis.table) {
                 $scope.databaseForm.type = 'Table';
                 $scope.databaseForm.selectSourceOfdata = 'table';
-                    AnalysisService.executSqlDataBase($scope.analysis).then(function (response) {
-                    $scope.responseDataBase = response.data;
-                      console.log($scope.responseDataBase);
-                    
+                AnalysisService.executeSqlDataBase($scope.analysis).then(function (response) {
+                    $scope.responseDataBaseTable = response.data;
+
                 });
 
 
             } else {
                 $scope.databaseForm.type = 'SQL';
                 $scope.databaseForm.selectSourceOfdata = 'sql';
-                AnalysisService.executSqlDataBase($scope.analysis).then(function (response) {
+                AnalysisService.executeSqlDataBase($scope.analysis).then(function (response) {
                     $scope.responseDataBase = response.data;
                       console.log($scope.responseDataBase);
                     
@@ -64,14 +63,19 @@ define([
                             formula: table.tableName + "." + table.columns[tb].name
                         });
                     }
+
+                    AnalysisService.executeSqlDataBase($scope.analysis).then(function (response) {
+                        $scope.responseDataBaseTable = response.data;
+
+                    });
                 }
             });
         }
 
 
-        $scope.executSQL = function () {
+        $scope.executeSQL = function () {
 
-            AnalysisService.executSqlDataBase($scope.analysis).then(function (response) {
+            AnalysisService.executeSqlDataBase($scope.analysis).then(function (response) {
                 $scope.responseDataBase = response.data;
                 $scope.analysis.analysisColumns = [];
                 for (var cl in response.data[0]) {

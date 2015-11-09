@@ -134,9 +134,9 @@ define([
             return $http.get(url);
         };
         
-        this.executSqlDataBase = function(analysis){
+        this.executeSqlDataBase = function(analysis){
             var analysisCopy = angular.copy(analysis);
-            var url = presenterResources.analysis + "/" + analysisCopy.datasource.id + "/execut-sql";
+            var url = presenterResources.analysis + "/" + analysisCopy.datasource.id + "/execute-sql";
             return $http.post(url, analysisCopy);
         };
 
