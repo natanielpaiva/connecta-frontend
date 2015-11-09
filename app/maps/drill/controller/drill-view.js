@@ -255,7 +255,7 @@ define([
             $scope.actualDrillLevel--;
 
             if (hasPresenter && window.presenterApp.ViewerController.nivelDrill > $scope.actualDrillLevel) {
-                window.presenterApp.ViewerController.execDrillUp();
+                window.presenterApp.ViewerController.execDrillUp(true);
             }
             console.info("ZOOM LEVEL", $scope.actualDrillLevel);
             if (typeof $scope.configSetCenter !== 'undefined' && $scope.actualDrillLevel > 0) {
