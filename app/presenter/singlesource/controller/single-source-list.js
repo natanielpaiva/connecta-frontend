@@ -10,7 +10,6 @@ define([
         $scope.singlesource = null;
         SingleSourceService.list().then(function (response) {
             $scope.singlesource = response.data;
-        }, function (response) {
         });
 
 	$scope.getType = function(ss){
