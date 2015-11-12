@@ -1,0 +1,274 @@
+
+.sidebarViewer ul[dnd-list],
+.sidebarViewer ul[dnd-list] > li {
+    position: relative;
+}
+
+.sidebarViewer {
+    width: 100%;
+    position: relative;
+}
+
+
+.sidebarViewer ul[dnd-list] {
+    min-height: 100px;
+    padding-left: 0px;
+}
+
+.sidebarViewer ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+.sidebarViewer ul[dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: $lighterGray;
+    min-width: 70px;
+    min-height: 100px;
+    border: dashed 0.2em $lightGray;
+}
+
+.sidebarViewer ul[dnd-list] li {
+    background-color: $presenterBlue;
+    border: 1px solid $lightGray;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: block;
+    color: $white;
+    font-size: 14px;
+    margin-bottom: -1px;
+    float: left;
+    display: block;
+    width: 170px;
+    height: 27px;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 3%;
+    padding-top: 2%;
+    background-size: cover;
+    position: relative;
+}
+
+.columnsViewer label{
+    font-size: 15px;
+}
+
+.sidebarViewer ul[dnd-list] li.selected {
+    background-color: #297eb8;
+    color: #fff;
+}
+
+.columnsViewer {
+    width: 100%;
+    float: left;
+    border: 1px solid $lighterGray;
+    margin: 2%;
+}
+
+.sidebarfilter ul{
+    width: 100%;
+    background-color: $lighterGray;
+    border: 1px solid $lightGray;
+    padding: 0px !important;
+}
+
+.sidebarfilter ul[dnd-list]{
+    padding:0px;
+    margin:0px;
+    background-color:$lightGray;
+    list-style:none;
+}
+
+.sidebarfilter ul[dnd-list] li{
+    background-color: $lighterGray;
+    border: 1px dashed $lightGray;
+    position: relative;
+    display: block;
+    width: 100%; 
+    height:30px;
+    line-height: 30px;
+    cursor: move;
+    font-weight: bold;
+}
+
+
+.sidebarfilter{
+    width: 216px;
+    height: 150px;
+    float:left;
+    margin-left: 20px;
+    overflow: auto;
+    background-color: $darkerGray;
+}
+
+.analysis-button button{
+     margin-top: 10px;
+     width: 216px;
+     margin-left: 20px;
+}
+
+.columnsViewer{
+    width:200px;
+    height:200px;
+    float:left;
+    border: 0.3em solid $lighterGray;
+    padding: 0.8em;
+    margin-right: 2%;
+}
+
+.boxViewer{
+    width: 210px;
+    height: 210px;
+    float:left;
+    margin-left: 1.4%;
+}
+
+.aba-switch-viewer{
+    width: 100%;
+    background-color: $darkerGray;
+}
+
+.switch-viewer{
+    background-color: $darkerGray;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    float:left;
+    width: 33.33%;
+    color: $white;
+    font-size: 1.8em;
+    line-height: 2em;
+    text-align: center;
+}
+
+.switch-viewer-back{
+    background-color: $darkerGray;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    float:left;
+    width: 20%;
+    margin-right: 10px;
+    color: $white;
+    font-size: 1.8em;
+    line-height: 2em;
+    text-align: center;
+}
+
+.switch-viewer-back div:hover{
+    width: 100%;
+    height: 100%;
+    cursor:pointer;
+    background-color: $gray;
+}
+
+.settings-text{
+    font-size: 1em;
+    line-height: 3.6em;
+    width: 66%;
+    color: $white;
+}
+
+.switch-viewer div:hover{
+    width: 100%;
+    height: 100%;
+    cursor:pointer;
+    background-color: $gray;
+}
+
+.navigation-settings:hover{
+    cursor:pointer;
+    background-color: $gray;
+}
+
+.navigation-settings{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 11%;
+}
+
+.switch-viewer div.active{
+    background-color: $red;
+}
+
+.accordion-viewer{
+    padding-top: 30%;
+}
+
+.combo-analysis{
+    padding-top: 5%;
+}
+
+.accordion-viewer .panel-group{
+    background: $black;
+}
+
+.accordion-viewer .panel-heading{
+    background: $black !important;
+
+}
+.accordion-viewer .panel-title{
+    color: $white !important;
+    font-family: 'Open Sans' !important;
+}
+
+.accordion-viewer .panel{
+    border:none !important;
+}
+
+.accordion-viewer .panel-collapse{
+    background-color: $darkerGray !important;
+    border:none !important;
+}
+
+.accordion-viewer .panel-body{
+    color: $white !important;
+    border:none !important;
+    font-family: 'Open Sans' !important;
+    padding: 0px !important;
+}
+
+.sidebar-form{
+    width: 100%;
+    margin-left: 4%;
+}
+
+.sidebar-form input[type="text"]{
+    width: 80%;
+}
+
+.sidebar-form select{
+    color: $black !important;
+}
+
+.sidebar-form input{
+    color: $black;
+}
+
+.sidebar-form label{
+    font-weight: normal;
+    width: 100%;
+}
+
+.layout-config{
+    width: 100%;
+    color: $white;
+    padding-top: 5%;
+}
+
+.modal-table-analysis{
+   overflow: auto;
+   height: 400px;
+}
+
+.layout-config{
+    overflow: auto;
+    height: 550px;
+    padding-bottom: 50%;
+}
+
+
+
+

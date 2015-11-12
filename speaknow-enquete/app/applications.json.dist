@@ -1,0 +1,48 @@
+{
+  "presenter": {
+    "title": "Presenter",
+    "host": "http://connectad.cds.com.br/connecta-presenter",
+    "icon": "assets/img/module-icon/presenter.png",
+    "home": "#/presenter"
+  },
+  "collector": {
+    "title": "Collector",
+    "host": "http://connectad.cds.com.br/connecta-collector",
+    "icon": "assets/img/module-icon/collector.png",
+    "home": "#/collector"
+  },
+  "maps": {
+    "title": "Maps",
+    "host": "http://connectad.cds.com.br/connecta-maps",
+    "icon": "assets/img/module-icon/maps.png",
+    "home": "#/maps"
+  },
+  "speaknow": {
+    "title": "Speaknow",
+    "host": "http://connectad.cds.com.br/connecta-speaknow",
+    "icon": "assets/img/module-icon/speaknow.png",
+    "home": "#/speaknow"
+  },
+  "speaknowBatch": {
+    "hide": true,
+    "host": "http://connectad.cds.com.br/speaknow-batch"
+  },
+  "portal": {
+    "title": "Connecta",
+    "host": "http://connectad.cds.com.br/connecta-portal",
+    "icon": "assets/img/module-icon/connecta.png",
+    "home": "#/"
+  },
+  "datamodel": {
+    "title": "Datamodel",
+    "host": "http://connectad.cds.com.br/connecta-datamodel",
+    "icon": "assets/img/module-icon/datamodel.png",
+    "home": "#/datamodel"
+  },
+  "inspection": {
+    "title": "Inspect",
+    "host": "http://connectad.cds.com.br/connecta-inspection",
+    "icon": "assets/img/module-icon/inspect.png",
+    "home": "#/inspection"
+  }
+}

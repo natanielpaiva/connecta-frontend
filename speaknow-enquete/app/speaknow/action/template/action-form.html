@@ -1,0 +1,318 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{isEditing ? 'ACTION.EDIT': 'ACTION.ADD'}}</h3>
+    </div>
+</div>
+
+<!--Info Interaction-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="well well-sm">
+            <h4>{{interaction.name}}</h4>
+            <p>{{interaction.description}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="actionForm" ng-submit="submit()">
+
+            <!--Dados da action-->
+            <div class="form-group">
+                <label for="name" class="required" translate>ACTION.NAME</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       ng-model="action.name" required />
+                <div ng-show="actionForm.$submitted || actionForm.name.$touched" 
+                     ng-messages="actionForm.name.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+            <div class="form-group group-checkbox-label" ng-show="action.type != 'SERVICE'">
+                <input type="checkbox" class="checkbox-with-label" id="whatsapp" name="whatsapp"
+                       ng-model="isWhatsapp" ng-change="setParameterType()"/>
+                <label for="whatsapp" class="label-checkbox" translate>ACTION.WHATSAPP</label>
+            </div>
+
+            <div class="form-group">
+                <label for="icon" translate>ACTION.ICON</label>
+                <button type="button" class="btn btn-default" 
+                        ng-click="openIconModal()">
+                    <span class="icon-{{action.icon}}"></span>
+                    <input type="hidden" class="form-control" id="icon" name="icon"
+                           ng-model="action.icon" />
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label for="type" translate>ACTION.TYPE</label>
+                <select id="type" name="type" class="form-control" ng-model="action.type" ng-change="verifyType()">
+                    <option ng-repeat="type in actionTypes" value="{{type}}">
+                        {{'ACTION.' + type| translate}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionItem" translate>ACTION.DESCRIPTION</label>
+                <textarea class="form-control" id="descriptionItem" name="descriptionItem"
+                          ng-model="action.description"></textarea>
+            </div>
+            <!--Dados da action-->
+
+            <!--Inicio Step-->
+            <div class="card-form card-step">
+                <!--header-->
+                <!--                <div class="header-card">
+                                    <h4>Passo 1</h4>
+                                </div>
+                                <hr/>-->
+
+                <div class="content-card">
+                    <!--Inicio Section-->
+                    <div class="card-form card-section" ng-repeat="(sec_index, section) in action.sections" ng-class="{'card-form-min': !section.max }">
+                        <!--header-->
+                        <div class="header-card" ng-click="minifyCard(action.sections); section.max = !section.max">
+                            <h4>{{section.title ? section.title : newSectionStr}}</h4>
+                            <div class="btn-group pull-right margin-right-single" role="group">
+                                <button type="button" class="btn btn-default" title="Visualizar">
+                                    <span class="icon-eye"/>
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="removeSection(section)" title="Remover">
+                                    <span class="icon-trash"/>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Content-->
+                        <div class="content-card">
+                            <div class="form-group">
+                                <label for="title" translate>ACTION.SECTION.TITLE</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                       ng-model="section.title" />
+                            </div>
+
+
+                            <!--Inicio Parametros-->
+                            <div class="card-form card-params" ng-repeat="(index, param) in section.params" ng-class="{'card-form-min': !param.max }">
+                                <!--Header-->
+                                <div class="header-card" ng-click="minifyCard(section.params);
+                                            param.max = true">
+                                    <h4>{{param.title ? param.title : newParamStr}}</h4>
+                                    <div class="btn-group pull-right margin-right-single" role="group" title="Visualizar">
+                                        <button type="button" class="btn btn-default">
+                                            <span class="icon-eye"/>
+                                        </button>
+                                        <button type="button" class="btn btn-default" ng-click="removeParam(section, param)" title="Remover">
+                                            <span class="icon-trash"/>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--content-->
+                                <div class="content-card">
+                                    <div class="form-group">
+                                        <label for="param-title" translate>ACTION.SECTION.PARAM.TITLE</label>
+                                        <input type="text" class="form-control" id="param-title" name="section{{sec_index}}_param_title_{{index}}"
+                                               ng-model="param.title" required />
+                                        <div ng-show="actionForm.$submitted || actionForm.section{{sec_index}}_param_title_{{index}}.$touched"
+                                             ng-messages="actionForm.section{{sec_index}}_param_title_{{index}}.$error"
+                                             ng-messages-include="portal-error-messages">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="isServiceAction()">
+                                        <label for="param-name" translate>ACTION.SECTION.PARAM.NAME</label>
+                                        <input type="text" class="form-control" id="param-name" name="section{{sec_index}}_param_name_{{index}}"
+                                               ng-model="param.name" ng-required="isServiceAction()"/>
+
+                                        <div ng-show="actionForm.$submitted || actionForm.section{{sec_index}}_param_name_{{index}}.$touched"
+                                             ng-messages="actionForm.section{{sec_index}}_param_name_{{index}}.$error"
+                                             ng-messages-include="portal-error-messages">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group" ng-show="action.type === 'FAQ'">
+                                        <label for="param-name" translate>ACTION.SECTION.PARAM.ANSWER</label>
+                                        <input type="text" class="form-control" id="param-name" name="section{{sec_index}}_param_value_{{index}}"
+                                               ng-model="param.value" ng-required="action.type === 'FAQ'"/>
+
+                                        <div ng-show="actionForm.$submitted || actionForm.section{{sec_index}}_param_value_{{index}}.$touched"
+                                             ng-messages="actionForm.section{{sec_index}}_param_value_{{index}}.$error"
+                                             ng-messages-include="portal-error-messages">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group" ng-show="action.type !== 'FAQ'">
+                                        <label for="param-type" translate>ACTION.SECTION.PARAM.TYPE</label>
+                                        <select id="type" name="param-type-{{index}}" class="form-control" ng-model="param.type"
+                                                ng-change="onChangeParamType(param.type)" ng-init="onChangeParamType(param.type)">
+                                            <option ng-selected="{{paramType == param.type}}"
+                                                ng-repeat="paramType in paramTypes" value="{{paramType}}">
+                                                {{'ACTION.SECTION.PARAM.PARAM_TYPE.' + paramType| translate}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div key-value class="clearfix well well-sm" ng-model="param.options"
+                                         ng-show="isMultiple(param.type)">
+                                        <div key-value-item>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="param-opt" translate>ACTION.SECTION.PARAM.KEY</label>
+                                                        <input type="text" class="form-control" id="param-opt" name="param_opt"
+                                                               ng-model="$parent.$parent.$item.key" placeholder="Chave"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="param-val" translate>ACTION.SECTION.PARAM.VALUE</label>
+                                                        <input type="text" class="form-control" id="param-val" name="param_val"
+                                                               ng-model="$parent.$parent.$item.value" placeholder="Valor"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="" class="btn btn-primary margin-top-single" 
+                                       ng-click="finishParam(sec_index, index, param)" 
+                                       ng-class="{disabled: !validateParam(sec_index, index, param)}" translate>LAYOUT.DONE</a>
+                                </div>
+                            </div>
+                            <!--Fim parametros-->
+
+                            <button type="button" class="btn btn-default" translate 
+                                    ng-class="{disabled: !validateParams(sec_index, section)}" 
+                                    ng-click="addParam(section)">ACTION.SECTION.PARAM.NEW</button>
+                            <div class="form-group">
+                                <label for="footer" translate>ACTION.SECTION.FOOTER</label>
+                                <input type="text" class="form-control" id="footer" name="footer"
+                                       ng-model="section.footer" />
+                            </div>
+                            <a href="" class="btn btn-primary" translate 
+                               ng-class="{disabled: !validateParams(sec_index, section)}" 
+                               ng-click="section.max = !section.max">LAYOUT.DONE</a>
+                        </div> 
+                    </div>
+                    <button type="button" class="btn btn-default" translate 
+                            ng-class="{disabled: !validateSections()}"
+                            ng-click="addSection()"
+                            ng-show="!isWhatsapp">ACTION.SECTION.NEW</button>
+                    <!--Fim sections-->
+                    <div class="form-group" ng-show="action.type === 'SERVICE'">
+                        <label for="script" translate>STEP.SCRIPT</label>
+                        <textarea class="form-control" id="script" name="script"
+                                  ng-model="action.scriptValue"></textarea>
+                    </div>
+                </div>
+                <!--Fim step-->
+
+                <div class="row" ng-show="isWhatsapp">
+                    <div class="col-md-12">
+                        <h3 translate>ACTION.WHATSAPP_CONFIG</h3>
+                    </div>
+                </div>
+
+
+                <div class="well well-sm" ng-show="isWhatsapp">
+
+                    <div class="form-group group-checkbox-label">
+                        <input type="checkbox" class="checkbox-with-label" id="default" name="default"
+                               ng-model="action.default"/>
+                        <label for="default" class="label-checkbox" translate>ACTION.DEFAULT</label>
+                    </div>
+
+                    <div class="form-group" ng-show="isQuestionSeparator && isWhatsapp">
+                        <div class="form-group">
+                            <label for="questionSeparator" class="required" translate>ACTION.QUESTION_SEPARATOR</label>
+                            <select type="text" class="form-control" id="name" name="questionSeparator"
+                                   ng-model="action.questionSeparator" maxlength="1" ng-require="isQuestionSeparator && isWhatsapp" >
+                                <option value="-">-</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" ng-show="isAnswerSeparator && isWhatsapp">
+                        <label for="answerSeparator" class="required" translate>ACTION.ANSWER_SEPARATOR</label>
+                        <select class="form-control" id="name" name="answerSeparator"
+                               ng-model="action.answerSeparator" maxlength="1" ng-required="isAnswerSeparator && isWhatsapp">
+                            <option value=";">;</option>
+                        </select>
+                        <div ng-show="actionForm.answerSeparator.$touched" ng-messages="actionForm.answerSeparator.$error"
+                            ng-messages-include="portal-error-messages"></div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="account" translate>ACTION.WHATSAPP_ACC</label>
+                        <select id="account" name="account" class="form-control" 
+                               ng-options="acc as acc.name for acc in whatsappAccounts track by acc.id"
+                               ng-model="whatsappAccount" ng-required="isWhatsapp">
+                        </select>
+                        <div ng-show="actionForm.account.$touched" ng-messages="actionForm.account.$error"
+                            ng-messages-include="portal-error-messages"></div>
+                    </div>
+
+                    <div class="form-group group-checkbox-label">
+                        <input type="checkbox" class="checkbox-with-label" id="allContacts" name="allContacts"
+                               ng-model="allContacts"/>
+                        <label for="allContacts" class="label-checkbox" translate>ACTION.SEND_ALL_CONTACTS</label>
+                    </div>
+
+                    <div class="form-group" ng-show="!allContacts">
+                        <label for="contacts" translate>ACTION.CONTACT</label>
+                        <input type="text" name="contacts" id="contacts" class="form-control" typeahead-on-select="addContact()"
+                               ng-model="contact" typeahead="contact as contact.name for contact in getContacts($viewValue)" typeahead-loading="loadingAttributes"
+                               />
+                        <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+                    </div>
+                    
+                    <div class="table-contacts" ng-show="contacts.length > 0 && !allContacts">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th translate>ACTION.NAME</th>
+                                    <th translate>ACTION.EMAIL</th>
+                                    <th translate>ACTION.PHONE</th>
+                                    <th translate>ACTION.ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="con in contacts">
+                                    <td>{{con.name}}</td>
+                                    <td class="text-left">{{con.email}}</td>
+                                    <td>{{con.phone}}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a role="button" class="btn btn-xs btn-info" ng-click="removeContact(contact)">
+                                                <span class="icon-trash"></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button type="button" class="btn btn-primary edit-whats-message" ng-click="editWhatsappMessage()" translate ng-show="!messageWhatsappEdited">
+                        ACTION.WHATSAPP_MESSAGE_EDIT
+                    </button>
+                    <button type="button" class="btn btn-primary edit-whats-message" ng-click="recriateMessage()" translate ng-show="messageWhatsappEdited">
+                        ACTION.RECOVER_WHATSAPP_MESSAGE
+                    </button>
+                    <div class="form-group" ng-show="messageWhatsappEdited">
+                        <label translate>ACTION.WHATSAPP_MESSAGE</label>
+                        <textarea name="whatsMessage" id="whatsMessage" class="form-control" ng-maxlength="500" ng-model="action.messageWhatsapp"
+                                  style="max-width: 100%;" ng-required="messageWhatsappEdited"/>
+                        <div ng-show="actionForm.whatsMessage.$touched" ng-messages="actionForm.whatsMessage.$error"
+                            ng-messages-include="portal-error-messages"></div>
+                    </div>
+                    
+                </div>
+                <button type="button" onclick="window.history.back()" class="btn btn-default" translate>
+                    LAYOUT.BACK                     
+                </button>
+                <button type="submit" class="btn btn-primary" ng-disabled="actionForm.$invalid" translate>
+                    LAYOUT.SAVE
+                </button>
+        </form>
+    </div>
+</div>

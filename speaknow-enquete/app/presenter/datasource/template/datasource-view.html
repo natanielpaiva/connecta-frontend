@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>DATASOURCE.VIEW_ANALYSIS_SOURCE</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group">
+            <button class="btn btn-default">
+                <span class="icon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default">
+                <span class="icon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <div class="col-md-offset-8 col-md-2 text-right">
+        <div class="btn-group">
+            <a class="btn btn-default" href="#/presenter/datasource/{{datasource.id}}/edit">
+                <span class="icon-pencil" aria-hidden="true"></span>
+            </a>
+            <button class="btn btn-default" ng-click="excluir(datasource.id)">
+                <span class="icon-trash" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single margin-bottom-single">
+            <p ng-if="datasource.name">
+                <strong translate>DATASOURCE.NAME</strong>: 
+                {{datasource.name}}
+            </p>
+
+            <p ng-if="datasource.description">
+                <strong translate>DATASOURCE.DESCRIPTION</strong>:
+                {{datasource.description}}
+            </p>
+
+            <p ng-if="datasource.type" >
+                <strong translate>DATASOURCE.DATASOURCE_TYPE</strong>:
+                <span class="{{types[datasource.type].icon}}"></span>
+                {{types[datasource.type].name}}
+            </p>
+
+            <!-- banco de dados-->
+            <p ng-if="datasource.driver"> 
+                <strong translate>DATASOURCE.DRIVER_NAME</strong>:
+                {{datasource.driver}}
+            </p>
+
+            <p ng-if="datasource.server">
+                <strong translate>DATASOURCE.SERVER</strong>:
+                <a href="{{datasource.server}}" target="_blank">
+                    {{datasource.server}}
+                </a>
+            </p>
+
+            <p ng-if="datasource.port">
+                <strong translate>DATASOURCE.PORT</strong>:
+                {{datasource.port}}
+            </p>
+
+            <p ng-if="datasource.sid"> 
+                <strong translate>DATASOURCE.DATABASE</strong>:
+                {{datasource.sid}}
+            </p>
+            <!-- banco de dados -->
+
+            <!-- endeca webservice-->
+            <p ng-if="datasource.address"> 
+                <strong translate>DATASOURCE.ADDRESS</strong>:
+                <a href="{{datasource.address}}" target="_blank">
+                    {{datasource.address}}
+                </a>
+            </p>
+            <!-- endeca -->
+
+            <p ng-if="datasource.path">
+                <strong translate>DATASOURCE.PATH</strong>:
+                {{datasource.path}}
+            </p>
+
+            <!-- webservice -->
+            <p ng-if="datasource.method">
+                <strong translate>DATASOURCE.METHOD</strong>:
+                {{datasource.method}}
+            </p>
+
+            <p ng-if="datasource.parameters && datasource.parameters.length">
+                <strong translate>DATASOURCE.PARAMETERS</strong>:
+            </p>
+
+            <ul ng-if="datasource.parameters" class="list-unstyled">
+                <li ng-repeat="p in datasource.parameters">
+                    <kbd>{{p.params}}</kbd>
+                    =
+                    <code>{{p.value}}</code>
+                </li>
+            </ul>
+
+            <!--webservice-->
+            <p ng-if="datasource.user">
+                <strong translate>DATASOURCE.USERNAME</strong>:
+                {{datasource.user}}
+            </p>
+
+            <p ng-if="datasource.password">
+                <strong translate>DATASOURCE.PASSWORD</strong>:
+                {{datasource.password}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="#/presenter/datasource" role="button" class="btn btn-default" translate>
+            LAYOUT.BACK
+        </a>
+    </div>
+</div>

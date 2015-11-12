@@ -1,0 +1,26 @@
+<table class="table table-striped table-condensed table-responsive">
+
+    <thead>
+        <tr>
+            <th ng-repeat="header in headers">{{header}}</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody ng-if="(results.length > 0)">
+        <tr ng-repeat="item in results">
+            __TEMPLATE__
+            <td>
+                <a class="btn btn-primary btn-xs"
+                   title="Editar"
+                   href="#{{config.controllers.edit}}/{{item.id}}"
+                   >
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+                <button class="btn btn-primary btn-xs" title="Remover" >
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,40 @@
+{
+    "VALIDATION": {
+        "REQUIRED": "Esse campo é obrigatório",
+        "EMAIL": "Deve ser um endereço de email válido",
+        "MINLENGTH": "Deve ter mais letras",
+        "MAXLENGTH": "Deve ter menos letras",
+        "NUMBER": "Deve ser um número",
+        "INVALID_DOCUMENT":"Arquivo inválido."
+    },
+    "LAYOUT": {
+        "HOME": "Página inicial",
+        "ADD": "Adicionar",
+        "NEW_M": "Novo",
+        "NEW_F": "Nova",
+        "EDIT": "Editar",
+        "DELETE": "Excluir",
+        "SAVE": "Salvar",
+        "BACK": "Voltar",
+        "NEXT": "Avançar",
+        "CANCEL": "Cancelar",
+        "APPLY": "Aplicar",
+        "FILTER": "Filtro",
+        "SELECT": "Selecione",
+        "SEARCH": "Buscar",
+        "DONE": "Pronto",
+        "DASHBOARD": "Painel",
+        "FILTER": "Filtro",
+        "SHOW_GRID": "Mostrar miniaturas",
+        "SHOW_LIST": "Mostrar como lista",
+        "SETTINGS": "Configurações",
+        "NOTIFICATIONS": "Notificações",
+        "LOGIN_FACEBOOK": "Entrar com Facebook",
+        "LOGIN_GOOGLE": "Entrar com Google +",
+        "OR":"ou",
+        "ADD_ACC":"Criar conta"
+    },
+    "KEY_VALUE": {
+        "NO_ITEM": "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."
+    }
+}

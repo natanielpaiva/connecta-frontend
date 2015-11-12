@@ -1,0 +1,115 @@
+.app-search{
+    background-color: #22262F;
+    transition: all 0.3s;
+    position: absolute;
+    top: -100%;
+    width: 100%;
+    padding-left: 250px;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.app-search .btn{
+    top: 10px;
+    float: right;
+    color: #505458;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.app-search .btn-close:hover{
+    color: #fff;
+    /*background-color: #eee;*/
+}
+
+.app-search .btn-close i{
+    font-size: 30px;
+    line-height: 45px;
+}
+
+body.show-app-search .app-search{
+    top: 60px;
+}
+
+.app-search .header{
+    padding: 10px 20px;
+}
+
+.app-search .header h2{
+    margin-top: 0;
+}
+
+.app-search .advanced{
+    background-color: #1B1E25;
+    padding: 0 20px;
+    height: 0px;
+    overflow: hidden;
+}
+
+.app-search .body{
+    min-height: 400px;
+    min-height: 200px;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 0 20px;
+}
+
+.app-search .body table{
+    background-color: #fff;
+}
+
+/* Lista de itens usando template */
+.app-search .body .item-list{
+    padding: 0;
+    margin: 0;
+}
+
+.app-search .body .item-list li{
+    display: inline-block;
+    float: left;
+    list-style: none;
+}
+
+.app-search .footer{
+    height: 64px;
+    padding: 15px;
+    background-color: #1B1E25;
+}
+
+.app-search .footer .pagination{
+    margin: 0;
+}
+
+
+.app-search .footer .btn-search{
+    padding: 2px 12px;
+    overflow: hidden;
+}
+.app-search .footer .btn.disabled
+{
+    overflow: hidden;
+    background-color: #428bca;
+    border-color: #357ebd;
+    width: 22px!important;
+    padding-left: 4px!important;
+    padding-right: 10px!important;
+}
+
+.app-search .footer .btn-search > input{
+    padding: 2px!important;
+    margin-left: 2px!important;
+    height: 28px!important;
+}
+
+.app-search .footer .btn-search > i{
+    margin-top: 6px;
+}
+
+.search-advanced .app-search .actions{
+    display: none;
+}
+
+.search-advanced .app-search .advanced{
+    height: auto;
+}

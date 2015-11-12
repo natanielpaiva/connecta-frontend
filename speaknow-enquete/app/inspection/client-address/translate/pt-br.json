@@ -1,0 +1,21 @@
+{
+    "CLIENT_ADDRESS": {
+        "CLIENT": "Cliente",
+        "CLIENTS": "Clientes",
+        "CLIENT_ADDRESS": "Endereço do Cliente",
+        "CLIENT_ADDRESS": "Endereços de Clientes",        
+        "ADD": "Cadastrar Endereço de Cliente",
+        "EDIT": "Editar Endereço de Cliente",
+        "VIEW": "Visualizar Endereço de Cliente",
+        "DESCRIPTION": "Endereço",
+        "ACTIONS":"Ações",
+        "CEP": "CEP",
+        "CITY": "Cidade",
+        "STATE": "Estado",
+        "COUNTRY": "País",
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Endereço de Cliente",
+        "CONFIRM_DELETE": "Deseja realmente excluir o Endereço de Cliente?"
+    }
+}

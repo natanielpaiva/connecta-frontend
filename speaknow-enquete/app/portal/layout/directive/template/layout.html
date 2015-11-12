@@ -1,0 +1,20 @@
+<div ng-class="{
+  'hide-menu' : !showMenu,
+  'fullscreen' : fullscreen,
+  'show-sidebar': showSidebarRight,
+  'login' : !authenticated
+  }">
+    <login class="am-slide-top" ng-if="!authenticated"></login>
+    <div id="fb-root"></div>
+    <heading></heading>
+    <menu></menu>
+    <sidebar>
+        <div ng-if="sidebar.controller" ng-controller="sidebar.controller">
+        </div>
+    </sidebar>
+    <div class="container-fluid">
+        <div ng-view class="page-container am-fade-and-slide-right"
+             ng-class="{ flat: showAsFlat }">
+        </div>
+    </div>
+</div>

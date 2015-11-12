@@ -1,0 +1,11 @@
+{
+    "LAYERSOURCE": {
+        "LAYERSOURCE":"lAYERS SOURCE",
+        "NAME":"NAME",
+        "TYPE": "TYPE",
+        "INTERNAL_LINK": "INTERNAL LINK",
+        "EXTERNAL_LINK": "EXTERNAL LINK",
+        "USER": "USER",
+        "PASSWORD": "PASSWORD"
+    }
+}

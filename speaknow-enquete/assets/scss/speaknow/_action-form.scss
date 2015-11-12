@@ -1,0 +1,69 @@
+.connecta-modal .modal-content .content {
+    .box-icon {
+        display: inline-block;
+        float: left;
+        margin-right: 10px;
+        background-color: $lighterGray;
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        /*padding-top: 5px;*/
+
+        svg {
+            padding-top: 5px;
+            display: inline-block;
+        }
+
+        &:hover{
+            background-color: $speaknowBlue;
+
+            path {
+                fill:$white !important; 
+            }
+        }
+
+        :checked {
+            & + svg {
+                background-color: $speaknowBlue;
+
+                path {
+                    fill:$white !important;
+                }
+            }
+        }
+
+        svg {
+            margin:0 auto;
+
+            path {
+                transform: scale(0.05);
+                fill: $darkGray !important;
+            }
+        }
+    }
+
+}
+
+/*Css adicionado por Daniel*/
+
+/* Estilo checkbox */
+
+.group-checkbox-label{
+    display: block;
+    width: 100%;
+    float: left;
+}
+
+.checkbox-with-label{
+    float: left;
+    margin: 6px !important;
+}
+
+.label-checkbox{
+    float: left;
+    margin: 3px !important;
+}
+.edit-whats-message{
+    margin-top: 15px;
+    margin-bottom: 10px;
+}

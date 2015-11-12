@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>LAYERVIEWERGROUP.LAYERVIEWERGROUP</h3>
+
+        <a class="btn btn-default" href="#/maps/layer-viewer-group/new" translate>
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+
+        <div class="margin-top-single">
+            <form novalidate name="formulario">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button type="button" ng-click="filter = !filter" class="btn btn-info" translate>LAYOUT.FILTER</button>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <table ng-table class="table table-striped margin-top-single">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="text-center" translate>LAYERVIEWERGROUP.NAME</th>
+                    <th class="text-center" translate>LAYERVIEWERGROUP.IMPL</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="layerViewerGroup in layerViewersGroup">
+                    <td><input type="checkbox" value="{{layerViewerGroup.id}}" /></td>
+                    <td class="text-center">
+                        <a href="#/maps/layer-viewer-group/{{layerViewerGroup.id}}" class="full-size-block link-no-state">
+                            {{layerViewerGroup.nm_viewer_group}}</a></td>
+
+                    <td class="text-center" ><a href="#/maps/layer-viewer-group/{{layerViewerGroup.id}}" class="full-size-block link-no-state">
+                            <span ng-if="!layerViewerGroup.$edit && layerViewerGroup.viewerTypeImplEntity.id == 1">OpenLayers</span>
+                            <span ng-if="!layerViewerGroup.$edit && layerViewerGroup.viewerTypeImplEntity.id == 2">ESRI</span>                        
+                        </a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

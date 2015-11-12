@@ -1,0 +1,21 @@
+<div>
+    <ul>
+        <li ng-repeat="page in pageHistory"
+            class="{{page.application.name}}"
+            >
+            <div class="page-shot">
+                <a class="btn-close" title="Fechar" ng-click="page.destroy()">
+                    <i class="glyphicon glyphicon-remove-circle "></i>
+                </a>
+
+                <button class="app-icon active" ng-click="page.restore()">
+                    restore
+                </button>
+
+                <div class="footer base-color-bg">
+                    {{page.title}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

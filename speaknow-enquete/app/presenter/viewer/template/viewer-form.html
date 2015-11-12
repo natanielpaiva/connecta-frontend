@@ -1,0 +1,162 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>VIEWER.VIEWER</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+
+            <div class="form-group col-md-6">
+                <label translate>VIEWER.NAME</label>
+                <input type="text" ng-model="analysisViewer.viewer.name" required class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label translate>VIEWER.DESCRIPTION</label>
+                <input type="text" ng-model="analysisViewer.viewer.description" required class="form-control" />
+            </div>
+            <div ng-if="analysisViewer.viewer.configuration.type == 'serial' ||
+                                    analysisViewer.viewer.configuration.type == 'pie' ||
+                                    analysisViewer.viewer.configuration.type == 'funnel' ||
+                                    analysisViewer.viewer.configuration.type == 'radar'"> 
+                <div class="boxViewer">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.METRIC</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.metrics">
+                                <li ng-repeat="column in analysisViewer.metrics" dnd-draggable="column" dnd-moved="analysisViewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong translate>FILTER_EMPTY</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="boxViewer">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.DESCRIPTION</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.descriptions">
+                                <li ng-repeat="column in analysisViewer.descriptions" dnd-draggable="column" 
+                                    dnd-moved="analysisViewer.descriptions.splice($index, 1)" 
+                                    dnd-effect-allowed="move" 
+                                    ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong>No results found...</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="analysisViewer.viewer.configuration.type == 'xy'"> 
+                <div class="boxViewer">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.XFIELD</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.xfields">
+                                <li ng-repeat="column in analysisViewer.xfields" dnd-draggable="column" dnd-moved="analysisViewer.xfields.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong translate>FILTER_EMPTY</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="boxViewer">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.YFIELD</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.yfields">
+                                <li ng-repeat="column in analysisViewer.yfields" dnd-draggable="column" 
+                                    dnd-moved="analysisViewer.yfields.splice($index, 1)" 
+                                    dnd-effect-allowed="move" 
+                                    ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong>No results found...</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="boxViewer">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.VALUEFIELD</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.valueFields">
+                                <li ng-repeat="column in analysisViewer.valueFields" dnd-draggable="column" 
+                                    dnd-moved="analysisViewer.valueFields.splice($index, 1)" 
+                                    dnd-effect-allowed="move" 
+                                    ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong>No results found...</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div ng-if="analysisViewer.viewer.configuration.type == 'gauge'"> 
+                <div class="boxViewer">
+                    <div class="columnsViewer">
+                        <label translate>VIEWER.METRIC</label>
+                        <div class="sidebarViewer">
+                            <ul dnd-list="analysisViewer.metrics">
+                                <li ng-repeat="column in analysisViewer.metrics" dnd-draggable="column" dnd-moved="analysisViewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    <strong translate>FILTER_EMPTY</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-default ng-scope" type="button" ng-click="newInterval()">
+                        <span class="icon-plus"></span>
+                        <translate>LAYOUT.ADD</translate>
+                    </button>
+                </div>    
+                <div ng-repeat="interval in analysisViewer.viewer.configuration.axes[0].bands">
+                    <label translate>VIEWER.INTERVAL</label>
+                    <input type='color' 
+                           ng-model='interval.color'/>
+                    De
+                    <input type='number' style="width: 60px;"
+                           ng-model='interval.startValue'/>
+                    Até
+                    <input type='number' style="width: 60px;"
+                           ng-model='interval.endValue'/>
+                    <button ng-if="iLastInterval > 2" type="button" class="btn btn-default"
+                            ng-click="$parent.deleteInterval($parent.interval)">
+                        <span class="icon-minus"></span>
+                    </button>
+                </div>
+            </div>
+            <amchart ng-model="analysisViewer.viewer.configuration">
+            </amchart>
+
+            <div class="form-group">
+                <a href="#/presenter/viewer" class="btn btn-default" translate>
+                    LAYOUT.CANCEL
+                </a>
+                <button class="btn btn-primary" translate>
+                    LAYOUT.SAVE
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

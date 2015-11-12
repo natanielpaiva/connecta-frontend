@@ -1,0 +1,15 @@
+<div ng-controller="AppPageController">
+    <div ng-if="page.showTitle">
+        <div class="page-title">
+            <h3>
+                {{page.title}} - <span class="semi-bold">{{page.subTitle}}</span>
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            __PAGE_CONTENT__
+        </div>
+    </div>
+</div>

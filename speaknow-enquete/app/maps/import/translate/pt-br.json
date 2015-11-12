@@ -1,0 +1,10 @@
+
+{
+    "IMPORT": {
+        "IMPORT":"Importar",
+        "SHP":"Arquivo Shape",
+        "IMPORT_SHP":"Importar Arquivo Shape",
+        "FILE":"Arquivo",
+        "SELECT_SOURCE":"Selecione uma Origem"
+    }
+}

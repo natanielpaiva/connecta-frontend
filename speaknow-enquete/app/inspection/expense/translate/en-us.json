@@ -1,0 +1,20 @@
+{
+    "EXPENSE": {
+        "EXPENSE_TO":"to",
+        "EXPENSE":"Costs",
+        "REGISTER_EXPENSE":"Register Travel Costs",
+        "INSPECTION": "Inspection",
+        "REGISTRATION_PERIOD":"Registration period",
+        "AIRFARE":"Airfare",
+        "ACCOMMODATION":"Accommodation",
+        "DISTANCE":"Distance(Miles)",
+        "DISPLACEMENT_LAND":"Displacement Land",
+        "TOLLS":"Tolls",
+        "TAXI":"Taxi",
+        "COST":"Cost(Nonstop)",
+        "COST_DAILY":"Cost Daily",
+        "OTHERS":"Others",
+        "ATTACHMENTS":"ATTACHMENTS"
+      
+    }
+}

@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-xs-6 form-group">
+        <label for="domain" translate>ANALYSIS.DIRECTORIES</label>
+        <div style="height:250px; background-color:#F2F2F2; overflow:auto">
+             <div ui-tree="options" data-nodrag>
+                <ol ui-tree-nodes ng-model="component.catalog" >
+                  <li ng-repeat="item in component.catalog" ui-tree-node data-collapsed="true"
+                      ng-include="'app/presenter/analysis/template/_analysis-obiee-catalog-form.html'"></li>
+                </ol>
+              </div>
+        </div>
+    </div>
+</div>

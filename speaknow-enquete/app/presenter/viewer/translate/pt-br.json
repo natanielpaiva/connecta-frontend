@@ -1,0 +1,14 @@
+{
+    "VIEWER": {
+        "VIEWER" : "Visualizador",
+        "VIEWERS" : "Visualizadores",
+        "NAME": "Nome",
+        "TYPE": "Tipo",
+        "DESCRIPTION": "Descrição",
+        "METRIC":"Métrica",
+        "XFIELD":"Coluna X",
+        "YFIELD":"Coluna Y",
+        "VALUEFIELD": "Coluna de valor",
+        "FONT_SIZE" : "Tamanho da fonte"
+    }
+}

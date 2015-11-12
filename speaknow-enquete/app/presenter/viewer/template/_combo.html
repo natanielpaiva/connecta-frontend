@@ -1,0 +1,42 @@
+<div class="form-sidebar" >
+    <div class="form-group">
+        <label for="nome" translate>ANALYSIS.ANALYSIS</label>
+        <input type="text" class="form-control" ng-model="analysis"
+               typeahead="analysis as analysis.name for analysis in getAnalysis($viewValue)"
+               typeahead-loading="loadingAnalysis"
+               typeahead-min-length="3"
+               typeahead-wait-ms="600"
+               typeahead-focus-first="true"
+               typeahead-on-select="setAnalysisData($item)"
+               />
+        <span ng-show="loadingAnalysis" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+    </div>
+</div>
+<div ng-if="analysis">
+    <div class="form-sidebar-filter" >
+        <label for="columns" translate>ANALYSIS.COLUMNS</label>
+        <input type="search" ng-model="q" placeholder="filtrar colunas..." aria-label="filtrar colunas"
+               class="form-control" />
+    </div>
+    <div class="sidebarfilter"> 
+        <ul dnd-list="analysis.analysisColumns" >
+            <li
+                ng-repeat="column in analysis.analysisColumns| filter:q as results"
+                dnd-draggable="column"
+                dnd-effect-allowed="move"
+                dnd-moved="analysis.analysisColumns.splice($index, 1)">
+                {{column.label}}
+            </li>
+            <li  ng-if="results.length == 0">
+                <strong>No results found...</strong>
+            </li>
+        </ul>
+    </div>
+</div>
+<div ng-if="analysis" class="analysis-button">
+    <button class="btn btn-primary"
+            ng-click="getListAnalysis()" translate>
+        VIEWER.VIEW_ANALYSIS
+    </button>
+</div>
+

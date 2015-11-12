@@ -1,0 +1,58 @@
+<div class="dashboard-list">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="margin-bottom-single">
+        {{'DASHBOARD.DASHBOARD_LIST' | translate}}
+
+        <a class="btn btn-primary pull-right" href="#/dashboard/new">
+          <span class="icon-plus"></span>
+          <span translate>LAYOUT.NEW_M</span>
+        </a>
+      </h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <span class="btn-group">
+        <button btn-radio="'grid'" class="btn btn-default" ng-model="listview.mode">
+          <span class="glyphicon glyphicon-th-large"></span>
+          <translate class="sr-only">LAYOUT.SHOW_GRID</translate>
+        </button>
+        <button btn-radio="'list'" class="btn btn-default" ng-model="listview.mode">
+          <span class="glyphicon glyphicon-th-list"/>
+          <translate class="sr-only">LAYOUT.SHOW_LIST</translate>
+        </button>
+      </span>
+      <button class="btn btn-default" ng-click="filter = !filter">
+        <span class="icon-funnel"></span>
+        <span class="sr-only" translate>
+          LAYOUT.FILTER
+        </span>
+      </button>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group has-feedback">
+        <input class="form-control" type="text"
+          placeholder="{{'LAYOUT.SEARCH' | translate}}" autofocus />
+        <span class="glyphicon glyphicon-search form-control-feedback">
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="thumbnail-grid row">
+    <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12"
+      ng-repeat="dashboard in dashboards">
+      <input type="checkbox" class="hidden-checkbox"
+        id="item-{{dashboard.id}}" />
+      <label class="thumbnail-grid-item-inner hidden-checkbox-label"
+        for="item-{{dashboard.id}}">
+
+        <a href="#/dashboard/{{dashboard.id}}" class="thumbnail-grid-item-name">
+          {{dashboard.name}}
+        </a>
+
+      </label>
+    </div>
+  </div>
+</div>

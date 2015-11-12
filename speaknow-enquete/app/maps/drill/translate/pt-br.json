@@ -1,0 +1,28 @@
+{
+    "DRILL": {
+        "DRILL": "Drill",
+        "DRILLS": "Drills",
+        "ADD": "Cadastrar Drill",
+        "EDIT": "Editar Drill",
+        "VIEW": "Visualizar Drill",
+        "NAME": "Nome",
+        "FANTASY_NAME": "Nome Fantasia",
+        "ANALYSIS": "Analise",
+        "COUNTY_REGISTRATION": "Inscrição Municipal",
+        "ADDRESSES": "Endereços",
+        "ACTIONS":"Ações",
+        "RESPONSIBLE": "Responsável",
+        "SAVE_SUCCESS": "Salvo com sucesso!",
+        "ERROR_SAVING": "Erro ao salvar!",
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Fornecedor",
+        "CONFIRM_DELETE": "Deseja realmente excluir o Fornecedor?",
+        "ANALYSIS_SELECT<":"Selecione uma analise",
+        "RESPONSIBLE_NAME": "Nome",        
+        "RESPONSIBLE_REGISTER": "Adicionar Responsável",
+        "RESPONSIBLE_PHONE": "Telefone",
+        "RESPONSIBLE_EMAIL": "Email",
+        "RESPONSIBLE_CPF": "CPF"
+    }
+}

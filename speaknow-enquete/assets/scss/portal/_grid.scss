@@ -1,0 +1,402 @@
+/*** grids ***/
+.grid  {
+    clear: both;
+    margin-top: 0px;
+    /* margin-bottom: 25px; */
+    padding: 0px;
+}
+
+.grid:after, .grid:before {
+    display: table;
+    color: "";
+}
+
+.grid-title {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.grid-title h4 {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 7px;
+}
+
+.grid-title h4 i {
+    font-size: 14px;
+    margin-right: 5px;
+    color: #666;
+}
+
+.grid-title .tools,
+.grid-title .actions
+{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    margin-top: 6px;
+    float: right;
+}
+
+.grid-title .tools > a {
+    display: inline-block;
+    height: 16px;
+    margin-left:5px;
+}
+
+.grid-title .dropdown-menu i {
+    color: #000 ;
+}
+
+.grid-title .tools > a:hover {
+    text-decoration: none;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    opacity:.6;
+    filter:'alpha(opacity=60)';
+}
+
+.grid-title .actions > .btn-group {
+    margin-top: -12px;
+}
+
+.grid-title .actions > .btn {
+    padding: 4px 10px;
+    margin-top: -13px;
+}
+
+.grid-title .actions > .btn-group > .btn {
+    padding: 4px 10px;
+    margin-top: -1px;
+}
+
+.grid-title .actions > .btn.mini {
+    margin-top: -12px;
+    padding: 4px 10px;
+}
+
+.grid-title .pagination.pagination-small {
+    float: right !important;
+    display: inline-block !important;
+    margin: 0px;
+    margin-top: -2px;
+}
+.grid .solid .grid-title{
+    color:#fff !important;
+    border-bottom:1px solid #fff;
+}
+.grid-body {
+    clear: both;
+    padding: 0;
+}
+
+.grid-body.light-blue, .grid.light-blue {
+    background-color: #bfd5fa  !important;
+}
+
+.grid-body.blue, .grid.blue {
+    background-color: #58acf3 !important;
+}
+
+.grid-body.red, .grid.red {
+    background-color: #f35958 !important;
+}
+
+.grid-body.yellow, .grid.yellow {
+    background-color: #ffb848 !important;
+}
+
+.grid-body.green, .grid.green {
+    background-color: #0aa699 !important;
+}
+
+.grid-body.purple, .grid.purple {
+    background-color: #852b99 !important;
+}
+
+.grid-body.light-grey, .grid.light-grey {
+    background-color: #fafafa !important;
+}
+
+.grid-body.dark-grey, .grid.dark-grey {
+    background-color: #555555 !important;
+}
+
+.grid-body .btn-toolbar {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.grid-body .btn-group {
+    margin: 0px !important;
+    padding: 0px !important;
+    margin-bottom: 10px
+}
+
+/*  draggable girds */
+
+.sortable .grid .grid-title {
+    cursor: move;
+}
+.ui-sortable{
+    min-height:0px !important;
+}
+.ui-sortable-placeholder {
+    border: 1px dotted black;
+    visibility: visible !important;
+    height: 100% !important;
+
+}
+
+.ui-sortable-placeholder * {
+    visibility: hidden;
+}
+
+.sortable-box-placeholder {
+    background-color: #f5f5f5;
+    border: 1px dashed #DDDDDD;
+    display: block;
+    /* float: left;*/
+    margin-top: 0px !important;
+    margin-bottom: 24px !important;
+}
+
+.sortable-box-placeholder * {
+    visibility:hidden;
+}
+
+/*** Solid colored grid ***/
+
+.grid.solid .grid-title .tools {
+    margin-top: 2px;
+    border: 0px;
+}
+
+.grid.solid .grid-title {
+    margin-bottom: 5px;
+    border: 0px;
+    padding:13px 15px 6px;
+    border-bottom:1px solid rgba(255,255,255,0.35) !important;
+
+}
+.grid.solid .grid-title h4{
+    color:#fff;
+}
+.grid.solid .grid-body{
+    color:#fff;
+    padding:20px;
+}
+.grid.solid .grid-body h3{
+    color:#fff;
+}
+
+
+/*** simple grid ***/
+
+.grid.simple {
+    padding:0px !important
+
+}
+.grid.simple .grid-title {
+    padding:14px 15px 7px 15px;
+    border-bottom: 1px solid #eee;
+    color: #282323 !important;
+    background-color: #fff;
+}
+
+.grid.simple .grid-title > .actions > .btn > i {
+    color: #fff !important;
+}
+
+.grid.simple .grid-title .tools {
+    margin-top: 0px;
+    position:relative;
+}
+
+.grid.simple .grid-title .tools a,
+.grid.solid .grid-title .tools a{
+    position:relative;
+    transition: all 0.1s linear 0s;
+}
+
+.grid.simple .grid-title .tools > *,
+.grid.solid .grid-title .tools  > *{
+    display: block;
+}
+
+.grid.simple .form-actions{
+    margin-right:-26px !important;
+    margin-left:-26px !important;
+    margin-bottom:-26px !important;}
+/* grid buttons */
+
+.grid.simple.transparent .grid-body {
+    background-color:transparent !important;
+    border:none;
+}
+.grid.simple .grid-body {
+    background-color: #fff;
+    padding: 26px;
+    border:1px solid #dddddd;
+    color:#6f7b8a;
+}
+.grid.simple .grid-body.no-padding{
+    padding: 0px;
+}
+.grid.simple .grid-body .wrap-body{
+    padding: 0 26px;
+    padding-top:10px;
+}
+.grid.simple .grid-body.no-border{
+    border:0px;
+    padding-top:0px;
+}
+.grid.simple .grid-body h4{
+    color:#282323;
+}
+.grid.simple .grid-body h3{
+    color:#282323;
+}
+.grid.simple .grid-title {
+    margin-bottom: 0px;
+    border:1px solid #dddddd;
+    border-bottom:0px;
+}
+.grid.simple .grid-title.no-border{
+    border:0px;
+    border-bottom:0px;
+}
+.grid.simple.transparent .grid-title {
+    border:none;
+    border-bottom:1px solid #D7DBE0;
+    background-color:transparent;
+}
+.grid.simple.vertical.green{
+    border-left:4px solid #0aa699;
+    border-top:none !important;
+}
+
+.grid.simple.horizontal.red .grid-title {
+    border-top:4px solid #f35958;
+}
+
+.grid.simple.horizontal.yellow .grid-title {
+    border-top:4px solid #ffb848;
+}
+.grid.simple.horizontal.green .grid-title {
+    border-top:4px solid #0aa699;
+}
+
+.grid.simple.horizontal.purple .grid-title {
+    border-top:4px solid #852b99;
+}
+
+.grid.simple.horizontal.grey .grid-title {
+    border-top:4px solid #555555;
+}
+
+.grid.simple.horizontal.light-grey .grid-title {
+    border-top:4px solid #aaa;
+}
+
+/*** Box grid ***/
+.grid.box {
+    padding:0px !important
+}
+
+.grid.box .grid-title {
+    padding:8px 10px 2px 10px;
+    border-bottom: 1px solid #eee;
+    color: #fff !important;
+}
+
+.grid.box .grid-title > .actions > .btn > i {
+    color: #fff !important;
+}
+
+.grid.box .grid-title .tools {
+    margin-top: 3px;
+}
+.grid.box .grid-title .tools a{
+    width:23px;
+    height:23px
+}
+
+/* grid buttons */
+.grid.box .grid-body {
+    background-color: #fff;
+    padding: 10px;
+}
+
+.grid.box .grid-title {
+    margin-bottom: 0px;
+}
+
+.grid.box.blue .grid-title {
+    background-color: #58acf3;
+}
+
+.grid.box.blue {
+    border: 1px solid #b4cef8;
+    border-top: 0;
+}
+
+.grid.box.red .grid-title {
+    background-color: #f35958;
+}
+
+.grid.box.red {
+    border: 1px solid #f35958;
+    border-top: 0;
+}
+
+.grid.box.yellow .grid-title {
+    background-color: #ffb848;
+}
+
+.grid.box.yellow {
+    border: 1px solid #fccb7e;
+    border-top: 0;
+}
+
+.grid.box.green .grid-title {
+    background-color: #0aa699;
+}
+
+.grid.box.green {
+    border: 1px solid #0aa699;
+    border-top: 0;
+}
+
+.grid.box.purple .grid-title {
+    background-color: #852b99;
+}
+
+.grid.box.purple {
+    border: 1px solid #af5cc1;
+    border-top: 0;
+}
+
+.grid.box.grey .grid-title {
+    background-color: #555555;
+}
+
+.grid.box.grey {
+    border: 1px solid #9d9c9c;
+    border-top: 0;
+}
+
+.grid.box.light-grey .grid-title {
+    background-color: #aaa;
+}
+
+.grid.box.light-grey {
+    border: 1px solid #eee;
+    border-top: 0;
+}

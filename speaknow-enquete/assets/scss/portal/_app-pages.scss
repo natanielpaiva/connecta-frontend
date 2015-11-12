@@ -1,0 +1,72 @@
+$pageGutter:1em;
+
+// Configurando o container das views
+.page-container {
+  background-color: rgba($white, 0.9);
+  margin-left: $sidebarSize;
+  margin-top: $headerHeight + (2*$pageGutter);
+  transition: margin $defaultAnimationDuration;
+  padding:$pageGutter;
+  border-radius:0.25em;
+  @include clearfix();
+
+  h1, h3 {
+      @extend .margin-top-zero;
+  }
+
+  &.flat {
+    margin-left: ($sidebarSize - 1);
+    margin-top: ($headerHeight + (2*$pageGutter)) - 1.4;
+    background-color: transparent;
+    padding:0;
+  }
+}
+.hide-menu .page-container {
+    margin-left: $miniSidebarSize;
+}
+.hide-menu .page-container.flat {
+    margin-left: $miniSidebarSize - 1.15;
+}
+
+.show-tabs .page-container {
+    margin-right: $sidebarSize;
+}
+
+/*** Page title ***/
+.page-title {
+    padding: 0px;
+    letter-spacing: -1px;
+    display: block;
+    color: #666;
+    margin: 0 0 10px;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+.page-title h3{
+    display:inline-block;
+    top:-5px;
+    position:relative;
+    width: 83%;
+}
+.page-title p{
+    color:#63696d;
+    letter-spacing:0.5px
+}
+.page-title i{
+    display:inline-block;
+    color:#73777c;
+    font-size:30px;
+    margin-right:12px;
+    position: relative;
+    top: 7px;
+    float:left
+}
+.page-title small {
+    font-size: 14px;
+    letter-spacing: 0px;
+    font-weight: 300;
+    color: #888;
+}
+.page-title .actions{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}

@@ -1,0 +1,56 @@
+.user-avatar-field {
+  display: block;
+
+  .user-image-container {
+    width: 100%;
+    float:left;
+    margin-bottom: 10px;
+  }
+
+  .user-avatar-dropzone, .img-user-quad {
+    width: 200px;
+    height: 200px;
+    padding: 0;
+    margin:0;
+  }
+
+  .user-avatar-dropzone {
+    float: left;
+  }
+
+  .img-user-quad {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-top: 8px;
+  }
+
+
+  .user-avatar-info {
+   float: left;
+   margin-left: 10px;
+   width: 700px;
+
+    span:first-child {
+      float: left;
+      display: block;
+      width: 100%;
+    }
+
+    .btn-container {
+      display: block;
+      width: 100%;
+      margin: 8px auto;
+      float: left;
+    }
+
+    .btn-user-info {
+      width: 170px;
+    }
+  }
+}
+
+.change-password-container {
+  margin-top: 20px;
+}
+

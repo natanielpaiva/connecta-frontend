@@ -1,0 +1,30 @@
+<div class="inner-modal">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 translate>INSPECTION.PRODUCT.ADD</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="product" translate>INSPECTION.PRODUCT.PRODUCT</label>
+                <select id="product" name="product" class="form-control" 
+                        ng-options="product as product.name for product in products track by product.id"
+                        ng-model="product" required/>
+                </select>
+            </div>
+
+            <a ng-click="cancel()"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-click="save(product)">
+                LAYOUT.SAVE
+            </button>
+            </form>
+        </div>
+    </div>
+
+
+</div>

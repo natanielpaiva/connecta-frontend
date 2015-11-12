@@ -1,0 +1,30 @@
+/* 
+    Created on : 27/02/2015, 18:45:42
+    Author     : Vinicius Pires <vinicius.pires@cds.com.br>
+*/
+.portal-type-switcher {
+    .portal-type-switcher-item {
+        margin:0 !important;
+        padding:0;
+        
+        *:not(.portal-type-switcher-input) {
+            padding:0;
+            background-color:$lightGray;
+            border-radius: 0.05em;
+            color:$white;
+            width:1.1em;
+            line-height:1.1em;
+            display:inline-block;
+            margin:0 0.1em 0 0;
+            font-size:$fontSizeBig;
+            text-align:center;
+        }
+    }
+    .portal-type-switcher-input {
+        opacity:0;
+
+        &:checked ~ *:not(.portal-type-switcher-input) {
+            background-color:$presenterBlue;
+        }
+    }
+}

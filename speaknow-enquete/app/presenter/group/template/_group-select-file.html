@@ -1,0 +1,92 @@
+<div class="form-group">
+    <label for="nome" translate>GROUP.SELECT_MEDIA</label>
+    <input type="text" name="media"
+           class="form-control"
+           ng-change="change()" ng-blur="change()"
+           ng-model="analysis.name"
+           typeahead="analysis as analysis.name for analysis in getAnalysis($viewValue)"
+           typeahead-loading="loadingAttributes"
+           typeahead-min-length="3"
+           typeahead-wait-ms="600"/>
+</div>
+
+<div class="form-group">
+    <div >
+        <label>GROUP.GET_MEDIA</label>
+    </div>
+</div>
+<div class="gallery row">
+    <div class="container-gallery">
+        <div class="row">
+            <div  class="col-md-12">
+
+                <div >
+                    <ul dnd-list="group.singleSource.lists.singleSourceGet"  >
+                        <li ng-repeat="item in group.singleSource.lists.singleSourceGet"
+                            dnd-draggable="item"
+
+                            dnd-moved="group.singleSource.lists.singleSourceGet.splice($index, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="group.singleSource.selected = item"
+                            ng-class="{'selected': group.singleSource.selected === item}"
+                            ng-attr-style="background-image:url({{item.path}})">
+                            <div ng-if="item.fileType === 'VIDEO'">
+                                <video width="120" height="100" >
+                                    <source ng-if="item.path" src="{{item.path}}" type="video/mp4">
+                                    Your browser does not support HTML5 video.
+                                </video>
+                                <div class="fill-parent"></div>
+                            </div>
+
+                            <div class="media-item">
+                                {{item.name}}
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="form-group">
+    <div >
+        <label>GROUP.SET_MEDIA</label>
+    </div>
+</div>
+<div class="gallery row">
+    <div class="container-gallery">
+        <div class="row">
+            <div  class="col-md-12">
+
+                <div>
+                    <ul dnd-list="group.singleSource.lists.singleSourceSet" >
+                        <li ng-repeat="item in group.singleSource.lists.singleSourceSet"
+                            dnd-draggable="item"
+                            dnd-moved="group.singleSource.lists.singleSourceSet.splice($index, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="group.singleSource.selected = item"
+                            ng-class="{'selected': group.singleSource.selected === item}"
+                            ng-attr-style="background-image:url({{item.path}})">
+                            <div ng-if="item.fileType === 'VIDEO'">
+                                <video  width="120" height="100" >
+                                    <source ng-if="item.path" src="{{item.path}}" type="video/mp4">
+                                    Your browser does not support HTML5 video.
+                                </video>
+                                <div class="fill-parent"></div>
+                            </div>
+
+                            <div class="media-item">
+                                {{item.name}}
+                            </div>
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

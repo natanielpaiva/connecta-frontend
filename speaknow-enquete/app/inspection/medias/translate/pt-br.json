@@ -1,0 +1,15 @@
+{
+    "MEDIA": {
+        "ADD":"Adicionar Mídia",
+        "MEDIA":"Mídia",
+        "MEDIAS":"Mídias",
+        "NAME":"Nome",
+        "TYPE":"Tipo",
+        "DESCRIPTION":"Descrição",
+        "PROJECT":"Projeto",
+        "DROP_FILE_HERE": "Arraste ou clique aqui",
+        "INVALID_DOCUMENT":"Mídia inválido.",
+        "VIEW":"Visualizar Mídia",
+        "EXTENSION":"Extensão"
+    }
+}

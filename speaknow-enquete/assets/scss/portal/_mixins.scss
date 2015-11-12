@@ -1,0 +1,49 @@
+/* 
+    Created on : 05/02/2015, 18:24:02
+    Author     : pires
+*/
+
+// Mixin para limpar containers de floats
+@mixin clearfix() {
+    &:after {
+        content:' ';
+        display:block;
+        clear:both;
+    }
+}
+
+// Margem top padronizada
+@mixin margin-top($em) {
+    margin-top: $em*1em;
+}
+// Expõe classes utilitárias para uso rápido no HTML
+.margin-top-zero {
+    @include margin-top(0);
+}
+.margin-top-single {
+    @include margin-top(1);
+}
+.margin-top-double {
+    @include margin-top(2);
+}
+.margin-top-triple {
+    @include margin-top(3);
+}
+
+// Margem bottom padronizada
+@mixin margin-bottom($em) {
+    margin-bottom: $em*1em;
+}
+// Expõe uma classe para uso rápido no HTML
+.margin-bottom-zero {
+    @include margin-bottom(0);
+}
+.margin-bottom-single {
+    @include margin-bottom(1);
+}
+.margin-bottom-double {
+    @include margin-bottom(2);
+}
+.margin-bottom-triple {
+    @include margin-bottom(3);
+}

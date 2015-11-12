@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{isEditing ? 'LAYERVIEWER.EDIT' : 'LAYERVIEWER.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div id="map"></div>
+
+        <form name="formulario" ng-submit="submit()">
+
+            <div class="form-group">
+                <label for="name" translate class="required">LAYERVIEWER.NAME</label>
+                <input type="text" class="form-control" id="name" name="name" required
+                       placeholder="{{'LAYERVIEWER.NAME'|translate}}"
+                       ng-model="layerViewer.nm_viewer" />
+                <div ng-show="formulario.$submitted || formulario.name.$touched" 
+                     ng-messages="formulario.name.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+
+            <div class="portal-type-switcher">
+                <label for="type" translate>LAYERVIEWER.TYPE</label></br>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Default">
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="1" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"/>
+                    <span class="icon-geoserver"></span>                    
+                </label>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Heatmap"> 
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="2" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"/>
+                    <span class="icon-heatmap"></span>
+                </label>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Mapviewer"> 
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="3" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"/>
+                    <span class="icon-cluster"></span>
+                </label>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Analysis"> 
+                    <input type="radio" class="portal-type-switcher-input" name="type" id="layerViewerTypeEntity"  
+                           ng-model="layerViewer.layerViewerTypeEntity.id" value="4" required ng-change="getLayerByType(layerViewer.layerViewerTypeEntity.id)"/>
+                    <span class="icon-analysis"></span>
+                </label>
+
+                <div ng-show="formulario.$submitted || formulario.type.$touched" 
+                     ng-messages="formulario.type.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+            </br>
+
+            <div class="form-group">
+                <label for="layer" translate>LAYERVIEWER.LAYER</label>
+                <select class="form-control" name="layer" id="layerEntity" required
+                        ng-model="layerViewer.layerEntity"
+                        ng-options="layer.ds_layer for layer in layers"
+                        ng-change="generateComboColumns()">
+                    <option value="">Selecione</option>
+                </select>
+                <div ng-show="formulario.$submitted || formulario.layer.$touched" 
+                     ng-messages="formulario.layer.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="impl" translate>LAYERVIEWER.IMPL</label>
+                <select class="form-control" name="impl" ng-model="layerViewer.viewerTypeImplEntity.id" required>
+                    <option value="">Selecione</option>
+                    <option value="1">OpenLayers</option>
+                    <option value="2">ESRI</option>
+                </select>
+                <div ng-show="formulario.$submitted || formulario.impl.$touched" 
+                     ng-messages="formulario.impl.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+            <div ng-if="types[layerViewer.layerViewerTypeEntity.id].template"
+                 ng-include="types[layerViewer.layerViewerTypeEntity.id].template"
+                 class="am-fade-and-slide-bottom">
+            </div>
+
+            <a href="#/maps/layer-viewer"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" ng-disabled="formulario.$invalid || layerViewer.parameters.length < 1" translate >
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

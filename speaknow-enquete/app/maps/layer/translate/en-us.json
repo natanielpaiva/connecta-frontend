@@ -1,0 +1,19 @@
+{
+    "LAYER": {        
+        "ADD": "Add Layer",
+        "EDIT": "Edit Layer",
+        "VIEW":"View Layer",
+        "LAYER":"Layer",
+        "SOURCE":"Source",
+        "SOURCE_LAYER":"Source Layers",
+        "DESCRIPTION":"Description",
+        "NAME":"Name",
+        "SELECT_LAYER":"Select Layer",
+        "SELECT_SOURCE":"Select Layer Source",
+        "TITLE_CONFIRM_DELETE": "Layer Delete",
+        "CONFIRM_DELETE": "Do you really want to delete Layer?",
+        "ADDED_SUCCESS": "Successfully Added",
+        "REMOVE_SUCCESS":"Successfully Removed",
+        "ERROR_REMOVING": "Error Removing"
+    }
+}

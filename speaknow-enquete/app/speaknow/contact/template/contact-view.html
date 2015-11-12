@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{contact.name}}</h3>
+
+        <!--        //TODO filtros e search da Grid-->
+        <div class="margin-top-single">
+            <a href="#/speaknow/contact"
+               class="btn btn-default" translate>
+                LAYOUT.BACK                     
+            </a>
+            <!--//TODO previous e back nos items (ouch)-->
+<!--            <button type="button" class="btn btn-default" >
+                <span class="icon-arrow-bold-left"></span></button>
+            <button type="button" class="btn btn-default" >
+                <span class="icon-arrow-bold-right"></span></button>-->
+
+            <button type="button" class="btn btn-default" ng-show="!readOnly"
+                    conf-modal="modalParams" conf-modal-args="[contact.id]">
+                <span class="icon-dump"></span>
+            </button>
+
+            <a href="#/speaknow/contact/{{contact.id}}/edit" class="btn btn-default" ng-show="!readOnly">
+                <span class="icon-pencil"></span>
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well margin-top-single margin-bottom-single">
+                    <p ng-if="contact.name">
+                        <strong translate>CONTACT.NAME</strong>: 
+                        {{contact.name}}
+                    </p>
+                    <p ng-if="contact.email">
+                        <strong translate>CONTACT.EMAIL</strong>: 
+                        {{contact.email}}
+                    </p>
+                    <p ng-if="contact.phone">
+                        <strong translate>CONTACT.PHONE</strong>: 
+                        {{contact.phone}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

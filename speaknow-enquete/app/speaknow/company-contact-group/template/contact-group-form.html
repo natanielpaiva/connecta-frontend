@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>COMPANYGROUP.COMPANYGROUP</h3>
+    </div>
+</div>
+
+<!--Info Interaction-->
+<div class="row" ng-if="company">
+    <div class="col-md-12">
+        <div class="well well-sm">
+            <h4>{{company.name}}</h4>
+            <p>{{company.description}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+            <div class="form-group">
+                <label for="nome" translate>COMPANYGROUP.NAME</label>
+                <input type="text" class="form-control" id="nome" name="nome"
+                       ng-model="contactGroup.name" required/>
+                <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+            <div class="form-group">
+                <label for="type" translate>COMPANYGROUP.DESCRIPTION</label>
+                <input type="text" class="form-control" id="type" name="type"
+                       ng-model="contactGroup.description" required/>
+                <div ng-show="formulario.type.$touched" ng-messages="formulario.type.$error"
+                     ng-messages-include="portal-validation-messages"></div>
+            </div>
+
+            <a href="#/speaknow/company/view"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

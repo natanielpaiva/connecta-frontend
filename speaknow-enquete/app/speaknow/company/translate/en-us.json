@@ -1,0 +1,30 @@
+{
+    "COMPANY": {
+        "COMPANIES": "Companies",
+        "COMPANY": "Company",
+        "NAME": "Name",
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "IMAGE":"Image",
+        "ADDRESS": "Address",
+        "TYPE": "Sector",
+        "NO_RESULT":"No Results",
+        "IMAGE_QUAD": "Image Square",
+        "IMAGE_RECT": "Image Rectangle",
+        "DROP_FILE_HERE":"Drop or click here",
+        "DESCRIPTION":"Description",
+        "GROUPS":"Contacts Groups",
+        "REMOVE_SUCCESS": "Successfully Removed",
+        "REMOVE_GROUP_SUCCESS": "Successfully Removed",
+        "SUCCESS":"Success",
+        "VALIDATE_ADDRESS":"Invalid address",
+        "EXITST":"Company exists",
+        "VALIDATION" : {
+            "ADDRESS":"Endereço inválido",
+            "INVALID_DOCUMENT":"Invalid Image.",
+            "IMAGESIZE":"A imagem não deve ser maior que 1mb",
+            "IMAGEFORM":"A imagem deve ser retangular",
+            "IMAGERESOLUTION": "É recomendado utilizar a resolução 1080x512HD"
+        }
+    }
+}
