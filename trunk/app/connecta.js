@@ -202,7 +202,7 @@ define([
               $rootScope.$broadcast('layout.notify', rejection.data);
             },
             401: function(rejection) { // UNAUTHORIZED
-              $rootScope.$broadcast('login.request_unathorized', rejection);
+             // $rootScope.$broadcast('login.request_unathorized', rejection);
               $rootScope.$broadcast('layout.notify', rejection.data);
             },
             403: function(rejection) { // FORBIDDEN

@@ -212,8 +212,6 @@ define([
             ConnectaGeoServiceDrill.showViewer($scope.drill.drillLevels[$scope.actualDrillLevel].childViewer);
             //TODO
             //recriar menu e legenda
-
-
             if (hasPresenter && typeof presenterDrill == 'undefined') {
                 if (window.presenterApp.ViewerController.analysisColum.indexOf("FFFFFF") > -1) {
                     window.presenterApp.ViewerController.analysisColum.splice(window.presenterApp.ViewerController.analysisColum.indexOf("FFFFFF"), 1);
@@ -265,10 +263,6 @@ define([
             } else {
                 $scope.MAP.__zoomMapToMaxExtent();
             }
-
-
-
-
         };
 
 
