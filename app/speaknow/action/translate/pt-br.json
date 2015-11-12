@@ -51,7 +51,7 @@
             "DONE": "Feito",
             "PARAM": {
                 "NAME": "Nome do parâmetro",
-                "TITLE": "Título do parâmetro",
+                "TITLE": "Pergunta",
                 "TAG": "Etiqueta do parâmetro",
                 "TYPE": "Tipo da resposta",
                 "ADD": "Adicionar Parâmetro",
@@ -59,10 +59,10 @@
                 "PARAM.OPTIONS": "Opções de parâmtros",
                 "ADD_OPT": "Adicionar opção de parâmetro",
                 "NEW": "Novo parâmetro",
-                "VALUE": "Valor",
+                "VALUE": "Texto",
                 "TEXT": "Texto",
                 "ANSWER":"Resposta",
-                "KEY": "Chave",
+                "KEY": "Opção",
                 "PARAM_TYPE": {
                     "TEXT": "Texto",
                     "URL": "Url",

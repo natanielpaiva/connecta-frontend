@@ -6,29 +6,28 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form novalidate name="singlesourceForm" ng-submit="submit()">
+        <form novalidate name="formulario" ng-submit="submit()">
 
             <div class="form-group">
                 <label for="model-nome" translate>SINGLESOURCE.NAME</label>
                 <input type="text" name="nome" ng-model="typeSingleSource.name"
                        id="model-nome" required class="form-control" />
-                <div ng-if="singlesourceForm.nome.$dirty" ng-messages="singlesourceForm.nome.$error"
+                <div ng-if="formulario.nome.$dirty" ng-messages="formulario.nome.$error"
                      ng-messages-include="portal-validation-messages"></div>
             </div>
             
-            <p class="bold" translate>SINGLESOURCE.TYPE_MEDIA</p>
-            <div class="portal-type-switcher margin-bottom-single">
-                <label ng-repeat="(key, type) in types" class="radio-inline portal-type-switcher-item"
-                       title="{{type.name}}">
-                    <input type="radio" class="portal-type-switcher-input" name="type" 
-                           ng-model="typeSingleSource.type"
-                           ng-value="type" />
-                    <span class="portal-type-switcher-icon {{type.icon}}"></span>
-                    <span class="portal-type-switcher-title" translate>{{'SINGLESOURCE.'+type.name}}</span>
+
+            <div class="portal-type-switcher">
+                <p class="bold" translate>SINGLESOURCE.TYPE_MEDIA<p>
+                <label ng-repeat="tp in types"  class="radio-inline portal-type-switcher-item">
+                    <input type="radio" ng-model="typeSingleSource.type" name="type" 
+                           class="portal-type-switcher-input" id="single-source-type-{{tp.id}}" ng-value="tp" /> 
+                    <span ng-if="tp.id === 'FILE'" class="icon-file3"></span>
+                    <span ng-if="tp.id === 'URL'" class="icon-link"></span>
                 </label>
             </div>
 
-            <div ng-if="typeSingleSource.type.template" class="am-collapse" ng-include="'app/presenter/singlesource/template/' + typeSingleSource.type.template"></div>
+            <div class="am-collapse" ng-include="'app/presenter/singlesource/template/' + typeSingleSource.type.template"></div>
 
             <div key-value class="well well-sm clearfix" ng-model="typeSingleSource.singleSourceAttributes">
                 <div key-value-item class="row">
@@ -52,7 +51,7 @@
                         <div class="form-group">
                             <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
                             <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
-                                    ng-model="$parent.$parent.$item.attributeType" class="form-control" required>
+                                    ng-model="$parent.$parent.$item.attributeType" class="form-control">
                                 <option value="" translate>LAYOUT.SELECT</option>
                             </select>
                         </div>
@@ -60,15 +59,13 @@
                 </div>
             </div>
 
-            <div class="text-right">
-                <a href="#/presenter/singlesource"
-                   class="btn btn-default" translate>
-                    LAYOUT.CANCEL
-                </a>
-                <button class="btn btn-primary" translate ng-disabled="singlesourceForm.$invalid">
-                    LAYOUT.SAVE
-                </button>
-            </div>
+            <a href="#/presenter/singlesource"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate>
+                LAYOUT.SAVE
+            </button>
         </form>
     </div>
 </div>

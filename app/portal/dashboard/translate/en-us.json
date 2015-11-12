@@ -1,32 +1,8 @@
 {
-    "DASHBOARD": {
-        "DASHBOARD_LIST": "Dashboards",
-        "DASHBOARD_NAME": "Dashboard name",
-        "NEW_SECTION": "New section",
-        "NO_ITEM": "Nothing yet. Drag a viewer here to start.",
-        "SEARCH_VIEWERS": "Search viewers",
-        "DASHBOARD_SETTINGS": "Dashboard settings",
-        "DASHBOARD_ITEM_SETTINGS": "Item settings",
-        "REMOVE_ITEM": "Remove item",
-        "MAX_ROWS": "Maximum of rows",
-        "ROW_HEIGHT": "Row height",
-        "COLUMNS": "Columns",
-        "PADDING": "Padding",
-        "TRANSITION_INTERVAL": "Transition interval",
-        "ANIMATION_DURATION": "Animation duration",
-        "SECTION_TRANSITION_ANIMATION": "Section transition animation",
-        "DISPLAY_MODE": "Section display mode",
-        "VERTICAL": "Vertical scroll",
-        "HORIZONTAL": "Pages",
-        "BACKGROUND_COLOR": "Background color",
-        "BACKGROUND_IMAGE": "Background image",
-        "FADE":"Fade",
-        "SLIDE_UP":"Slide up",
-        "SLIDE_DOWN":"Slide down",
-        "SLIDE_RIGHT":"Slide right",
-        "SLIDE_LEFT":"Slide left",
-        "CONTENT_HEIGHT":"Content height",
-        "CONTENT_WIDTH":"Content width",
-        "OPACITY":"Opacity"
-    }
+  "DASHBOARD": {
+    "DASHBOARD_LIST":"Dashboards",
+    "DASHBOARD_NAME":"Dashboard name",
+    "NEW_SECTION" : "New section",
+    "NO_ITEM" : "Nothing yet. Drag a viewer here to start."
+  }
 }

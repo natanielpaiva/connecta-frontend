@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-6">
         <div class="input-group">
-            <input type="search" ng-model="q" class="form-control" placeholder="{{'LAYOUT.SEARCH'| translate}}">
+            <input type="text" class="form-control" placeholder="{{'LAYOUT.SEARCH'| translate}}">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-search"></span>
             </span>
@@ -44,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="vw in viewers | filter:q as results" class="row">
+                <tr ng-repeat="vw in viewers" class="row">
                     <td class="col-md-1">
                         <label class="reset-spacing full-size-block cursor-pointer">
                             <input type="checkbox" class="reset-spacing cursor-pointer" />
@@ -52,12 +52,12 @@
                     </td>
                     <td class="text-left col-md-8">
                         <a href="#/presenter/viewer/{{vw.id}}/edit" class="full-size-block link-no-state">
-                            {{vw.name}}
+                            {{vw.viewer.name}}
                         </a>
                     </td>
                     <td class="text-left col-md-8">
                         <a href="#/presenter/viewer/{{vw.id}}/edit" class="full-size-block link-no-state">
-                            {{vw.configuration.type}}
+                            {{vw.viewer.configuration.type}}
                         </a>
                     </td>
                     <td class="col-md-1">

@@ -7,11 +7,11 @@ define([
     'portal/layout/service/notify',
     'portal/layout/service/modalTranslate'
 ], function (maps) {
-    return maps.lazy.controller('AppliedBudgetFormController', function ($scope, AppliedBudgetService, ConnectaGeoServiceAppliedBudget, MunicipalBudgetService, BudgetAreaApplicationService, notify, $location, $routeParams, $translate, $http, $modalTranslate) {
+    return maps.lazy.controller('AppliedBudgetFormController', function ($scope, AppliedBudgetService, ConnectaGeoService, MunicipalBudgetService, BudgetAreaApplicationService, notify, $location, $routeParams, $translate, $http, $modalTranslate) {
         $scope.appliedBudget = null;
         $scope.isEditing = false;
         $scope.municipalBudgets = null;
-        $scope.budgetAreaApplications = null;
+        $scope.budgetApplicationAreas = null;
 
         //translate buttons text
         $scope.buttonsText = {
@@ -46,7 +46,7 @@ define([
 
 
         BudgetAreaApplicationService.list().then(function (response) {
-            $scope.budgetAreaApplications = response.data;
+            $scope.budgetApplicationAreas = response.data;
         }, function (response) {
             console.info("error", response);
         });
@@ -57,7 +57,7 @@ define([
             $scope.isEditing = true;
 
             AppliedBudgetService.get($routeParams.id).success(function (data) {
-                $scope.appliedBudget = data;               
+                $scope.appliedBudget = data;
                 var longitude = $scope.appliedBudget.geomWKT.substring(6, $scope.appliedBudget.geomWKT.indexOf(" "));
                 var latitude = $scope.appliedBudget.geomWKT.substring($scope.appliedBudget.geomWKT.indexOf(" ") + 1, $scope.appliedBudget.geomWKT.indexOf(")"));
 
@@ -75,12 +75,10 @@ define([
 
 
                 var interval = setInterval(function () {
-                    if (typeof $scope.formulario !=='undefined' && $scope.formulario.description.$viewValue !== "") {
+                    if ($scope.formulario.description.$viewValue !== "") {
                         //angular.element("#municipalBudget").find("option[label='" + $scope.appliedBudget.municipalBudget.elementName + "']").attr('selected', 'true');
-                        angular.element("#budgetAreaApplication").find("option[label='" + $scope.appliedBudget.budgetApplicationArea.description + "']").attr('selected', 'true');
-                        angular.element("#budgetAreaApplication").trigger('change');
+                        angular.element("#budgetAreaApplication").find("option[label='" + $scope.appliedBudget.budgetAreaApplication.description + "']").attr('selected', 'true');
                         angular.element("#municipalBudget").find("option[label='" + $scope.appliedBudget.municipalBudget.programName + '----> ' + $scope.appliedBudget.municipalBudget.activityProjectName + "']").attr('selected', 'true');
-                        angular.element("#municipalBudget").trigger('change');
                         clearInterval(interval);
                     }
 
@@ -90,11 +88,11 @@ define([
                 var int2 = setInterval(function () {
                     //if (angular.element('.row.ng-scope:first>div>h3').text() == "Editar Camada") {
                     if (angular.element('.row.ng-scope:first>div>h3').text() === $scope.editText) {
-                        ConnectaGeoServiceAppliedBudget.createMap();
+                        ConnectaGeoService.createMap();
 
                         var interval2 = setInterval(function () {
-                            if ((typeof ConnectaGeoServiceAppliedBudget.map !== 'undefined' && ConnectaGeoServiceAppliedBudget.map !== null) && ConnectaGeoServiceAppliedBudget.map.__objLayers.length > 0) {
-                                ConnectaGeoServiceAppliedBudget.addMarker(featurePoint);
+                            if ((typeof ConnectaGeoService.map !== 'undefined' && ConnectaGeoService.map !== null) && ConnectaGeoService.map.__objLayers.length > 0) {
+                                ConnectaGeoService.addMarker(featurePoint);
                                 clearInterval(interval2);
                             }
                         }, 500);
@@ -106,17 +104,17 @@ define([
 
             });
         } else {
-            ConnectaGeoServiceAppliedBudget.createMap();
+            ConnectaGeoService.createMap();
         }
 
 
         $scope.zoomMapToFullExtent = function () {
-            ConnectaGeoServiceAppliedBudget.zoomMapToInitialView();
+            ConnectaGeoService.zoomMapToInitialView();
         };
 
 
         $scope.addedMarkers = function () {
-            if (ConnectaGeoServiceAppliedBudget.map !== null && ConnectaGeoServiceAppliedBudget.hasmarkers() > 0) {
+            if (ConnectaGeoService.hasmarkers() > 0) {
                 return false;
             } else {
                 return true;
@@ -170,30 +168,30 @@ define([
                 }
             };
 
-            ConnectaGeoServiceAppliedBudget.addMarker(featurePoint);
+            ConnectaGeoService.addMarker(featurePoint);
         };
 
 
 
         $scope.toggleDragControl = function () {
-            ConnectaGeoServiceAppliedBudget.toggleDragMarker();
+            ConnectaGeoService.toggleDragMarker();
         };
 
 
         $scope.toggleDrawMarker = function () {
-            ConnectaGeoServiceAppliedBudget.toggleDrawMarker();
+            ConnectaGeoService.toggleDrawMarker();
         };
 
 
 
         $scope.removeMarkers = function () {
-            ConnectaGeoServiceAppliedBudget.removeMarkers();
+            ConnectaGeoService.removeMarkers();
         };
 
 
 
         $scope.submit = function () {
-            $scope.appliedBudget.geomWKT = ConnectaGeoServiceAppliedBudget.getMarkerWKT();
+            $scope.appliedBudget.geomWKT = ConnectaGeoService.getMarkerWKT();
             $scope.appliedBudget.municipalBudget = {"id": $scope.appliedBudget.municipalBudget.id};
             $scope.appliedBudget.budgetAreaApplication = {"id": $scope.appliedBudget.budgetAreaApplication.id};
             AppliedBudgetService.save($scope.appliedBudget).then(function () {

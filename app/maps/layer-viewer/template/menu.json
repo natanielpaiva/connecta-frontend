@@ -4,16 +4,13 @@
             "id": "btn-zoom-total",            
             "action": "zoomMapToMaxExtent",
             "img": "assets/img/maps/menu/ico_redimensionar_camada.png",
-            "span": "",
-            "hint":"Zoom Total"
+            "span": ""
         },
         {
             "id": "btn-zoom-area",            
             "action": "toggleZoomArea",
             "img": "assets/img/maps/menu/ico_find.png",
-            "span": "",
-            "hint":"Zoom Area"
-            
+            "span": ""
         },
         {
             "id": "sub-camadas",
@@ -21,7 +18,6 @@
             "type": "img",
             "img": "assets/img/maps/menu/ico_camadas.png",
             "span": "camadas",
-            "hint":"Camadas",
             "items": [
                 {
                     "id": "btn-physical",
@@ -78,7 +74,6 @@
             "type": "input",
             "img": "assets/img/maps/menu/ico_camadas_mapa.png",
             "span": "opacidade",
-            "hint":"Opacidade",
             "items": [
                 {
                     "id": "btn-opacity",
@@ -95,16 +90,14 @@
                     "id": "btn-info",
                     "action": "toggleInfo",
                     "img": "assets/img/maps/menu/ico_info.png",
-                    "span": "",
-                    "hint":"Informação"
+                    "span": ""
 
                 },
                 {
                     "id": "btn-legend",
                     "action": "toggleLegend",
                     "img": "assets/img/maps/menu/ico_legenda.png",
-                    "span": "",
-                    "hint":"Legenda"
+                    "span": ""
 
                 },
                 {
@@ -113,7 +106,6 @@
                     "type": "img",
                     "img": "assets/img/maps/menu/ico_spatial.png",
                     "span": "Filtro_Espacial",
-                    "hint":"Filtro Espacial",
                     "items": [
                         {
                             "id": "btn-contains",

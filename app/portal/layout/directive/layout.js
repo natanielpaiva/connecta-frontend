@@ -17,37 +17,37 @@ define([
       restrict: 'AE',
       replace: true,
       templateUrl: 'app/portal/layout/directive/template/layout.html',
-      controller: function($scope, LayoutService, SidebarService) {
+      controller: function($scope, LayoutService) {
         $scope.showAsFlat = false;
         $scope.fullscreen = false;
-        $scope.showMenu = LayoutService.isMenuVisible();
-        $scope.showSidebar = false;
-        $scope.sidebarMini = SidebarService.isSidebarMini();
+        $scope.showMenu = LayoutService.isSidebarVisible();
+        $scope.showSidebarRight = false;
         $scope.authenticated = false;
-        
+
         /**
          * Evento para exibir o menu
          */
-        $scope.$on('menu.mini', function(ev, show) {
-          $scope.showMenu = show;
+        $scope.$on('menu.show', function() {
+          $scope.showMenu = true;
+        });
+        /**
+         * Evento para ocultar o menu
+         * TODO Remover esse e receber o boolean pelo evento
+         */
+        $scope.$on('menu.hide', function() {
+          $scope.showMenu = false;
         });
         /**
          * Evento para mostrar o form de login
          */
-        $scope.$on('login.authenticated', function(ev, authenticated) {
+        $scope.$on('login.authenticated', function($event, authenticated) {
           $scope.authenticated = authenticated;
         });
         /**
          * Evento para mostrar a barra lateral
          */
-        $scope.$on('sidebar.show', function(ev, val) {
-          $scope.showSidebar = val;
-        });
-        /**
-         * Evento para minimizar a barra lateral
-         */
-        $scope.$on('sidebar.mini', function(ev, val) {
-          $scope.sidebarMini = val;
+        $scope.$on('sidebarRight.show', function(ev, val) {
+          $scope.showSidebarRight = val;
         });
         /**
          * Evento para mostrar o page container sem fundo

@@ -115,6 +115,7 @@ define([
         };
 
         $scope.save = function () {
+            delete $scope.interaction.actions;
             InteractionService.save($scope.interaction, $scope.fileImage, $scope.removeImage).then(function () {
                 notify.success('INTERACTION.SUCCESS');
                 $location.path('speaknow/interaction');

@@ -1,42 +1,41 @@
 {
-    "VALIDATION": {
-        "REQUIRED": "This field is required",
-        "EMAIL": "Must be a valid email address",
-        "MINLENGTH": "The field is too short",
-        "MAXLENGTH": "The field is too long",
-        "NUMBER": "Field must contain only numbers",
-        "INVALID_DOCUMENT": "Invalid file"
-    },
-    "LAYOUT": {
-        "HOME": "Home",
-        "ADD": "Add",
-        "NEW_M": "New",
-        "NEW_F": "New",
-        "EDIT": "Edit",
-        "DELETE": "Delete",
-        "SAVE": "Save",
-        "BACK": "Back",
-        "CLOSE": "Close",
-        "NEXT": "Next",
-        "CANCEL": "Cancel",
-        "APPLY": "Apply",
-        "FILTER": "Filter",
-        "SELECT": "Choose an option",
-        "SEARCH": "Search",
-        "DONE": "Done",
-        "DASHBOARD": "Dashboard",
-        "FILTER": "Filter",
-        "SHOW_GRID": "Show grid",
-        "SHOW_LIST": "Show list",
-        "SETTINGS": "Settings",
-        "NOTIFICATIONS": "Notifications",
-        "LOGIN_FACEBOOK": "Login with Facebook",
-        "LOGIN_GOOGLE": "Login with Google +",
-        "OR": "or",
-        "ADD_ACC": "Create Account",
-        "NO_RESULTS": "No result found"
-    },
-    "KEY_VALUE": {
-        "NO_ITEM": "Nothing yet. Click '{{LAYOUT.ADD}}' to add a new item."
-    }
+  "VALIDATION": {
+    "REQUIRED": "This field is required",
+    "EMAIL": "Must be a valid email address",
+    "MINLENGTH": "The field is too short",
+    "MAXLENGTH": "The field is too long",
+    "NUMBER":"Field must contain only numbers",
+    "INVALID_DOCUMENT":"Invalid file"
+  },
+  "LAYOUT": {
+    "HOME": "Home",
+    "ADD": "Add",
+    "NEW_M" : "New",
+    "NEW_F" : "New",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "SAVE": "Save",
+    "BACK": "Back",
+    "NEXT": "Next",
+    "CANCEL": "Cancel",
+    "APPLY": "Apply",
+    "FILTER": "Filter",
+    "SELECT": "Choose an option",
+    "SEARCH": "Search",
+    "DONE": "Done",
+    "DASHBOARD": "Dashboard",
+    "FILTER":"Filter",
+    "SHOW_GRID" : "Show grid",
+    "SHOW_LIST" : "Show list",
+    "SETTINGS" : "Settings",
+    "NOTIFICATIONS" : "Notifications",
+    "LOGIN_FACEBOOK":"Login with Facebook",
+    "LOGIN_GOOGLE":"Login with Google +",
+    "OR":"or",
+    "ADD_ACC":"Create Account",
+    "NO_RESULTS":"Nenhum resultado encontrado"
+  },
+  "KEY_VALUE": {
+    "NO_ITEM": "Nothing yet. Click '{{LAYOUT.ADD}}' to add a new item."
+  }
 }

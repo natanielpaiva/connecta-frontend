@@ -17,33 +17,31 @@
             <div class="form-group">
                 <label for="description" translate>DATASOURCE.DESCRIPTION</label>
                 <textarea class="form-control" id="description" name="description"
-                          placeholder="{{'DATASOURCE.DESCRIPTION'|translate}}"
                           ng-model="datasource.description"></textarea>
             </div>
 
-            <div class="portal-type-switcher margin-bottom-single">
-                <label ng-repeat="(key, type) in types | orderBy:'order'" class="radio-inline portal-type-switcher-item"
-                       title="{{type.name}}">
+            <div class="portal-type-switcher">
+                <label ng-repeat="(key, tp) in types" class="radio-inline portal-type-switcher-item"
+                       title="{{tp.name}}">
                     <input type="radio" class="portal-type-switcher-input" name="type" 
-                           ng-model="datasource.type"
+                           ng-model="datasource.type" id="datasource-type-{{key}}"
                            ng-value="key" />
-                    <span class="portal-type-switcher-icon {{type.icon}}"></span>
-                    <span class="portal-type-switcher-title">{{type.name}}</span>
+                    <span class="{{tp.icon}}"></span>
                 </label>
             </div>
-            
-            <type-switcher ng-model="datasource.type"
-                config="types" object="datasource"></type-switcher>
 
-            <div class="text-right">
-                <a href="#/presenter/datasource"
-                   class="btn btn-default" translate>
-                    LAYOUT.CANCEL
-                </a>
-                <button class="btn btn-primary" translate>
-                    LAYOUT.SAVE
-                </button>
+            <div ng-if="types[datasource.type].template"
+                 ng-include="types[datasource.type].template"
+                 class="am-fade-and-slide-bottom">
             </div>
+
+            <a href="#/presenter/datasource"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate>
+                LAYOUT.SAVE
+            </button>
         </form>
     </div>
 </div>

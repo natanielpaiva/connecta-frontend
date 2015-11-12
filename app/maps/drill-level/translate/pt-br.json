@@ -1,13 +1,18 @@
 {
-    "DRILL_LEVEL": {
-        "NAME":"Nome",
-        "PARENT_LEVEL":"Nível Pai",
-        "PARENT_LEVEL_COLUMN":"Coluna do Nível Pai",
-        "CHILD_LEVEL":"Nível Filho",
-        "CHILD_LEVEL_COLUMN":"Coluna Nível Filho",
-        "ADD": "Cadastrar Nível de Drill",
-        "EDIT": "Editar Nível de Drill",
-        "VIEW": "Visualizar Nível de Drill",
-        "ACTIONS":"Ações"
+    "SUPPLIER_ADDRESS": {
+        "SUPPLIER_ADDRESS": "Endereço do Fornecedor",
+        "SUPPLIER_ADDRESSES": "Endereços de Fornecedores",        
+        "ADD": "Cadastrar Endereço de Fornecedor",
+        "EDIT": "Editar Endereço de Fornecedor",
+        "VIEW": "Visualizar Endereço de Fornecedor",
+        "DESCRIPTION": "Endereço",
+        "CEP": "CEP",
+        "CITY": "Cidade",
+        "STATE": "Estado",
+        "COUNTRY": "País",
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Endereço de Fornecedor",
+        "CONFIRM_DELETE": "Deseja realmente excluir o Endereço de Fornecedor?"
     }
 }

@@ -1,0 +1,36 @@
+<div ng-if="statement.type == 'CONDITION'" class="statement {{ statement.type | lowercase }}">
+    Condição
+    <input placeholder="Atributo" style="width:100px;" type="text" ng-model="statement.attribute" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes" />
+    <select ng-model="statement.predicate" ng-options="key as value.name for (key, value) in predicateMap">
+        <option value="">
+            Selecione
+        </option>
+    </select>
+    <!-- Like, EQUAL -->
+    <input ng-if="statement.predicate != 'BETWEEN' && statement.predicate != 'NOT_BETWEEN'
+                          &&  statement.predicate != 'IN' && statement.predicate != 'NOT_IN'" placeholder="Valor" style="width:100px;" type="text" ng-model="statement.value" />
+
+    <!-- Between -->
+    <input ng-if="statement.predicate == 'BETWEEN' || statement.predicate == 'NOT_BETWEEN'" placeholder="De" style="width:100px;" type="text" ng-model="statement.value.start" />
+
+    <input ng-if="statement.predicate == 'BETWEEN' || statement.predicate == 'NOT_BETWEEN'" placeholder="Até" style="width:100px;" type="text" ng-model="statement.value.end" />
+
+    <!-- In -->
+    <tags-input min-length="1" style="width:100px;" ng-if="statement.predicate == 'IN' || statement.predicate == 'NOT_IN'"
+    ng-model="statement.value"></tags-input>
+
+    <button type="button" ng-click="remove(parent,statement)">-</button>
+</div>
+<div ng-if="statement.type == 'GROUP'" class="statement {{ statement.type | lowercase }}">
+    Grupo
+    <select ng-model="statement.operator" ng-options="key as value.name for (key, value) in operatorMap">
+        <option value="">
+            Selecione
+        </option>
+    </select>
+    <button type="button" ng-click="addGroup(statement)">+grupo</button>
+    <button type="button" ng-click="addCondition(statement)">+condicao</button>
+    <button type="button" ng-if="parent!=null" ng-click="remove(parent, statement)">-</button>
+    <div ng-repeat="stmt in statement.statements" ng-init="prnt=statement" ng-include="'app/presenter/group/template/_group-select-item.html'" onload="statement=stmt;parent=prnt">
+    </div>
+</div>

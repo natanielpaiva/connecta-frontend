@@ -1,35 +1,35 @@
 {
-    "USER": {
-        "FIRST_NAME": "First Name",
-        "LAST_NAME": "Last Name",
-        "EMAIL": "Email",
-        "AVATAR": "Avatar",
-        "PROFILE": "Profile",
-        "ACCOUNT": "Account",
-        "CONFIG": "Configuration",
-        "LOGOUT": "Logout",
-        "UPDATE_SUCCESS": "Profile Updated",
-        "CHOOSE_IMAGE": "Choose Image",
-        "REMOVE_IMAGE": "Remove Image",
-        "PASSWORD": "Password",
-        "NEW_PASSWORD": "New Password",
-        "CONFIRM_PASS": "Repeat Password",
-        "CHANGE_PASS": "Change Password",
-        "CHANGE_PASSWORD_SUCCESS": "Password Updated",
-        "CONFIRM": "Confirm Password",
-        "ADD": "Add User",
-        "SAVE_PROFILE": "Save Profile",
-        "GRAVATAR_TEXT": "You can change your avatar here or remove the current avatar to revert to <a href='http://gravatar.com'>gravatar.com</a>",
-        "VALIDATION": {
-            "IMAGESIZE": "Maximum image file size: 600Kb",
-            "IMAGEFORM": "Avatar image must be quadrangular",
-            "COMPARE_PASS": "Passwords do not match.",
-            "SHORT_PASS": "Password needs to be at least 8 characters long.",
-            "INVALID_DOCUMENT": "Invalid Image",
-            "USER_OR_PASS_INVALID": "Invalid username or password."
-        },
-        "ERROR": {
-            "USERNAME_EXISTS": "Email exists"
-        }
+  "USER": {
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "EMAIL":"Email",
+    "AVATAR": "Avatar",
+    "PROFILE": "Profile",
+    "ACCOUNT": "Account",
+    "CONFIG": "Configuration",
+    "LOGOUT": "Logout",
+    "UPDATE_SUCCESS": "Profile Updated",
+    "CHOOSE_IMAGE": "Choose Image",
+    "REMOVE_IMAGE": "Remove Image",
+    "PASSWORD": "Password",
+    "NEW_PASSWORD": "New Password",
+    "CONFIRM_PASS": "Repeat Password",
+    "CHANGE_PASS": "Change Password",
+    "CHANGE_PASSWORD_SUCCESS": "Password Updated",
+    "CONFIRM":"Confirm Password",
+    "ADD":"Add User",
+    "SAVE_PROFILE": "Save Profile",
+    "GRAVATAR_TEXT": "You can change your avatar here or remove the current avatar to revert to <a href='gravatar.com'>gravatar.com</a>",
+    "VALIDATION": {
+      "IMAGESIZE": "Maximum image file size: 600Kb",
+      "IMAGEFORM": "Avatar image must be quadrangular",
+      "COMPARE_PASS": "Passwords do not match.",
+      "SHORT_PASS": "Password needs to be at least 8 characters long.",
+      "INVALID_DOCUMENT": "Invalid Image",
+      "USER_OR_PASS_INVALID":"User or password invalid."
+    },
+    "ERROR": {
+        "USERNAME_EXISTS": "Email exists"
     }
+  }
 }

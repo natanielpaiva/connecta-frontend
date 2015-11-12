@@ -3,7 +3,7 @@ define([
     'maps/layer-viewer-group/service/menu-service',
     'maps/layer-viewer/service/layer-viewer-service'
 ], function (maps) {
-    return maps.lazy.service('ViewerServiceLayerViewerGroup', function (mapsResources, MenuServiceLayerViewerGroup, LayerViewerService, $http) {
+    return maps.lazy.service('ViewerService', function (mapsResources, MenuService, LayerViewerService, $http) {
 
         this.getViewerConfig = function (layerViewerGroup, map) {
 
@@ -36,7 +36,7 @@ define([
             lool = map;
             var temp2 = setInterval(function () {
 
-                MenuServiceLayerViewerGroup.renderMenu(objViewersGroup, map);
+                MenuService.renderMenu(objViewersGroup, map);
 
                 clearInterval(temp2);
             }, 500);

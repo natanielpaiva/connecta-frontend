@@ -1,34 +1,17 @@
-<div class="row">
-    <div class="col-xs-12">
-        <div class="form-group checkbox">
-            <label> 
-                <translate>
-                    VIEWER.SEQUENCED_ANIMATION
-                </translate>
-                <input  type="checkbox" ng-model="viewer.configuration.sequencedAnimation"/>
-            </label>
-
-        </div>
-    </div>
+<div class="sidebar-form">
+    <label translate>VIEWER.SEQUENCED_ANIMATION</label>
+    <input type="checkbox" ng-model="analysisViewer.viewer.configuration.sequencedAnimation"/>
 </div>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="form-group">
-            <label translate>VIEWER.START_DURATION</label>
-            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.startDuration"/>
-        </div>
-    </div>
+<div class="sidebar-form">
+    <label translate>VIEWER.START_DURATION</label>
+    <input type="number" ng-model="analysisViewer.viewer.configuration.startDuration"/>
 </div>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="form-group">
-            <label translate>VIEWER.START_EFFECT</label>
-            <select class="form-control input-sm" ng-model="viewer.configuration.startEffect">
-                <option value="easeOutSine" translate>VIEWER.EASE_OUT_SINE</option>
-                <option value="easeInSine" translate>VIEWER.EASE_IN_SINE</option>
-                <option value="elastic" translate>VIEWER.ELASTIC</option>
-                <option value="bounce" translate>VIEWER.BOUNCE</option>
-            </select>
-        </div>
-    </div>
+<div class="sidebar-form">
+    <label translate>VIEWER.START_EFFECT</label>
+    <select ng-model="analysisViewer.viewer.configuration.startEffect">
+        <option value="easeOutSine" translate>VIEWER.EASE_OUT_SINE</option>
+        <option value="easeInSine" translate>VIEWER.EASE_IN_SINE</option>
+        <option value="elastic" translate>VIEWER.ELASTIC</option>
+        <option value="bounce" translate>VIEWER.BOUNCE</option>
+    </select>
 </div>

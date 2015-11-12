@@ -17,11 +17,13 @@ require.config({
         'speaknow': 'speaknow',
         'presenter': 'presenter',
         'maps': 'maps',
+        'datamodel': 'datamodel',
         'connecta.portal': 'portal/connecta.portal',
         'connecta.collector': 'collector/connecta.collector',
         'connecta.speaknow': 'speaknow/connecta.speaknow',
         'connecta.presenter': 'presenter/connecta.presenter',
         'connecta.maps': 'maps/connecta.maps',
+        'connecta.datamodel': 'datamodel/connecta.datamodel',
         'connecta.inspection': 'inspection/connecta.inspection'
     },
     shim: {
@@ -186,8 +188,12 @@ require.config({
                 'angular',
                 'jquery',
                 'bower_components/jquery-ui-custom/index',
-                'bower_components/bootstrap/dist/js/bootstrap.min'
+                'bower_components/bootstrap/dist/js/bootstrap.min',
+//                'search-expression'
             ]
+        },
+        'bower_components/json-formatter/dist/json-formatter.mim':{
+             deps: ['angular']
         }
     }
 });

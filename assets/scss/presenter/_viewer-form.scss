@@ -9,6 +9,7 @@
     position: relative;
 }
 
+
 .sidebarViewer ul[dnd-list] {
     min-height: 100px;
     padding-left: 0px;
@@ -189,7 +190,7 @@
 }
 
 .switch-viewer div.active{
-    background-color: $connectaRed;
+    background-color: $red;
 }
 
 .accordion-viewer{
@@ -229,7 +230,30 @@
     padding: 0px !important;
 }
 
+.sidebar-form{
+    width: 100%;
+    margin-left: 4%;
+}
+
+.sidebar-form input[type="text"]{
+    width: 80%;
+}
+
+.sidebar-form select{
+    color: $black !important;
+}
+
+.sidebar-form input{
+    color: $black;
+}
+
+.sidebar-form label{
+    font-weight: normal;
+    width: 100%;
+}
+
 .layout-config{
+    width: 100%;
     color: $white;
     padding-top: 5%;
 }
@@ -240,9 +264,9 @@
 }
 
 .layout-config{
-    overflow-y: auto;
+    overflow: auto;
     height: 550px;
-    padding-bottom: 2em;
+    padding-bottom: 50%;
 }
 
 

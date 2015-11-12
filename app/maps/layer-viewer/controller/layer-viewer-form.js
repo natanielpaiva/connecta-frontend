@@ -5,30 +5,14 @@ define([
     'maps/layer-viewer/service/layer-viewer-service',
     'portal/layout/service/notify',
     'maps/presenter-source/service/presenter-source-service',
-    'portal/layout/service/modalTranslate'
 ], function (maps, colorComponent) {
-    return maps.lazy.controller('LayerViewerFormController', function ($scope, LayerService, notify, LayerViewerService, PresenterSourceService, $location, $routeParams, $translate,$modalTranslate) {
+    return maps.lazy.controller('LayerViewerFormController', function ($scope, LayerService, notify, LayerViewerService, PresenterSourceService, $location, $routeParams, $translate) {
 
         $scope.types = LayerViewerService.getTypes();
         $scope.isEditing = false;
         $scope.presenterAnalysis = null;
         $scope.layers = [];
         $scope.layerColumns = [];
-        
-          //translate buttons text
-        $scope.viewerTypes = {
-            default: "DEFAULT",
-            heatmap: "HEATMAP",
-            cluster: "CLUSTER",
-            analysis: "ANALYSIS"
-        };
-
-        $modalTranslate($scope.viewerTypes, 'default', 'LAYERVIEWER.DEFAULT');
-        $modalTranslate($scope.viewerTypes, 'heatmap', 'LAYERVIEWER.HEATMAP');
-        $modalTranslate($scope.viewerTypes, 'cluster', 'LAYERVIEWER.CLUSTER');
-        $modalTranslate($scope.viewerTypes, 'analysis', 'LAYERVIEWER.ANALYSIS');
-       
-        
 
         $scope.getPresenterSource = function () {
             PresenterSourceService.list().then(function (response) {

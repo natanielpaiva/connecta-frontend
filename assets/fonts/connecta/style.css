@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'connecta';
-	src:url('fonts/connecta.eot?uqyq2');
-	src:url('fonts/connecta.eot?uqyq2#iefix') format('embedded-opentype'),
-		url('fonts/connecta.ttf?uqyq2') format('truetype'),
-		url('fonts/connecta.woff?uqyq2') format('woff'),
-		url('fonts/connecta.svg?uqyq2#connecta') format('svg');
+	src:url('fonts/connecta.eot?-tb396l');
+	src:url('fonts/connecta.eot?#iefix-tb396l') format('embedded-opentype'),
+		url('fonts/connecta.ttf?-tb396l') format('truetype'),
+		url('fonts/connecta.woff?-tb396l') format('woff'),
+		url('fonts/connecta.svg?-tb396l#connecta') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,15 +23,6 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-drilldown:before {
-	content: "\ebe3";
-}
-.icon-drillup:before {
-	content: "\ebe4";
-}
-.icon-drill:before {
-	content: "\ebe2";
-}
 .icon-esri:before {
 	content: "\ebde";
 }
@@ -4550,4 +4541,3 @@
 .icon-star-outline:before {
 	content: "\ebd3";
 }
-

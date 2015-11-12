@@ -51,7 +51,7 @@
             "DONE": "Done",
             "PARAM": {
                 "NAME": "Parameter Name",
-                "TITLE": "Parameter Title",
+                "TITLE": "Question",
                 "TAG": "Parameter Tag",
                 "TYPE": "Answer Type",
                 "ADD": "Add Parameter",
@@ -59,10 +59,10 @@
                 "PARAM.OPTIONS": "Parameter Options",
                 "ADD_OPT": "Add Parameter Option",
                 "NEW": "New Parameter",
-                "VALUE": "Value",
+                "VALUE": "Text",
                 "TEXT": "Text",
                 "ANSWER":"Answer",
-                "KEY": "Key",
+                "KEY": "Option",
                 "PARAM_TYPE": {
                     "TEXT": "Text",
                     "URL": "Url",

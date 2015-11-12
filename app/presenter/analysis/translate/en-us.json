@@ -1,18 +1,17 @@
 {
     "ANALYSIS": {
-        "ANALYSIS": "Analysis",
-        "REGISTER_ANALYSIS": "Register Analysis",
+        "REGISTER_ANALYSIS": "Register Análises",
         "SOURCE_ANALYSIS": "Source Analysis",
         "NAME": "Name",
-        "DESCRIPTION": "Description",
-        "ATTRIBUTE": "Attribute",
+        "DESCRIPTION": "Description*",
+        "ATTRIBUTE": "Attribute*",
         "VALUE": "Value",
-        "TYPE": "Type",
+        "TYPE": "Type*",
         "ADD_ATTRIBUTES": "Add Attributes",
-        "SOURCE_OF_DATA": "Source of Data",
+        "SOURCE_OF_DATA": "Source of Data*",
         "DATA_INSERTION": "Data insertion",
-        "CUSTOM_SQL": "Custom SQL",
-        "TABLE": "Table",
+        "CUSTOM_SQL": "Custom SQL*",
+        "TABLE": "Table*",
         "COLUMN": "Column",
         "DESCRIPTION_OF_COLUMNS": "Description of Columns",
         "SELECT": "Select",
@@ -34,10 +33,6 @@
         "FETCH_DATA": "Fetch Data",
         "UNTITLED_OBJECT": "Untitled Object",
         "UNTITLED_LIST": "Untitled List",
-        "UNKNOWN": "Unknown",
-        "PREVIEW": "Preview",
-        "FACET": "Facet",
-        "RESPONSE_XML": "Response XML",
-        "RESULTS_OF_THE_ANALYSIS": "Results of the analysis"
+        "UNKNOWN" : "Unknown"
     }
 }

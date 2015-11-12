@@ -1,7 +1,7 @@
 define([
     'connecta.maps'    
 ], function (maps) {
-    return maps.lazy.service('ToolBarServiceDrill', function (mapsResources, $http) {
+    return maps.lazy.service('ToolBarService', function (mapsResources, $http) {
 
         this.map = "";
 

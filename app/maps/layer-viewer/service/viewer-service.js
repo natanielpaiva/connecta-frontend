@@ -2,7 +2,7 @@ define([
     'connecta.maps',
     'maps/layer-viewer/service/menu-service'
 ], function (maps) {
-    return maps.lazy.service('ViewerService', function (mapsResources, MenuServiceLayerViewer, $http) {
+    return maps.lazy.service('ViewerService', function (mapsResources, MenuService, $http) {
 
         this.getViewerConfig = function (layerViewer, map) {
 
@@ -37,7 +37,7 @@ define([
                     break;
             }
 
-            MenuServiceLayerViewer.renderMenu(layerViewerConfig, map);
+            MenuService.renderMenu(layerViewerConfig, map);
 
 
             this.renderViewer(configLayer, map);

@@ -29,5 +29,11 @@ define([
             var url = speaknowResources.contactGroup + '/' + id;
             return $http.delete(url);
         };
+        
+        this.readOnly = function(id){
+            var url = speaknowResources.contactGroup + "/readOnly/" + id;
+            return $http.get(url);
+        };
+        
     });
 });

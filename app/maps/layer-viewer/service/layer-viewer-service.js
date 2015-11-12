@@ -106,14 +106,8 @@ define([
                 console.info("STYLE", data);
             });
         };
-        
-        
-        
-        this.listAllWmsViewers = function () {
-            var url = mapsResources.layerViewer+'/listAllWmsViewers';
-            return $http.get(url);
-        };
-        
+
+
 
     });
 });

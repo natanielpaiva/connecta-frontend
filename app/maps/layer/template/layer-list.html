@@ -27,16 +27,16 @@
         <table ng-table class="table table-striped margin-top-single">
             <thead>
                 <tr>
-                    <th class="text-center" translate>LAYER.NAME</th>
-                    <th class="text-center" translate>LAYER.SOURCE</th>
-                    <th class="text-center" translate>LAYER.DESCRIPTION</th>
+                    <th></th>
+                    <th translate>LAYER.SOURCE</th>
+                    <th translate>LAYER.NAME</th>
+                    <th translate>LAYER.DESCRIPTION</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="layer in layers">
-                    <td class="text-center" ><a class="full-size-block link-no-state" href="#/maps/layer/{{layer.id}}">
-                            {{layer.nm_layer}}</a></td> 
+                    <td><input type="checkbox" value="{{layer.id}}" /></td>
                     <td class="text-center" >
                         <a class="full-size-block link-no-state" href="#/maps/layer/{{layer.id}}">
                         <span ng-if="!layer.$edit && layer.layerSourceEntity.id == 1">Geoserver</span>
@@ -45,6 +45,8 @@
                         <span ng-if="!layer.$edit && layer.layerSourceEntity.id == 4">MapServer</span> 
                         </a>
                     </td>   
+                    <td class="text-center" ><a class="full-size-block link-no-state" href="#/maps/layer/{{layer.id}}">
+                            {{layer.nm_layer}}</a></td> 
                     <td class="text-center" ><a class="full-size-block link-no-state" href="#/maps/layer/{{layer.id}}">
                             {{layer.ds_layer}}</a></td> 
                     

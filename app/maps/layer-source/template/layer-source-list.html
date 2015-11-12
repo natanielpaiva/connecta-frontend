@@ -24,21 +24,21 @@
             </form>
         </div>
 
-        <table ng-table="tableParams" class="table table-striped margin-top-single">
+        <table ng-table class="table table-striped margin-top-single">
             <thead>
                 <tr>
                     <th></th>
-                    <th class="text-center" translate>LAYERSOURCE.NAME</th>                    
-                    <th class="text-center" translate>LAYERSOURCE.INTERNAL_LINK</th>
-                    <th class="text-center" translate>LAYERSOURCE.EXTERNAL_LINK</th>
-                    <th class="text-center" translate>LAYERSOURCE.TYPE</th>
+                    <th translate>LAYERSOURCE.NAME</th>
+                    <th translate>LAYERSOURCE.TYPE</th>
+                    <th translate>LAYERSOURCE.INTERNAL_LINK</th>
+                    <th translate>LAYERSOURCE.EXTERNAL_LINK</th>
 <!--                    <th translate>LAYERSOURCE.USER</th>
                     <th translate>LAYERSOURCE.PASSWORD</th>-->
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="layerSource in $data">
+                <tr ng-repeat="layerSource in layerSources">
                     <td><a href="#/maps/layer-source/{{layerSource.id}}" class="full-size-block link-no-state">
                             
                             <input type="checkbox" value="{{layerSource.id}}" /></a></td>

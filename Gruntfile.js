@@ -1,8 +1,5 @@
-/* global require, module */
-
 module.exports = function(grunt) {
 
-  var reload = grunt.option('reload') === undefined ? true : grunt.option('reload');
   var port = grunt.option('port') || 9001;
 
   // Carrega as tasks do Grunt declaradas como dependência no package.json
@@ -129,7 +126,7 @@ module.exports = function(grunt) {
         files: ['app/**/*.js'],
         tasks: ['jshint'],
         options: {
-          livereload: reload
+          livereload: grunt.option('reload'),
         }
       },
       css: {
@@ -137,9 +134,9 @@ module.exports = function(grunt) {
         tasks: ['sass']
       },
       livereload: {
-        files: ['assets/css/*.css', 'app/**/*.html', 'app/**/*.json'],
+        files: ['assets/css/*.css', 'app/**/*.html'],
         options: {
-          livereload: reload
+          livereload: grunt.option('reload'),
         }
       }
     }

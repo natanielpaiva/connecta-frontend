@@ -1,54 +1,34 @@
-<style>
-[gridster] {
-    {{dashboard.backgroundColor?'background-color:'+dashboard.backgroundColor+';':''}}
-    background-image:{{getImage(dashboard.backgroundImage)}};
-}
-</style>
-
 <form ng-submit="save()" class="dashboard-form">
   <div class="row">
-    <div class="col-xs-8">
+    <div class="col-md-6">
       <div class="form-group">
-        <label for="dashboard-name" class="sr-only" translate>DASHBOARD.DASHBOARD_NAME</label>
+        <label for="dashboard-name" translate>DASHBOARD.DASHBOARD_NAME</label>
         <input type="text" ng-model="dashboard.name"
-          placeholder="{{'DASHBOARD.DASHBOARD_NAME'|translate}}"
           class="form-control" id="dashboard-name" />
       </div>
     </div>
-    <div class="col-xs-4 text-right">
-      <button class="btn btn-default" type="button" ng-click="config()">
+    <div class="col-md-6 text-right">
+      <button class="btn btn-default" type="button">
         <span class="icon-cog"></span>
-        <translate class="hidden-xs">LAYOUT.SETTINGS</translate>
+        {{'LAYOUT.SETTINGS' | translate}}
       </button>
       <button class="btn btn-primary" type="submit">
-          <span class="icon-save hidden-lg hidden-md hidden-sm"></span>
-          <translate class="hidden-xs">LAYOUT.SAVE</translate>
+        {{'LAYOUT.SAVE' | translate}}
       </button>
     </div>
   </div>
   <tabset>
     <tab ng-repeat="section in dashboard.sections | orderBy:'order'" active="section.active">
       <tab-heading>
-        <span ng-if="!section.edit" ng-dblclick="renameSection($event, section, true)"
-              class="dashboard-form-section-name">
-            {{section.name}}
-        </span>
-        <input class="dashboard-form-section-name-edit" ng-model="section.name"
-             ng-if="section.edit" ng-blur="renameSection($event, section, false)" />
-        <button class="btn btn-xs btn-icon-only" ng-click="removeSection($event, section)" type="button">
-          <span class="icon-close"></span>
+        {{section.name}}
+        <button class="btn btn-xs btn-icon-only">
+          <span class="icon-cog"></span>
         </button>
       </tab-heading>
-      <div gridster="section" dnd-list="section.items" class="image-on-background">
-        <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
-            <viewer src="item.viewerUrl" class="image-on-background" ng-style="{
-                'background-color':toRGBA(item.backgroundColor,item.opacity),
-                'background-image':getImage(item.backgroundImage)
-            }"></viewer>
-            <button class="btn btn-icon-only dashboard-form-item-edit"
-                    type="button" ng-click="itemConfig(item, section)">
-                <span class="icon-pencil"></span>
-            </button>
+      <div gridster="config">
+        <div class="dashboard-item"
+          gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
+
         </div>
         <div class="dashboard-no-item" ng-if="!section.items.length">
           <span class="icon-area-graph"></span>

@@ -8,6 +8,13 @@
     <div class="row">
 
         <div class="col-md-6">
+            <div class="form-group">
+                <label for="nome" translate>ANALYSIS.SOURCE_ANALYSIS</label>
+                <select class="form-control"  ng-model="analysis.datasource.id">
+                    <option value="csv">CSV</option> 
+                    <option ng-repeat="ds in listDatasource" value="{{ds.id}}">{{ds.name}}</option>
+                </select>
+            </div>
 
             <div class="form-group">
                 <label for="name" translate>ANALYSIS.NAME</label>
@@ -20,57 +27,41 @@
                 <textarea class="form-control" id="description" name="description"
                           ng-model="analysis.description"></textarea>
             </div>
-            
-            <div class="form-group" ng-show="edit === false">
-                <label for="nome" translate>ANALYSIS.SOURCE_ANALYSIS</label>
-                <select class="form-control"  ng-model="analysis.datasource.id">
-                    <option value="csv">CSV</option> 
-                    <option ng-repeat="ds in listDatasource" value="{{ds.id}}">{{ds.name}}</option>
-                </select>
-            </div>
-            
-            <div class="form-group" ng-show="edit === true">
-                <label for="nome" translate>ANALYSIS.SOURCE_ANALYSIS</label>
-                <input type="text" class="form-control" disabled="disabled"
-                       ng-model="analysis.datasource.name" />
-            </div>
         </div>
-        
-    </div>
-    
-    <div ng-if="showForm">
-        <div ng-include="'app/presenter/analysis/template/' + subform.template"
-             ng-controller="subform.controller"></div>
     </div>
 
-<!--   <debug ng-model="analysis.analysisColumns"></debug>-->
-    
+    <div ng-if="analysis.type.template" ng-include="'app/presenter/analysis/template/' + analysis.type.template"></div>
+
     <!--Descrição das colunas-->
     <h4 translate>ANALYSIS.DESCRIPTION_OF_COLUMNS</h4>
     <div class="row"  >
         <div class="col-md-12" >
             <div class="clearfix well" style="height:250px; background-color:#F2F2F2; overflow:auto">
-                <div ng-repeat="columns in analysis.analysisColumns" >
+                <div ng-repeat="analysisColumns in component.columns" >
                     <div class="col-md-6 form-group">
                         <label for="column" translate>ANALYSIS.COLUMN</label>
-                        <input type="text" ng-model="columns.name" disabled class="form-control"/>
+                        <input type="text"  disabled class="form-control" ng-model="analysisColumns.name" />
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="valor" translate>ANALYSIS.DESCRIPTION</label>
-                        <input type="text" ng-model="columns.label"  class="form-control" />
-                        <input type="hidden" ng-model="columns.formula"  class="form-control" />
+                        <input type="text" ng-model="analysisColumns.label" ng-init="analysisColumns.label = analysisColumns.name" class="form-control" />
+                        <!--                        <input type="hidden" ng-model="analysisColumns.formula" ng-init="analysisColumns.formula = analysisColumns.name" class="form-control" />-->
                     </div>
                 </div> 
             </div>
         </div>
     </div>
 
+
+    <debug ng-model="component.columns"></debug>
+
+
     <!--Adicionar atributos-->
-<!--    <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>-->
+    <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>
 
     <div class="row" >
         <div class="col-md-12">
-<!--            <div class="clearfix well">
+            <div class="clearfix well">
                 <div ng-repeat="at in attributes" >
                     <div class="col-md-4 form-group">
                         <label for="" translate>ANALYSIS.ATTRIBUTE</label>
@@ -99,10 +90,10 @@
                         </p>
                     </div>
                 </div> 
-            </div>-->
+            </div>
 
             <a href="#/presenter/analysis"
-               class="btn btn-default" translate>
+               class="btn" translate>
                 LAYOUT.CANCEL
             </a>
             <button class="btn btn-primary" translate>

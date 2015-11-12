@@ -35,10 +35,6 @@
         "IS_COLUMN":"Coluna",
         "UNTITLED_OBJECT": "Objeto sem nome",
         "UNTITLED_LIST": "Lista sem nome",
-        "UNKNOWN" : "Desconhecido",
-        "PREVIEW": "Pré-visualização",
-        "FACET": "Facet",
-        "RESPONSE_XML": "Resposta XML",
-        "RESULTS_OF_THE_ANALYSIS": "Resultado da Análise"
+        "UNKNOWN" : "Desconhecido"
     }
 }

@@ -19,8 +19,7 @@ $boxHeight: 22em;
 
     menu,
     heading,
-    .page-container,
-    .connecta-sidebar {
+    .page-container {
         display: none;
     }
 
@@ -86,7 +85,6 @@ $boxHeight: 22em;
         color: #777;
     }
 }
-
 #form-login {
     width: 100%;
     margin-top: 3em;

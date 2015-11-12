@@ -1,3 +1,11 @@
+<style>
+    .statement {
+        line-height: 2em;
+        padding-left: 1em;
+        &.group {}
+        &.condition {}
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
         <h3 translate>GROUP.REGISTER_GROUP</h3>
@@ -12,20 +20,30 @@
                 <input type="text" name="nome" ng-model="group.name" id="model-nome" required class="form-control" />
                 <div ng-if="formulario.nome.$dirty" ng-messages="formulario.nome.$error" ng-messages-include="portal-validation-messages"></div>
             </div>
+
+            <div class="portal-type-switcher ">
+                <p class="bold" translate>GROUP.TYPE</p>
+                <label ng-repeat="tp in types" class="radio-inline portal-type-switcher-item">
+                    <input type="radio" ng-model="group.type" name="type" class="portal-type-switcher-input" id="single-source-type-{{tp.id}}" ng-value="tp" />
+                    <span ng-if="tp.id === 'GALLERY'" class="icon-photo-library"></span>
+                    <span ng-if="tp.id === 'FOLDER'" class="icon-folder-open"></span>
+                </label>
+            </div>
             <div class="form-group">
                 <label for="description" translate>GROUP.DESCRIPTION</label>
                 <textarea id="description" rows="5" cols="60" ng-model="group.description" class="form-control"></textarea>
             </div>
 
             <div class="form-group">
-                <label ng-repeat="tp in types" class="radio-inline portal-type-switcher-item">
-                    <input type="radio"  ng-model="group.type" class="portal-type-switcher-input" id="single-source-type-{{tp.id}}" ng-value="tp" />
+                <label ng-repeat="tp in typeFilter" class="radio-inline portal-type-switcher-item">
+                    <input type="radio" name="typeFilter" ng-model="group.typeFilter" class="portal-type-switcher-input" id="single-source-type-{{tp.id}}" ng-value="tp" />
                     <span translate="">{{tp.name}}</span>
 
                 </label>
             </div>
-            <ng-include ng-if="group.type.template"
-                 src="'app/presenter/group/template/' + group.type.template">
+
+            <ng-include ng-if="group.typeFilter.template"
+                class="am-collapse" src="'app/presenter/group/template/' + group.typeFilter.template">
             </ng-include>
 
             <div class="form-group" style="float: left;">

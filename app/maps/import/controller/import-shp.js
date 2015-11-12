@@ -1,10 +1,9 @@
 define([
-    'connecta.maps',
+    'connecta.maps',    
     'maps/import/service/import-shp-service',
-    'maps/layer-source/service/layer-source-service',
-    'portal/layout/service/notify'
+    'maps/layer-source/service/layer-source-service'
 ], function (maps) {
-    return maps.lazy.controller('ImportSHPController', function ($scope, ImportSHPService, LayerSourceService, $location, $routeParams, notify,$translate) {
+    return maps.lazy.controller('ImportSHPController', function ($scope, ImportSHPService, LayerSourceService, $location, $routeParams) {
 
         $scope.nm_layerSource = null;
 
@@ -17,23 +16,15 @@ define([
 
 
         $scope.addFileListener = function () {
-            angular.element("#file-original").change(function () {
-                console.info("VALUE", this.value);
-                if (this.value.substr(this.value.indexOf('.') + 1) !== "zip") {
-                    $translate('IMPORT.INVALID_EXTENSION').then(function (text) {
-                        notify.info(text);
-                    });
-                } else {
-
-                    angular.element("#file-falso").val(this.value);
-                }
+                angular.element("#file-original").change(function () {
+                angular.element("#file-falso").val(this.value);
             });
         };
-
-
+        
+        
         $scope.addFileListener();
-
-
+        
+        
 
         $scope.submit = function () {
             var formData = new FormData();

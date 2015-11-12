@@ -16,6 +16,10 @@ define([
             $location.path('speaknow/contact');
         }
         
+        ContactService.readOnly($routeParams.id).then(function(response){
+            $scope.readOnly = response.data;
+        });
+        
         $scope.delete = function (id) {
             ContactService.delete(id).success(function () {
                 notify.success('CONTACT.REMOVE_SUCCESS');

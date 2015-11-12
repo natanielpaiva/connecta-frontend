@@ -1,30 +1,8 @@
 {
-    "DASHBOARD": {
-        "DASHBOARD_LIST": "Painéis",
-        "DASHBOARD_NAME": "Nome do painel",
-        "NEW_SECTION": "Nova seção",
-        "NO_ITEM": "Nada ainda. Arraste um visualizador para cá para começar.",
-        "SEARCH_VIEWERS": "Buscar visualizadores",
-        "DASHBOARD_SETTINGS": "Configurações do Painel",
-        "DASHBOARD_ITEM_SETTINGS": "Configurações do Item",
-        "REMOVE_ITEM": "Remover item",
-        "MAX_ROWS": "Máximo de linhas",
-        "ROW_HEIGHT": "Altura da linha",
-        "COLUMNS": "Quantidade de colunas",
-        "PADDING": "Espaçamento",
-        "TRANSITION_INTERVAL": "Intervalo de transição",
-        "ANIMATION_DURATION": "Duração da animação",
-        "SECTION_TRANSITION_ANIMATION": "Animação da troca de seções",
-        "DISPLAY_MODE": "Modo de exibição das seções",
-        "VERTICAL": "Rolagem Vertical",
-        "HORIZONTAL": "Páginas",
-        "BACKGROUND_COLOR": "Cor de fundo",
-        "BACKGROUND_IMAGE": "Imagem de fundo",
-        "FADE":"Esmaecer",
-        "SLIDE_UP":"Deslizar para cima",
-        "SLIDE_DOWN":"Deslizar para baixo",
-        "SLIDE_RIGHT":"Deslizar para direita",
-        "SLIDE_LEFT":"Deslizar para esquerda",
-        "OPACITY":"Opacidade"
-    }
+  "DASHBOARD": {
+    "DASHBOARD_LIST":"Painéis",
+    "DASHBOARD_NAME":"Nome do painel",
+    "NEW_SECTION" : "Nova seção",
+    "NO_ITEM" : "Nada ainda. Arraste um visualizador para cá para começar."
+  }
 }

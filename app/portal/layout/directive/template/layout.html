@@ -1,19 +1,19 @@
 <div ng-class="{
   'hide-menu' : !showMenu,
   'fullscreen' : fullscreen,
-  'show-sidebar': showSidebar,
-  'sidebar-mini': sidebarMini,
+  'show-sidebar': showSidebarRight,
   'login' : !authenticated
   }">
     <login class="am-slide-top" ng-if="!authenticated"></login>
     <div id="fb-root"></div>
-    <heading class="navbar navbar-fixed-top">
-    
-    </heading>
+    <heading></heading>
     <menu></menu>
-    <sidebar></sidebar>
+    <sidebar>
+        <div ng-if="sidebar.controller" ng-controller="sidebar.controller">
+        </div>
+    </sidebar>
     <div class="container-fluid">
-        <div ng-view class="page-container am-fade-and-slide-right margin-bottom-single"
+        <div ng-view class="page-container am-fade-and-slide-right"
              ng-class="{ flat: showAsFlat }">
         </div>
     </div>

@@ -11,7 +11,12 @@ define([
      * @returns {undefined}
      */
     return portal.service('LayoutService', function ($rootScope, $cookieStore) {
-        var MENU = 'connecta.portal.layout.menu';
+        var SIDEBAR = 'connecta.portal.layout.menu';
+
+        var broadcastEvent = function (show) {
+            var eventName = show ? 'menu.show' : 'menu.hide';
+            $rootScope.$broadcast(eventName);
+        };
 
         /**
          * Oculta e exibe a barra lateral (menu esquerdo)
@@ -19,16 +24,16 @@ define([
          * @returns {undefined}
          */
         this.toggleSidebar = function () {
-            $cookieStore.put(MENU, !$cookieStore.get(MENU));
-            $rootScope.$broadcast('menu.mini', $cookieStore.get(MENU));
+            $cookieStore.put(SIDEBAR, !$cookieStore.get(SIDEBAR));
+            broadcastEvent($cookieStore.get(SIDEBAR));
             return this;
         };
 
         /**
          * Informa se a barra lateral está aberta
          */
-        this.isMenuVisible = function () {
-            return $cookieStore.get(MENU);
+        this.isSidebarVisible = function () {
+            return $cookieStore.get(SIDEBAR);
         };
 
         this.showAsFlat = function (flat) {
@@ -36,8 +41,8 @@ define([
             return this;
         };
 
-        this.showSidebar = function (val) {
-            $rootScope.$broadcast('sidebar.show', val);
+        this.showSidebarRight = function (val) {
+            $rootScope.$broadcast('sidebarRight.show', val);
             return this;
         };
 
@@ -45,5 +50,6 @@ define([
             $rootScope.$broadcast('page.fullscreen', fullscreen);
             return this;
         };
+
     });
 });

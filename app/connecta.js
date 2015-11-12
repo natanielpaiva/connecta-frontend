@@ -1,4 +1,3 @@
-/* global Pace */
 define([    
   'angular',
   'jquery',
@@ -10,6 +9,7 @@ define([
   'connecta.speaknow',
   'connecta.presenter',
   'connecta.maps',
+  'connecta.datamodel',
   'connecta.inspection',
   // Dependências principais  
   'angular-route',
@@ -37,7 +37,7 @@ define([
   'bower_components/angular-amchart/src/amchart',
   'bower_components/angular-facebook/lib/angular-facebook',
   'bower_components/ngAutocomplete/src/ngAutocomplete'
-], function(angular, $, applications, portal, collector, speaknow, presenter, maps, inspection) {
+], function(angular, $, applications, portal, collector, speaknow, presenter, maps, datamodel, inspection) {
 
   var connecta = angular.module('connecta', [
     'connecta.portal',
@@ -45,6 +45,7 @@ define([
     'connecta.speaknow',
     'connecta.presenter',
     'connecta.maps',
+    'connecta.datamodel',
     'connecta.inspection',
     'ngRoute',
     'ngResource',
@@ -98,6 +99,7 @@ define([
     speaknow.lazy = lazy;
     presenter.lazy = lazy;
     maps.lazy = lazy;
+    datamodel.lazy = lazy;
     inspection.lazy = lazy;
   }
 
@@ -149,7 +151,7 @@ define([
    * @returns {undefined}
    */
   function configureRoutes($routeProvider) {
-    var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, inspection);
+    var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, datamodel, inspection);
 
     angular.forEach(allRoutes, function(route, url) {
       if (route.controllerUrl) {
@@ -175,8 +177,8 @@ define([
 
   /**
    * Configura os padrões de tratamento de Request e Response dos serviços REST
-   * @param {object} $httpProvider
-   * @param {object} applications
+   * @param {type} $httpProvider
+   * @returns {undefined}
    */
   function configureRequestInterceptors($httpProvider, applications) {
     $httpProvider.interceptors.push(function($q, $rootScope) {
@@ -199,20 +201,19 @@ define([
         responseError: function(rejection) {
           var responseInterceptors = {
             400: function(rejection) { // BAD REQUEST
-              $rootScope.$broadcast('layout.notify', rejection.data);
+
             },
             401: function(rejection) { // UNAUTHORIZED
               $rootScope.$broadcast('login.request_unathorized', rejection);
-              $rootScope.$broadcast('layout.notify', rejection.data);
             },
             403: function(rejection) { // FORBIDDEN
-              $rootScope.$broadcast('layout.notify', rejection.data);
+
             },
             404: function(rejection) { // PAGE NOT FOUND
-              $rootScope.$broadcast('layout.notify', rejection.data);
+
             },
             500: function(rejection) { // INTERNAL SERVER ERROR
-              $rootScope.$broadcast('layout.notify', rejection.data);
+
             }
           };
 
@@ -323,10 +324,8 @@ define([
     'portal/layout/service/layout',
     'portal/layout/directive/debug',
     'portal/layout/directive/scroll-to',
-    'portal/layout/directive/select-all',
     'portal/layout/directive/random-class',
     'portal/layout/directive/key-value',
-    'portal/layout/directive/type-switcher',
     'portal/layout/directive/file-model',
     'portal/layout/directive/input-timeout',
     'portal/layout/directive/heading-popover',

@@ -14,12 +14,12 @@
             <button type="button" class="btn btn-default" >
                 <span class="icon-arrow-bold-right"></span></button>-->
 
-            <button type="button" class="btn btn-default" 
+            <button type="button" class="btn btn-default" ng-show="!readOnly"
                     conf-modal="modalParams" conf-modal-args="[contact.id]">
                 <span class="icon-dump"></span>
             </button>
 
-            <a href="#/speaknow/contact/{{contact.id}}/edit" class="btn btn-default">
+            <a href="#/speaknow/contact/{{contact.id}}/edit" class="btn btn-default" ng-show="!readOnly">
                 <span class="icon-pencil"></span>
             </a>
         </div>

@@ -1,7 +1,6 @@
 {
     "IMPORT": {
         "IMPORT": "Import",
-        "INVALID_EXTENSION":"Invalid Extension",
         "SHP": "Shapefile",
         "IMPORT_SHP":"Import Shape File",
         "FILE":"File",

@@ -10,8 +10,8 @@
         "PASSWORD":"Senha",
         "TITLE_CONFIRM_DELETE":"Exclusão de Fonte do Presenter",
         "CONFIRM_DELETE":"Deseja realmente excluir Fonte do Presenter?",
-        "ADDED_SUCCESS": "Fonte do Presenter adicionada com sucesso!",
-        "REMOVE_SUCCESS": "Fonte do Presenter removida com sucesso!",
-        "ERROR_REMOVING": "Erro ao remover Fonte do Presenter!"
+        "ADDED_SUCCESS": "Adicionada com sucesso!",
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!"
     }
 }

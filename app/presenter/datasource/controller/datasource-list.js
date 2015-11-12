@@ -26,8 +26,8 @@ define([
 
         $scope.datasources = [];
 
-        $scope.remove = function (id) {
-            DatasourceService.remove(id).then(function(){
+        $scope.excluir = function (id) {
+            DatasourceService.excluir(id).then(function(){
                 //Retira um item da lista de datasource
                 $scope.datasources.splice(
                         $scope.datasources.indexOf(id), 1);

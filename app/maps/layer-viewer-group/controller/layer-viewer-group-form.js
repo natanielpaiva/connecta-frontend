@@ -22,14 +22,6 @@ define([
         $scope.layerColumns = [];
 
         $scope.viewerLayer = [];
-        
-         if ($routeParams.id) {
-            $scope.isEditing = true;            
-        }
-        
-        
-        
-        
 
         //escuta o obj de parameters para saber quando se adicionou uma novo combo de intervalo
         $scope.$watch('viewerTypeImplEntity.id', function (val) {
@@ -49,6 +41,8 @@ define([
                     console.info("ERROR");
                 });
             } else {
+
+                $scope.isEditing = true;
 
                 GroupLayerViewerService.get($routeParams.id).then(function (result) {
                     $scope.groupLayerViewer = result.data;

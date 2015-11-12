@@ -1,382 +1,206 @@
 .dashboard-form {
-    .dashboard-item {
-        border:dashed 0.16em rgba($lighterGray, 0.75);
+  .dashboard-item {
+    background: darken($white, 1%);
+    border:dashed 0.16em rgba($lighterGray, 0.75);
 
-        &.gridster-item {
-            overflow:hidden;
+    &.gridster-item {
+      overflow:hidden;
 
-            &:hover {
-                .gridster-item-resizable-handler.handle-se {
-                    border-color:transparent rgba($lighterGray,0.75) rgba($lighterGray,0.75) transparent;
-                }
-            }
-
-            .dashboard-form-item-edit {
-                position:absolute;
-                top:.25em;
-                right:.25em;
-                text-align:center;
-                padding:0;
-                color:$gray;
-                z-index:10;
-                &:hover {
-                    color:$lightBlack;
-                }
-            }
+      &:hover {
+        .gridster-item-resizable-handler.handle-se {
+          border-color:transparent rgba($lighterGray,0.75) rgba($lighterGray,0.75) transparent;
         }
+      }
     }
-    .gridster-preview-holder {
-        &.ng-enter, &.ng-leave {
-            background-color:$lightGray !important;
-        }
+  }
+  .gridster-preview-holder {
+    &.ng-enter, &.ng-leave {
+      background-color:$lightGray !important;
     }
+  }
 
-    .nav {
-        li {
-            a {
-                padding:0 2em 0 1em !important;
+  .dashboard-no-item {
+    display: block;
+    line-height: 1.5em;
+    padding-top:1em;
+    font-size: 2em;
+    text-align: center;
+    color:$lighterGray;
 
-                tab-heading {
-
-                    input.dashboard-form-section-name-edit {
-                        line-height:1.5em;
-                        margin:0;
-                        margin-right:1em;
-                        width:8em;
-                        background-color: $bs-gray-lighter;
-                        border: none;
-                        &:focus {
-                            outline:none;
-                        }
-                    }
-                    .btn-icon-only {
-                        position:absolute;
-                        top:50%;
-                        margin-top:-0.8em;
-                        margin-right:0em;
-                        right:0;
-
-                        &:hover {
-                            background-color: transparent;
-                            color:$black;
-                        }
-                    }
-                }
-            }
-
-            &:last-of-type {
-                a {
-                    padding:0 1em !important;
-                }
-            }
-        }
+    .icon-area-graph {
+      font-size: 4em;
     }
+  }
 
-    .dashboard-no-item {
-        display: block;
-        width:100%;
-        text-align: center;
-        color:$lighterGray;
-
-        line-height: 1.5em;
-        font-size: 1.5em;
-
-        position:absolute;
-        top:50%;
-        margin-top:-3em;
-        user-select:none;
-
-        .icon-area-graph {
-            font-size: 4em;
-        }
-        p {
-            cursor:default;
-        }
-    }
-
-    .dndPlaceholder {
-        display: block;
-        background-color: rgba($lightGray, 0.5);
-        list-style: none;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-        position:absolute;
-        border: dashed 0.2em $lightGray;
-    }
-
-    
-    .remove-item {
-        position: absolute;
-        top:0.4em;
-        right: 1.5em;
-        padding: 0;
-        margin:0;
-        line-height: 1em;
-    }
-}
-
-.dashboard-config-modal {
-    .dashboard-background-preview {
-        text-align:center;
-    }
-    .corColorCluster {
-        right:15px;
-    }
-    .dropzone {
-        line-height:6em;
-        img {
-            max-height:6em;
-        }
-    }
-
-    .modal-body {
-        padding-bottom:0;
-    }
-    .modal-footer {
-        margin-top:0;
-    }
-    input[type=range] {
-        height:2.5em;
-    }
-}
-
-
-// Estilos da sidebar de pesquisa de visualizadores
-.dashboard-form-viewer-search {
-    padding:10px;
-
-    ul {
-        overflow-y:auto;
-        padding:0;
-        margin:0;
-
-        li {
-            padding:0 0.5em;
-            height:7em;
-            margin:10px 0;
-            background-color:lighten($lighterGray, 7.5%);
-            position:relative;
-
-            $variation:30%;
-            // TODO Continuar com as cores dos outros módulos
-            &.background-fallback-presenter {
-                background-color: lighten($presenterBlue, $variation);
-            }
-            &.background-fallback-maps {
-                background-color: lighten($mapsGreen, $variation);
-            }
-            &.background-fallback-portal {
-                background-color: lighten($connectaRed, $variation*1.5); // vermelho bagaray
-            }
-            &.background-fallback-speaknow {
-                background-color: lighten($speaknowBlue, $variation);
-            }
-
-            .module-icon {
-                width:2em;
-                height:2em;
-                position:absolute;
-                top:.25em;
-                right:.25em;
-            }
-            .viewer-name {
-                background-color: rgba($black, 0.75);
-                color: $white;
-                position:absolute;
-                bottom:0;
-                left:0;
-                right:0;
-                height: 2em;
-                line-height: 2em;
-                padding:0 1em;
-                text-align: center;
-
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-        }
-    }
+  // Widgets
+  .redactor-editor {
+    padding:5px !important;
+  }
 }
 
 .dashboard-view-page {
-    @extend .image-on-background;
+  h1 {
+    margin-left: 10px;
+    font-size: 2.25em;
+    font-weight: bold;
 
-    background-attachment: fixed;
+    a {
+      display: block;
+      color:$gray;
+    }
+    .icon-arrow-left {
+      font-size: 0;
+      color:$gray;
+      opacity: 0;
+      transition: opacity ease-in 250ms, font-size ease-in-out 250ms;
+    }
+
+    &:hover {
+      .icon-arrow-left {
+        opacity: 1;
+        font-size: 0.8em;
+      }
+    }
+  }
+  h2 {
+    margin: 0;
+    margin-left: 10px;
+    font-size: 1.8em;
+    font-weight: 500;
+
+
+    a {
+      @extend .link-no-state;
+      line-height: 2em;
+      display:block;
+      border-bottom: solid 1px lighten($gray, 20%);
+    }
+    .icon-link {
+      font-size: 0.8em;
+    }
+  }
+  .dashboard-item {
+    background: $white;
+
+    &.gridster-item {
+      overflow:hidden;
+    }
+  }
+  .gridster-preview-holder {
+    &.ng-enter, &.ng-leave {
+      background-color:$lightGray !important;
+    }
+  }
+
+  .section-menu {
+    user-select:none;
+    position:fixed;
+    top:0em;
+    z-index: 999;
+    padding:10em 4em 10em 0;
     margin:0;
-    width:100%;
-    padding:1em;
+    left:-11em;
+    transition: transform ease-in-out 250ms;
 
-    .dashboard-view-edit {
-        font-size:0.6em;
-        padding:0;
-        margin:0;
-        line-height:2em;
+    &:hover {
+      transform:translateX(1.5em);
     }
 
-    h1 {
-        margin-left: 10px;
-        font-size: 2.25em;
-        font-weight: bold;
-        padding-right:0.25em;
-
-        a {
-            display: block;
-            color:$gray;
-        }
-        .icon-arrow-left {
-            font-size: 0;
-            color:$gray;
-            opacity: 0;
-            transition: opacity ease-in $defaultAnimationDuration,
-                font-size ease-in-out $defaultAnimationDuration;
-        }
-
-        &:hover {
-            .icon-arrow-left {
-                opacity: 1;
-                font-size: 0.8em;
-            }
-        }
+    a {
+      display: block;
+      color:$white;
+      font-weight: bold;
+      line-height:2em;
+      font-size: 1.05em;
     }
-    h2 {
-        margin: 0 10px;
-        font-size: 1.8em;
-        font-weight: 500;
+    .section-menu-item {
+      width: 12em;
+      margin: 0.5em 0;
+      border-radius: 0.5em;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      box-shadow: 0.25em 0.25em 0 rgba($black, 0.25);
 
-        a {
-            @extend .link-no-state;
-            line-height: 2em;
-            display:block;
-            border-bottom: solid 1px lighten($gray, 20%);
-        }
-        .icon-link {
-            font-size: 0.8em;
-        }
+      transition: transform ease-in-out 250ms;
+
+      &:hover {
+        transform:translateX(9.5em);
+      }
     }
-    .dashboard-item {
-        @extend .image-on-background;
-        &.gridster-item {
-            overflow:hidden;
-        }
-    }
-    .gridster-preview-holder {
-        &.ng-enter, &.ng-leave {
-            background-color:$lightGray !important;
-        }
-    }
+  }
 
-    .section-menu {
-        user-select: none;
-        position:fixed;
-        top:0em;
-        z-index: 999;
-        padding:10em 4em 10em 0;
-        margin:0;
-        left:-11em;
-        transition: transform ease-in-out 250ms;
-
-        &:hover {
-            transform:translateX(1.5em);
-        }
-
-        a {
-            display: block;
-            color:$white;
-            font-weight: bold;
-            line-height:2em;
-            font-size: 1.05em;
-        }
-        .section-menu-item {
-            width: 12em;
-            margin: 0.5em 0;
-            border-radius: 0.5em;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            box-shadow: 0.25em 0.25em 0 rgba($black, 0.25);
-
-            transition: transform ease-in-out $defaultAnimationDuration;
-
-            &:hover {
-                transform:translateX(9.5em);
-            }
-        }
-    }
-
-    // Widgets
-    .redactor-editor {
-        padding:5px !important;
-    }
+  // Widgets
+  .redactor-editor {
+    padding:5px !important;
+  }
 }
 
 .dashboard-list {
 
-    user-select: none;
+  user-select: none;
 
-    .thumbnail-grid {
-        .thumbnail-grid-item {
-            margin-top:1em;
-            margin-bottom:1em;
-            position: relative;
+  .has-feedback {
+      .form-control-feedback {
+          top:0;
+      }
+  }
 
-            .thumbnail-grid-item-inner {
-                height:14em;
-                width:100%;
-                background-color:$lighterGray;
-            }
-            .thumbnail-grid-item-name {
-                position: absolute;
-                bottom:1em;
-                left:0;
-                display: block;
-                width: 100%;
-                text-align: center;
+  .thumbnail-grid {
+    .thumbnail-grid-item {
+      margin-top:1em;
+      margin-bottom:1em;
+      position: relative;
 
-                &:link, &:hover, &:visited {
-                    color:lighten($gray, 10%);
-                    font-size:1.25em;
-                    font-weight: normal;
-                }
+      .thumbnail-grid-item-inner {
+        height:14em;
+        width:100%;
+        background-color:$lighterGray;
+      }
+      .thumbnail-grid-item-name {
+        position: absolute;
+        bottom:1em;
+        left:0;
+        display: block;
+        width: 100%;
+        text-align: center;
 
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            .hidden-checkbox:checked ~ .hidden-checkbox-label .thumbnail-grid-item-name {
-                color:$white;
-            }
+        &:link, &:hover, &:visited {
+          color:lighten($gray, 10%);
+          font-size:1.25em;
+          font-weight: normal;
         }
-    }
 
-    .hidden-checkbox {
-        opacity:0;
-        height:0 !important;
-        width:0 !important;
-        padding:0 !important;
-        margin:0 !important;
-        float: left;
-
-        &:checked {
-            ~ .hidden-checkbox-label {
-                background-color: $presenterBlue;
-            }
+        &:hover {
+          text-decoration: underline;
         }
-    }
-    .hidden-checkbox-label {
-        @extend .cursor-pointer;
-        margin:0;
-        padding:1em 1.25em;
-    }
-    .hidden-checkbox-show-when-checked {
-        display: none;
-    }
-}
+      }
 
-viewer {
-    display:block;
-    width:100%;
-    height:auto;
+      .hidden-checkbox:checked ~ .hidden-checkbox-label .thumbnail-grid-item-name {
+        color:$white;
+      }
+    }
+  }
+
+  .hidden-checkbox {
+    opacity:0;
+    height:0 !important;
+    width:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+    float: left;
+
+    &:checked {
+      ~ .hidden-checkbox-label {
+        background-color: $presenterBlue;
+      }
+    }
+  }
+  .hidden-checkbox-label {
+    @extend .cursor-pointer;
+    margin:0;
+    padding:1em 1.25em;
+  }
+  .hidden-checkbox-show-when-checked {
+    display: none;
+  }
 }

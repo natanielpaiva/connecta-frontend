@@ -1,10 +1,10 @@
-// Arquivo do módulo para puxar todos os arquivos dependentes
+/**
+arquivo base de estilo da aplicação, define aqui as cores e outros elementos
+*/
 
-@import "datasource-view";
-@import "singlesource-view";
+
+@import "hierarchy-form";
+@import "analysis-form";
 @import "group-form";
 @import "group-view";
-@import "analysis-form";
-@import "hierarchy-form";
 @import "viewer-form";
-@import "viewer-singlesource";

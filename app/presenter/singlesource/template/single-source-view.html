@@ -1,49 +1,62 @@
-<div class="singlesource-view">
-    <div class="row">
-        <div class="col-md-12">
-            <h3>
-                <span class="{{getType().icon}}"></span>
-                {{singlesource.name}}
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>SINGLESOURCE.REGISTER_MEDIA</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-10">
+                
+            </div>
+            <div class="col-md-2">
                 <div class="pull-right btn-group">
                     <a href="#/presenter/singlesource/{{singlesource.id}}/edit"
-                       class="btn btn-default btn-sm" title="{{ 'LAYOUT.EDIT' | translate }}">
+                       class="btn btn-default" title="{{ 'LAYOUT.EDIT' | translate }}">
                         <span class="icon-pencil"></span>
                     </a>
-                    <button class="btn btn-default btn-sm" ng-click="excluir(singlesource.id)"
-                            title="{{ 'LAYOUT.DELETE' | translate }}">
+                    <button class="btn btn-default" ng-click="excluir(singlesource.id)"
+                        title="{{ 'LAYOUT.DELETE' | translate }}">
                         <span class="icon-trash"></span>
                     </button>
                 </div>
-            </h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div ng-if="singlesource.type === 'FILE'" class="singlesource-view-lightbox">
-                <div ng-switch="fileExtensions.fileType">
-                    <a href="{{singlesource.binaryFile}}" ng-switch-when="BINARY" class="singlesource-view-download">
-                        <div class="download-link-container">
-                            <span class="icon-download"></span>
-                            <!--<span>{{singlesource.name}}</span>-->
-                            <span class="text-download" translate>SINGLESOURCE.DOWNLOAD</span>
-                        </div>
-                    </a>
-                    <img ng-switch-when="IMAGE"
-                         ng-src="{{singlesource.binaryFile}}" />
-                    <video controls ng-switch-when="VIDEO">
-                        <source ng-src="{{singlesource.binaryFile}}" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                </div>
-                <p ng-if="singlesource.type">
-                    <span class="{{getType().icon}}"></span>
-                <translate>{{'SINGLESOURCE.' + getType().name}}</translate>
-                </p>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single">
+            <p ng-if="singlesource.name">
+                <strong translate>SINGLESOURCE.NAME</strong>: 
+                {{singlesource.name}}
+            </p>
+
+            <p ng-if="singlesource.type" >
+                <strong translate>SINGLESOURCE.TYPE</strong>:
+                {{singlesource.type}}
+            </p>
+            <div ng-if="singlesource.type === 'FILE'" >
+                <div ng-switch="fileExtensions.fileType">
+                    <div  class="col-md-10 font-size-big" ng-switch-when="BINARY" >
+                        <a href="{{singlesource.binaryFile}}">
+                            <span  class="icon-file3"></span>
+                        </a>
+                    </div>
+                    <div ng-switch-when="IMAGE" >
+                        <img style="width: 340px;" alt="" src="{{singlesource.binaryFile}}" />
+                    </div>
+                    <div ng-switch-when="VIDEO" >
+                        <video controls>
+                            <source src="{{singlesource.binaryFile}}" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
             <table class="table margin-top-single">
                 <thead>
                     <tr>
@@ -64,18 +77,14 @@
                             {{ssattr.value}}
                         </td>
                     </tr>
-                    <tr ng-if="!singlesource.singleSourceAttributes.length">
-                        <td colspan="2" class="text-center" translate>
-                            LAYOUT.NO_RESULTS
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 text-right">
-            <a href="#/presenter/singlesource" class="btn btn-default" translate>LAYOUT.BACK</a>
-        </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a href="#/presenter/singlesource" class="btn btn-default" translate>LAYOUT.BACK</a>
     </div>
 </div>

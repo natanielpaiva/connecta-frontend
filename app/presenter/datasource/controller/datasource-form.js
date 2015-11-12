@@ -6,14 +6,16 @@ define([
 
         $scope.types = DatasourceService.getTypes();
 
+        $scope.datasource = {
+            parameters:[]
+        };
+
         if ($routeParams.id) {
             DatasourceService.getById($routeParams.id).then(function (response) {
                 $scope.datasource = response.data;
             });
         } else {
-            $scope.datasource = {
-                type: Object.keys($scope.types)[0]
-            };
+            $scope.datasource.type = Object.keys($scope.types)[0];
         }
 
         $scope.submit = function () {

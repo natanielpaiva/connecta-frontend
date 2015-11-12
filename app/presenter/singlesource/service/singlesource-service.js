@@ -8,13 +8,11 @@ define([
             {
                 id: 'FILE',
                 name: 'FILE',
-                icon:'icon-insert-drive-file',
                 template: '_single-source-file.html'
             },
             {
                 id: 'URL',
                 name: 'URL',
-                icon:'icon-link',
                 template: '_single-source-url.html'
             }
         ];

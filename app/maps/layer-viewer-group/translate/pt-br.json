@@ -1,13 +1,13 @@
 {
     "LAYERVIEWERGROUP": {
         "LAYERVIEWERGROUP": "Visualizadores Agrupados",
-        "ADD": "Adicionar Visualizador Agrupado",
-        "EDIT": "Alterar  Visualizador Agrupado",
-        "VIEW": "Visualizar Visualizadores Agrupados",
-        "TYPE": "Tipo",
-        "NAME": "Nome do grupo",
-        "LAYER": "Camada",
-        "SELECT": "Selecionar",
+        "ADD": "Adicionar novo Visualizador Agrupado",
+        "EDIT": "Alterar cadastro de Visualizador Agrupado",
+        "VIEW": "Visualizar Visualizadores Agrupados de Mapa",
+        "TYPE": "Tipo:",
+        "NAME": "Nome do grupo:",
+        "LAYER": "Camada:",
+        "SELECT": "Selecionar:",
         "DEFAULT": "Padrão",
         "HEATMAP": "Calor",
         "IMPL": "Tipo de Implementação:",
@@ -32,10 +32,10 @@
         "ID_LAYER":"ID da Camada :",
         "ANALISY":"Análise: ",
         "ID_ANALISY":"ID da Análise: ",
-        "ADDED_SUCCESS": "Visualizador Agrupado adicionado com sucesso!",
-        "REMOVE_SUCCESS": "Visualizador Agrupado removido com sucesso!",
-        "ERROR_REMOVING": "Erro ao remover Visualizador Agrupado",
-        "TITLE_CONFIRM_DELETE": "Exclusão de Visualizador Agrupado",
-        "CONFIRM_DELETE": "Você deseja realmente excluir o Visualizador Agrupado?"
+        "ADDED_SUCCESS": "Adicionada com sucesso!",
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Visualizador de Camada",
+        "CONFIRM_DELETE": "Você deseja realmente excluir o Visualizador de Camada?"
     }
 }

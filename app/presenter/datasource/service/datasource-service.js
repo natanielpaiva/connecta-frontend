@@ -20,7 +20,7 @@ define([
                 template: 'app/presenter/datasource/template/_datasource-hdfs.html',
                 icon:'icon-hadoop'
             },
-            OBIEE: {
+            BI: {
                 name: 'OBIEE',
                 template: 'app/presenter/datasource/template/_datasource-obiee.html',
                 icon:'icon-obiee'
@@ -31,7 +31,6 @@ define([
                 icon:'icon-solr'
             },
             WEBSERVICE: {
-                order:6,
                 name: 'WebService',
                 template: 'app/presenter/datasource/template/_datasource-webservice.html',
                 icon:'icon-webservice' // Capitão Planeta?

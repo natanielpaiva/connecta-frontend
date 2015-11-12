@@ -5,7 +5,7 @@ define([
     'bower_components/connectaGeoJS/index/require_config',
     'maps/applied-budget/service/map-service'
 ], function (maps, connectaGeoJS, mapsConfig) {
-    return maps.lazy.service('ConnectaGeoServiceAppliedBudget', function (mapsResources, $http, MapServiceAppliedBudget) {
+    return maps.lazy.service('ConnectaGeoService', function (mapsResources, $http, MapService) {
 
         //Bse URL Framework
         mapsConfig.baseURL = "bower_components/connectaGeoJS/index/";
@@ -13,7 +13,7 @@ define([
         //mapsConfig.proxyURLOpenlayers = "http://localhost:7001/connecta-maps/proxy.jsp?";
 
         this.__connectaGeo = new connectaGeoJS();
-        MapServiceAppliedBudget.setConnectaGeo(this.__connectaGeo);
+        MapService.setConnectaGeo(this.__connectaGeo);
 
         this.map = null;
         this.controlAddMarker = null;
@@ -23,16 +23,16 @@ define([
 
             if (this.__connectaGeo.__objMaps.length > 0) {
                 this.__connectaGeo.__destroyObjMap(this.__connectaGeo.__objMaps[0]);
-                delete MapServiceAppliedBudget.map;
+                delete MapService.map;
             }
 
             //Openlayers
-            MapServiceAppliedBudget.createMap(1);
+            MapService.createMap(1);
             var that = this;
 
             var interval = setInterval(function () {
-                if (typeof MapServiceAppliedBudget.map !== 'undefined') {
-                    that.map = MapServiceAppliedBudget.map;
+                if (typeof MapService.map !== 'undefined') {
+                    that.map = MapService.map;
                     var layerVector = {
                         type: 'Vector',
                         title: 'Layer de TESTE VECTOR a partir de outra camada',
