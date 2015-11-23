@@ -10,41 +10,49 @@
         <div class="col-md-6">
 
             <div class="form-group">
-                <label for="name" translate>ANALYSIS.NAME</label>
+                <label for="name" translate class="required">ANALYSIS.NAME</label>
                 <input type="text" class="form-control" id="name" name="name"
-                       ng-model="analysis.name" />
+                       ng-model="analysis.name" required/>
+                <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
+                     ng-messages-include="portal-error-messages" ></div>
             </div>
 
             <div class="form-group">
-                <label for="description" translate>ANALYSIS.DESCRIPTION</label>
+                <label for="description" translate class="required">ANALYSIS.DESCRIPTION</label>
                 <textarea class="form-control" id="description" name="description"
-                          ng-model="analysis.description"></textarea>
+                          ng-model="analysis.description" required></textarea>
+                <div ng-show="formulario.description.$touched" ng-messages="formulario.description.$error"
+                     ng-messages-include="portal-error-messages" ></div>
             </div>
-            
+
             <div class="form-group" ng-show="edit === false">
-                <label for="nome" translate>ANALYSIS.SOURCE_ANALYSIS</label>
-                <select class="form-control"  ng-model="analysis.datasource.id">
+                <label for="nome" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
+                <select class="form-control"  ng-model="analysis.datasource.id" required>
                     <option value="csv">CSV</option> 
                     <option ng-repeat="ds in listDatasource" value="{{ds.id}}">{{ds.name}}</option>
                 </select>
+                <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
+                     ng-messages-include="portal-error-messages" ></div>
             </div>
-            
+
             <div class="form-group" ng-show="edit === true">
-                <label for="nome" translate>ANALYSIS.SOURCE_ANALYSIS</label>
+                <label for="nome" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
                 <input type="text" class="form-control" disabled="disabled"
-                       ng-model="analysis.datasource.name" />
+                       ng-model="analysis.datasource.name" required/>
+                <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"
+                     ng-messages-include="portal-error-messages" required></div>
             </div>
         </div>
-        
+
     </div>
-    
+
     <div ng-if="showForm">
         <div ng-include="'app/presenter/analysis/template/' + subform.template"
              ng-controller="subform.controller"></div>
     </div>
 
-<!--   <debug ng-model="analysis.analysisColumns"></debug>-->
-    
+    <!--   <debug ng-model="analysis.analysisColumns"></debug>-->
+
     <!--Descrição das colunas-->
     <h4 translate>ANALYSIS.DESCRIPTION_OF_COLUMNS</h4>
     <div class="row"  >
@@ -66,46 +74,46 @@
     </div>
 
     <!--Adicionar atributos-->
-<!--    <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>-->
+    <!--    <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>-->
 
     <div class="row" >
         <div class="col-md-12">
-<!--            <div class="clearfix well">
-                <div ng-repeat="at in attributes" >
-                    <div class="col-md-4 form-group">
-                        <label for="" translate>ANALYSIS.ATTRIBUTE</label>
-                        <input type="text" name="params" id="params" class="form-control" 
-                               ng-model="p.params" />
-                        <div ng-if="formulario.$dirty" ng-messages="formulario.params.$error"
-                             ng-messages-include="portal-error-messages"></div>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label for="valor" translate>ANALYSIS.VALUE</label>
-                        <input type="text" class="form-control"
-                               ng-model="p.value" />
-                        <div ng-if="formulario.$dirty" ng-messages="formulario.method.$error"
-                             ng-messages-include="portal-error-messages"></div>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label for="valor" translate>ANALYSIS.TYPE</label>
-                        <select ng-options="ty for ty in attributeTypes"
-                                ng-model="at.type">
-                        </select>
-                    </div>
-                    <div class="col-xs-3 form-group">
-                        <p class="margin-top-triple">
-                            <button class="btn btn-large btn-primary" type="button" ng-click="addMethodAttribute()">+</button>
-                            <button class="btn btn-large btn-primary" type="button" ng-click="removeMethodAttribute(at)">-</button>
-                        </p>
-                    </div>
-                </div> 
-            </div>-->
+            <!--            <div class="clearfix well">
+                            <div ng-repeat="at in attributes" >
+                                <div class="col-md-4 form-group">
+                                    <label for="" translate>ANALYSIS.ATTRIBUTE</label>
+                                    <input type="text" name="params" id="params" class="form-control" 
+                                           ng-model="p.params" />
+                                    <div ng-if="formulario.$dirty" ng-messages="formulario.params.$error"
+                                         ng-messages-include="portal-error-messages"></div>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="valor" translate>ANALYSIS.VALUE</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="p.value" />
+                                    <div ng-if="formulario.$dirty" ng-messages="formulario.method.$error"
+                                         ng-messages-include="portal-error-messages"></div>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="valor" translate>ANALYSIS.TYPE</label>
+                                    <select ng-options="ty for ty in attributeTypes"
+                                            ng-model="at.type">
+                                    </select>
+                                </div>
+                                <div class="col-xs-3 form-group">
+                                    <p class="margin-top-triple">
+                                        <button class="btn btn-large btn-primary" type="button" ng-click="addMethodAttribute()">+</button>
+                                        <button class="btn btn-large btn-primary" type="button" ng-click="removeMethodAttribute(at)">-</button>
+                                    </p>
+                                </div>
+                            </div> 
+                        </div>-->
 
             <a href="#/presenter/analysis"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>
-            <button class="btn btn-primary" translate>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
                 LAYOUT.SAVE
             </button>
 

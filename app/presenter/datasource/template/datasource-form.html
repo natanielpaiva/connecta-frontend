@@ -8,17 +8,17 @@
     <div class="col-md-12">
         <form novalidate name="formulario" ng-submit="submit()">
             <div class="form-group">
-                <label for="name" translate class="required">DATASOURCE.NAME</label>
+                <label class="required" for="name" translate class="required">DATASOURCE.NAME</label>
                 <input type="text" class="form-control" id="name" name="name"
                        placeholder="{{'DATASOURCE.NAME'|translate}}"
-                       ng-model="datasource.name" />
+                       ng-model="datasource.name" required/>
             </div>
 
             <div class="form-group">
-                <label for="description" translate>DATASOURCE.DESCRIPTION</label>
+                <label class="required" for="description" translate>DATASOURCE.DESCRIPTION</label>
                 <textarea class="form-control" id="description" name="description"
                           placeholder="{{'DATASOURCE.DESCRIPTION'|translate}}"
-                          ng-model="datasource.description"></textarea>
+                          ng-model="datasource.description" required></textarea>
             </div>
 
             <div class="portal-type-switcher margin-bottom-single">
@@ -40,7 +40,7 @@
                    class="btn btn-default" translate>
                     LAYOUT.CANCEL
                 </a>
-                <button class="btn btn-primary" translate>
+                <button class="btn btn-primary" translate ng-disabled="user_config_form.$invalid">
                     LAYOUT.SAVE
                 </button>
             </div>

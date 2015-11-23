@@ -1,22 +1,22 @@
 <!-- HDFS -->
 <div class="form-group">
-    <label for="server" translate>DATASOURCE.SERVER</label>
+    <label for="server" translate class="required">DATASOURCE.SERVER</label>
     <input type="text" name="server" id="server" class="form-control" 
-           ng-model="object.server"/>
-    <div ng-if="formulario.$dirty" ng-messages="formulario.server.$error"
+           ng-model="object.server" required/>
+    <div ng-if="formulario.server$dirty" ng-messages="formulario.server.$error"
          ng-messages-include="portal-validation-messages"></div>
 </div>
 <div class="form-group">
-    <label for="port" translate>DATASOURCE.PORT</label>
+    <label for="port" translate class="required">DATASOURCE.PORT</label>
     <input type="text" name="port" id="port" class="form-control"
-           ng-model="object.port"/>
-    <div ng-if="formulario.$dirty" ng-messages="formulario.port.$error"
+           ng-model="object.port" required/>
+    <div ng-if="formulario.port$dirty" ng-messages="formulario.port.$error"
          ng-messages-include="portal-validation-messages"></div>
 </div>
 <div class="form-group">
-    <label for="path" translate>DATASOURCE.PATH</label>
+    <label for="path" translate class="required">DATASOURCE.PATH</label>
     <input type="text" name="path" id="path" class="form-control"
-           ng-model="object.path"/>
-    <div ng-if="formulario.$dirty" ng-messages="formulario.path.$error"
+           ng-model="object.path" required/>
+    <div ng-if="formulario.path$dirty" ng-messages="formulario.path.$error"
          ng-messages-include="portal-validation-messages"></div>
 </div>

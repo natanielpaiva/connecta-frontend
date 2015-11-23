@@ -1,11 +1,13 @@
 <div class="row">
     <div class="col-xs-3 form-group">
-        <label for="separador" translate>analysis.separator</label>
-        <select class="form-control" ng-model="analysis.separator" ng-options="item.value as item.name for item in separator"  >
+        <label for="separador" translate class="required">analysis.separator</label>
+        <select name="separator" class="form-control" ng-model="analysis.separator" ng-options="item.value as item.name for item in separator"  >
             <option value="">Selecione</option>
         </select>
+        <div ng-show="formulario.separator.$touched" ng-messages="formulario.separator.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
-    
+
     <div class="col-xs-3 form-group">
         <label for="quote" translate>analysis.quote</label>
         <input type="text" name="quote" class="form-control">
@@ -13,26 +15,32 @@
 </div>
 
 <div class="row" >
-   <div class="col-xs-6 form-group">
-        <label for="typeCSV" translate>analysis.csv-type</label>
-        <select class="form-control" ng-model="analysis.csvType" ng-options="item.value as item.name for item in csvType">
+    <div class="col-xs-6 form-group">
+        <label for="typeCSV" translate class="required">analysis.csv-type</label>
+        <select name="typeCSV" class="form-control" ng-model="analysis.csvType" ng-options="item.value as item.name for item in csvType">
             <option value="">Selecione</option>
         </select>
-    </div>
-</div>
- 
-<div class="row">
-    <div class="col-xs-6 form-group">
-        <label for="description" translate>analysis.csv-file</label>
-        <input type="file"> 
+        <div ng-show="formulario.typeCSV.$touched" ng-messages="formulario.typeCSV.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-xs-6 form-group">
+    <div class="col-xs-6 form-group" class="required">
+        <label for="description" translate>analysis.csv-file</label>
+        <input name="file" type="file"> 
+        <div ng-show="formulario.file.$touched" ng-messages="formulario.file.$error"
+             ng-messages-include="portal-error-messages" ></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-6 form-group" class="required">
         <label for="textCSV" translate>analysis.csv-text</label>
-        <textarea class="form-control" rows="4"></textarea>
+        <textarea name="textCSV" class="form-control" rows="4"></textarea>
         <button type="button" class="btn" >Enviar</button>
+        <div ng-show="formulario.textCSV.$touched" ng-messages="formulario.textCSV.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
 </div>
 

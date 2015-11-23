@@ -1,25 +1,31 @@
 <!-- Endeca -->
 <div class="form-group">
-    <label for="txtAddress" translate>DATASOURCE.ADDRESS</label>
+    <label for="txtAddress" translate class="required">DATASOURCE.ADDRESS</label>
     <input type="text" name="address" id="address" class="form-control"  
-           ng-model="object.address" />
+           ng-model="object.address" required />
     <div ng-if="formulario.$dirty" ng-messages="formulario.address.$error"
          ng-messages-include="portal-validation-messages"></div>
+    <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
+         ng-messages-include="portal-error-messages"></div>
 </div>
 <div class="row" >
     <div class="col-xs-6 form-group">
-        <label for="user" translate>DATASOURCE.USERNAME</label>
+        <label for="user" translate class="required">DATASOURCE.USERNAME</label>
         <input type="text" name="user" id="user" class="form-control" 
-               ng-model="object.user" />
+               ng-model="object.user" required />
         <div ng-if="formulario.$dirty" ng-messages="formulario.user.$error"
              ng-messages-include="portal-validation-messages"></div>
+        <div ng-show="formulario.user.$touched" ng-messages="formulario.user.$error"
+             ng-messages-include="portal-error-messages"></div>
     </div>
     <div class="col-xs-6 form-group">
-        <label for="password" translate>DATASOURCE.PASSWORD</label>
+        <label for="password" translate class="required">DATASOURCE.PASSWORD</label>
         <input type="text" name="password" id="password" class="form-control"
-               ng-model="object.password" />
+               ng-model="object.password" required />
         <div ng-if="formulario.$dirty" ng-messages="formulario.password.$error"
              ng-messages-include="portal-validation-messages"></div>
+        <div ng-show="formulario.password.$touched" ng-messages="formulario.password.$error"
+             ng-messages-include="portal-error-messages"></div>
     </div>
 </div>
 

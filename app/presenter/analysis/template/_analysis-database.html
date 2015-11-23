@@ -1,49 +1,57 @@
 <div class="row">
-    <div class="col-xs-3 form-group" ng-if="edit===false">
-        <label for="sourceOfdata" translate>ANALYSIS.SOURCE_OF_DATA</label>
-        <select class="form-control" ng-model="databaseForm.selectSourceOfdata" ng-options="item.value as item.name for item in sourceOfdata" ng-change="getSourceOfdata()" >
+    <div class="col-xs-3 form-group" ng-if="edit === false">
+        <label for="sourceOfdata" translate class="required">ANALYSIS.SOURCE_OF_DATA</label>
+        <select id="selectSourceOfdata" name="selectSourceOfdata" class="form-control" ng-model="databaseForm.selectSourceOfdata" ng-options="item.value as item.name for item in sourceOfdata" ng-change="getSourceOfdata()" required >
             <option value="">Selecione</option>
         </select>
-        <div ng-if="formulario.$dirty" ng-messages="formulario.driver.$error"
-             ng-messages-include="portal-error-messages"></div>
+        <div ng-show="formulario.selectSourceOfdata.$touched" ng-messages="formulario.selectSourceOfdata.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
-    
+
     <div class="col-xs-3 form-group" ng-if="edit === true">
-        <label for="sourceOfdata" translate>ANALYSIS.SOURCE_OF_DATA</label>
-        <input type="text" class="form-control" ng-model="databaseForm.type" disabled="disabled"> 
+        <label for="sourceOfdata" translate class="required">ANALYSIS.SOURCE_OF_DATA</label>
+        <input id="type" name="type" type="text" class="form-control" ng-model="databaseForm.type" disabled="disabled" required 
+               <div ng-show="formulario.type.$touched" ng-messages="formulario.type.$error"
+               ng-messages-include="portal-error-messages" ></div>
     </div>
-    
+
     <div class="col-xs-3 form-group">
-        <label for="dataInsertion" translate>ANALYSIS.DATA_INSERTION</label>
-        <input type="date" name="dataInsertion" class="form-control" id="dataInsertion"
+        <label for="dataInsertion" translate class="required">ANALYSIS.DATA_INSERTION</label>
+        <input type="date" name="dataInsertion" class="form-control" id="dataInsertion" name="dataInsertion"
                ng-model="analysis.dataInsertion">
-        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
-             ng-messages-include="portal-error-messages"></div>
+        <div ng-show="formulario.dataInsertion.$touched" ng-messages="formulario.dataInsertion.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
 </div>
 
 
 <div class="row" ng-if="databaseForm.selectSourceOfdata === 'table'">
-   <div class="col-xs-6 form-group" ng-if="edit===false">
-        <label for="table" translate>ANALYSIS.TABLE</label>
-        <select class="form-control" name="table" ng-model="databaseForm.selectedTable"  ng-options="item as item.tableName for item in listTableDatasource">
+    <div class="col-xs-6 form-group" ng-if="edit === false">
+        <label for="table" translate class="required">ANALYSIS.TABLE</label>
+        <select class="form-control" name="table" id="table" ng-model="databaseForm.selectedTable"  ng-options="item as item.tableName for item in listTableDatasource" required>
             <option value="">Selecione</option>
         </select>
+        <div ng-show="formulario.selectedTable.$touched" ng-messages="formulario.selectedTable.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
-    
-    <div class="col-xs-6 form-group" ng-if="edit===true">
-        <label for="table" translate>ANALYSIS.TABLE</label>
-        <input type="text" class="form-control" ng-model="analysis.table" disabled="disabled"> 
+
+    <div class="col-xs-6 form-group" ng-if="edit === true">
+        <label for="table" translate class="required">ANALYSIS.TABLE</label>
+        <input id="table" name="table" type="text" class="form-control" ng-model="analysis.table" disabled="disabled" required> 
+        <div ng-show="formulario.table.$touched" ng-messages="formulario.table.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
-    
+
 </div>
- 
+
 <div class="row" ng-if="databaseForm.selectSourceOfdata === 'sql'">
     <div class="col-xs-6 form-group">
-        <label for="description" translate>ANALYSIS.CUSTOM_SQL</label>
+        <label for="description" translate class="required">ANALYSIS.CUSTOM_SQL</label>
         <textarea class="form-control" id="description" name="sql" rows="4"
-                  ng-model="analysis.sql"></textarea>
+                  ng-model="analysis.sql"></textarea required>
         <button type="button" class="btn" ng-click="executeSQL()">Aplicar</button>
+        <div ng-show="formulario.sql.$touched" ng-messages="formulario.sql.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
 </div>
 
@@ -61,7 +69,7 @@
             <tbody>
                 <tr ng-repeat="r in responseDataBaseTable" class="row">
                     <td ng-repeat="col in analysis.analysisColumns" class="text-left">
-                       {{ r[col.name] }}
+                        {{ r[col.name]}}
                     </td>
                 </tr>
             </tbody>
@@ -83,7 +91,7 @@
             <tbody>
                 <tr ng-repeat="r in responseDataBaseSql" class="row">
                     <td ng-repeat="col in analysis.analysisColumns" class="text-left">
-                       {{ r[col.formula] }}
+                        {{ r[col.formula]}}
                     </td>
                 </tr>
             </tbody>

@@ -1,7 +1,7 @@
 {
   "presenter": {
     "title": "Presenter",
-    "host": "http://connectad.cds.com.br/connecta-presenter",
+    "host": "http://localhost:7001/connecta-presenter",
     "icon": "assets/img/module-icon/presenter.png",
     "iconMini": "assets/img/module-icon/mini/presenter.png",
     "home": "#/presenter",
