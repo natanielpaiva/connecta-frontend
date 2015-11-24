@@ -1,6 +1,6 @@
 {
   "name": "connecta-portal",
-  "version": "0.0.2-SNAPSHOT",
+  "version": "0.3.0",
   "description": "Interface principal dos aplicativos Connecta",
   "repository": "http://dsvn.cds.com.br/svn/connecta-2.0/connecta-portal-frontend/",
   "devDependencies": {
