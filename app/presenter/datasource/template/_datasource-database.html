@@ -1,7 +1,7 @@
 <!-- Database -->
 <div class="form-group">
     <label for="drive" translate class="required">DATASOURCE.DRIVER_NAME</label>
-    <select class="form-control" id="driver" name="driver" ng-model="object.driver" required>
+    <select class="form-control" name="driver" ng-model="object.driver" required>
         <option value="">Selecione</option>
         <option value="ORACLE_SID">Oracle Thin (Service ID - SID)</option>
         <option value="POSTGRES">PostgreSQL</option>
@@ -14,9 +14,9 @@
 <div class="row">
     <div class="col-xs-6 form-group">
         <label for="txtServer" translate class="required">DATASOURCE.HOST</label>
-        <input type="text" name="txtServer" id="txtServer" required class="form-control"
-               ng-model="object.server" required/>
-        <div ng-if="formulario.txtServer.$dirty" ng-messages="formulario.txtServer.$error"
+        <input type="text" name="txtServer" required class="form-control"
+               ng-model="object.server" required />
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtServer.$error"
              ng-messages-include="portal-validation-messages"></div>
     </div>
 
@@ -24,7 +24,7 @@
         <label for="txtPort" translate class="required">DATASOURCE.PORT</label>
         <input type="number" name="txtPort" class="form-control" id="txtPort"
                ng-model="object.port" required>
-        <div ng-if="formulario.txtPort.$dirty" ng-messages="formulario.txtPort.$error"
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtPort.$error"
              ng-messages-include="portal-validation-messages"></div>
     </div>
 </div>
@@ -33,31 +33,31 @@
         <label for="password" translate class="required">DATASOURCE.DATABASE</label>
         <input type="text" name="sid" class="form-control" id="password"
                ng-model="object.sid" required />
-        <div ng-if="formulario.sid.$dirty" ng-messages="formulario.sid.$error"
+        <div ng-if="formulario.$dirty" ng-messages="formulario.sid.$error"
              ng-messages-include="portal-validation-messages"></div>
 
     </div>
     <div class="col-xs-6 form-group">
         <label for="txtSchema" translate class="required">DATASOURCE.SCHEMA</label>
         <input type="text" name="txtSchema" id="schema" class="form-control"
-               ng-model="object.txtSchema" required />
-        <div ng-if="formulario.txtSchema.$dirty" ng-messages="formulario.txtSchema.$error"
+               ng-model="object.schema" required />
+        <div ng-if="formulario.$dirty" ng-messages="formulario.txtSchema.$error"
              ng-messages-include="portal-validation-messages"></div>
     </div>
 </div>
 <div class="row" >
     <div class="col-xs-6 form-group" class="required">
-        <label for="user" translate>DATASOURCE.USERNAME</label>
+        <label for="user" translate class="required">DATASOURCE.USERNAME</label>
         <input type="text" name="user" id="user" class="form-control" 
-               ng-model="object.user" required/>
-        <div ng-if="formulario.user.$dirty" ng-messages="formulario.user.$error"
+               ng-model="object.user" required />
+        <div ng-if="formulario.$dirty" ng-messages="formulario.user.$error"
              ng-messages-include="portal-validation-messages"></div>
     </div>
     <div class="col-xs-6 form-group">
         <label for="password" translate class="required">DATASOURCE.PASSWORD</label>
         <input type="text" name="password" id="password" class="form-control"
                ng-model="object.password" required />
-        <div ng-if="formulario.password.$dirty" ng-messages="formulario.password.$error"
+        <div ng-if="formulario.$dirty" ng-messages="formulario.password.$error"
              ng-messages-include="portal-validation-messages"></div>
     </div>
 </div>

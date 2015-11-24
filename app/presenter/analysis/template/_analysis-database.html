@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-xs-3 form-group" ng-if="edit === false">
+    <div class="col-xs-3 form-group" ng-if="edit===false">
         <label for="sourceOfdata" translate class="required">ANALYSIS.SOURCE_OF_DATA</label>
-        <select id="selectSourceOfdata" name="selectSourceOfdata" class="form-control" ng-model="databaseForm.selectSourceOfdata" ng-options="item.value as item.name for item in sourceOfdata" ng-change="getSourceOfdata()" required >
+        <select class="form-control" ng-model="databaseForm.selectSourceOfdata" ng-options="item.value as item.name for item in sourceOfdata" ng-change="getSourceOfdata()" required>
             <option value="">Selecione</option>
         </select>
         <div ng-show="formulario.selectSourceOfdata.$touched" ng-messages="formulario.selectSourceOfdata.$error"
@@ -26,9 +26,9 @@
 
 
 <div class="row" ng-if="databaseForm.selectSourceOfdata === 'table'">
-    <div class="col-xs-6 form-group" ng-if="edit === false">
-        <label for="table" translate class="required">ANALYSIS.TABLE</label>
-        <select class="form-control" name="table" id="table" ng-model="databaseForm.selectedTable"  ng-options="item as item.tableName for item in listTableDatasource" required>
+    <div class="col-xs-6 form-group" ng-if="edit===false">
+        <label for="table" translate  class="required">ANALYSIS.TABLE</label>
+        <select class="form-control" name="table" ng-model="databaseForm.selectedTable"  ng-options="item as item.tableName for item in listTableDatasource" required>
             <option value="">Selecione</option>
         </select>
         <div ng-show="formulario.selectedTable.$touched" ng-messages="formulario.selectedTable.$error"

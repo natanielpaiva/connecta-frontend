@@ -43,7 +43,6 @@ define([
         }
 
 
-
         if ($routeParams.id) {
 
             AnalysisService.getAnalysis($routeParams.id).then(function (response) {
@@ -58,7 +57,6 @@ define([
                 $scope.subform = $scope.types[response.data.type];
 
                 console.log("datasourceCurrent", $scope.datasourceCurrent);
-                //console.log("$scope.subform edit", $scope.subform);
 
                 $timeout(function () {
                     $scope.showForm = true;
@@ -72,24 +70,16 @@ define([
 
             $scope.$watch('analysis.datasource.id', function (idDatasouce) {
                 for (var ds  in $scope.listDatasource) {
-
-                    if (idDatasouce === $scope.listDatasource[ds].id.toString()) {
+                    if (idDatasouce === $scope.listDatasource[ds].id.toString()  ) {
 
                         $scope.datasourceCurrent = $scope.listDatasource[ds];
-
-
-                        //console.log("datasourceCurrent: ", datasourceCurrent);
                         //Monta o template de acordo com o datasource
 
-                        //$scope.analysis.typeAnalysis = datasourceCurrent.type;
                         $scope.analysis.type = $scope.datasourceCurrent.type;
                         $scope.analysis.datasource.type = $scope.datasourceCurrent.type;
                         $scope.subform = $scope.types[$scope.datasourceCurrent.type];
 
-                        //console.log("$scope.subform", $scope.subform);
-
                         timeReload();
-
 
                         if ($scope.types[$scope.datasourceCurrent.type].start) {
                             resetComponent();
@@ -101,8 +91,21 @@ define([
                         }
                     }
                 }
+                
+                if(idDatasouce === $scope.types.CSV.id){
+                    var csv = $scope.types.CSV;
+                    
+                    timeReload();
+                    $scope.subform = csv;
+                    $scope.analysis.type = csv.name;
+                    
+                    $scope.analysis.datasource = null;
+                    
+                    $scope.datasourceCurrent = {
+                        type: 'csv'
+                    };
+                }
             });
-
         }
 
         $scope.attributeTypes = ["Select", "Map", "Date", "Text", "Etc"];
@@ -116,12 +119,10 @@ define([
 
         $scope.submit = function () {
 
-            //$scope.analysis.analysisColumns = $scope.component.columns;
 
             //caso o submit seja Sorl
             if ($scope.types.SOLR.name === $scope.datasourceCurrent.type) {
-                console.log("$scope.analysis.query ", $scope.analysis.query);
-                console.log("$scope.statement ", $scope.statement);
+                
                 var queryCopy = angular.copy($scope.analysis.query);
 
 
@@ -150,8 +151,6 @@ define([
                      $location.path('presenter/analysis');
                 });
             }
-            
-
         };
 
     });

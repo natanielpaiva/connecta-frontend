@@ -1,29 +1,14 @@
 /* global angular */
-
 define([
-    'connecta.portal'
+    'connecta.portal',
+    'portal/layout/service/data-uri'
 ], function (portal) {
-
-    return portal.filter('dataUri', function ($timeout) {
+    return portal.filter('dataUri', function (dataURI) {
         return function (file) {
-            if (angular.isString(file)) {
-                return file;
-            } else {
-                if (!file.base64 && !file.loading) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $timeout(function () {
-                            file.base64 = e.target.result;
-                            file.loading = false;
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                    file.loading = true;
-                }
-
-                return file.base64;
-            }
+            dataURI(file).then(function(string){
+                file.base64 = string;
+            });
+            return file && file.base64 ? file.base64 : null;
         };
     });
-
 });

@@ -6,12 +6,16 @@ define([
             templateUrl: 'app/portal/dashboard/directive/template/viewer.html',
             scope:{
                 model:'=?ngModel',
-                src:'=?'
+                src:'=?',
+                type:'=?'
             },
             controller: function ($scope, $http) {
                 if ( $scope.src ) {
                     $http.get($scope.src).then(function(response){
                         $scope.model = response.data;
+                        if ($scope.type && !$scope.model.type) {
+                            $scope.model.type = $scope.type;
+                        }
                     });
                 }
             }

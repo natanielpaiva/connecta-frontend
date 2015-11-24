@@ -8,13 +8,13 @@
     <div class="col-md-12">
         <form novalidate name="formulario" ng-submit="submit()">
             <div class="form-group">
-                <label for="model-nome" translate>GROUP.NAME</label>
+                <label for="model-nome" class="required" translate>GROUP.NAME</label>
                 <input type="text" name="nome" ng-model="group.name" id="model-nome" required class="form-control" />
-                <div ng-if="formulario.nome.$dirty" ng-messages="formulario.nome.$error" ng-messages-include="portal-validation-messages"></div>
+                <div ng-if="formulario.nome.$dirty" ng-messages="formulario.nome.$error" ng-messages-include="portal-validation-messages" required></div>
             </div>
             <div class="form-group">
-                <label for="description" translate>GROUP.DESCRIPTION</label>
-                <textarea id="description" rows="5" cols="60" ng-model="group.description" class="form-control"></textarea>
+                <label for="description" class="required" translate>GROUP.DESCRIPTION</label>
+                <textarea id="description" rows="5" cols="60" ng-model="group.description" class="form-control" required></textarea>
             </div>
 
             <div class="form-group">
@@ -32,7 +32,7 @@
                 <a href="#/presenter/group" class="btn btn-default" translate>
                     LAYOUT.CANCEL
                 </a>
-                <button class="btn btn-primary" translate>
+                <button class="btn btn-primary" ng-disabled="formulario.$invalid" translate>
                     LAYOUT.SAVE
                 </button>
             </div>

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-6 form-group">
         <label for="domain" translate class="required">ANALYSIS.TYPE_QUERY</label>
-        <select name="domain" class="form-control" ng-model="analysis.typeQuery" ng-options="item.value as item.name for item in typeQuery" required>
+        <select class="form-control" ng-model="analysis.typeQuery" ng-options="item.value as item.name for item in typeQuery" required>
             <option value="">Selecione</option>
         </select>
         <div ng-show="formulario.domain.$touched" ng-messages="formulario.domain.$error"
@@ -9,21 +9,17 @@
     </div>
 </div>
 <div class="row am-flip-x" ng-if="analysis.typeQuery === 'hiveQL'">
-    <div class="col-xs-6 form-group">
+   <div class="col-xs-6 form-group">
         <label for="hiveQL" translate class="required">ANALYSIS.HIVE_QL</label>
-        <textarea name="hiveQL" class="form-control" id="hiveQL"
-                  ng-model="analysis.hiveQL"></textarea>
-        <div ng-show="formulario.hiveQL.$touched" ng-messages="formulario.hiveQL.$error"
-             ng-messages-include="portal-error-messages"></div>
+        <textarea class="form-control" id="hiveQL" name="hiveQL"
+                          ng-model="analysis.hiveQL" required></textarea>
     </div>
 </div>
 <div class="row am-flip-x" ng-if="analysis.typeQuery === 'pigQuery'">
     <div class="col-xs-6 form-group">
         <label for="pigQuery" translate class="required">ANALYSIS.PIG_QUERY</label>
-        <textarea class="form-control" id="description" name="pigQuery"
-                  ng-model="analysis.pigQuery" required></textarea>
-        <div ng-show="formulario.pigQuery.$touched" ng-messages="formulario.pigQuery.$error"
-             ng-messages-include="portal-error-messages"></div>
+       <textarea class="form-control" id="description" name="pigQuery"
+                          ng-model="analysis.pigQuery" required></textarea>
     </div>
 </div>
 <div class="row">
@@ -31,15 +27,11 @@
         <label for="sourceOfdata" translate class="required">ANALYSIS.MR_CLASS</label>
         <input type="text" name="mr_class" class="form-control" id="mrClass"
                ng-model="analysis.mrClass" required>
-        <div ng-show="formulario.mr_class.$touched" ng-messages="formulario.mr_class.$error"
-             ng-messages-include="portal-error-messages"></div>
     </div>
 
     <div class="col-xs-3 form-group">
         <label for="dataInsertion" translate class="required">ANALYSIS.MR_METHOD</label>
         <input type="text" name="MrMethod" class="form-control" id="mrMethod"
                ng-model="analysis.mrMethod" required>
-        <div ng-show="formulario.MrMethod.$touched" ng-messages="formulario.MrMethod.$error"
-             ng-messages-include="portal-error-messages"></div>
     </div>
 </div>

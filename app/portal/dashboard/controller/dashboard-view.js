@@ -1,3 +1,4 @@
+/* global angular */
 define([
     'connecta.portal',
     'portal/dashboard/service/dashboard-service',
@@ -6,14 +7,15 @@ define([
     'presenter/viewer/directive/analysis-viewer',
     'presenter/viewer/directive/singlesource-viewer',
     'presenter/viewer/directive/singlesource-group-viewer',
-    'presenter/viewer/directive/combined-viewer'
+    'presenter/viewer/directive/combined-viewer',
+    'maps/layer-viewer/directive/map-viewer'
 ], function (portal) {
     return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $location, $filter) {
         $scope.dashboard = {};
 
         LayoutService.setFullscreen(true);
 
-        $scope.$on("$locationChangeStart", function (event) {
+        $scope.$on("$locationChangeStart", function(){
             LayoutService.setFullscreen(false);
         });
 

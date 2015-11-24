@@ -19,7 +19,7 @@
         "SEPARATOR": "Separator",
         "QUOTE": "Quote",
         "CSV_TYPE": "Tipo CSV",
-        "CSV_FILE": "Arquivo CSV",
+        "CSV_FILE": "Ou suba o arquivo CSV",
         "CSV_TEXT": "Texto CSV",
         "DOMAIN": "Dominio",
         "TYPE_QUERY": "Tipo de Query",

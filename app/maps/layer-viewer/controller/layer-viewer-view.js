@@ -44,7 +44,7 @@ define([
             $modalTranslate($scope.modalParams, 'text', 'LAYERVIEWER.CONFIRM_DELETE');
 
 
-            ConnectaGeoService.showViewer($scope.layerViewer);
+            ConnectaGeoService.showViewer($scope.layerViewer, 'map-view');
 
         });
 

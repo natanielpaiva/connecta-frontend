@@ -224,6 +224,14 @@ define([
             return $http.get(url);
         };
 
+        //csv
+        this.getResultCSV = function(analysis){
+            var analysisCopy = angular.copy(analysis);
+            var url = presenterResources.analysis + "/result-csv";
+            return $http.post(url, analysisCopy);
+        };
+
+
 
         //solr
         var _fixQueryBuilder = function (statement, edit) {

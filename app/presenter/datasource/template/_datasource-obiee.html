@@ -2,14 +2,14 @@
 <div class="form-group">
     <label for="address" translate class="required">DATASOURCE.ADDRESS</label>
     <input type="text" name="address" id="address" class="form-control"
-           ng-model="object.address required"/>
+           ng-model="object.address" required/>
     <div ng-if="formulario.$dirty" ng-messages="formulario.addrss.$error"
              ng-messages-include="portal-validation-messages"></div>
 </div>
 <div class="form-group">
     <label for="path" translate class="required">DATASOURCE.PATH</label>
     <input type="text" name="path" id="path" class="form-control"
-           ng-model="object.path" required/>
+           ng-model="object.path" required />
     <div ng-if="formulario.$dirty" ng-messages="formulario.path.$error"
              ng-messages-include="portal-validation-messages"></div>
 </div>
@@ -17,7 +17,7 @@
     <div class="col-xs-6 form-group">
         <label for="user" translate class="required">DATASOURCE.USERNAME</label>
         <input type="text" name="user" id="user" class="form-control" 
-               ng-model="object.user" required />
+               ng-model="object.user" required/>
         <div ng-if="formulario.$dirty" ng-messages="formulario.user.$error"
              ng-messages-include="portal-validation-messages"></div>
     </div>

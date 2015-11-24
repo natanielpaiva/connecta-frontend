@@ -7,10 +7,11 @@ define([
     'presenter/viewer/directive/singlesource-viewer',
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
+    'maps/layer-viewer/directive/map-viewer',
     'portal/layout/filter/data-uri'
 ], function (portal) {
     return portal.lazy.controller('DashboardFormController', function (
-            $scope, DashboardService, $routeParams, $location, $filter, SidebarService, applications, $modal) {
+            $scope, DashboardService, $routeParams, $location, $filter, SidebarService, applications, $modal, $http) {
         $scope.dashboard = {};
 
         var _sectionTemplate = {
@@ -52,7 +53,7 @@ define([
         $scope.$on('$locationChangeStart', function () {
             SidebarService.hide();
         });
-
+        
         if ($routeParams.id) {
             DashboardService.get($routeParams.id).then(function (response) {
                 response.data.sections.sort(function (a, b) {

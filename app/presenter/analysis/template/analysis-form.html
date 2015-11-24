@@ -12,22 +12,18 @@
             <div class="form-group">
                 <label for="name" translate class="required">ANALYSIS.NAME</label>
                 <input type="text" class="form-control" id="name" name="name"
-                       ng-model="analysis.name" required/>
-                <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
-                     ng-messages-include="portal-error-messages" ></div>
+                       ng-model="analysis.name" required />
             </div>
 
             <div class="form-group">
                 <label for="description" translate class="required">ANALYSIS.DESCRIPTION</label>
                 <textarea class="form-control" id="description" name="description"
                           ng-model="analysis.description" required></textarea>
-                <div ng-show="formulario.description.$touched" ng-messages="formulario.description.$error"
-                     ng-messages-include="portal-error-messages" ></div>
             </div>
 
             <div class="form-group" ng-show="edit === false">
                 <label for="nome" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
-                <select class="form-control"  ng-model="analysis.datasource.id" required>
+                <select class="form-control"  ng-model="analysis.datasource.id">
                     <option value="csv">CSV</option> 
                     <option ng-repeat="ds in listDatasource" value="{{ds.id}}">{{ds.name}}</option>
                 </select>
@@ -36,7 +32,7 @@
             </div>
 
             <div class="form-group" ng-show="edit === true">
-                <label for="nome" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
+                <label for="nome" translate >ANALYSIS.SOURCE_ANALYSIS</label>
                 <input type="text" class="form-control" disabled="disabled"
                        ng-model="analysis.datasource.name" required/>
                 <div ng-show="formulario.nome.$touched" ng-messages="formulario.nome.$error"

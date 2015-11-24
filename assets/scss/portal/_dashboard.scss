@@ -106,7 +106,7 @@
         border: dashed 0.2em $lightGray;
     }
 
-    
+
     .remove-item {
         position: absolute;
         top:0.4em;
@@ -325,23 +325,29 @@
                 height:14em;
                 width:100%;
                 background-color:$lighterGray;
-            }
-            .thumbnail-grid-item-name {
-                position: absolute;
-                bottom:1em;
-                left:0;
-                display: block;
-                width: 100%;
-                text-align: center;
+                position:relative;
 
-                &:link, &:hover, &:visited {
-                    color:lighten($gray, 10%);
-                    font-size:1.25em;
-                    font-weight: normal;
-                }
+                .thumbnail-grid-item-name {
+                    position: absolute;
+                    bottom:.5em;
+                    left:0;
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    padding:0 1em;
 
-                &:hover {
-                    text-decoration: underline;
+                    &:link, &:hover, &:visited {
+                        color:lighten($gray, 10%);
+                        font-size:1.25em;
+                        font-weight: normal;
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
 
@@ -376,7 +382,18 @@
 }
 
 viewer {
-    display:block;
-    width:100%;
-    height:auto;
+    z-index: 0;
+    @include div-block();
+    [ng-switch] {
+        @include div-block();
+        z-index: 0;
+
+        map-viewer {
+            z-index: 0;
+            @include div-block();
+        }
+    }
+}
+.gridster-item-resizable-handler, .dashboard-form-item-edit {
+    z-index: 999 !important;
 }

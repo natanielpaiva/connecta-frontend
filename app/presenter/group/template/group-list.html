@@ -1,76 +1,35 @@
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="margin-bottom-single" translate>GROUP.REGISTER_GROUP</h3>
-       
-        <div class="row margin-bottom-single">
-            <div class="col-md-6">
-                <a class="btn btn-primary" href="#/presenter/group/new" translate>
-                    <span class="icon-plus"></span>
-                </a>
-                <button type="button" ng-click="filter = !filter" class="btn btn-default">
-                    <span class="icon-funnel"></span>
-                </button>
-            </div>
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+<default-list-heading
+    title-text="GROUP.REGISTER_GROUP"
+    add-button-href="#/presenter/group/new"
+    add-button-text="LAYOUT.NEW_M"
+    ></default-list-heading>
+
+<table ng-table class="table table-striped table-hover">
+    <thead>
+        <tr class="row">
+            <th class="col-md-1"></th>
+            <th class="col-md-4" translate>GROUP.NAME</th>
+            <th class="col-md-1" translate>GROUP.TYPE</th>
+            <th class="col-md-5" translate>GROUP.DESCRIPTION</th>
+            <th class="col-md-1"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="ss in group" class="row">
+            <td class="col-md-1">{{ss.id}}</td>
+            <td class="text-left col-md-4">{{ss.name}}</td>
+            <td class="col-md-1">{{ss.type}}</td>
+            <td class="col-md-5">{{ss.description}}</td>
+            <td class="col-md-1">
+                <div class="btn-group">
+                    <a href="#/presenter/group/{{ss.id}}" class="btn btn-xs btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                    <button type="button" class="btn btn-xs btn-default" ng-click="excluir(ss)">
+                        <span class="icon-trash"></span>
+                    </button>
                 </div>
-            </div>
-        </div>
-        <div class="well" ng-show="filter" >
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="" translate>GROUP.TYPE</label>
-                    <select class="form-control">
-                        <option value="">LAYOUT.SELECT</option>
-                        <option ng-repeat="tp in types" value="{{tp.name}}">{{tp.name}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" translate>GROUP.SEARCHTHERM</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                               ng-model="group.name" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-default">Aplicar</button>
-                </div>
-            </div>
-        </div>
-        <table ng-table class="table table-striped table-hover">
-            <thead>
-                <tr class="row">
-                    <th class="col-md-1"></th>
-                    <th class="col-md-4" translate>GROUP.NAME</th>
-                    <th class="col-md-1" translate>GROUP.TYPE</th>
-                    <th class="col-md-5" translate>GROUP.DESCRIPTION</th>
-                    <th class="col-md-1"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="ss in group" class="row">
-                    <td class="col-md-1">{{ss.id}}</td>
-                    <td class="text-left col-md-4">{{ss.name}}</td>
-                    <td class="col-md-1">{{ss.type}}</td>
-                    <td class="col-md-5">{{ss.description}}</td>
-                    <td class="col-md-1">
-                        <div class="btn-group">
-                            <a href="#/presenter/group/{{ss.id}}" class="btn btn-xs btn-default">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </a>
-                            <button type="button" class="btn btn-xs btn-default" ng-click="excluir(ss)">
-                                <span class="icon-trash"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+            </td>
+        </tr>
+    </tbody>
+</table>

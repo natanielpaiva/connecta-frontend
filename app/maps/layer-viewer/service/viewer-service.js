@@ -2,10 +2,9 @@ define([
     'connecta.maps',
     'maps/layer-viewer/service/menu-service'
 ], function (maps) {
-    return maps.lazy.service('ViewerService', function (mapsResources, MenuServiceLayerViewer, $http) {
+    return maps.lazy.service('MapViewerService', function (MenuServiceLayerViewer) {
 
-        this.getViewerConfig = function (layerViewer, map) {
-
+        this.getViewerConfig = function (layerViewer, map, mapDivId) {
             //LayerViewerConfig
             var layerViewerConfig = {
                 layerViewer: layerViewer,
@@ -17,45 +16,35 @@ define([
                 implType: layerViewer.viewerTypeImplEntity.id
             };
 
-
             var configLayer = "";
             switch (layerViewerConfig.type) {
                 case 1:
-
-                    configLayer = this.createDefaultViewer(layerViewerConfig);
+                    configLayer = this.createDefaultViewer(layerViewerConfig, mapDivId);
                     break;
                 case 2:
-                    configLayer = this.createHeatmapViewer(layerViewerConfig);
+                    configLayer = this.createHeatmapViewer(layerViewerConfig, mapDivId);
                     break;
                 case 3:
-                    configLayer = this.createClusterViewer(layerViewerConfig);
+                    configLayer = this.createClusterViewer(layerViewerConfig, mapDivId);
                     break;
-
                 case 4:
-
-                    configLayer = this.createAnalysisViewer(layerViewerConfig);
+                    configLayer = this.createAnalysisViewer(layerViewerConfig, mapDivId);
                     break;
             }
 
-            MenuServiceLayerViewer.renderMenu(layerViewerConfig, map);
-
-
+            MenuServiceLayerViewer.renderMenu(layerViewerConfig, map, mapDivId);
             this.renderViewer(configLayer, map);
-
         };
 
-
-        this.createDefaultViewer = function (configViewer) {
+        this.createDefaultViewer = function (configViewer, mapDivId) {
             //Cria div para renderizar a legenda
             this.__element = document.createElement('div');
             this.__element.id = configViewer.name + 'Legend';
-            document.getElementById("map-view").appendChild(this.__element);
+            document.getElementById(mapDivId).appendChild(this.__element);
             this.__element.style.float = 'right';
             this.__element.style.bottom = '30px';
             this.__element.style.position = 'absolute';
             this.__element.style.zIndex = '9999';
-
-
 
             //Default
             return {
@@ -68,14 +57,9 @@ define([
                 divLegend: this.__element.id,
                 filter: ""
             };
-
-
         };
 
-
-
-        this.createHeatmapViewer = function (configViewer) {
-
+        this.createHeatmapViewer = function (configViewer, mapDivId) {
             //HeatMap        
             var colors = configViewer.layerViewer.ds_param_values.split("~");
             return {
@@ -91,8 +75,6 @@ define([
                 }
             };
         };
-
-
 
         this.createClusterViewer = function (configViewer) {
 //           var config = configViewer.layerViewer.ds_param_values.replace(/~/gi, "");
@@ -117,7 +99,6 @@ define([
                 });
             }
 
-
             //Final
             clusterParams.push({
                 "parameterName": "radius#clusterColor#fontColor#opacity",
@@ -138,21 +119,17 @@ define([
             };
         };
 
-
-
-        this.createAnalysisViewer = function (configViewer) {
+        this.createAnalysisViewer = function (configViewer, mapDivId) {
             //Cria div para renderizar a legenda
             this.__element = document.createElement('div');
             this.__element.id = configViewer.name + 'Legend';
-            document.getElementById("map-view").appendChild(this.__element);
+            document.getElementById(mapDivId).appendChild(this.__element);
             this.__element.style.float = 'right';
             this.__element.style.bottom = '30px';
             this.__element.style.position = 'absolute';
             this.__element.style.zIndex = '9999';
             
             var params=configViewer.layerViewer.ds_param_values.split('#');
-
-
 
             //Default
             return {
@@ -165,13 +142,7 @@ define([
                 divLegend: this.__element.id,
                 filter: ""
             };
-
-
         };
-
-
-
-
 
         this.renderViewer = function (configLayer, map) {
             var interval = setInterval(function () {
@@ -198,7 +169,6 @@ define([
                         map.__createControl(controlInfo);
                         map.__createControl(controlSpatialFilter);
                     }
-
 
                     clearInterval(interval);
                 }

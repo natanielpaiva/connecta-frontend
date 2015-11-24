@@ -1,6 +1,6 @@
 define([], function() {
     return function ObieeAnalysisFormController($scope) {
-       alert("Obiee");
+     //  alert("Obiee");
        
                $scope.getCatalog = function (scope, item) {
             scope.toggle();

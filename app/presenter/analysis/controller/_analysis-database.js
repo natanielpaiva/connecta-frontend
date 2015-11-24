@@ -1,6 +1,6 @@
 define([
     'presenter/analysis/service/analysis-service'
-], function () {//atividade interna
+], function () {
     return function DatabaseAnalysisFormController($scope, AnalysisService) {
 
         $scope.databaseForm = {

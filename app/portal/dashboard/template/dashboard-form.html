@@ -41,7 +41,7 @@
       </tab-heading>
       <div gridster="section" dnd-list="section.items" class="image-on-background">
         <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
-            <viewer src="item.viewerUrl" class="image-on-background" ng-style="{
+            <viewer src="item.viewerUrl" type="item.type" class="image-on-background" ng-style="{
                 'background-color':toRGBA(item.backgroundColor,item.opacity),
                 'background-image':getImage(item.backgroundImage)
             }"></viewer>

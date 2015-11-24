@@ -1,6 +1,6 @@
 define([], function() {
     return function EndecaAnalysisFormController($scope) {
-        alert("endeca");
+    //    alert("endeca");
         
         $scope.$watch('analysis.domain', function (domain) {
             if ($scope.component.domain !== null && domain !== undefined) {

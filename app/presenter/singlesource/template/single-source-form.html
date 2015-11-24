@@ -9,9 +9,9 @@
         <form novalidate name="singlesourceForm" ng-submit="submit()">
 
             <div class="form-group">
-                <label for="model-nome" translate>SINGLESOURCE.NAME</label>
+                <label for="model-nome" translate class="required">SINGLESOURCE.NAME</label>
                 <input type="text" name="nome" ng-model="typeSingleSource.name"
-                       id="model-nome" required class="form-control" />
+                       id="model-nome" required class="form-control" required />
                 <div ng-if="singlesourceForm.nome.$dirty" ng-messages="singlesourceForm.nome.$error"
                      ng-messages-include="portal-validation-messages"></div>
             </div>
@@ -19,10 +19,10 @@
             <p class="bold" translate>SINGLESOURCE.TYPE_MEDIA</p>
             <div class="portal-type-switcher margin-bottom-single">
                 <label ng-repeat="(key, type) in types" class="radio-inline portal-type-switcher-item"
-                       title="{{type.name}}">
+                       title="{{type.name}}" class="required">
                     <input type="radio" class="portal-type-switcher-input" name="type" 
                            ng-model="typeSingleSource.type"
-                           ng-value="type" />
+                           ng-value="type" required/>
                     <span class="portal-type-switcher-icon {{type.icon}}"></span>
                     <span class="portal-type-switcher-title" translate>{{'SINGLESOURCE.'+type.name}}</span>
                 </label>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
+                            <label for="attributeTypes" class="required" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
                             <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
                                     ng-model="$parent.$parent.$item.attributeType" class="form-control" required>
                                 <option value="" translate>LAYOUT.SELECT</option>

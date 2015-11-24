@@ -1,6 +1,6 @@
 define([], function() {
     return function HdfsAnalysisFormController($scope) {
-        alert("HDFS");
+       // alert("HDFS");
         
         
          $scope.typeQuery = [

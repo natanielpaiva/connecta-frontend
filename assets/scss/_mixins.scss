@@ -74,6 +74,7 @@
 @mixin margin-right($em) {
     margin-right: $em*1em;
 }
+
 // Expõe uma classe para uso rápido no HTML
 .margin-right-zero {
     @include margin-right(0);
@@ -86,4 +87,10 @@
 }
 .margin-right-triple {
     @include margin-right(3);
+}
+
+@mixin div-block() {
+    display:block;
+    width:100%;
+    height:100%;
 }

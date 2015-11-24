@@ -1,15 +1,11 @@
+/* global angular */
 define([
     'connecta.maps',
     'maps/layer-viewer/service/toolbar-service'
 ], function (maps) {
-    return maps.lazy.service('MenuServiceLayerViewer', function (mapsResources, ToolBarService, $http) {
+    return maps.lazy.service('MenuServiceLayerViewer', function (ToolBarService, $http) {
         
-        
-
-
-
         this.addEvents = function (elementId) {
-
             //MENU INTEIRO LATERAL DIREITA;
             angular.element('#' + elementId).find('#link-active-bar').on('click', function () {
 
@@ -68,9 +64,8 @@ define([
             });
         };
 
-
         this.addSubMenuItemAction = function (itemType, itemID, action, param) {            
-            if (itemType == "img") {
+            if (itemType === "img") {
                 angular.element('#' + itemID).click(function () {
                     ToolBarService[action](param);
                 });
@@ -80,11 +75,8 @@ define([
                 angular.element('#' + itemID).on('input change', function () {
                     ToolBarService[action](document.getElementById(itemID).value);
                 });
-
             }
-
         };
-
 
         this.addMenuItemAction = function (itemID, action) {
             var that = this;            
@@ -109,7 +101,7 @@ define([
 
                 angular.element("#" + subMenuId + ">ul").append(li);
 
-                if (itemType == "img") {
+                if (itemType === "img") {
                     subItemParam = subMenuItems[itemObj].param;
                     li.innerHTML = "<a  id = '" + subItemId + "'  class='link-sub-nivel-2' style='cursor:pointer;'>\n\<img src = '" + subMenuItems[itemObj].img + "' alt = 'ico_" + subMenuItems[itemObj].id + "' style='cursor:pointer;'> " + subMenuItems[itemObj].span + "</a>";
                 } else {
@@ -123,10 +115,6 @@ define([
             }
 
         };
-
-
-
-
 
         this.addMenuItem = function (divName, elem, item) {
             var itemID = "";
@@ -143,15 +131,11 @@ define([
 
         };
 
-
         this.createMenu = function (divName) {
             var that = this;
             var li = "";
             $http.get('app/maps/layer-viewer/template/menu.json').success(function (data) {
                 
-                //$.getJSON("app/maps/layer-viewer/template/menu.json", function (data) {
-                    
-
                 for (var elem in data.menuItems) {
 
                     if (typeof data.menuItems[elem].id != 'undefined') {                                                
@@ -178,22 +162,16 @@ define([
             });
         };
 
-        this.renderMenu = function (layerViewerConfig, mapComponent) {
-            
+        this.renderMenu = function (layerViewerConfig, mapComponent, mapDivId) {
             ToolBarService.setMap(mapComponent);
 
             this.__layerViewerType = layerViewerConfig.layerViewer.layerViewerTypeEntity.id;           
             this.__element = document.createElement('div');
             this.__element.id = layerViewerConfig.name.replace(/ /gi, "") + 'MENU';
-            document.getElementById("map-view").appendChild(this.__element);
+            document.getElementById(mapDivId).appendChild(this.__element);
             angular.element("#" + this.__element.id).load('app/maps/layer-viewer/template/menu_template.html');
             
             this.createMenu(this.__element.id);
         };
-
-
-
-
     });
-
 });
