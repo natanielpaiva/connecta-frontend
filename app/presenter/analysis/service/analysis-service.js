@@ -148,12 +148,29 @@ define([
 
 
         this.save = function (analysis) {
+            _fixAttributes(analysis);
             var url = presenterResources.analysis;
             var analysisCopy = angular.copy(analysis);
             console.log("analysisCopy ", analysisCopy);
-            //analysisCopy.type = analysisCopy.type.id.toUpperCase();
             return $http.post(url, analysisCopy);
         };
+        
+        
+        
+         var _fixAttributes = function (analysis) {
+            angular.forEach(analysis.analysisAttributes, function (attribute) {
+                if (angular.isString(attribute.attribute)) {
+                    attribute.attribute = {name: attribute.attribute, description:"", type:attribute.attributeType.label};
+                    delete attribute.attributeType;
+                }else{
+                    if(attribute.attributeType !== undefined){
+                        attribute.attribute.type = attribute.attributeType.label;
+                        delete attribute.attributeType;
+                    }
+                }
+            });
+        };
+        
 
         //lista catalog Obiee
         this.getListCatologBiee = function (idDatasouce, path) {

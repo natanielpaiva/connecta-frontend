@@ -1,13 +1,19 @@
 define([
     'connecta.presenter',
     'presenter/analysis/service/analysis-service',
-    'presenter/datasource/service/datasource-service'
+    'presenter/datasource/service/datasource-service',
+    'presenter/singlesource/service/singlesource-service'
 
 ], function (presenter) {
     return presenter.lazy.controller('AnalysisFormController', function (
-            $scope, AnalysisService, DatasourceService, GroupService, $timeout, $routeParams, $location) {
+            $scope, AnalysisService, DatasourceService, SingleSourceService,GroupService, $timeout, $routeParams, $location) {
 
         $scope.edit = false;
+
+        $scope.getAttributes = function (val) {
+            return SingleSourceService.getAttribute(val);
+        };
+        $scope.optionsAttributeTypes = SingleSourceService.getAttributeTypes();
 
         $scope.datasourceCurrent = null;
 
@@ -105,6 +111,8 @@ define([
                         type: 'csv'
                     };
                 }
+                $scope.analysis.analysisAttributes = [{}];
+                
             });
         }
 
@@ -114,8 +122,6 @@ define([
 
 
         //###############################################################################################
-
-
 
         $scope.submit = function () {
 
