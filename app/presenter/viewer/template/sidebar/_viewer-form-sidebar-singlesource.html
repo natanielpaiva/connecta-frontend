@@ -13,7 +13,19 @@
                     dnd-effect-allowed="move"
                     dnd-moved="search.results.splice($index, 1)"
                     class="image-on-background"
-                    style="background-image:url({{result.binaryFile}})">
+                    style="background-image:url({{result.binaryFile}})"
+                    ng-if="result.type == 'FILE'">
+                    <div class="module-icon image-on-background"></div>
+
+                    <div class="singlesource-name">{{result.name}}</div>
+                    
+                </li>
+                <li ng-repeat="result in search.results" dnd-draggable="result"
+                    dnd-effect-allowed="move"
+                    dnd-moved="search.results.splice($index, 1)"
+                    class="image-on-background"
+                    ng-if="result.type == 'URL'">
+                    <span class="sidebar-result-icon icon-link"></span>
                     <div class="module-icon image-on-background"></div>
 
                     <div class="singlesource-name">{{result.name}}</div>

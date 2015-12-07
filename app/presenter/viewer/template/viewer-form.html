@@ -21,15 +21,15 @@
     <div class="row">
         <div class="col-md-12">
             <div ng-if="viewer.configuration.type == 'serial' ||
-                        viewer.configuration.type == 'pie' ||
-                        viewer.configuration.type == 'funnel' ||
-                        viewer.configuration.type == 'radar'"> 
+                                    viewer.configuration.type == 'pie' ||
+                                    viewer.configuration.type == 'funnel' ||
+                                    viewer.configuration.type == 'radar'"> 
                 <div class="boxViewer">
                     <div class="columnsViewer">
                         <label translate>VIEWER.METRIC</label>
                         <div class="sidebarViewer">
                             <ul dnd-list="viewer.metrics">
-                                <li ng-repeat="column in viewer.metrics" dnd-draggable="column" dnd-moved="viewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                <li ng-repeat="column in viewer.metrics" dnd-draggable="column" dnd-moved="viewer.metrics.splice($index, 1)" dnd-effect-allowed="move" >
                                     {{column.label}}
                                 </li>
                                 <li class="animate-repeat" ng-if="results.length === 0">
@@ -47,7 +47,7 @@
                                 <li ng-repeat="column in viewer.descriptions" dnd-draggable="column" 
                                     dnd-moved="viewer.descriptions.splice($index, 1)" 
                                     dnd-effect-allowed="move" 
-                                    ng-attr-style="background-image:url({{column.label}})">
+                                    >
                                     {{column.label}}
                                 </li>
                                 <li class="animate-repeat" ng-if="results.length === 0">
@@ -153,8 +153,8 @@
         </div>
     </div>
 </div>
-<div class="col-md-12">
-    <viewer ng-model="viewer">
+<div id="analysis-viewer" class="col-md-12">
+    <viewer  ng-model="viewer">
     </viewer>
 </div>
 <div class="col-md-12">

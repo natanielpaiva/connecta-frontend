@@ -5,7 +5,7 @@ define([
     return presenter.lazy.controller('SingleSourceFormController', function ($scope, SingleSourceService, $routeParams, $location, fileExtensions) {
 
         $scope.myFiles = [];
-        $scope.types = SingleSourceService.getTypes();
+        $scope.types = SingleSourceService.getTypesArray();
         $scope.optionsAttributeTypes = SingleSourceService.getAttributeTypes();
         $scope.typeSingleSource = {};
         $scope.file = "";

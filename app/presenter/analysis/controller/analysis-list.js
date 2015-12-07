@@ -2,35 +2,31 @@ define([
     'connecta.presenter',
     'presenter/analysis/service/analysis-service'
 ], function (presenter) {
-    return presenter.lazy.controller('AnalysisListController', function ($scope, AnalysisService, ngTableParams, $location) {
+    return presenter.lazy.controller('AnalysisListController', function ($scope, AnalysisService, ngTableParams) {
 
+        $scope.types = AnalysisService.getTypes();
         
-         $scope.tableParams = new ngTableParams({
-            count:100,
+        $scope.tableParams = new ngTableParams({
+            count:50,
             page:1,
             filter: $scope.filter
         }, {
             getData: function ($defer, params) {
                 return AnalysisService.list(params.url()).then(function(response){
-                    $scope.analysis = response.data;
-                    console.log(response.data);
-                    params.total(response.data.totalElements);
-                    $defer.resolve(response.data.content);
+                    $scope.analysisList = response.data.content;
                 });
             },
-            counts:[100,150,200,250]
+            counts:[50,100,150,200]
         });
-        
-        
-        $scope.excluir = function (id) {
-                AnalysisService.remove(id).then(function(){
-               
-               console.log("$scope.analysis ",$scope.analysis.content);
-//                    $scope.analysis.content.splice(
-//                            $scope.analysis.content.indexOf(id), 1);
-                    $location.path('presenter/analysis');
+
+        $scope.bulkRemove = function (analysisList) {
+            AnalysisService.bulkRemove(analysisList).then(function(){
+                angular.forEach(analysisList, function(analysis){
+                    $scope.analysisList.splice(
+                        $scope.analysisList.indexOf(analysis), 1);
                 });
-            };
+            });
+        };
 
     });
 });

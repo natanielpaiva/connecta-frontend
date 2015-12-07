@@ -1,12 +1,10 @@
 /**
-    * For the correct positioning of the placeholder element, the dnd-list and
-    * it's children must have position: relative
-    */
-
+* For the correct positioning of the placeholder element, the dnd-list and
+* it's children must have position: relative
+*/
 .gallery-view ul > li {
     position: relative;
 }
-
 
 /**
  * The dnd-list should always have a min-height,
@@ -16,8 +14,6 @@
     min-height: 100px;
     padding-left: 0px;
 }
-
-
 
 /**
  * The dnd-lists's child elements currently MUST have
@@ -45,7 +41,6 @@
     position: relative;
 }
 
-
 .panel-heading{
     width:100%;
 }
@@ -53,7 +48,7 @@
 .container-gallery{
     background: #ddd;
     padding: 5px;
-    margin-left:2%;
+    margin-left: 0;
 }
 
 .media-item{
@@ -66,4 +61,40 @@
     right: 0;
     left: 0;
     line-height: 2.5em;
+    white-space: nowrap;
+    height: 2.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.container-gallery ul{
+    float: left;
+}
+
+.container-gallery ul li.item-gallery{
+    float: left;
+    width: auto !important;
+    height: auto !important;
+}
+
+.container-gallery ul li a{
+    float: left;
+    display: inline-block;
+    width: 157px;
+    height: 157px;    
+}
+
+.container-gallery ul li a img{
+    float: left;
+    width: 114px;
+    margin-left: 22px;
+}
+
+.container-gallery ul li a span{
+    float: left;
+    width: 100%;
+    padding-left: 1%;
+    padding-right: 1%;
+    display: block;
+    margin-top: -6px;
 }

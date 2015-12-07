@@ -1,9 +1,13 @@
 {
     "VIEWER": {
+        "TYPE_ANALYSIS":"Analysis",
+        "TYPE_SINGLESOURCE":"Media",
+        "TYPE_SINGLESOURCE_GROUP":"Media Group",
+        
         "VIEWER": "Viewer",
         "VIEWERS": "Viewers",
         "NAME": "Name",
-        "TYPE": "Type",
+        "TYPE": "Viewer Type",
         "DESCRIPTION": "Description",
         "METRIC": "Metric",
         "XFIELD": "X Column",
@@ -25,7 +29,7 @@
         "PLOT_AREA": "Plot area",
         "_APPEARANCE": "+ Appearance",
         "APPEARANCE": "Appearance",
-        "_BACKGROUND_AND_PLOT_AREA": "Background and plot area",
+        "_BACKGROUND_AND_PLOT_AREA": "+ Background and plot area",
         "MARGINS": "Margins",
         "AUTO_MARGIN_OFFSET": "Auto margin offset",
         "AUTO_MARGINS": "Auto Margins",
@@ -162,8 +166,6 @@
         "LINE_THICKNESS": "Line thieckness",
         "_GRAPHS": "+ Graphs",
         "GRAPHS": "Graphs"
-        
-
     }
 }
 

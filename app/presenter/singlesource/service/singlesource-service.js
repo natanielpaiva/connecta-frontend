@@ -4,7 +4,20 @@ define([
 ], function (presenter) {
 
     return presenter.lazy.service('SingleSourceService', function ($autocomplete, presenterResources, $http, $upload) {
-        var types = [
+        var types = {
+            FILE: {
+                name: 'FILE',
+                icon:'icon-insert-drive-file',
+                template: '_single-source-file.html'
+            },
+            URL: {
+                name: 'URL',
+                icon:'icon-link',
+                template: '_single-source-url.html'
+            }
+        };
+        
+        var typesArray = [
             {
                 id: 'FILE',
                 name: 'FILE',
@@ -21,7 +34,6 @@ define([
         
         var attributeTypes = [
             {
-                
                 value: 'TEXT',
                 label: 'TEXT'
             },
@@ -111,6 +123,11 @@ define([
             return types;
         };
         
+        // FIXME Remover, utilizar apenas o mapa
+        this.getTypesArray = function () {
+            return typesArray;
+        };
+        
         this.getAttributeTypes = function(){
             return attributeTypes;
         };
@@ -133,9 +150,19 @@ define([
         this.getFileById = function (id) {
             return presenterResources.singlesource + '/' + id + '/binary';
         };
+        
+        this.bulkRemove = function (singlesources) {
+            return $http.delete(presenterResources.singlesource, {
+                data: singlesources.map(function(e){
+                    return e.id;
+                }),
+                headers: {
+                    // WTF, saporra ta mandando text/plain
+                    'Content-Type': 'application/json'
+                }
+            });
+        };
 
     });
-
-
 
 });

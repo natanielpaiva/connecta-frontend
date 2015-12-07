@@ -1,3 +1,4 @@
+/* global angular */
 define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service',
@@ -5,39 +6,37 @@ define([
 ], function (presenter) {
     return presenter.lazy.controller('ViewerListController', function ($scope, ViewerService, ngTableParams, $modal) {
         $scope.viewers = [];
+        
+        $scope.types = ViewerService.getTypes();
+        
         $scope.tableParams = new ngTableParams({
-            count: 100,
+            count: 50,
             page: 1,
             filter: $scope.filter
         }, {
             getData: function ($defer, params) {
-                return ViewerService.list(params.url()).then(function (response) {
+                return ViewerService.list(params.url()).then(function(response){
                     $scope.viewers = response.data;
-                    params.total(response.data.totalElements);
-                    $defer.resolve(response.data);
                 });
             },
-            counts: [100, 150, 200, 250]
+            counts:[50,100,150,200]
         });
-
-
-
-        $scope.delete = function (id) {
-            ViewerService.delete(id).then(function () {
-                //Retira um item da lista de datasource
-                $scope.viewers.splice(
-                        $scope.viewers.indexOf(id), 1);
+        
+        $scope.bulkRemove = function (viewers) {
+            ViewerService.bulkRemove(viewers).then(function(){
+                angular.forEach(viewers, function(viewer){
+                    $scope.viewers.splice(
+                        $scope.viewers.indexOf(viewer), 1);
+                });
             });
         };
 
         $scope.open = function (size) {
-
             $modal.open({
                 animation: true,
                 templateUrl: 'app/presenter/viewer/template/_template-types.html',
                 controller: 'ModalInstanceCtrl',
                 size: size
-
             });
         };
 

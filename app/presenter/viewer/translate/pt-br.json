@@ -1,9 +1,13 @@
 {
     "VIEWER": {
+        "TYPE_ANALYSIS":"Análise",
+        "TYPE_SINGLESOURCE":"Mídia",
+        "TYPE_SINGLESOURCE_GROUP":"Grupo de Mídia",
+        
         "VIEWER": "Visualizador",
         "VIEWERS": "Visualizadores",
         "NAME": "Nome",
-        "TYPE": "Tipo",
+        "TYPE": "Tipo de visualizador",
         "DESCRIPTION": "Descrição",
         "METRIC": "Métrica",
         "XFIELD": "Coluna X",
@@ -161,8 +165,5 @@
         "LINE_THICKNESS": "preenchimento da linha",
         "_GRAPHS": "+ Gráficos",
         "GRAPHS": "Gráficos"
-
-
-
     }
 }

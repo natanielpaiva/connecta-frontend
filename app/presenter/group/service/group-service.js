@@ -4,16 +4,29 @@ define([
 ], function (presenter) {
 
     return presenter.lazy.service('GroupService', function (presenterResources, $http, $autocomplete) {
-
-        var typeFilter = [{
-                id: 'SELECT',
+        var types = {
+            SELECT: {
                 name: 'GROUP.SELECT_FILE',
+                icon: 'icon-images',
                 template: '_group-form-sidebar.html'
-            }, {
-                id: 'FILTER',
+            },
+            FILTER: {
                 name: 'GROUP.FILTER',
+                icon: 'icon-funnel',
                 template: '_group-form-query-builder.html'
-            }];
+            }
+        };
+        
+        // FIXME utilizar o mapa
+        var typeFilter = [{
+            id: 'SELECT',
+            name: 'GROUP.SELECT_FILE',
+            template: '_group-form-sidebar.html'
+        }, {
+            id: 'FILTER',
+            name: 'GROUP.FILTER',
+            template: '_group-form-query-builder.html'
+        }];
 
         var predicateMap = {
             EQUAL: {
@@ -296,9 +309,22 @@ define([
             var url = presenterResources.group + "/query/result";
             return $http.post(url, queryPersist);
         };
+        
+        this.getTypes = function(){
+            return types;
+        };
+        
+        this.bulkRemove = function (groups) {
+            return $http.delete(presenterResources.group, {
+                data: groups.map(function (e) {
+                    return e.id;
+                }),
+                headers: {
+                    // WTF, saporra ta mandando text/plain
+                    'Content-Type': 'application/json'
+                }
+            });
+        };
 
     });
-
-
-
 });

@@ -1,8 +1,11 @@
+/* global angular */
 define([
     'connecta.presenter',
     'presenter/datasource/service/datasource-service'
 ], function (presenter) {
     return presenter.lazy.controller('DatasourceListController', function ($scope, DatasourceService, ngTableParams) {
+        
+        $scope.datasources = [];
 
         $scope.types = DatasourceService.getTypes();
 
@@ -10,7 +13,7 @@ define([
         $scope.filter = {};
         
         $scope.tableParams = new ngTableParams({
-            count:100,
+            count:50,
             page:1,
             filter: $scope.filter
         }, {
@@ -18,19 +21,18 @@ define([
                 return DatasourceService.list(params.url()).then(function(response){
                     $scope.datasources = response.data.content;
                     params.total(response.data.totalElements);
-                    $defer.resolve(response.data.content);
+//                    $defer.resolve(response.data.content);
                 });
             },
-            counts:[100,150,200,250]
+            counts:[50,100,150,200]
         });
 
-        $scope.datasources = [];
-
-        $scope.remove = function (id) {
-            DatasourceService.remove(id).then(function(){
-                //Retira um item da lista de datasource
-                $scope.datasources.splice(
-                        $scope.datasources.indexOf(id), 1);
+        $scope.bulkRemove = function (datasources) {
+            DatasourceService.bulkRemove(datasources).then(function(){
+                angular.forEach(datasources, function(datasource){
+                    $scope.datasources.splice(
+                        $scope.datasources.indexOf(datasource), 1);
+                });
             });
         };
     });

@@ -17,16 +17,19 @@ define([
             HdfsAnalysisFormController) {
     
     return presenter.lazy.service('AnalysisService', function (presenterResources, $http) {
+        
         var types = {
             DATABASE: {
                 id: 'database',
                 name: 'Database',
+                icon: 'icon-database2',
                 template: '_analysis-database.html',
                 controller: DatabaseAnalysisFormController
             },
             ENDECA: {
                 id: 'endeca',
                 name: 'Endeca',
+                icon: 'icon-endeca',
                 template: '_analysis-endeca.html',
                 controller: EndecaAnalysisFormController,
                 start: function (idDatasouce, component) {
@@ -39,12 +42,14 @@ define([
             HDFS: {
                 id: 'hdfs',
                 name: 'HDFS',
+                icon: 'icon-hadoop',
                 template: '_analysis-hdfs.html',
                 controller: HdfsAnalysisFormController
             },
             BI: {
                 id: 'bi',
                 name: 'BI',
+                icon: 'icon-obiee',
                 template: '_analysis-obiee.html',
                 field: "catalog",
                 controller: ObieeAnalysisFormController,
@@ -58,19 +63,14 @@ define([
             SOLR: {
                 id: 'solr',
                 name: 'SOLR',
+                icon: 'icon-solr',
                 template: '_analysis-solr.html',
                 controller: SolrAnalysisFormController
-                
-//                start: function (datasouce, component) {
-//                    var url = presenterResources.analysis + "/" + datasouce.id + "/columns-sorl";
-//                    $http.get(url).then(function (response) {
-//                        component.columns = response.data;
-//                    });
-//                }
             },
             WEBSERVICE: {
                 id: 'webservice',
                 name: 'WebService',
+                icon: 'icon-webservice',
                 template: '_analysis-webservice.html',
                 controller: WebserviceAnalysisFormController,
                 start: function (datasouce, component) {
@@ -97,6 +97,7 @@ define([
             CSV: {
                 id: 'csv',
                 name: 'CSV',
+                icon: 'icon-insert-drive-file',
                 template: '_analysis-csv.html', 
                 controller: CsvAnalysisFormController
             }
@@ -296,19 +297,31 @@ define([
                return retorno;
           };
           
-          var agreementValueObject = function(value, edit) {
-
-               var retorno = {
-                    "value": "",
-                    "between": value,
-                    "in": []
-               };
-               if (edit) {
-                    retorno = {"start": value.between.start, "end": value.between.end};
-               }
-               return retorno;
-
-          };
+        var agreementValueObject = function(value, edit) {
+            var retorno = {
+                "value": "",
+                "between": value,
+                "in": []
+            };
+            
+            if (edit) {
+                retorno = {"start": value.between.start, "end": value.between.end};
+            }
+            
+            return retorno;
+        };
+        
+        this.bulkRemove = function (analysisList) {
+            return $http.delete(presenterResources.analysis, {
+                data: analysisList.map(function (e) {
+                    return e.id;
+                }),
+                headers: {
+                    // WTF, saporra ta mandando text/plain
+                    'Content-Type': 'application/json'
+                }
+            });
+        };
 
     });
 });

@@ -9,7 +9,7 @@ define([
     'bower_components/amcharts/dist/amcharts/themes/dark',
     'bower_components/amcharts/dist/amcharts/themes/light',
     'bower_components/amcharts/dist/amcharts/themes/patterns'
-    
+
 ], function (angular) {
     var presenter = angular.module('connecta.presenter', [
     ]);
@@ -49,8 +49,8 @@ define([
             hierarchy: appPresenter.host + '/hierarchy',
             hierarchyItem: appPresenter.host + '/hierarchy/hierarchy-item',
             group: appPresenter.host + '/group',
-            viewer:appPresenter.host + '/viewer',
-            analysisViewer:appPresenter.host + '/analysis-viewer'
+            viewer: appPresenter.host + '/viewer',
+            analysisViewer: appPresenter.host + '/analysis-viewer'
         });
     });
 
@@ -105,25 +105,21 @@ define([
             controllerUrl: 'presenter/analysis/controller/analysis-list',
             templateUrl: 'app/presenter/analysis/template/analysis-list.html'
         },
-        
         '/presenter/analysis/new': {
             controller: 'AnalysisFormController',
             controllerUrl: 'presenter/analysis/controller/analysis-form',
             templateUrl: 'app/presenter/analysis/template/analysis-form.html'
         },
-        
-         '/presenter/analysis/:id': {
+        '/presenter/analysis/:id': {
             controller: 'AnalysisViewController',
             controllerUrl: 'presenter/analysis/controller/analysis-view',
             templateUrl: 'app/presenter/analysis/template/analysis-view.html'
         },
-        
         '/presenter/analysis/:id/edit': {
             controller: 'AnalysisFormController',
             controllerUrl: 'presenter/analysis/controller/analysis-form',
             templateUrl: 'app/presenter/analysis/template/analysis-form.html'
         },
-        
         '/presenter/group': {
             controller: 'GroupListController',
             controllerUrl: 'presenter/group/controller/group-list',
@@ -199,12 +195,6 @@ define([
 
     presenter._menu = [
         {
-            href: 'presenter/analysis',
-            title: 'ANALYSIS.ANALYSIS',
-            icon: 'icon-analysis',
-            children: []
-        },
-        {
             title: 'DATASOURCE.DATASOURCE',
             icon: 'icon-database2',
             children: [
@@ -216,10 +206,10 @@ define([
                     href: 'presenter/group',
                     title: 'GROUP.GROUPS'
                 },
-                {
-                    href: 'presenter/hierarchy',
-                    title: 'HIERARCHY.HIERARCHY_LIST'
-                },
+//                {
+//                    href: 'presenter/hierarchy',
+//                    title: 'HIERARCHY.HIERARCHY_LIST'
+//                },
                 {
                     href: 'presenter/singlesource',
                     title: 'SINGLESOURCE.MEDIA'
@@ -227,17 +217,24 @@ define([
             ]
         },
         {
+            href: 'presenter/analysis',
+            title: 'ANALYSIS.ANALYSIS',
+            icon: 'icon-analysis',
+            children: []
+        },
+        {
             href: 'presenter/viewer',
             title: 'VIEWER.VIEWERS',
             icon: 'icon-viewer',
             children: []
-        },
-        {
-            href: 'presenter/network',
-            title: 'NETWORK.NETWORKS',
-            icon: 'icon-networks',
-            children: []
         }
+//        ,
+//        {
+//            href: 'presenter/network',
+//            title: 'NETWORK.NETWORKS',
+//            icon: 'icon-networks',
+//            children: []
+//        }
     ];
 
     return presenter;

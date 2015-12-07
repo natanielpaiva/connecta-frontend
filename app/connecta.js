@@ -198,6 +198,9 @@ define([
         },
         responseError: function(rejection) {
           var responseInterceptors = {
+            0: function(rejection) { // NET ERROR
+              console.log('ERROR CODE 0',rejection);
+            },
             400: function(rejection) { // BAD REQUEST
               $rootScope.$broadcast('layout.notify', rejection.data);
             },
@@ -327,6 +330,7 @@ define([
     'portal/layout/directive/random-class',
     'portal/layout/directive/key-value',
     'portal/layout/directive/type-switcher',
+    'portal/layout/directive/bulk-action-bar',
     'portal/layout/directive/file-model',
     'portal/layout/directive/input-timeout',
     'portal/layout/directive/heading-popover',

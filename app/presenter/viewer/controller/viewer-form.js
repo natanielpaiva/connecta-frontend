@@ -6,7 +6,10 @@ define([
     'presenter/viewer/directive/singlesource-viewer',
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
-    'presenter/viewer/controller/modal-analysis'
+    'presenter/viewer/controller/modal-analysis',
+    'bower_components/amcharts/dist/amcharts/amcharts',
+    'bower_components/amcharts/dist/amcharts/plugins/export/export'
+
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, LayoutService, $modal) {
         $scope.state = {loaded: false};
@@ -16,7 +19,6 @@ define([
 
         $scope.metrics = [];
         $scope.descriptions = [];
-        
 
 
         var sidebarSinglesource = function () {
@@ -24,13 +26,13 @@ define([
                 controller: function ($scope) {
                     $scope.templateSidebar = ViewerService.getTemplateSidebar();
                     $scope.viewer = getViewer();
-                    
+
                     $scope.setSinglesourceData = function (singlesourceData) {
                         $scope.singlesourceData = singlesourceData;
                         $scope.singlesourceList = [];
                         $scope.singlesourceList.push(singlesourceData);
                     };
-                    
+
                     $scope.getSinglesource = function (val) {
                         return ViewerService.getSinglesourceAutoComplete(val);
                     };
@@ -69,6 +71,17 @@ define([
                     $scope.chartCursor = getChartCursor();
                     $scope.chartScrollbar = getChartScrollbar();
                     $scope.legend = getLegend();
+                    ViewerService.getTemplates().then(function (response) {
+                        $scope.templates = response.data;
+                    });
+
+                    $scope.changeTypeChart = function (template, type) {
+                        ViewerService.getTemplates(type, template).then(function (response) {
+                            $scope.viewer.configuration = response.data;
+                        });
+                    };
+
+                    $scope.typeAmChart = ViewerService.getTypeAmChart();
 
                     $scope.accordionConfig = ViewerService.getAccordionConfig();
                     $scope.templateSidebar = ViewerService.getTemplateSidebar();
@@ -148,6 +161,7 @@ define([
 
                     $scope.templateCombo = '/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-combo.html';
                     $scope.templateSettings = '/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-settings.html';
+                    $scope.templateTypes = '/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-types.html';
 
                     $scope.setLayoutSettings = function (config) {
                         $scope.layoutConfig = config;
@@ -186,7 +200,7 @@ define([
             return $scope.legend;
         };
 
-        $scope.$on("$locationChangeStart", function(){
+        $scope.$on("$locationChangeStart", function () {
             SidebarService.hide();
         });
 
@@ -201,10 +215,10 @@ define([
                 });
             }
         };
-        
+
         $scope.submit = function () {
 
-            ViewerService.save($scope.viewer).then(function (response) {
+            ViewerService.save($scope.viewer).then(function () {
                 $location.path('presenter/viewer');
             });
         };
@@ -220,7 +234,7 @@ define([
             "yfields": [],
             "valueFields": []
         };
-        
+
         if ($routeParams.id) {
             ViewerService.getAnalysisViewer($routeParams.id).then(function (response) {
 
@@ -252,6 +266,7 @@ define([
                     default:
 
                         $scope.viewer.configuration = data.configuration;
+
                         var analysisColumns = data.analysisViewerColumns;
 
                         var arrays = {
@@ -267,7 +282,7 @@ define([
                             arrays[columnType].push(analysisColumns[k].analysisColumn);
                         }
                         sidebarAnalysis();
-                        $scope.viewer.configuration = data.configuration;
+                        $scope.viewer.configuration.export = {enabled: true};
                         getPreview();
                         load();
                         break;

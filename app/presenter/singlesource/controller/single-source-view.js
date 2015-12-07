@@ -14,7 +14,7 @@ define([
             $scope.singlesource.binaryFile = SingleSourceService.getFileById($routeParams.id);
             
             $scope.getType = function(){
-                return SingleSourceService.getTypes().filter(function(type){
+                return SingleSourceService.getTypesArray().filter(function(type){
                     return type.id == $scope.singlesource.type;
                 }).pop();
             };

@@ -18,6 +18,9 @@
                 </div>
             </div>
         </div>
+        <div class="viewer-frame" ng-if="item.type === 'URL'" >
+            <iframe src="{{item.url}}"></iframe>
+        </div>
     </div>
     <div class="singlesource-drag-here" ng-if="model.singlesource.list.length === 0">
         <label translate>
@@ -25,3 +28,5 @@
         </label>
     </div>
 </div>
+
+

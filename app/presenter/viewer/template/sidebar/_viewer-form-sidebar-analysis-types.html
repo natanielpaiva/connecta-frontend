@@ -1,0 +1,12 @@
+<div class="aba-switch-viewer-type">
+    <div ng-repeat="t in templates">
+            <div ng-repeat="chart in typeAmChart[t.id]">
+                <div class="switch-viewer-type">
+                    <div ng-click="changeTypeChart(chart.id, t.id)" title="{{chart.id}}">
+                        <img width="50px" class="thumb-chart" ng-src="{{chart.src}}" />
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div> 

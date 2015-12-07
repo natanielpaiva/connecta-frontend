@@ -9,43 +9,57 @@
         <tr class="row">
             <th class="col-md-1">
                 <label class="reset-spacing full-size-block cursor-pointer">
-                    <input type="checkbox" class="reset-spacing cursor-pointer" />
+                    <input type="checkbox" class="reset-spacing cursor-pointer hidden"
+                        select-all="analysisList" select-all-property="selected"
+                        ng-model="selected" />
+                    <span class="bulk-actions-checkbox" ng-class="{
+                        'icon-check-box-outline-blank':!selected,
+                        'icon-check-box':selected,
+                    }"></span>
                 </label>
             </th>
-            <th class="col-md-8" translate>DATASOURCE.NAME</th>
-            <th class="col-md-2 text-left" translate>DATASOURCE.DATASOURCE_TYPE</th>
-            <th class="col-md-1"></th>
+            <th class="col-md-8" translate>ANALYSIS.NAME</th>
+            <th class="col-md-3 text-left" translate>ANALYSIS.ANALYSIS_TYPE</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="ds in $data" class="row">
+        <tr ng-repeat="a in analysisList" class="row am-slide-right"
+            ng-class="{'selected':a.selected}">
             <td class="col-md-1">
                 <label class="reset-spacing full-size-block cursor-pointer">
-                    <input type="checkbox" class="reset-spacing cursor-pointer" />
+                    <input type="checkbox" class="reset-spacing cursor-pointer hidden"
+                           ng-model="a.selected" />
+                    <span class="bulk-actions-checkbox"
+                          ng-class="{
+                                'icon-check-box-outline-blank':!a.selected,
+                                'icon-check-box':a.selected,
+                            }"></span>
                 </label>
             </td>
             <td class="text-left col-md-8">
-                <a href="#/presenter/analysis/{{ds.id}}" class="full-size-block link-no-state">
-                    {{ds.name}}
+                <a href="#/presenter/analysis/{{a.id}}" class="full-size-block link-no-state">
+                    {{a.name}}
                 </a>
             </td>
-            <td class="text-left col-md-2">
-                <a href="#/presenter/analysis/{{ds.id}}" class="full-size-block link-no-state">
+            <td class="text-left col-md-3">
+                <a href="#/presenter/analysis/{{a.id}}" class="full-size-block link-no-state">
                     <div class="row">
                         <div class="col-xs-2">
-                            <span class="{{types[ds.type].icon}}"></span>
+                            <span class="{{types[a.type].icon}}"></span>
                         </div>
                         <div class="col-xs-10">
-                            {{types[ds.type].name}}
+                            {{types[a.type].name}}
                         </div>
                     </div>
                 </a>
             </td>
-            <td class="col-md-1">
-                <button type="button" class="btn btn-xs" ng-click="excluir(ds.id)">
-                    <span class="icon-trash" aria-hidden="true"></span>
-                </button>
-            </td>
         </tr>
     </tbody>
 </table>
+
+<bulk-action-bar ng-show="(analysisList | filter:{selected:true}).length"
+    class="am-slide-right">
+    <bulk-action icon="icon-trash" title="LAYOUT.DELETE"
+        ng-click="bulkRemove((analysisList | filter:{selected:true}))">
+    </bulk-action>
+</bulk-action-bar>

@@ -5,7 +5,88 @@ define([
     'portal/layout/service/autocomplete'
 ], function (presenter) {
 
-    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, $rootScope) {
+    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http) {
+        
+        var types = {
+            ANALYSIS: {
+                type: 'ANALYSIS',
+                icon: 'icon-analysis',
+                template: "app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis.html"
+            },
+            SINGLESOURCE: {
+                type: 'SINGLESOURCE',
+                icon: 'icon-image3',
+                template: "app/presenter/viewer/template/sidebar/_viewer-form-sidebar-singlesource.html"
+            },
+            SINGLESOURCE_GROUP: {
+                type: "SINGLESOURCE_GROUP",
+                icon: 'icon-perm-media',
+                template: ""
+            }
+        };
+
+        var typeAmChart = {
+            bar: [
+                {
+                    id: 'bar-two-value-axes',
+                    src: '../../assets/img/presenter/barras/bar-two-value-axes.png'
+                },
+                {
+                    id: 'bar-and-line',
+                    src: '../../assets/img/presenter/barras/bar-and-line.png'
+                },
+                {
+                    id: 'bar-clustered-3d',
+                    src: '../../assets/img/presenter/barras/bar-clustered-3d.png'
+                },
+                {
+                    id: 'bar-3d-bar',
+                    src: '../../assets/img/presenter/barras/bar-3d-bar.png'
+                }
+
+            ],
+            column: [
+                {
+                    id: 'column-using-custom-colors',
+                    src: '../../assets/img/presenter/colunas/column-using-custom-colors.png'
+                }
+            ],
+            area: [
+                {
+                    id: 'area-date-series-yearly',
+                    src: '../../assets/img/presenter/area/area-date-series-yearly.png'
+                }
+            ]
+            ,
+            line: [
+                {
+                    id: 'line-stacked',
+                    src: '../../assets/img/presenter/linhas/line-stacked.png'
+                },
+                {
+                    id: 'line-rotate',
+                    src: '../../assets/img/presenter/linhas/line-rotate.png'
+                },
+                {
+                    id: 'line',
+                    src: '../../assets/img/presenter/linhas/line.png'
+                }
+            ],
+            'pie-donut': [
+                {
+                    id: 'pie',
+                    src: '../../assets/img/presenter/circular/pie.png'
+                },
+                {
+                    id: 'donut-3d',
+                    src: '../../assets/img/presenter/circular/donut-3d.png'
+                },
+                {
+                    id: 'donut',
+                    src: '../../assets/img/presenter/circular/donut.png'
+                }
+            ]
+        };
 
         var templateSidebar = [
             {
@@ -284,6 +365,10 @@ define([
             }
         ];
 
+        this.getTypeAmChart = function () {
+            return typeAmChart;
+        };
+
         this.getTemplateSidebar = function () {
             return templateSidebar;
         };
@@ -321,7 +406,7 @@ define([
 
         this.getSinglesource = function (id) {
             var url = presenterResources.singlesource + "/" + id;
-            return $http.get(url);    
+            return $http.get(url);
         };
 
         this.getBinaryFile = function (singlesource) {
@@ -337,7 +422,7 @@ define([
                     delete analysisViewer.singlesource;
                     break;
                 default:
-                    for ( key in analysisViewer.metrics) {
+                    for (key in analysisViewer.metrics) {
                         analysisViewer
                                 .analysisViewerColumns
                                 .push({
@@ -473,6 +558,7 @@ define([
         this.getPreview = function (viewer, analysisViewerResult) {
             var viewerConfiguration = analysisViewerResult.analysisViewer.configuration;
             viewer.configuration = analysisViewerResult.analysisViewer.configuration;
+            viewer.configuration.export = {enabled: true};
             if (viewerConfiguration.type !== "gauge") {
                 viewer.configuration.data = analysisViewerResult.result;
             } else {
@@ -577,6 +663,22 @@ define([
                 }
             }
             delete viewer.configuration.dataProvider;
+        };
+        
+        this.getTypes = function(){
+            return types;
+        };
+        
+        this.bulkRemove = function (viewers) {
+            return $http.delete(presenterResources.viewer, {
+                data: viewers.map(function (e) {
+                    return e.id;
+                }),
+                headers: {
+                    // WTF, saporra ta mandando text/plain
+                    'Content-Type': 'application/json'
+                }
+            });
         };
     });
 });

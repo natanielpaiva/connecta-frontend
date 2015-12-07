@@ -99,6 +99,10 @@
     right: 0;
     left: 0;
     line-height: 2.5em;
+    white-space: nowrap;
+    height: 2.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .statement {

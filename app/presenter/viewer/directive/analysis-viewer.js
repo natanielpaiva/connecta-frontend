@@ -13,6 +13,7 @@ define([
                     ViewerService.result($scope.model.id).then(function (response) {
                         response.data.analysisViewer.configuration.dataProvider = response.data.result;
                         $scope.model = response.data.analysisViewer;
+                        $scope.model.configuration.export = {enabled: true};
                     });
                 }
             }

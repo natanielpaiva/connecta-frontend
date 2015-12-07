@@ -8,6 +8,7 @@
         "ATTRIBUTE": "Attribute",
         "VALUE": "Value",
         "TYPE": "Type",
+        "ANALYSIS_TYPE": "Analysis Type",
         "ADD_ATTRIBUTES": "Add Attributes",
         "SOURCE_OF_DATA": "Source of Data",
         "DATA_INSERTION": "Data insertion",
