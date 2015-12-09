@@ -339,7 +339,6 @@ define([
     'inspection/inspection/directive/status-change',
     'inspection/inspection/directive/inspect-datepicker',
     'inspection/inspection/directive/drop-file',
-    'speaknow/company/service/company-service',
     'portal/user/service/user-service'
   ], function(doc) {
     angular.bootstrap(doc, [connecta.name]);

@@ -1,7 +1,12 @@
+drop-file{
+    display:table;
+}
+
 .dropzone-inspection {
     padding: 5px;
     float: left;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
 }
 
 .file-item {
