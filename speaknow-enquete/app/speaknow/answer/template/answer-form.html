@@ -1,0 +1,45 @@
+<div>Enquete: {{poll.name}}</div>
+<div>Descrição: {{poll.description}}</div>
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div>
+			<pre>{{answers | json}}</pre>
+			<pre>{{teste | json }}</pre>
+		</div>
+
+		<form name="answer_form" novalidate>
+			<div class="row" ng-repeat="question in poll.questions track by question.id">
+
+				<label class="required">{{question.description}}</label>
+
+				<div ng-if="question.type === 'SINGLE'" ng-init="answers[question.id].question.id = question.id">
+					<div ng-repeat="item in question.items">
+						<input type="radio" ng-model="answers[question.id].questionItem.id" name="{{question.id}}" 
+							   ng-value="{{item.id}}">{{item.value}}
+					</div>
+				</div>
+
+				<div ng-if="question.type === 'MULTIPLE'">
+					<div ng-repeat="item in question.items">
+						<input type="checkbox" ng-model="answers_multiples[question.id][item.id]" 
+						       ng-value="{{item.id}}">{{item.value}}
+					</div>
+				</div>
+
+				<div ng-if="question.type === 'TEXT'" ng-init="answers[question.id].question.id = question.id">
+					<input type="text" ng-model="answers[question.id].value" required/>
+				</div>
+
+			</div>
+
+			<div class="row">
+		        <div class="col-md-6">
+		 			<button class="btn btn-primary" ng-click="submit()" translate>POLL.SEND</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</div>

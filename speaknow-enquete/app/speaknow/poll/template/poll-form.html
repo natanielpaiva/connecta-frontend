@@ -1,0 +1,203 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>POLL.REGISTER_POLL</h3>
+        <h3 translate>{{isEditing ? 'POLL.EDIT' : 'POLL.ADD'}}</h3>
+    </div>
+</div>
+
+<div>
+    <div class="steps">
+        <div class="box-step box1">
+            <div class="number-step step1" ng-class="{'step-active':stepsIcons[0]}">
+                1
+            </div>
+            <div class="legend-step" translate>
+                POLL.POLL_DATA
+            </div>
+        </div>
+        <div class="divider-step1" ng-class="{'divider-blue':stepsIcons[1]}"></div>
+        <div class="box-step box2">
+            <div class="number-step step2" ng-class="{'step-active':stepsIcons[1]}">
+                2
+            </div>
+            <div class="legend-step" translate>
+                POLL.ANSWER_CONFIG
+            </div>
+        </div>
+        <div class="divider-step2" ng-class="{'divider-blue':stepsIcons[2]}"></div>
+        <div class="box-step box3">
+            <div class="number-step step3" ng-class="{'step-active':stepsIcons[2]}">
+                3
+            </div>
+            <div class="legend-step" translate>
+                POLL.RECIPIENTS
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="step1" ng-show="steps[0]">
+
+            <form novalidate name="poll_step_one">
+                <div class="form-group">
+                    <label class="required" for="nome" translate>POLL.NAME</label>
+                    <input type="text" class="form-control" name="name"
+                           ng-model="poll.name" required/>
+
+                    <div ng-show="poll_step_one.$submitted || poll_step_one.name.$touched" 
+                         ng-messages="poll_step_one.name.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>    
+
+                <div class="form-group">
+                    <label for="pollDescription" translate>POLL.DESCRIPTION</label>
+                    <textarea class="form-control" name="pollDescription"
+                              ng-model="poll.description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" translate>POLL.IMAGE</label>
+                    <drop-file files="imageFile" 
+                               documents="imageUrl" 
+                               files-type=".jpeg,.jpg,.png"
+                               is-single="true"
+                               type="TEST"
+                               callback="dropImageCallback"></drop-file>
+                </div>
+
+                <a href="#/speaknow/poll" class="btn btn-default" translate>LAYOUT.CANCEL</a>
+                <a class="btn btn-primary" translate ng-click="activeStep(1, true)">POLL.NEXT</a>
+            </form>
+
+        </div>
+
+        <div class="step2" ng-show="steps[1]">
+            <form novalidate name="poll_step_two"> 
+                <div class="form-question">
+
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label class="required" for="description" translate>POLL.QUESTION</label>
+                            <input type="text" class="form-control" name="description"
+                                   ng-model="question.description" required/>
+
+                            <div ng-show="poll_step_two.$submitted || poll_step_two.description.$touched" 
+                                 ng-messages="poll_step_two.description.$error"
+                                 ng-messages-include="portal-error-messages"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required" for="answer_type" translate>POLL.ANSWER_TYPE</label>
+                            <select class="form-control" name="answer_type" 
+                                    ng-change="changeQuestionType()" ng-model="answer_type">
+                                <option ng-repeat="(key, value) in answer_types" value="{{key}}" translate>{{value}}</option>
+                            </select>
+                        </div>
+                        
+                        <div ng-show="!questionText" class="well well-sm clearfix">
+                            <button class="btn btn-default" ng-click="addAnswer()" type="button">
+                                <span class="icon-plus"></span>
+                                <translate>LAYOUT.ADD</translate>
+                            </button>
+
+                            <div class="row" ng-repeat="answer in answers track by $index">
+                                <div class="col-md-11">
+                                    <div class="col-md-6">
+                                        <div class="form-group margin-bottom-zero">
+                                            <label class="required" translate>POLL.ANSWER_ITEM</label>
+                                            <input type="text" ng-model="answers[$index].key" class="form-control" 
+                                                   required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group margin-bottom-zero">
+                                            <label class="required" translate>POLL.ANSWER_VALUE</label>
+                                            <input type="text" ng-model="answers[$index].value" class="form-control" 
+                                                   required/>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                <div class="col-md-1">
+                                    <button type="button" ng-click="onRemoveAnswer($index)" class="btn btn-default margin-top-label text-right">
+                                        <span class="icon-minus"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="text-center" ng-show="answers.length === 0" translate>KEY_VALUE.NO_ITEM</div>
+                        </div>
+                        
+                        <div class="btn btn-primary" id="add-question" ng-click="addQuestion()" translate>
+                            POLL.ADD_QUESTION
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+
+            <div class="questions">
+                <table>
+                    <thead>
+                        <td>Questão</td>
+                        <td>Tipo</td>
+                        <td></td>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="question in poll.questions track by $index">
+                            <td>{{question.description}}</td>
+                            <td>{{question.answer_type}}</td>
+                            <td>
+                                <a role="button" class="btn btn-xs btn-info" ng-click="editQuestion($index)">
+                                    <span class="icon-trash"></span>
+                                </a>
+                                <a role="button" class="btn btn-xs btn-info" ng-click="removeQuestion($index)">
+                                    <span class="icon-trash"></span>
+                                </a>
+                            </td>    
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <a class="btn btn-default" translate ng-click="activeStep(0)">
+                POLL.PREVIOUS                     
+            </a>
+            <a class="btn btn-primary" translate ng-click="activeStep(2, true)">
+                POLL.NEXT
+            </a>
+        </div>
+
+        <div class="step3" ng-show="steps[2]">
+            <div class="dsc-form-web">
+                <img src="assets/img/speaknow/web.png"> 
+                <span class="dsc-form-web">
+                    Formulário Web
+                </span>
+                <p class="txt-web">
+                    Assim que a Interação for salva e enviada, será gerado automaticamente um formulário 
+                    web com as opções informadas anteriormente. Esse formulário possui um código de 
+                    identificação único que será mostrado ao concluir a ação de salvar. Para acessar 
+                    este formulário na web, basta acessar o link gerado pelo sistema, que deve se parecer 
+                    com este: <b>connecta.cds.com.br/speaknow/poll/</b>. 
+                    Outra forma de acessar é pelo link: <b>connecta.cds.com.br/speaknow/poll/</b>, informando o 
+                    código da interação, por exemplo <b>sn123213</b>.
+                </p>
+            </div>
+
+            <div style="margin-top: 10px">
+                <a class="btn btn-default" translate ng-click="activeStep(1)">
+                    POLL.PREVIOUS
+                </a>
+                <button class="btn btn-primary" ng-click="submit()" translate>
+                    POLL.SAVE
+                </button>
+            </div>
+        </div>
+        
+    </div>
+</div>

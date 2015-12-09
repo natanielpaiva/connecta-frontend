@@ -1,0 +1,41 @@
+{
+    "POLL": {
+        "RECIPIENTS": "Recipients",
+        "REGISTER_POLL": "Register Poll",
+        "POLLS": "Polls",
+        "POLL_DATA": "Data Poll",
+        "ANSWER_CONFIG": "Setup Answer", 
+        "ADD_POLL": "Add Poll",
+        "ADD_QUESTION": "Add Question", 
+        "QUESTION": "Question",  
+        "ANSWER": "Answer",
+        "ANSWER_ITEM": "Identifier",
+        "ANSWER_VALUE": "Value",
+        "NAME": "Name",
+        "IMAGE" : "Image",
+        "ICON" : "Icon",
+        "TYPE" : "Type",
+        "DESCRIPTION" : "Description",
+        "DROP_FILE_HERE": "Drop file here",
+        "PREVIOUS": "Previous",
+        "NEXT": "Next",
+        "SAVE": "Save",
+        "ANSWER_TYPE": "Answer type", 
+        "ANSWER_TYPES":{
+            "TEXT": "Text",
+            "SINGLE": "Single choice",
+            "MULTIPLE": "Multiple choice"
+        },
+        "DESCRIPTION_WARNING": "Fill question",
+        "MIN_ANSWER_WARNING": "Add at least two answers to question",
+        "INVALID_ANSWER_WARNING": "Invalid answer",
+        "MIN_QUESTIONS_WARNING": "Add at least one question",
+        "NOT_FOUND": "Url not found",
+        "ACTIVE": "Active",
+        "ACTIONS": "Actions",
+        "SEARCH": "Search Poll",
+        "SEARCH_NOT_FOUND": "No poll found or poll is disabled",
+        "ACTIVATE": "Activate",
+        "DEACTIVATE": "Deactivate"
+    }
+}

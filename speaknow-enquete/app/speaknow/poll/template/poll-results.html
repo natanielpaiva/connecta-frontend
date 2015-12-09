@@ -1,0 +1,9 @@
+<div>
+	RESULTADOS DA ENQUETE
+</div>
+
+<div ng-repeat="item in data">
+	<h4>{{item.question}}</h4>
+
+	<amchart ng-model='item.answers'></amchart>
+</div>

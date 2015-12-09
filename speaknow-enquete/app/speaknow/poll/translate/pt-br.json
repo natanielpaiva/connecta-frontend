@@ -1,0 +1,41 @@
+{
+    "POLL": {
+        "RECIPIENTS": "Destinatários",
+        "REGISTER_POLL": "Registrar Enquete",
+        "POLLS": "Enquetes",
+        "POLL_DATA": "Dados da Enquete",
+        "ANSWER_CONFIG": "Configurar Resposta", 
+        "ADD_POLL": "Adicionar Enquete",
+        "ADD_QUESTION": "Adicionar Questão", 
+        "QUESTION": "Questão",  
+        "ANSWER": "Resposta",
+        "ANSWER_ITEM": "Identificador",
+        "ANSWER_VALUE": "Valor",
+        "NAME": "Nome",
+        "IMAGE" : "Imagem",
+        "ICON" : "Ícone",
+        "TYPE" : "Tipo",
+        "DESCRIPTION" : "Descrição",
+        "DROP_FILE_HERE": "Arraste ou clique aqui",
+        "PREVIOUS": "Anterior",
+        "NEXT": "Próximo",
+        "SAVE": "Salvar",
+        "ANSWER_TYPE": "Tipo de Resposta", 
+        "ANSWER_TYPES":{
+            "TEXT": "Texto",
+            "SINGLE": "Única escolha",
+            "MULTIPLE": "Múltipla escolha"
+        },
+        "DESCRIPTION_WARNING": "Preencha a questão",
+        "MIN_ANSWER_WARNING": "Adicione ao menos duas respostas",
+        "INVALID_ANSWER_WARNING": "Resposta inválida",
+        "MIN_QUESTIONS_WARNING": "Adicione pelo menos uma questão",
+        "NOT_FOUND": "Url não encontrada",
+        "ACTIVE": "Ativo",
+        "ACTIONS": "Ações",
+        "SEARCH": "Pesquisar Enquete",
+        "SEARCH_NOT_FOUND": "Nenhuma enquete encontrada, ou enquete inativa",
+        "ACTIVATE": "Ativar",
+        "DEACTIVATE": "Desativar"
+    }
+}

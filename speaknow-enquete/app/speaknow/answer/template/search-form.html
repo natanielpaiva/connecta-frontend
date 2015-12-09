@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>POLL.SEARCH</h3>
+    </div>
+</div>
+
+<div class="well margin-top-single" >
+
+	<div class="row">
+		O Connecta Speaknow é a sua mais nova solução para interações na Internet. 
+		Ele conecta você aos seus clientes de maneira simples e eficiente. Conheça e junte-se à um novo mundo de comunicação.
+	</div>
+
+	<div class="row">
+		Responda uma enquete informando o código, por exemplo <b>S10AN</b>.
+	</div>
+
+    <form novalidate name="form_search">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="required" for="search_field" translate>POLL.NAME</label>
+                    <input type="text" class="form-control" name="search_field" ng-model="search" pattern=".{3,}" required/>
+
+                    <div ng-messages="form_search.search_field.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-default" ng-click="searchPoll()" translate>LAYOUT.SEARCH</button>
+            </div>
+        </div>
+    </form>
+
+</div>
