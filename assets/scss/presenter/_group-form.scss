@@ -45,6 +45,7 @@
     border:dashed 0.2em $lightGray;
 }
 
+
 /**
  * The dnd-lists's child elements currently MUST have
  * position: relative. Otherwise we can not determine
@@ -77,6 +78,12 @@
 .gallery ul[dnd-list] li.selected {
     background-color: #297eb8;
     color: #fff;
+}
+
+.gallery{
+    border: 1px solid #ddd;
+    min-height: 2em;
+    margin-bottom: 4%;
 }
 
 .panel-heading{

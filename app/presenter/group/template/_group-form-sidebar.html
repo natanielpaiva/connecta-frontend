@@ -3,38 +3,19 @@
         <label translate>GROUP.SET_MEDIA</label>
     </div>
 </div>
-<div class="gallery row">
-    <div class="container-gallery">
-        <div class="row">
-            <div  class="col-md-12">
+<div class="gallery">
+    <ul dnd-list="group.singleSource.lists.singleSourceSet" >
+        <li ng-repeat="item in group.singleSource.lists.singleSourceSet"
+            dnd-draggable="item"
+            dnd-moved="group.singleSource.lists.singleSourceSet.splice($index, 1)"
+            dnd-effect-allowed="move"
+            dnd-selected="group.singleSource.selected = item"
+            ng-class="{'selected': group.singleSource.selected === item}"
+            ng-style="{'background-image': 'url({{item.binaryFile}})'}">
 
-                <div>
-                    <ul dnd-list="group.singleSource.lists.singleSourceSet" >
-                        <li ng-repeat="item in group.singleSource.lists.singleSourceSet"
-                            dnd-draggable="item"
-                            dnd-moved="group.singleSource.lists.singleSourceSet.splice($index, 1)"
-                            dnd-effect-allowed="move"
-                            dnd-selected="group.singleSource.selected = item"
-                            ng-class="{'selected': group.singleSource.selected === item}"
-                            ng-attr-style="background-image:url({{item.binaryFile}})">
-                            <div ng-if="item.fileType === 'VIDEO'">
-                                <video  width="120" height="100" >
-                                    <source ng-if="item.binaryFile" src="{{item.binaryFile}}" type="video/mp4">
-                                    Your browser does not support HTML5 video.
-                                </video>
-                                <div class="fill-parent"></div>
-                            </div>
-
-                            <div class="media-item">
-                                {{item.name}}
-                            </div>
-
-                        </li>
-                    </ul>
-
-                </div>
+            <div class="media-item">
+                {{item.name}}
             </div>
-        </div>
-
-    </div>
+        </li>
+    </ul>
 </div>
