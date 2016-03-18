@@ -15,7 +15,7 @@ define([
     base: applications.portal.host,
     dashboard: applications.portal.host + '/dashboard',
     dashboardViewers: applications.portal.host + '/dashboard/viewer',
-    login: applications.portal.host + '/auth',
+    login: applications.portal.host + '/oauth/token',
     user: applications.portal.host + '/user'
   });
 
@@ -65,7 +65,7 @@ define([
       {
         name: 'heading-popover-apps.html',
         url: 'app/portal/layout/template/heading-popover-apps.html'
-      },
+      }
     ];
 
     angular.forEach(templateUrls, function(template){

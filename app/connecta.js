@@ -18,7 +18,7 @@ define([
   'bower_components/angular-ui-utils/ui-utils',
   'bower_components/angular-ui-tree/dist/angular-ui-tree.min',
   'angular-ng-table',
-  'bower_components/prefix-free/prefixfree.min',
+  'bower_components/connecta-prefixfree/prefixfree.min',
   'bower_components/angular-animate/angular-animate.min',
   'bower_components/angular-cookies/angular-cookies.min',
   'bower_components/angular-touch/angular-touch.min',
@@ -36,7 +36,8 @@ define([
   'bower_components/angular-redactor/angular-redactor',
   'bower_components/angular-amchart/src/amchart',
   'bower_components/angular-facebook/lib/angular-facebook',
-  'bower_components/ngAutocomplete/src/ngAutocomplete'
+  'bower_components/ngAutocomplete/src/ngAutocomplete',
+  'bower_components/angular-base64/angular-base64'
 ], function(angular, $, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
   var connecta = angular.module('connecta', [
@@ -63,7 +64,8 @@ define([
     'pascalprecht.translate',
     'angularFileUpload',
     'currencyMask',
-    'AngularAmChart'    
+    'AngularAmChart',
+    'base64'
   ]);
 
   // Configuração do backend dos módulos
@@ -273,12 +275,14 @@ define([
    * token de autenticação no cabeçalho
    *
    * @param {type} $http
+   * @param {type} $rootScope
+   * @param {type} $route
    * @param {type} LoginService
    * @returns {undefined}
    */
   function configureAuthenticationListener($http, $rootScope, $route, LoginService){
     $http.defaults.transformRequest.push(function(data, getHeaders){
-      getHeaders()["X-Authorization-Token"] = LoginService.getAuthenticationToken();
+      getHeaders().Authorization = "Bearer "+LoginService.getAuthenticationToken();
       return data;
     });
 

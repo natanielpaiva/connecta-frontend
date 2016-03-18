@@ -55,6 +55,7 @@
     </div>
 </div>
 
+<!--   <debug ng-model="analysis"></debug>-->
 
 <div class="row margin-top-single" ng-if="responseDataBase">
     <div class="col-md-12">
@@ -67,7 +68,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="r in responseDataBaseTable" class="row">
+                <tr ng-repeat="r in responseDataBase" class="row">
                     <td ng-repeat="col in analysis.analysisColumns" class="text-left">
                         {{ r[col.name]}}
                     </td>

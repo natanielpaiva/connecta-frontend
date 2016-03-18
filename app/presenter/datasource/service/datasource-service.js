@@ -31,7 +31,6 @@ define([
                 icon: 'icon-solr'
             },
             WEBSERVICE: {
-                order: 6,
                 name: 'WebService',
                 template: 'app/presenter/datasource/template/_datasource-webservice.html',
                 icon: 'icon-webservice' // Capitão Planeta?

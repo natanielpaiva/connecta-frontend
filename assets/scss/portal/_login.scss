@@ -28,18 +28,15 @@ $boxHeight: 22em;
         display: block;
     }
 
-
     section {
         font-size: 14px;
         width: $boxWidth;
         margin: 0 auto;
         color: $white;
-        height: $boxHeight;
         position: fixed;
         left: 50%;
-        top: 35%;
-        margin-left: -($boxWidth/2);
-        margin-top: -($boxHeight/2);
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .create-account-form {

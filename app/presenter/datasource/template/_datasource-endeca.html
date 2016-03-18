@@ -4,7 +4,7 @@
     <input type="text" name="address" id="address" class="form-control"  
            ng-model="object.address" required />
     <div ng-if="formulario.$dirty" ng-messages="formulario.address.$error"
-         ng-messages-include="portal-validation-messages"></div>
+         ng-messages-include="portal-error-messages"></div>
     <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
          ng-messages-include="portal-error-messages"></div>
 </div>
@@ -14,7 +14,7 @@
         <input type="text" name="user" id="user" class="form-control" 
                ng-model="object.user" required/>
         <div ng-if="formulario.$dirty" ng-messages="formulario.user.$error"
-             ng-messages-include="portal-validation-messages"></div>
+             ng-messages-include="portal-error-messages"></div>
         <div ng-show="formulario.user.$touched" ng-messages="formulario.user.$error"
              ng-messages-include="portal-error-messages"></div>
     </div>
@@ -23,9 +23,8 @@
         <input type="text" name="password" id="password" class="form-control"
                ng-model="object.password" required />
         <div ng-if="formulario.$dirty" ng-messages="formulario.password.$error"
-             ng-messages-include="portal-validation-messages"></div>
+             ng-messages-include="portal-error-messages"></div>
         <div ng-show="formulario.password.$touched" ng-messages="formulario.password.$error"
              ng-messages-include="portal-error-messages"></div>
     </div>
 </div>
-

@@ -18,8 +18,9 @@
                             }"></span>
                 </label>
             </th>
-            <th class="col-md-8 col-sm-6 col-xs-11" translate>GROUP.NAME</th>
-            <th class="col-md-3 col-sm-5 hidden-xs" translate>GROUP.TYPE</th>
+            <th class="col-md-3 col-sm-4 col-xs-4" translate>GROUP.NAME</th>
+            <th class="col-md-5 col-sm-5 col-xs-7" translate>GROUP.DESCRIPTION</th>
+            <th class="col-md-3 col-sm-3 hidden-xs" translate>GROUP.TYPE</th>
         </tr>
     </thead>
     <tbody>
@@ -41,14 +42,21 @@
                             }"></span>
                 </label>
             </td>
-            <td class="col-md-8 col-sm-6 col-xs-11">
+            <td class="col-md-3 col-sm-4 col-xs-4">
                 <a href="#/presenter/group/{{group.id}}" class="full-size-block link-no-state">
                     <span class="list-icon-for-type visible-xs-inline hidden-sm hidden-md hidden-lg {{types[group.type].icon}}"
                           title="{{types[group.type].name}}"></span>
                     {{group.name}}
                 </a>
             </td>
-            <td class="col-md-3 col-sm-5 hidden-xs">
+            <td class="col-md-5 col-sm-5 col-xs-7">
+            <a href="#/presenter/group/{{group.id}}" class="full-size-block link-no-state">
+                <a href="#/presenter/group/{{group.id}}" class="full-size-block link-no-state">
+                    {{group.description}}
+                </a>
+            </a>
+            </td>
+            <td class="col-md-3 col-sm-3 hidden-xs">
                 <a href="#/presenter/group/{{group.id}}" class="full-size-block link-no-state">
                     <span class="list-icon-for-type {{types[group.type].icon}}"></span>
                     {{types[group.type].name | translate}}

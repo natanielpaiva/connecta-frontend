@@ -1,12 +1,9 @@
 /* global angular */
-
 define([
     'connecta.presenter',
     'portal/layout/service/autocomplete'
 ], function (presenter) {
-
     return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http) {
-        
         var types = {
             ANALYSIS: {
                 type: 'ANALYSIS',
@@ -29,61 +26,60 @@ define([
             bar: [
                 {
                     id: 'bar-two-value-axes',
-                    src: '../../assets/img/presenter/barras/bar-two-value-axes.png'
+                    src: 'assets/img/presenter/barras/bar-two-value-axes.png'
                 },
                 {
                     id: 'bar-and-line',
-                    src: '../../assets/img/presenter/barras/bar-and-line.png'
+                    src: 'assets/img/presenter/barras/bar-and-line.png'
                 },
                 {
                     id: 'bar-clustered-3d',
-                    src: '../../assets/img/presenter/barras/bar-clustered-3d.png'
+                    src: 'assets/img/presenter/barras/bar-clustered-3d.png'
                 },
                 {
                     id: 'bar-3d-bar',
-                    src: '../../assets/img/presenter/barras/bar-3d-bar.png'
+                    src: 'assets/img/presenter/barras/bar-3d-bar.png'
                 }
 
             ],
             column: [
                 {
                     id: 'column-using-custom-colors',
-                    src: '../../assets/img/presenter/colunas/column-using-custom-colors.png'
+                    src: 'assets/img/presenter/colunas/column-using-custom-colors.png'
                 }
             ],
             area: [
                 {
                     id: 'area-date-series-yearly',
-                    src: '../../assets/img/presenter/area/area-date-series-yearly.png'
+                    src: 'assets/img/presenter/area/area-date-series-yearly.png'
                 }
-            ]
-            ,
+            ],
             line: [
                 {
                     id: 'line-stacked',
-                    src: '../../assets/img/presenter/linhas/line-stacked.png'
+                    src: 'assets/img/presenter/linhas/line-stacked.png'
                 },
                 {
                     id: 'line-rotate',
-                    src: '../../assets/img/presenter/linhas/line-rotate.png'
+                    src: 'assets/img/presenter/linhas/line-rotate.png'
                 },
                 {
                     id: 'line',
-                    src: '../../assets/img/presenter/linhas/line.png'
+                    src: 'assets/img/presenter/linhas/line.png'
                 }
             ],
             'pie-donut': [
                 {
                     id: 'pie',
-                    src: '../../assets/img/presenter/circular/pie.png'
+                    src: 'assets/img/presenter/circular/pie.png'
                 },
                 {
                     id: 'donut-3d',
-                    src: '../../assets/img/presenter/circular/donut-3d.png'
+                    src: 'assets/img/presenter/circular/donut-3d.png'
                 },
                 {
                     id: 'donut',
-                    src: '../../assets/img/presenter/circular/donut.png'
+                    src: 'assets/img/presenter/circular/donut.png'
                 }
             ]
         };
@@ -91,11 +87,11 @@ define([
         var templateSidebar = [
             {
                 type: "ANALYSIS",
-                template: "/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis.html"
+                template: "app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis.html"
             },
             {
                 type: "SINGLESOURCE",
-                template: "/app/presenter/viewer/template/sidebar/_viewer-form-sidebar-singlesource.html"
+                template: "app/presenter/viewer/template/sidebar/_viewer-form-sidebar-singlesource.html"
             },
             {
                 type: "SINGLESOURCE_GROUP",
@@ -360,6 +356,18 @@ define([
                     name: 'VIEWER.GRAPHS',
                     template: 'app/presenter/viewer/template/graphs/graphs.html',
                     type: 'GRAPHS'
+                }
+
+            },
+            {
+                heading: "VIEWER._CATEGORY_AXIS",
+                title: "Category Axis",
+                type: "CATEGORY_AXIS",
+                children: "",
+                config: {
+                    name: 'VIEWER.CATEGORY_AXIS',
+                    template: 'app/presenter/viewer/template/category-axis/axis-label.html',
+                    type: 'CATEGORY_AXIS'
                 }
 
             }
@@ -634,7 +642,7 @@ define([
             }
         };
         var configureSerialAndRadar = function (viewer, analysisViewerResult) {
-            var standardGraph = analysisViewerResult.analysisViewer.configuration.graphs[0];
+            var standardGraph = angular.copy(analysisViewerResult.analysisViewer.configuration.graphs[0]);
             viewer.configuration.graphs = [];
             var analysisViewerColumns = analysisViewerResult.analysisViewer.analysisViewerColumns;
             for (var i in analysisViewerColumns) {
@@ -646,6 +654,7 @@ define([
                     var graph = angular.copy(standardGraph);
                     graph.title = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                     graph.valueField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
+                    graph.id = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                     viewer.configuration.graphs.push(graph);
                 }
 

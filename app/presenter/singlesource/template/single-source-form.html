@@ -13,7 +13,7 @@
                 <input type="text" name="nome" ng-model="typeSingleSource.name"
                        id="model-nome" required class="form-control" required />
                 <div ng-if="singlesourceForm.nome.$dirty" ng-messages="singlesourceForm.nome.$error"
-                     ng-messages-include="portal-validation-messages"></div>
+                     ng-messages-include="portal-error-messages"></div>
             </div>
             
             <p class="bold" translate>SINGLESOURCE.TYPE_MEDIA</p>

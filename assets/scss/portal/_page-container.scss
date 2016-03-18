@@ -11,6 +11,14 @@ $pageGutter:1em;
     border-radius:0.25em;
     @include clearfix();
 
+
+    &.am-fade-and-slide-right.ng-leave {
+        width: calc(100% - (20em + 15px*2));
+        position: absolute;
+        z-index: -1;
+        overflow-x: hidden;
+    }
+
     h1, h3 {
         @extend .margin-top-zero;
     }
@@ -78,6 +86,7 @@ $pageGutter:1em;
 }
 
 [layout] {
+    overflow-x:hidden;
     border:none;
     padding: 0 !important;
     margin:0 !important;
@@ -91,7 +100,7 @@ $pageGutter:1em;
 
     &.fullscreen {
         background:darken($white,1%);
-        
+
         heading {
             transition:transform $defaultAnimationDuration;
             transform: translateY(-6em);

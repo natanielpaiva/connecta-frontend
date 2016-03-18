@@ -1,50 +1,41 @@
-<!--<debug ng-model="component"></debug>-->
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <h3 translate>ANALYSIS.REGISTER_ANALYSIS</h3>
     </div>
 </div>
 <form novalidate name="formulario" ng-submit="submit()">
     <div class="row">
-
-        <div class="col-md-6">
-
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="name" translate class="required">ANALYSIS.NAME</label>
-                <input type="text" class="form-control" id="name" name="name"
-                       ng-model="analysis.name" required />
+                <input type="text" class="form-control" id="name"
+                       ng-model="analysis.name" maxlength="100" required />
             </div>
-
             <div class="form-group">
-                <label for="description" translate class="required">ANALYSIS.DESCRIPTION</label>
-                <textarea class="form-control" id="description" name="description"
-                          ng-model="analysis.description" required></textarea>
+                <label for="description" translate>ANALYSIS.DESCRIPTION</label>
+                <textarea class="form-control" id="description"
+                    ng-model="analysis.description" maxlength="500" ></textarea>
             </div>
-            
-            <div class="form-group" ng-show="edit === false">
-                <label for="nome" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
-                <select class="form-control"  ng-model="analysis.datasource.id">
+            <div class="form-group" ng-if="!edit">
+                <label for="datasource" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
+                <select class="form-control" id="datasource" ng-model="analysis.datasource.id">
                     <option value="csv">CSV</option> 
                     <option ng-repeat="ds in listDatasource" value="{{ds.id}}">{{ds.name}}</option>
                 </select>
             </div>
-            
-            <div class="form-group" ng-show="edit === true">
-                <label for="nome" translate >ANALYSIS.SOURCE_ANALYSIS</label>
-                <input type="text" class="form-control" disabled="disabled"
-                       ng-model="analysis.datasource.name" />
+            <div class="form-group" ng-if="edit">
+                <label for="datasource" translate>ANALYSIS.SOURCE_ANALYSIS</label>
+                <input type="text" id="datasource" class="form-control"
+                       disabled="disabled" ng-model="analysis.datasource.name" />
             </div>
         </div>
-        
     </div>
-    
-    <div ng-if="showForm">
+
+    <div ng-if="showForm && subform.template">
         <div ng-include="'app/presenter/analysis/template/' + subform.template"
              ng-controller="subform.controller"></div>
     </div>
 
-<!--   <debug ng-model="analysis"></debug>-->
-    
     <!--DescriÃ§Ã£o das colunas-->
     <h4 translate>ANALYSIS.DESCRIPTION_OF_COLUMNS</h4>
     <div class="row"  >
@@ -65,80 +56,41 @@
         </div>
     </div>
 
-    
-    
-<!--    Adicionar atributos -->
+    <!-- Adicionar atributos -->
     <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>
-    
-                <div key-value class="well well-sm clearfix" ng-model="analysis.analysisAttributes">
-                <div key-value-item class="row">
-                    <div class="col-md-4">
-                        <div class="form-group has-feedback">
-                            <label for="user" translate>SINGLESOURCE.ATTRIBUTE_NAME</label>
-                            
-                                <input type="text" name="analysisAttribute" id="analysisAttribute" class="form-control" 
-                                       ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
-                                <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="valor" translate>SINGLESOURCE.ATTRIBUTE_VALUE</label>
-                            <input type="text" class="form-control"
-                                   ng-model="$parent.$parent.$item.value" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="attributeTypes" class="required" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
-                            <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
-                                    ng-model="$parent.$parent.$item.attributeType" class="form-control" required>
-                                <option value="" translate>LAYOUT.SELECT</option>
-                            </select>
-                        </div>
-                    </div>
+
+    <div key-value class="well well-sm clearfix" ng-model="analysis.analysisAttributes">
+        <div key-value-item class="row">
+            <div class="col-md-4">
+                <div class="form-group has-feedback">
+                    <label for="user" translate>SINGLESOURCE.ATTRIBUTE_NAME</label>
+
+                    <input type="text" name="analysisAttribute" id="analysisAttribute" class="form-control" 
+                           ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
+                    <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
                 </div>
             </div>
-    
-    
-    
-    
-    
-    
-    
-    <div class="row" >
-        <div class="col-md-12">
-<!--            <div class="clearfix well">
-                <div ng-repeat="at in attributes" >
-                    <div class="col-md-4 form-group">
-                        <label for="" translate>ANALYSIS.ATTRIBUTE</label>
-                        <input type="text" name="params" id="params" class="form-control" 
-                               ng-model="p.params" />
-                        <div ng-if="formulario.$dirty" ng-messages="formulario.params.$error"
-                             ng-messages-include="portal-error-messages"></div>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label for="valor" translate>ANALYSIS.VALUE</label>
-                        <input type="text" class="form-control"
-                               ng-model="p.value" />
-                        <div ng-if="formulario.$dirty" ng-messages="formulario.method.$error"
-                             ng-messages-include="portal-error-messages"></div>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label for="valor" translate>ANALYSIS.TYPE</label>
-                        <select ng-options="ty for ty in attributeTypes"
-                                ng-model="at.type">
-                        </select>
-                    </div>
-                    <div class="col-xs-3 form-group">
-                        <p class="margin-top-triple">
-                            <button class="btn btn-large btn-primary" type="button" ng-click="addMethodAttribute()">+</button>
-                            <button class="btn btn-large btn-primary" type="button" ng-click="removeMethodAttribute(at)">-</button>
-                        </p>
-                    </div>
-                </div> 
-            </div>-->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="valor" translate>SINGLESOURCE.ATTRIBUTE_VALUE</label>
+                    <input type="text" class="form-control"
+                           ng-model="$parent.$parent.$item.value" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
+                    <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
+                            ng-model="$parent.$parent.$item.attributeType" class="form-control" >
+                        <option value="" translate>LAYOUT.SELECT</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row" >
+        <div class="col-md-12 text-right">
             <a href="#/presenter/analysis"
                class="btn btn-default" translate>
                 LAYOUT.CANCEL
@@ -146,7 +98,6 @@
             <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
                 LAYOUT.SAVE
             </button>
-
         </div>
     </div>
 </form>

@@ -15,6 +15,7 @@
         "CUSTOM_SQL": "Custom SQL",
         "TABLE": "Table",
         "COLUMN": "Column",
+        "COLUMNS": "Columns",
         "DESCRIPTION_OF_COLUMNS": "Description of Columns",
         "SELECT": "Select",
         "SEPARATOR": "Separator",

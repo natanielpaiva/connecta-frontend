@@ -19,7 +19,8 @@
     "host": "http://connectad.cds.com.br/connecta-maps",
     "icon": "assets/img/module-icon/maps.png",
     "iconMini": "assets/img/module-icon/mini/maps.png",
-    "home": "#/maps"
+    "home": "#/maps",
+    "viewerPath":"/layerViewers/:id"
   },
   "speaknow": {
     "title": "Speaknow",

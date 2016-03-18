@@ -22,6 +22,8 @@
         "PARAMETERS": "Parâmetros",
         "PARAMETER": "Parâmetro",
         "PARAMETER_VALUE": "Valor",
-        "DATASOURCE": "Fonte de dados"
+        "DATASOURCE": "Fonte de dados",
+        "EDIT": "Editar",
+        "DELETE": "Excluir"
     }
 }

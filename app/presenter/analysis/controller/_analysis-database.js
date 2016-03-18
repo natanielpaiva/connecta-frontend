@@ -65,7 +65,7 @@ define([
                     }
 
                     AnalysisService.executeSqlDataBase($scope.analysis).then(function (response) {
-                        $scope.responseDataBaseTable = response.data;
+                        $scope.responseDataBase = response.data;
 
                     });
                 }
@@ -76,13 +76,17 @@ define([
         $scope.executeSQL = function () {
 
             AnalysisService.executeSqlDataBase($scope.analysis).then(function (response) {
+                console.log("$scope.analysis ", $scope.analysis);
+                console.log("$scope.analysis ", response.data);
+                
                 $scope.responseDataBase = response.data;
                 $scope.analysis.analysisColumns = [];
                 for (var cl in response.data[0]) {
-                    //var name = cl.split(".");
+                    console.log(cl);
+                   var name = cl.split(".")[1];
                     $scope.analysis.analysisColumns.push({
-                        name: cl,
-                        label: cl,
+                        name: name,
+                        label: name,
                         formula: cl
                     });
 

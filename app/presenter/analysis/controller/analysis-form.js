@@ -64,17 +64,17 @@ define([
 
                 console.log("datasourceCurrent", $scope.datasourceCurrent);
 
-                $timeout(function () {
-                    $scope.showForm = true;
-                });
+                timeReload();
                 // $scope.listTableDatasource = response.data;
             });
         } else {
+            $scope.analysis = {};
             DatasourceService.list({count: 1000, page: 1}).then(function (response) {
                 $scope.listDatasource = response.data.content;
             });
 
             $scope.$watch('analysis.datasource.id', function (idDatasouce) {
+                $scope.showForm = false;
                 for (var ds  in $scope.listDatasource) {
                     if (idDatasouce === $scope.listDatasource[ds].id.toString()  ) {
 
@@ -85,50 +85,43 @@ define([
                         $scope.analysis.datasource.type = $scope.datasourceCurrent.type;
                         $scope.subform = $scope.types[$scope.datasourceCurrent.type];
 
-                        timeReload();
-
                         if ($scope.types[$scope.datasourceCurrent.type].start) {
                             resetComponent();
 
                             $scope.types[$scope.datasourceCurrent.type].start(
                                     $scope.datasourceCurrent,
-                                    $scope.component
-                                    );
+                                    $scope.component);
                         }
                     }
                 }
                 
                 if(idDatasouce === $scope.types.CSV.id){
                     var csv = $scope.types.CSV;
-                    
-                    timeReload();
+
                     $scope.subform = csv;
                     $scope.analysis.type = csv.name;
-                    
+
                     $scope.analysis.datasource = null;
-                    
+
                     $scope.datasourceCurrent = {
                         type: 'csv'
                     };
                 }
-                $scope.analysis.analysisAttributes = [{}];
-                
+
+                $scope.analysis.analysisAttributes = [];
+
+                timeReload();
             });
         }
 
         $scope.attributeTypes = ["Select", "Map", "Date", "Text", "Etc"];
 
-        $scope.attributeTypes = ["Select", "Map", "Date", "Text", "Etc"];
-
-
         //###############################################################################################
 
         $scope.submit = function () {
-
-
-            //caso o submit seja Sorl
+            //caso o submit seja Solr
             if ($scope.types.SOLR.name === $scope.datasourceCurrent.type) {
-                
+
                 var queryCopy = angular.copy($scope.analysis.query);
 
 

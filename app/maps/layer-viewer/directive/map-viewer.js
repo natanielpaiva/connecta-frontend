@@ -3,7 +3,7 @@ define([
     'connecta.portal',
     'maps/layer-viewer/service/connecta-geo-service',
     'maps/layer-viewer/service/layer-viewer-service',
-    'portal/layout/service/uuid'
+    'portal/layout/service/util'
 ], function (portal) {
     return portal.lazy.directive('mapViewer', function () {
         return {
@@ -12,9 +12,9 @@ define([
                 model: '=ngModel',
                 height: '=?'
             },
-            controller: function ($scope, LayerViewerService, ConnectaGeoService, uuid) {
+            controller: function ($scope, LayerViewerService, ConnectaGeoService, util) {
 //                $scope.model.type='MAP';
-                $scope.mapDivId = uuid();
+                $scope.mapDivId = util.uuid();
                 
                 LayerViewerService.getById($scope.model.id).then(function(response){
                     angular.extend($scope.model, response.data);

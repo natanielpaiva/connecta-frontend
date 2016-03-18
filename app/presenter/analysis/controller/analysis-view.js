@@ -7,11 +7,12 @@ define([
 ], function (presenter) {
     return presenter.lazy.controller('AnalysisViewController', function (
             $scope, $routeParams, AnalysisService, DatasourceService, GroupService) {
-
+  
         if ($routeParams.id) {
 
             AnalysisService.getAnalysis($routeParams.id).then(function (response) {
                 $scope.types = DatasourceService.getTypes();
+                console.log("$scope.types", $scope.types);
                 $scope.analysis = response.data;
 
                 $scope.analysisResult = null;
@@ -40,12 +41,15 @@ define([
                             });
 
                 }
+                //database
+                if ($scope.analysis.type === $scope.types.DATABASE.name.toUpperCase()) {
+                    console.log("$scope.analysis", $scope.analysis);
+                       AnalysisService.executeSqlDataBase($scope.analysis).then(function (response) {
+                       $scope.analysisResult = response.data;
 
-                if ($scope.analysis.type === $scope.types.DATABASE.name) {
-                    //tenho que implementar o método que busca os resultados
-
+                    });
                 }
-
+                //webService
                 if ($scope.analysis.type === $scope.types.WEBSERVICE.name.toUpperCase()) {
 
                     if ($scope.analysis.datasource.typeWebservice === "REST") {
@@ -60,9 +64,16 @@ define([
                             $scope.analysisResult = response.data;
                         });
                     }
-
                 }
-
+                
+                //console.log("$scope.analysis.type", $scope.analysis.type);
+              
+                //csv tenho que consertar esse codigo!!
+                if( $scope.analysis.type === "CSV" ){
+                     AnalysisService.getResultCSV($scope.analysis).then(function (response) {
+                         $scope.analysisResult = response.data;
+                     });
+                }
 
             });
         }

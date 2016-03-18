@@ -9,12 +9,12 @@
         <form novalidate name="formulario" ng-submit="submit()">
             <div class="form-group">
                 <label for="model-nome" class="required" translate>GROUP.NAME</label>
-                <input type="text" name="nome" ng-model="group.name" id="model-nome" required class="form-control" />
-                <div ng-if="formulario.nome.$dirty" ng-messages="formulario.nome.$error" ng-messages-include="portal-validation-messages" required></div>
+                <input type="text" name="nome" ng-model="group.name" id="model-nome" required class="form-control" maxlength="5"/>
+                <div ng-if="formulario.nome.$dirty" ng-messages="formulario.nome.$error" ng-messages-include="portal-error-messages" required></div>
             </div>
             <div class="form-group">
                 <label for="description" class="required" translate>GROUP.DESCRIPTION</label>
-                <textarea id="description" rows="5" cols="60" ng-model="group.description" class="form-control" required></textarea>
+                <textarea id="description" ng-model="group.description" class="form-control" maxlength="5" required></textarea>
             </div>
 
             <div class="form-group">

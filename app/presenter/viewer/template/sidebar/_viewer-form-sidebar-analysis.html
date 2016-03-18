@@ -1,5 +1,5 @@
 <div ng-if="setLayoutConfiguration != true">
-    <div class="aba-switch-viewer">
+    <div class="tab-viewer-settings">
         <div class="switch-viewer">
             <div title="{{'VIEWER.ANALYSIS'|translate}}" ng-click="checkViewerBar(analysisBar)"
                  ng-class="{active:viewerBar == analysisBar}">
@@ -32,16 +32,17 @@
     </div>
 </div>
 <div ng-if="setLayoutConfiguration">
-    <div class="aba-switch-viewer">
+    <div class="tab-viewer-settings">
         <div class="switch-viewer-back" ng-click="disabledLayoutConfig()">
             <div>
-                <span class="icon-arrow-back" ></span>
+                <span class="icon-arrow-back"></span>
             </div>
         </div>
         <div class="settings-text">
              {{layoutConfig.name | translate}}
         </div>
     </div>
-    <div class="layout-config" ng-include="layoutConfig.template">
+    <div class="layout-config margin-top-single"
+         ng-include="layoutConfig.template">
     </div>
 </div>

@@ -254,7 +254,9 @@ blockquote small {
             border-color: $lightGray;
         }
     }
-
+    &.btn-primary {
+        background-color: $presenterBlue;
+    }
     &:not(.btn-default),
         &:not(.btn-default):hover,
         &:not(.btn-default):active {
@@ -350,12 +352,11 @@ blockquote small {
 
     &.table-single-line {
         tr  {
-            td {
+            td, th {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 max-width:20em;
-
             }
         }
     }
@@ -445,3 +446,4 @@ blockquote small {
 a[href="http://www.amcharts.com/javascript-charts/"] {
     display: none !important;
 }
+

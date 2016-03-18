@@ -9,10 +9,10 @@
         </div>
         <div class="col-md-2">
             <div class="btn-group pull-right">
-                <a class="btn btn-default btn-sm" href="#/presenter/datasource/{{datasource.id}}/edit">
+                <a title="{{ 'DATASOURCE.EDIT' | translate }}" class="btn btn-default btn-sm" href="#/presenter/datasource/{{datasource.id}}/edit">
                     <span class="icon-pencil" aria-hidden="true"></span>
                 </a>
-                <button class="btn btn-default btn-sm" ng-click="excluir(datasource.id)">
+                <button title="{{ 'DATASOURCE.DELETE' | translate }}" class="btn btn-default btn-sm" ng-click="excluir(datasource.id)">
                     <span class="icon-trash" aria-hidden="true"></span>
                 </button>
             </div>

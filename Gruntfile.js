@@ -4,6 +4,9 @@ module.exports = function(grunt) {
 
   var reload = grunt.option('reload') === undefined ? true : grunt.option('reload');
   var port = grunt.option('port') || 9001;
+  var open = grunt.option('open');
+  var module = grunt.option('module');
+  var submodule = grunt.option('submodule');
 
   // Carrega as tasks do Grunt declaradas como dependência no package.json
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -110,7 +113,7 @@ module.exports = function(grunt) {
           port: port,
           base: '.',
           debug: true,
-          open: grunt.option('open'),
+          open: open,
           middleware: function(connect, options) {
             return [
               // Load the middleware provided by the livereload plugin
@@ -149,6 +152,27 @@ module.exports = function(grunt) {
     if (!grunt.file.exists('app/applications.json')) {
       grunt.file.write('app/applications.json', grunt.file.read('app/applications.json.dist'));
     }
+  });
+  
+  grunt.registerTask('module', function(){
+    if (!module) {
+      grunt.log.error('Provide module name with --module');
+      return;
+    }
+    if (!submodule) {
+      grunt.log.error('Provide submodule name with --submodule');
+      return;
+    }
+    grunt.log.ok('Creating module %s and submodule %s', module, submodule);
+    var modulePath = 'app/'+module+'/'+submodule+'/';
+
+    ['animation','controller','directive/template','filter','template','service','translate'].forEach(function(folder){
+	grunt.file.mkdir(modulePath+folder);
+    });
+
+    grunt.file.write(modulePath+'translate/en-us.json', '{\n\t"SUBMODULE":{\n\t\t"HELLO":"Hello, world"\n\t}\n}'.replace('SUBMODULE',submodule.toUpperCase()));
+    grunt.file.write(modulePath+'translate/pt-br.json', '{\n\t"SUBMODULE":{\n\t\t"HELLO":"Olá, mundo"\n\t}\n}'.replace('SUBMODULE',submodule.toUpperCase()));
+
   });
 
   grunt.registerTask('default', ['jshint', 'sass', 'create-config']);

@@ -1,42 +1,50 @@
-<div class="form-sidebar" ng-if="viewer.type == 'ANALYSIS'" >
-    <div class="form-group">
-        <label for="nome" translate>ANALYSIS.ANALYSIS</label>
-        <input type="text" class="form-control" ng-model="analysisData"
-               typeahead="analysis as analysis.name for analysis in getAnalysis($viewValue)"
-               typeahead-loading="loadingAnalysis"
-               typeahead-min-length="3"
-               typeahead-wait-ms="600"
-               typeahead-focus-first="true"
-               typeahead-on-select="setAnalysisData($item)"
-               />
-        <span ng-show="loadingAnalysis" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+<div class="form-sidebar">
+    <div class="row margin-top-single" ng-if="viewer.type == 'ANALYSIS'">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="analysis" translate>ANALYSIS.ANALYSIS</label>
+                <input type="text" class="form-control" ng-model="analysisData"
+                       id="analysis"
+                       typeahead="analysis as analysis.name for analysis in getAnalysis($viewValue)"
+                       typeahead-loading="loadingAnalysis"
+                       typeahead-min-length="3"
+                       typeahead-wait-ms="600"
+                       typeahead-focus-first="true"
+                       typeahead-on-select="setAnalysisData($item)" />
+                <span ng-show="loadingAnalysis" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+            </div>
+        </div>
     </div>
-</div>
-<div ng-if="analysisData">
-    <div class="form-sidebar-filter" >
-        <label for="columns" translate>ANALYSIS.COLUMNS</label>
-        <input type="search" ng-model="q" placeholder="filtrar colunas..." aria-label="filtrar colunas"
-               class="form-control" />
+    <div ng-if="analysisData" class="row">
+        <div class="col-md-12">
+            <div class="form-sidebar-filter">
+                <label for="columns" translate>ANALYSIS.COLUMNS</label>
+                <input type="search" ng-model="q" class="form-control" id="columns"
+                       placeholder="{{'VIEWER.FILTER_COLUMNS'|translate}}" />
+            </div>
+            <div class="sidebar-analysis-columns"> 
+                <ul dnd-list="analysisData.analysisColumns" >
+                    <li ng-repeat="column in analysisData.analysisColumns| filter:q as results"
+                        dnd-draggable="column"
+                        dnd-effect-allowed="move"
+                        dnd-moved="analysisData.analysisColumns.splice($index, 1)">
+                        {{column.label}}
+                    </li>
+                    <li ng-if="results.length == 0">
+                        <strong>{{'LAYOUT.NO_RESULTS'|translate}}</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="sidebarfilter"> 
-        <ul dnd-list="analysisData.analysisColumns" >
-            <li
-                ng-repeat="column in analysisData.analysisColumns| filter:q as results"
-                dnd-draggable="column"
-                dnd-effect-allowed="move"
-                dnd-moved="analysisData.analysisColumns.splice($index, 1)">
-                {{column.label}}
-            </li>
-            <li  ng-if="results.length == 0">
-                <strong>No results found...</strong>
-            </li>
-        </ul>
-    </div>
-</div>
-<div ng-if="analysisDataView" class="analysis-button">
-    <button class="btn btn-primary"
-            ng-click="getListAnalysis()" translate>
-        VIEWER.VIEW_ANALYSIS
-    </button>
-</div>
 
+    <div ng-if="analysisDataView" class="row margin-top-single">
+        <div class="col-md-12">
+            <button class="btn btn-primary btn-block" translate
+                    ng-click="getListAnalysis()">
+                VIEWER.VIEW_ANALYSIS
+            </button>
+        </div>
+    </div>
+
+</div>

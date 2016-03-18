@@ -7,165 +7,180 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label translate>VIEWER.NAME</label>
-                <input type="text" ng-model="viewer.name" required class="form-control" />
+                <label for="name" translate>VIEWER.NAME</label>
+                <input type="text" ng-model="viewer.name" required
+                       id="name" class="form-control" />
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label translate>VIEWER.DESCRIPTION</label>
-                <input type="text" ng-model="viewer.description" required class="form-control" />
+                <label for="description" translate>VIEWER.DESCRIPTION</label>
+                <input type="text" ng-model="viewer.description" required
+                       id="description" class="form-control" />
             </div>
+        </div>
+    </div>
+    <div class="row" ng-if="viewer.configuration.type == 'serial' ||
+                            viewer.configuration.type == 'pie' ||
+                            viewer.configuration.type == 'funnel' ||
+                            viewer.configuration.type == 'radar'">
+        <div class="col-md-4">
+            <div class="box-viewer">
+                <span class="box-name" translate>VIEWER.METRIC</span>
+                <div class="columns-viewer">
+                    <div class="sidebar-viewer">
+                        <ul dnd-list="viewer.metrics">
+                            <li ng-repeat="column in viewer.metrics" dnd-draggable="column" dnd-moved="viewer.metrics.splice($index, 1)" dnd-effect-allowed="move" >
+                                {{column.label}}
+                            </li>
+                            <li class="animate-repeat" ng-if="results.length === 0">
+                                {{'LAYOUT.NO_RESULTS'| translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="box-viewer">
+                <span class="box-name" translate>VIEWER.DESCRIPTION</span>
+                <div class="columns-viewer">
+                    <div class="sidebar-viewer">
+                        <ul dnd-list="viewer.descriptions">
+                            <li ng-repeat="column in viewer.descriptions" dnd-draggable="column" 
+                                dnd-moved="viewer.descriptions.splice($index, 1)" 
+                                dnd-effect-allowed="move">
+                                {{column.label}}
+                            </li>
+                            <li class="animate-repeat" ng-if="results.length === 0">
+                                {{'LAYOUT.NO_RESULTS'| translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="viewer.configuration.type == 'xy'"> 
+        <div class="col-md-4">
+            <div class="box-viewer">
+                <span class="box-name" translate>VIEWER.XFIELD</span>
+                <div class="columns-viewer">
+                    <div class="sidebar-viewer">
+                        <ul dnd-list="viewer.xfields">
+                            <li ng-repeat="column in viewer.xfields" dnd-draggable="column" dnd-moved="viewer.xfields.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                {{column.label}}
+                            </li>
+                            <li class="animate-repeat" ng-if="results.length === 0">
+                                {{'LAYOUT.NO_RESULTS'| translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="box-viewer">
+                <span class="box-name" translate>VIEWER.YFIELD</span>
+                <div class="columns-viewer">
+                    <div class="sidebar-viewer">
+                        <ul dnd-list="viewer.yfields">
+                            <li ng-repeat="column in viewer.yfields" dnd-draggable="column" 
+                                dnd-moved="viewer.yfields.splice($index, 1)" 
+                                dnd-effect-allowed="move" 
+                                ng-attr-style="background-image:url({{column.label}})">
+                                {{column.label}}
+                            </li>
+                            <li class="animate-repeat" ng-if="results.length === 0">
+                                {{'LAYOUT.NO_RESULTS'| translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="box-viewer">
+                <span class="box-name" translate>VIEWER.VALUEFIELD</span>
+                <div class="columns-viewer">
+                    <div class="sidebar-viewer">
+                        <ul dnd-list="viewer.valueFields">
+                            <li ng-repeat="column in viewer.valueFields" dnd-draggable="column"
+                                dnd-moved="viewer.valueFields.splice($index, 1)"
+                                dnd-effect-allowed="move" 
+                                ng-attr-style="background-image:url({{column.label}})">
+                                {{column.label}}
+                            </li>
+                            <li class="animate-repeat" ng-if="results.length === 0">
+                                {{'LAYOUT.NO_RESULTS'| translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="viewer.configuration.type === 'gauge'">
+        <div class="col-md-4">
+            <div class="box-viewer">
+                <span class="box-name" translate>VIEWER.METRIC</span>
+                <div class="columns-viewer">
+                    <div class="sidebar-viewer">
+                        <ul dnd-list="viewer.metrics">
+                            <li ng-repeat="column in viewer.metrics" dnd-draggable="column" dnd-moved="viewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
+                                {{column.label}}
+                            </li>
+                            <li class="animate-repeat" ng-if="results.length === 0">
+                                {{'LAYOUT.NO_RESULTS'| translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 viewer-gauge-interval-list">
+            <div class="clearfix margin-bottom-single">
+                {{'VIEWER.INTERVAL'|translate}}
+                <button class="btn btn-default btn-sm pull-right" type="button"
+                        ng-click="newInterval()">
+                    <span class="icon-plus"></span>
+                    {{'LAYOUT.ADD'|translate}}
+                </button>
+            </div>
+            <div ng-repeat="interval in viewer.configuration.axes[0].bands">
+                <input type='color' class="form-control input-sm viewer-gauge-interval"
+                       ng-model='interval.color'/>
+                <input type='number' class="form-control input-sm viewer-gauge-interval"
+                       ng-model='interval.startValue' placeholder="{{'VIEWER.INTERVAL_FROM'|translate}}" />
+                <input type='number' class="form-control input-sm viewer-gauge-interval"
+                       ng-model='interval.endValue' placeholder="{{'VIEWER.INTERVAL_TO'|translate}}" />
+                <button type="button" class="btn btn-xs btn-icon-only"
+                        ng-click="deleteInterval(interval)">
+                    <span class="icon-close"></span>
+                </button>
+            </div>
+            <translate ng-if="!viewer.configuration.axes[0].bands.length">
+                KEY_VALUE.NO_ITEM
+            </translate>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <div ng-if="viewer.configuration.type == 'serial' ||
-                                    viewer.configuration.type == 'pie' ||
-                                    viewer.configuration.type == 'funnel' ||
-                                    viewer.configuration.type == 'radar'"> 
-                <div class="boxViewer">
-                    <div class="columnsViewer">
-                        <label translate>VIEWER.METRIC</label>
-                        <div class="sidebarViewer">
-                            <ul dnd-list="viewer.metrics">
-                                <li ng-repeat="column in viewer.metrics" dnd-draggable="column" dnd-moved="viewer.metrics.splice($index, 1)" dnd-effect-allowed="move" >
-                                    {{column.label}}
-                                </li>
-                                <li class="animate-repeat" ng-if="results.length === 0">
-                                    <strong translate>FILTER_EMPTY</strong>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="boxViewer">
-                    <div class="columnsViewer">
-                        <label translate>VIEWER.DESCRIPTION</label>
-                        <div class="sidebarViewer">
-                            <ul dnd-list="viewer.descriptions">
-                                <li ng-repeat="column in viewer.descriptions" dnd-draggable="column" 
-                                    dnd-moved="viewer.descriptions.splice($index, 1)" 
-                                    dnd-effect-allowed="move" 
-                                    >
-                                    {{column.label}}
-                                </li>
-                                <li class="animate-repeat" ng-if="results.length === 0">
-                                    <strong>No results found...</strong>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="analysis-viewer" class="col-md-12">
+            <viewer ng-model="viewer"></viewer>
         </div>
-    </div> 
-    <div ng-if="viewer.configuration.type == 'xy'"> 
-        <div class="boxViewer">
-            <div class="columnsViewer">
-                <label translate>VIEWER.XFIELD</label>
-                <div class="sidebarViewer">
-                    <ul dnd-list="viewer.xfields">
-                        <li ng-repeat="column in viewer.xfields" dnd-draggable="column" dnd-moved="viewer.xfields.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
-                            {{column.label}}
-                        </li>
-                        <li class="animate-repeat" ng-if="results.length === 0">
-                            <strong translate>FILTER_EMPTY</strong>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="boxViewer">
-            <div class="columnsViewer">
-                <label translate>VIEWER.YFIELD</label>
-                <div class="sidebarViewer">
-                    <ul dnd-list="viewer.yfields">
-                        <li ng-repeat="column in viewer.yfields" dnd-draggable="column" 
-                            dnd-moved="viewer.yfields.splice($index, 1)" 
-                            dnd-effect-allowed="move" 
-                            ng-attr-style="background-image:url({{column.label}})">
-                            {{column.label}}
-                        </li>
-                        <li class="animate-repeat" ng-if="results.length === 0">
-                            <strong>No results found...</strong>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="boxViewer">
-            <div class="columnsViewer">
-                <label translate>VIEWER.VALUEFIELD</label>
-                <div class="sidebarViewer">
-                    <ul dnd-list="viewer.valueFields">
-                        <li ng-repeat="column in viewer.valueFields" dnd-draggable="column" 
-                            dnd-moved="viewer.valueFields.splice($index, 1)" 
-                            dnd-effect-allowed="move" 
-                            ng-attr-style="background-image:url({{column.label}})">
-                            {{column.label}}
-                        </li>
-                        <li class="animate-repeat" ng-if="results.length === 0">
-                            <strong>No results found...</strong>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div> 
-
-    <div ng-if="viewer.configuration.type == 'gauge'"> 
-        <div class="boxViewer">
-            <div class="columnsViewer">
-                <label translate>VIEWER.METRIC</label>
-                <div class="sidebarViewer">
-                    <ul dnd-list="viewer.metrics">
-                        <li ng-repeat="column in viewer.metrics" dnd-draggable="column" dnd-moved="viewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
-                            {{column.label}}
-                        </li>
-                        <li class="animate-repeat" ng-if="results.length === 0">
-                            <strong translate>FILTER_EMPTY</strong>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div>
-            <button class="btn btn-default ng-scope" type="button" ng-click="newInterval()">
-                <span class="icon-plus"></span>
-                <translate>LAYOUT.ADD</translate>
-            </button>
-        </div>    
-        <div ng-repeat="interval in viewer.configuration.axes[0].bands">
-            <label translate>VIEWER.INTERVAL</label>
-            <input type='color' 
-                   ng-model='interval.color'/>
-            De
-            <input type='number' style="width: 60px;"
-                   ng-model='interval.startValue'/>
-            Até
-            <input type='number' style="width: 60px;"
-                   ng-model='interval.endValue'/>
-            <button ng-if="iLastInterval > 2" type="button" class="btn btn-default"
-                    ng-click="$parent.deleteInterval($parent.interval)">
-                <span class="icon-minus"></span>
+    </div>
+    <button type="button" class="btn btn-primary"
+            ng-click="export(viewer.name)"> EXPORTAR
+    </button>
+    <div class="row margin-top-single">
+        <div class="col-md-12 text-right">
+            <a href="#/presenter/viewer" class="btn btn-default" translate>
+                LAYOUT.BACK
+            </a>
+            <button class="btn btn-primary" translate>
+                LAYOUT.SAVE
             </button>
         </div>
     </div>
-</div>
-<div id="analysis-viewer" class="col-md-12">
-    <viewer  ng-model="viewer">
-    </viewer>
-</div>
-<div class="col-md-12">
-    <div class="form-group">
-        <a href="#/presenter/viewer" class="btn btn-default" translate>
-            LAYOUT.CANCEL
-        </a>
-        <button class="btn btn-primary" translate>
-            LAYOUT.SAVE
-        </button>
-    </div>
-</div>
-</div>
 </form>

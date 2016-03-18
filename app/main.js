@@ -98,6 +98,10 @@ require.config({
         'bower_components/amcharts/dist/amcharts/amcharts': {
             exports: 'AmCharts'
         },
+        'bower_components/html2canvas/build': {
+            exports: 'Html2canvas'
+        },
+        
         'bower_components/amcharts/dist/amcharts/themes/black': {
             deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
             exports: 'AmCharts.themes.black'

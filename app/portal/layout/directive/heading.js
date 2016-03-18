@@ -41,15 +41,7 @@ define([
         LoginService.checkAuthentication();
 
         $scope.getUserAvatarUrl = function(){
-          var avatarUrl = $scope.user.avatarUrl;
-          var avatarUrlType = $scope.user.avatarUrlType;
-
-          if(avatarUrlType === 'DATABASE'){
-            $scope.avatarUrl = avatarUrl + '?_=' + new Date().getTime();
-          } else {
-            $scope.avatarUrl = avatarUrl;
-          }
-
+            $scope.avatarUrl = $scope.user.imageUrl;
         };
 
         $scope.logoutUser = function(){

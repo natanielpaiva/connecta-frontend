@@ -1,6 +1,6 @@
 {
   "name": "connecta",
-  "version": "0.0.1",
+  "version": "0.4.3",
   "private": true,
   "homepage": "http://innovation.cds.com.br/hotsite/connecta/",
   "dependencies": {
@@ -31,14 +31,14 @@
     "requirejs-text": "2.0.10",
     "requirejs-domready": "2.0.1",
     "requirejs-json": "0.0.3",
-    "html2canvas": "0.4.1",
+    "html2canvas": "0.5.0-alpha1",
     "bootstrap": "3.1.1",
     "pace": "1.0.2",
     "font-awesome": "4.0.3",
     "animate.css": "~3.2.1",
     "angular-motion": "~0.3.4",
     "angular-ui-tree": "~2.1.5",
-    "prefix-free": "gh-pages",
+    "connecta-prefixfree": "v1.1.0",
     "toastr": "~2.1.1",
     "angular-ui-utils": "~0.2.3",
     "connectaGeoJS": "./assets/lib/connectaGeoJS",
@@ -48,7 +48,8 @@
     "angular-currency-mask": "0.1.0-alpha",
     "angular-amchart": "~1.0.5",
     "angular-facebook": "0.2.3",
-    "ngAutocomplete": "~1.0.0"
+    "ngAutocomplete": "~1.0.0",
+    "angular-base64": "~2.0.4"
   },
   "authors": [],
   "moduleType": [

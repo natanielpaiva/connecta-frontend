@@ -15,6 +15,7 @@
         "CUSTOM_SQL": "SQL Personalizado",
         "TABLE": "Tabela",
         "COLUMN": "Coluna",
+        "COLUMNS": "Colunas",
         "DESCRIPTION_OF_COLUMNS": "Descrição das colunas",
         "SELECT": "Select",
         "SEPARATOR": "Separator",
