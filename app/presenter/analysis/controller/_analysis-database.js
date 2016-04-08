@@ -83,7 +83,7 @@ define([
                 $scope.analysis.analysisColumns = [];
                 for (var cl in response.data[0]) {
                     console.log(cl);
-                   var name = cl.split(".")[1];
+                   var name = cl.split(".")[1] || cl;
                     $scope.analysis.analysisColumns.push({
                         name: name,
                         label: name,

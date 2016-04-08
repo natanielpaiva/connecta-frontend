@@ -5,14 +5,16 @@
     "icon": "assets/img/module-icon/presenter.png",
     "iconMini": "assets/img/module-icon/mini/presenter.png",
     "home": "#/presenter",
-    "viewerPath":"/viewer/:id"
+    "viewerPath":"/viewer/:id",
+    "active":true
   },
   "collector": {
     "title": "Collector",
     "host": "http://connectad.cds.com.br/connecta-collector",
     "icon": "assets/img/module-icon/collector.png",
     "iconMini": "assets/img/module-icon/mini/collector.png",
-    "home": "#/collector"
+    "home": "#/collector",
+    "active":true
   },
   "maps": {
     "title": "Maps",
@@ -20,38 +22,44 @@
     "icon": "assets/img/module-icon/maps.png",
     "iconMini": "assets/img/module-icon/mini/maps.png",
     "home": "#/maps",
-    "viewerPath":"/layerViewers/:id"
+    "viewerPath":"/layerViewers/:id",
+    "active":true
   },
   "speaknow": {
     "title": "Speaknow",
     "host": "http://connectad.cds.com.br/connecta-speaknow",
     "icon": "assets/img/module-icon/speaknow.png",
     "iconMini": "assets/img/module-icon/mini/speaknow.png",
-    "home": "#/speaknow"
+    "home": "#/speaknow",
+    "active":true
   },
   "speaknowBatch": {
     "hide": true,
-    "host": "http://connectad.cds.com.br/speaknow-batch"
+    "host": "http://connectad.cds.com.br/speaknow-batch",
+    "active":true
   },
   "portal": {
     "title": "Connecta",
     "host": "http://connectad.cds.com.br/connecta-portal",
     "icon": "assets/img/module-icon/connecta.png",
     "iconMini": "assets/img/module-icon/mini/connecta.png",
-    "home": "#/"
+    "home": "#/",
+    "active":true
   },
   "datamodel": {
     "title": "Datamodel",
     "host": "http://connectad.cds.com.br/connecta-datamodel",
     "icon": "assets/img/module-icon/datamodel.png",
     "iconMini": "assets/img/module-icon/mini/datamodel.png",
-    "home": "#/datamodel"
+    "home": "#/datamodel",
+    "active":true
   },
   "inspection": {
     "title": "Inspect",
     "host": "http://connectad.cds.com.br/connecta-inspection",
     "icon": "assets/img/module-icon/inspect.png",
     "iconMini": "assets/img/module-icon/mini/inspect.png",
-    "home": "#/inspection"
+    "home": "#/inspection",
+    "active":true
   }
 }

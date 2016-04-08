@@ -1,7 +1,7 @@
 define([
     'connecta.speaknow',
     'speaknow/action/service/action-service',
-    'speaknow/interaction/service/interaction-service',
+    'speaknow/interaction/service/interaction-service'
 ], function (speaknow) {
     return speaknow.lazy.controller('ActionDataAnalysisController', function ($scope, 
         ActionService, $location, $routeParams) {

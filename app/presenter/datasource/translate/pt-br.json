@@ -24,6 +24,7 @@
         "PARAMETER_VALUE": "Valor",
         "DATASOURCE": "Fonte de dados",
         "EDIT": "Editar",
-        "DELETE": "Excluir"
+        "DELETE": "Excluir",
+        "TEST_CONNECTION":"Testar conexão"
     }
 }

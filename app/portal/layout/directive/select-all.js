@@ -6,7 +6,7 @@ define([
             scope: {
                 selectAll: '=',
                 selectAllProperty: '@',
-                ngModel: '=',
+                ngModel: '='
             },
             controller: function ($scope) {
                 $scope.$watch('ngModel', function () {

@@ -6,8 +6,8 @@ define([
     'presenter/analysis/controller/_analysis-webservice',
     'presenter/analysis/controller/_analysis-csv',
     'presenter/analysis/controller/_analysis-obiee',
-    'presenter/analysis/controller/_analysis-hdfs',
-], function (presenter, 
+    'presenter/analysis/controller/_analysis-hdfs'
+], function (presenter,
             DatabaseAnalysisFormController,
             EndecaAnalysisFormController,
             SolrAnalysisFormController,

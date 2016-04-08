@@ -1,7 +1,7 @@
 define([
   'angular',
   'json!applications.json',
-  'bower_components/angular-gridster/src/angular-gridster',
+  'bower_components/angular-gridster/src/angular-gridster'
 ], function(angular, applications) {
   var portal = angular.module('connecta.portal', [
     'pascalprecht.translate',

@@ -36,6 +36,24 @@ define([
                 icon: 'icon-webservice' // Capitão Planeta?
             }
         };
+        
+        var databaseDrivers = {
+            ORACLE_SID:{
+                name:'Oracle Thin (Service ID - SID)',
+                defaultPort:1521,
+                hasSchema:true
+            },
+            POSTGRES:{
+                name:'PostgreSQL',
+                defaultPort:5432,
+                hasSchema:true
+            },
+            MYSQL:{
+                name:'MySQL',
+                defaultPort:3306,
+                hasSchema:false
+            }
+        };
 
         var getTypeUrl = function (datasource) {
             return presenterResources.datasource + '/' + datasource.type.toLowerCase();
@@ -43,6 +61,10 @@ define([
 
         this.getTypes = function () {
             return typeConfig;
+        };
+        
+        this.getDatabaseDrivers = function() {
+            return databaseDrivers;
         };
 
         this.save = function (datasource) {

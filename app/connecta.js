@@ -1,5 +1,5 @@
 /* global Pace */
-define([    
+define([
   'angular',
   'jquery',
   // Configuração dos módulos
@@ -11,7 +11,7 @@ define([
   'connecta.presenter',
   'connecta.maps',
   'connecta.inspection',
-  // Dependências principais  
+  // Dependências principais
   'angular-route',
   'angular-resource',
   'angular-ui-bootstrap',
@@ -340,6 +340,8 @@ define([
     'portal/layout/directive/heading-popover',
     'portal/layout/directive/default-list-heading',
     'portal/layout/directive/compareTo',
+    'portal/layout/directive/validated-field-holder',
+    'portal/layout/directive/validated-field-messages',
     'portal/layout/filter/data-uri',
     'portal/layout/directive/file-model',
     'portal/layout/directive/conf-modal',

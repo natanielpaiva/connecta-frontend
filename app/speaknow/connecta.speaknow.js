@@ -327,7 +327,7 @@ define([
             title: 'PRODUCT.PRODUCT_SERVICE',
             icon: 'icon-box2',
             children: []
-        },
+        }
         // {
         //     title: 'WHATSAPP.WHATSAPP',
         //     icon: 'icon-comments',

@@ -5,7 +5,8 @@
         "MINLENGTH": "The field is too short",
         "MAXLENGTH": "The field is too long",
         "NUMBER": "Field must contain only numbers",
-        "INVALID_DOCUMENT": "Invalid file"
+        "INVALID_DOCUMENT": "Invalid file",
+        "FILL_REQUIRED_FIELDS_ENABLE_SAVE":"Fill the required fields to save"
     },
     "LAYOUT": {
         "HOME": "Home",

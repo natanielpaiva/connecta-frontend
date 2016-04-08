@@ -26,13 +26,7 @@ define([
                     $scope.company = response.data;
                     $scope.getGroups();
                     $scope.company.companyContacts = $scope.company.companyContacts.sort(function(a, b){
-                        if(a > b){
-                            return -1;
-                        } else if(a > b){
-                            return 1;
-                        }
-                        
-                        return 0;
+                        return a - b;
                     });
                     ContactGroupService.setCompany($scope.company);
                 }, function (data) {
@@ -94,6 +88,6 @@ define([
                     size: 'sm',
                     success: $scope.delete
                 };
-                
+
             });
 });

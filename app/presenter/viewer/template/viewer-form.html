@@ -21,9 +21,9 @@
         </div>
     </div>
     <div class="row" ng-if="viewer.configuration.type == 'serial' ||
-                            viewer.configuration.type == 'pie' ||
-                            viewer.configuration.type == 'funnel' ||
-                            viewer.configuration.type == 'radar'">
+                        viewer.configuration.type == 'pie' ||
+                        viewer.configuration.type == 'funnel' ||
+                        viewer.configuration.type == 'radar'">
         <div class="col-md-4">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.METRIC</span>
@@ -50,6 +50,25 @@
                             <li ng-repeat="column in viewer.descriptions" dnd-draggable="column" 
                                 dnd-moved="viewer.descriptions.splice($index, 1)" 
                                 dnd-effect-allowed="move">
+                                {{column.label}}
+                            </li>
+                            <li class="animate-repeat" ng-if="results.length === 0">
+                                {{'LAYOUT.NO_RESULTS'| translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="viewer.configuration.type == 'table'">
+        <div class="col-md-4">
+            <div class="box-viewer">
+                <span class="box-name" translate>VIEWER.COLUMNS</span>
+                <div class="columns-viewer">
+                    <div class="sidebar-viewer">
+                        <ul dnd-list="viewer.metrics">
+                            <li ng-repeat="column in viewer.metrics" dnd-draggable="column" dnd-moved="viewer.metrics.splice($index, 1)" dnd-effect-allowed="move" >
                                 {{column.label}}
                             </li>
                             <li class="animate-repeat" ng-if="results.length === 0">

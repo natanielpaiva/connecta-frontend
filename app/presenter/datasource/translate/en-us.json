@@ -8,7 +8,7 @@
         "DATASOURCE_TYPE": "Datasource Type",
         "ADDRESS": "Address",
         "PATH": "Path",
-        "USERNAME": "User name",
+        "USERNAME": "Username",
         "PASSWORD": "Password",
         "DRIVER_NAME": "Driver",
         "HOST": "Host",
@@ -22,6 +22,7 @@
         "PARAMETERS": "Parameters",
         "PARAMETER": "Parameter",
         "PARAMETER_VALUE": "Value",
-        "DATASOURCE": "Datasource"
+        "DATASOURCE": "Datasource",
+        "TEST_CONNECTION":"Test connection"
     }
 }

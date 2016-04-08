@@ -4,6 +4,29 @@ define([
     'portal/layout/service/autocomplete'
 ], function (presenter) {
     return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http) {
+
+        var exampleTable = {
+            examples: [
+                {
+                    example1: 'example1',
+                    example2: 'example2'
+                },
+                {
+                    example1: 'example1',
+                    example2: 'example2'
+                },
+                {
+                    example1: 'example1',
+                    example2: 'example2'
+                },
+                {
+                    example1: 'example1',
+                    example2: 'example2'
+                }
+            ]
+        };
+
+
         var types = {
             ANALYSIS: {
                 type: 'ANALYSIS',
@@ -373,6 +396,10 @@ define([
             }
         ];
 
+        this.getExampleTable = function () {
+            return exampleTable;
+        };
+
         this.getTypeAmChart = function () {
             return typeAmChart;
         };
@@ -584,6 +611,9 @@ define([
             }
 
             switch (viewerConfiguration.type) {
+                case "table":
+                    viewer.configuration.data = analysisViewerResult.result;
+                    break;
                 case "serial":
                     configureSerialAndRadar(viewer, analysisViewerResult);
                     break;
@@ -673,11 +703,11 @@ define([
             }
             delete viewer.configuration.dataProvider;
         };
-        
-        this.getTypes = function(){
+
+        this.getTypes = function () {
             return types;
         };
-        
+
         this.bulkRemove = function (viewers) {
             return $http.delete(presenterResources.viewer, {
                 data: viewers.map(function (e) {

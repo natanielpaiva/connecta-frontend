@@ -6,14 +6,14 @@
                 <label for="first_name" translate>USER.FIRST_NAME</label>
                 <input type="text" class="form-control" id="first_name" name="first_name"
                        ng-model="user.name" required maxlength="100"/>
-                <div ng-show="user_profile_form.name.$touched" ng-messages="user_profile_form.name.$error"
+                <div ng-show="user.name.$touched" ng-messages="user.name.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
             <div class="form-group">
                 <label for="last_name" translate>USER.LAST_NAME</label>
                 <input type="text" class="form-control" id="last_name" name="last_name"
                        ng-model="user.lastName" required maxlength="100"/>
-                <div ng-show="user_profile_form.last_name.$touched" ng-messages="user_profile_form.last_name.$error"
+                <div ng-show="user.last_name.$touched" ng-messages="user.last_name.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
@@ -21,7 +21,7 @@
                 <label for="email" translate>USER.EMAIL</label>
                 <input type="text" class="form-control" id="email" name="email"
                        ng-model="user.email" required maxlength="100"/>
-                <div ng-show="user_profile_form.email.$touched" ng-messages="user_profile_form.email.$error"
+                <div ng-show="user.email.$touched" ng-messages="user.email.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
 
@@ -59,7 +59,7 @@
                   </div>
                 </div>
             </div>
-            <button class="btn btn-primary" form="user_profile_form" translate ng-disabled="user_profile_form.$invalid">
+            <button class="btn btn-primary" form="user_profile_form" translate ng-disabled="user.$invalid">
                 USER.SAVE_PROFILE
             </button>
         </form>

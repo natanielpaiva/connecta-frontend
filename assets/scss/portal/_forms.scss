@@ -11,6 +11,20 @@
         line-height: 100%;
     }
 }
+
+// Colocando as labels pra preencherem o bloco todo e ficar mais fácil de clicar
+label {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.help-block {
+    margin-bottom:0;
+}
+
 // Deixando um pouco mais flat e retirando o box-shadow
 input, textarea, select{
     border-radius:0 !important;

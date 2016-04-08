@@ -141,7 +141,9 @@ define([
                         GroupService.getSinglesourceList($scope.search.name).then(function (response) {
                             $scope.search.results = response;
                             for (var key in $scope.search.results) {
-                                $scope.search.results[key].binaryFile = GroupService.getBinaryFile($scope.search.results[key]);
+                                if($scope.search.results[key].type === 'FILE'){
+                                    $scope.search.results[key].binaryFile = GroupService.getBinaryFile($scope.search.results[key]);
+                                }
                             }
                         });
                     };

@@ -3,46 +3,48 @@
         <h3 translate>DATASOURCE.REGISTER_ANALYSIS_SOURCE</h3>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
-        <form novalidate name="formulario" ng-submit="submit()">
-            <div class="form-group">
+        <form name="formObject" ng-submit="submit()">
+            <div class="form-group" validated-field-holder="formObject.name">
                 <label class="required" for="name" translate class="required">DATASOURCE.NAME</label>
                 <input required type="text" class="form-control" id="name" name="name"
                        placeholder="{{'DATASOURCE.NAME'|translate}}"
                        ng-model="datasource.name" required/>
+                <validated-field-messages ng-model="formObject.name"></validated-field-messages>
             </div>
-
             <div class="form-group">
-                <label for="description" translate class="required">DATASOURCE.DESCRIPTION</label>
-                <textarea required class="form-control" id="description" name="description"
-                          placeholder="{{'DATASOURCE.DESCRIPTION'|translate}}"
-                          ng-model="datasource.description" ></textarea>
+                <label for="description" translate>DATASOURCE.DESCRIPTION</label>
+                <textarea class="form-control" id="description" name="description" ng-model="datasource.description"
+                    placeholder="{{'DATASOURCE.DESCRIPTION'|translate}}"></textarea>
             </div>
-
             <div class="portal-type-switcher margin-bottom-single">
-                <label ng-repeat="(key, type) in types | orderBy:'order'" class="radio-inline portal-type-switcher-item"
+                <label ng-repeat="(key, type) in form.types | orderBy:'order'" class="radio-inline portal-type-switcher-item"
                        title="{{type.name}}">
-                    <input type="radio" class="portal-type-switcher-input" name="type" 
+                    <input type="radio" class="portal-type-switcher-input" name="type"
                            ng-model="datasource.type"
                            ng-value="key" />
                     <span class="portal-type-switcher-icon {{type.icon}}"></span>
                     <span class="portal-type-switcher-title">{{type.name}}</span>
                 </label>
             </div>
-            
-            <type-switcher ng-model="datasource.type"
-                config="types" object="datasource"></type-switcher>
+
+            <type-switcher ng-model="datasource.type" config="form.types"
+                    object="datasource" aux="form" form-object="formObject"></type-switcher>
 
             <div class="text-right">
-                <a href="#/presenter/datasource"
-                   class="btn btn-default" translate>
+                <small class="text-muted" ng-if="formObject.$invalid" translate>VALIDATION.FILL_REQUIRED_FIELDS_ENABLE_SAVE</small>
+                <a href="#/presenter/datasource" class="btn btn-default" translate>
                     LAYOUT.CANCEL
                 </a>
-                <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
-                    LAYOUT.SAVE
-                </button>
+<!--                <button class="btn btn-default" type="button" translate>
+                    DATASOURCE.TEST_CONNECTION
+                </button>-->
+                <div class="inline-block" title="{{(formObject.$invalid?'VALIDATION.FILL_REQUIRED_FIELDS_ENABLE_SAVE':'') | translate}}">
+                    <button class="btn btn-primary" translate ng-disabled="formObject.$invalid">
+                        LAYOUT.SAVE
+                    </button>
+                </div>
             </div>
         </form>
     </div>

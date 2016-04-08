@@ -4,7 +4,10 @@ define([
 ], function (presenter) {
     return presenter.lazy.controller('DatasourceFormController', function ($scope, DatasourceService, $location, $routeParams) {
 
-        $scope.types = DatasourceService.getTypes();
+        $scope.form = {
+            types: DatasourceService.getTypes(),
+            drivers: DatasourceService.getDatabaseDrivers()
+        };
 
         if ($routeParams.id) {
             DatasourceService.getById($routeParams.id).then(function (response) {
@@ -12,12 +15,20 @@ define([
             });
         } else {
             $scope.datasource = {
-                type: Object.keys($scope.types)[0]
+                type: 'DATABASE',
+                driver: 'ORACLE_SID',
+                hdfsPort: 50070
             };
+            
+            $scope.$watch('datasource.driver', function (selected) {
+                if (selected) {
+                    $scope.datasource.port = $scope.form.drivers[selected].defaultPort;
+                }
+            });
         }
 
         $scope.submit = function () {
-            DatasourceService.save($scope.datasource).then(function () {
+            DatasourceService.save($scope.datasource).then(function(){
                 $location.path('presenter/datasource');
             });
         };

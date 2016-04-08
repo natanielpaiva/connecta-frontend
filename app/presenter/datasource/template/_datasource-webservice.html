@@ -3,19 +3,20 @@
     <input type="text" name="method" id="method" class="form-control"
            ng-model="object.method" />
 </div>-->
-<div class="form-group">
+<div class="form-group" validated-field-holder="formObject.webserviceUrl">
     <label for="address" translate class="required">DATASOURCE.URL</label>
-    <input type="text" name="address" id="address" class="form-control"
+    <input type="text" name="webserviceUrl" id="address" class="form-control"
            ng-model="object.address" required/>
+    <validated-field-messages ng-model="formObject.webserviceUrl"></validated-field-messages>
 </div>
 
 <div class="form-group">
     <label for="method" translate> </label>
-    
+
     <input type="radio" name="typeWebservice" id="method"
            ng-model="object.typeWebservice" value="REST"/> REST
-   <input type="radio" name="typeWebservice" id="method"
-           ng-model="object.typeWebservice" value="SOAP"/> SOAP(WSDL)
+    <input type="radio" name="typeWebservice" id="method"
+           ng-model="object.typeWebservice" value="SOAP"/> SOAP (WSDL)
 </div>
 
 <!--<div key-value class="well well-sm clearfix" ng-model="object.parameters">

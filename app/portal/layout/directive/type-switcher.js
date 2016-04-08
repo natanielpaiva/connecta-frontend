@@ -8,7 +8,9 @@ define([
             scope: {
                 ngModel: '=ngModel',
                 config:'=',
-                object:'='
+                object:'=',
+                aux:'=',
+                formObject:'=?'
             }
         };
     });

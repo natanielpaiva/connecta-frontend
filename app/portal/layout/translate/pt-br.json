@@ -5,7 +5,8 @@
         "MINLENGTH": "Deve ter mais letras",
         "MAXLENGTH": "Deve ter menos letras",
         "NUMBER": "Deve ser um número",
-        "INVALID_DOCUMENT":"Arquivo inválido."
+        "INVALID_DOCUMENT":"Arquivo inválido.",
+        "FILL_REQUIRED_FIELDS_ENABLE_SAVE":"Preencha os campos obrigatórios para salvar"
     },
     "LAYOUT": {
         "HOME": "Página inicial",

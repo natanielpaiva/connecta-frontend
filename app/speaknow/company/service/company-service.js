@@ -62,7 +62,7 @@ define([
             {
                 transformRequest: angular.identity,
                 headers: {
-                    'Content-Type': undefined,
+                    'Content-Type': undefined
                 },
                 'withCredentials': false
             });

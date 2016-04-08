@@ -1,5 +1,5 @@
 define([
-    'connecta.portal',
+    'connecta.portal'
 ], function (portal) {
     return portal.service('GPlusService', function (UserService, LoginService, $location) {
 

@@ -1,6 +1,7 @@
 define([
     'connecta.presenter',
-    'presenter/datasource/service/datasource-service'
+    'presenter/datasource/service/datasource-service',
+    'presenter/datasource/filter/bullet'
 ], function (presenter) {
     return presenter.lazy.controller('DatasourceViewController', function ($scope, DatasourceService, $routeParams, $location) {
 

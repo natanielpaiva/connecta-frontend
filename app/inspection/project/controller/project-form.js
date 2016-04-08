@@ -2,7 +2,7 @@ define([
     'connecta.inspection',
     'inspection/project/service/project-service',
     'inspection/client/service/client-service',
-    'portal/layout/service/notify',
+    'portal/layout/service/notify'
 ], function (inspection) {
     return inspection.lazy.controller('ProjectFormController', function (
             $scope, $routeParams, ProjectService, ClientService, notify, $location, $translate) {

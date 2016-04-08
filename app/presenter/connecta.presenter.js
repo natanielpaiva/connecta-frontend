@@ -11,8 +11,7 @@ define([
     'bower_components/amcharts/dist/amcharts/themes/patterns'
 
 ], function (angular) {
-    var presenter = angular.module('connecta.presenter', [
-    ]);
+    var presenter = angular.module('connecta.presenter', []);
 
     presenter.config(function ($translatePartialLoaderProvider) {
         $translatePartialLoaderProvider.addPart('presenter/datasource');
@@ -24,13 +23,13 @@ define([
         $translatePartialLoaderProvider.addPart('presenter/viewer');
     });
 
-    presenter.value("fileExtensions", {
-        JPG: {fileType: 'IMAGE', mimeTypes: ["image/jpeg", "image/pjpeg"]},
-        PNG: {fileType: 'IMAGE', mimeTypes: ["image/png"]},
-        MP4: {fileType: 'VIDEO', mimeTypes: ["video/mp4"]},
-        XLS: {fileType: 'BINARY', mimeTypes: ["application/excel"]},
-        DOC: {fileType: 'BINARY', mimeTypes: ["application/msword"]},
-        DOCX: {fileType: 'BINARY', mimeTypes: ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"]},
+    presenter.value('fileExtensions', {
+        JPG: {fileType: 'IMAGE', mimeTypes: ['image/jpeg', 'image/pjpeg']},
+        PNG: {fileType: 'IMAGE', mimeTypes: ['image/png']},
+        MP4: {fileType: 'VIDEO', mimeTypes: ['video/mp4']},
+        XLS: {fileType: 'BINARY', mimeTypes: ['application/excel']},
+        DOC: {fileType: 'BINARY', mimeTypes: ['application/msword']},
+        DOCX: {fileType: 'BINARY', mimeTypes: ['application/vnd.openxmlformats-officedocument.wordprocessingml.document']},
         PPT: {fileType: 'BINARY'},
         PPTX: {fileType: 'BINARY'}
     });
@@ -190,31 +189,13 @@ define([
             controllerUrl: 'presenter/viewer/controller/viewer-view',
             templateUrl: 'app/presenter/viewer/template/viewer-view.html'
         }
-
     };
 
     presenter._menu = [
         {
-            title: 'DATASOURCE.DATASOURCE',
+            title: 'DATASOURCE.ANALYSIS_SOURCE',
             icon: 'icon-database2',
-            children: [
-                {
-                    href: 'presenter/datasource',
-                    title: 'DATASOURCE.ANALYSIS_SOURCE'
-                },
-                {
-                    href: 'presenter/group',
-                    title: 'GROUP.GROUPS'
-                },
-//                {
-//                    href: 'presenter/hierarchy',
-//                    title: 'HIERARCHY.HIERARCHY_LIST'
-//                },
-                {
-                    href: 'presenter/singlesource',
-                    title: 'SINGLESOURCE.MEDIA'
-                }
-            ]
+            href: 'presenter/datasource'
         },
         {
             href: 'presenter/analysis',
@@ -227,8 +208,25 @@ define([
             title: 'VIEWER.VIEWERS',
             icon: 'icon-viewer',
             children: []
+        },
+        {
+            title: 'SINGLESOURCE.MEDIA',
+            icon: 'icon-perm-media',
+            children: [
+//                {
+//                    href: 'presenter/group',
+//                    title: 'GROUP.GROUPS'
+//                },
+                {
+                    href: 'presenter/singlesource',
+                    title: 'SINGLESOURCE.MEDIA'
+                }
+            ]
         }
-//        ,
+//        {
+//            href: 'presenter/hierarchy',
+//            title: 'HIERARCHY.HIERARCHY_LIST'
+//        },
 //        {
 //            href: 'presenter/network',
 //            title: 'NETWORK.NETWORKS',

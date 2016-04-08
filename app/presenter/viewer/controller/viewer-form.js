@@ -12,7 +12,7 @@ define([
     'bower_components/amcharts/dist/amcharts/exporting/canvg',
     'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
     'bower_components/html2canvas/dist/html2canvas.min',
-    'bower_components/html2canvas/dist/html2canvas' 
+    'bower_components/html2canvas/dist/html2canvas'
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, LayoutService, $modal, util) {
         $scope.state = {loaded: false};
@@ -22,6 +22,7 @@ define([
 
         $scope.metrics = [];
         $scope.descriptions = [];
+        $scope.columns = [];
 
 
         var sidebarSinglesource = function () {
@@ -49,7 +50,9 @@ define([
                         ViewerService.getSinglesourceList($scope.search.name).then(function (response) {
                             $scope.search.results = response;
                             for (var key in $scope.search.results) {
-                                $scope.search.results[key].binaryFile = ViewerService.getBinaryFile($scope.search.results[key]);
+                                if($scope.search.results[key].type === 'FILE'){
+                                    $scope.search.results[key].binaryFile = ViewerService.getBinaryFile($scope.search.results[key]);
+                                }
                             }
                         });
                     };
@@ -260,7 +263,8 @@ define([
             "descriptions": [],
             "xfields": [],
             "yfields": [],
-            "valueFields": []
+            "valueFields": [],
+            "columns": []
         };
 
         if ($routeParams.id) {
@@ -286,7 +290,9 @@ define([
 
                         ViewerService.getSinglesource(data.singleSource.id).then(function (response) {
                             var data = response.data;
-                            data.binaryFile = ViewerService.getBinaryFile(data);
+                            if(data.type === 'FILE'){
+                                data.binaryFile = ViewerService.getBinaryFile(data);
+                            }
                             $scope.viewer.singlesource.list.push(data);
                         });
 
@@ -303,6 +309,7 @@ define([
                             XFIELD: $scope.viewer.xfields,
                             YFIELD: $scope.viewer.yfields,
                             VALUEFIELD: $scope.viewer.valueFields,
+                            COLUMNS: $scope.viewer.columns
                         };
 
                         for (var k in analysisColumns) {
@@ -360,6 +367,9 @@ define([
                 getPreview();
             });
             $scope.$watchCollection('viewer.valueFields', function (newValue, oldValue) {
+                getPreview();
+            });
+             $scope.$watchCollection('viewer.columns', function (newValue, oldValue) {
                 getPreview();
             });
         };
