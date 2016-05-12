@@ -23,6 +23,11 @@
         </tr>
     </thead>
     <tbody>
+        <tr ng-if="!singlesources.length" class="row">
+            <td class="col-xs-12 text-center" colspan="3" translate>
+                LAYOUT.NO_RESULTS
+            </td>
+        </tr>
         <tr ng-repeat="ss in singlesources" class="row" ng-class="{'selected':ss.selected}">
             <td class="col-md-1 col-xs-1 text-center">
                 <label class="reset-spacing full-size-block cursor-pointer">

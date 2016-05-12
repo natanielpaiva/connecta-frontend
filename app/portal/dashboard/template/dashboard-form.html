@@ -5,14 +5,14 @@
 }
 </style>
 
-<form ng-submit="save()" class="dashboard-form">
+<form ng-submit="save()" novalidate name="formObject" class="dashboard-form">
   <div class="row">
     <div class="col-xs-8">
       <div class="form-group">
         <label for="dashboard-name" class="sr-only" translate>DASHBOARD.DASHBOARD_NAME</label>
         <input type="text" ng-model="dashboard.name"
           placeholder="{{'DASHBOARD.DASHBOARD_NAME'|translate}}"
-          class="form-control" id="dashboard-name" />
+          class="form-control" id="dashboard-name" required />
       </div>
     </div>
     <div class="col-xs-4 text-right">
@@ -20,7 +20,7 @@
         <span class="icon-cog"></span>
         <translate class="hidden-xs">LAYOUT.SETTINGS</translate>
       </button>
-      <button class="btn btn-primary" type="submit">
+      <button class="btn btn-primary" type="submit" ng-disabled="formObject.$invalid">
           <span class="icon-save hidden-lg hidden-md hidden-sm"></span>
           <translate class="hidden-xs">LAYOUT.SAVE</translate>
       </button>
@@ -41,7 +41,8 @@
       </tab-heading>
       <div gridster="section" dnd-list="section.items" class="image-on-background">
         <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
-            <viewer src="item.viewerUrl" type="item.type" class="image-on-background" ng-style="{
+            <viewer edit="true" src="item.viewerUrl" type="item.type"
+                class="image-on-background" ng-style="{
                 'background-color':toRGBA(item.backgroundColor,item.opacity),
                 'background-image':getImage(item.backgroundImage)
             }"></viewer>

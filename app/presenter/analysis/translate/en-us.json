@@ -1,5 +1,6 @@
 {
     "ANALYSIS": {
+        "NEW_ANALYSIS":"New analysis",
         "ANALYSIS": "Analysis",
         "REGISTER_ANALYSIS": "Register Analysis",
         "SOURCE_ANALYSIS": "Analysis Source",
@@ -12,7 +13,6 @@
         "ADD_ATTRIBUTES": "Add Attributes",
         "SOURCE_OF_DATA": "Source of Data",
         "DATA_INSERTION": "Data insertion",
-        "CUSTOM_SQL": "Custom SQL",
         "TABLE": "Table",
         "COLUMN": "Column",
         "COLUMNS": "Columns",
@@ -40,6 +40,10 @@
         "PREVIEW": "Preview",
         "FACET": "Facet",
         "RESPONSE_XML": "Response XML",
-        "RESULTS_OF_THE_ANALYSIS": "Results of the analysis"
+        "RESULTS_OF_THE_ANALYSIS": "Results of the analysis",
+        "DATABASE": {
+            "REQUEST_TABLE": "Table",
+            "REQUEST_SQL": "Custom query"
+        }
     }
 }

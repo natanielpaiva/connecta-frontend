@@ -1,0 +1,100 @@
+// Home do Connecta
+.home {
+    /*margin:2em 3em;*/
+    margin:1em 0 1em 2em;
+
+    h2 {
+        font-weight:500;
+        span {
+            font-weight:600;
+        }
+        margin-left:-2px;
+    }
+    p {
+        font-weight:500;
+        font-size:1.2em;
+    }
+
+    & > .row {
+        & > div {
+            margin-bottom:2em;
+            .module-box {
+                background-color: #EDEDED;
+                border:solid $white 1px;
+                box-shadow:0 4px 4px lighten($lighterGray, 15%);
+                width:100%;
+                height:14em;
+                @include clearfix;
+                box-sizing:border-box;
+
+                .module-icon {
+                    display: block;
+                    float:left;
+                    line-height:14em;
+                    width:50%;
+                    text-align:center;
+                }
+                .module-options {
+                    padding:1em;
+                    display: block;
+                    float:left;
+                    height:14em;
+                    width:50%;
+                    text-align:center;
+                    
+                    .btn {
+                        color:$white;
+                        border:none;
+                        border-radius:0;
+                        box-shadow:0 4px 4px $lighterGray;
+                        width:100%;
+                        font-weight:600;
+                        display:block;
+                        margin-bottom:1.5em;
+                        padding:0;
+                        line-height:2.5em;
+                        background-color:lighten(#4ADFC0, 5%);
+                    }
+                }
+
+                &.disabled {
+                    background-color: #929292;
+                    border:solid $darkerWhite 1px;
+                    border-bottom-color:darken($darkerWhite, 20%);
+
+                    .module-icon {
+                        img {
+                            -webkit-filter: grayscale(1);
+                            -webkit-filter: grayscale(100%);
+                            filter: gray;
+                            filter: grayscale(100%);
+                            // TODO se der pala em algum navegador, implementar essa linha do filtro em SVG
+                            /*filter: url(desaturate.svg#greyscale);*/
+                        }
+                    }
+                    .module-description {
+                        padding:1em 1em 0 0;
+                        height:8em;
+                        color:$white;
+                        font-weight:550;
+                        font-size:1.1em;
+                        overflow:hidden;
+                        line-height:1.4em;
+                    }
+                    .module-options {
+                        line-height:4em;
+                        height:5em;
+                        
+                        .btn {
+                            width:100%;
+                            /*background-color:$lightBlue;*/
+                            background-color:$bs-brand-success;
+                            display:inline-block;
+                            margin:0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

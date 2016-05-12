@@ -1,44 +1,41 @@
-<div class="row">
-    <div class="col-md-12">
-        <button class="btn btn-default" ng-click="setLang('pt-br')">Português</button>
-        <button class="btn btn-default" ng-click="setLang('en-us')">English</button>
+<div class="home">
+    <h2>{{'LAYOUT.WELCOME'|translate}}{{user.name?', ':''}}<span ng-if="user.name">{{user.name}}</span>!</h2>
+    
+    <p translate>LAYOUT.WELCOME_LONGTEXT</p>
+    
+    <div class="row">
+        <div class="col-md-6" ng-repeat="application in applications | filter:shownModules | orderBy:'title'">
+            <div class="module-box">
+                <figure class="module-icon">
+                    <a href="{{application.home}}">
+                        <img ng-src="{{application.icon}}" alt="{{application.title}}"
+                             title="{{'META.'+(application.id|uppercase)+'.DESCRIPTION'|translate}}" />
+                    </a>
+                </figure>
+                <div class="module-options">
+                    <a style="background-color:{{application.color}};"
+                        ng-href="{{link}}" class="btn btn-default"
+                        ng-repeat="(link, text) in options[application.id]">
+                        {{text|translate}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-repeat="application in applications | filter:unactiveModules | orderBy:'title'">
+            <div class="module-box disabled">
+                <figure class="module-icon">
+                    <img ng-src="{{application.icon}}" alt="{{application.title}}"
+                         title="{{'META.'+(application.id|uppercase)+'.DESCRIPTION'|translate}}" /> 
+                </figure>
+                <div class="module-description" title="{{'META.'+(application.id|uppercase)+'.DESCRIPTION'|translate}}">
+                    {{'META.'+(application.id|uppercase)+'.DESCRIPTION'|translate}}
+                </div>
+                <div class="module-options">
+                    <a target="_blank" ng-href="{{application.site}}" class="btn btn-primary" translate>
+                        LAYOUT.MODULE_GET_IT_NOW
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<!-- <div class="row">
-    <div class="col-md-12">
-        <form novalidate name="formulario">
-            <div class="form-group">
-                <label for="model-nome" translate>LABEL.NAME</label>
-                <input type="text" name="nome" ng-model="model.nome"
-                       id="model-nome" required class="form-control" />
-                <div ng-if="formulario.$dirty" ng-messages="formulario.nome.$error"
-                     ng-messages-include="portal-validation-messages"></div>
-            </div>
-
-            <div class="form-group" ng-class="{
-                        'has-error': formulario.firstName.$invalid && formulario.$dirty }">
-                <label for="model-firstName" translate>LABEL.FIRSTNAME</label>
-                <input type="text" name="firstName" ng-model="model.firstName"
-                       id="model-firstName" required minlength="3" class="form-control" />
-                <div ng-messages="formulario.firstName.$error"
-                     ng-messages-include="portal-validation-messages"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="model-lastName" translate>LABEL.LASTNAME</label>
-                <input type="text" name="lastName" ng-model="model.lastName" maxlength="10"
-                       id="model-lastName" required class="form-control" />
-                <div ng-messages="formulario.lastName.$error"
-                     ng-messages-include="portal-validation-messages"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="model-email" translate>LABEL.EMAIL</label>
-                <input type="email" name="email" ng-model="model.email"
-                       id="model-email" required class="form-control" />
-                <div ng-messages="formulario.email.$error" ng-messages-include="portal-validation-messages"></div>
-            </div>
-        </form>
-    </div>
-</div> -->

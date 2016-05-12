@@ -50,15 +50,15 @@ input, textarea, select{
     font-size:1.5em;
 
     color:rgba($gray, 0.4);
-    background-color: rgba($lighterGray, 0.2);
-    border:dashed 0.2em rgba($lightGray, 0.8);
+    background-color: rgba($darkWhite, 0.2);
+    border:dashed 0.2em rgba($darkerWhite, 0.8);
 
     border-radius: 0.3em;
     // TODO Colocar um estilo de error quando entrar no .reject
     &.accept, &.reject {
         color:rgba($gray, 0.7);
-        background-color: rgba($lighterGray, 0.5);
-        border:dashed 0.2em $lightGray;
+        background-color: rgba($darkWhite, 0.5);
+        border:dashed 0.2em $darkerWhite;
     }
 }
 

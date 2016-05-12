@@ -6,38 +6,81 @@
         "MAXLENGTH": "The field is too long",
         "NUMBER": "Field must contain only numbers",
         "INVALID_DOCUMENT": "Invalid file",
-        "FILL_REQUIRED_FIELDS_ENABLE_SAVE":"Fill the required fields to save"
+        "FILL_REQUIRED_FIELDS_ENABLE_SAVE": "Fill the required fields to save"
     },
     "LAYOUT": {
         "HOME": "Home",
+        "WELCOME": "Welcome to Connecta",
+        "WELCOME_LONGTEXT": "Where should we start today?",
+        "MODULE_GET_IT_NOW": "Get it now!",
         "ADD": "Add",
         "NEW_M": "New",
         "NEW_F": "New",
         "EDIT": "Edit",
         "DELETE": "Delete",
+        "REMOVE": "Remove",
         "SAVE": "Save",
         "BACK": "Back",
         "CLOSE": "Close",
         "NEXT": "Next",
         "CANCEL": "Cancel",
         "APPLY": "Apply",
-        "FILTER": "Filter",
+        "SELECT_FILTER": "Select filter type",
         "SELECT": "Choose an option",
         "SEARCH": "Search",
         "DONE": "Done",
         "DASHBOARD": "Dashboard",
-        "FILTER": "Filter",
+        "FILTER": {
+            "FILTER": "Filter",
+            "VALUE": "Value",
+            "START": "Start",
+            "END": "End",
+            "TYPE": {
+                "TYPE": "Filter type",
+                
+                "EQUAL": "Equal",
+                "NOT_EQUAL": "Not equal",
+                "LESS_THAN": "Less than",
+                "LESS_THAN_EQUAL": "Less than or equal",
+                "GREATER_THAN": "Greater than",
+                "GREATER_THAN_EQUAL": "Greater than or equal",
+                "BETWEEN": "Interval",
+                "IN": "List of values",
+                "CONTAINS": "Contains",
+                "STARTS_WITH": "Starts with",
+                "ENDS_WITH": "Ends with"
+            }
+        },
         "SHOW_GRID": "Show grid",
         "SHOW_LIST": "Show list",
         "SETTINGS": "Settings",
-        "NOTIFICATIONS": "Notifications",
         "LOGIN_FACEBOOK": "Login with Facebook",
         "LOGIN_GOOGLE": "Login with Google +",
         "OR": "or",
         "ADD_ACC": "Create Account",
-        "NO_RESULTS": "No results found"
+        "NO_RESULTS": "No results found",
+        "MORE_APPS": "Get more apps",
+        "MORE": "And {{size}} more records..."
+    },
+    "NOTIFICATION": {
+        "NOTIFICATIONS": "Notifications",
+        "NO_NOTIFICATION": "No notification"
     },
     "KEY_VALUE": {
         "NO_ITEM": "Nothing yet. Click '{{LAYOUT.ADD}}' to add a new item."
+    },
+    "META": {
+        "PRESENTER": {
+            "DESCRIPTION": "Simple and integrated vision of your organization data. Visualize your strategic information through charts, quickly crossing data between different data sources."
+        },
+        "MAPS": {
+            "DESCRIPTION": "Have a broader view of localized strategic information. Discover how your business goes in each location and prepare to grow your business worldwide."
+        },
+        "SPEAKNOW": {
+            "DESCRIPTION": "The enterprise social network that will shorten the distance between you and your client. Get direct feedback through polls and forms at your own need."
+        },
+        "COLLECTOR": {
+            "DESCRIPTION": "Intelligent search to social media has its name. Discover what is said about your company or topics of interest in major social networks and the Web."
+        }
     }
 }

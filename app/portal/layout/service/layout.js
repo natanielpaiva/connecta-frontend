@@ -1,3 +1,4 @@
+/* global angular */
 define([
     'connecta.portal'
 ], function (portal) {
@@ -8,9 +9,11 @@ define([
      *
      * @param {type} $rootScope
      * @param {type} $cookieStore
+     * @param {type} $menu
+     * @param {type} applications
      * @returns {undefined}
      */
-    return portal.service('LayoutService', function ($rootScope, $cookieStore) {
+    return portal.service('LayoutService', function ($rootScope, $cookieStore, $menu, applications) {
         var MENU = 'connecta.portal.layout.menu';
 
         /**
@@ -44,6 +47,30 @@ define([
         this.setFullscreen = function (fullscreen) {
             $rootScope.$broadcast('page.fullscreen', fullscreen);
             return this;
+        };
+
+        this.moduleChanged = function (originModule, $originRoute, destModule, $destRoute) {
+            $menu.update();
+            
+            var configObject = null;
+            if (angular.module(destModule) &&
+                angular.module(destModule)._configKey &&
+                applications[angular.module(destModule)._configKey]) {
+            
+                configObject = applications[angular.module(destModule)._configKey];
+            }
+            
+            $rootScope.$broadcast('layout.modulechange', {
+                angularModule:destModule,
+                route:$destRoute,
+                config: configObject
+            });
+            
+            $rootScope.$broadcast(destModule + '.enter', $destRoute);
+
+            if (originModule) {
+                $rootScope.$broadcast(originModule + '.leave', $originRoute);
+            }
         };
     });
 });

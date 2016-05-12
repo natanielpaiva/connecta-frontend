@@ -1,5 +1,6 @@
 {
     "USER": {
+        "USER": "User",
         "FIRST_NAME": "First Name",
         "LAST_NAME": "Last Name",
         "EMAIL": "Email",
@@ -17,6 +18,7 @@
         "CHANGE_PASS": "Change Password",
         "CHANGE_PASSWORD_SUCCESS": "Password Updated",
         "CONFIRM": "Confirm Password",
+        "LANGUAGE": "Language",
         "ADD": "Add User",
         "SAVE_PROFILE": "Save Profile",
         "GRAVATAR_TEXT": "You can change your avatar here or remove the current avatar to revert to <a href='http://gravatar.com'>gravatar.com</a>",
@@ -30,6 +32,7 @@
         },
         "ERROR": {
             "USERNAME_EXISTS": "Email exists"
-        }
+        },
+        "DOMAINS" : "Domains"
     }
 }

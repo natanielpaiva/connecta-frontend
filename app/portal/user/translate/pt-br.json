@@ -1,5 +1,6 @@
 {
     "USER": {
+        "USER": "Usuário",
         "FIRST_NAME": "Nome",
         "LAST_NAME": "Sobrenome",
         "EMAIL": "Email",
@@ -17,6 +18,7 @@
         "CHANGE_PASS": "Trocar Senha",
         "CHANGE_PASSWORD_SUCCESS": "Senha Atualizada",
         "CONFIRM": "Confirmar Senha",
+        "LANGUAGE": "Idioma",
         "ADD": "Criar Usuário",
         "SAVE_PROFILE": "Salvar Dados",
         "GRAVATAR_TEXT": "Você pode mudar seu avatar abaixo ou remover seu avatar para utilizar o <a href='http://gravatar.com'>gravatar.com</a>",
@@ -30,6 +32,7 @@
         },
         "ERROR": {
             "USERNAME_EXISTS": "E-mail ja cadastrado"
-        }
+        },
+        "DOMAINS" : "Domínios"
     }
 }

@@ -1,5 +1,6 @@
 {
     "DATASOURCE": {
+        "NEW_DATASOURCE":"Nova fonte de dados",
         "REGISTER_ANALYSIS_SOURCE": "Cadastro de fontes de análise",
         "VIEW_ANALYSIS_SOURCE": "Visualizar fonte de análise",
         "ANALYSIS_SOURCE": "Fontes de análise",

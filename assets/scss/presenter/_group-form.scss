@@ -39,10 +39,10 @@
  */
 .gallery ul[dnd-list] .dndPlaceholder {
     display: block;
-    background-color: $lighterGray;
+    background-color: $darkWhite;
     min-width: 50px;
     min-height: 50px;
-    border:dashed 0.2em $lightGray;
+    border:dashed 0.2em $darkerWhite;
 }
 
 

@@ -1,21 +1,20 @@
+
 <div class="form-sidebar">
     <div class="row margin-top-single" ng-if="viewer.type == 'ANALYSIS'">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="analysis" translate>ANALYSIS.ANALYSIS</label>
-                <input type="text" class="form-control" ng-model="analysisData"
-                       id="analysis"
-                       typeahead="analysis as analysis.name for analysis in getAnalysis($viewValue)"
-                       typeahead-loading="loadingAnalysis"
-                       typeahead-min-length="3"
-                       typeahead-wait-ms="600"
-                       typeahead-focus-first="true"
-                       typeahead-on-select="setAnalysisData($item)" />
-                <span ng-show="loadingAnalysis" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+
+                <ui-select ng-model="viewer.analysis">
+                    <ui-select-match placeholder="{{'VIEWER.SELECT'|translate}}">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="a in analysisList | filter: $select.search track by a.name">
+                        <div ng-bind-html="a.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
             </div>
         </div>
     </div>
-    <div ng-if="analysisData" class="row">
+    
+    <div ng-if="viewer.analysis" class="row">
         <div class="col-md-12">
             <div class="form-sidebar-filter">
                 <label for="columns" translate>ANALYSIS.COLUMNS</label>
@@ -23,11 +22,9 @@
                        placeholder="{{'VIEWER.FILTER_COLUMNS'|translate}}" />
             </div>
             <div class="sidebar-analysis-columns"> 
-                <ul dnd-list="analysisData.analysisColumns" >
-                    <li ng-repeat="column in analysisData.analysisColumns| filter:q as results"
-                        dnd-draggable="column"
-                        dnd-effect-allowed="move"
-                        dnd-moved="analysisData.analysisColumns.splice($index, 1)">
+                <ul dnd-list="viewer.analysis.analysisColumns" dnd-effect-allowed="copy">
+                    <li ng-repeat="column in viewer.analysis.analysisColumns| filter:q as results"
+                        dnd-draggable="column">
                         {{column.label}}
                     </li>
                     <li ng-if="results.length == 0">
@@ -38,10 +35,10 @@
         </div>
     </div>
 
-    <div ng-if="analysisDataView" class="row margin-top-single">
+    <div ng-if="viewer.analysis" class="row margin-top-single">
         <div class="col-md-12">
             <button class="btn btn-primary btn-block" translate
-                    ng-click="getListAnalysis()">
+                    ng-click="getAnalysisResult()">
                 VIEWER.VIEW_ANALYSIS
             </button>
         </div>

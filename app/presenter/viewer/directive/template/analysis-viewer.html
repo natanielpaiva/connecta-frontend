@@ -1,29 +1,16 @@
 <amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration"></amchart>
-<div ng-if="columnExample === '' && model.configuration.type === 'table'">
-    <table  class="table table-striped table-hover">
+
+<div  ng-if="model.configuration.type === 'table'">
+    <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
         <thead>
-            <tr class="row">
-                <th class="text-center" translate>VIEWER.EXAMPLE</th>
-                <th class="text-center" translate>VIEWER.EXAMPLE</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="row" ng-repeat=" example in exampleTable.examples">
-                <td class="text-center" translate>
-                    {{example.example1}}
-                </td>
-                <td class="text-center" translate>
-                    {{example.example2}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div ng-if="columnExample !== '' && model.configuration.type === 'table'">
-    <table  class="table table-striped table-hover">
-        <thead>
-            <tr class="row">
-                <th ng-repeat="n in columnsTable" class="text-center" translate>{{n.value}}</th>
+            <tr dnd-list="model.metrics" class="row">
+                <th class="text-center" ng-if="columnExample === '' && model.configuration.type === 'table'" translate>VIEWER.DRAG_HERE</th>
+                <th dnd-draggable="n" dnd-moved="model.metrics.splice($index, 1)"
+                    ng-repeat="n in model.metrics" class="text-center">
+
+                    {{n.label | translate}}
+                    <i class="icon-close" ng-click="model.metrics.splice($index, 1)"></i>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -34,4 +21,60 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="viewer-filter" ng-class="{'viewer-filter-active':filterConfigOpen}" ng-if="!edit">
+    <span class="icon-funnel" ng-click="filterConfigOpen = !filterConfigOpen"></span>
+
+    <div class="viewer-filter-config">
+        <div class="viewer-filter-config-header">
+            <span class="viewer-filter-config-title" translate>LAYOUT.SELECT_FILTER</span>
+            <span class="icon-check" ng-click="getAnalysisResult()"></span>
+        </div>
+        <div class="viewer-filter-config-content" >
+            <div ng-repeat="filter in model.analysisViewerColumns|filter:{columnType:'FILTER'}" ng-class="{active:filter.active}">
+                <div class="viewer-filter-config-label" ng-click="filter.active=!filter.active"
+                     title="{{filter.analysisColumn.label}}">
+                    <span ng-class="{
+                        'icon-check-box':filter.active,
+                        'icon-check-box-outline-blank':!filter.active
+                    }"></span>
+                    {{filter.analysisColumn.label}}
+                </div>
+                <div class="viewer-filter-config-type" title="{{'LAYOUT.FILTER.TYPE'|translate}}"
+                     ng-init="!filter.type?(filter.type = 'EQUAL'):null">
+                    <select class="form-control input-sm" ng-model="filter.type"
+                            ng-options="operator.id as (operator.name | translate) for operator in (m2a(filterOperators)| orderBy:'order')">
+                    </select>
+                </div>
+                <div class="viewer-filter-config-value" ng-switch="filterOperators[filter.type].type">
+                    <input type="text" class="form-control input-sm"
+                           ng-switch-when="STRING"
+                           placeholder="{{'LAYOUT.FILTER.VALUE'|translate}}"
+                           ng-model="filter.value.value" />
+                    <input type="text" class="form-control input-sm"
+                           ng-switch-when="NUMBER"
+                           placeholder="{{'LAYOUT.FILTER.VALUE'|translate}}"
+                           ng-model="filter.value.value" />
+                    <div ng-switch-when="INTERVAL" class="viewer-filter-config-value-between">
+                        <input type="text" class="form-control input-sm"
+                               placeholder="{{'LAYOUT.FILTER.START'|translate}}"
+                               ng-model="filter.value.between.start" />
+                        <input type="text" class="form-control input-sm"
+                               placeholder="{{'LAYOUT.FILTER.END'|translate}}"
+                               ng-model="filter.value.between.end" />
+                    </div>
+                    <div ng-switch-when="ARRAY">
+                        <select class="form-control input-sm" ng-model="filter.value.in">
+
+                        </select>
+                    </div>
+                </div>
+
+                <!--                {{filter.columnDataType|json}}
+                                {{filter.analysisColumn.name|json}}
+                                {{filter|json}}-->
+            </div>
+        </div>
+    </div>
 </div>

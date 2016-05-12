@@ -1,10 +1,11 @@
+/* global angular */
 define([
     'connecta.portal'
 ], function (portal) {
     /**
      * Serviço de utilitários
      */
-    return portal.lazy.service('util', function(){
+    return portal.service('util', function(){
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
@@ -36,6 +37,18 @@ define([
         this.rgbToHex = function(red, green, blue){
             var decColor = red + 256 * green + 65536 * blue;
             return decColor.toString(16);
+        };
+        
+        this.mapToArray = function(map, keyPropertyName) {
+            if (!keyPropertyName) {
+                keyPropertyName = 'id';
+            }
+            var array = [];
+            angular.forEach(map, function (value, key) {
+                value[keyPropertyName] = key;
+                array.push(value);
+            });
+            return array;
         };
     });
 });

@@ -10,34 +10,77 @@
     },
     "LAYOUT": {
         "HOME": "Página inicial",
+        "WELCOME": "Bem vindo ao Connecta",
+        "WELCOME_LONGTEXT":"Por onde começamos hoje?",
+        "MODULE_GET_IT_NOW":"Adquira agora!",
         "ADD": "Adicionar",
         "NEW_M": "Novo",
         "NEW_F": "Nova",
         "EDIT": "Editar",
         "DELETE": "Excluir",
+        "REMOVE": "Remover",
         "SAVE": "Salvar",
         "BACK": "Voltar",
         "CLOSE": "Fechar",
         "NEXT": "Avançar",
         "CANCEL": "Cancelar",
         "APPLY": "Aplicar",
-        "FILTER": "Filtro",
+        "SELECT_FILTER": "Selecione o tipo de Filtro",
         "SELECT": "Selecione",
         "SEARCH": "Buscar",
         "DONE": "Pronto",
         "DASHBOARD": "Painel",
-        "FILTER": "Filtro",
+        "FILTER": {
+            "FILTER": "Filtro",
+            "VALUE": "Valor",
+            "START": "Início",
+            "END": "Fim",
+            "TYPE": {
+                "TYPE": "Tipo de filtro",
+                
+                "EQUAL": "Igual a",
+                "NOT_EQUAL": "Diferente de",
+                "LESS_THAN": "Menor que",
+                "LESS_THAN_EQUAL": "Menor ou igual a",
+                "GREATER_THAN": "Maior que",
+                "GREATER_THAN_EQUAL": "Maior ou igual a",
+                "BETWEEN": "Intervalo",
+                "IN": "Lista de valores",
+                "CONTAINS": "Contém",
+                "STARTS_WITH": "Começa com",
+                "ENDS_WITH": "Termina com"
+            }
+        },
         "SHOW_GRID": "Mostrar miniaturas",
         "SHOW_LIST": "Mostrar como lista",
         "SETTINGS": "Configurações",
-        "NOTIFICATIONS": "Notificações",
         "LOGIN_FACEBOOK": "Entrar com Facebook",
         "LOGIN_GOOGLE": "Entrar com Google +",
         "OR":"ou",
         "ADD_ACC":"Criar conta",
-        "NO_RESULTS": "Nenhum resultado encontrado"
+        "NO_RESULTS": "Nenhum resultado encontrado",
+        "MORE_APPS":"Obter mais aplicativos",
+        "MORE":"E mais {{size}} registros..."
+    },
+    "NOTIFICATION":{
+        "NOTIFICATIONS": "Notificações",
+        "NO_NOTIFICATION": "Nenhuma notificação"
     },
     "KEY_VALUE": {
         "NO_ITEM": "Nada ainda. Clique no botão 'Adicionar' para adicionar um item."
+    },
+    "META":{
+        "PRESENTER":{
+            "DESCRIPTION":"As informações da sua empresa de forma simples e integrada. Visualize suas estratégias através de gráficos, rapidamente cruzando fontes diferentes."
+        },
+        "MAPS":{
+            "DESCRIPTION":"Tenha uma visão mais ampla das suas informações geográficas. Descubra como o seu negócio anda em cada lugar do mundo, e prepare-se para crescer."
+        },
+        "SPEAKNOW":{
+            "DESCRIPTION":"A rede social empresarial que vai estreitar seu relacionamento com o cliente. Obtenha feedbacks através de enquetes e formulários do seu jeito."
+        },
+        "COLLECTOR":{
+            "DESCRIPTION":"A busca inteligente às mídias sociais tem um novo nome. Descubra o que foi dito sobre a sua empresa ou tópicos de interesse nas maiores redes sociais e na Web."
+        }
     }
 }

@@ -1,5 +1,6 @@
 {
     "ANALYSIS": {
+        "NEW_ANALYSIS":"Nova análise",
         "ANALYSIS": "Análises",
         "REGISTER_ANALYSIS": "Cadastrar Análises",
         "SOURCE_ANALYSIS": "Fonte de análises",
@@ -12,7 +13,6 @@
         "ADD_ATTRIBUTES": "Adicionar atributos",
         "SOURCE_OF_DATA": "Origem dos Dados",
         "DATA_INSERTION": "Data da Inserção",
-        "CUSTOM_SQL": "SQL Personalizado",
         "TABLE": "Tabela",
         "COLUMN": "Coluna",
         "COLUMNS": "Colunas",
@@ -41,6 +41,10 @@
         "PREVIEW": "Pré-visualização",
         "FACET": "Facet",
         "RESPONSE_XML": "Resposta XML",
-        "RESULTS_OF_THE_ANALYSIS": "Resultado da Análise"
+        "RESULTS_OF_THE_ANALYSIS": "Resultado da Análise",
+        "DATABASE": {
+            "REQUEST_TABLE": "Tabela",
+            "REQUEST_SQL": "Query personalizada"
+        }
     }
 }

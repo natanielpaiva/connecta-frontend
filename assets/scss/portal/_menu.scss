@@ -27,9 +27,14 @@ menu {
                     &:focus {
                     background: transparent;
                 }
-                &:hover,
-                    &.active {
-                    background-color: $connectaRed;
+                &.active {
+                    background-color: $red;
+                    &:hover {
+                        background-color: $red;
+                    }
+                }
+                &:hover {
+                    background-color:$gray;
                 }
                 .menu-item-icon {
                     float: left;
@@ -76,9 +81,14 @@ menu {
                     .menu-item {
                         padding-left: 4em;
                         background-color: $darkerGray;
-                        &:hover,
-                            &.active {
+                        &:hover {
                             background-color: $gray;
+                        }
+                        &.active {
+                            background-color: $lighterGray;
+                            &:hover {
+                                background-color: $lighterGray;
+                            }
                         }
                     }
                 }

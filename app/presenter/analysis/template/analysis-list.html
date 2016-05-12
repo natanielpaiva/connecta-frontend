@@ -23,6 +23,11 @@
         </tr>
     </thead>
     <tbody>
+        <tr ng-if="!analysisList.length" class="row">
+            <td class="col-xs-12 text-center" colspan="3" translate>
+                LAYOUT.NO_RESULTS
+            </td>
+        </tr>
         <tr ng-repeat="a in analysisList" class="row am-slide-right"
             ng-class="{'selected':a.selected}">
             <td class="col-md-1">

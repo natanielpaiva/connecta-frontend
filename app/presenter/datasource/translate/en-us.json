@@ -1,5 +1,6 @@
 {
     "DATASOURCE": {
+        "NEW_DATASOURCE":"New datasource",
         "REGISTER_ANALYSIS_SOURCE": "Register analysis source",
         "VIEW_ANALYSIS_SOURCE": "View analysis source",
         "ANALYSIS_SOURCE": "Analysis Source",

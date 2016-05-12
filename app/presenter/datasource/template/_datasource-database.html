@@ -24,15 +24,23 @@
 </div>
 <div class="row">
     <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseDatabase">
-        <label for="database-database" translate class="required">DATASOURCE.DATABASE</label>
+        <label for="database-database" translate ng-class="{
+            required:aux.drivers[object.driver].hasSid
+        }">DATASOURCE.DATABASE</label>
         <input type="text" name="databaseDatabase" class="form-control" id="database-database"
-               ng-model="object.sid" required />
+               ng-model="object.sid" ng-disabled="!aux.drivers[object.driver].hasSid"
+               ng-required="aux.drivers[object.driver].hasSid" />
         <validated-field-messages ng-model="formObject.databaseDatabase"></validated-field-messages>
     </div>
-    <div class="col-xs-6 form-group">
-        <label for="database-schema" translate>DATASOURCE.SCHEMA</label>
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseSchema">
+        <label for="database-schema" translate ng-class="{
+            required:!aux.drivers[object.driver].hasSid
+        }">
+            DATASOURCE.SCHEMA
+        </label>
         <input type="text" id="database-schema" name="databaseSchema" class="form-control"
-               ng-model="object.schema" ng-disabled="!aux.drivers[object.driver].hasSchema" />
+               ng-model="object.schema" ng-required="!aux.drivers[object.driver].hasSid" />
+        <validated-field-messages ng-model="formObject.databaseSchema"></validated-field-messages>
     </div>
 </div>
 <div class="row">

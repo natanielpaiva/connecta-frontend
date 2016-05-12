@@ -85,13 +85,13 @@
                             text-align:center;
 
                             &:hover{
-                                background-color: $connectaRed;
+                                background-color: $red;
                                 transition: background-color $defaultAnimationDuration;
                             }
                         }
 
                         a.tool-active{
-                            border-left: 5px solid $connectaRed;
+                            border-left: 5px solid $red;
                         }
                     }
                 }
@@ -144,7 +144,7 @@
 }
 
 .menu-right-nivel-2 ul li a.link-sub-nivel-2-active{
-    border-left-color: $connectaRed;
+    border-left-color: $red;
 }
 
 .ico-sub-nivel-2{

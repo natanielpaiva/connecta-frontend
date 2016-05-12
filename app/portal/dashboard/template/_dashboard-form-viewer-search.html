@@ -13,7 +13,7 @@
                     dnd-effect-allowed="move"
                     dnd-moved="search.results.splice($index, 1)"
                     class="image-on-background background-fallback-{{viewer.module}}"
-                    style="background-image:url({{viewer.thumbnail}})">
+                    style="{{viewer.thumbnail?'background-image:url('+viewer.thumbnail+')':''}}">
                     
                     <div style="background-image:url({{applications[viewer.module].iconMini}})"
                         class="module-icon image-on-background"></div>

@@ -3,6 +3,8 @@ define([
 ], function (angular) {
     var collector = angular.module('connecta.collector', []);
     
+    collector._configKey = 'collector';
+    
     collector._routes = {
 //        Utilizar esse formato
 //        

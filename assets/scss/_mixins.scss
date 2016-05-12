@@ -12,6 +12,13 @@
     }
 }
 
+// Mixin para usar em textos que devem ser clipados ao final do width do elemento pai
+@mixin clipped-text {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
 // Margem top padronizada
 @mixin margin-top($em) {
     margin-top: $em*1em;

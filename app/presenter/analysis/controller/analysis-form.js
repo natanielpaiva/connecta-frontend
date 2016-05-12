@@ -1,18 +1,24 @@
+/* global angular */
+
 define([
     'connecta.presenter',
     'presenter/analysis/service/analysis-service',
     'presenter/datasource/service/datasource-service',
     'presenter/singlesource/service/singlesource-service'
-
 ], function (presenter) {
     return presenter.lazy.controller('AnalysisFormController', function (
-            $scope, AnalysisService, DatasourceService, SingleSourceService,GroupService, $timeout, $routeParams, $location) {
+            $scope, AnalysisService, DatasourceService, SingleSourceService, $timeout, $routeParams, $location) {
+
+        //modelo de um 'DataSource' de CSV para ajustar os problemas nas tabelas
+        //este conceito será refatorado, visto que um CSV não é um dataSource.
+        var csvDS = {id:'csv',name:'CSV',type:'CSV'};
 
         $scope.edit = false;
 
         $scope.getAttributes = function (val) {
             return SingleSourceService.getAttribute(val);
         };
+
         $scope.optionsAttributeTypes = SingleSourceService.getAttributeTypes();
 
         $scope.datasourceCurrent = null;
@@ -22,12 +28,10 @@ define([
                 $scope.component = {};
             }
             $scope.component.catalog = [];
-            //$scope.component.columns = [];
             $scope.component.domain = [];
-            //$scope.component.typeWebservice = [];
             $scope.component.operationWebservice = [];
-            //$scope.component.webserviceRestJson = {};
         }
+        
         resetComponent();
 
         $scope.showForm = false;
@@ -40,43 +44,41 @@ define([
             }
         };
 
-//
-
         function timeReload() {
             $timeout(function () {
                 $scope.showForm = true;
             });
         }
 
-
         if ($routeParams.id) {
-
+            $scope.edit = true;
             AnalysisService.getAnalysis($routeParams.id).then(function (response) {
                 //preenche o select de tabelas do banco de dados
                 $scope.analysis = response.data;
-                $scope.edit = true;
-
                 $scope.datasourceCurrent = $scope.analysis.datasource;
-
-                $scope.analysis.type = response.data.type;
-                $scope.analysis.datasource.type = response.data.type;
+                if($scope.datasourceCurrent === undefined){
+                    $scope.analysis.datasource = csvDS;
+                    $scope.datasourceCurrent = csvDS;
+                }else{
+                    $scope.analysis.datasource.type = response.data.type;
+                }
                 $scope.subform = $scope.types[response.data.type];
 
-                console.log("datasourceCurrent", $scope.datasourceCurrent);
-
                 timeReload();
-                // $scope.listTableDatasource = response.data;
             });
         } else {
             $scope.analysis = {};
+            
             DatasourceService.list({count: 1000, page: 1}).then(function (response) {
                 $scope.listDatasource = response.data.content;
+                //adiciona CSV na primeira posicao da lista
+                $scope.listDatasource.splice(0, 0, csvDS);
             });
 
             $scope.$watch('analysis.datasource.id', function (idDatasouce) {
                 $scope.showForm = false;
                 for (var ds  in $scope.listDatasource) {
-                    if (idDatasouce === $scope.listDatasource[ds].id.toString()  ) {
+                    if (idDatasouce === $scope.listDatasource[ds].id.toString()) {
 
                         $scope.datasourceCurrent = $scope.listDatasource[ds];
                         //Monta o template de acordo com o datasource
@@ -94,19 +96,6 @@ define([
                         }
                     }
                 }
-                
-                if(idDatasouce === $scope.types.CSV.id){
-                    var csv = $scope.types.CSV;
-
-                    $scope.subform = csv;
-                    $scope.analysis.type = csv.name;
-
-                    $scope.analysis.datasource = null;
-
-                    $scope.datasourceCurrent = {
-                        type: 'csv'
-                    };
-                }
 
                 $scope.analysis.analysisAttributes = [];
 
@@ -119,35 +108,25 @@ define([
         //###############################################################################################
 
         $scope.submit = function () {
-            //caso o submit seja Solr
             if ($scope.types.SOLR.name === $scope.datasourceCurrent.type) {
-
                 var queryCopy = angular.copy($scope.analysis.query);
 
+                AnalysisService.saveQueryBuilder(queryCopy).success(function(data) {
+                    $scope.analysis.query = {
+                        id: data.id
+                    };
 
-                AnalysisService.saveQueryBuilder(queryCopy).
-                        success(function (data, status, headers, config) {
-                            console.log("Query salva com sucesso");
-
-                            $scope.analysis.query = {
-                                "id": data.id
-                            };
-
-                            AnalysisService.save($scope.analysis).then(function () {
-                            });
-
-                        }).
-                        error(function (data, status, headers, config) {
-
-                        });
-
-
+                    AnalysisService.save($scope.analysis).then(function(response) {
+                        $location.path('presenter/analysis/'+response.data.id);
+                    });
+                });
             } else {
-                console.log("$scope.analysis ", $scope.analysis);
-                console.log("$scope.types ", $scope.types.SOLR.name);
-                AnalysisService.save($scope.analysis).then(function () {
-                    
-                     $location.path('presenter/analysis');
+                var analysisCopy = angular.copy($scope.analysis);
+                if($scope.types.CSV.name === $scope.datasourceCurrent.type)
+                    delete analysisCopy.datasource;
+
+                AnalysisService.save(analysisCopy).then(function(response) {
+                    $location.path('presenter/analysis/'+response.data.id);
                 });
             }
         };

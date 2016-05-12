@@ -19,7 +19,6 @@
             <div class="form-group" ng-if="!edit">
                 <label for="datasource" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
                 <select class="form-control" id="datasource" ng-model="analysis.datasource.id">
-                    <option value="csv">CSV</option> 
                     <option ng-repeat="ds in listDatasource" value="{{ds.id}}">{{ds.name}}</option>
                 </select>
             </div>
@@ -40,7 +39,8 @@
     <h4 translate>ANALYSIS.DESCRIPTION_OF_COLUMNS</h4>
     <div class="row"  >
         <div class="col-md-12" >
-            <div class="clearfix well" style="height:250px; background-color:#F2F2F2; overflow:auto">
+            <!--style="height:250px; background-color:#F2F2F2; overflow:auto"-->
+            <div class="clearfix well" > 
                 <div ng-repeat="columns in analysis.analysisColumns" >
                     <div class="col-md-6 form-group">
                         <label for="column" translate>ANALYSIS.COLUMN</label>

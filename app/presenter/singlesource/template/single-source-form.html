@@ -8,14 +8,13 @@
     <div class="col-md-12">
         <form novalidate name="singlesourceForm" ng-submit="submit()">
 
-            <div class="form-group">
+            <div class="form-group" validated-field-holder="singlesourceForm.name">
                 <label for="model-nome" translate class="required">SINGLESOURCE.NAME</label>
                 <input type="text" name="nome" ng-model="typeSingleSource.name"
                        id="model-nome" required class="form-control" required />
-                <div ng-if="singlesourceForm.nome.$dirty" ng-messages="singlesourceForm.nome.$error"
-                     ng-messages-include="portal-error-messages"></div>
+                <validated-field-messages ng-model="singlesourceForm.name"></validated-field-messages>
             </div>
-            
+
             <p class="bold" translate>SINGLESOURCE.TYPE_MEDIA</p>
             <div class="portal-type-switcher margin-bottom-single">
                 <label ng-repeat="(key, type) in types" class="radio-inline portal-type-switcher-item"
@@ -24,7 +23,7 @@
                            ng-model="typeSingleSource.type"
                            ng-value="type" required/>
                     <span class="portal-type-switcher-icon {{type.icon}}"></span>
-                    <span class="portal-type-switcher-title" translate>{{'SINGLESOURCE.'+type.name}}</span>
+                    <span class="portal-type-switcher-title" translate>{{'SINGLESOURCE.' + type.name}}</span>
                 </label>
             </div>
 
@@ -35,10 +34,10 @@
                     <div class="col-md-4">
                         <div class="form-group has-feedback">
                             <label for="user" translate>SINGLESOURCE.ATTRIBUTE_NAME</label>
-                            
-                                <input type="text" name="singleSourceAttributes" id="singleSourceAttributes" class="form-control" 
-                                       ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
-                                <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+
+                            <input type="text" name="singleSourceAttributes" id="singleSourceAttributes" class="form-control" 
+                                   ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
+                            <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -50,9 +49,9 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="attributeTypes" class="required" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
+                            <label for="attributeTypes"  translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
                             <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
-                                    ng-model="$parent.$parent.$item.attributeType" class="form-control" required>
+                                    ng-model="$parent.$parent.$item.attributeType" class="form-control" >
                                 <option value="" translate>LAYOUT.SELECT</option>
                             </select>
                         </div>
@@ -65,9 +64,11 @@
                    class="btn btn-default" translate>
                     LAYOUT.CANCEL
                 </a>
-                <button class="btn btn-primary" translate ng-disabled="singlesourceForm.$invalid">
-                    LAYOUT.SAVE
-                </button>
+                <div class="inline-block" title="{{(singlesourceForm.$invalid ? 'VALIDATION.FILL_REQUIRED_FIELDS_ENABLE_SAVE' : '') | translate}}">
+                    <button class="btn btn-primary" translate ng-disabled="singlesourceForm.$invalid">
+                        LAYOUT.SAVE
+                    </button>
+                </div>
             </div>
         </form>
     </div>

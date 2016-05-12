@@ -2,6 +2,9 @@ define([
     'angular'
 ], function (angular) {
     var maps = angular.module('connecta.maps', ['ngAutocomplete']);
+    
+    maps._configKey = 'maps';
+    
     maps.config(function ($translatePartialLoaderProvider) {
         $translatePartialLoaderProvider.addPart('maps/layer-source');
         $translatePartialLoaderProvider.addPart('maps/layer');
@@ -13,6 +16,7 @@ define([
         $translatePartialLoaderProvider.addPart('maps/drill');
         $translatePartialLoaderProvider.addPart('maps/drill-level');
     });
+    
     maps.run(function (applications) {
         var appMaps = applications.maps;
         maps.lazy.value('mapsResources', {
@@ -35,7 +39,6 @@ define([
         });
     });
 
-
     maps.constant('sortBy', function (array, name) {
         return array.sort(function (a, b) {
             var nameA = a[name].toUpperCase();
@@ -49,7 +52,6 @@ define([
             return 0;
         });
     });
-
 
     /*
      * Layer-Source
@@ -249,8 +251,8 @@ define([
             controllerUrl: 'maps/drill-level/controller/drill-level-form',
             templateUrl: 'app/maps/drill-level/template/drill-level-form.html'
         }
-
     };
+    
     maps._menu = [
         {
             href: 'maps/layer-source',
@@ -306,5 +308,6 @@ define([
         }
 
     ];
+    
     return maps;
 });

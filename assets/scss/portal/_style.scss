@@ -247,11 +247,11 @@ blockquote small {
 .btn {
     border-radius: 0.15em;
     &.btn-default {
-        border-color: $lightGray;
-        background-color: lighten($lighterGray, 4%);
+        border-color: $darkerWhite;
+        background-color: lighten($darkWhite, 4%);
         &:hover,
             &:active {
-            border-color: $lightGray;
+            border-color: $darkerWhite;
         }
     }
     &.btn-primary {
@@ -269,7 +269,7 @@ blockquote small {
         height:2em;
 
         &:hover {
-            background-color: $lighterGray;
+            background-color: $darkWhite;
         }
     }
 }
@@ -321,7 +321,7 @@ blockquote small {
             &.selected {
                 td {
                     transition:background-color ease 250ms;
-                    background-color:rgba($connectaRed, 0.95) !important;
+                    background-color:rgba($red, 0.95) !important;
                     * {
                         color:$white !important;
                     }
@@ -410,7 +410,7 @@ blockquote small {
              * extremamante incomodado com isso, você está totalmente certo.
              */
             content:' ';
-            background:$lighterGray;
+            background:$darkWhite;
             width:1px;
             height:1px;
             position:absolute;
@@ -437,7 +437,7 @@ blockquote small {
     }
 }
 .tab-content {
-    border:solid 1px $lighterGray;
+    border:solid 1px $darkWhite;
     border-top:none;
     background-color: $white;
 }

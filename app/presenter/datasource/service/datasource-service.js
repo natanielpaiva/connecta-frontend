@@ -3,7 +3,7 @@ define([
     'connecta.presenter'
 ], function (angular, presenter) {
 
-    return presenter.lazy.service('DatasourceService', function (presenterResources, $http) {
+    return presenter.lazy.service('DatasourceService', function (presenterResources, $http, DomainService) {
         var typeConfig = {
             DATABASE: {
                 name: 'Database',
@@ -36,22 +36,27 @@ define([
                 icon: 'icon-webservice' // Capitão Planeta?
             }
         };
-        
+
         var databaseDrivers = {
             ORACLE_SID:{
                 name:'Oracle Thin (Service ID - SID)',
                 defaultPort:1521,
-                hasSchema:true
+                hasSid:true
+            },
+            ORACLE_SNM:{
+                name:'Oracle Thin (Service Name)',
+                defaultPort:1521,
+                hasSid:true
             },
             POSTGRES:{
                 name:'PostgreSQL',
                 defaultPort:5432,
-                hasSchema:true
+                hasSid:true
             },
             MYSQL:{
                 name:'MySQL',
                 defaultPort:3306,
-                hasSchema:false
+                hasSid:false
             }
         };
 
@@ -62,7 +67,7 @@ define([
         this.getTypes = function () {
             return typeConfig;
         };
-        
+
         this.getDatabaseDrivers = function() {
             return databaseDrivers;
         };
@@ -71,6 +76,7 @@ define([
             var url = getTypeUrl(datasource);
 
             var datasourceCopy = angular.copy(datasource);
+            datasourceCopy.domain = DomainService.getDomainName();
 
             return $http.post(url, datasourceCopy);
         };
@@ -91,7 +97,7 @@ define([
             var url = presenterResources.datasource + '/' + id;
             return $http.get(url);
         };
-        
+
         this.bulkRemove = function (datasources) {
             return $http.delete(presenterResources.datasource, {
                 data: datasources.map(function (e) {

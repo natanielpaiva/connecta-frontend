@@ -3,7 +3,9 @@ define([
     'portal/layout/service/autocomplete'
 ], function (presenter) {
 
-    return presenter.lazy.service('SingleSourceService', function ($autocomplete, presenterResources, $http, $upload) {
+    return presenter.lazy.service('SingleSourceService', function ($autocomplete, presenterResources,
+              $http, $upload, DomainService, LoginService) {
+
         var types = {
             FILE: {
                 name: 'FILE',
@@ -16,7 +18,7 @@ define([
                 template: '_single-source-url.html'
             }
         };
-        
+
         var typesArray = [
             {
                 id: 'FILE',
@@ -31,7 +33,7 @@ define([
                 template: '_single-source-url.html'
             }
         ];
-        
+
         var attributeTypes = [
             {
                 value: 'TEXT',
@@ -45,7 +47,7 @@ define([
                 value: 'DATE',
                 label: 'DATE'
             }
-            
+
         ];
 
         var _fixAttributes = function (singlesource) {
@@ -74,9 +76,12 @@ define([
 
         this.save = function (file, singlesource) {
             _fixAttributes(singlesource);
+            singlesource.domain = DomainService.getDomainName();
+
             return $upload.upload({
                 url: presenterResources.singlesource + "/file",
                 method: 'POST',
+                headers: { "Authorization" : "Bearer " + LoginService.getAuthenticationToken()},
                 fields: {
                     singlesource: singlesource
                 },
@@ -105,6 +110,7 @@ define([
 
             var singlesourceCopy = angular.copy(singlesource);
             singlesourceCopy.type = singlesourceCopy.type.id;
+            singlesourceCopy.domain = DomainService.getDomainName();
 
             return $http.post(url, singlesourceCopy);
         };
@@ -122,12 +128,12 @@ define([
         this.getTypes = function () {
             return types;
         };
-        
+
         // FIXME Remover, utilizar apenas o mapa
         this.getTypesArray = function () {
             return typesArray;
         };
-        
+
         this.getAttributeTypes = function(){
             return attributeTypes;
         };
@@ -146,11 +152,11 @@ define([
             var url = presenterResources.singlesource + '/' + id;
             return $http.get(url);
         };
-        
+
         this.getFileById = function (id) {
             return presenterResources.singlesource + '/' + id + '/binary';
         };
-        
+
         this.bulkRemove = function (singlesources) {
             return $http.delete(presenterResources.singlesource, {
                 data: singlesources.map(function(e){

@@ -1,5 +1,6 @@
 {
     "VIEWER": {
+        "NEW_VIEWER":"New viewer",
         "TYPE_ANALYSIS": "Analysis",
         "TYPE_SINGLESOURCE": "Media",
         "TYPE_SINGLESOURCE_GROUP": "Media Group",
@@ -24,6 +25,8 @@
         "VALUEFIELD": "Value Column",
         "FONT_SIZE": "Font size",
         "VIEW_ANALYSIS": "Analysis result",
+        "EXPORT": "Export image",
+        
         "FONT_COLOR": "Color",
         "FONT_FAMILY": "Font",
         "HAND_DRAWN": "Hand drawn",
@@ -177,7 +180,13 @@
         "GRAPHS": "Graphs",
         "_CATEGORY_AXIS": "+ Category Axis",
         "CATEGORY_AXIS": "Category Axis",
-        "AUTO_ROTATE_ANGLE": "Auto rotate angle"
+        "AUTO_ROTATE_ANGLE": "Auto rotate angle",
+        "SETTINGS_FILTER":"Settings filter",
+        "DRAG_COLUMNS_FOR_SET_FILTERS":"Drag columns for set filters",
+        "SETTINGS_DRILL":"Settings drill",
+        "DRAG_COLUMNS_FOR_DRILL":"Drag columns for drill",
+        "SETTINGS_ADVANCED":"Settings advanced",
+        "SELECT":"Select"
     },
     "VIEWER_TEMPLATE_TYPE": {
         "bar": "Bar",

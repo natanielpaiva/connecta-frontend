@@ -3,6 +3,8 @@ define([
     'json!applications.json'
 ], function (angular, applications) {
     var speaknow = angular.module('connecta.speaknow', []);
+    
+    speaknow._configKey = 'speaknow';
 
     function registerTranslateParts($translatePartialLoaderProvider) {
       $translatePartialLoaderProvider.addPart('speaknow/whatsapp');

@@ -3,7 +3,9 @@ define([
     'portal/layout/service/autocomplete'
 ], function (presenter) {
 
-    return presenter.lazy.service('GroupService', function (presenterResources, $http, $autocomplete) {
+    return presenter.lazy.service('GroupService', function (presenterResources,
+              $http, $autocomplete, DomainService) {
+
         var types = {
             SELECT: {
                 name: 'GROUP.SELECT_FILE',
@@ -16,7 +18,7 @@ define([
                 template: '_group-form-query-builder.html'
             }
         };
-        
+
         // FIXME utilizar o mapa
         var typeFilter = [{
             id: 'SELECT',
@@ -293,8 +295,9 @@ define([
             var groupCopy = angular.copy(group);
 
             _fixGroup(groupCopy);
-            var url = presenterResources.group;
+            groupCopy.domain = DomainService.getDomainName();
 
+            var url = presenterResources.group;
             if (group.id === undefined) {
                 return $http.post(url, groupCopy);
             } else {
@@ -309,11 +312,11 @@ define([
             var url = presenterResources.group + "/query/result";
             return $http.post(url, queryPersist);
         };
-        
+
         this.getTypes = function(){
             return types;
         };
-        
+
         this.bulkRemove = function (groups) {
             return $http.delete(presenterResources.group, {
                 data: groups.map(function (e) {

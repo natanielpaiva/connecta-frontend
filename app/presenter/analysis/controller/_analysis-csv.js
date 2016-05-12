@@ -33,8 +33,10 @@ define([
         });
 
         $scope.getDataCsv = function () {
-
-            AnalysisService.getResultCSV($scope.analysis).then(function (response) {
+            //remove o datasource (csv não pode ter datasource)
+            var analysisCopy = angular.copy($scope.analysis);
+            delete analysisCopy.datasource;
+            AnalysisService.getResultCSV(analysisCopy).then(function (response) {
 
                 $scope.responseCSV = response.data;
                 $scope.analysis.analysisColumns = [];

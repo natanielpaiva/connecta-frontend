@@ -4,13 +4,16 @@ define([
 ], function () {
     return function SolrAnalysisFormController($scope, GroupService, AnalysisService, $timeout) {
 
+        
+        $scope.analysis.facet = 10;
+
         //$scope.types = GroupService.getTypes();
         $scope.queryBuilderTypes = GroupService.getTypes();
         //$scope.typeFilter = GroupService.getTypeFilter();
         $scope.queryBuilderTypeFilter = GroupService.getTypeFilter();
         $scope.group = {};
 
-
+        
         $scope.predicateMap = GroupService.getPredicate();
         $scope.operatorMap = GroupService.getOperator();
 

@@ -2,6 +2,7 @@
 define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service',
+    'presenter/analysis/service/analysis-service',
     'portal/dashboard/directive/viewer',
     'portal/layout/service/util',
     'presenter/viewer/directive/analysis-viewer',
@@ -12,18 +13,41 @@ define([
     'bower_components/amcharts/dist/amcharts/exporting/canvg',
     'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
     'bower_components/html2canvas/dist/html2canvas.min',
-    'bower_components/html2canvas/dist/html2canvas'
+    'bower_components/html2canvas/dist/html2canvas',
+    'bower_components/angular-ui-select/dist/select'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, LayoutService, $modal, util) {
+    return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, $uibModal, AnalysisService, util) {
         $scope.state = {loaded: false};
         $scope.chartCursor = {ativo: false};
         $scope.chartScrollbar = {ativo: false};
         $scope.legend = {ativo: false};
 
-        $scope.metrics = [];
-        $scope.descriptions = [];
-        $scope.columns = [];
+        $scope.status = {
+            open: false
+        };
 
+        $scope.viewer = {
+            name: "",
+            description: "",
+            type: "ANALYSIS",
+            analysisViewerColumns: [],
+            metrics: [],
+            descriptions: [],
+            xfields: [],
+            yfields: [],
+            valueFields: [],
+            columns: [],
+            filters: [],
+            drills: []
+        };
+
+        $scope.changeStatus = function () {
+            if ($scope.status.open) {
+                $scope.status.open = false;
+            } else {
+                $scope.status.open = true;
+            }
+        };
 
         var sidebarSinglesource = function () {
             SidebarService.config({
@@ -50,7 +74,7 @@ define([
                         ViewerService.getSinglesourceList($scope.search.name).then(function (response) {
                             $scope.search.results = response;
                             for (var key in $scope.search.results) {
-                                if($scope.search.results[key].type === 'FILE'){
+                                if ($scope.search.results[key].type === 'FILE') {
                                     $scope.search.results[key].binaryFile = ViewerService.getBinaryFile($scope.search.results[key]);
                                 }
                             }
@@ -66,10 +90,13 @@ define([
         };
 
         var sidebarAnalysis = function () {
-
             SidebarService.config({
                 controller: function ($scope) {
-                    $scope.analysis = "";
+
+                    ViewerService.analysisList().then(function (response) {
+                        $scope.analysisList = response.data;
+                    });
+
                     $scope.analysisBar = "ANALYSIS";
                     $scope.typeBar = "TYPE";
                     $scope.settingsBar = "SETTINGS";
@@ -77,6 +104,7 @@ define([
                     $scope.chartCursor = getChartCursor();
                     $scope.chartScrollbar = getChartScrollbar();
                     $scope.legend = getLegend();
+
                     ViewerService.getTemplates().then(function (response) {
                         $scope.templates = response.data;
                     });
@@ -162,34 +190,37 @@ define([
                         analysisViewerColumns: []
                     };
 
-                    $scope.getListAnalysis = function () {
-                        ViewerService.getListAnalysis($scope.analysisViewerData, $scope.analysisDataView).then(function (response) {
-
-                            $modal.open({
-                                animation: true,
-                                templateUrl: 'app/presenter/viewer/template/_modal-analysis.html',
-                                controller: 'ModalAnalysis',
-                                size: 'lg',
-                                resolve: {
-                                    analysisData: function () {
-                                        return response.data.result;
-                                    }
-                                }
-
-                            });
-
-                        }, function (response) {
-                        });
-                    };
-
                     $scope.disabledLayoutConfig = function () {
                         $scope.setLayoutConfiguration = false;
                     };
 
-                    $scope.setAnalysisData = function (analysisData) {
-                        $scope.analysisData = analysisData;
-                        $scope.analysisDataView = angular.copy(analysisData);
+                    $scope.$watch('viewer.analysis', function (newValue) {
+                        if (newValue !== undefined) {
+                            ViewerService.getAnalysisById(newValue.id).then(function (response) {
+                                angular.extend($scope.viewer.analysis, response.data);
+                            });
+                        }
+                    });
+
+                    $scope.getAnalysisResult = function () {
+                        return AnalysisService.execute({
+                            analysis: $scope.viewer.analysis
+                        }).then(function (response) {
+                            $uibModal.open({
+                                animation: true,
+                                templateUrl: 'app/presenter/viewer/template/_modal-analysis.html',
+                                controller: 'ModalAnalysis',
+                                size: 'lg',
+                                backdrop: false,
+                                resolve: {
+                                    analysisResult: function () {
+                                        return response.data;
+                                    }
+                                }
+                            });
+                        });
                     };
+
 
                     $scope.viewer = getViewer();
 
@@ -237,60 +268,86 @@ define([
             SidebarService.hide();
         });
 
+        var _prepareForRequest = function (viewer) {
+            var analysisCopy = angular.copy(viewer.analysis);
+            analysisCopy.analysisColumns = [];
+
+            var populateAnalysis = function (o) {
+                analysisCopy.analysisColumns.push(o.analysisColumn);
+            };
+
+            angular.forEach(viewer.metrics, populateAnalysis);
+            angular.forEach(viewer.descriptions, populateAnalysis);
+            angular.forEach(viewer.xfields, populateAnalysis);
+            angular.forEach(viewer.yfields, populateAnalysis);
+            angular.forEach(viewer.valueFields, populateAnalysis);
+
+            _prepareSave(viewer);
+
+            return analysisCopy;
+        };
+
+        var _savePreparationStrategy = {
+            ANALYSIS: function (viewer) {
+                var columnTypes = {
+                    METRIC: viewer.metrics,
+                    DESCRIPTION: viewer.descriptions,
+                    XFIELD: viewer.xfields,
+                    YFIELD: viewer.yfields,
+                    VALUEFIELD: viewer.valueFields,
+                    FILTER: viewer.filters
+                };
+
+                viewer.analysisViewerColumns = [];
+                angular.forEach(columnTypes, function (type, key) {
+                    angular.forEach(type, function (o) {
+                        o.columnType = key;
+                        viewer.analysisViewerColumns.push(o);
+                    });
+                });
+            },
+            SINGLESOURCE: function(viewer){
+                angular.extend(viewer.singleSource, viewer.singlesource.list[0]);
+            }
+        };
+
+        var _prepareSave = function (viewer) {
+            _savePreparationStrategy[viewer.type](viewer);
+        };
+
         var getPreview = function () {
-            if (($scope.viewer.metrics.length > 0) ||
+            var readyForPreview = ($scope.viewer.metrics.length > 0) ||
                     ($scope.viewer.xfields.length > 0 &&
-                            $scope.viewer.yfields.length > 0)) {
-                ViewerService.preview($scope.viewer).then(function (response) {
+                            $scope.viewer.yfields.length > 0);
+
+            if (readyForPreview) {
+                AnalysisService.execute({
+                    analysis: _prepareForRequest($scope.viewer)
+                }).then(function (response) {
                     ViewerService.getPreview($scope.viewer, response.data);
-                }, function (response) {
                 });
             }
         };
 
         $scope.submit = function () {
+            _prepareSave($scope.viewer);
             ViewerService.save($scope.viewer).then(function () {
                 $location.path('presenter/viewer');
             });
         };
 
-        $scope.viewer = {
-            "name": "",
-            "description": "",
-            "type": "ANALYSIS",
-            "analysisViewerColumns": [],
-            "metrics": [],
-            "descriptions": [],
-            "xfields": [],
-            "yfields": [],
-            "valueFields": [],
-            "columns": []
-        };
-
         if ($routeParams.id) {
             ViewerService.getAnalysisViewer($routeParams.id).then(function (response) {
+                angular.extend($scope.viewer, response.data);
 
-                var data = response.data;
-                $scope.viewer.id = data.id;
-                $scope.viewer.name = data.name;
-                $scope.viewer.description = data.description;
-
-
-                switch (data.type) {
+                switch ($scope.viewer.type) {
                     case 'SINGLESOURCE':
-                        $scope.viewer = {
-                            singleSource: {id: data.singleSource.id},
-                            singlesource: {list: []},
-                            name: data.name,
-                            description: data.description,
-                            type: "SINGLESOURCE",
-                            id: data.id
-                        };
+                        $scope.viewer.singlesource = {list: []};
                         sidebarSinglesource();
 
-                        ViewerService.getSinglesource(data.singleSource.id).then(function (response) {
+                        ViewerService.getSinglesource($scope.viewer.singleSource.id).then(function (response) {
                             var data = response.data;
-                            if(data.type === 'FILE'){
+                            if (data.type === 'FILE') {
                                 data.binaryFile = ViewerService.getBinaryFile(data);
                             }
                             $scope.viewer.singlesource.list.push(data);
@@ -298,10 +355,7 @@ define([
 
                         break;
                     default:
-
-                        $scope.viewer.configuration = data.configuration;
-
-                        var analysisColumns = data.analysisViewerColumns;
+                        var analysisViewerColumns = $scope.viewer.analysisViewerColumns;
 
                         var arrays = {
                             METRIC: $scope.viewer.metrics,
@@ -309,69 +363,63 @@ define([
                             XFIELD: $scope.viewer.xfields,
                             YFIELD: $scope.viewer.yfields,
                             VALUEFIELD: $scope.viewer.valueFields,
-                            COLUMNS: $scope.viewer.columns
+                            COLUMNS: $scope.viewer.columns,
+                            FILTER: $scope.viewer.filters
                         };
 
-                        for (var k in analysisColumns) {
-                            var columnType = analysisColumns[k].columnType;
-                            arrays[columnType].push(analysisColumns[k].analysisColumn);
+                        for (var k in analysisViewerColumns) {
+                            var columnType = analysisViewerColumns[k].columnType;
+                            arrays[columnType].push(analysisViewerColumns[k]);
                         }
                         sidebarAnalysis();
-                        //$scope.viewer.configuration.export = {enabled: true, libs:{autoLoad:false}};
                         getPreview();
                         load();
                         break;
                 }
             });
-        } else {
-
-            if ($routeParams.template && $routeParams.type) {
-                switch ($routeParams.template) {
-                    case "other-singlesource":
-                        $scope.viewer = {
-                            singleSource: {id: ""},
-                            singlesource: {list: []},
-                            name: "",
-                            description: "",
-                            type: "SINGLESOURCE"
-                        };
-                        sidebarSinglesource();
-                        break;
-                    default:
-                        sidebarAnalysis();
-                        ViewerService.getTemplates($routeParams.type, $routeParams.template)
-                                .then(function (response) {
-                                    var dados = response.data;
-                                    dados.data = response.data.dataProvider;
-                                    $scope.viewer.configuration = dados;
-                                    load();
-                                });
-                        break;
-                }
-
+        } else if ($routeParams.template && $routeParams.type) {
+            switch ($routeParams.template) {
+                case "other-singlesource":
+                    $scope.viewer = {
+                        singleSource: {id: ""},
+                        singlesource: {list: []},
+                        name: "",
+                        description: "",
+                        type: "SINGLESOURCE"
+                    };
+                    sidebarSinglesource();
+                    break;
+                default:
+                    sidebarAnalysis();
+                    ViewerService.getTemplates($routeParams.type, $routeParams.template).then(function (response) {
+                        var dados = response.data;
+                        dados.data = response.data.dataProvider;
+                        $scope.viewer.configuration = dados;
+                        //Disable Animation
+                        $scope.viewer.configuration.startDuration = 0;
+                        load();
+                    });
+                    break;
             }
 
         }
 
         var load = function () {
-            $scope.$watchCollection('viewer.metrics', function (newValue, oldValue) {
+            var __update = function (array) {
+//                angular.forEach(array, function(o){
+//                    o = { analysisColumn: o };
+//                    
+//                    delete o.id;
+//                });
                 getPreview();
-            });
-            $scope.$watchCollection('viewer.descriptions', function (newValue, oldValue) {
-                getPreview();
-            });
-            $scope.$watchCollection('viewer.xfields', function (newValue, oldValue) {
-                getPreview();
-            });
-            $scope.$watchCollection('viewer.yfields', function (newValue, oldValue) {
-                getPreview();
-            });
-            $scope.$watchCollection('viewer.valueFields', function (newValue, oldValue) {
-                getPreview();
-            });
-             $scope.$watchCollection('viewer.columns', function (newValue, oldValue) {
-                getPreview();
-            });
+            };
+
+            $scope.$watchCollection('viewer.metrics', __update);
+            $scope.$watchCollection('viewer.descriptions', __update);
+            $scope.$watchCollection('viewer.xfields', __update);
+            $scope.$watchCollection('viewer.yfields', __update);
+            $scope.$watchCollection('viewer.valueFields', __update);
+            $scope.$watchCollection('viewer.columns', __update);
         };
 
         $scope.newInterval = function () {
@@ -393,6 +441,17 @@ define([
             $scope.viewer.configuration.axes[0].bands.splice(
                     $scope.viewer.configuration.axes[0].bands.indexOf(intervalItem), 1
                     );
+        };
+
+        $scope.transformColumnDrop = function (item, columnType) {
+            if (item.analysisColumn) {
+                return item;
+            } else {
+                return {
+                    analysisColumn: angular.copy(item),
+                    columnType: columnType
+                };
+            }
         };
 
         $scope.export = function (filename) {
@@ -496,10 +555,10 @@ define([
                 obj_url = window.URL.createObjectURL(oBuilder);
             }
 
-            var a = $("<a/>");
-            $("body").append(a);
+            var a = angular.element("<a/>");
+            angular.element("body").append(a);
             a[0].href = obj_url;
-            a[0].download = filename;
+            a[0].download = filename + '.jpg';
             a[0].click();
             a.remove();
         };

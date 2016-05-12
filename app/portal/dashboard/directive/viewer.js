@@ -7,7 +7,8 @@ define([
             scope:{
                 model:'=?ngModel',
                 src:'=?',
-                type:'=?'
+                type:'=?',
+                edit:'=?'
             },
             controller: function ($scope, $http) {
                 if ( $scope.src ) {

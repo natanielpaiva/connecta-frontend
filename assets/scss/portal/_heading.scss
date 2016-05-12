@@ -16,7 +16,7 @@ heading {
         color: $white;
         font-size: 2.8em;
         &:active {
-            color: $lighterGray;
+            color: $darkWhite;
         }
         &.toggle-menu {
             display: block;
@@ -166,6 +166,7 @@ heading {
                     .heading-popover-title {
                         font-size: 0.45em;
                         line-height: 2.5em;
+                        height: 2.5em;
                         color: $white;
                         background-color: $lightBlack;
                         padding: 0.1em 1em;
@@ -203,8 +204,33 @@ heading {
                             width: 2.275em;
                             display: block;
                             float: left;
+
                             &:hover {
-                                background-color: $lighterGray;
+                                background-color: $darkWhite;
+                            }
+
+                            &.apps-more {
+                                line-height: 2.275em;
+                                color: $lighterGray;
+                                /*background-color: rgba(100, 100, 100, 0.08);*/
+                                background-color: #f0f0f0;
+                                text-align: center;
+                                position:relative;
+
+                                .icon-open-in-new {
+                                    display:none;
+                                }
+
+                                &:hover {
+                                    background-color: $darkWhite;
+                                    .icon-open-in-new {
+                                        display:block;
+                                        position:absolute;
+                                        font-size:0.5em;
+                                        top:0.25em;
+                                        right:0.25em;
+                                    }
+                                }
                             }
                         }
                     }
@@ -217,6 +243,16 @@ heading {
 
                         .notifications-title {
                             text-align: center;
+                        }
+
+                        .notifications-content {
+                            font-size:0.3em;
+                            line-height:4em;
+
+                            p {
+                                text-align: center;
+                                margin:0;
+                            }
                         }
                     }
 
@@ -253,11 +289,38 @@ heading {
                                             display: block;
 
                                             &:hover {
-                                                background-color: $lighterGray;
+                                                background-color: $darkWhite;
                                             }
 
                                             & > span {
                                                 margin-right:0.5em;
+                                            }
+                                        }
+
+                                        & > ul {
+                                            float:left;
+                                            width: 100%;
+                                            height: auto;
+                                            padding:0;
+
+                                            & > li {
+                                                float: left;
+                                                width: 100%;
+                                                list-style: none;
+
+                                                & > a {
+                                                    font-size: 0.5em;
+                                                    line-height: normal;
+                                                    color: $lightBlack;
+                                                    width: 100%;
+                                                    padding: 2%;
+                                                    display: block;
+                                                    margin-left: 1.5em;
+                                                }
+
+                                                & > a.selected {
+                                                    color: blue !important;
+                                                }
                                             }
                                         }
                                     }
@@ -270,11 +333,18 @@ heading {
 
         }
     }
+
+    .menu-item-arrow {
+        text-align: center;
+        font-size: 1.5em;
+        width: 1.25em;
+        float: right;
+    }
 }
 
 /*Ícones das aplicações*/
 .current-app {
-    width: 11em;
+    width: 11em !important;
     height: 100%;
     overflow: hidden;
     background-repeat: no-repeat;
@@ -282,8 +352,9 @@ heading {
     background-size: 11em auto;
     margin-right: 3em;
     transition: all 0.3s;
-    float: right;
+    float: right !important;
+    display:block;
 
-    //Temporário
-    background-image: url("../img/logo-connecta.png");
+    //Fallback
+    background-image: url("../img//horizontal-logos/connecta.png");
 }

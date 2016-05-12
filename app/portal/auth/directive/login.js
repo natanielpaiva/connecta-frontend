@@ -8,13 +8,15 @@ define([
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, LoginService, FacebookService, UserService, GPlusService, $location, notify) {
+            controller: function ($scope, LoginService, FacebookService,
+              UserService, GPlusService, $location, notify, DomainService, $timeout) {
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.logged = false;
                 $scope.sections = {
                     "login": "login",
-                    "form": "form"
+                    "form": "form",
+                    "domain" : "domain"
                 };
                 $scope.currentSection = $scope.sections.login;
 
@@ -32,9 +34,15 @@ define([
 
                 $scope.submit = function () {
                     LoginService.doLogin($scope.credentials).then(function(response){
+                      $scope.loadDomains($scope.credentials.username);
+                      $scope.setSection('domain');
                     }, function(){
                             notify.warning("USER.VALIDATION.USER_OR_PASS_INVALID");
                     });
+                };
+
+                $scope.selectDomain = function(domain){
+                    LoginService.selectDomain(domain.name);
                 };
 
                 $scope.onFileSelected = function (files, ev, rejFiles) {
@@ -114,6 +122,13 @@ define([
                     $scope.userImage = $scope.user.profile.avatarUrl;
                     $scope.currentSection = $scope.sections.form;
                 });
+
+                $scope.loadDomains = function (username) {
+                    //getUserDomains
+                    DomainService.getDomainsByUser(username).then(function(response){
+                        $scope.domains = response.data;
+                    });
+                };
 
             }
         };

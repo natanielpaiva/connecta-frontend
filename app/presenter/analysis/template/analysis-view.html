@@ -28,8 +28,14 @@
 
             <p ng-if="analysis.type" >
                 <strong translate>ANALYSIS.SOURCE_ANALYSIS</strong>:
-                <span class="{{types[analysis.type].icon}}"></span>
-                {{types[analysis.type].name}}
+                <span ng-if="types[analysis.type] !== undefined">
+                    <span class="{{types[analysis.type].icon}}"></span>
+                    {{types[analysis.type].name}}
+                </span>
+                <span ng-if="types[analysis.type] === undefined">
+                    <span class="icon-insert-drive-file"></span>
+                    {{analysis.type}}
+                </span>
             </p>
 
             <!--SOLR  -->
@@ -45,10 +51,9 @@
             </p>
             
             <p ng-if="analysis.sql" >
-                <strong translate>ANALYSIS.SQL</strong>:
+                <strong translate>ANALYSIS.DATABASE.REQUEST_SQL</strong>:
                 {{analysis.sql}}
             </p>
-            
 
             <!--SOAP  -->
             <p ng-if="analysis.method" >

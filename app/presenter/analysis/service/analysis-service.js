@@ -1,3 +1,4 @@
+/* global angular */
 define([
     'connecta.presenter',
     'presenter/analysis/controller/_analysis-database',
@@ -15,9 +16,9 @@ define([
             CsvAnalysisFormController,
             ObieeAnalysisFormController,
             HdfsAnalysisFormController) {
-    
-    return presenter.lazy.service('AnalysisService', function (presenterResources, $http) {
-        
+
+    return presenter.lazy.service('AnalysisService', function (presenterResources, $http, DomainService) {
+
         var types = {
             DATABASE: {
                 id: 'database',
@@ -98,12 +99,17 @@ define([
                 id: 'csv',
                 name: 'CSV',
                 icon: 'icon-insert-drive-file',
-                template: '_analysis-csv.html', 
+                template: '_analysis-csv.html',
                 controller: CsvAnalysisFormController
             }
         };
+        
+        var databaseRequestTypes = {
+            SQL:'ANALYSIS.DATABASE.REQUEST_SQL',
+            TABLE:'ANALYSIS.DATABASE.REQUEST_TABLE'
+        };
 
-        //listar todas as analysis
+        // listar todas as analysis
         this.list = function (params) {
             var url = presenterResources.analysis;
             return $http.get(url, {
@@ -117,13 +123,15 @@ define([
             return $http.delete(url);
         };
 
-
-
         this.getTypes = function () {
             return types;
         };
+        
+        this.getDatabaseRequestTypes = function () {
+            return databaseRequestTypes;
+        };
 
-        //lista data source   
+        //lista data source
         this.getListDatasource = function () {
             var url = presenterResources.datasource;
             return $http.get(url);
@@ -134,10 +142,10 @@ define([
             var url = presenterResources.analysis + "/" + idDataSource + "/columns-datasource";
             return $http.get(url);
         };
-        
-        this.executeSqlDataBase = function(analysis){
+
+        this.execute = function(analysis) {
             var analysisCopy = angular.copy(analysis);
-            var url = presenterResources.analysis + "/" + analysisCopy.datasource.id + "/execute-sql";
+            var url = presenterResources.analysis + "/result";
             return $http.post(url, analysisCopy);
         };
 
@@ -146,17 +154,14 @@ define([
             return $http.get(url);
         };
 
-
         this.save = function (analysis) {
             _fixAttributes(analysis);
             var url = presenterResources.analysis;
             var analysisCopy = angular.copy(analysis);
-            console.log("analysisCopy ", analysisCopy);
+            analysisCopy.domain = DomainService.getDomainName();
             return $http.post(url, analysisCopy);
         };
-        
-        
-        
+
          var _fixAttributes = function (analysis) {
             angular.forEach(analysis.analysisAttributes, function (attribute) {
                 if (angular.isString(attribute.attribute)) {
@@ -170,7 +175,6 @@ define([
                 }
             });
         };
-        
 
         //lista catalog Obiee
         this.getListCatologBiee = function (idDatasouce, path) {
@@ -196,7 +200,7 @@ define([
             var url = presenterResources.analysis + "/" + idDatasouce + "/soap/operation/" + operation;
             return $http.post(url, parameter);
         };
-        
+
         //Soap
         this.getResulApplyingXpath = function ( analysis, operation) {
             var analysisCopy = angular.copy(analysis);
@@ -205,7 +209,6 @@ define([
         };
 
         this.getResulApplyingJson = function (idDatasouce, analysis) {
-
             var analysisCopy = angular.copy(analysis);
             console.log("analysis ", analysisCopy);
             //analysisCopy.type = analysisCopy.type.id.toUpperCase();
@@ -214,30 +217,29 @@ define([
         };
 
 
-           //solr
+        //solr
         this.getSolrResultApplyingQuery = function(idDatasouce, query, facet) {
                var queryPersist = angular.copy({"statement": query});
                _fixQueryBuilder(queryPersist, false);
                var url = presenterResources.analysis + "/" + idDatasouce + "/solr-result-applying-query/facet/" + facet;
                return $http.post(url, queryPersist);
-          };
-          
-          this.saveQueryBuilder = function(query) {
-               var queryBuilder = angular.copy({"statement": query});
-               var urlSaveQuery = presenterResources.group + "/query";
+        };
 
-               _fixQueryBuilder(queryBuilder);
-               return $http.post(urlSaveQuery, queryBuilder);
-          };
-          
-           this.formatQueryBuiderEdit = function(query) {
-               _fixQueryBuilder(query.statement, true);
-               return query;
-          };
+        this.saveQueryBuilder = function(query) {
+             var queryBuilder = angular.copy({"statement": query});
+             var urlSaveQuery = presenterResources.group + "/query";
 
+             _fixQueryBuilder(queryBuilder);
+             return $http.post(urlSaveQuery, queryBuilder);
+        };
+
+        this.formatQueryBuiderEdit = function(query) {
+            _fixQueryBuilder(query.statement, true);
+            return query;
+        };
 
         this.getColumnsSorl = function(id){
-            
+
             var url = presenterResources.analysis + "/" + id + "/columns-sorl";
             return $http.get(url);
         };
@@ -249,12 +251,8 @@ define([
             return $http.post(url, analysisCopy);
         };
 
-
-
         //solr
         var _fixQueryBuilder = function (statement, edit) {
-
-            //console.log("statement ", statement.type);
             if (statement.type === 'CONDITION_SOLR') {
                 if (statement.predicate === 'EQUAL' ||
                         statement.predicate === 'NOT_EQUAL' ||
@@ -275,7 +273,7 @@ define([
                 }
 
             } else {
-                
+
                 var key;
                 if (statement.statement !== undefined) {
                     for (key in statement.statement.statements) {
@@ -289,7 +287,7 @@ define([
             }
 
         };
-        
+
         var agreementValueArray = function(value, edit) {
                var valueArray = [];
                for (var i in value) {
@@ -301,7 +299,7 @@ define([
                     "in": valueArray
                };
           };
-        
+
         var agreementValueString = function(value, edit) {
                var retorno = {
                     "value": value,
@@ -313,21 +311,21 @@ define([
                }
                return retorno;
           };
-          
+
         var agreementValueObject = function(value, edit) {
             var retorno = {
                 "value": "",
                 "between": value,
                 "in": []
             };
-            
+
             if (edit) {
                 retorno = {"start": value.between.start, "end": value.between.end};
             }
-            
+
             return retorno;
         };
-        
+
         this.bulkRemove = function (analysisList) {
             return $http.delete(presenterResources.analysis, {
                 data: analysisList.map(function (e) {
@@ -339,6 +337,5 @@ define([
                 }
             });
         };
-
     });
 });

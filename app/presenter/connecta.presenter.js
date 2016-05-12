@@ -13,6 +13,8 @@ define([
 ], function (angular) {
     var presenter = angular.module('connecta.presenter', []);
 
+    presenter._configKey = 'presenter';
+
     presenter.config(function ($translatePartialLoaderProvider) {
         $translatePartialLoaderProvider.addPart('presenter/datasource');
         $translatePartialLoaderProvider.addPart('presenter/singlesource');
@@ -48,8 +50,7 @@ define([
             hierarchy: appPresenter.host + '/hierarchy',
             hierarchyItem: appPresenter.host + '/hierarchy/hierarchy-item',
             group: appPresenter.host + '/group',
-            viewer: appPresenter.host + '/viewer',
-            analysisViewer: appPresenter.host + '/analysis-viewer'
+            viewer: appPresenter.host + '/viewer'
         });
     });
 
@@ -212,15 +213,16 @@ define([
         {
             title: 'SINGLESOURCE.MEDIA',
             icon: 'icon-perm-media',
+            href: 'presenter/singlesource',
             children: [
 //                {
 //                    href: 'presenter/group',
 //                    title: 'GROUP.GROUPS'
 //                },
-                {
-                    href: 'presenter/singlesource',
-                    title: 'SINGLESOURCE.MEDIA'
-                }
+//                {
+//                    href: 'presenter/singlesource',
+//                    title: 'SINGLESOURCE.MEDIA'
+//                }
             ]
         }
 //        {

@@ -2,6 +2,7 @@
   "AUTH": {
     "LOGIN" : "Entrar",
     "USER" : "Usuário",
-    "PASSWORD" : "Senha"
+    "PASSWORD" : "Senha",
+    "DOMAIN" : "Domínio"
   }
 }

@@ -2,18 +2,18 @@ define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service'
 ], function (presenter) {
-    return presenter.lazy.controller('ModalAnalysis', function ($scope, $modalInstance, analysisData) {
+    return presenter.lazy.controller('ModalAnalysis', function ($scope, $uibModalInstance, analysisResult) {
 
 
         $scope.ok = function () {
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+        $scope.close = function () {
+            $uibModalInstance.dismiss('cancel');
         };
         
-        $scope.analysisData = analysisData;
+        $scope.analysisResult = analysisResult;
        
     });
 });

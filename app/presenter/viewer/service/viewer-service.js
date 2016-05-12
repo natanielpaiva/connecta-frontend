@@ -3,7 +3,7 @@ define([
     'connecta.presenter',
     'portal/layout/service/autocomplete'
 ], function (presenter) {
-    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http) {
+    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, DomainService) {
 
         var exampleTable = {
             examples: [
@@ -421,6 +421,14 @@ define([
                 });
             });
         };
+        
+        this.getAnalysisById = function(id){
+            return $http.get(presenterResources.analysis + "/" + id );
+        };
+        
+        this.analysisList = function(){
+            return $http.get(presenterResources.analysis);
+        };
 
         this.getSinglesourceAutoComplete = function (value) {
             return $autocomplete(presenterResources.singlesource + "/auto-complete", {
@@ -448,84 +456,97 @@ define([
             return presenterResources.singlesource + '/' + singlesource.id + '/binary';
         };
 
-        var filterAnalysisViewer = function (analysisViewer) {
-            switch (analysisViewer.type) {
-                case 'SINGLESOURCE':
-                    for (var key in analysisViewer.singlesource.list) {
-                        analysisViewer.singleSource.id = analysisViewer.singlesource.list[key].id;
-                    }
-                    delete analysisViewer.singlesource;
-                    break;
-                default:
-                    for (key in analysisViewer.metrics) {
-                        analysisViewer
-                                .analysisViewerColumns
-                                .push({
-                                    columnDataType: 'NUMBER',
-                                    columnType: 'METRIC',
-                                    analysisColumn: analysisViewer.metrics[key]
-                                }
-                                );
-                    }
-
-                    for (key in analysisViewer.descriptions) {
-                        analysisViewer
-                                .analysisViewerColumns
-                                .push({
-                                    columnDataType: 'TEXT',
-                                    columnType: 'DESCRIPTION',
-                                    analysisColumn: analysisViewer.descriptions[key]
-                                }
-                                );
-                    }
-
-                    for (key in analysisViewer.xfields) {
-                        analysisViewer
-                                .analysisViewerColumns
-                                .push({
-                                    columnDataType: 'NUMBER',
-                                    columnType: 'XFIELD',
-                                    analysisColumn: analysisViewer.xfields[key]
-                                }
-                                );
-                    }
-
-                    for (key in analysisViewer.yfields) {
-                        analysisViewer
-                                .analysisViewerColumns
-                                .push({
-                                    columnDataType: 'NUMBER',
-                                    columnType: 'YFIELD',
-                                    analysisColumn: analysisViewer.yfields[key]
-                                }
-                                );
-                    }
-
-                    for (key in analysisViewer.valueFields) {
-                        analysisViewer
-                                .analysisViewerColumns
-                                .push({
-                                    columnDataType: 'NUMBER',
-                                    columnType: 'VALUEFIELD',
-                                    analysisColumn: analysisViewer.valueFields[key]
-                                }
-                                );
-                    }
-                    break;
-            }
-
-
-            delete analysisViewer.metrics;
-            delete analysisViewer.descriptions;
-            delete analysisViewer.yfields;
-            delete analysisViewer.xfields;
-            delete analysisViewer.valueFields;
-        };
+//        var filterAnalysisViewer = function (analysisViewer) {
+//            switch (analysisViewer.type) {
+//                case 'SINGLESOURCE':
+//                    for (var key in analysisViewer.singlesource.list) {
+//                        analysisViewer.singleSource.id = analysisViewer.singlesource.list[key].id;
+//                    }
+//                    delete analysisViewer.singlesource;
+//                    break;
+//                default:
+//                    for (key in analysisViewer.metrics) {
+//                        analysisViewer
+//                                .analysisViewerColumns
+//                                .push({
+//                                    columnDataType: 'NUMBER',
+//                                    columnType: 'METRIC',
+//                                    analysisColumn: analysisViewer.metrics[key]
+//                                }
+//                                );
+//                    }
+//                    
+//                    for (key in analysisViewer.filters) {
+//                        analysisViewer
+//                                .analysisViewerColumns
+//                                .push({
+//                                    columnDataType: 'TEXT',
+//                                    columnType: 'FILTER',
+//                                    analysisColumn: analysisViewer.filters[key]
+//                                }
+//                                );
+//                    }
+//
+//                    for (key in analysisViewer.descriptions) {
+//                        analysisViewer
+//                                .analysisViewerColumns
+//                                .push({
+//                                    columnDataType: 'TEXT',
+//                                    columnType: 'DESCRIPTION',
+//                                    analysisColumn: analysisViewer.descriptions[key]
+//                                }
+//                                );
+//                    }
+//
+//                    for (key in analysisViewer.xfields) {
+//                        analysisViewer
+//                                .analysisViewerColumns
+//                                .push({
+//                                    columnDataType: 'NUMBER',
+//                                    columnType: 'XFIELD',
+//                                    analysisColumn: analysisViewer.xfields[key]
+//                                }
+//                                );
+//                    }
+//
+//                    for (key in analysisViewer.yfields) {
+//                        analysisViewer
+//                                .analysisViewerColumns
+//                                .push({
+//                                    columnDataType: 'NUMBER',
+//                                    columnType: 'YFIELD',
+//                                    analysisColumn: analysisViewer.yfields[key]
+//                                }
+//                                );
+//                    }
+//
+//                    for (key in analysisViewer.valueFields) {
+//                        analysisViewer
+//                                .analysisViewerColumns
+//                                .push({
+//                                    columnDataType: 'NUMBER',
+//                                    columnType: 'VALUEFIELD',
+//                                    analysisColumn: analysisViewer.valueFields[key]
+//                                }
+//                                );
+//                    }
+//                    break;
+//            }
+//
+//
+//            delete analysisViewer.metrics;
+//            delete analysisViewer.descriptions;
+//            delete analysisViewer.yfields;
+//            delete analysisViewer.xfields;
+//            delete analysisViewer.valueFields;
+//            delete analysisViewer.filters;
+//        };
+        
         this.save = function (analysisViewer) {
-
             var analysisViewerCopy = angular.copy(analysisViewer);
             var url = presenterResources.viewer;
-            filterAnalysisViewer(analysisViewerCopy);
+//            filterAnalysisViewer(analysisViewerCopy);
+            analysisViewerCopy.domain = DomainService.getDomainName();
             if (analysisViewer.id === undefined) {
                 return $http.post(url, analysisViewerCopy);
             } else {
@@ -533,22 +554,23 @@ define([
                 return $http.put(url, analysisViewerCopy);
             }
         };
-        this.preview = function (analysisViewer) {
-            var analysisViewerCopy = angular.copy(analysisViewer);
-            var url = presenterResources.viewer + "/preview";
-            filterAnalysisViewer(analysisViewerCopy);
-            return $http.post(url, analysisViewerCopy);
-        };
+        
+//        this.preview = function (analysisViewer) {
+//            var analysisViewerCopy = angular.copy(analysisViewer);
+//            var url = presenterResources.viewer + "/preview";
+//            filterAnalysisViewer(analysisViewerCopy);
+//            return $http.post(url, analysisViewerCopy);
+//        };
 
-        this.result = function (id) {
-            var url = [
-                presenterResources.viewer,
-                id,
-                "result"
-            ].join("/");
-
-            return $http.get(url);
-        };
+//        this.result = function (id) {
+//            var url = [
+//                presenterResources.viewer,
+//                id,
+//                "result"
+//            ].join("/");
+//
+//            return $http.get(url);
+//        };
 
         this.getListAnalysis = function (analysisViewerData, analysisData) {
             analysisViewerData.analysisViewerColumns = [];
@@ -562,7 +584,7 @@ define([
                         }
                         );
             }
-            var url = presenterResources.analysisViewer + "/preview";
+            var url = presenterResources.viewer + "/preview";
             return $http.post(url, analysisViewerData);
         };
 
@@ -586,23 +608,25 @@ define([
             var url = presenterResources.viewer + "/" + id;
             return $http.get(url);
         };
+        
         this.delete = function (id) {
             var url = presenterResources.viewer + "/" + id;
             return $http.delete(url);
         };
-        this.getPreview = function (viewer, analysisViewerResult) {
-            var viewerConfiguration = analysisViewerResult.analysisViewer.configuration;
-            viewer.configuration = analysisViewerResult.analysisViewer.configuration;
-            viewer.configuration.export = {enabled: true};
-            if (viewerConfiguration.type !== "gauge") {
-                viewer.configuration.data = analysisViewerResult.result;
+        
+        this.getPreview = function (viewer, result) {
+//            var viewerConfiguration = analysisViewerResult.analysisViewer.configuration;
+//            viewer.configuration = analysisViewerResult.analysisViewer.configuration;
+//            viewer.configuration.export = {enabled: true};
+            if (viewer.configuration.type !== "gauge") {
+                viewer.configuration.data = result;
             } else {
                 viewer.configuration.arrows = [];
-                for (var iResult in analysisViewerResult.result) {
-                    for (var key in  analysisViewerResult.result[iResult]) {
+                for (var iResult in result) {
+                    for (var key in  result[iResult]) {
                         var arrows = {
                             id: key,
-                            value: analysisViewerResult.result[iResult][key],
+                            value: result[iResult][key],
                             color: '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
                         };
                         viewer.configuration.arrows.push(arrows);
@@ -610,24 +634,24 @@ define([
                 }
             }
 
-            switch (viewerConfiguration.type) {
+            switch (viewer.configuration.type) {
                 case "table":
-                    viewer.configuration.data = analysisViewerResult.result;
+                    viewer.configuration.data = result;
                     break;
                 case "serial":
-                    configureSerialAndRadar(viewer, analysisViewerResult);
+                    configureSerialAndRadar(viewer, result);
                     break;
                 case "radar":
-                    configureSerialAndRadar(viewer, analysisViewerResult);
+                    configureSerialAndRadar(viewer, result);
                     break;
                 case "pie":
-                    configureFunnelAndPie(viewer, analysisViewerResult);
+                    configureFunnelAndPie(viewer, result);
                     break;
                 case "funnel":
-                    configureFunnelAndPie(viewer, analysisViewerResult);
+                    configureFunnelAndPie(viewer, result);
                     break;
                 case "xy":
-                    var analysisViewerColumns = analysisViewerResult.analysisViewer.analysisViewerColumns;
+                    var analysisViewerColumns = viewer.analysisViewerColumns;
                     var qtdXField = 0;
                     var qtdYField = 0;
                     var qtdValueField = 0;
@@ -646,7 +670,7 @@ define([
                     }
 
                     if (qtdXField === qtdYField) {
-                        var standardGraph = angular.copy(analysisViewerResult.analysisViewer.viewer.configuration.graphs[0]);
+                        var standardGraph = angular.copy(viewer.configuration.graphs[0]);
                         viewer.configuration.graphs = [];
                         for (var l = 0; l < qtdXField; l++) {
                             var graphXy = angular.copy(standardGraph);
@@ -671,10 +695,11 @@ define([
                     break;
             }
         };
-        var configureSerialAndRadar = function (viewer, analysisViewerResult) {
-            var standardGraph = angular.copy(analysisViewerResult.analysisViewer.configuration.graphs[0]);
+        
+        var configureSerialAndRadar = function (viewer, result) {
+            var standardGraph = angular.copy(viewer.configuration.graphs[0]);
             viewer.configuration.graphs = [];
-            var analysisViewerColumns = analysisViewerResult.analysisViewer.analysisViewerColumns;
+            var analysisViewerColumns = viewer.analysisViewerColumns;
             for (var i in analysisViewerColumns) {
                 if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
                     viewer.configuration.categoryField = analysisViewerColumns[i].analysisColumn.label;
@@ -691,8 +716,8 @@ define([
             }
             delete viewer.configuration.dataProvider;
         };
-        var configureFunnelAndPie = function (viewer, analysisViewerResult) {
-            var analysisViewerColumns = analysisViewerResult.analysisViewer.analysisViewerColumns;
+        var configureFunnelAndPie = function (viewer, result) {
+            var analysisViewerColumns = viewer.analysisViewerColumns;
             for (var i in analysisViewerColumns) {
                 if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
                     viewer.configuration.titleField = analysisViewerColumns[i].analysisColumn.label;

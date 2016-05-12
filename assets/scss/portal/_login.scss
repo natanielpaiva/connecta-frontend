@@ -5,8 +5,6 @@ $boxHeight: 22em;
     login {
         display: none;
     }
-
-    overflow-y: scroll;
 }
 
 [layout].login {
@@ -16,6 +14,7 @@ $boxHeight: 22em;
     bottom: 0;
     left:0;
     right:0;
+    overflow-y:hidden;
 
     menu,
     heading,
@@ -67,7 +66,7 @@ $boxHeight: 22em;
             width: 910px;
             margin-left: 15%;
         }
-    } 
+    }
 }
 
 #header-login {
@@ -104,8 +103,17 @@ $boxHeight: 22em;
             outline: none;
             width: 245px;
         }
+        select.field-select {
+            display: inline-block;
+            color: $white;
+            background-color: transparent;
+            border: 1px solid #333;
+            margin-left: 1em;
+            outline: none;
+            width: 245px;
+        }
         #btn-login {
-            background-color: $lightGray;
+            background-color: $darkerWhite;
             border: none;
             width: 100%;
             height: 3em;
@@ -114,7 +122,7 @@ $boxHeight: 22em;
             transition: background-color 250ms;
             &:hover,
                 &:focus {
-                background-color: lighten($lightGray, $defaultLight*2);
+                background-color: lighten($darkerWhite, $defaultLight*2);
                 cursor: pointer;
                 transition: background-color 250ms;
             }
@@ -190,4 +198,80 @@ $boxHeight: 22em;
         }
     }
 
+}
+
+.domain-list {
+    width: 60em;
+    margin: 5em auto 0 auto;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1.4em 2em 0em 2em;
+    border-radius:0.25em;
+
+    p{
+        color: $white;
+        margin: 0 0 .75em 0;
+        font-size: 1.75em;
+        font-weight: 100;
+    }
+    .thumbnail-grid {
+        .thumbnail-grid-item {
+            position: relative;
+            cursor: pointer;
+            a {
+                height:12em;
+                display:block;
+                width:100%;
+                position: relative;
+                margin-bottom: 2em;
+                &:link, &:hover, &:visited {
+                    * {
+                        color:$white;
+                    }
+                }
+                &:hover {
+                    .thumbnail-grid-item-name {
+                        background-color:$gray;
+                    }
+                }
+                .thumbnail-grid-item-inner {
+                    border:solid 0.5em transparent;
+                    border-bottom-width: 0;
+                    height:9em;
+                    width:100%;
+                    background-color:$darkWhite;
+                    position:relative;
+                    overflow:hidden;
+                    text-align:center;
+
+                    .icon-domain {
+                        font-size:4em;
+                        color:$gray;
+                        line-height: 2em;
+                        height: 2em;
+                        display: block;
+                        text-align: center;
+                        width:100%;
+                    }
+                }
+                .thumbnail-grid-item-name {
+                    //background-color:$darkerWhite;
+                    background-color:rgba($black, 0.6);
+                    //background-color:rgba($black, 0.75);
+                    color:$white;
+                    line-height:2.4em;
+                    font-size:1.25em;
+                    bottom:0;
+                    left:0;
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    padding: 0 0.5em;
+                }
+            }
+
+        }
+    }
 }

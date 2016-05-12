@@ -3,7 +3,7 @@ define([
     'connecta.portal'
 ], function (portal) {
 
-    return portal.lazy.service('DashboardService', function (portalResources, $http, $upload) {
+    return portal.lazy.service('DashboardService', function (portalResources, $http, $upload, DomainService) {
 
         this.save = function (dashboard) {
             var url = portalResources.dashboard;
@@ -31,7 +31,8 @@ define([
             }
 
             var dashboardCopy = angular.copy(dashboard);
-
+            dashboardCopy.domain = DomainService.getDomainName();
+            
             return $http[method](url, dashboardCopy);
         };
 

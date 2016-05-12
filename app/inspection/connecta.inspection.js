@@ -2,6 +2,8 @@ define([
     'angular'
 ], function (angular) {
     var inspection = angular.module('connecta.inspection', ['ui.bootstrap']);
+    
+    inspection._configKey = 'inspection';
 
     inspection.config(function ($translatePartialLoaderProvider) {
         $translatePartialLoaderProvider.addPart('inspection/inspection');

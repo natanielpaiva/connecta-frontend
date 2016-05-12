@@ -1,7 +1,8 @@
 /* global Pace */
 define([
-  'angular',
   'jquery',
+  'angular',
+  
   // Configuração dos módulos
   'json!applications.json',
   // Módulos Angular Connecta
@@ -37,8 +38,9 @@ define([
   'bower_components/angular-amchart/src/amchart',
   'bower_components/angular-facebook/lib/angular-facebook',
   'bower_components/ngAutocomplete/src/ngAutocomplete',
-  'bower_components/angular-base64/angular-base64'
-], function(angular, $, applications, portal, collector, speaknow, presenter, maps, inspection) {
+  'bower_components/angular-base64/angular-base64',
+  'bower_components/angular-ui-select/dist/select'
+], function($ , angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
   var connecta = angular.module('connecta', [
     'connecta.portal',
@@ -65,7 +67,8 @@ define([
     'angularFileUpload',
     'currencyMask',
     'AngularAmChart',
-    'base64'
+    'base64',
+    'ui.select'
   ]);
 
   // Configuração do backend dos módulos
@@ -218,6 +221,9 @@ define([
             },
             500: function(rejection) { // INTERNAL SERVER ERROR
               $rootScope.$broadcast('layout.notify', rejection.data);
+            },
+            409: function(rejection) { // CONFLICT
+              $rootScope.$broadcast('layout.notify', rejection.data);
             }
           };
 
@@ -248,7 +254,7 @@ define([
    * @param {type} $rootScope
    * @param {type} $menu
    */
-  function configureRouteChangeListener($rootScope, $menu) {
+  function configureRouteChangeListener($rootScope, $menu, LayoutService) {
 
     /**
      * Verifica mudança de rotas e emite os eventos de entrada e saida dos módulos
@@ -260,12 +266,7 @@ define([
       var isModuleChange = (!originModule) || (destModule && $originRoute.$$route.module !== $destRoute.$$route.module);
 
       if (isModuleChange && destModule) {
-        $menu.update();
-        $rootScope.$broadcast(destModule + '.enter', $destRoute);
-
-        if(originModule){
-          $rootScope.$broadcast(originModule + '.leave', $originRoute);
-        }
+        LayoutService.moduleChanged(originModule, $originRoute, destModule, $destRoute);
       }
     });
   }
@@ -280,9 +281,10 @@ define([
    * @param {type} LoginService
    * @returns {undefined}
    */
-  function configureAuthenticationListener($http, $rootScope, $route, LoginService){
+  function configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService){
     $http.defaults.transformRequest.push(function(data, getHeaders){
       getHeaders().Authorization = "Bearer "+LoginService.getAuthenticationToken();
+      getHeaders().Domain = DomainService.getDomainName();
       return data;
     });
 
@@ -305,10 +307,10 @@ define([
     //$locationProvider.html5Mode(true);
   });
 
-  connecta.run(function($rootScope, $menu, $http, $route, LoginService) {
+  connecta.run(function($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService) {
 
-    configureAuthenticationListener($http, $rootScope, $route, LoginService);
-    configureRouteChangeListener($rootScope, $menu);
+    configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService);
+    configureRouteChangeListener($rootScope, $menu, LayoutService);
 
   });
 
@@ -352,7 +354,9 @@ define([
     'inspection/inspection/directive/inspect-datepicker',
     'inspection/inspection/directive/drop-file',
     'speaknow/company/service/company-service',
-    'portal/user/service/user-service'
+    'portal/user/service/user-service',
+    'portal/domain/service/domain-service',
+    'portal/auth/directive/visibleToRoles',
   ], function(doc) {
     angular.bootstrap(doc, [connecta.name]);
   });

@@ -1,5 +1,6 @@
 {
     "VIEWER": {
+        "NEW_VIEWER":"Novo visualizador",
         "TYPE_ANALYSIS":"Análise",
         "TYPE_SINGLESOURCE":"Mídia",
         "TYPE_SINGLESOURCE_GROUP":"Grupo de Mídia",
@@ -24,6 +25,8 @@
         "VALUEFIELD": "Coluna de valor",
         "FONT_SIZE": "Tamanho da fonte",
         "VIEW_ANALYSIS": "Resultado da análise",
+        "EXPORT": "Exportar imagem",
+        
         "FONT_COLOR": "Cor",
         "FONT_FAMILY": "Fonte",
         "HAND_DRAWN": "Desenhado a mão",
@@ -176,7 +179,13 @@
         "GRAPHS": "Gráficos",
         "_CATEGORY_AXIS": "+ Eixo de categoria",
         "CATEGORY_AXIS": "Eixo de categoria",
-        "AUTO_ROTATE_ANGLE": "Ângulo de rotação"
+        "AUTO_ROTATE_ANGLE": "Ângulo de rotação",
+        "SETTINGS_FILTER":"Configurações de filtro",
+        "DRAG_COLUMNS_FOR_SET_FILTERS":"Arraste as colunas para definir os filtros:",
+        "SETTINGS_DRILL":"Configurações drill",
+        "DRAG_COLUMNS_FOR_DRILL":"Arraste as colunas para a hierarquia de Drill:",
+        "SETTINGS_ADVANCED":"Configurações avançadas",
+        "SELECT":"Selecione"
     },
     "VIEWER_TEMPLATE_TYPE": {
         "bar": "Bar",

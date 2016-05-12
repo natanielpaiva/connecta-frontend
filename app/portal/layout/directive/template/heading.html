@@ -3,12 +3,13 @@
         <span class="sr-only">Toggle navigation</span>
     </button>
 
-    <div class="navbar-brand {{appInstance.name}}">
+    <div class="navbar-brand">
         <button class="navbar-toggle toggle-menu" ng-click="toggleSidebar()" type="button">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-menu"></span>
         </button>
-        <div class="current-app" title="{{appInstance.title}}"></div>
+        <a href="{{currentModule.config.home}}" class="current-app" title="{{currentModule.title}}"
+             style="{{currentModule.config.headerLogo?'background-image:url('+currentModule.config.headerLogo+')':''}}"></a>
     </div>
 </div>
 
@@ -32,13 +33,13 @@
             </a>
         </li>
         <li ng-class="{'heading-item-focus': notificationPopoverFocus }">
-            <a href title="{{'LAYOUT.NOTIFICATIONS'| translate}}"
+            <a href title="{{'NOTIFICATION.NOTIFICATIONS'| translate}}"
                ng-click="toggleNotificationsPopOver()">
                 <span class="icon-notifications"></span>
             </a>
         </li>
         <li ng-class="{'heading-item-focus': userPopoverFocus }">
-            <a class="image-on-background user-avatar" href title="{{user.firstName}} {{user.lastName}}"
+            <a class="image-on-background user-avatar" href title="{{user.name + ' ' + user.lastName}}"
                ng-click="toggleUserPopOver()" ng-show='avatarUrl' style="background-image: url('{{avatarUrl}}')">
             </a>
         </li>
