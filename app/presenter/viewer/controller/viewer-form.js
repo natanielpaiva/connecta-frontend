@@ -306,7 +306,7 @@ define([
                     });
                 });
             },
-            SINGLESOURCE: function(viewer){
+            SINGLESOURCE: function (viewer) {
                 angular.extend(viewer.singleSource, viewer.singlesource.list[0]);
             }
         };
