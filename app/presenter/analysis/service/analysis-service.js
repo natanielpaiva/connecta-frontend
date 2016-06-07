@@ -19,7 +19,7 @@ define([
 
     return presenter.lazy.service('AnalysisService', function (presenterResources, $http, DomainService) {
 
-        var types = {
+        var _types = {
             DATABASE: {
                 id: 'database',
                 name: 'Database',
@@ -75,9 +75,7 @@ define([
                 template: '_analysis-webservice.html',
                 controller: WebserviceAnalysisFormController,
                 start: function (datasouce, component) {
-
                     component.typeWebservice = datasouce.typeWebservice;
-                    console.log("datasouce.typeWebservice: ", datasouce.typeWebservice);
                     var url = null;
                     if (datasouce.typeWebservice === "REST") {
                         url = presenterResources.analysis + "/" + datasouce.id + "/get-rest-specifications";
@@ -104,9 +102,89 @@ define([
             }
         };
         
-        var databaseRequestTypes = {
+        var _databaseRequestTypes = {
             SQL:'ANALYSIS.DATABASE.REQUEST_SQL',
             TABLE:'ANALYSIS.DATABASE.REQUEST_TABLE'
+        };
+        
+        var _solrRequestTypes = {
+            QUERY_BUILDER:'ANALYSIS.SOLR.QUERY_BUILDER',
+            TEXT_QUERY:'ANALYSIS.SOLR.TEXT_QUERY'
+        };
+        
+      
+        
+        var _filterOperators = {
+            EQUAL: {
+                order: 0,
+                icon: 'icon-filter-equal',
+                name: 'DASHBOARD.FILTER.TYPE.EQUAL',
+                type: 'VALUE'
+            },
+            NOT_EQUAL: {
+                order: 1,
+                icon: 'icon-filter-not-equal',
+                name: 'DASHBOARD.FILTER.TYPE.NOT_EQUAL',
+                type: 'VALUE'
+            },
+            LESS_THAN: {
+                order: 2,
+                icon: 'icon-filter-less-than',
+                name: 'DASHBOARD.FILTER.TYPE.LESS_THAN',
+                type: 'NUMBER'
+            },
+            LESS_THAN_EQUAL: {
+                order: 3,
+                icon: 'icon-filter-less-than-equal',
+                name: 'DASHBOARD.FILTER.TYPE.LESS_THAN_EQUAL',
+                type: 'NUMBER'
+            },
+            GREATER_THAN: {
+                order: 4,
+                icon: 'icon-filter-greater-than',
+                name: 'DASHBOARD.FILTER.TYPE.GREATER_THAN',
+                type: 'NUMBER'
+            },
+            GREATER_THAN_EQUAL: {
+                order: 5,
+                icon: 'icon-filter-greater-than-equal',
+                name: 'DASHBOARD.FILTER.TYPE.GREATER_THAN_EQUAL',
+                type: 'NUMBER'
+            },
+            BETWEEN: {
+                order: 6,
+                icon: 'icon-filter-between',
+                name: 'DASHBOARD.FILTER.TYPE.BETWEEN',
+                type: 'INTERVAL'
+            },
+            IN: {
+                order: 7,
+                icon: 'icon-filter-in',
+                name: 'DASHBOARD.FILTER.TYPE.IN',
+                type: 'ARRAY'
+            },
+            CONTAINS: {
+                order: 8,
+                icon: 'icon-filter-contains',
+                name: 'DASHBOARD.FILTER.TYPE.CONTAINS',
+                type: 'STRING'
+            },
+            STARTS_WITH: {
+                order: 9,
+                icon: 'icon-filter-starts-with',
+                name: 'DASHBOARD.FILTER.TYPE.STARTS_WITH',
+                type: 'STRING'
+            },
+            ENDS_WITH: {
+                order: 10,
+                icon: 'icon-filter-ends-with',
+                name: 'DASHBOARD.FILTER.TYPE.ENDS_WITH',
+                type: 'STRING'
+            }
+        };
+        
+        this.getFilterOperators = function() {
+            return _filterOperators;
         };
 
         // listar todas as analysis
@@ -124,11 +202,15 @@ define([
         };
 
         this.getTypes = function () {
-            return types;
+            return _types;
         };
         
         this.getDatabaseRequestTypes = function () {
-            return databaseRequestTypes;
+            return _databaseRequestTypes;
+        };
+        
+        this.getSolrRequestTypes = function () {
+            return _solrRequestTypes;
         };
 
         //lista data source
@@ -147,6 +229,13 @@ define([
             var analysisCopy = angular.copy(analysis);
             var url = presenterResources.analysis + "/result";
             return $http.post(url, analysisCopy);
+        };
+        
+        this.possibleValuesFor = function(analysisExecuteRequest, filter) {
+            var url = presenterResources.analysis + "/filter-value?column="+
+                    filter.analysisColumn.name; // Não sei outro jeito de fazer post com parâmetros :/
+            
+            return $http.post(url, angular.copy(analysisExecuteRequest));
         };
 
         this.getAnalysis = function (idAnalysis) {
@@ -238,9 +327,8 @@ define([
             return query;
         };
 
-        this.getColumnsSorl = function(id){
-
-            var url = presenterResources.analysis + "/" + id + "/columns-sorl";
+        this.getConditionsSorl = function(id){
+            var url = presenterResources.analysis + "/" + id + "/conditions-sorl";
             return $http.get(url);
         };
 

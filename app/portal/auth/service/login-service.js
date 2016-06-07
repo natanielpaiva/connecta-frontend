@@ -1,3 +1,4 @@
+/* global angular */
 define([
   'connecta.portal'
 ], function(portal) {
@@ -42,9 +43,11 @@ define([
         $http.get(portalResources.user + '/current').then(function(response) {
           _currentUser = response.data;
           deferred.resolve(_currentUser);
-        }, function(response) {
-          loginService.unauthenticate();
         });
+//        , function() {
+//          loginService.unauthenticate();
+//        }
+        
       } else {
         $timeout(function() {
           var userCopy = {};
@@ -68,8 +71,6 @@ define([
         angular.copy(_currentUser, userCopy);
         deferred.resolve(userCopy);
         $rootScope.$broadcast('user.refresh.done', userCopy);
-      }, function(response) {
-        console.log(response);
       });
 
       return deferred.promise;
@@ -145,7 +146,7 @@ define([
     this.selectDomain = function(domain){
          $cookieStore.put('portal.auth.access_token', _userToken.access_token);
          $cookieStore.put('portal.auth.refresh_token', _userToken.refresh_token);
-         $cookieStore.put('user.domain.name', domain);
+         $cookieStore.put('user.domain.name', domain.id);
          loginService.setAuthenticated(true);
     };
 

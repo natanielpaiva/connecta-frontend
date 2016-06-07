@@ -1,7 +1,7 @@
 {
-  "name": "connecta-portal",
+  "name": "connecta-frontend",
   "version": "0.4.2",
-  "description": "Interface principal dos aplicativos Connecta",
+  "description": "Interface web dos aplicativos Connecta",
   "repository": "http://dsvn.cds.com.br/svn/connecta-2.0/connecta-portal-frontend/",
   "devDependencies": {
     "archiver": "^0.12.0",

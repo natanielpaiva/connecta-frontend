@@ -129,7 +129,7 @@ define([
 
                 identifyAndHighlightUserDomain = function(domainSelected){
                     for(var i = 0; i < $scope.user.domains.length; i++){
-                        if($scope.user.domains[i].name === domainSelected){
+                        if($scope.user.domains[i].id === domainSelected){
                             $scope.user.domains[i].selected = true;
                         }else{
                             $scope.user.domains[i].selected = false;
@@ -145,8 +145,8 @@ define([
                 $scope.changeDomain = function(domain){
                     var currentDomain = $cookieStore.get('user.domain.name');
                     if(currentDomain !== domain.name){
-                        $cookieStore.put('user.domain.name', domain.name);
-                        identifyAndHighlightUserDomain(domain.name);
+                        $cookieStore.put('user.domain.name', domain.id);
+                        identifyAndHighlightUserDomain(domain.id);
                         reloadPageAfterDomainSelection();
                     }
                     $scope.toggleDomain = false;

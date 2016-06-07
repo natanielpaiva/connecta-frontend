@@ -44,6 +44,12 @@
         "DATABASE": {
             "REQUEST_TABLE": "Table",
             "REQUEST_SQL": "Custom query"
+        },
+        "QUERY":"Query",
+        "SOLR":{
+           "CUSTOM_QUERY": "Custom query",
+           "TEXT_QUERY": "Text query"
         }
+        
     }
 }

@@ -45,7 +45,7 @@
 
 <h4 ng-if="responseDataBase" translate>ANALYSIS.RESULTS_OF_THE_ANALYSIS</h4>
 
-<div class="row margin-top-single" ng-if="responseDataBase">
+<div class="row margin-top-single" ng-if="responseDataBase" ng-init="limit=10">
     <div class="col-md-12">
         <div style="overflow-x:auto;">
             <table class="table table-condensed table-single-line table-striped table-hover"
@@ -58,7 +58,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="r in responseDataBase| limitTo:10" class="row">
+                    <tr ng-repeat="r in responseDataBase| limitTo:limit" class="row">
                         <td ng-repeat="col in analysis.analysisColumns" class="text-left">
                             {{ r[col.name]  ? r[col.name] :  r[col.label] }}
                         </td>
@@ -66,8 +66,8 @@
                 </tbody>
             </table>
         </div>
-        <p class="text-center margin-top-single" ng-if="responseDataBase.length && responseDataBase.length > 10">
-            {{'LAYOUT.MORE'|translate:{size:responseDataBase.length} }}
+        <p class="text-center margin-top-single" ng-if="responseDataBase.length && responseDataBase.length > limit">
+            {{'LAYOUT.MORE'|translate:{size:responseDataBase.length - limit} }}
         </p>
     </div>
 </div>

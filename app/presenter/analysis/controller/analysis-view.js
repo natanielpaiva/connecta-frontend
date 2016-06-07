@@ -15,24 +15,22 @@ define([
 
                 //SOLR
                 if ($scope.analysis.type === $scope.types.SOLR.name) {
-                    GroupService.getQueryById($scope.analysis.query.id).success(function (data) {
-                        var query = AnalysisService.formatQueryBuiderEdit(data);
-                        $scope.statement = query.statement;
-                        $scope.analysis.query = query.statement;
-                        return AnalysisService.getSolrResultApplyingQuery(
-                                $scope.analysis.datasource.id,
-                                $scope.statement,
-                                $scope.analysis.facet
-                            ).then(function (response) {
-                                $scope.analysisResult = response.data;
-                            });
+                    AnalysisService.execute({
+                        analysis: $scope.analysis,
+                        pagination: {count: 50,page: 1}
+
+                    }).then(function (response) {
+                        $scope.analysisResult = response.data;
+
                     });
 
                 }
                 //database
                 if ($scope.analysis.type === $scope.types.DATABASE.name.toUpperCase()) {
                     AnalysisService.execute({
-                        analysis: $scope.analysis
+                        analysis: $scope.analysis,
+                        pagination: {count: 50,page: 1}
+
                     }).then(function (response) {
                         $scope.analysisResult = response.data;
 

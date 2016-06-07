@@ -225,59 +225,258 @@
     }
 }
 
+@keyframes overflowfix {
+    0% {
+        overflow: inherit;
+    }
+    99% {
+        overflow: inherit;
+    }
+    100% {
+        overflow: hidden;
+    }
+}
+
 .dashboard-view-page {
     @extend .image-on-background;
 
     background-attachment: fixed;
+    background-color: #fafafa;
     margin:0;
     width:100%;
     padding:1em;
+    padding-top:6em;
+    @include clearfix;
 
-    .dashboard-view-edit {
-        font-size:0.6em;
-        padding:0;
-        margin:0;
-        line-height:2em;
-    }
+    $defaultAnimationDuration:$defaultAnimationDuration*2;
 
-    h1 {
-        margin-left: 10px;
-        font-size: 2.25em;
-        font-weight: bold;
-        padding-right:0.25em;
+    .dashboard-header {
+        background-color:$black;
+        width:60em;
+        max-width:75%;
+        position:fixed;
+        top:0;
+        left:0;
+        color:$white;
+        line-height:4.5em;
+        height:4.5em;
+        z-index:9;
+        float:left;
+        display:block;
+        box-shadow: 0 0 1em $gray;
+        @include clearfix;
 
-        a {
-            display: block;
-            color:$gray;
+        transition:width ease $defaultAnimationDuration,
+            background-color $defaultAnimationDuration ease,
+            box-shadow $defaultAnimationDuration ease;
+
+        &:after {
+            content:' ';
+            display:block;
+            position:absolute;
+            top:0;
+            right:-4.49em;
+            border-style: solid;
+            border-width: 2.275em;
+            border-color:$black transparent transparent $black;
+            transition:border-color $defaultAnimationDuration ease;
         }
-        .icon-arrow-left {
-            font-size: 0;
-            color:$gray;
-            opacity: 0;
-            transition: opacity ease-in $defaultAnimationDuration,
-                font-size ease-in-out $defaultAnimationDuration;
+
+        > *:not(svg) {
+            opacity:1;
+            transition:opacity $defaultAnimationDuration/4 linear $defaultAnimationDuration;
         }
 
-        &:hover {
-            .icon-arrow-left {
-                opacity: 1;
-                font-size: 0.8em;
+        &.dashboard-header-mini:not(:hover) {
+            transition:width $defaultAnimationDuration ease,
+                background-color $defaultAnimationDuration ease $defaultAnimationDuration/2;
+            animation: overflowfix $defaultAnimationDuration;
+            overflow: hidden;
+            background-color: transparent;
+            box-shadow: none;
+            width:5em;
+
+            > *:not(svg) {
+                opacity:0;
+                transition:opacity 0s linear;
+            }
+
+            &:after {
+                border-color:transparent;
+                transition:border-color $defaultAnimationDuration ease $defaultAnimationDuration/2;
+            }
+
+            svg {
+                transition:padding-left ease $defaultAnimationDuration;
+
+                #texto {
+                    display:none;
+                }
+
+                #logo {
+                    transition:transform $defaultAnimationDuration ease;
+                    transform-origin:50% 50%;
+                    transform:rotate(180deg) scale(1.5);
+                }
+            }
+        }
+
+        svg {
+            height:4.3em;
+            width:12em;
+            float:left;
+            padding-left:1em;
+            transition:padding-left $defaultAnimationDuration ease;
+
+            #logo {
+                transform:rotate(0deg) scale(1);
+                transition:transform $defaultAnimationDuration ease;
+                transform-origin:50% 50%;
+            }
+        }
+
+        h1 {
+            font-size: 1.4em;
+            font-weight: 500;
+            float:left;
+            height:3em;
+            line-height:3em;
+            padding:0 0 0 0.5em;
+            margin:0;
+            width: 25em;
+            text-align: center;
+            @include clipped-text;
+        }
+        .dashboard-view-controls {
+            float:right;
+            width:13em;
+            line-height:4.5em;
+            height:4.5em;
+            text-align: right;
+            a {
+                font-size:1.8em;
+                display: block;
+                width:1.75em;
+                padding:0;
+                margin:0;
+                float:left;
+                color:$white;
+                position:relative;
+                text-align: center;
+
+                .icon-rotate-90 {
+                    position:absolute;
+                    top:50%;
+                    left:0;
+                    transform: rotate(90deg) translate(-57%, -40%);
+                }
             }
         }
     }
-    h2 {
-        margin: 0 10px;
-        font-size: 1.8em;
-        font-weight: 500;
 
-        a {
-            @extend .link-no-state;
-            line-height: 2em;
-            display:block;
-            border-bottom: solid 1px lighten($gray, 20%);
+    .drill-breadcrumb {
+        font-size:11px;
+        margin-top:-0.2em;
+        overflow:hidden;
+        text-overflow:clip;
+        white-space:nowrap;
+        width:100%;
+        height:2em;
+        line-height:2em;
+        &:hover {
+            height:auto;
         }
-        .icon-link {
-            font-size: 0.8em;
+        &:after {
+            content:' ';
+            display:block;
+            clear:both;
+        }
+
+        .drill-breadcrumb-item {
+            cursor:pointer;
+            color:$white;
+            height:2em;
+            float:left;
+            margin-right:1em;
+            padding:0;
+            padding-left:0.4em;
+            position:relative;
+            &:hover {
+                opacity:0.9;
+            }
+
+            &.drill-breadcrumb-item-home {
+                .fa-home {
+                    transform:translateY(-0.15em);
+                    font-size:1.2em;
+                    height:2em;
+                    line-height:2em;
+                }
+            }
+            &:nth-of-type(odd) {
+                background-color:darken($presenterBlue,5%);
+
+                &:before {
+                    border-left-color:darken($presenterBlue,5%);
+                }
+                &:after {
+                    border-top-color:darken($presenterBlue,5%);
+                    border-bottom-color:darken($presenterBlue,5%);
+                }
+            }
+            &:nth-of-type(even) {
+                background-color:lighten($presenterBlue,5%);
+                &:before {
+                    border-left-color:lighten($presenterBlue,5%);
+                }
+                &:after {
+                    border-top-color:lighten($presenterBlue,5%);
+                    border-bottom-color:lighten($presenterBlue,5%);
+                }
+            }
+            &:first-of-type {
+                &:after {
+                    border-width:0;
+                }
+            }
+            &:before {
+                content:' ';
+                height:0;
+                width:0;
+                border-style:solid;
+                border-width:1em;
+                border-color:transparent;
+                border-right-width:0;
+                position:absolute;
+                right:-1em;
+            }
+            &:after {
+                content:' ';
+                height:0;
+                width:0;
+                border-style:solid;
+                border-width:1em;
+                border-color:transparent;
+                position:absolute;
+                left:-1em;
+
+                border-right-width:0;
+            }
+        }
+    }
+
+    h2 {
+        margin: 0.5em 0.4em;
+        font-size: 1.9em;
+        a {
+            &:link, &:hover, &:visited, &:active{
+                display:block;
+                font-weight: 600;
+                border-left: solid 0.3em $presenterBlue;
+                color: $presenterBlue;
+                padding-left:0.5em;
+                line-height:1.25em;
+            }
         }
     }
     .dashboard-item {
@@ -293,38 +492,37 @@
     }
 
     .section-menu {
-        user-select: none;
         position:fixed;
-        top:0em;
-        z-index: 999;
-        padding:10em 4em 10em 0;
-        margin:0;
-        left:-11em;
-        transition: transform ease-in-out 250ms;
+        width:0;
+        left:0;
+        top:50%;
+        transform:translateY(-50%);
+        z-index: 8;
 
-        &:hover {
-            transform:translateX(1.5em);
-        }
+        @include clearfix;
 
-        a {
-            display: block;
-            color:$white;
-            font-weight: bold;
-            line-height:2em;
-            font-size: 1.05em;
-        }
         .section-menu-item {
-            width: 12em;
-            margin: 0.5em 0;
-            border-radius: 0.5em;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            box-shadow: 0.25em 0.25em 0 rgba($black, 0.25);
+            font-size:1.2em;
+            font-weight:500;
+            margin-bottom:0.25em;
+            text-align:center;
+            cursor:pointer;
+            display:block;
+            transition:transform 500ms ease;
+            transform:translate(-9.25em);
+            box-sizing:border-box;
+            width:10em;
+            height:2em;
+            padding:0 0.5em;
+            line-height:2em;
 
-            transition: transform ease-in-out $defaultAnimationDuration;
+            @include clipped-text;
+
+            background-color:$presenterBlue;
+            color:white;
 
             &:hover {
-                transform:translateX(9.5em);
+                transform:translate(0);
             }
         }
     }
@@ -455,113 +653,299 @@ viewer {
             @include div-block();
         }
     }
-}
 
-.viewer-filter {
-    position:absolute;
-    right:2em;
-    top:0;
+    box-sizing:border-box;
+    padding:1em;
+    border:solid 0.1em transparent;
 
-    .icon-funnel {
-        line-height:2em;
-        height:2em;
-        width:2em;
-        text-align:center;
-        display:block;    
-        cursor: pointer;
+    &:hover:not(.edit) {
+        border:solid 0.1em darken($darkWhite,10%);
 
-        &:hover {
-            background-color:$white;
+        .viewer-header {
+            /*border-bottom: solid 0.2em darken($darkWhite,10%);*/
+
+            .controls {
+                opacity:1;
+            }
         }
     }
-    .viewer-filter-config {
-        display:none;
-    }
 
-    &.viewer-filter-active {
-        .icon-funnel {
-            background-color:$white;
+    .viewer-header {
+        @include clearfix;
+        border-bottom: solid 0.2em $presenterBlue;
+        h3 {
+            font-size: 1.2em;
+            font-weight: normal;
+            line-height:1em;
+            float:left;
         }
-        .viewer-filter-config {
-            border-radius:0.5em;
-            display:block;
-            width:25em;
-            min-height:6em;
-            background-color:$white;
-            border:solid 0.1em $lighterGray;
-            position:absolute;
-            top:2em;
-            right:0em;
-            box-shadow:0 0.1em 0.5em 0.01em $lighterGray;
-            overflow:hidden;
-
-            .viewer-filter-config-header {
-                @include clearfix();
-
-                background-color:$darkWhite;
-                line-height:2em;
-                font-weight:600;
-                padding:0 0.8em;
-                border-bottom:solid 0.1em $darkerWhite;
-
-                .viewer-filter-config-header-title {
-
-                }
-
-                [class*="icon-"] {
-                    float:right;
-                    line-height:2em;
-                    height:2em;
-                    width:1.5em;
-                    cursor:pointer;
-                    text-align:center;
+        .controls {
+            opacity:0;
+            margin:0;
+            padding:0;
+            float:right;
+            cursor:pointer;
+            @include clearfix;
+            > span {
+                font-size: 1.5em;
+                display:block;
+                float:left;
+                text-align:center;
+                color:darken($darkWhite,10%);
+                width:1.1em;
+                margin:0;
+                padding:0;
+                &:hover, &.active {
+                    color:$presenterBlue;
                 }
             }
-            .viewer-filter-config-content {
-                padding:1em;
-                > div {
-                    width:100%;
+        }
+    }
+}
+
+.viewer-filter-config {
+    position:absolute;
+    right:0;
+    top:0;
+    display:none;
+    font-size:0.85em;
+
+    &.viewer-filter-active {
+        border-radius:0.5em;
+        display:block;
+        width:32em;
+        min-height:6em;
+        background-color:$white;
+        border:solid 0.1em $lighterGray;
+        position:absolute;
+        top:3.5em;
+        right:0.65em;
+        box-shadow:0 0.25em 2em -0.5em $gray;
+
+        &:before {
+            content:' ';
+            display:block;
+            border-style:solid;
+            border-width:0.5em;
+            border-color:transparent;
+            border-top-width: 0;
+            border-bottom-color: $lighterGray;
+            position:absolute;
+            top:-0.5em;
+            right:1em;
+        }
+
+        .viewer-filter-config-header {
+            @include clearfix;
+            border-top-left-radius: 0.5em;
+            border-top-right-radius: 0.5em;
+
+            background-color:$darkWhite;
+            line-height:2.75em;
+            font-weight:600;
+            padding:0 0.8em;
+            border-bottom:solid 0.1em $darkerWhite;
+
+            .viewer-filter-config-title {
+                
+            }
+
+            [class*="icon-"] {
+                float:right;
+                line-height:2em;
+                height:2em;
+                width:1em;
+                cursor:pointer;
+                text-align:center;
+                font-size:1.4em;
+                color:$lighterGray;
+            }
+        }
+        .viewer-filter-config-content {
+            padding:0.5em;
+            > div {
+                @include clearfix;
+                width:100%;
+                padding:0;
+                margin:0 0 0.5em 0;
+                height: 30px;
+                line-height: 30px;
+
+                &.active {
+                    .viewer-filter-config-label{
+                        background-color:$lighterGray;
+                        color:$white;
+                    }
+                }
+
+                &:last-of-type {
+                    margin:0;
+                }
+                
+                .viewer-filter-config-label,
+                    .viewer-filter-config-type,
+                    .viewer-filter-config-value {
+                    float:left;
+                    display:block;
+                    margin:0;
                     padding:0;
-                    margin:0 0 0.5em 0;
-                    @include clearfix();
-                    
+                    height: 30px;
+                    line-height: 30px;
+                }
+
+                .viewer-filter-config-label {
+                    @include clipped-text;
+                    width:10em;
+                }
+                .viewer-filter-config-type {
+                    @include clearfix;
+                    width:5em;
+                    position:relative;
+                    color:$lightBlack;
+                    padding:0 0.4em;
+
+                    .viewer-filter-config-type-button {
+                        width:30px;
+                        height: 30px;
+                        line-height: 30px;
+                        background-color:$darkerWhite;
+                        float:left;
+                        text-align:center;
+                        cursor:pointer;
+                        border-top-left-radius:0.15em;
+                        border-bottom-left-radius:0.15em;
+                        margin: 0 auto;
+                        
+                        &:hover {
+                            background-color:$darkWhite;
+                        }
+                        
+                        span {
+                            color:$lighterGray;
+                            font-size:2em;
+                            height: 30px;
+                            line-height: 30px;
+                        }
+                    }
+                    .viewer-filter-config-type-arrow {
+                        border-top-right-radius:0.15em;
+                        border-bottom-right-radius:0.15em;
+                        width:15px;
+                        height: 30px;
+                        line-height: 30px;
+                        background-color:$darkerWhite;
+                        float:left;
+                        transform:translateX(0.5px);
+                        text-align:center;
+                        cursor:pointer;
+                        
+                        color:$lighterGray;
+                        
+                        &:hover, &.opened {
+                            background-color:$darkWhite;
+                        }
+                    }
                     &.active {
-                        .viewer-filter-config-label{
-                            background-color:$lighterGray;
-                            color:$white;
+                        .viewer-filter-config-type-button, .viewer-filter-config-type-arrow {
+                            background-color:$presenterBlue;
+                            span {
+                                color:darken($white, 5%);
+                            }
+                            
+                            &:hover, &.opened {
+                                background-color:lighten($presenterBlue, 5%);
+                            }
+                        }
+                    }
+                    .viewer-filter-config-type-options {
+                        font-size:1.2em;
+                        position:absolute;
+                        top:2.25em;
+                        left:50%;
+                        transform:translateX(-42.5%);
+                        border-radius:0.25em;
+                        background-color:$white;
+                        width:14em;
+                        border:solid 0.1em $darkerWhite;
+                        z-index:1;
+                        padding:0.5em;
+                        
+                        > div {
+                            line-height:1.75em;
+                            padding:0 0.5em;
+                            cursor:pointer;
+                            user-select:none;
+                            border-radius:0.15em;
+                            
+                            &:hover {
+                                background-color:$backgroundGray;
+                            }
+                            
+                            &.active {
+                                background-color:$presenterBlue;
+                                color:$white;
+                                &:hover {
+                                    background-color:darken($presenterBlue,5%);
+                                }
+                            }
+                        }
+                        
+                        &:before {
+                            height:0;
+                            width:0;
+                            content:' ';
+                            display:block;
+                            position:absolute;
+                            top:-0.45em;
+                            left:50%;
+                            transform:translateX(-50%);
+                            
+                            border-style:solid;
+                            border-width:0.5em;
+                            border-color:transparent;
+                            border-bottom-color:$white;
+                            border-top-width:0;
                         }
                     }
                     
-                    &:last-of-type {
-                        margin:0;
-                    }
+                }
+                .viewer-filter-config-value {
+                    width:15.8em;
                     
-                    .viewer-filter-config-label {
-                        width:40%;
-                        line-height:2.3em;
-                        cursor: pointer;
-                        padding-left:0.5em;
-                        height:2.3em;
-                        float:left;
-                        @include clipped-text();
-                        user-select:none;
+                    .viewer-filter-config-value-between {
+                        @include clearfix;
+                        input {
+                            margin:0;
+                            width:50%;
+                            float:left;
+                        }
                     }
-                    .viewer-filter-config-type {
-                        width:20%;
-                        height:2em;
-                        float:left;
+
+                    & > div {
+                        height:30px;
                     }
-                    .viewer-filter-config-value {
-                        width:40%;
-                        height:2em;
-                        float:left;
-                        
-                        .viewer-filter-config-value-between {
-                            @include clearfix;
+
+                    .ui-select-container {
+                        height:30px;
+                        .ui-select-match {
                             input {
-                                margin:0;
-                                width:50%;
-                                float:left;
+                                height:30px;
+                            }
+                            .ui-select-toggle {
+                                height:30px;
+                                line-height:15px;
+
+                                &[multiple] {
+                                    min-height:30px;
+                                    height:auto;
+                                }
+                            }
+                        }
+                        .ui-select-choices {
+                            .ui-select-choices-group {
+                                .ui-select-choices-row-inner {
+
+                                }
                             }
                         }
                     }

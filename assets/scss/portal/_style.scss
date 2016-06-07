@@ -304,9 +304,32 @@ blockquote small {
                 color: white;
                 font-weight: normal;
                 border: none !important;
+                
+                &:first-of-type {
+                    border-top-left-radius:0.25em;
+                }
+                &:last-of-type {
+                    border-top-right-radius:0.25em;
+                }
             }
         }
     }
+    
+    tbody {
+        tr {
+            &:last-of-type {
+                td {
+                    &:first-of-type {
+                        border-bottom-left-radius:0.25em;
+                    }
+                    &:last-of-type {
+                        border-bottom-right-radius:0.25em;
+                    }
+                }
+            }
+        }
+    }
+    
     thead,
     tbody,
     tfoot {
@@ -449,4 +472,45 @@ a[href="http://www.amcharts.com/javascript-charts/"] {
 
 .inline-block{
     display: inline-block;
+}
+
+.ui-select-container {
+    width:100%;
+    .ui-select-match {
+        width:100%;
+        input {
+            width:100% !important;
+        }
+        .ui-select-toggle {
+            width:100%;
+            border-radius:0;
+            background-color:$white;
+        }
+    }
+    .ui-select-choices {
+        padding:0;
+        border-radius:0;
+
+        .ui-select-choices-group {
+            padding:0.4em;
+
+            .ui-select-choices-row-inner {
+                @include clipped-text();
+                padding:0 0.5em;
+                font-size:1em;
+                border-radius:0.25em;
+
+                span[class*="icon-"] {
+                    line-height:2em;
+                    height:2em;
+                    font-size:0.9em;
+                    padding-top:5px;
+                }
+                span:not([class*="icon-"]) {
+                    line-height:2em;
+                    height:2em;
+                }
+            }
+        }
+    }
 }

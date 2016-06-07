@@ -7,7 +7,7 @@
 <table ng-table="tableParams" class="table table-striped table-hover">
     <thead>
         <tr class="row">
-            <th class="col-lg-1 col-xs-1 text-center">
+            <th class="col-lg-1 col-xs-1">
                 <label class="reset-spacing full-size-block cursor-pointer">
                     <input type="checkbox" class="reset-spacing cursor-pointer hidden"
                            select-all="singlesources" select-all-property="selected"
@@ -29,7 +29,7 @@
             </td>
         </tr>
         <tr ng-repeat="ss in singlesources" class="row" ng-class="{'selected':ss.selected}">
-            <td class="col-md-1 col-xs-1 text-center">
+            <td class="col-md-1 col-xs-1">
                 <label class="reset-spacing full-size-block cursor-pointer">
                     <input type="checkbox" class="reset-spacing cursor-pointer hidden"
                            ng-model="ss.selected" />

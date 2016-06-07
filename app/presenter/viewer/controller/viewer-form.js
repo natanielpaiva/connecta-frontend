@@ -10,11 +10,12 @@ define([
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
     'presenter/viewer/controller/modal-analysis',
-    'bower_components/amcharts/dist/amcharts/exporting/canvg',
-    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
+//    'bower_components/amcharts/dist/amcharts/exporting/canvg',
+//    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
     'bower_components/html2canvas/dist/html2canvas.min',
     'bower_components/html2canvas/dist/html2canvas',
     'bower_components/angular-ui-select/dist/select'
+    
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, $uibModal, AnalysisService, util) {
         $scope.state = {loaded: false};
@@ -37,8 +38,7 @@ define([
             yfields: [],
             valueFields: [],
             columns: [],
-            filters: [],
-            drills: []
+            filters: []
         };
 
         $scope.changeStatus = function () {
@@ -97,6 +97,8 @@ define([
                         $scope.analysisList = response.data;
                     });
 
+                    $scope.types = AnalysisService.getTypes();
+
                     $scope.analysisBar = "ANALYSIS";
                     $scope.typeBar = "TYPE";
                     $scope.settingsBar = "SETTINGS";
@@ -135,7 +137,11 @@ define([
 
                     var dataSerial = function (categoryField, graphs) {
                         $scope.viewer.configuration.categoryField = categoryField;
+                        for (var i in graphs) {
+                            graphs[i].balloonText = "[[title]] de [[category]]:[[value]]";
+                        }
                         $scope.viewer.configuration.graphs = graphs;
+
                     };
 
                     var dataPie = function (titleField, valueField) {
@@ -287,6 +293,30 @@ define([
             return analysisCopy;
         };
 
+        function populateDrillIfExists(viewer) {
+            drill = {};
+            if (viewer.analysis.hasDrill) {
+                drill.columnsToSum = [];
+
+                angular.forEach(viewer.analysisViewerColumns, function (column) {
+                    if (column.columnType === "DESCRIPTION" &&
+                            column.analysisColumn.orderDrill !== undefined) {
+                        drill.columnToDrill = column.analysisColumn.name;
+                    }
+                });
+                populateColumnsToSum(viewer, drill);
+            }
+            return drill;
+        }
+
+        function populateColumnsToSum(viewer, drill) {
+            angular.forEach(viewer.analysisViewerColumns, function (column) {
+                if (column.columnType === "METRIC") {
+                    drill.columnsToSum.push(column.analysisColumn.name);
+                }
+            });
+        }
+
         var _savePreparationStrategy = {
             ANALYSIS: function (viewer) {
                 var columnTypes = {
@@ -316,13 +346,15 @@ define([
         };
 
         var getPreview = function () {
-            var readyForPreview = ($scope.viewer.metrics.length > 0) ||
+            var readyForPreview = ($scope.viewer.metrics.length > 0 &&
+                    $scope.viewer.descriptions.length > 0) ||
                     ($scope.viewer.xfields.length > 0 &&
                             $scope.viewer.yfields.length > 0);
 
             if (readyForPreview) {
                 AnalysisService.execute({
-                    analysis: _prepareForRequest($scope.viewer)
+                    analysis: _prepareForRequest($scope.viewer),
+                    drill: populateDrillIfExists($scope.viewer)
                 }).then(function (response) {
                     ViewerService.getPreview($scope.viewer, response.data);
                 });
@@ -408,7 +440,7 @@ define([
             var __update = function (array) {
 //                angular.forEach(array, function(o){
 //                    o = { analysisColumn: o };
-//                    
+//
 //                    delete o.id;
 //                });
                 getPreview();

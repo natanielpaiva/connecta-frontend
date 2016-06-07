@@ -2,7 +2,7 @@
 define([
   'jquery',
   'angular',
-  
+
   // Configuração dos módulos
   'json!applications.json',
   // Módulos Angular Connecta
@@ -39,7 +39,8 @@ define([
   'bower_components/angular-facebook/lib/angular-facebook',
   'bower_components/ngAutocomplete/src/ngAutocomplete',
   'bower_components/angular-base64/angular-base64',
-  'bower_components/angular-ui-select/dist/select'
+  'bower_components/angular-ui-select/dist/select',
+  'bower_components/angular-scroll/angular-scroll.min'
 ], function($ , angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
   var connecta = angular.module('connecta', [
@@ -68,7 +69,8 @@ define([
     'currencyMask',
     'AngularAmChart',
     'base64',
-    'ui.select'
+    'ui.select',
+    'duScroll'
   ]);
 
   // Configuração do backend dos módulos
@@ -356,7 +358,7 @@ define([
     'speaknow/company/service/company-service',
     'portal/user/service/user-service',
     'portal/domain/service/domain-service',
-    'portal/auth/directive/visibleToRoles',
+    'portal/auth/directive/visibleToRoles'
   ], function(doc) {
     angular.bootstrap(doc, [connecta.name]);
   });

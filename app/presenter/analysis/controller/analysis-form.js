@@ -11,9 +11,11 @@ define([
 
         //modelo de um 'DataSource' de CSV para ajustar os problemas nas tabelas
         //este conceito será refatorado, visto que um CSV não é um dataSource.
-        var csvDS = {id:'csv',name:'CSV',type:'CSV'};
+        var csvDS = {id: 'csv', name: 'CSV', type: 'CSV'};
 
         $scope.edit = false;
+
+        $scope.analysisColumnsDrill = [];
 
         $scope.getAttributes = function (val) {
             return SingleSourceService.getAttribute(val);
@@ -31,7 +33,7 @@ define([
             $scope.component.domain = [];
             $scope.component.operationWebservice = [];
         }
-        
+
         resetComponent();
 
         $scope.showForm = false;
@@ -50,16 +52,30 @@ define([
             });
         }
 
+        //Função para que o array de analysisColumnDrill seja populado corretamente
+        function prepareOrderDrill(analysisColumns) {
+            var array = {};
+            for (var a in analysisColumns) {
+                if (analysisColumns[a].orderDrill !== undefined && analysisColumns[a].orderDrill !== '') {
+                    array[analysisColumns[a].orderDrill] = analysisColumns[a];
+                }
+            }
+            for (var key in array) {
+                $scope.analysisColumnsDrill.push(array[key]);
+            }
+        }
+
         if ($routeParams.id) {
             $scope.edit = true;
             AnalysisService.getAnalysis($routeParams.id).then(function (response) {
                 //preenche o select de tabelas do banco de dados
                 $scope.analysis = response.data;
+                prepareOrderDrill($scope.analysis.analysisColumns);
                 $scope.datasourceCurrent = $scope.analysis.datasource;
-                if($scope.datasourceCurrent === undefined){
+                if ($scope.datasourceCurrent === undefined) {
                     $scope.analysis.datasource = csvDS;
                     $scope.datasourceCurrent = csvDS;
-                }else{
+                } else {
                     $scope.analysis.datasource.type = response.data.type;
                 }
                 $scope.subform = $scope.types[response.data.type];
@@ -68,7 +84,7 @@ define([
             });
         } else {
             $scope.analysis = {};
-            
+
             DatasourceService.list({count: 1000, page: 1}).then(function (response) {
                 $scope.listDatasource = response.data.content;
                 //adiciona CSV na primeira posicao da lista
@@ -107,26 +123,55 @@ define([
 
         //###############################################################################################
 
+
+        function addOrderDrill(analysis, analysisColumnDrill) {
+
+            delete analysis.hasDrill;
+
+            for (var column in analysis.analysisColumns) {
+                delete analysis.analysisColumns[column].orderDrill;
+
+                for (var c in analysisColumnDrill) {
+                    if (analysisColumnDrill[c].name === analysis.analysisColumns[column].name) {
+                        analysis.hasDrill = true;
+                        analysis.analysisColumns[column].orderDrill = c;
+                    }
+                }
+            }
+        }
+
+
         $scope.submit = function () {
+
+            addOrderDrill($scope.analysis, $scope.analysisColumnsDrill);
+
             if ($scope.types.SOLR.name === $scope.datasourceCurrent.type) {
                 var queryCopy = angular.copy($scope.analysis.query);
 
-                AnalysisService.saveQueryBuilder(queryCopy).success(function(data) {
-                    $scope.analysis.query = {
-                        id: data.id
-                    };
-
-                    AnalysisService.save($scope.analysis).then(function(response) {
-                        $location.path('presenter/analysis/'+response.data.id);
+                if ($scope.analysis.requestType === "QUERY_BUILDER") {
+                    $scope.analysis.textQuery = null;
+                    AnalysisService.saveQueryBuilder(queryCopy).success(function (data) {
+                        $scope.analysis.query = {
+                            id: data.id
+                        };
                     });
+
+                } else if ($scope.analysis.requestType === "TEXT_QUERY") {
+                    $scope.analysis.query = null;
+                }
+                console.log("submit", $scope.analysis);
+                AnalysisService.save($scope.analysis).then(function (response) {
+                    $location.path('presenter/analysis/' + response.data.id);
                 });
+
+
             } else {
                 var analysisCopy = angular.copy($scope.analysis);
-                if($scope.types.CSV.name === $scope.datasourceCurrent.type)
+                if ($scope.types.CSV.name === $scope.datasourceCurrent.type)
                     delete analysisCopy.datasource;
 
-                AnalysisService.save(analysisCopy).then(function(response) {
-                    $location.path('presenter/analysis/'+response.data.id);
+                AnalysisService.save(analysisCopy).then(function (response) {
+                    $location.path('presenter/analysis/' + response.data.id);
                 });
             }
         };
