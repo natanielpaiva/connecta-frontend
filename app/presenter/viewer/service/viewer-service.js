@@ -618,6 +618,7 @@ define([
 //            var viewerConfiguration = analysisViewerResult.analysisViewer.configuration;
 //            viewer.configuration = analysisViewerResult.analysisViewer.configuration;
 //            viewer.configuration.export = {enabled: true};
+            viewer.configuration.fontFamily = 'Arial';
             if (viewer.configuration.type !== "gauge") {
                 viewer.configuration.data = result;
             } else {
@@ -710,6 +711,11 @@ define([
                     graph.title = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                     graph.valueField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                     graph.id = angular.copy(analysisViewerColumns[i].analysisColumn.label);
+                    graph.balloonText = "[[title]] de [[category]]:[[value]]";
+                    viewer.configuration.valueAxes = [];
+                    viewer.configuration.valueAxes.push({id:analysisViewerColumns[i].analysisColumn.label,
+                                                         title:analysisViewerColumns[i].analysisColumn.label,
+                                                         titleRotation:-90});
                     viewer.configuration.graphs.push(graph);
                 }
 

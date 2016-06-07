@@ -10,7 +10,16 @@ define([
     'presenter/viewer/directive/combined-viewer',
     'maps/layer-viewer/directive/map-viewer'
 ], function (portal) {
-    return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $location, $filter) {
+    return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $filter, $document) {
+        $scope.config = {
+          headerMini: false
+        };
+
+        $document.on('scroll', function() {
+            $scope.config.headerMini = $document.scrollTop()>70;
+            $scope.$apply();
+        });
+
         $scope.dashboard = {};
 
         LayoutService.setFullscreen(true);
@@ -24,6 +33,14 @@ define([
             sizeY: 'item.sizeY',
             row: 'item.row',
             col: 'item.column'
+        };
+
+        $scope.fullscreen = function() {
+            LayoutService.toggleBrowserFullscreen();
+        };
+
+        $scope.export = function() {
+            // TODO
         };
 
         DashboardService.get($routeParams.id).then(function (response) {
@@ -53,16 +70,18 @@ define([
                 return 'none';
             }
         };
-        
+
         $scope.toRGBA = function (hex, opacity) {
             if (!hex || hex.length < 7) {
-                return 'transparent';
+//                return '#f9f9f9';
+                return false;
             }
 
             var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 
             if (!result) {
-                return 'transparent';
+                return false;
+//                return '#f9f9f9';
             }
 
             var color = {

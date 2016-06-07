@@ -1,22 +1,21 @@
 define([
     'connecta.portal',
     'portal/auth/service/login-service',
-    'portal/auth/service/facebook-service',
-    'portal/auth/service/google-plus-service',
+//    'portal/auth/service/facebook-service',
+//    'portal/auth/service/google-plus-service',
     'portal/layout/service/notify'
 ], function (portal) {
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, LoginService, FacebookService,
-              UserService, GPlusService, $location, notify, DomainService, $timeout) {
+            controller: function ($scope, LoginService, UserService, $location, notify, DomainService, $translate) { // FacebookService, GPlusService,
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.logged = false;
                 $scope.sections = {
-                    "login": "login",
-                    "form": "form",
-                    "domain" : "domain"
+                    login: "login",
+                    form: "form",
+                    domain : "domain"
                 };
                 $scope.currentSection = $scope.sections.login;
 
@@ -28,9 +27,9 @@ define([
 
                 LoginService.checkAuthentication();
 
-                $scope.loginWithFacebook = function () {
-                    FacebookService.login();
-                };
+//                $scope.loginWithFacebook = function () {
+//                    FacebookService.login();
+//                };
 
                 $scope.submit = function () {
                     LoginService.doLogin($scope.credentials).then(function(response){
@@ -42,7 +41,7 @@ define([
                 };
 
                 $scope.selectDomain = function(domain){
-                    LoginService.selectDomain(domain.name);
+                    LoginService.selectDomain(domain);
                 };
 
                 $scope.onFileSelected = function (files, ev, rejFiles) {
@@ -104,24 +103,24 @@ define([
                     });
                 };
 
-                $scope.loginWithGoogle = function(){
-                    GPlusService.loginWithGoogle();
-                };
+//                $scope.loginWithGoogle = function(){
+//                    GPlusService.loginWithGoogle();
+//                };
 
-                $scope.$on('facebook-without-email', function (event, userFacebook) {
-                    console.log("User: ", userFacebook);
-                    $scope.user = {
-                        profile: {
-                            "firstName": userFacebook.first_name,
-                            "lastName": userFacebook.last_name,
-                            "avatarUrl": "http://graph.facebook.com/" + userFacebook.id + "/picture?type=large"
-                        },
-                        credentials: {
-                        }
-                    };
-                    $scope.userImage = $scope.user.profile.avatarUrl;
-                    $scope.currentSection = $scope.sections.form;
-                });
+//                $scope.$on('facebook-without-email', function (event, userFacebook) {
+//                    console.log("User: ", userFacebook);
+//                    $scope.user = {
+//                        profile: {
+//                            "firstName": userFacebook.first_name,
+//                            "lastName": userFacebook.last_name,
+//                            "avatarUrl": "http://graph.facebook.com/" + userFacebook.id + "/picture?type=large"
+//                        },
+//                        credentials: {
+//                        }
+//                    };
+//                    $scope.userImage = $scope.user.profile.avatarUrl;
+//                    $scope.currentSection = $scope.sections.form;
+//                });
 
                 $scope.loadDomains = function (username) {
                     //getUserDomains

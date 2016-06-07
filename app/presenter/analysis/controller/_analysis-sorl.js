@@ -4,7 +4,7 @@ define([
 ], function () {
     return function SolrAnalysisFormController($scope, GroupService, AnalysisService, $timeout) {
 
-        
+
         $scope.analysis.facet = 10;
 
         //$scope.types = GroupService.getTypes();
@@ -13,7 +13,12 @@ define([
         $scope.queryBuilderTypeFilter = GroupService.getTypeFilter();
         $scope.group = {};
 
-        
+        AnalysisService.getConditionsSorl($scope.analysis.datasource.id).then(function (response) {
+            $scope.analysis.conditionSorl = response.data;
+        });
+
+        $scope.requestTypes = AnalysisService.getSolrRequestTypes();
+
         $scope.predicateMap = GroupService.getPredicate();
         $scope.operatorMap = GroupService.getOperator();
 
@@ -49,56 +54,128 @@ define([
                     );
         };
 
+        $scope.getResultSolr = function () {
+            $scope.analysis.requestType = "TEXT_QUERY";
+            AnalysisService.execute({
+                analysis: $scope.analysis
+            }).then(function (response) {
+                $scope.analysis.analysisColumns = [];
+                console.log("response.data ", response.data);
+                for (var formula in response.data[0]) {
+                    $scope.analysis.analysisColumns.push({
+                        name: formula,
+                        label: formula,
+                        formula: formula
+                    });
+                }
+                $scope.responseSolr = response.data;
+            });
+        };
+
         $scope.getTabularFormartResultSolr = function () {
+            $scope.analysis.requestType = "QUERY_BUILDER";
+            $scope.analysis.analysisColumns = [];
+
+            console.log("$scope.analysis", $scope.analysis);
+
             return AnalysisService.getSolrResultApplyingQuery(
                     $scope.analysis.datasource.id,
                     $scope.statement,
                     $scope.analysis.facet).then(function (response) {
 
+                $scope.analysis.analysisColumns = [];
+                console.log("response.data[0]", response.data[0]);
+
+                for (var formula in response.data[0]) {
+                    $scope.analysis.analysisColumns.push({
+                        name: formula,
+                        label: formula,
+                        formula: formula
+                    });
+                }
                 $scope.responseSolr = response.data;
                 $scope.analysis.query = $scope.statement;
             });
+
+            //Código funcionando
+//            AnalysisService.execute({
+//                analysis: $scope.analysis
+//            }).then(function (response) {
+//                $scope.responseSolr = response.data;
+//                $scope.analysis.query = $scope.statement;
+//
+//                $scope.analysis.analysisColumns = [];
+//                console.log("response.data[0]", response.data[0]);
+//
+//                for (var formula in response.data[0]) {
+//                    $scope.analysis.analysisColumns.push({
+//                        name: formula,
+//                        label: formula,
+//                        formula: formula
+//                    });
+//                }
+//            });
         };
 
         if ($scope.edit) {
-            GroupService.getQueryById($scope.analysis.query.id).
-                    success(function (data, status, headers, config) {
+            console.log("anal", $scope.analysis);
 
-                        var query = AnalysisService.formatQueryBuiderEdit(data);
-                        $scope.statement = query.statement;
+            if ($scope.analysis.requestType === "QUERY_BUILDER") {
+                GroupService.getQueryById($scope.analysis.query.id).
+                        success(function (data, status, headers, config) {
 
-                        $scope.analysis.query = query.statement;
+                            var query = AnalysisService.formatQueryBuiderEdit(data);
+                            $scope.statement = query.statement;
 
-                        console.log("$scope.statement", $scope.statement);
-                        $scope.predicateMap = GroupService.getPredicate();
-                        $scope.operatorMap = GroupService.getOperator();
-                        //$scope.getResultQueryBuider($scope.query);
+                            $scope.analysis.query = query.statement;
 
-                        return AnalysisService.getSolrResultApplyingQuery(
-                                $scope.analysis.datasource.id,
-                                $scope.statement,
-                                $scope.analysis.facet).then(function (response) {
+                            console.log("$scope.statement", $scope.statement);
+                            $scope.predicateMap = GroupService.getPredicate();
+                            $scope.operatorMap = GroupService.getOperator();
 
-                            $scope.responseSolr = response.data;
-                            //$scope.responseSolr = response.data;
-
-                            $scope.analysis.query = $scope.statement;
-                            console.log($scope.analysis);
+                            AnalysisService.execute({
+                                analysis: $scope.analysis
+                            }).then(function (response) {
+                                $scope.responseSolr = response.data;
+                                $scope.analysis.query = $scope.statement;
+                            });
+//                        return AnalysisService.getSolrResultApplyingQuery(
+//                                $scope.analysis.datasource.id,
+//                                $scope.statement,
+//                                $scope.analysis.facet).then(function (response) {
+//
+//                            $scope.responseSolr = response.data;
+//                            //$scope.responseSolr = response.data;
+//
+//                            $scope.analysis.query = $scope.statement;
+//                            console.log($scope.analysis);
+//                        });
+                        }).
+                        error(function (data, status, headers, config) {
                         });
+            } else if ($scope.analysis.requestType === "TEXT_QUERY") {
 
-                    }).
-                    error(function (data, status, headers, config) {
+                AnalysisService.execute({
+                    analysis: $scope.analysis
+                }).then(function (response) {
+                    $scope.analysis.analysisColumns = [];
+                    console.log("response.data ", response.data);
+                    for (var formula in response.data[0]) {
+                        $scope.analysis.analysisColumns.push({
+                            name: formula,
+                            label: formula,
+                            formula: formula
+                        });
+                    }
+                    $scope.responseSolr = response.data;
+                });
+            }
 
-                    });
 
         } else {
             //new
-
             $scope.queryInit();
 
-            return AnalysisService.getColumnsSorl($scope.analysis.datasource.id).then(function (response) {
-                $scope.analysis.analysisColumns = response.data;
-            });
         }
 
     };

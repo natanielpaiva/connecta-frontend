@@ -25,8 +25,35 @@
         "SLIDE_DOWN":"Slide down",
         "SLIDE_RIGHT":"Slide right",
         "SLIDE_LEFT":"Slide left",
-        "CONTENT_HEIGHT":"Content height",
-        "CONTENT_WIDTH":"Content width",
-        "OPACITY":"Opacity"
+        "OPACITY":"Opacity",
+        "EXPORT":"Export",
+        "FULLSCREEN":"Fullscreen",
+        "DRILL_UP":"Generalize (Drill up)",
+        "ACTIVATE_DRILL":"Activate detailing (Drill)",
+        "OPEN_FILTER":"Open filter settings",
+        "FILTER": {
+            "SELECT_FILTER":"Filter settings",
+            "SELECTED_FILTER":"Type: {{name}}. Click to active this filter",
+            "FILTER": "Filter",
+            "VALUE": "Value",
+            "START": "Start",
+            "END": "End",
+            "APPLY": "Apply filter settings",
+            "TYPE": {
+                "TYPE": "Change filter type",
+                
+                "EQUAL": "Equal",
+                "NOT_EQUAL": "Not equal",
+                "LESS_THAN": "Less than",
+                "LESS_THAN_EQUAL": "Less than or equal",
+                "GREATER_THAN": "Greater than",
+                "GREATER_THAN_EQUAL": "Greater than or equal",
+                "BETWEEN": "Interval",
+                "IN": "List of values",
+                "CONTAINS": "Contains",
+                "STARTS_WITH": "Starts with",
+                "ENDS_WITH": "Ends with"
+            }
+        }
     }
 }

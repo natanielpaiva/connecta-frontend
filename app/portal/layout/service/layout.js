@@ -14,6 +14,7 @@ define([
      * @returns {undefined}
      */
     return portal.service('LayoutService', function ($rootScope, $cookieStore, $menu, applications) {
+        var layout = this;
         var MENU = 'connecta.portal.layout.menu';
 
         /**
@@ -49,23 +50,59 @@ define([
             return this;
         };
 
+        this.launchBrowserFullscreen = function (element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+        };
+        
+        this.exitFullscreen = function () {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        };
+
+        this.toggleBrowserFullscreen = function () {
+            var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled;
+
+            if (fullscreenEnabled) { // Browser tem suporte para Fullscreen
+                var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+
+                if (fullscreenElement) { // Fullscreen ativado, sair
+                    layout.exitFullscreen();
+                } else {    // Fullscreen desativado, ativar
+                    layout.launchBrowserFullscreen(document.documentElement); // a página toda
+                }
+            }
+        };
+
         this.moduleChanged = function (originModule, $originRoute, destModule, $destRoute) {
             $menu.update();
-            
+
             var configObject = null;
             if (angular.module(destModule) &&
-                angular.module(destModule)._configKey &&
-                applications[angular.module(destModule)._configKey]) {
-            
+                    angular.module(destModule)._configKey &&
+                    applications[angular.module(destModule)._configKey]) {
+
                 configObject = applications[angular.module(destModule)._configKey];
             }
-            
+
             $rootScope.$broadcast('layout.modulechange', {
-                angularModule:destModule,
-                route:$destRoute,
+                angularModule: destModule,
+                route: $destRoute,
                 config: configObject
             });
-            
+
             $rootScope.$broadcast(destModule + '.enter', $destRoute);
 
             if (originModule) {

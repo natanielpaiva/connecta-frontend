@@ -13,83 +13,22 @@ define([
                 edit: '=?edit'
             },
             controller: function ($scope, ViewerService, AnalysisService, util) {
+                $scope.drillOrder = 0;
                 $scope.m2a = util.mapToArray;
-
-                $scope.filterOperators = {
-                    EQUAL: {
-                        order: 0,
-                        icon: 'icon-filter-equal',
-                        name: 'LAYOUT.FILTER.TYPE.EQUAL',
-                        type: 'STRING'
-                    },
-                    NOT_EQUAL: {
-                        order: 1,
-                        icon: 'icon-filter-not-equal',
-                        name: 'LAYOUT.FILTER.TYPE.NOT_EQUAL',
-                        type: 'STRING'
-                    },
-                    LESS_THAN: {
-                        order: 2,
-                        icon: 'icon-filter-less-than',
-                        name: 'LAYOUT.FILTER.TYPE.LESS_THAN',
-                        type: 'NUMBER'
-                    },
-                    LESS_THAN_EQUAL: {
-                        order: 3,
-                        icon: 'icon-filter-less-than-equal',
-                        name: 'LAYOUT.FILTER.TYPE.LESS_THAN_EQUAL',
-                        type: 'NUMBER'
-                    },
-                    GREATER_THAN: {
-                        order: 4,
-                        icon: 'icon-filter-greater-than',
-                        name: 'LAYOUT.FILTER.TYPE.GREATER_THAN',
-                        type: 'NUMBER'
-                    },
-                    GREATER_THAN_EQUAL: {
-                        order: 5,
-                        icon: 'icon-filter-greater-than-equal',
-                        name: 'LAYOUT.FILTER.TYPE.GREATER_THAN_EQUAL',
-                        type: 'NUMBER'
-                    },
-                    BETWEEN: {
-                        order: 6,
-                        icon: 'icon-filter-between',
-                        name: 'LAYOUT.FILTER.TYPE.BETWEEN',
-                        type: 'INTERVAL'
-                    },
-                    IN: {
-                        order: 7,
-                        icon: 'icon-filter-in',
-                        name: 'LAYOUT.FILTER.TYPE.IN',
-                        type: 'ARRAY'
-                    },
-                    CONTAINS: {
-                        order: 8,
-                        icon: 'icon-filter-contains',
-                        name: 'LAYOUT.FILTER.TYPE.CONTAINS',
-                        type: 'STRING'
-                    },
-                    STARTS_WITH: {
-                        order: 9,
-                        icon: 'icon-filter-starts-with',
-                        name: 'LAYOUT.FILTER.TYPE.STARTS_WITH',
-                        type: 'STRING'
-                    },
-                    ENDS_WITH: {
-                        order: 10,
-                        icon: 'icon-filter-ends-with',
-                        name: 'LAYOUT.FILTER.TYPE.ENDS_WITH',
-                        type: 'STRING'
-                    }
+                $scope.options = {
+                    isDrilling: false,  // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
+                    filterConfigOpen: false
                 };
+
+                $scope.filterOperators = AnalysisService.getFilterOperators();
 
                 $scope.analysisExecuteRequest = {
                     analysis: null,
-                    filters: []
+                    filters: [],
+                    drill: null
                 };
-
-                $scope.getAnalysisResult = function () {
+                
+                var _prepareFiltersForRequest = function(){
                     $scope.analysisExecuteRequest.filters = [];
 
                     angular.forEach($scope.model.analysisViewerColumns, function (column) {
@@ -101,11 +40,40 @@ define([
                             });
                         }
                     });
+                };
+                
+                $scope.possibleValues = function(filter) {
+                    if ($scope.analysisExecuteRequest.analysis) { // pra ele não rodar antes da informação estar completa
+                        _prepareFiltersForRequest();
+
+                        AnalysisService.possibleValuesFor($scope.analysisExecuteRequest, filter).then(function (response) {
+                            filter.possibleValues = response.data;
+                        });
+                    }
+                };
+
+                function updateChartFields(columnDrill){
+                    if(columnDrill){
+                        if($scope.model.configuration.type === 'pie'){
+                            $scope.model.configuration.titleField = columnDrill;
+                        }else{
+                            $scope.model.configuration.categoryField = columnDrill;
+                        }
+                    }
+                }
+
+                $scope.getAnalysisResult = function (itemClicked) {
+                    _prepareDrillForRequest(itemClicked);
+                    _prepareFiltersForRequest();
 
                     AnalysisService.execute($scope.analysisExecuteRequest).then(function (response) {
                         if ($scope.model.configuration.type === 'table') {
                             $scope.model.configuration.data = response.data;
                         } else {
+                            var columnDrill = $scope.drillLevels[$scope.drillOrder];
+                            if(columnDrill)
+                                updateChartFields(columnDrill.label);
+
                             $scope.model.configuration.dataProvider = response.data;
                             $scope.model.configuration.export = {enabled: true};
                         }
@@ -116,7 +84,22 @@ define([
                     ViewerService.getAnalysisViewer($scope.model.id).then(function (response) {
                         angular.extend($scope.model, response.data);
                         $scope.analysisExecuteRequest.analysis = $scope.model.analysis;
-
+                        
+                        
+                        $scope.model.analysisViewerColumns.filter(function(column){
+                            return column.columnType === "FILTER";
+                        }).forEach(function(filter){
+                            filter.type = 'CONTAINS';
+                            filter.value = {
+                                value:null,
+                                in:[],
+                                between:{
+                                    start:null,
+                                    end:null
+                                }
+                            };
+                        });
+                        
                         $scope.getAnalysisResult();
                     });
                 }
@@ -144,9 +127,9 @@ define([
                                 $scope.columnsTable[key] = {value: newValue[key].analysisColumn.label};
 
                         }
-                        if (isEmpty($scope.columnsTable)) {
-                            $scope.columnExample = '';
-                        }
+//                        if (isEmpty($scope.columnsTable)) {
+//                            $scope.columnExample = '';
+//                        }
                     }
                 });
 
@@ -162,9 +145,113 @@ define([
 //                        $scope.columnExample = '';
 //                    }
 //                });
+                $scope.drillUp = function(){
+                    $scope.drillOrder--;
+                    $scope.drillLevels[$scope.drillOrder].filterDrillValue = undefined;
+
+                    $scope.getAnalysisResult();
+                };
+                
 
                 $scope.exampleTable = ViewerService.getExampleTable();
+                
+                $scope.notEmpty = function(){
+                    if(!$scope.drillLevels.length) {
+                        return [];
+                    }
+                    return $scope.drillLevels.filter(function(item){
+                        return item.filterDrillValue?true:false;
+                    });
+                };
 
+                $scope.drillLevels = [];
+                $scope.setChart = function(chart){
+                     $scope.chart = chart;
+                     prepareOrderDrill($scope.model.analysis.analysisColumns);
+                     if($scope.chart.type === 'pie'){
+                        $scope.chart.addListener("clickSlice", function (event) {
+                            if($scope.drillOrder < drillMaxLevel && $scope.options.isDrilling) {
+                                $scope.getAnalysisResult(event.dataItem.title);
+                            }
+                        });
+                     }else{
+                         $scope.chart.addListener("clickGraphItem", function(event) {
+                            if($scope.drillOrder < drillMaxLevel && $scope.options.isDrilling) {
+                                $scope.getAnalysisResult(event.item.category);
+                            }
+                         });
+                     }
+                };
+
+                //Função para que o array de analysisColumnDrill seja populado corretamente
+                var drillMaxLevel = 0;
+                function prepareOrderDrill(analysisColumns){
+                    if($scope.drillLevels.length === 0){
+                        $scope.drillLevels = [];
+                        var array = {};
+                        for( var a in analysisColumns ){
+                            if(analysisColumns[a].orderDrill !== undefined &&
+                                            analysisColumns[a].orderDrill !== ''){
+
+                                var drillLevel = {name : analysisColumns[a].name,
+                                                    label : analysisColumns[a].label};
+                                array[analysisColumns[a].orderDrill] = drillLevel;
+                            }
+                        }
+                        for(var key in array){
+                            $scope.drillLevels.push(array[key]);
+                        }
+                        drillMaxLevel = $scope.drillLevels.length - 1;
+                    }
+                }
+
+                function _prepareDrillForRequest(itemClicked){
+                    if($scope.analysisExecuteRequest.analysis.hasDrill) {
+                        prepareOrderDrill($scope.model.analysis.analysisColumns);
+
+                        $scope.analysisExecuteRequest.drill = {};
+                        $scope.analysisExecuteRequest.drill.columnsToSum = [];
+
+                        if(itemClicked){
+                            $scope.drillLevels[$scope.drillOrder].filterDrillValue = itemClicked;
+                            definePreviousColumns($scope.drillOrder);
+                            $scope.drillOrder++;
+                        //back button
+                        }else{
+                            definePreviousColumns($scope.drillOrder);
+                        }
+
+                        $scope.analysisExecuteRequest.drill
+                            .columnToDrill = $scope.drillLevels[$scope.drillOrder].name;
+
+                        populateColumnsToSum();
+                    }
+                }
+
+                function definePreviousColumns(drillOrder){
+                    $scope.analysisExecuteRequest.drill.listPreviousColumns = [];
+                    var copyDrillOrder = angular.copy(drillOrder);
+
+                    while(copyDrillOrder >= 0){
+                        var drillColumnValue = {};
+                        drillColumnValue.drillColumn = $scope.drillLevels[copyDrillOrder].name;
+                        drillColumnValue.drillFilterValue = $scope.drillLevels[copyDrillOrder].filterDrillValue;
+
+                        if(drillColumnValue.drillColumn !== undefined && drillColumnValue.drillFilterValue !== undefined){
+                                    $scope.analysisExecuteRequest.drill.listPreviousColumns.push(drillColumnValue);
+                        }
+                        copyDrillOrder--;
+                    }
+                }
+
+                function populateColumnsToSum() {
+                    angular.forEach($scope.model.analysisViewerColumns, function (column) {
+                        if (column.columnType === "METRIC") {
+                            $scope.analysisExecuteRequest
+                                .drill.columnsToSum.push(column.analysisColumn.name);
+                        }
+                    });
+                }
             }
         };
     });

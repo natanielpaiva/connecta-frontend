@@ -10,7 +10,7 @@ require.config({
         'angular-route': '../bower_components/angular-route/angular-route.min',
         'angular-resource': '../bower_components/angular-resource/angular-resource.min',
         'angular-ui-bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
-        'angular-ng-table': '../bower_components/ng-table/ng-table.min',         
+        'angular-ng-table': '../bower_components/ng-table/ng-table.min',
         'angular-facebook': '../bower_components/angular-facebook/lib/angular-facebook',
         'portal': 'portal',
         'collector': 'collector',
@@ -59,6 +59,9 @@ require.config({
         'bower_components/angular-facebook/lib/angular-facebook': {
             deps: ['angular']
         },
+        'bower_components/angular-scroll/angular-scroll.min': {
+            deps: ['angular']
+        },
         'bower_components/angular-translate-loader-partial/angular-translate-loader-partial.min': {
             deps: [
                 'angular',
@@ -101,7 +104,7 @@ require.config({
         'bower_components/html2canvas/build': {
             exports: 'Html2canvas'
         },
-        
+
         'bower_components/amcharts/dist/amcharts/themes/black': {
             deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
             exports: 'AmCharts.themes.black'

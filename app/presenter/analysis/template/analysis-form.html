@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label for="description" translate>ANALYSIS.DESCRIPTION</label>
                 <textarea class="form-control" id="description"
-                    ng-model="analysis.description" maxlength="500" ></textarea>
+                          ng-model="analysis.description" maxlength="500" ></textarea>
             </div>
             <div class="form-group" ng-if="!edit">
                 <label for="datasource" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
@@ -35,59 +35,117 @@
              ng-controller="subform.controller"></div>
     </div>
 
-    <!--DescriÃ§Ã£o das colunas-->
+    <!--Descrição das colunas-->
     <h4 translate>ANALYSIS.DESCRIPTION_OF_COLUMNS</h4>
     <div class="row"  >
         <div class="col-md-12" >
             <!--style="height:250px; background-color:#F2F2F2; overflow:auto"-->
             <div class="clearfix well" > 
                 <div ng-repeat="columns in analysis.analysisColumns" >
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-5 form-group">
                         <label for="column" translate>ANALYSIS.COLUMN</label>
                         <input type="text" ng-model="columns.name" disabled class="form-control"/>
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-5 form-group">
                         <label for="valor" translate>ANALYSIS.DESCRIPTION</label>
                         <input type="text" ng-model="columns.label"  class="form-control" />
                         <input type="hidden" ng-model="columns.formula"  class="form-control" />
+                    </div>
+                    <div class="col-md-2 close-column">
+                        <span ng-click="analysis.analysisColumns.splice($index, 1)" class="icon-close"></span>
                     </div>
                 </div> 
             </div>
         </div>
     </div>
 
-    <!-- Adicionar atributos -->
-    <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>
+    <div class="configure-drill">
+        <uib-accordion close-others="true">
+            <uib-accordion-group> 
+                <uib-accordion-heading>
+                    <span translate>VIEWER.SETTINGS_ADVANCED</span>
+                    <i ng-click="changeStatus()" class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
+                    </i>
+                </uib-accordion-heading>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div  translate>VIEWER.DRAG_HERE</div>
+                        <div class="analysis-drag-here">
+                            <ul dnd-list="analysisColumnsDrill" 
+                                ng-class="{
+                                'has-item':!!analysisColumnsDrill.length
+                            }">
+                                <li ng-repeat="column in analysisColumnsDrill" 
+                                    dnd-draggable="column" 
+                                    dnd-moved="analysisColumnsDrill.splice($index, 1)">
+                                    {{column.label}}
+                                    <span class="icon-close" ng-click="analysisColumnsDrill.splice($index, 1)"></span>
+                                    <div class="icon-arrow-long-down"></div>
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    {{'LAYOUT.NO_RESULTS'| translate}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div  translate>ANALYSIS.COLUMNS</div>
+                        <!--<div  translate>VIEWER.DRAG_COLUMNS_FOR_SET_FILTERS</div>-->
+                        <div class="analysis-settings-drill">
+                            <ul dnd-list="analysis.analysisColumns"
+                                dnd-effect-allowed="move" dnd-allowed-types="[]"
+                                 ng-class="{
+                                    'has-item':!!analysis.analysisColumns.length
+                                }">
+                                <li ng-repeat="column in analysis.analysisColumns" 
+                                    dnd-draggable="column" 
+                                    >
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    {{'LAYOUT.NO_RESULTS'| translate}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicionar atributos -->
+                <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>
 
-    <div key-value class="well well-sm clearfix" ng-model="analysis.analysisAttributes">
-        <div key-value-item class="row">
-            <div class="col-md-4">
-                <div class="form-group has-feedback">
-                    <label for="user" translate>SINGLESOURCE.ATTRIBUTE_NAME</label>
+                <div key-value class="well well-sm clearfix" ng-model="analysis.analysisAttributes">
+                    <div key-value-item class="row">
+                        <div class="col-md-4">
+                            <div class="form-group has-feedback">
+                                <label for="user" translate>SINGLESOURCE.ATTRIBUTE_NAME</label>
 
-                    <input type="text" name="analysisAttribute" id="analysisAttribute" class="form-control" 
-                           ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
-                    <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+                                <input type="text" name="analysisAttribute" id="analysisAttribute" class="form-control" 
+                                       ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
+                                <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="valor" translate>SINGLESOURCE.ATTRIBUTE_VALUE</label>
+                                <input type="text" class="form-control"
+                                       ng-model="$parent.$parent.$item.value" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
+                                <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
+                                        ng-model="$parent.$parent.$item.attributeType" class="form-control" >
+                                    <option value="" translate>LAYOUT.SELECT</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="valor" translate>SINGLESOURCE.ATTRIBUTE_VALUE</label>
-                    <input type="text" class="form-control"
-                           ng-model="$parent.$parent.$item.value" />
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
-                    <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
-                            ng-model="$parent.$parent.$item.attributeType" class="form-control" >
-                        <option value="" translate>LAYOUT.SELECT</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+            </uib-accordion-group>
+        </uib-accordion>
     </div>
+
+
 
     <div class="row" >
         <div class="col-md-12 text-right">

@@ -7,10 +7,10 @@
     <div class="col-md-12">
         <form name="formObject" ng-submit="submit()">
             <div class="form-group" validated-field-holder="formObject.name">
-                <label class="required" for="name" translate class="required">DATASOURCE.NAME</label>
+                <label for="name" translate class="required">DATASOURCE.NAME</label>
                 <input required type="text" class="form-control" id="name" name="name"
                        placeholder="{{'DATASOURCE.NAME'|translate}}"
-                       ng-model="datasource.name" required/>
+                       ng-model="datasource.name" />
                 <validated-field-messages ng-model="formObject.name"></validated-field-messages>
             </div>
             <div class="form-group">

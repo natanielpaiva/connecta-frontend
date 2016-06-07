@@ -1,15 +1,11 @@
 <!-- Solr --> 
-
 <div ng-if="statement.type === 'CONDITION_SOLR'" class="statement {{ statement.type | lowercase }}">
     Condição
-
 <!--<debug ng-model="statement"></debug>-->
 <!--   <debug ng-model="analysis.analysisColumns"></debug>-->
-   
-
     <select  ng-model="statement.name" >
         <option value="">Selecione</option>
-        <option title="{{statement.name}}" ng-repeat="cl in analysis.analysisColumns" ng-selected="{{statement.name === cl.name}}" value="{{cl.name}}">{{cl.name}}</option>
+        <option title="{{statement.name}}" ng-repeat="cl in analysis.conditionSorl" ng-selected="{{statement.name === cl}}" value="{{cl}}">{{cl}}</option>
     </select>
 
     <select ng-model="statement.predicate" ng-options="key as value.name for (key, value) in predicateMap"></select>
@@ -31,9 +27,6 @@
 <div ng-if="statement.type == 'GROUP'" class="statement {{ statement.type | lowercase }}">
     Grupo
     <select ng-model="statement.operator" ng-options="key as value.name for (key, value) in operatorMap">
-<!--        <option value="">
-            Selecione
-        </option>-->
     </select>
     <button type="button" ng-click="addGroup(statement)">+grupo</button>
     <button type="button" ng-click="addCondition(statement)">+condicao</button>

@@ -45,6 +45,11 @@
         "DATABASE": {
             "REQUEST_TABLE": "Tabela",
             "REQUEST_SQL": "Query personalizada"
+        },
+        "QUERY":"Consulta",
+        "SOLR":{
+           "QUERY_BUILDER": "Construtor de consulta",
+           "TEXT_QUERY": "Consulta de texto"
         }
     }
 }

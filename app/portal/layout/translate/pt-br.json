@@ -30,27 +30,6 @@
         "SEARCH": "Buscar",
         "DONE": "Pronto",
         "DASHBOARD": "Painel",
-        "FILTER": {
-            "FILTER": "Filtro",
-            "VALUE": "Valor",
-            "START": "Início",
-            "END": "Fim",
-            "TYPE": {
-                "TYPE": "Tipo de filtro",
-                
-                "EQUAL": "Igual a",
-                "NOT_EQUAL": "Diferente de",
-                "LESS_THAN": "Menor que",
-                "LESS_THAN_EQUAL": "Menor ou igual a",
-                "GREATER_THAN": "Maior que",
-                "GREATER_THAN_EQUAL": "Maior ou igual a",
-                "BETWEEN": "Intervalo",
-                "IN": "Lista de valores",
-                "CONTAINS": "Contém",
-                "STARTS_WITH": "Começa com",
-                "ENDS_WITH": "Termina com"
-            }
-        },
         "SHOW_GRID": "Mostrar miniaturas",
         "SHOW_LIST": "Mostrar como lista",
         "SETTINGS": "Configurações",

@@ -19,7 +19,7 @@
         & > div {
             margin-bottom:2em;
             .module-box {
-                background-color: #EDEDED;
+                background-color: $white;
                 border:solid $white 1px;
                 box-shadow:0 4px 4px lighten($lighterGray, 15%);
                 width:100%;

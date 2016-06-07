@@ -25,6 +25,35 @@
         "SLIDE_DOWN":"Deslizar para baixo",
         "SLIDE_RIGHT":"Deslizar para direita",
         "SLIDE_LEFT":"Deslizar para esquerda",
-        "OPACITY":"Opacidade"
+        "OPACITY":"Opacidade",
+        "EXPORT":"Exportar",
+        "FULLSCREEN":"Tela cheia",
+        "DRILL_UP":"Generalizar (Drill up)",
+        "ACTIVATE_DRILL":"Ativar detalhamento (Drill)",
+        "OPEN_FILTER":"Abrir configuração do filtro",
+        "FILTER": {
+            "SELECT_FILTER":"Configuração do filtro",
+            "SELECTED_FILTER":"Tipo: {{name}}. Clique para ativar esse filtro",
+            "FILTER": "Filtro",
+            "VALUE": "Valor",
+            "START": "Início",
+            "END": "Fim",
+            "APPLY": "Aplicar configurações de filtro",
+            "TYPE": {
+                "TYPE": "Alterar o tipo do filtro",
+                
+                "EQUAL": "Igual a",
+                "NOT_EQUAL": "Diferente de",
+                "LESS_THAN": "Menor que",
+                "LESS_THAN_EQUAL": "Menor ou igual a",
+                "GREATER_THAN": "Maior que",
+                "GREATER_THAN_EQUAL": "Maior ou igual a",
+                "BETWEEN": "Intervalo",
+                "IN": "Lista de valores",
+                "CONTAINS": "Contém",
+                "STARTS_WITH": "Começa com",
+                "ENDS_WITH": "Termina com"
+            }
+        }
     }
 }

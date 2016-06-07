@@ -3,12 +3,13 @@ $pageGutter:1em;
 // Configurando o container das views
 .page-container {
     overflow: hidden;
-    background-color: rgba($white, 0.9);
+    background-color: $white;
     margin-left: $sidebarSize;
     margin-top: $headerHeight + (2*$pageGutter);
     transition: margin $defaultAnimationDuration;
     padding:$pageGutter;
     border-radius:0.25em;
+    border:solid 0.1em lighten($lighterGray, 35%);
     @include clearfix();
 
 
@@ -27,6 +28,7 @@ $pageGutter:1em;
         margin-left: ($sidebarSize - 1);
         margin-top: ($headerHeight + (2*$pageGutter)) - 1.4;
         background-color: transparent;
+        border:none;
         padding:0;
     }
 }

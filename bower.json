@@ -45,11 +45,12 @@
     "angular-redactor": "~1.1.4",
     "imperavi-redactor": "~10.0.9",
     "angular-currency-mask": "0.1.0-alpha",
-    "angular-amchart": "~1.0.5",
+    "angular-amchart": "^1.0.5",
     "angular-facebook": "0.2.3",
     "ngAutocomplete": "~1.0.0",
     "angular-base64": "~2.0.4",
-    "angular-ui-select":"0.16.1"
+    "angular-ui-select": "0.16.1",
+    "angular-scroll": "^1.0.0"
   },
   "authors": [],
   "moduleType": [
