@@ -32,7 +32,7 @@ define([
 
             var dashboardCopy = angular.copy(dashboard);
             dashboardCopy.domain = DomainService.getDomainName();
-            
+
             return $http[method](url, dashboardCopy);
         };
 
@@ -58,6 +58,17 @@ define([
             return $http.get(url, {
                 params: {
                     text: term
+                }
+            });
+        };
+
+        this.bulkRemove = function (dashboard) {
+            return $http.delete(portalResources.dashboard, {
+                data: dashboard.map(function (e) {
+                    return e.id;
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             });
         };
