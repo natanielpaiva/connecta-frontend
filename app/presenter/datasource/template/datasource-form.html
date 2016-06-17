@@ -37,9 +37,10 @@
                 <a href="#/presenter/datasource" class="btn btn-default" translate>
                     LAYOUT.CANCEL
                 </a>
-<!--                <button class="btn btn-default" type="button" translate>
+                <button class="btn btn-default" ng-if="datasource.type == 'DATABASE'"   ng-click="testConnection()" type="button" translate>
                     DATASOURCE.TEST_CONNECTION
-                </button>-->
+                </button>
+               
                 <div class="inline-block" title="{{(formObject.$invalid?'VALIDATION.FILL_REQUIRED_FIELDS_ENABLE_SAVE':'') | translate}}">
                     <button class="btn btn-primary" translate ng-disabled="formObject.$invalid">
                         LAYOUT.SAVE

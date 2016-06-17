@@ -38,25 +38,25 @@ define([
         };
 
         var databaseDrivers = {
-            ORACLE_SID:{
-                name:'Oracle Thin (Service ID - SID)',
-                defaultPort:1521,
-                hasSid:true
+            ORACLE_SID: {
+                name: 'Oracle Thin (Service ID - SID)',
+                defaultPort: 1521,
+                hasSid: true
             },
-            ORACLE_SNM:{
-                name:'Oracle Thin (Service Name)',
-                defaultPort:1521,
-                hasSid:true
+            ORACLE_SNM: {
+                name: 'Oracle Thin (Service Name)',
+                defaultPort: 1521,
+                hasSid: true
             },
-            POSTGRES:{
-                name:'PostgreSQL',
-                defaultPort:5432,
-                hasSid:true
+            POSTGRES: {
+                name: 'PostgreSQL',
+                defaultPort: 5432,
+                hasSid: true
             },
-            MYSQL:{
-                name:'MySQL',
-                defaultPort:3306,
-                hasSid:false
+            MYSQL: {
+                name: 'MySQL',
+                defaultPort: 3306,
+                hasSid: false
             }
         };
 
@@ -68,7 +68,7 @@ define([
             return typeConfig;
         };
 
-        this.getDatabaseDrivers = function() {
+        this.getDatabaseDrivers = function () {
             return databaseDrivers;
         };
 
@@ -78,6 +78,13 @@ define([
             var datasourceCopy = angular.copy(datasource);
             datasourceCopy.domain = DomainService.getDomainName();
 
+            return $http.post(url, datasourceCopy);
+        };
+
+        this.testConnection = function (datasource) {
+            var url = presenterResources.datasource + "/test-connection";
+            var datasourceCopy = angular.copy(datasource);
+            datasourceCopy.domain = DomainService.getDomainName();
             return $http.post(url, datasourceCopy);
         };
 
