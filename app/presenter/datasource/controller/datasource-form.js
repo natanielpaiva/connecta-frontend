@@ -2,7 +2,7 @@ define([
     'connecta.presenter',
     'presenter/datasource/service/datasource-service'
 ], function (presenter) {
-    return presenter.lazy.controller('DatasourceFormController', function ($scope, DatasourceService, $location, $routeParams) {
+    return presenter.lazy.controller('DatasourceFormController', function ($scope, DatasourceService, $location, $routeParams, $rootScope) {
 
         $scope.form = {
             types: DatasourceService.getTypes(),
@@ -19,16 +19,21 @@ define([
                 driver: 'ORACLE_SID',
                 hdfsPort: 50070
             };
-            
+
             $scope.$watch('datasource.driver', function (selected) {
                 if (selected) {
                     $scope.datasource.port = $scope.form.drivers[selected].defaultPort;
                 }
             });
         }
+        $scope.testConnection = function () {
+            DatasourceService.testConnection($scope.datasource).then(function () {
+                $rootScope.$broadcast('layout.notify', {type:"SUCCESS", message:"Conexão feita com sucesso!"});
+            });
+        };
 
         $scope.submit = function () {
-            DatasourceService.save($scope.datasource).then(function(){
+            DatasourceService.save($scope.datasource).then(function () {
                 $location.path('presenter/datasource');
             });
         };

@@ -6,8 +6,15 @@ define([
 
 ], function (presenter) {
     return presenter.lazy.controller('AnalysisViewController', function ($scope,
-            $routeParams, AnalysisService, DatasourceService, GroupService) {
+            $routeParams, AnalysisService, DatasourceService, $location) {
         if ($routeParams.id) {
+
+            $scope.excluir = function (id) {
+                AnalysisService.remove(id).then(function () {
+                    $location.path('presenter/analysis');
+                });
+            };
+
             AnalysisService.getAnalysis($routeParams.id).then(function (response) {
                 $scope.types = DatasourceService.getTypes();
                 $scope.analysis = response.data;
@@ -17,7 +24,7 @@ define([
                 if ($scope.analysis.type === $scope.types.SOLR.name) {
                     AnalysisService.execute({
                         analysis: $scope.analysis,
-                        pagination: {count: 50,page: 1}
+                        pagination: {count: 50, page: 1}
 
                     }).then(function (response) {
                         $scope.analysisResult = response.data;
@@ -29,7 +36,7 @@ define([
                 if ($scope.analysis.type === $scope.types.DATABASE.name.toUpperCase()) {
                     AnalysisService.execute({
                         analysis: $scope.analysis,
-                        pagination: {count: 50,page: 1}
+                        pagination: {count: 50, page: 1}
 
                     }).then(function (response) {
                         $scope.analysisResult = response.data;

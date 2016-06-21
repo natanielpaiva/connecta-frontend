@@ -4,6 +4,8 @@
     <select id="database-driver" class="form-control"
             ng-model="object.driver" ng-options="key as driver.name for (key, driver) in aux.drivers">
     </select>
+    <div ng-show="formulario.driver.$touched" ng-messages="formulario.domain.$error"
+         ng-messages-include="portal-error-messages"></div>
 </div>
 <div class="row">
     <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseHost">

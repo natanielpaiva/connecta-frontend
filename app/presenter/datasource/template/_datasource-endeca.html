@@ -1,9 +1,12 @@
 <!-- Endeca -->
+
 <div class="form-group" validated-field-holder="formObject.endecaAddress">
     <label for="endeca-address" translate class="required">DATASOURCE.ADDRESS</label>
     <input type="text" name="endecaAddress" id="endeca-address" class="form-control"
            ng-model="object.address" required />
     <validated-field-messages ng-model="formObject.endecaAddress"></validated-field-messages>
+    <div ng-show="formulario.address.$touched" ng-messages="formulario.address.$error"
+         ng-messages-include="portal-error-messages"></div>
 </div>
 <div class="row" >
     <div class="col-xs-6 form-group" validated-field-holder="formObject.endecaUser">
@@ -11,11 +14,15 @@
         <input type="text" name="endecaUser" id="user" class="form-control"
                ng-model="object.user" required/>
         <validated-field-messages ng-model="formObject.endecaUser"></validated-field-messages>
+        <div ng-show="formulario.user.$touched" ng-messages="formulario.user.$error"
+             ng-messages-include="portal-error-messages"></div>
     </div>
     <div class="col-xs-6 form-group" validated-field-holder="formObject.endecaPassword">
         <label for="password" translate class="required">DATASOURCE.PASSWORD</label>
         <input type="text" name="endecaPassword" id="password" class="form-control"
                ng-model="object.password" required />
         <validated-field-messages ng-model="formObject.endecaPassword"></validated-field-messages>
+        <div ng-show="formulario.password.$touched" ng-messages="formulario.password.$error"
+             ng-messages-include="portal-error-messages"></div>
     </div>
 </div>

@@ -7,10 +7,10 @@
     <div class="col-md-12">
         <form name="formObject" ng-submit="submit()">
             <div class="form-group" validated-field-holder="formObject.name">
-                <label for="name" translate class="required">DATASOURCE.NAME</label>
+                <label class="required" for="name" translate class="required">DATASOURCE.NAME</label>
                 <input required type="text" class="form-control" id="name" name="name"
                        placeholder="{{'DATASOURCE.NAME'|translate}}"
-                       ng-model="datasource.name" />
+                       ng-model="datasource.name" required/>
                 <validated-field-messages ng-model="formObject.name"></validated-field-messages>
             </div>
             <div class="form-group">
@@ -37,9 +37,10 @@
                 <a href="#/presenter/datasource" class="btn btn-default" translate>
                     LAYOUT.CANCEL
                 </a>
-<!--                <button class="btn btn-default" type="button" translate>
+                <button class="btn btn-default" ng-if="datasource.type == 'DATABASE'"   ng-click="testConnection()" type="button" translate>
                     DATASOURCE.TEST_CONNECTION
-                </button>-->
+                </button>
+               
                 <div class="inline-block" title="{{(formObject.$invalid?'VALIDATION.FILL_REQUIRED_FIELDS_ENABLE_SAVE':'') | translate}}">
                     <button class="btn btn-primary" translate ng-disabled="formObject.$invalid">
                         LAYOUT.SAVE

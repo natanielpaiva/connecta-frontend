@@ -344,7 +344,7 @@ blockquote small {
             &.selected {
                 td {
                     transition:background-color ease 250ms;
-                    background-color:rgba($red, 0.95) !important;
+                    background-color:$presenterBlue !important;
                     * {
                         color:$white !important;
                     }

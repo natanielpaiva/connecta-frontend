@@ -4,6 +4,8 @@
         <select class="form-control" ng-model="analysis.typeQuery" ng-options="item.value as item.name for item in typeQuery" required>
             <option value="">Selecione</option>
         </select>
+        <div ng-show="formulario.domain.$touched" ng-messages="formulario.domain.$error"
+             ng-messages-include="portal-error-messages"></div>
     </div>
 </div>
 <div class="row am-flip-x" ng-if="analysis.typeQuery === 'hiveQL'">
@@ -26,7 +28,7 @@
         <input type="text" name="mr_class" class="form-control" id="mrClass"
                ng-model="analysis.mrClass" required>
     </div>
-    
+
     <div class="col-xs-3 form-group">
         <label for="dataInsertion" translate class="required">ANALYSIS.MR_METHOD</label>
         <input type="text" name="MrMethod" class="form-control" id="mrMethod"

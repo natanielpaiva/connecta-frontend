@@ -4,6 +4,8 @@
         <select class="form-control" ng-model="analysis.separator" ng-options="item.value as item.name for item in separator" required >
             <option value="">Selecione</option>
         </select>
+        <div ng-show="formulario.separator.$touched" ng-messages="formulario.separator.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
 
     <div class="col-xs-3 form-group">
@@ -20,6 +22,8 @@
         <select class="form-control" ng-model="analysis.csvType" ng-options="item.value as item.name for item in csvType">
             <option value="">Selecione</option>
         </select>
+        <div ng-show="formulario.typeCSV.$touched" ng-messages="formulario.typeCSV.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
 </div>-->
 
@@ -57,6 +61,8 @@
                 </tr>
             </tbody>
         </table>
+        <div ng-show="formulario.textCSV.$touched" ng-messages="formulario.textCSV.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
 </div>
 

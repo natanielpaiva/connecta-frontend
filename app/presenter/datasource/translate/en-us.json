@@ -24,6 +24,7 @@
         "PARAMETER": "Parameter",
         "PARAMETER_VALUE": "Value",
         "DATASOURCE": "Datasource",
-        "TEST_CONNECTION":"Test connection"
+        "TEST_CONNECTION":"Test connection",
+        "CHEKING_CONNECTION": "Cheking connection"
     }
 }
