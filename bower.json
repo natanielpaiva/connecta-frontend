@@ -50,7 +50,8 @@
     "ngAutocomplete": "~1.0.0",
     "angular-base64": "~2.0.4",
     "angular-ui-select": "0.16.1",
-    "angular-scroll": "^1.0.0"
+    "angular-scroll": "^1.0.0",
+    "angular-show-on-konami-code": "^0.0.1"
   },
   "authors": [],
   "moduleType": [

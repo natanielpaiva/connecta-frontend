@@ -172,6 +172,9 @@ require.config({
         'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min': {
             deps: ['angular']
         },
+        'bower_components/angular-show-on-konami-code/angular-show-on-konami-code': {
+            deps: ['angular']
+        },
         'bower_components/jquery-ui-custom/index': {
             deps: ['jquery']
         },
