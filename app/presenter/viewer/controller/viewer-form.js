@@ -15,7 +15,7 @@ define([
     'bower_components/html2canvas/dist/html2canvas.min',
     'bower_components/html2canvas/dist/html2canvas',
     'bower_components/angular-ui-select/dist/select'
-    
+
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, $uibModal, AnalysisService, util) {
         $scope.state = {loaded: false};
@@ -205,8 +205,8 @@ define([
                             ViewerService.getAnalysisById(newValue.id).then(function (response) {
                                 angular.extend($scope.viewer.analysis, response.data);
                                 //Torna todos as columns filtraveis
-                                if($scope.viewer.analysis !== undefined
-                                    && (oldValue === undefined || newValue.id !== oldValue.id)){
+                                if($scope.viewer.analysis !== undefined &&
+                                    (oldValue === undefined || newValue.id !== oldValue.id)){
                                     //remove os atributos da analise
                                     $scope.viewer.filters = [];
                                     $scope.viewer.metrics = [];
@@ -449,6 +449,11 @@ define([
                         $scope.viewer.configuration = dados;
                         //Disable Animation
                         $scope.viewer.configuration.startDuration = 0;
+                        angular.forEach($scope.viewer.configuration.titles, function(title) {
+                            title.text = '';
+                        });
+                        $scope.viewer.configuration.thousandsSeparator = '.';
+                        $scope.viewer.configuration.decimalSeparator = ',';
                         load();
                     });
                     break;
