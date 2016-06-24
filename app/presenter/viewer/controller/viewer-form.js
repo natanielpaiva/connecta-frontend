@@ -200,10 +200,30 @@ define([
                         $scope.setLayoutConfiguration = false;
                     };
 
-                    $scope.$watch('viewer.analysis', function (newValue) {
+                    $scope.$watch('viewer.analysis', function (newValue, oldValue) {
                         if (newValue !== undefined) {
                             ViewerService.getAnalysisById(newValue.id).then(function (response) {
                                 angular.extend($scope.viewer.analysis, response.data);
+                                //Torna todos as columns filtraveis
+                                if($scope.viewer.analysis !== undefined
+                                    && (oldValue === undefined || newValue.id !== oldValue.id)){
+                                    //remove os atributos da analise
+                                    $scope.viewer.filters = [];
+                                    $scope.viewer.metrics = [];
+                                    $scope.viewer.descriptions = [];
+                                    $scope.viewer.xfields = [];
+                                    $scope.viewer.yfields = [];
+                                    $scope.viewer.valueFields = [];
+                                    $scope.viewer.columns = [];
+
+                                    angular.forEach($scope.viewer.analysis.analysisColumns, function(column) {
+                                      var colunaFiltravel = {
+                                          analysisColumn: angular.copy(column),
+                                          columnType: 'FILTER'
+                                      };
+                                      $scope.viewer.filters.push(colunaFiltravel);
+                                    });
+                                }
                             });
                         }
                     });
