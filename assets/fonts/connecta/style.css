@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'connecta';
-    src:    url('fonts/connecta.eot?jl3lxz');
-    src:    url('fonts/connecta.eot?jl3lxz#iefix') format('embedded-opentype'),
-        url('fonts/connecta.ttf?jl3lxz') format('truetype'),
-        url('fonts/connecta.woff?jl3lxz') format('woff'),
-        url('fonts/connecta.svg?jl3lxz#connecta') format('svg');
+    src:    url('fonts/connecta.eot?6s26ha');
+    src:    url('fonts/connecta.eot?6s26ha#iefix') format('embedded-opentype'),
+        url('fonts/connecta.ttf?6s26ha') format('truetype'),
+        url('fonts/connecta.woff?6s26ha') format('woff'),
+        url('fonts/connecta.svg?6s26ha#connecta') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,6 +24,15 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-left-join:before {
+    content: "\ebf2";
+}
+.icon-right-join:before {
+    content: "\ebf3";
+}
+.icon-inner-join:before {
+    content: "\ebf4";
+}
 .icon-filter2:before {
     content: "\ebf0";
 }
@@ -1418,9 +1427,6 @@
 }
 .icon-upload-to-cloud:before {
     content: "\e655";
-}
-.icon-upload:before {
-    content: "\e656";
 }
 .icon-add-user:before {
     content: "\e657";
