@@ -304,7 +304,7 @@ blockquote small {
                 color: white;
                 font-weight: normal;
                 border: none !important;
-                
+
                 &:first-of-type {
                     border-top-left-radius:0.25em;
                 }
@@ -314,7 +314,7 @@ blockquote small {
             }
         }
     }
-    
+
     tbody {
         tr {
             &:last-of-type {
@@ -329,7 +329,7 @@ blockquote small {
             }
         }
     }
-    
+
     thead,
     tbody,
     tfoot {
@@ -511,6 +511,117 @@ a[href="http://www.amcharts.com/javascript-charts/"] {
                     height:2em;
                 }
             }
+        }
+    }
+}
+
+.roger {
+    $green:#66dd77;
+    $black:lighten(black, 15%);
+
+    height:25em;
+
+    * {
+        box-sizing:border-box;
+    }
+
+    .head {
+        background-color:$green;
+        width:10em;
+        height:7em;
+        text-align:center;
+        border-radius:50%;
+        position:relative;
+        &:after {
+            content:' ';
+            display:block;
+            clear:both;
+        }
+        .eye {
+            background-color:$black;
+            width:3em;
+            height:1.1em;
+            border-radius:50%;
+            position:absolute;
+            top:3.5em;
+            &:first-of-type {
+                left:1.3em;
+            }
+            &:last-of-type {
+                right:1.3em;
+            }
+        }
+        .mouth {
+            border-bottom:solid 0.2em black;
+            width:3em;
+            height:1em;
+            border-radius:50%;
+            position:absolute;
+            left:50%;
+            top:70%;
+            transform:translateX(-50%);
+        }
+    }
+
+    .neck {
+        margin-top:-.5em;
+        position:absolute;
+        left:50%;
+        transform:translateX(-50%);
+        border-bottom: 2em solid $green;
+        border-left: .5em solid transparent;
+        border-right: .5em solid transparent;
+        height: 0;
+        width: 2em;
+    }
+    .arm {
+        height:8em;
+        width:2em;
+        border-color:$green;
+        border-width:1em;
+        border-style:solid;
+        border-bottom:none;
+        position:absolute;
+        margin-top:1.5em;
+        &.left {
+            border-right:none;
+            left:1em;
+            border-top-left-radius:0.75em;
+            border-bottom-left-radius:0.75em;
+        }
+        &.right {
+            border-left:none;
+            right:1em;
+            border-top-right-radius:0.75em;
+            border-bottom-right-radius:0.75em;
+        }
+    }
+    .torso {
+        background-color:$green;
+        position:absolute;
+        left:50%;
+        margin-top:1.1em;
+        transform:translateX(-50%);
+        width:5em;
+        height:10em;
+        border-radius:1em;
+    }
+    .leg {
+        height:7em;
+        width:0;
+        border-color:$green;
+        border-width:0.55em;
+        border-style:solid;
+        border-bottom:none;
+        position:absolute;
+        margin-top:11em;
+        border-bottom-left-radius:1em;
+        border-bottom-right-radius:1em;
+        &.left {
+            left:3.25em;
+        }
+        &.right {
+            right:3.25em;
         }
     }
 }

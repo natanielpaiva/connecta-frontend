@@ -40,7 +40,8 @@ define([
   'bower_components/ngAutocomplete/src/ngAutocomplete',
   'bower_components/angular-base64/angular-base64',
   'bower_components/angular-ui-select/dist/select',
-  'bower_components/angular-scroll/angular-scroll.min'
+  'bower_components/angular-scroll/angular-scroll.min',
+  'bower_components/angular-show-on-konami-code/angular-show-on-konami-code'
 ], function($ , angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
   var connecta = angular.module('connecta', [
@@ -70,7 +71,8 @@ define([
     'AngularAmChart',
     'base64',
     'ui.select',
-    'duScroll'
+    'duScroll',
+    'show-on-konami-code'
   ]);
 
   // Configuração do backend dos módulos

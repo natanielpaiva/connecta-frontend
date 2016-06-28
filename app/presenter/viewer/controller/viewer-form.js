@@ -15,7 +15,7 @@ define([
     'bower_components/html2canvas/dist/html2canvas.min',
     'bower_components/html2canvas/dist/html2canvas',
     'bower_components/angular-ui-select/dist/select'
-    
+
 ], function (presenter) {
     return presenter.lazy.controller('ViewerFormController', function ($scope, ViewerService, SidebarService, $routeParams, $location, $uibModal, AnalysisService, util) {
         $scope.state = {loaded: false};
@@ -200,10 +200,30 @@ define([
                         $scope.setLayoutConfiguration = false;
                     };
 
-                    $scope.$watch('viewer.analysis', function (newValue) {
+                    $scope.$watch('viewer.analysis', function (newValue, oldValue) {
                         if (newValue !== undefined) {
                             ViewerService.getAnalysisById(newValue.id).then(function (response) {
                                 angular.extend($scope.viewer.analysis, response.data);
+                                //Torna todos as columns filtraveis
+                                if($scope.viewer.analysis !== undefined &&
+                                    (oldValue === undefined || newValue.id !== oldValue.id)){
+                                    //remove os atributos da analise
+                                    $scope.viewer.filters = [];
+                                    $scope.viewer.metrics = [];
+                                    $scope.viewer.descriptions = [];
+                                    $scope.viewer.xfields = [];
+                                    $scope.viewer.yfields = [];
+                                    $scope.viewer.valueFields = [];
+                                    $scope.viewer.columns = [];
+
+                                    angular.forEach($scope.viewer.analysis.analysisColumns, function(column) {
+                                      var colunaFiltravel = {
+                                          analysisColumn: angular.copy(column),
+                                          columnType: 'FILTER'
+                                      };
+                                      $scope.viewer.filters.push(colunaFiltravel);
+                                    });
+                                }
                             });
                         }
                     });
@@ -429,6 +449,11 @@ define([
                         $scope.viewer.configuration = dados;
                         //Disable Animation
                         $scope.viewer.configuration.startDuration = 0;
+                        angular.forEach($scope.viewer.configuration.titles, function(title) {
+                            title.text = '';
+                        });
+                        $scope.viewer.configuration.thousandsSeparator = '.';
+                        $scope.viewer.configuration.decimalSeparator = ',';
                         load();
                     });
                     break;

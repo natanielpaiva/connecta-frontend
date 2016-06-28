@@ -4,7 +4,7 @@
       <img src="assets/img/logo-connecta-negative.png" alt="logo" id="logo-app-master"/>
     </div>
     <div id="version-app">
-      v0.5.2
+      v0.6.0
     </div>
   </div>
   <div id="form-login">
@@ -52,7 +52,7 @@
 
   <div class="thumbnail-grid row">
     <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains">
-      <a ng-click="selectDomain(domain)">
+      <a ng-click="selectDomain(domain)" title="{{domain.name}}">
         <div class="thumbnail-grid-item-inner">
           <!-- <img src="assets/img/portal/dashboard-icon.svg" alt=""/> -->
           <span class="icon-domain"></span>
