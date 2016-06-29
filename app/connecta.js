@@ -2,7 +2,6 @@
 define([
   'jquery',
   'angular',
-
   // Configuração dos módulos
   'json!applications.json',
   // Módulos Angular Connecta
@@ -36,7 +35,7 @@ define([
   'bower_components/angular-currency-mask/angular-currency-mask',
   'bower_components/angular-redactor/angular-redactor',
   'bower_components/angular-amchart/src/amchart',
-  'bower_components/angular-facebook/lib/angular-facebook',
+//  'bower_components/angular-facebook/lib/angular-facebook',
   'bower_components/ngAutocomplete/src/ngAutocomplete',
   'bower_components/angular-base64/angular-base64',
   'bower_components/angular-ui-select/dist/select',
@@ -65,12 +64,12 @@ define([
     'ui.bootstrap',
     'ui.tree',
     'ui.mask',
+    'ui.select',
     'pascalprecht.translate',
     'angularFileUpload',
     'currencyMask',
     'AngularAmChart',
     'base64',
-    'ui.select',
     'duScroll',
     'show-on-konami-code'
   ]);
@@ -208,7 +207,11 @@ define([
         responseError: function(rejection) {
           var responseInterceptors = {
             0: function(rejection) { // NET ERROR
-              console.log('ERROR CODE 0',rejection);
+              console.log('ERROR CODE 0', rejection);
+              $rootScope.$broadcast('layout.notify', {
+                  type:'ERROR',
+                  message:'LAYOUT.NO_CONNECTION'
+              });
             },
             400: function(rejection) { // BAD REQUEST
               $rootScope.$broadcast('layout.notify', rejection.data);
@@ -257,6 +260,7 @@ define([
    * específico da aplicação
    * @param {type} $rootScope
    * @param {type} $menu
+   * @param {type} LayoutService
    */
   function configureRouteChangeListener($rootScope, $menu, LayoutService) {
 
@@ -283,6 +287,7 @@ define([
    * @param {type} $rootScope
    * @param {type} $route
    * @param {type} LoginService
+   * @param {type} DomainService
    * @returns {undefined}
    */
   function configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService){

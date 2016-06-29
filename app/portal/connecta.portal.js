@@ -7,8 +7,8 @@ define([
         'pascalprecht.translate',
         'ngCookies',
         'gridster',
-        'angular-redactor',
-        'facebook'
+        'angular-redactor'
+//        ,'facebook'
     ]);
     
     portal._configKey = 'portal';
@@ -22,7 +22,7 @@ define([
         domain: applications.portal.host + '/domain'
     });
 
-    portal.config(function ($translatePartialLoaderProvider, redactorOptions, FacebookProvider) {
+    portal.config(function ($translatePartialLoaderProvider, redactorOptions) { //, FacebookProvider
         $translatePartialLoaderProvider.addPart('portal/layout');
         $translatePartialLoaderProvider.addPart('portal/application');
         $translatePartialLoaderProvider.addPart('portal/dashboard');
@@ -37,12 +37,12 @@ define([
 
         angular.extend(redactorOptions, _redactorOptions);
 
+//
+//        var appIdConnectaCloud = '950123895028823';
+//        var appIdConnectaHml = '953657114675501';
+//        var appIdConnectaLocal = '953794307995115';
 
-        var appIdConnectaCloud = '950123895028823';
-        var appIdConnectaHml = '953657114675501';
-        var appIdConnectaLocal = '953794307995115';
-
-        FacebookProvider.init(appIdConnectaHml);
+//        FacebookProvider.init(appIdConnectaHml);
     });
 
     /**

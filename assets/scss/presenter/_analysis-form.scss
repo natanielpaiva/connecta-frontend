@@ -1,215 +1,261 @@
-.xml-tree {
-    padding-left: 1em;
-    list-style: none;
-    padding:0;
-    margin:0;
-
-    li {
+.analysis-form {
+    .xml-tree {
+        padding-left: 1em;
+        list-style: none;
         padding:0;
         margin:0;
-        line-height:1em;
-        list-style: none;
-
-        label {
-            margin:0.3em !important;
-            cursor:pointer;
-            user-select:none;
-        }
-
-        input[name=table] {
-            opacity:0;
-            height:0;
-            width:0;
-
-            &:checked ~ label.radio-table {
-                background-color:$presenterBlue;
-            }
-        }
-        label.radio-table {
-            background-color:$gray;
-            color:$white;
-            border-radius:0.2em;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            padding:0.25em;
-            font-size:1em;
-        }
-
-        input[name=column] {
-            opacity:0;
-            height:0;
-            width:0;
-
-            &:checked ~ label.checkbox-column {
-                background-color:$bs-brand-warning;
-            }
-        }
-        label.checkbox-column {
-            background-color:$darkerWhite;
-
-            color:$white;
-            border-radius:0.2em;
-            padding:0.3em;
-            font-size:0.8em;
-            font-weight:normal;
-            line-height:1.25em;
-
-            &.element-level {
-                margin-right:-0.95em !important;
-                border-top-right-radius:0;
-                border-bottom-right-radius:0;
-            }
-        }
-    }
-}
-
-.close-column{
-    cursor:pointer;
-}
-
-.analysis-settings-drill {
-
-    width: 100%;
-    position: relative;
-
-    ul[dnd-list], ul[dnd-list] > li {
-        position: relative;
-    }
-
-    ul[dnd-list] {
-        min-height: 100px;
-        padding-left: 0px;
-        border: dashed 0.2em $darkerWhite;
-        margin-top:0.5em;
-        padding: 0.8em;
-        min-height: 12em;
-        
-        &.has-item {
-            background-color:$white;
-            border: solid 0.2em $darkerWhite;
-            
-            .dndPlaceholder {
-                display:block;
-                background-color: $darkWhite;
-                border: dashed 0.2em $darkerWhite;
-            }
-        }
-
-        .dndPlaceholder {
-            display: none;
-        }
-
-        .dndDraggingSource {
-            display: none;
-        }
 
         li {
-            background-color: $presenterBlue;
-            box-shadow: 0.1em 0.1em 0 $darkerWhite;
-            border-radius: 0.2em;
-            display: inline-block;
-            color: $white;
-            font-size: 14px;
-            line-height:2em;
-            height:2em;
-            width: auto;
-            cursor: pointer;
-            margin-bottom:0.25em;
-            margin-right:0.25em;
-            padding:0 0.5em;
-            @include clearfix;
+            padding:0;
+            margin:0;
+            line-height:1em;
+            list-style: none;
 
-            &.selected {
-                background-color: #297eb8;
-                color: #fff;
+            label {
+                margin:0.3em !important;
+                cursor:pointer;
+                user-select:none;
+            }
+
+            input[name=table] {
+                opacity:0;
+                height:0;
+                width:0;
+
+                &:checked ~ label.radio-table {
+                    background-color:$presenterBlue;
+                }
+            }
+            label.radio-table {
+                background-color:$gray;
+                color:$white;
+                border-radius:0.2em;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                padding:0.25em;
+                font-size:1em;
+            }
+
+            input[name=column] {
+                opacity:0;
+                height:0;
+                width:0;
+
+                &:checked ~ label.checkbox-column {
+                    background-color:$bs-brand-warning;
+                }
+            }
+            label.checkbox-column {
+                background-color:$darkerWhite;
+
+                color:$white;
+                border-radius:0.2em;
+                padding:0.3em;
+                font-size:0.8em;
+                font-weight:normal;
+                line-height:1.25em;
+
+                &.element-level {
+                    margin-right:-0.95em !important;
+                    border-top-right-radius:0;
+                    border-bottom-right-radius:0;
+                }
             }
         }
     }
-}
 
+    .close-column{
+        cursor:pointer;
+    }
 
-.analysis-drag-here {
+    .analysis-settings-drill {
 
-    width: 100%;
-    ul[dnd-list] {
-        
-        &.dndDragover {
-            background-color: $darkWhite;
+        width: 100%;
+        position: relative;
+
+        ul[dnd-list], ul[dnd-list] > li {
+            position: relative;
+        }
+
+        ul[dnd-list] {
+            min-height: 100px;
+            padding-left: 0px;
             border: dashed 0.2em $darkerWhite;
-            
-            li:nth-last-of-type(2) {
-                div {
-                    color: $lighterGray !important;
+            margin-top:0.5em;
+            padding: 0.8em;
+            min-height: 12em;
+
+            &.has-item {
+                background-color:$white;
+                border: solid 0.2em $darkerWhite;
+
+                .dndPlaceholder {
+                    display:block;
+                    background-color: $darkWhite;
+                    border: dashed 0.2em $darkerWhite;
+                }
+            }
+
+            .dndPlaceholder {
+                display: none;
+            }
+
+            .dndDraggingSource {
+                display: none;
+            }
+
+            li {
+                background-color: $presenterBlue;
+                box-shadow: 0.1em 0.1em 0 $darkerWhite;
+                border-radius: 0.2em;
+                display: inline-block;
+                color: $white;
+                font-size: 14px;
+                line-height:2em;
+                height:2em;
+                width: auto;
+                cursor: pointer;
+                margin-bottom:0.25em;
+                margin-right:0.25em;
+                padding:0 0.5em;
+                @include clearfix;
+
+                &.selected {
+                    background-color: #297eb8;
+                    color: #fff;
                 }
             }
         }
-        
-        &.has-item {
-            background-color:$white;
-            border: solid 0.2em $darkerWhite;
-            
-            .dndPlaceholder {
-                display:block;
+    }
+
+
+    .analysis-drag-here {
+
+        width: 100%;
+        ul[dnd-list] {
+
+            &.dndDragover {
                 background-color: $darkWhite;
                 border: dashed 0.2em $darkerWhite;
-            }
-        }
-        
-        
-        min-height: 100px;
-        padding-left: 0px;
-        border: dashed 0.2em $darkerWhite;
-        margin-top:0.5em;
-        padding: 0.8em;
-        min-height: 12em;
 
-/*         {
-            display: none;
-        }*/
-
-        .dndDraggingSource {
-            display: none;
-        }
-
-        li, .dndPlaceholder {
-            background-color: $presenterBlue;
-            box-shadow: 0.1em 0.1em 0 $darkerWhite;
-            border-radius: 0.2em;
-            display: block;
-            color: $white;
-            font-size: 14px;
-            line-height:2em;
-            height:2em;
-            width:14em;
-            min-width: 14em;
-            cursor: pointer;
-            margin:0 auto 2em auto;
-            padding:0 0.5em;
-            text-align: center;
-            @include clearfix;
-
-            &.selected {
-                background-color: #297eb8;
-                color: #fff;
-            }
-            div{
-                width: 100%;
-                text-align: center;
-                line-height:2em;
-                color: $black;
-            }
-            span{
-                float:right;
-                padding-top: 0.5em;
-            }
-            
-            &:last-of-type {
-                div {
-                    color: $darkerWhite;
+                li:nth-last-of-type(2) {
+                    div {
+                        color: $lighterGray !important;
+                    }
                 }
             }
+
+            &.has-item {
+                background-color:$white;
+                border: solid 0.2em $darkerWhite;
+
+                .dndPlaceholder {
+                    display:block;
+                    background-color: $darkWhite;
+                    border: dashed 0.2em $darkerWhite;
+                }
+            }
+
+
+            min-height: 100px;
+            padding-left: 0px;
+            border: dashed 0.2em $darkerWhite;
+            margin-top:0.5em;
+            padding: 0.8em;
+            min-height: 12em;
+
+            /*         {
+                        display: none;
+                    }*/
+
+            .dndDraggingSource {
+                display: none;
+            }
+
+            li, .dndPlaceholder {
+                background-color: $presenterBlue;
+                box-shadow: 0.1em 0.1em 0 $darkerWhite;
+                border-radius: 0.2em;
+                display: block;
+                color: $white;
+                font-size: 14px;
+                line-height:2em;
+                height:2em;
+                width:14em;
+                min-width: 14em;
+                cursor: pointer;
+                margin:0 auto 2em auto;
+                padding:0 0.5em;
+                text-align: center;
+                @include clearfix;
+
+                &.selected {
+                    background-color: #297eb8;
+                    color: #fff;
+                }
+                div{
+                    width: 100%;
+                    text-align: center;
+                    line-height:2em;
+                    color: $black;
+                }
+                span{
+                    float:right;
+                    padding-top: 0.5em;
+                }
+
+                &:last-of-type {
+                    div {
+                        color: $darkerWhite;
+                    }
+                }
+            }
+
+
         }
-        
-        
+    }
+    
+    .well {
+        margin-bottom: 0;
+    }
+    
+    .analysis-csv-file {
+        label {
+            cursor:pointer;
+            font-size:2em;
+            font-weight:500;
+            margin:0;
+            height: 4.5em;
+            line-height: 4.5em;
+            text-align:center;
+            border:dashed 0.1em $darkWhite;
+            color:$darkWhite;
+            border-radius:0.25em;
+            &:hover {
+                border:dashed 0.1em $darkerWhite;
+                color:$darkerWhite;
+            }
+        }
+        input {
+            opacity:0;
+            height:0;
+            width:0;
+        }
+    }
+    
+    .analysis-relations {
+        h4 {
+            @include clearfix;
+        }
+        .suggestions {
+            .analysis-relation-suggestion {
+                
+            }
+        }
+        .relations {
+            .analysis-relation {
+                
+            }
+        }
     }
 }

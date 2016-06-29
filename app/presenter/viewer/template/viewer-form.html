@@ -198,7 +198,7 @@
             </translate>
         </div>
     </div>
-    <div class="row">
+    <div class="row margin-bottom-single">
         <div id="analysis-viewer" class="col-md-12">
             <viewer ng-model="viewer" edit="true"></viewer>
         </div>
@@ -208,13 +208,17 @@
             <uib-accordion-group> 
                 <uib-accordion-heading>
                     <span translate>VIEWER.SETTINGS_ADVANCED</span>
-                    <i ng-click="changeStatus()" class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
-                    </i>
+                    <span ng-click="changeStatus()" class="pull-right glyphicon"
+                          ng-class="{
+                            'glyphicon-chevron-down': isOpen,
+                            'glyphicon-chevron-right': !isOpen
+                          }">
+                    </span>
                 </uib-accordion-heading>
                 <div class="row">
                     <div class="col-md-12">
-                        <div  translate>VIEWER.SETTINGS_FILTER</div>
-                        <!--<div  translate>VIEWER.DRAG_COLUMNS_FOR_SET_FILTERS</div>-->
+                        <div translate>VIEWER.SETTINGS_FILTER</div>
+                        <!--<div translate>VIEWER.DRAG_COLUMNS_FOR_SET_FILTERS</div>-->
                         <div class="box-viewer">
                             <div class="columns-viewer">
                                 <div class="sidebar-viewer">
@@ -237,7 +241,7 @@
                             </div>
                         </div>
                     </div>
-<!--                    <div class="col-md-6">
+    <!--                    <div class="col-md-6">
                         <div  translate>VIEWER.SETTINGS_DRILL</div>
                         <div  translate>VIEWER.DRAG_COLUMNS_FOR_DRILL</div>
                         <div class="box-viewer-filter">

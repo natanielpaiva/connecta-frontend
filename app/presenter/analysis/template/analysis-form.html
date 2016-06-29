@@ -3,7 +3,7 @@
         <h3 translate>ANALYSIS.REGISTER_ANALYSIS</h3>
     </div>
 </div>
-<form novalidate name="formulario" ng-submit="submit()">
+<form novalidate name="formulario" ng-submit="submit()" class="analysis-form">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -35,11 +35,9 @@
              ng-controller="subform.controller"></div>
     </div>
 
-    <!--DescriÃ§Ã£o das colunas-->
     <h4 translate>ANALYSIS.DESCRIPTION_OF_COLUMNS</h4>
-    <div class="row"  >
+    <div class="row">
         <div class="col-md-12" >
-            <!--style="height:250px; background-color:#F2F2F2; overflow:auto"-->
             <div class="clearfix well" > 
                 <div ng-repeat="columns in analysis.analysisColumns" >
                     <div class="col-md-5 form-group">
@@ -55,6 +53,26 @@
                         <span ng-click="analysis.analysisColumns.splice($index, 1)" class="icon-close"></span>
                     </div>
                 </div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="analysis-relations">
+        <h4 class="margin-top-single">
+            <translate>ANALYSIS.RELATIONS.RELATIONS</translate>
+            <button class="auto-detect btn pull-right"
+                    type="button" translate disabled>
+                ANALYSIS.RELATIONS.DETECT
+            </button>
+        </h4>
+        <div class="suggestions">
+            <div class="analysis-relation-suggestion">
+                
+            </div>
+        </div>
+        <div class="relations">
+            <div class="analysis-relation" >
+                
             </div>
         </div>
     </div>
@@ -132,7 +150,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
+                                <label translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
                                 <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
                                         ng-model="$parent.$parent.$item.attributeType" class="form-control" >
                                     <option value="" translate>LAYOUT.SELECT</option>
@@ -149,9 +167,8 @@
 
     <div class="row" >
         <div class="col-md-12 text-right">
-            <a href="#/presenter/analysis"
-               class="btn btn-default" translate>
-                LAYOUT.CANCEL
+            <a href="#/presenter/analysis" class="btn btn-default" translate>
+                LAYOUT.BACK
             </a>
             <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
                 LAYOUT.SAVE

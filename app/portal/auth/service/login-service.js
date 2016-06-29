@@ -43,10 +43,10 @@ define([
         $http.get(portalResources.user + '/current').then(function(response) {
           _currentUser = response.data;
           deferred.resolve(_currentUser);
+        }, function() {
+          loginService.unauthenticate();
         });
-//        , function() {
-//          loginService.unauthenticate();
-//        }
+
         
       } else {
         $timeout(function() {

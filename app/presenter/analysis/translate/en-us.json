@@ -21,7 +21,7 @@
         "SEPARATOR": "Separator",
         "QUOTE": "Quote",
         "CSV_TYPE": "type CSV",
-        "CSV_FILE": "Or upload the CSV File",
+        "CSV_FILE": "Or drag CSV here",
         "CSV_TEXT": "CSV Text",
         "DOMAIN": "Domain",
         "TYPE_QUERY": "Query type",
@@ -49,7 +49,10 @@
         "SOLR":{
            "CUSTOM_QUERY": "Custom query",
            "TEXT_QUERY": "Text query"
+        },
+        "RELATIONS": {
+            "RELATIONS":"Related analysis",
+            "DETECT":"Auto-detect"
         }
-        
     }
 }
