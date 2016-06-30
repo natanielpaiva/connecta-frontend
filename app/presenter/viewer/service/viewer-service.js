@@ -715,7 +715,8 @@ define([
                     viewer.configuration.valueAxes = [];
                     viewer.configuration.valueAxes.push({id:analysisViewerColumns[i].analysisColumn.label,
                                                          title:analysisViewerColumns[i].analysisColumn.label,
-                                                         titleRotation:-90});
+                                                         titleRotation:-90,
+                                                         minimum:0});
                     viewer.configuration.graphs.push(graph);
                 }
 
