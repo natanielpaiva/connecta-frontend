@@ -421,11 +421,11 @@ define([
                 });
             });
         };
-        
+
         this.getAnalysisById = function(id){
             return $http.get(presenterResources.analysis + "/" + id );
         };
-        
+
         this.analysisList = function(){
             return $http.get(presenterResources.analysis);
         };
@@ -475,7 +475,7 @@ define([
 //                                }
 //                                );
 //                    }
-//                    
+//
 //                    for (key in analysisViewer.filters) {
 //                        analysisViewer
 //                                .analysisViewerColumns
@@ -541,7 +541,7 @@ define([
 //            delete analysisViewer.valueFields;
 //            delete analysisViewer.filters;
 //        };
-        
+
         this.save = function (analysisViewer) {
             var analysisViewerCopy = angular.copy(analysisViewer);
             var url = presenterResources.viewer;
@@ -554,7 +554,7 @@ define([
                 return $http.put(url, analysisViewerCopy);
             }
         };
-        
+
 //        this.preview = function (analysisViewer) {
 //            var analysisViewerCopy = angular.copy(analysisViewer);
 //            var url = presenterResources.viewer + "/preview";
@@ -608,12 +608,12 @@ define([
             var url = presenterResources.viewer + "/" + id;
             return $http.get(url);
         };
-        
+
         this.delete = function (id) {
             var url = presenterResources.viewer + "/" + id;
             return $http.delete(url);
         };
-        
+
         this.getPreview = function (viewer, result) {
 //            var viewerConfiguration = analysisViewerResult.analysisViewer.configuration;
 //            viewer.configuration = analysisViewerResult.analysisViewer.configuration;
@@ -696,7 +696,7 @@ define([
                     break;
             }
         };
-        
+
         var configureSerialAndRadar = function (viewer, result) {
             var standardGraph = angular.copy(viewer.configuration.graphs[0]);
             viewer.configuration.graphs = [];
@@ -715,7 +715,8 @@ define([
                     viewer.configuration.valueAxes = [];
                     viewer.configuration.valueAxes.push({id:analysisViewerColumns[i].analysisColumn.label,
                                                          title:analysisViewerColumns[i].analysisColumn.label,
-                                                         titleRotation:-90});
+                                                         titleRotation:-90,
+                                                         minimum:0});
                     viewer.configuration.graphs.push(graph);
                 }
 

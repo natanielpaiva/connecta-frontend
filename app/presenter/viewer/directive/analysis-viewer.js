@@ -119,17 +119,19 @@ define([
                 $scope.columnExample = '';
                 $scope.columnsTable = [];
                 $scope.$watchCollection('model.analysisViewerColumns', function (newValue, oldValue) {
-                    if ($scope.model.configuration.type === 'table') {
-                        $scope.columnsTable = {};
-                        for (var key in newValue) {
-                            $scope.columnExample = true;
-                            if (newValue[key].columnType === 'METRIC')
-                                $scope.columnsTable[key] = {value: newValue[key].analysisColumn.label};
+                    if($scope.model.configuration !== undefined){
+                        if ($scope.model.configuration.type === 'table') {
+                            $scope.columnsTable = {};
+                            for (var key in newValue) {
+                                $scope.columnExample = true;
+                                if (newValue[key].columnType === 'METRIC')
+                                    $scope.columnsTable[key] = {value: newValue[key].analysisColumn.label};
 
+                            }
+    //                        if (isEmpty($scope.columnsTable)) {
+    //                            $scope.columnExample = '';
+    //                        }
                         }
-//                        if (isEmpty($scope.columnsTable)) {
-//                            $scope.columnExample = '';
-//                        }
                     }
                 });
 
