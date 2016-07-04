@@ -16,7 +16,7 @@ define([
                 $scope.drillOrder = 0;
                 $scope.m2a = util.mapToArray;
                 $scope.options = {
-                    isDrilling: false,  // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
+                    isDrilling: false, // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
                     filterConfigOpen: false
                 };
 
@@ -27,8 +27,8 @@ define([
                     filters: [],
                     drill: null
                 };
-                
-                var _prepareFiltersForRequest = function(){
+
+                var _prepareFiltersForRequest = function () {
                     $scope.analysisExecuteRequest.filters = [];
 
                     angular.forEach($scope.model.analysisViewerColumns, function (column) {
@@ -41,8 +41,8 @@ define([
                         }
                     });
                 };
-                
-                $scope.possibleValues = function(filter) {
+
+                $scope.possibleValues = function (filter) {
                     if ($scope.analysisExecuteRequest.analysis) { // pra ele não rodar antes da informação estar completa
                         _prepareFiltersForRequest();
 
@@ -52,11 +52,11 @@ define([
                     }
                 };
 
-                function updateChartFields(columnDrill){
-                    if(columnDrill){
-                        if($scope.model.configuration.type === 'pie'){
+                function updateChartFields(columnDrill) {
+                    if (columnDrill) {
+                        if ($scope.model.configuration.type === 'pie') {
                             $scope.model.configuration.titleField = columnDrill;
-                        }else{
+                        } else {
                             $scope.model.configuration.categoryField = columnDrill;
                         }
                     }
@@ -69,9 +69,10 @@ define([
                     AnalysisService.execute($scope.analysisExecuteRequest).then(function (response) {
                         if ($scope.model.configuration.type === 'table') {
                             $scope.model.configuration.data = response.data;
+                            $scope.model.columns = $scope.model.analysisViewerColumns;
                         } else {
                             var columnDrill = $scope.drillLevels[$scope.drillOrder];
-                            if(columnDrill)
+                            if (columnDrill)
                                 updateChartFields(columnDrill.label);
 
                             $scope.model.configuration.dataProvider = response.data;
@@ -84,22 +85,22 @@ define([
                     ViewerService.getAnalysisViewer($scope.model.id).then(function (response) {
                         angular.extend($scope.model, response.data);
                         $scope.analysisExecuteRequest.analysis = $scope.model.analysis;
-                        
-                        
-                        $scope.model.analysisViewerColumns.filter(function(column){
+
+
+                        $scope.model.analysisViewerColumns.filter(function (column) {
                             return column.columnType === "FILTER";
-                        }).forEach(function(filter){
+                        }).forEach(function (filter) {
                             filter.type = 'CONTAINS';
                             filter.value = {
-                                value:null,
-                                in:[],
-                                between:{
-                                    start:null,
-                                    end:null
+                                value: null,
+                                in: [],
+                                between: {
+                                    start: null,
+                                    end: null
                                 }
                             };
                         });
-                        
+
                         $scope.getAnalysisResult();
                     });
                 }
@@ -115,25 +116,28 @@ define([
                     }
                 };
 
+                $scope.removeIndex = function (index) {
+                    $scope.model.columns.splice(index, 1);
+                };
 
                 $scope.columnExample = '';
                 $scope.columnsTable = [];
-                $scope.$watchCollection('model.analysisViewerColumns', function (newValue, oldValue) {
-                    if($scope.model.configuration !== undefined){
+                $scope.$watchCollection('model.columns', function (newValue, oldValue) {
+                    if ($scope.model.configuration !== undefined) {
                         if ($scope.model.configuration.type === 'table') {
                             $scope.columnsTable = {};
                             for (var key in newValue) {
                                 $scope.columnExample = true;
-                                if (newValue[key].columnType === 'METRIC')
+                                if (newValue[key].columnType === 'COLUMN')
                                     $scope.columnsTable[key] = {value: newValue[key].analysisColumn.label};
-
                             }
-    //                        if (isEmpty($scope.columnsTable)) {
-    //                            $scope.columnExample = '';
-    //                        }
+                            if (Object.keys($scope.columnsTable).length === 0) {
+                                $scope.columnExample = '';
+                            }
                         }
                     }
                 });
+
 
 //                $scope.$watchCollection('model.analysisViewerColumns', function (newValue, oldValue) {
 //                    $scope.columnsTable = {};
@@ -147,100 +151,100 @@ define([
 //                        $scope.columnExample = '';
 //                    }
 //                });
-                $scope.drillUp = function(){
+                $scope.drillUp = function () {
                     $scope.drillOrder--;
                     $scope.drillLevels[$scope.drillOrder].filterDrillValue = undefined;
 
                     $scope.getAnalysisResult();
                 };
-                
+
 
                 $scope.exampleTable = ViewerService.getExampleTable();
-                
-                $scope.notEmpty = function(){
-                    if(!$scope.drillLevels.length) {
+
+                $scope.notEmpty = function () {
+                    if (!$scope.drillLevels.length) {
                         return [];
                     }
-                    return $scope.drillLevels.filter(function(item){
-                        return item.filterDrillValue?true:false;
+                    return $scope.drillLevels.filter(function (item) {
+                        return item.filterDrillValue ? true : false;
                     });
                 };
 
                 $scope.drillLevels = [];
-                $scope.setChart = function(chart){
-                     $scope.chart = chart;
-                     prepareOrderDrill($scope.model.analysis.analysisColumns);
-                     if($scope.chart.type === 'pie'){
+                $scope.setChart = function (chart) {
+                    $scope.chart = chart;
+                    prepareOrderDrill($scope.model.analysis.analysisColumns);
+                    if ($scope.chart.type === 'pie') {
                         $scope.chart.addListener("clickSlice", function (event) {
-                            if($scope.drillOrder < drillMaxLevel && $scope.options.isDrilling) {
+                            if ($scope.drillOrder < drillMaxLevel && $scope.options.isDrilling) {
                                 $scope.getAnalysisResult(event.dataItem.title);
                             }
                         });
-                     }else{
-                         $scope.chart.addListener("clickGraphItem", function(event) {
-                            if($scope.drillOrder < drillMaxLevel && $scope.options.isDrilling) {
+                    } else {
+                        $scope.chart.addListener("clickGraphItem", function (event) {
+                            if ($scope.drillOrder < drillMaxLevel && $scope.options.isDrilling) {
                                 $scope.getAnalysisResult(event.item.category);
                             }
-                         });
-                     }
+                        });
+                    }
                 };
 
                 //Função para que o array de analysisColumnDrill seja populado corretamente
                 var drillMaxLevel = 0;
-                function prepareOrderDrill(analysisColumns){
-                    if($scope.drillLevels.length === 0){
+                function prepareOrderDrill(analysisColumns) {
+                    if ($scope.drillLevels.length === 0) {
                         $scope.drillLevels = [];
                         var array = {};
-                        for( var a in analysisColumns ){
-                            if(analysisColumns[a].orderDrill !== undefined &&
-                                            analysisColumns[a].orderDrill !== ''){
+                        for (var a in analysisColumns) {
+                            if (analysisColumns[a].orderDrill !== undefined &&
+                                    analysisColumns[a].orderDrill !== '') {
 
-                                var drillLevel = {name : analysisColumns[a].name,
-                                                    label : analysisColumns[a].label};
+                                var drillLevel = {name: analysisColumns[a].name,
+                                    label: analysisColumns[a].label};
                                 array[analysisColumns[a].orderDrill] = drillLevel;
                             }
                         }
-                        for(var key in array){
+                        for (var key in array) {
                             $scope.drillLevels.push(array[key]);
                         }
                         drillMaxLevel = $scope.drillLevels.length - 1;
                     }
                 }
 
-                function _prepareDrillForRequest(itemClicked){
-                    if($scope.analysisExecuteRequest.analysis.hasDrill) {
+                function _prepareDrillForRequest(itemClicked) {
+                    if ($scope.analysisExecuteRequest.analysis.hasDrill) {
                         prepareOrderDrill($scope.model.analysis.analysisColumns);
 
                         $scope.analysisExecuteRequest.drill = {};
                         $scope.analysisExecuteRequest.drill.columnsToSum = [];
 
-                        if(itemClicked){
+                        if (itemClicked) {
                             $scope.drillLevels[$scope.drillOrder].filterDrillValue = itemClicked;
                             definePreviousColumns($scope.drillOrder);
                             $scope.drillOrder++;
-                        //back button
-                        }else{
+                            //back button
+                        } else {
                             definePreviousColumns($scope.drillOrder);
                         }
 
                         $scope.analysisExecuteRequest.drill
-                            .columnToDrill = $scope.drillLevels[$scope.drillOrder].name;
+                                .columnToDrill = $scope.drillLevels[$scope.drillOrder].name;
 
                         populateColumnsToSum();
                     }
                 }
 
-                function definePreviousColumns(drillOrder){
+                function definePreviousColumns(drillOrder) {
                     $scope.analysisExecuteRequest.drill.listPreviousColumns = [];
                     var copyDrillOrder = angular.copy(drillOrder);
 
-                    while(copyDrillOrder >= 0){
+                    while (copyDrillOrder >= 0) {
                         var drillColumnValue = {};
                         drillColumnValue.drillColumn = $scope.drillLevels[copyDrillOrder].name;
                         drillColumnValue.drillFilterValue = $scope.drillLevels[copyDrillOrder].filterDrillValue;
 
-                        if(drillColumnValue.drillColumn !== undefined && drillColumnValue.drillFilterValue !== undefined){
-                                    $scope.analysisExecuteRequest.drill.listPreviousColumns.push(drillColumnValue);
+                        if (drillColumnValue.drillColumn !== undefined && drillColumnValue.drillFilterValue !== undefined) {
+                            $scope.analysisExecuteRequest.drill.listPreviousColumns.push(drillColumnValue);
                         }
                         copyDrillOrder--;
                     }
@@ -250,7 +254,7 @@ define([
                     angular.forEach($scope.model.analysisViewerColumns, function (column) {
                         if (column.columnType === "METRIC") {
                             $scope.analysisExecuteRequest
-                                .drill.columnsToSum.push(column.analysisColumn.name);
+                                    .drill.columnsToSum.push(column.analysisColumn.name);
                         }
                     });
                 }
