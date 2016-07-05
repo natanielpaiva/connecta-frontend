@@ -345,7 +345,8 @@ define([
                     XFIELD: viewer.xfields,
                     YFIELD: viewer.yfields,
                     VALUEFIELD: viewer.valueFields,
-                    FILTER: viewer.filters
+                    FILTER: viewer.filters,
+                    COLUMN: viewer.columns
                 };
 
                 viewer.analysisViewerColumns = [];
@@ -370,8 +371,8 @@ define([
                     $scope.viewer.descriptions.length > 0) ||
                     ($scope.viewer.xfields.length > 0 &&
                             $scope.viewer.yfields.length > 0);
-
-            if (readyForPreview) {
+                    
+            if (readyForPreview || $scope.viewer.columns.length > 0) {
                 AnalysisService.execute({
                     analysis: _prepareForRequest($scope.viewer),
                     drill: populateDrillIfExists($scope.viewer)
@@ -415,7 +416,7 @@ define([
                             XFIELD: $scope.viewer.xfields,
                             YFIELD: $scope.viewer.yfields,
                             VALUEFIELD: $scope.viewer.valueFields,
-                            COLUMNS: $scope.viewer.columns,
+                            COLUMN: $scope.viewer.columns,
                             FILTER: $scope.viewer.filters
                         };
 

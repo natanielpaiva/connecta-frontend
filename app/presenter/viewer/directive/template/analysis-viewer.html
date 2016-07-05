@@ -38,14 +38,14 @@
 <div  ng-if="model.configuration.type === 'table'">
     <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
         <thead>
-            <tr dnd-list="model.metrics" dnd-drop="transformColumnDrop(item, 'METRIC')" class="row">
+            <tr dnd-list="model.columns" dnd-drop="transformColumnDrop(item, 'COLUMN')" class="row">
                 <th class="text-center" ng-if="columnExample === '' && model.configuration.type === 'table'" translate>VIEWER.DRAG_HERE</th>
-                <th dnd-draggable="n" dnd-moved="model.metrics.splice($index, 1)"
-                    ng-repeat="n in model.analysisViewerColumns" class="text-center"
-                    ng-if="columnExample !== '' && n.columnType === 'METRIC'">
+                <th dnd-draggable="n" dnd-moved="model.columns.splice($index, 1)"
+                    ng-repeat="n in model.columns" class="text-center"
+                    ng-if="columnExample !== '' && n.columnType === 'COLUMN'">
 
                     {{n.analysisColumn.label| translate}}
-                    <span ng-if="edit" class="icon-close" ng-click="model.metrics.splice($index, 1)"></span>
+                    <span ng-if="edit" class="icon-close" ng-click="model.columns.splice($index, 1)"></span>
                 </th>
             </tr>
         </thead>

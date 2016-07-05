@@ -48,7 +48,7 @@ define([
                 defaultPort: 1521,
                 hasSid: true
             },
-            POSTGRES: {
+            POSTGRESQL: {
                 name: 'PostgreSQL',
                 defaultPort: 5432,
                 hasSid: true
