@@ -237,7 +237,7 @@
     }
 }
 
-.dashboard-view-page {
+.dashboard-view-page{
     @extend .image-on-background;
 
     background-attachment: fixed;
@@ -252,7 +252,7 @@
 
     .dashboard-header {
         background-color:$black;
-        width:60em;
+        width:80em;
         max-width:75%;
         position:fixed;
         top:0;
@@ -343,13 +343,13 @@
             line-height:3em;
             padding:0 0 0 0.5em;
             margin:0;
-            width: 25em;
+            width: 30em;
             text-align: center;
             @include clipped-text;
         }
         .dashboard-view-controls {
             float:right;
-            width:13em;
+            width:16em;
             line-height:4.5em;
             height:4.5em;
             text-align: right;
@@ -530,6 +530,78 @@
     // Widgets
     .redactor-editor {
         padding:5px !important;
+    }
+
+    .print{
+        display: none;
+    }
+}
+
+@media print {
+    body {
+        margin:0;
+        padding:0;
+    }
+    .dashboard-view-page{
+        margin:0;
+        padding:0;
+        
+        .no-print{
+            display: none;
+        }
+        .print{
+            display: block;
+        }
+        .dashboard-header-print {
+            $headerPrintSize:60px;
+            display:block;
+            width:100%;
+            text-align:left;
+            margin:0;
+            padding:0;
+            margin-bottom:2em;
+            @include clearfix;
+            
+            svg {
+                float:left;
+                height:$headerPrintSize;
+                width:$headerPrintSize;
+                margin:0;
+                padding:0;
+            }
+            h1 {
+                margin:0;
+                padding:0;
+                float:left;
+                width:auto;
+                color:$black;
+                height:$headerPrintSize;
+                line-height:$headerPrintSize;
+                font-size:$headerPrintSize*0.5;
+                font-weight:bold;
+            }
+        }
+        
+        .dashboard-section {
+            h2 {
+                font-weight:normal;
+                border-left-width: 0.1em;
+            }
+        }
+        
+        .dashboard-header {
+            display:none;
+        }
+        viewer {
+            &:hover:not(.edit) {
+                border:none;
+            }
+            .viewer-header {
+                .controls {
+                    display: none;
+                }
+            }
+        }
     }
 }
 
@@ -747,7 +819,7 @@ viewer {
             border-bottom:solid 0.1em $darkerWhite;
 
             .viewer-filter-config-title {
-                
+
             }
 
             [class*="icon-"] {
@@ -781,10 +853,10 @@ viewer {
                 &:last-of-type {
                     margin:0;
                 }
-                
+
                 .viewer-filter-config-label,
-                    .viewer-filter-config-type,
-                    .viewer-filter-config-value {
+                .viewer-filter-config-type,
+                .viewer-filter-config-value {
                     float:left;
                     display:block;
                     margin:0;
@@ -815,11 +887,11 @@ viewer {
                         border-top-left-radius:0.15em;
                         border-bottom-left-radius:0.15em;
                         margin: 0 auto;
-                        
+
                         &:hover {
                             background-color:$darkWhite;
                         }
-                        
+
                         span {
                             color:$lighterGray;
                             font-size:2em;
@@ -838,9 +910,9 @@ viewer {
                         transform:translateX(0.5px);
                         text-align:center;
                         cursor:pointer;
-                        
+
                         color:$lighterGray;
-                        
+
                         &:hover, &.opened {
                             background-color:$darkWhite;
                         }
@@ -851,7 +923,7 @@ viewer {
                             span {
                                 color:darken($white, 5%);
                             }
-                            
+
                             &:hover, &.opened {
                                 background-color:lighten($presenterBlue, 5%);
                             }
@@ -869,18 +941,18 @@ viewer {
                         border:solid 0.1em $darkerWhite;
                         z-index:1;
                         padding:0.5em;
-                        
+
                         > div {
                             line-height:1.75em;
                             padding:0 0.5em;
                             cursor:pointer;
                             user-select:none;
                             border-radius:0.15em;
-                            
+
                             &:hover {
                                 background-color:$backgroundGray;
                             }
-                            
+
                             &.active {
                                 background-color:$presenterBlue;
                                 color:$white;
@@ -889,7 +961,7 @@ viewer {
                                 }
                             }
                         }
-                        
+
                         &:before {
                             height:0;
                             width:0;
@@ -899,7 +971,7 @@ viewer {
                             top:-0.45em;
                             left:50%;
                             transform:translateX(-50%);
-                            
+
                             border-style:solid;
                             border-width:0.5em;
                             border-color:transparent;
@@ -907,11 +979,11 @@ viewer {
                             border-top-width:0;
                         }
                     }
-                    
+
                 }
                 .viewer-filter-config-value {
                     width:15.8em;
-                    
+
                     .viewer-filter-config-value-between {
                         @include clearfix;
                         input {
