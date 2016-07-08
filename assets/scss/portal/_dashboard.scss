@@ -364,11 +364,8 @@
                 position:relative;
                 text-align: center;
 
-                .icon-rotate-90 {
-                    position:absolute;
-                    top:50%;
-                    left:0;
-                    transform: rotate(90deg) translate(-57%, -40%);
+                .icon-expand {
+                    font-weight:600;
                 }
             }
         }

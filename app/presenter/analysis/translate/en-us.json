@@ -16,7 +16,7 @@
         "TABLE": "Table",
         "COLUMN": "Column",
         "COLUMNS": "Columns",
-        "DESCRIPTION_OF_COLUMNS": "Description of Columns",
+        "DESCRIPTION_OF_COLUMNS": "Columns",
         "SELECT": "Select",
         "SEPARATOR": "Separator",
         "QUOTE": "Quote",
@@ -41,6 +41,7 @@
         "FACET": "Facet",
         "RESPONSE_XML": "Response XML",
         "RESULTS_OF_THE_ANALYSIS": "Results of the analysis",
+        "DRILL_SEQUENCE":"Drill (detailing) sequence",
         "DATABASE": {
             "REQUEST_TABLE": "Table",
             "REQUEST_SQL": "Custom query"
@@ -52,7 +53,10 @@
         },
         "RELATIONS": {
             "RELATIONS":"Related analysis",
-            "DETECT":"Auto-detect"
+            "DETECT":"Auto-detect",
+            "NEW_RELATION":"+ Relate with another analysis",
+            "SELECT_RIGHT_ANALYSIS":"Select right analysis",
+            "NO_COLUMNS_YET":"No columns yet"
         }
     }
 }

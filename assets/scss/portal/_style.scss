@@ -15,6 +15,11 @@
     }
 }
 
+::selection {
+    background-color: rgba($presenterBlue, 0.7);
+    color:$white;
+}
+
 /* Reset */
 html {
     font-size: 100%;
