@@ -34,7 +34,7 @@ define([
   'bower_components/amcharts/dist/amcharts/amcharts',
   'bower_components/angular-currency-mask/angular-currency-mask',
   'bower_components/angular-redactor/angular-redactor',
-  'bower_components/angular-amchart/src/amchart',
+  'bower_components/angular-amchart/angular-amchart',
 //  'bower_components/angular-facebook/lib/angular-facebook',
   'bower_components/ngAutocomplete/src/ngAutocomplete',
   'bower_components/angular-base64/angular-base64',

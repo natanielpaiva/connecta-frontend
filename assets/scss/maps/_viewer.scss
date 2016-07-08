@@ -95,3 +95,22 @@
     background-color: white;
     padding: 10px;
 }
+
+.analysis-viewer {
+    height:30em;
+    
+    viewer {
+        border:none;
+        &:hover:not(.edit) {
+            border:none;
+        }
+    }
+}
+
+viewer {
+    analysis-viewer {
+        @include clearfix;
+        display:block;
+        height:100%;
+    }
+}

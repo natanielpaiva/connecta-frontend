@@ -28,6 +28,7 @@
         "OPACITY":"Opacidade",
         "EXPORT":"Exportar",
         "FULLSCREEN":"Tela cheia",
+        "PRINT":"Imprimir",
         "DRILL_UP":"Generalizar (Drill up)",
         "ACTIVATE_DRILL":"Ativar detalhamento (Drill)",
         "OPEN_FILTER":"Abrir configuração do filtro",

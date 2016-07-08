@@ -13,13 +13,6 @@
     </div>
 </div>
 
-<!--<div ng-repeat="drill in drillLevels track by $index" class="inline-block">
-    <div ng-if="drill.filterDrillValue">
-        <span ng-if="$index > 0">-></span>
-        <span>{{drill.label}} : {{drill.filterDrillValue}}</span>
-    </div>
-</div>-->
-
 <div class="drill-breadcrumb" ng-if="notEmpty().length">
     <div class="drill-breadcrumb-item drill-breadcrumb-item-home">
         <span class="fa fa-home"></span>
@@ -28,10 +21,6 @@
          title="{{drill.label}}: {{drill.filterDrillValue}}">
         {{drill.filterDrillValue}}
     </div>
-<!--    <div class="breadcrumb-item">Brazil</div>
-    <div class="breadcrumb-item">Distrito Federal</div>
-    <div class="breadcrumb-item">Restaurante</div>
-    <div class="breadcrumb-item">Vinicius Pires</div>-->
 </div>
 
 <amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration" return-chart="!edit"></amchart>

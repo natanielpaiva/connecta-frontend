@@ -10,13 +10,14 @@ define([
     'presenter/viewer/directive/combined-viewer',
     'maps/layer-viewer/directive/map-viewer'
 ], function (portal) {
-    return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $filter, $document) {
+    return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $filter, $document, $window, $timeout) {
         $scope.config = {
-          headerMini: false
+            headerMini: false,
+            isPrinting: false
         };
 
-        $document.on('scroll', function() {
-            $scope.config.headerMini = $document.scrollTop()>70;
+        $document.on('scroll', function () {
+            $scope.config.headerMini = $document.scrollTop() > 70;
             $scope.$apply();
         });
 
@@ -24,7 +25,7 @@ define([
 
         LayoutService.setFullscreen(true);
 
-        $scope.$on("$locationChangeStart", function(){
+        $scope.$on("$locationChangeStart", function () {
             LayoutService.setFullscreen(false);
         });
 
@@ -35,13 +36,25 @@ define([
             col: 'item.column'
         };
 
-        $scope.fullscreen = function() {
+        $scope.fullscreen = function () {
             LayoutService.toggleBrowserFullscreen();
         };
 
-        $scope.export = function() {
+        $scope.export = function () {
             // TODO
         };
+
+        $scope.print = function () {
+            $scope.config.isPrinting = true;
+            
+            $timeout(function(){
+                $scope.$apply(function(){
+                    $window.print();
+                    $scope.config.isPrinting = false;
+                });
+            },1000);
+        };
+
 
         DashboardService.get($routeParams.id).then(function (response) {
 
