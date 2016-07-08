@@ -1,14 +1,16 @@
 <div class="dashboard-view-page" ng-if="dashboard.displayMode === 'VERTICAL'"
      ng-style="{
          'background-color':toRGBA(dashboard.backgroundColor, dashboard.opacity),
-         'background-image':getImage(dashboard.backgroundImage)
+         'background-image':getImage(dashboard.backgroundImage),
+         'width':config.isPrinting?'730px':'auto',
+         'margin':config.isPrinting?'0 auto':'initial'
      }">
     <div class="dashboard-header" ng-class="{
           'dashboard-header-mini': config.headerMini
         }">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="318px"
         	 height="95px" viewBox="0 0 318 95" enable-background="new 0 0 318 95" xml:space="preserve">
-           <g id="logo">
+            <g id="logo">
            	<path fill="#FFFFFF" d="M40.554,8.636L6.699,28.067V66.93l33.854,19.434L74.408,66.93V28.067L40.554,8.636z M46.196,47.452v3.214
            		l-5.643,3.523l-5.643-3.523v-3.214v-3.82l5.643-3.519l5.643,3.519V47.452z"/>
            	<g>
@@ -64,27 +66,52 @@
             </g>
         </svg>
 
-
-
-        <h1 title="{{dashboard.name}}">{{dashboard.name}}</h1>
-        <div class="dashboard-view-controls">
-            <a href="#/dashboard" title="{{'LAYOUT.BACK'|translate}}">
-                <span class="icon-arrow-left"></span>
-            </a>
-            <a href="#/dashboard/{{dashboard.id}}/edit" class="dashboard-view-edit"
-               title="{{'LAYOUT.EDIT'|translate}}">
-                <span class="icon-mode-edit"></span>
-            </a>
-            <a href="javascript:void(0)" title="{{'DASHBOARD.EXPORT'|translate}}"
-               ng-click="export()">
-                <span class="icon-upload"></span>
-            </a>
-            <a href="javascript:void(0)" title="{{'DASHBOARD.FULLSCREEN'|translate}}"
-               ng-click="fullscreen()">
-                <span class="icon-resize-full-screen"></span>
-                <span class="icon-rotate-90 icon-resize-full-screen"></span>
-            </a>
+        <h1 title="{{dashboard.name}}" >{{dashboard.name}}</h1>
+        <div class="no-print">
+            <div class="dashboard-view-controls">
+                <a href="#/dashboard" title="{{'LAYOUT.BACK'|translate}}">
+                    <span class="icon-arrow-left"></span>
+                </a>
+                <a href="javascript:void(0)" title="{{'DASHBOARD.EXPORT'|translate}}"
+                   ng-click="export()">
+                    <span class="icon-upload2"></span>
+                </a>
+                <a href="javascript:void(0)" title="{{'DASHBOARD.PRINT'|translate}}"
+                   ng-click="print()">
+                    <span class="icon-printer"></span>
+                </a>
+                <a href="#/dashboard/{{dashboard.id}}/edit" class="dashboard-view-edit"
+                   title="{{'LAYOUT.EDIT'|translate}}">
+                    <span class="icon-mode-edit"></span>
+                </a>
+                <a href="javascript:void(0)" title="{{'DASHBOARD.FULLSCREEN'|translate}}"
+                   ng-click="fullscreen()">
+                    <span class="icon-resize-full-screen"></span>
+                    <span class="icon-rotate-90 icon-resize-full-screen"></span>
+                </a>
+            </div>
         </div>
+    </div>
+    
+    <div class="print dashboard-header-print">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" width="95px" height="95px" viewBox="0 0 95 95">
+            <g>
+                    <path fill="#600202" d="M41,12.947l-30,17.22v34.439l30,17.221l30-17.221V30.167L41,12.947z M46,47.344v2.849l-5,3.121l-5-3.121
+                            v-2.849v-3.387l5-3.117l5,3.117V47.344z"/>
+                    <path fill="#D30F0F" d="M46,50.193c3-0.211,13-2.197,25-10.709v-9.405l-13.687-7.791c0,0-0.313,13.424-11.313,25.211
+                            C46,48.422,46,49.246,46,50.193z"/>
+                    <path fill="#9B0D0D" d="M46,43.958c0,0-0.676-19.851-5.223-31.011l16.425,9.341c0,0-0.202,13.254-11.202,25.213
+                            C46,47.5,46,44.939,46,43.958z"/>
+                    <path fill="#D30F0F" d="M36,43.958c0,0-14,1.157-25,11.304v9.4l13.685,7.801c0,0-0.685-12.098,11.315-24.962
+                            C36,47.5,36,45.188,36,43.958z"/>
+                    <path fill="#9B0D0D" d="M36,50.193c0,0-0.502,17.83,4.777,31.633l-16.204-9.363c0,0-0.573-11.814,11.427-24.962V50.193z"/>
+                    <polygon fill="#FFFFFF" points="46,50.193 41,53.314 36,50.193 36,43.958 41,40.84 46,43.958 			"/>
+            </g>
+        </svg>
+        <h1>
+            {{dashboard.name}}
+        </h1>
     </div>
 
     <div class="dashboard-section" ng-repeat="(index, section) in dashboard.sections">
@@ -103,17 +130,7 @@
             </div>
         </div>
     </div>
-
-    <!-- <ul class="list-unstyled section-menu">
-        <li class="section-menu-item" ng-repeat="(index, section) in dashboard.sections"
-            random-class="['background-green','background-blue','background-yellow','background-red','background-gray']"
-            random-class-sequential="true">
-            <a href="javascript:void(0);" scroll-to="#dashboard-section-{{index}}">
-                <span class="icon-link"></span>
-                {{section.name}}
-            </a>
-        </li>
-    </ul> -->
+    
     <div class="section-menu">
       <div class="section-menu-item" ng-repeat="(index, section) in dashboard.sections"
           title="{{section.name}}" scroll-to="#dashboard-section-{{index}}">
