@@ -378,6 +378,7 @@ define([
                     drill: populateDrillIfExists($scope.viewer)
                 }).then(function (response) {
                     ViewerService.getPreview($scope.viewer, response.data);
+                    $scope.state.loaded = true;
                 });
             }
         };
@@ -459,25 +460,27 @@ define([
                     });
                     break;
             }
-
+            $scope.state.loaded = true;
         }
 
-        var load = function () {
-            var __update = function (array) {
-//                angular.forEach(array, function(o){
-//                    o = { analysisColumn: o };
+        var __update = function (array) {
+            if ($scope.state.loaded) {
+            	getPreview();
+            }
+//            angular.forEach(array, function(o){
+//                o = { analysisColumn: o };
 //
-//                    delete o.id;
-//                });
-                getPreview();
-            };
+//                delete o.id;
+//            });
+        };
 
-            $scope.$watchCollection('viewer.metrics', __update);
-            $scope.$watchCollection('viewer.descriptions', __update);
-            $scope.$watchCollection('viewer.xfields', __update);
-            $scope.$watchCollection('viewer.yfields', __update);
-            $scope.$watchCollection('viewer.valueFields', __update);
-            $scope.$watchCollection('viewer.columns', __update);
+        var load = function () {
+             $scope.$watchCollection('viewer.metrics', __update);
+             $scope.$watchCollection('viewer.descriptions', __update);
+             $scope.$watchCollection('viewer.xfields', __update);
+             $scope.$watchCollection('viewer.yfields', __update);
+             $scope.$watchCollection('viewer.valueFields', __update);
+             $scope.$watchCollection('viewer.columns', __update);
         };
 
         $scope.newInterval = function () {
