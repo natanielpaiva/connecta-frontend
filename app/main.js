@@ -149,7 +149,7 @@ require.config({
             deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
             exports: 'AmCharts.AmXYChart'
         },
-        'bower_components/angular-amchart/angular-amchart': {
+        'bower_components/angular-amchart-directive/angular-amchart-directive': {
             deps: ['angular',
                 'bower_components/amcharts/dist/amcharts/amcharts',
                 'bower_components/amcharts/dist/amcharts/pie',
