@@ -241,7 +241,7 @@
     @extend .image-on-background;
 
     background-attachment: fixed;
-    background-color: #fafafa;
+    background-color: #fafafa; // de belém
     margin:0;
     width:100%;
     padding:1em;
@@ -590,6 +590,8 @@
             display:none;
         }
         viewer {
+            display: block;
+            page-break-inside: avoid;
             &:hover:not(.edit) {
                 border:none;
             }
