@@ -828,13 +828,13 @@ define([
                 if(analysisViewerColumn.columnType === 'DESCRIPTION'){
                     descriptionCount++;
                     descriptionLabel = analysisViewerColumn.analysisColumn.label;
+
+                    if (analysisViewerColumn.analysisColumn.orderDrill !== undefined &&
+                            analysisViewerColumn.analysisColumn.orderDrill !== '') {
+                        drillCount++;
+                    }
                 }else if(analysisViewerColumn.columnType === 'METRIC'){
                     metricCount++;
-                }
-
-                if (analysisViewerColumn.analysisColumn.orderDrill !== undefined &&
-                        analysisViewerColumn.analysisColumn.orderDrill !== '') {
-                    drillCount++;
                 }
             });
 
