@@ -832,8 +832,8 @@ define([
                     metricCount++;
                 }
 
-                if (analysisViewerColumn.orderDrill !== undefined &&
-                        analysisViewerColumn.orderDrill !== '') {
+                if (analysisViewerColumn.analysisColumn.orderDrill !== undefined &&
+                        analysisViewerColumn.analysisColumn.orderDrill !== '') {
                     drillCount++;
                 }
             });
