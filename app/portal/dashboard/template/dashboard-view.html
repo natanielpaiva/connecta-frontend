@@ -65,31 +65,28 @@
             		S291.879,39.896,290.182,41.583z"/>
             </g>
         </svg>
-
-        <h1 title="{{dashboard.name}}" >{{dashboard.name}}</h1>
-        <div class="no-print">
-            <div class="dashboard-view-controls">
-                <a href="#/dashboard" title="{{'LAYOUT.BACK'|translate}}">
-                    <span class="icon-arrow-left"></span>
-                </a>
-                <a href="javascript:void(0)" title="{{'DASHBOARD.EXPORT'|translate}}"
-                   ng-click="export()">
-                    <span class="icon-upload2"></span>
-                </a>
-                <a href="javascript:void(0)" title="{{'DASHBOARD.PRINT'|translate}}"
-                   ng-click="print()">
-                    <span class="icon-printer"></span>
-                </a>
-                <a href="#/dashboard/{{dashboard.id}}/edit" class="dashboard-view-edit"
-                   title="{{'LAYOUT.EDIT'|translate}}">
-                    <span class="icon-mode-edit"></span>
-                </a>
-                <a href="javascript:void(0)" title="{{'DASHBOARD.FULLSCREEN'|translate}}"
-                   ng-click="fullscreen()">
-                    <span class="icon-expand"></span>
-                </a>
-            </div>
+        <div class="dashboard-view-controls">
+            <a href="#/dashboard" title="{{'LAYOUT.BACK'|translate}}">
+                <span class="icon-arrow-left"></span>
+            </a>
+            <a href="javascript:void(0)" title="{{'DASHBOARD.EXPORT'|translate}}"
+               ng-click="export()">
+                <span class="icon-upload2"></span>
+            </a>
+            <a href="javascript:void(0)" title="{{'DASHBOARD.PRINT'|translate}}"
+               ng-click="print()">
+                <span class="icon-printer"></span>
+            </a>
+            <a href="#/dashboard/{{dashboard.id}}/edit" class="dashboard-view-edit"
+               title="{{'LAYOUT.EDIT'|translate}}">
+                <span class="icon-mode-edit"></span>
+            </a>
+            <a href="javascript:void(0)" title="{{'DASHBOARD.FULLSCREEN'|translate}}"
+               ng-click="fullscreen()">
+                <span class="icon-expand"></span>
+            </a>
         </div>
+        <h1 title="{{dashboard.name}}">{{dashboard.name}}</h1>
     </div>
     
     <div class="print dashboard-header-print">

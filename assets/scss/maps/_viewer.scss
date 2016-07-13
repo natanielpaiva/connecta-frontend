@@ -110,7 +110,8 @@
 viewer {
     analysis-viewer {
         @include clearfix;
-        display:block;
         height:100%;
+        display:flex;
+        flex-flow:column;
     }
 }

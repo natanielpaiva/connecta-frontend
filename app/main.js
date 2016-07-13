@@ -62,6 +62,9 @@ require.config({
         'bower_components/angular-scroll/angular-scroll.min': {
             deps: ['angular']
         },
+//        'bower_components/angular-click-outside/clickoutside.directive': {
+//            deps: ['angular']
+//        },
         'bower_components/angular-translate-loader-partial/angular-translate-loader-partial.min': {
             deps: [
                 'angular',
@@ -104,7 +107,6 @@ require.config({
         'bower_components/html2canvas/build': {
             exports: 'Html2canvas'
         },
-
         'bower_components/amcharts/dist/amcharts/themes/black': {
             deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
             exports: 'AmCharts.themes.black'

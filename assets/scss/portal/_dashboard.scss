@@ -237,7 +237,8 @@
     }
 }
 
-.dashboard-view-page{
+.dashboard-view-page {
+    @include clearfix;
     @extend .image-on-background;
 
     background-attachment: fixed;
@@ -246,14 +247,13 @@
     width:100%;
     padding:1em;
     padding-top:6em;
-    @include clearfix;
 
     $defaultAnimationDuration:$defaultAnimationDuration*2;
 
     .dashboard-header {
+        @include clearfix;
         background-color:$black;
-        width:80em;
-        max-width:75%;
+        width:75%;
         position:fixed;
         top:0;
         left:0;
@@ -264,7 +264,6 @@
         float:left;
         display:block;
         box-shadow: 0 0 1em $gray;
-        @include clearfix;
 
         transition:width ease $defaultAnimationDuration,
             background-color $defaultAnimationDuration ease,
@@ -275,7 +274,7 @@
             display:block;
             position:absolute;
             top:0;
-            right:-4.49em;
+            right:-58px;
             border-style: solid;
             border-width: 2.275em;
             border-color:$black transparent transparent $black;
@@ -338,12 +337,9 @@
         h1 {
             font-size: 1.4em;
             font-weight: 500;
-            float:left;
             height:3em;
             line-height:3em;
             padding:0 0 0 0.5em;
-            margin:0;
-            width: 30em;
             text-align: center;
             @include clipped-text;
         }
