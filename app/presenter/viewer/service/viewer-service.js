@@ -822,6 +822,7 @@ define([
         var identifyViewerType = function(viewer, result){
             var descriptionCount = 0;
             var metricCount = 0;
+            var drillCount = 0;
             var descriptionLabel;
             viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
                 if(analysisViewerColumn.columnType === 'DESCRIPTION'){
@@ -830,9 +831,14 @@ define([
                 }else if(analysisViewerColumn.columnType === 'METRIC'){
                     metricCount++;
                 }
+
+                if (analysisViewerColumn.orderDrill !== undefined &&
+                        analysisViewerColumn.orderDrill !== '') {
+                    drillCount++;
+                }
             });
 
-            if(metricCount > 1 && result.length === 1){
+            if(metricCount > 1 && result.length === 1 && drillCount > 1){
                 return {
                     "type" : 2,
                     "descriptionLabel" : descriptionLabel
