@@ -838,7 +838,7 @@ define([
                 }
             });
 
-            if(metricCount > 1 && result.length === 1 && drillCount > 1){
+            if(metricCount > 1 && result.length === 1 && drillCount === 1){
                 return {
                     "type" : 2,
                     "descriptionLabel" : descriptionLabel
