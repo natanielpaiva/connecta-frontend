@@ -17,7 +17,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="description" translate>VIEWER.DESCRIPTION</label>
-                <input type="text" ng-model="viewer.description" 
+                <input type="text" ng-model="viewer.description"
                        id="description" class="form-control" />
             </div>
         </div>
@@ -27,7 +27,7 @@
                 viewer.configuration.type == 'pie' ||
                 viewer.configuration.type == 'funnel' ||
                 viewer.configuration.type == 'radar'">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.METRIC</span>
                 <div class="columns-viewer">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.DESCRIPTION</span>
                 <div class="columns-viewer">
@@ -61,8 +61,8 @@
                                 'has-item':!!viewer.descriptions.length
                             }">
                             <li ng-repeat="viewerColumn in viewer.descriptions"
-                                dnd-draggable="viewerColumn" 
-                                dnd-moved="viewer.descriptions.splice($index, 1)" 
+                                dnd-draggable="viewerColumn"
+                                dnd-moved="viewer.descriptions.splice($index, 1)"
                                 dnd-effect-allowed="move">
                                 {{viewerColumn.analysisColumn.label}}
                                 <span class="icon-close" ng-click="viewer.descriptions.splice($index, 1)"></span>
@@ -76,8 +76,8 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-if="viewer.configuration.type == 'xy'"> 
-        <div class="col-md-4">
+    <div class="row" ng-if="viewer.configuration.type == 'xy'">
+        <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.XFIELD</span>
                 <div class="columns-viewer">
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.YFIELD</span>
                 <div class="columns-viewer">
@@ -111,7 +111,7 @@
                             }">
                             <li ng-repeat="column in viewer.yfields" dnd-draggable="column"
                                 dnd-moved="viewer.yfields.splice($index, 1)"
-                                dnd-effect-allowed="move" 
+                                dnd-effect-allowed="move"
                                 ng-attr-style="background-image:url({{column.label}})">
                                 {{column.analysisColumn.label}}
                                 <i class="icon-close" ng-click="viewer.yfields.splice($index, 1)"></i>
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.VALUEFIELD</span>
                 <div class="columns-viewer">
@@ -135,7 +135,7 @@
                             }">
                             <li ng-repeat="column in viewer.valueFields" dnd-draggable="column"
                                 dnd-moved="viewer.valueFields.splice($index, 1)"
-                                dnd-effect-allowed="move" 
+                                dnd-effect-allowed="move"
                                 ng-attr-style="background-image:url({{column.label}})">
                                 {{column.analysisColumn.label}}
                                 <i class="icon-close" ng-click="viewer.valueFields.splice($index, 1)"></i>
@@ -151,7 +151,7 @@
     </div>
 
     <div class="row" ng-if="viewer.configuration.type === 'gauge'">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.METRIC</span>
                 <div class="columns-viewer">
@@ -205,7 +205,7 @@
     </div>
     <div>
         <uib-accordion close-others="true">
-            <uib-accordion-group> 
+            <uib-accordion-group>
                 <uib-accordion-heading>
                     <span translate>VIEWER.SETTINGS_ADVANCED</span>
                     <span ng-click="changeStatus()" class="pull-right glyphicon"
@@ -226,9 +226,9 @@
                                         ng-class="{
                                             'has-item':!!viewer.filters.length
                                         }">
-                                        <li ng-repeat="column in viewer.filters" dnd-draggable="column" 
-                                            dnd-moved="viewer.filters.splice($index, 1)" 
-                                            dnd-effect-allowed="move" 
+                                        <li ng-repeat="column in viewer.filters" dnd-draggable="column"
+                                            dnd-moved="viewer.filters.splice($index, 1)"
+                                            dnd-effect-allowed="move"
                                             >
                                             {{column.analysisColumn.label}}
                                             <i class="icon-close" ng-click="viewer.filters.splice($index, 1)"></i>
@@ -248,10 +248,10 @@
                             <div class="columns-viewer">
                                 <div class="sidebar-viewer">
                                     <ul dnd-list="viewer.drills">
-                                        <li ng-repeat="column in viewer.drills" 
-                                            dnd-draggable="column" 
-                                            dnd-moved="viewer.drills.splice($index, 1)"  
-                                            dnd-effect-allowed="move" 
+                                        <li ng-repeat="column in viewer.drills"
+                                            dnd-draggable="column"
+                                            dnd-moved="viewer.drills.splice($index, 1)"
+                                            dnd-effect-allowed="move"
                                             >
                                             {{column.label}}
                                         </li>

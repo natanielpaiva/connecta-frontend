@@ -75,8 +75,19 @@ define([
                             if (columnDrill)
                                 updateChartFields(columnDrill.label);
 
-                            $scope.model.configuration.dataProvider = response.data;
-                            $scope.model.configuration.export = {enabled: true};
+                            var typeViewer = identifyViewerType($scope.model, response.data);
+
+                            if($scope.model.configuration.type === 'pie' &&
+                                    typeViewer === 2 && drillMaxLevel < 1){
+                                montaPieType2($scope.model, response.data);
+                            }else if($scope.model.configuration.type === 'serial' &&
+                                    typeViewer === 2 && drillMaxLevel < 1){
+                                montaSerialType2($scope.model, response.data);
+                            }else{
+                                $scope.model.configuration.dataProvider = response.data;
+                                $scope.model.configuration.export = {enabled: true};
+                            }
+
                         }
                     });
                 };
@@ -104,6 +115,77 @@ define([
                         $scope.getAnalysisResult();
                     });
                 }
+
+                var identifyViewerType = function(viewer, result){
+                    var descriptionCount = 0;
+                    var metricCount = 0;
+                    viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
+                        if(analysisViewerColumn.columnType === 'METRIC'){
+                            metricCount++;
+                        }
+                    });
+
+                    if(metricCount > 1 && result.length === 1){
+                        return 2;
+                    }
+
+                    return 1;
+                };
+
+                var montaPieType2 = function(viewer, result){
+                    viewer.configuration.dataProvider = [];
+                    var description = viewer.configuration.titleField;
+                    var value = "value";
+                    viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
+                        if(analysisViewerColumn.columnType === 'METRIC'){
+                            for(var r in result){
+                                var obj = {};
+                                var labelMetric = analysisViewerColumn.analysisColumn.label;
+                                var valueMetric;
+                                var object = result[r];
+                                for (var t in object){
+                                    if(t === labelMetric){
+                                        valueMetric = object[t];
+                                    }
+                                }
+
+                                if(valueMetric !== undefined){
+                                    obj[description] = labelMetric;
+                                    obj.value = valueMetric;
+                                }
+                                viewer.configuration.dataProvider.push(obj);
+                            }
+                        }
+                    });
+                };
+
+                var montaSerialType2 = function(viewer, result){
+                    viewer.configuration.dataProvider = [];
+                    var description = viewer.configuration.categoryField;
+                    var value = "value";
+
+                    viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
+                        if(analysisViewerColumn.columnType === 'METRIC'){
+                            for(var r in result){
+                                var obj = {};
+                                var labelMetric = analysisViewerColumn.analysisColumn.label;
+                                var valueMetric;
+                                var object = result[r];
+                                for (var t in object){
+                                    if(t === labelMetric){
+                                        valueMetric = object[t];
+                                    }
+                                }
+
+                                if(valueMetric !== undefined){
+                                    obj[description] = labelMetric;
+                                    obj.value = valueMetric;
+                                }
+                                viewer.configuration.dataProvider.push(obj);
+                            }
+                        }
+                    });
+                };
 
                 $scope.transformColumnDrop = function (item, columnType) {
                     if (item.analysisColumn) {
