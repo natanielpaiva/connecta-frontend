@@ -10,31 +10,26 @@ define([
                 template: 'app/presenter/datasource/template/_datasource-database.html',
                 icon: 'icon-database2'
             },
-            ENDECA: {
-                name: 'Endeca',
-                template: 'app/presenter/datasource/template/_datasource-endeca.html',
-                icon: 'icon-endeca'
-            },
-            HDFS: {
-                name: 'HDFS',
-                template: 'app/presenter/datasource/template/_datasource-hdfs.html',
-                icon: 'icon-hadoop'
-            },
-            OBIEE: {
-                name: 'OBIEE',
-                template: 'app/presenter/datasource/template/_datasource-obiee.html',
-                icon: 'icon-obiee'
-            },
+//            HDFS: {
+//                name: 'HDFS',
+//                template: 'app/presenter/datasource/template/_datasource-hdfs.html',
+//                icon: 'icon-hadoop'
+//            },
+//            OBIEE: {
+//                name: 'OBIEE',
+//                template: 'app/presenter/datasource/template/_datasource-obiee.html',
+//                icon: 'icon-obiee'
+//            },
             SOLR: {
                 name: 'SOLR',
                 template: 'app/presenter/datasource/template/_datasource-solr.html',
                 icon: 'icon-solr'
-            },
-            WEBSERVICE: {
-                name: 'WebService',
-                template: 'app/presenter/datasource/template/_datasource-webservice.html',
-                icon: 'icon-webservice' // Capitão Planeta?
             }
+//            WEBSERVICE: {
+//                name: 'WebService',
+//                template: 'app/presenter/datasource/template/_datasource-webservice.html',
+//                icon: 'icon-webservice' // Capitão Planeta?
+//            }
         };
 
         var databaseDrivers = {
