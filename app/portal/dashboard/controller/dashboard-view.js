@@ -47,12 +47,12 @@ define([
         $scope.print = function () {
             $scope.config.isPrinting = true;
             
-            $timeout(function(){
-                $scope.$apply(function(){
-                    $window.print();
-                    $scope.config.isPrinting = false;
-                });
-            },1000);
+//            $timeout(function(){
+//                $scope.$apply(function(){
+//                    $window.print();
+//                    $scope.config.isPrinting = false;
+//                });
+//            },1500);
         };
 
 

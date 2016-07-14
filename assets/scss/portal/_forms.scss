@@ -44,7 +44,7 @@ input, textarea, select{
 // Estilização para o componente de drag & drop de upload de arquivo
 .dropzone {
     @extend .text-center; 
-    line-height: 3em;
+    line-height: 8em;
     display: block;
     font-weight: normal;
     font-size:1.5em;

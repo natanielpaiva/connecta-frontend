@@ -22,10 +22,8 @@
             <iframe src="{{item.url}}"></iframe>
         </div>
     </div>
-    <div class="singlesource-drag-here" ng-if="model.singlesource.list.length === 0">
-        <label translate>
-            VIEWER.DRAG_HERE
-        </label>
+    <div class="dropzone" ng-if="model.singlesource.list.length === 0" translate>
+        VIEWER.DRAG_HERE
     </div>
 </div>
 <!-- FIXME Tive que fazer esse código para a apresentação, separar o código da
