@@ -2,7 +2,10 @@
     <h3>{{model.name}}</h3>
     <div class="controls">
         <span class="icon-spread-sheet" ng-click="exportCsv()"
-              title="{{'DASHBOARD.EXPORT'|translate}}"></span>
+              title="{{'DASHBOARD.EXPORT_CSV'|translate}}"></span>
+<!--  Implementação em andamento!  
+<span id="png" class="icon-image4" ng-click="exportPng()"
+              title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>-->
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder>0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
         <span class="drill icon-select-arrows" ng-click="options.isDrilling=!options.isDrilling"

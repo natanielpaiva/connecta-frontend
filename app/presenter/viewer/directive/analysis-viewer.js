@@ -77,13 +77,13 @@ define([
 
                             var typeViewer = identifyViewerType($scope.model, response.data);
 
-                            if($scope.model.configuration.type === 'pie' &&
-                                    typeViewer === 2 && drillMaxLevel < 1){
+                            if ($scope.model.configuration.type === 'pie' &&
+                                    typeViewer === 2 && drillMaxLevel < 1) {
                                 montaPieType2($scope.model, response.data);
-                            }else if($scope.model.configuration.type === 'serial' &&
-                                    typeViewer === 2 && drillMaxLevel < 1){
+                            } else if ($scope.model.configuration.type === 'serial' &&
+                                    typeViewer === 2 && drillMaxLevel < 1) {
                                 montaSerialType2($scope.model, response.data);
-                            }else{
+                            } else {
                                 $scope.model.configuration.dataProvider = response.data;
                                 $scope.model.configuration.export = {enabled: true};
                             }
@@ -116,40 +116,40 @@ define([
                     });
                 }
 
-                var identifyViewerType = function(viewer, result){
+                var identifyViewerType = function (viewer, result) {
                     var descriptionCount = 0;
                     var metricCount = 0;
-                    viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
-                        if(analysisViewerColumn.columnType === 'METRIC'){
+                    viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                        if (analysisViewerColumn.columnType === 'METRIC') {
                             metricCount++;
                         }
                     });
 
-                    if(metricCount > 1 && result.length === 1){
+                    if (metricCount > 1 && result.length === 1) {
                         return 2;
                     }
 
                     return 1;
                 };
 
-                var montaPieType2 = function(viewer, result){
+                var montaPieType2 = function (viewer, result) {
                     viewer.configuration.dataProvider = [];
                     var description = viewer.configuration.titleField;
                     var value = "value";
-                    viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
-                        if(analysisViewerColumn.columnType === 'METRIC'){
-                            for(var r in result){
+                    viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                        if (analysisViewerColumn.columnType === 'METRIC') {
+                            for (var r in result) {
                                 var obj = {};
                                 var labelMetric = analysisViewerColumn.analysisColumn.label;
                                 var valueMetric;
                                 var object = result[r];
-                                for (var t in object){
-                                    if(t === labelMetric){
+                                for (var t in object) {
+                                    if (t === labelMetric) {
                                         valueMetric = object[t];
                                     }
                                 }
 
-                                if(valueMetric !== undefined){
+                                if (valueMetric !== undefined) {
                                     obj[description] = labelMetric;
                                     obj.value = valueMetric;
                                 }
@@ -159,25 +159,25 @@ define([
                     });
                 };
 
-                var montaSerialType2 = function(viewer, result){
+                var montaSerialType2 = function (viewer, result) {
                     viewer.configuration.dataProvider = [];
                     var description = viewer.configuration.categoryField;
                     var value = "value";
 
-                    viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
-                        if(analysisViewerColumn.columnType === 'METRIC'){
-                            for(var r in result){
+                    viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                        if (analysisViewerColumn.columnType === 'METRIC') {
+                            for (var r in result) {
                                 var obj = {};
                                 var labelMetric = analysisViewerColumn.analysisColumn.label;
                                 var valueMetric;
                                 var object = result[r];
-                                for (var t in object){
-                                    if(t === labelMetric){
+                                for (var t in object) {
+                                    if (t === labelMetric) {
                                         valueMetric = object[t];
                                     }
                                 }
 
-                                if(valueMetric !== undefined){
+                                if (valueMetric !== undefined) {
                                     obj[description] = labelMetric;
                                     obj.value = valueMetric;
                                 }
@@ -239,14 +239,19 @@ define([
 
                     $scope.getAnalysisResult();
                 };
-                
-                $scope.exportPng = function () {
 
+                $scope.exportPng = function () {
+                    var png = document.getElementById("png");
+                    var context = png.getContext("2d");
                 };
 
                 $scope.exportCsv = function () {
                     var array = $scope.model.configuration.dataProvider;
                     var csv = '';
+                    for (var head in array[0]) {
+                        csv += head + ',';
+                    }
+                    csv += '\r\n';
 
                     for (var i = 0; i < array.length; i++) {
                         var line = '';
@@ -258,9 +263,9 @@ define([
                         }
                         csv += line + '\r\n';
                     }
-                    
+
                     var uri = "data:text/csv;charset=utf-8," + escape(csv);
-                    var name = $scope.model.name + ".csv" ;
+                    var name = $scope.model.name + ".csv";
                     var download = document.createElement("a");
                     download.href = uri;
                     download.download = name;

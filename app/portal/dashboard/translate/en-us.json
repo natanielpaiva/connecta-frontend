@@ -28,6 +28,8 @@
         "OPACITY":"Opacity",
         "DOWNLOAD":"Download",
         "EXPORT":"Export",
+        "EXPORT_CSV":"CSV",
+        "EXPORT_PNG":"PNG",
         "FULLSCREEN":"Fullscreen",
         "PRINT":"Print",
         "DRILL_UP":"Generalize (Drill up)",
