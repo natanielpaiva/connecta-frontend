@@ -1,6 +1,8 @@
 <div class="viewer-header" ng-if="!edit">
     <h3>{{model.name}}</h3>
     <div class="controls">
+        <span class="icon-spread-sheet" ng-click="exportCsv()"
+              title="{{'DASHBOARD.EXPORT'|translate}}"></span>
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder>0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
         <span class="drill icon-select-arrows" ng-click="options.isDrilling=!options.isDrilling"
@@ -24,6 +26,7 @@
 </div>
 
 <amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration" return-chart="!edit"></amchart>
+
 <div  ng-if="model.configuration.type === 'table'">
     <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
         <thead>
