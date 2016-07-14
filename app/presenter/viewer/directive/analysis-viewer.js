@@ -249,7 +249,7 @@ define([
                     var array = $scope.model.configuration.dataProvider;
                     var csv = '';
                     for (var head in array[0]) {
-                        csv += head + ',';
+                        csv += head + ';';
                     }
                     csv += '\r\n';
 
@@ -257,7 +257,7 @@ define([
                         var line = '';
                         for (var index in array[i]) {
                             if (line !== '')
-                                line += ',';
+                                line += ';';
 
                             line += array[i][index];
                         }
