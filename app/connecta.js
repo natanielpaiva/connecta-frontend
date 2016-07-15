@@ -41,8 +41,6 @@ define([
   'bower_components/angular-ui-select/dist/select',
   'bower_components/angular-scroll/angular-scroll.min',
   'bower_components/angular-show-on-konami-code/angular-show-on-konami-code'
-//  ,
-//  'bower_components/angular-click-outside/clickoutside.directive'
 ], function($ , angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
   var connecta = angular.module('connecta', [
@@ -74,8 +72,6 @@ define([
     'base64',
     'duScroll',
     'show-on-konami-code'
-//    ,
-//    'angular-click-outside'
   ]);
 
   // Configuração do backend dos módulos

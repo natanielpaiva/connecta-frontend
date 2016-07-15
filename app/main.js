@@ -62,9 +62,6 @@ require.config({
         'bower_components/angular-scroll/angular-scroll.min': {
             deps: ['angular']
         },
-//        'bower_components/angular-click-outside/clickoutside.directive': {
-//            deps: ['angular']
-//        },
         'bower_components/angular-translate-loader-partial/angular-translate-loader-partial.min': {
             deps: [
                 'angular',
