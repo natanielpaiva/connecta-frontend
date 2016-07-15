@@ -19,10 +19,10 @@
 
 <div class="drill-breadcrumb" ng-if="notEmpty().length">
     <div class="drill-breadcrumb-item drill-breadcrumb-item-home">
-        <span class="fa fa-home"></span>
+        <span class="fa fa-home" ng-click="drillUpFromBreadCrumb(0)"></span>
     </div>
-    <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index" 
-         title="{{drill.label}}: {{drill.filterDrillValue}}">
+    <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index"
+         title="{{drill.label}}: {{drill.filterDrillValue}}" ng-click="drillUpFromBreadCrumb($index+1)">
         {{drill.filterDrillValue}}
     </div>
 </div>

@@ -243,6 +243,21 @@ define([
                     $scope.getAnalysisResult();
                 };
 
+                $scope.drillUpFromBreadCrumb = function (drillLevel) {
+                    if($scope.drillOrder === drillLevel){
+                        return; //mesmo level
+                    } else if(($scope.drillOrder - 1) === drillLevel) {
+                        $scope.drillUp(); //level anterior
+                    }else{
+                       for(var i = $scope.drillOrder ; i >= drillLevel; i--){
+                           $scope.drillLevels[i].filterDrillValue = undefined;
+                           console.log(i);
+                       }
+                       $scope.drillOrder = drillLevel;
+                       $scope.getAnalysisResult();
+                    }
+                };
+
                 $scope.exportPng = function () {
                     element = angular.element('.amchart');
                     type = 'png';

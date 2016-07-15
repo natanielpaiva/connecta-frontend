@@ -702,8 +702,9 @@ define([
             viewer.configuration.graphs = [];
             var analysisViewerColumns = viewer.analysisViewerColumns;
             var typeViewer = identifyViewerType(viewer, result);
+            var negativeValue = false;
             if(typeViewer.type === 2){
-                montaSerialType2(viewer, result, typeViewer, standardGraph);
+                negativeValue = montaSerialType2(viewer, result, typeViewer, standardGraph);
             }else{
                 for (var i in analysisViewerColumns) {
                     if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
@@ -716,23 +717,43 @@ define([
                         graph.valueField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                         graph.id = angular.copy(analysisViewerColumns[i].analysisColumn.label);
                         graph.balloonText = "[[title]] de [[category]] : [[value]]";
-                        viewer.configuration.valueAxes.forEach(function(valueAxis){
-                            valueAxis.title = "";
-                            valueAxis.minimum = 0;
-                        });
                         viewer.configuration.graphs.push(graph);
+
+                        //verifica se tem algum numero negativo para setar ou não a escala
+                        for(var r in result){
+                            var labelMetric = analysisViewerColumns[i].analysisColumn.label;
+                            var valueMetric;
+                            var object = result[r];
+                            for (var t in object){
+                                if(t === labelMetric){
+                                    valueMetric = object[t];
+                                    if(valueMetric < 0){
+                                        negativeValue = true;
+                                    }
+                                }
+                            }
+                        }
                     }
 
                 }
             }
+
+            viewer.configuration.valueAxes.forEach(function(valueAxis){
+                valueAxis.title = "";
+                if(!negativeValue) valueAxis.minimum = 0;
+            });
 
             delete viewer.configuration.dataProvider;
         };
         var configureFunnelAndPie = function (viewer, result) {
             var typeViewer = identifyViewerType(viewer, result);
             var analysisViewerColumns = viewer.analysisViewerColumns;
-            viewer.configuration.legend.valueWidth = 100;
-
+            if(viewer.configuration.legend){
+                viewer.configuration.legend.valueWidth = 100;
+            }else{
+                viewer.configuration.legend = {};
+                viewer.configuration.legend.valueWidth = 100;
+            }
             if(typeViewer.type === 2){
                 montaPieType2(viewer, result, typeViewer);
             }else{
@@ -780,6 +801,7 @@ define([
         };
 
         var montaSerialType2 = function(viewer, result, typeViewer, standardGraph){
+            var negative;
             viewer.configuration.data = [];
             var description = typeViewer.descriptionLabel;
             var value = "value";
@@ -790,10 +812,6 @@ define([
             graph.valueField = value;
             graph.id = description;
             graph.balloonText = "[[category]] de [[title]] : [[value]]";
-            viewer.configuration.valueAxes.forEach(function(valueAxis){
-                valueAxis.title = "";
-                valueAxis.minimum = 0;
-            });
             viewer.configuration.graphs.push(graph);
 
             viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
@@ -812,11 +830,16 @@ define([
                         if(valueMetric !== undefined){
                             obj[description] = labelMetric;
                             obj.value = valueMetric;
+                            if(valueMetric < 0){
+                                negative = true;
+                            }
                         }
                         viewer.configuration.data.push(obj);
                     }
                 }
             });
+
+            return negative;
         };
 
         var identifyViewerType = function(viewer, result){
@@ -840,7 +863,7 @@ define([
                 }
             });
 
-            if(metricCount > 1 && result.length === 1 && drillCount === 1){
+            if(metricCount > 1 && result.length === 1 && drillCount < 2){
                 return {
                     "type" : 2,
                     "descriptionLabel" : descriptionLabel
