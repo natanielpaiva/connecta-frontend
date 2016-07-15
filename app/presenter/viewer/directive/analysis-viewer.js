@@ -244,10 +244,10 @@ define([
                 };
 
                 $scope.exportPng = function () {
-                    element= angular.element('.analysis-viewer');
+                    element = angular.element('.amchart');
                     type = 'png';
                     isPdf = false;
-                    filename= $scope.model.name;
+                    filename = $scope.model.name;
 
                     wrapper = element[0];
                     svgs = wrapper.getElementsByTagName('svg');
@@ -320,6 +320,37 @@ define([
                         });
                     }
 
+                };
+                $scope.outputData = function (image, filename, isPdf) {
+                    var obj_url;
+                    if (isPdf) {
+
+                        var imgData = image;
+                        var doc = new jsPDF();
+                        doc.addImage(imgData, 'JPEG', 0, 0);
+                        // Saída como URI de Dados
+                        obj_url = doc.output('dataurlstring');
+                    } else {
+
+                        window.URL = window.webkitURL || window.URL;
+                        var image_data = atob(image.split(',')[1]);
+                        // Converter os dados binários em um Blob
+                        var arraybuffer = new ArrayBuffer(image_data.length);
+                        var view = new Uint8Array(arraybuffer);
+                        for (var i = 0; i < image_data.length; i++) {
+                            view[i] = image_data.charCodeAt(i) & 0xff;
+                        }
+
+                        var oBuilder = new Blob([view], {type: 'application/octet-stream'});
+                        obj_url = window.URL.createObjectURL(oBuilder);
+                    }
+
+                    var a = angular.element("<a/>");
+                    angular.element("body").append(a);
+                    a[0].href = obj_url;
+                    a[0].download = filename + '.jpg';
+                    a[0].click();
+                    a.remove();
                 };
 
                 $scope.exportCsv = function () {
