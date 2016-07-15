@@ -4,7 +4,9 @@ define([
     'portal/layout/service/util',
     'portal/layout/directive/click-out',
     'presenter/analysis/service/analysis-service',
-    'presenter/viewer/service/viewer-service'
+    'presenter/viewer/service/viewer-service',
+    'bower_components/amcharts/dist/amcharts/exporting/canvg',
+    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor'
 ], function (portal) {
     return portal.lazy.directive('analysisViewer', function () {
         return {
@@ -242,8 +244,82 @@ define([
                 };
 
                 $scope.exportPng = function () {
-                    var png = document.getElementById("png");
-                    var context = png.getContext("2d");
+                    element= angular.element('.analysis-viewer');
+                    type = 'png';
+                    isPdf = false;
+                    filename= $scope.model.name;
+
+                    wrapper = element[0];
+                    svgs = wrapper.getElementsByTagName('svg');
+
+                    options = {
+                        ignoreAnimation: true,
+                        ignoreMouse: true,
+                        ignoreClear: true,
+                        ignoreDimensions: true,
+                        offsetX: 0,
+                        offsetY: 0
+                    };
+                    canvas = document.createElement('canvas');
+                    context = canvas.getContext('2d');
+                    counter = {
+                        height: 0,
+                        width: 0
+                    };
+
+                    function removeImages(svg) {
+                        startStr = '<image';
+                        stopStr = '</image>';
+                        stopStrAlt = '/>';
+                        start = svg.indexOf(startStr);
+                        match = '';
+
+                        if (start !== -1) {
+                            stop = svg.slice(start, start + 1000).indexOf(stopStr);
+                            if (stop !== -1) {
+                                svg = removeImages(svg.slice(0, start) + svg.slice(start + stop + stopStr.length, svg.length));
+                            } else {
+                                stop = svg.slice(start, start + 1000).indexOf(stopStrAlt);
+                                if (stop !== -1) {
+                                    svg = removeImages(svg.slice(0, start) + svg.slice(start + stop + stopStr.length, svg.length));
+                                }
+                            }
+                        }
+                        return svg;
+                    }
+
+                    canvas.height = wrapper.offsetHeight;
+                    canvas.width = wrapper.offsetWidth;
+                    context.fillStyle = '#ffffff';
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+
+                    if (svgs.length > 0) {
+                        // Add SVGs
+                        for (var i = 0; i < svgs.length; i++) {
+                            var container = svgs[i].parentNode;
+                            var innerHTML = removeImages(container.innerHTML); // remove images from svg until its supported
+
+                            options.offsetY = counter.height;
+                            counter.height += container.offsetHeight;
+                            counter.width = container.offsetWidth;
+                            canvg(canvas, innerHTML, options);
+                        }
+
+                        var image = canvas.toDataURL('image/' + type);
+                        $scope.outputData(image, filename, isPdf);
+                        // Adiciona Legenda ao Container inicial da mesma
+                    } else {
+                        html2canvas([angular.element('.analysis-viewer')[0]], {
+                            useCORS: true
+                        }).then(function (canvas) {
+
+                            var image = canvas.toDataURL("image/" + type);
+                            image = image.replace('data:image/jpeg;base64,', '');
+                            finalImageSrc = 'data:image/jpeg;base64,' + image;
+                            $scope.outputData(finalImageSrc, filename, isPdf);
+                        });
+                    }
+
                 };
 
                 $scope.exportCsv = function () {
@@ -265,7 +341,7 @@ define([
                         csv += line + '\r\n';
                     }
 
-                    var uri = "data:text/csv;charset=utf-8," + escape(csv);
+                    var uri = "data:text/csv;charset=ISO-8859-1," + escape(csv);
                     var name = $scope.model.name + ".csv";
                     var download = document.createElement("a");
                     download.href = uri;

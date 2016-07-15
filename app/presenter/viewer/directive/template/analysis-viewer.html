@@ -3,18 +3,17 @@
     <div class="controls">
         <span class="icon-spread-sheet" ng-click="exportCsv()"
               title="{{'DASHBOARD.EXPORT_CSV'|translate}}"></span>
-<!--  Implementação em andamento!  
-<span id="png" class="icon-image4" ng-click="exportPng()"
-              title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>-->
-        <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder>0"
+        <span id="png" class="icon-image4" ng-click="exportPng()"
+              title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
+        <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
-        <span class="drill icon-select-arrows" ng-click="options.isDrilling=!options.isDrilling"
+        <span class="drill icon-select-arrows" ng-click="options.isDrilling = !options.isDrilling"
               ng-class="{active:options.isDrilling}" title="{{'DASHBOARD.ACTIVATE_DRILL'|translate}}"></span>
         <span class="filter icon-filter2" ng-click="options.filterConfigOpen = true"
               title="{{'DASHBOARD.OPEN_FILTER'|translate}}"
               ng-class="{
                   active:options.filterConfigOpen
-              }"></span>
+                  }"></span>
     </div>
 </div>
 
@@ -28,7 +27,9 @@
     </div>
 </div>
 
-<amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration" return-chart="!edit"></amchart>
+<div class="analysis-viewer">
+    <amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration" return-chart="!edit"></amchart>
+</div>
 
 <div  ng-if="model.configuration.type === 'table'">
     <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
@@ -63,7 +64,7 @@
               title="{{'DASHBOARD.FILTER.APPLY'|translate}}"></span>
     </div>
     <div class="viewer-filter-config-content">
-        <div ng-repeat="filter in model.analysisViewerColumns|filter:{columnType:'FILTER'}|orderBy:'analysisColumn.label' track by $index">
+        <div ng-repeat="filter in model.analysisViewerColumns| filter:{columnType:'FILTER'} | orderBy:'analysisColumn.label' track by $index">
             <div class="viewer-filter-config-label"
                  title="{{filter.analysisColumn.label}}">
                 {{filter.analysisColumn.label}}
@@ -77,16 +78,16 @@
                 </div>
                 <div class="viewer-filter-config-type-arrow"
                      title="{{'DASHBOARD.FILTER.TYPE'|translate}}"
-                     ng-click="filter.optionsVisible=!filter.optionsVisible"
+                     ng-click="filter.optionsVisible = !filter.optionsVisible"
                      ng-class="{opened:filter.optionsVisible}">
                     <span class="icon-keyboard-arrow-down"></span>
                 </div>
                 <div class="viewer-filter-config-type-options" ng-show="filter.optionsVisible">
-                    <div ng-repeat="operator in m2a(filterOperators) | orderBy:'order'"
-                         ng-click="filter.type=operator.id;filter.optionsVisible=false"
-                         ng-class="{active:filter.type==operator.id}">
+                    <div ng-repeat="operator in m2a(filterOperators)| orderBy:'order'"
+                         ng-click="filter.type = operator.id; filter.optionsVisible = false"
+                         ng-class="{active:filter.type == operator.id}">
                         <span class="{{operator.icon}}"></span>
-                        {{operator.name | translate}}
+                        {{operator.name| translate}}
                     </div>
                 </div>
             </div>

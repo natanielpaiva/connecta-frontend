@@ -10,8 +10,8 @@ define([
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
     'presenter/viewer/controller/modal-analysis',
-//    'bower_components/amcharts/dist/amcharts/exporting/canvg',
-//    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
+    'bower_components/amcharts/dist/amcharts/exporting/canvg',
+    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
     'bower_components/html2canvas/dist/html2canvas.min',
     'bower_components/html2canvas/dist/html2canvas',
     'bower_components/angular-ui-select/dist/select'
@@ -516,7 +516,7 @@ define([
         };
 
         $scope.export = function (filename) {
-            element = $('#analysis-viewer').append($('.amChartsLegend'));
+            element = $('.analysis-viewer');
             type = 'jpeg';
             isPdf = false;
 
@@ -580,7 +580,7 @@ define([
                 $scope.outputData(image, filename, isPdf);
                 // Adiciona Legenda ao Container inicial da mesma
             } else {
-                html2canvas([$('#analysis-viewer')[0]], {
+                html2canvas([$('.analysis-viewer')[0]], {
                     useCORS: true
                 }).then(function (canvas) {
 
