@@ -2,6 +2,7 @@
 define([
     'connecta.portal',
     'portal/layout/service/util',
+    'portal/layout/directive/click-out',
     'presenter/analysis/service/analysis-service',
     'presenter/viewer/service/viewer-service'
 ], function (portal) {

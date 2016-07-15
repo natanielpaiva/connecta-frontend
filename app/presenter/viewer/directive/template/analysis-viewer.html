@@ -10,7 +10,7 @@
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
         <span class="drill icon-select-arrows" ng-click="options.isDrilling=!options.isDrilling"
               ng-class="{active:options.isDrilling}" title="{{'DASHBOARD.ACTIVATE_DRILL'|translate}}"></span>
-        <span class="filter icon-filter2" ng-click="options.filterConfigOpen = !options.filterConfigOpen"
+        <span class="filter icon-filter2" ng-click="options.filterConfigOpen = true"
               title="{{'DASHBOARD.OPEN_FILTER'|translate}}"
               ng-class="{
                   active:options.filterConfigOpen
@@ -54,7 +54,9 @@
     </table>
 </div>
 
-<div class="viewer-filter-config" ng-class="{'viewer-filter-active':options.filterConfigOpen}">
+<div class="viewer-filter-config" ng-class="{'viewer-filter-active':options.filterConfigOpen}"
+     click-out="options.filterConfigOpen=false" click-out-exceptions="['.filter','.viewer-filter-config-type-options']"
+     ng-show="options.filterConfigOpen">
     <div class="viewer-filter-config-header">
         <span class="viewer-filter-config-title" translate>DASHBOARD.FILTER.SELECT_FILTER</span>
         <span class="icon-checkmark3" ng-click="getAnalysisResult()"
@@ -79,7 +81,7 @@
                      ng-class="{opened:filter.optionsVisible}">
                     <span class="icon-keyboard-arrow-down"></span>
                 </div>
-                <div class="viewer-filter-config-type-options" ng-if="filter.optionsVisible">
+                <div class="viewer-filter-config-type-options" ng-show="filter.optionsVisible">
                     <div ng-repeat="operator in m2a(filterOperators) | orderBy:'order'"
                          ng-click="filter.type=operator.id;filter.optionsVisible=false"
                          ng-class="{active:filter.type==operator.id}">
