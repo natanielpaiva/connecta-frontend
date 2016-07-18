@@ -56,15 +56,13 @@ define([
         
         if ($routeParams.id) {
             DashboardService.get($routeParams.id).then(function (response) {
-                response.data.sections.sort(function (a, b) {
-                    a.draggable = {
+                response.data.sections.forEach(function (section) {
+                    section.draggable = {
                         enabled: true
                     };
-                    a.resizable = {
+                    section.resizable = {
                         enabled: true
                     };
-
-                    return a.order - b.order;
                 });
                 response.data.sections[0].active = true;
 

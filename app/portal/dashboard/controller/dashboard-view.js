@@ -10,7 +10,7 @@ define([
     'presenter/viewer/directive/combined-viewer',
     'maps/layer-viewer/directive/map-viewer'
 ], function (portal) {
-    return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $filter, $document, $window, $timeout) {
+    return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $filter, $document, $window, $timeout, applications) {
         $scope.config = {
             headerMini: false,
             isPrinting: false
@@ -46,7 +46,7 @@ define([
 
         $scope.print = function () {
             $scope.config.isPrinting = true;
-            
+
 //            $timeout(function(){
 //                $scope.$apply(function(){
 //                    $window.print();
