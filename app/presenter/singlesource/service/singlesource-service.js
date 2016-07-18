@@ -46,6 +46,10 @@ define([
             {
                 value: 'DATE',
                 label: 'DATE'
+            },
+            {
+                value: 'CONNECTA_MAPS',
+                label: 'CONNECTA_MAPS'
             }
 
         ];
