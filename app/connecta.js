@@ -347,6 +347,7 @@ define([
     'portal/layout/directive/type-switcher',
     'portal/layout/directive/bulk-action-bar',
     'portal/layout/directive/file-model',
+    'portal/layout/directive/export-image',
     'portal/layout/directive/input-timeout',
     'portal/layout/directive/heading-popover',
     'portal/layout/directive/default-list-heading',

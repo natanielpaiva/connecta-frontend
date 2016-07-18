@@ -258,116 +258,6 @@ define([
                     }
                 };
 
-                $scope.exportPng = function () {
-                    element = angular.element('.amchart');
-                    type = 'png';
-                    isPdf = false;
-                    filename = $scope.model.name;
-
-                    wrapper = element[0];
-                    svgs = wrapper.getElementsByTagName('svg');
-
-                    options = {
-                        ignoreAnimation: true,
-                        ignoreMouse: true,
-                        ignoreClear: true,
-                        ignoreDimensions: true,
-                        offsetX: 0,
-                        offsetY: 0
-                    };
-                    canvas = document.createElement('canvas');
-                    context = canvas.getContext('2d');
-                    counter = {
-                        height: 0,
-                        width: 0
-                    };
-
-                    function removeImages(svg) {
-                        startStr = '<image';
-                        stopStr = '</image>';
-                        stopStrAlt = '/>';
-                        start = svg.indexOf(startStr);
-                        match = '';
-
-                        if (start !== -1) {
-                            stop = svg.slice(start, start + 1000).indexOf(stopStr);
-                            if (stop !== -1) {
-                                svg = removeImages(svg.slice(0, start) + svg.slice(start + stop + stopStr.length, svg.length));
-                            } else {
-                                stop = svg.slice(start, start + 1000).indexOf(stopStrAlt);
-                                if (stop !== -1) {
-                                    svg = removeImages(svg.slice(0, start) + svg.slice(start + stop + stopStr.length, svg.length));
-                                }
-                            }
-                        }
-                        return svg;
-                    }
-
-                    canvas.height = wrapper.offsetHeight;
-                    canvas.width = wrapper.offsetWidth;
-                    context.fillStyle = '#ffffff';
-                    context.fillRect(0, 0, canvas.width, canvas.height);
-
-                    if (svgs.length > 0) {
-                        // Add SVGs
-                        for (var i = 0; i < svgs.length; i++) {
-                            var container = svgs[i].parentNode;
-                            var innerHTML = removeImages(container.innerHTML); // remove images from svg until its supported
-
-                            options.offsetY = counter.height;
-                            counter.height += container.offsetHeight;
-                            counter.width = container.offsetWidth;
-                            canvg(canvas, innerHTML, options);
-                        }
-
-                        var image = canvas.toDataURL('image/' + type);
-                        $scope.outputData(image, filename, isPdf);
-                        // Adiciona Legenda ao Container inicial da mesma
-                    } else {
-                        html2canvas([angular.element('.analysis-viewer')[0]], {
-                            useCORS: true
-                        }).then(function (canvas) {
-
-                            var image = canvas.toDataURL("image/" + type);
-                            image = image.replace('data:image/jpeg;base64,', '');
-                            finalImageSrc = 'data:image/jpeg;base64,' + image;
-                            $scope.outputData(finalImageSrc, filename, isPdf);
-                        });
-                    }
-
-                };
-                $scope.outputData = function (image, filename, isPdf) {
-                    var obj_url;
-                    if (isPdf) {
-
-                        var imgData = image;
-                        var doc = new jsPDF();
-                        doc.addImage(imgData, 'JPEG', 0, 0);
-                        // Saída como URI de Dados
-                        obj_url = doc.output('dataurlstring');
-                    } else {
-
-                        window.URL = window.webkitURL || window.URL;
-                        var image_data = atob(image.split(',')[1]);
-                        // Converter os dados binários em um Blob
-                        var arraybuffer = new ArrayBuffer(image_data.length);
-                        var view = new Uint8Array(arraybuffer);
-                        for (var i = 0; i < image_data.length; i++) {
-                            view[i] = image_data.charCodeAt(i) & 0xff;
-                        }
-
-                        var oBuilder = new Blob([view], {type: 'application/octet-stream'});
-                        obj_url = window.URL.createObjectURL(oBuilder);
-                    }
-
-                    var a = angular.element("<a/>");
-                    angular.element("body").append(a);
-                    a[0].href = obj_url;
-                    a[0].download = filename + '.jpg';
-                    a[0].click();
-                    a.remove();
-                };
-
                 $scope.exportCsv = function () {
                     var array = $scope.model.configuration.dataProvider;
                     var csv = '';
@@ -387,7 +277,7 @@ define([
                         csv += line + '\r\n';
                     }
 
-                    var uri = "data:text/csv;charset=ISO-8859-1," + escape(csv);
+                    var uri = "data:text/csv;charset=UTF-8," + escape(csv);
                     var name = $scope.model.name + ".csv";
                     var download = document.createElement("a");
                     download.href = uri;
@@ -396,7 +286,6 @@ define([
                     download.click();
                     document.body.removeChild(download);
                 };
-
 
                 $scope.exampleTable = ViewerService.getExampleTable();
 
