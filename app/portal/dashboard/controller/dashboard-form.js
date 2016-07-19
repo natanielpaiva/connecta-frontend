@@ -35,6 +35,8 @@ define([
                             var viewerPath = applications[obj.module].host +
                                     applications[obj.module].viewerPath;
                             obj.viewerUrl = viewerPath.replace(':id', obj.id);
+                            obj.viewer = obj.id;
+                            
                             delete obj.id;
                         });
 
