@@ -1,10 +1,7 @@
 <div class="viewer-header" ng-if="!edit">
     <h3>{{model.name}}</h3>
     <div class="controls">
-        <span class="icon-spread-sheet" ng-click="exportCsv()"
-              title="{{'DASHBOARD.EXPORT_CSV'|translate}}"></span>
-        <span id="png" class="icon-image4" ng-click="model.exportImage()"
-              title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
+
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
         <span class="drill icon-select-arrows" ng-click="options.isDrilling = !options.isDrilling"
@@ -14,6 +11,10 @@
               ng-class="{
                   active:options.filterConfigOpen
                   }"></span>
+        <span class="icon-spread-sheet" ng-click="exportCsv()"
+              title="{{'DASHBOARD.EXPORT_CSV'|translate}}"></span>
+        <span id="png" class="icon-image4" ng-click="model.exportImage()"
+              title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
     </div>
 </div>
 
@@ -22,7 +23,7 @@
         <span class="fa fa-home" ng-click="drillUpFromBreadCrumb(0)"></span>
     </div>
     <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index"
-         title="{{drill.label}}: {{drill.filterDrillValue}}" ng-click="drillUpFromBreadCrumb($index+1)">
+         title="{{drill.label}}: {{drill.filterDrillValue}}" ng-click="drillUpFromBreadCrumb($index + 1)">
         {{drill.filterDrillValue}}
     </div>
 </div>
