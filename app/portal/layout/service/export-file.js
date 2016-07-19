@@ -4,14 +4,12 @@ define([
     'portal/layout/service/util',
     'bower_components/html2canvas/dist/html2canvas.min'
 ], function (portal) {
-    /**
-     * Serviço de utilitários
-     */
-    return portal.service('exportFile', function (util) {
-        this.exportImage = function (model,element) {
+    return portal.service('ExportFile', function() {
+        var ExportFile = this;
+        
+        function _exportImage(filename, element) {
             var isPdf = false;
-            var filename = model.name || util.uuid();
-            var type = "png";
+            var type = 'png';
 
             var svgs = element.getElementsByTagName('svg');
 
@@ -86,7 +84,7 @@ define([
 
         };
 
-        var _outputData = function (image, filename, isPdf) {
+        function _outputData(image, filename, isPdf) {
             var obj_url;
             var type = 'png';
             if (isPdf) {
@@ -111,10 +109,34 @@ define([
                 obj_url = window.URL.createObjectURL(oBuilder);
             }
 
-            _download(obj_url,filename+ '.' + type);
-        };
+            _download(obj_url, filename + '.' + type);
+        }
+
+        function _exportCsv(array, filename) {
+            console.log(array, filename);
+            var csv = '';
+            for (var head in array[0]) {
+                csv += head + ';';
+            }
+            csv += '\r\n';
+
+            for (var i = 0; i < array.length; i++) {
+                var line = '';
+                for (var index in array[i]) {
+                    if (line !== '')
+                        line += ';';
+
+                    line += array[i][index];
+                }
+                csv += line + '\r\n';
+            }
+            var uri = "data:text/csv;charset=UTF-8," + escape(csv);
+            var name = filename + ".csv";
+            _download(uri, name);
+
+        }
         
-        function _download(url,filename){
+        function _download(url, filename) {
             var download = document.createElement("a");
             download.href = url;
             download.download = filename;
@@ -123,6 +145,21 @@ define([
             document.body.removeChild(download);
         }
         
+        this.TYPE = {
+            CSV: _exportCsv,
+            IMAGE: _exportImage
+        };
+
+        /**
+         * 
+         * @param {Function} strategy
+         * @returns {undefined}
+         */
+        ExportFile.export = function(strategy) {
+            strategy.apply(ExportFile, Array.prototype.slice.call(arguments)
+                    .slice(1, arguments.length) );
+        };
+
     });
 });
 

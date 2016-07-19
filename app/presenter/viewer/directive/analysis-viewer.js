@@ -3,12 +3,13 @@ define([
     'connecta.portal',
     'portal/layout/service/util',
     'portal/layout/directive/click-out',
+    'portal/layout/service/export-file',
     'presenter/analysis/service/analysis-service',
     'presenter/viewer/service/viewer-service',
     'bower_components/amcharts/dist/amcharts/exporting/canvg',
     'bower_components/amcharts/dist/amcharts/exporting/rgbcolor'
 ], function (portal) {
-    return portal.lazy.directive('analysisViewer', function () {
+    return portal.lazy.directive('analysisViewer', function (ExportFile) {
         return {
             templateUrl: 'app/presenter/viewer/directive/template/analysis-viewer.html',
             scope: {
@@ -258,34 +259,13 @@ define([
                     }
                 };
 
-//                $scope.exportCsv = function () {
-//                    var array = $scope.model.configuration.dataProvider;
-//                    var csv = '';
-//                    for (var head in array[0]) {
-//                        csv += head + ';';
-//                    }
-//                    csv += '\r\n';
-//
-//                    for (var i = 0; i < array.length; i++) {
-//                        var line = '';
-//                        for (var index in array[i]) {
-//                            if (line !== '')
-//                                line += ';';
-//
-//                            line += array[i][index];
-//                        }
-//                        csv += line + '\r\n';
-//                    }
-//
-//                    var uri = "data:text/csv;charset=UTF-8," + escape(csv);
-//                    var name = $scope.model.name + ".csv";
-//                    var download = document.createElement("a");
-//                    download.href = uri;
-//                    download.download = name;
-//                    document.body.appendChild(download);
-//                    download.click();
-//                    document.body.removeChild(download);
-//                };
+                $scope.exportCsv = function () {
+                    ExportFile.export(
+                        ExportFile.TYPE.CSV,
+                        $scope.model.configuration.dataProvider,
+                        $scope.model.name
+                    );
+                };
 
                 $scope.exampleTable = ViewerService.getExampleTable();
 

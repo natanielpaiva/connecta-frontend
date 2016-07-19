@@ -3,7 +3,7 @@ define([
     'connecta.portal',
     'portal/layout/service/export-file'
 ], function (portal) {
-    return portal.directive('exportImage', function (exportFile) {
+    return portal.directive('exportImage', function (ExportFile) {
         return {
             restrict: 'A',
             scope: {
@@ -19,7 +19,11 @@ define([
                     }
                     if (value && !value.exportImage) {
                         value.exportImage = function () {
-                            exportFile.exportImage($scope.model, $scope._element);
+                            ExportFile.export(
+                                ExportFile.TYPE.IMAGE,
+                                $scope.model.name,
+                                $scope._element
+                            );
                         };
                     }
                 });
