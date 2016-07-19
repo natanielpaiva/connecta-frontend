@@ -258,34 +258,34 @@ define([
                     }
                 };
 
-                $scope.exportCsv = function () {
-                    var array = $scope.model.configuration.dataProvider;
-                    var csv = '';
-                    for (var head in array[0]) {
-                        csv += head + ';';
-                    }
-                    csv += '\r\n';
-
-                    for (var i = 0; i < array.length; i++) {
-                        var line = '';
-                        for (var index in array[i]) {
-                            if (line !== '')
-                                line += ';';
-
-                            line += array[i][index];
-                        }
-                        csv += line + '\r\n';
-                    }
-
-                    var uri = "data:text/csv;charset=UTF-8," + escape(csv);
-                    var name = $scope.model.name + ".csv";
-                    var download = document.createElement("a");
-                    download.href = uri;
-                    download.download = name;
-                    document.body.appendChild(download);
-                    download.click();
-                    document.body.removeChild(download);
-                };
+//                $scope.exportCsv = function () {
+//                    var array = $scope.model.configuration.dataProvider;
+//                    var csv = '';
+//                    for (var head in array[0]) {
+//                        csv += head + ';';
+//                    }
+//                    csv += '\r\n';
+//
+//                    for (var i = 0; i < array.length; i++) {
+//                        var line = '';
+//                        for (var index in array[i]) {
+//                            if (line !== '')
+//                                line += ';';
+//
+//                            line += array[i][index];
+//                        }
+//                        csv += line + '\r\n';
+//                    }
+//
+//                    var uri = "data:text/csv;charset=UTF-8," + escape(csv);
+//                    var name = $scope.model.name + ".csv";
+//                    var download = document.createElement("a");
+//                    download.href = uri;
+//                    download.download = name;
+//                    document.body.appendChild(download);
+//                    download.click();
+//                    document.body.removeChild(download);
+//                };
 
                 $scope.exampleTable = ViewerService.getExampleTable();
 
