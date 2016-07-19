@@ -205,8 +205,8 @@ define([
                             ViewerService.getAnalysisById(newValue.id).then(function (response) {
                                 angular.extend($scope.viewer.analysis, response.data);
                                 //Torna todos as columns filtraveis
-                                if($scope.viewer.analysis !== undefined &&
-                                    (oldValue === undefined || newValue.id !== oldValue.id)){
+                                if ($scope.viewer.analysis !== undefined &&
+                                        (oldValue === undefined || newValue.id !== oldValue.id)) {
                                     //remove os atributos da analise
                                     $scope.viewer.filters = [];
                                     $scope.viewer.metrics = [];
@@ -216,12 +216,12 @@ define([
                                     $scope.viewer.valueFields = [];
                                     $scope.viewer.columns = [];
 
-                                    angular.forEach($scope.viewer.analysis.analysisColumns, function(column) {
-                                      var colunaFiltravel = {
-                                          analysisColumn: angular.copy(column),
-                                          columnType: 'FILTER'
-                                      };
-                                      $scope.viewer.filters.push(colunaFiltravel);
+                                    angular.forEach($scope.viewer.analysis.analysisColumns, function (column) {
+                                        var colunaFiltravel = {
+                                            analysisColumn: angular.copy(column),
+                                            columnType: 'FILTER'
+                                        };
+                                        $scope.viewer.filters.push(colunaFiltravel);
                                     });
                                 }
                             });
@@ -371,7 +371,7 @@ define([
                     $scope.viewer.descriptions.length > 0) ||
                     ($scope.viewer.xfields.length > 0 &&
                             $scope.viewer.yfields.length > 0);
-                    
+
             if (readyForPreview || $scope.viewer.columns.length > 0) {
                 AnalysisService.execute({
                     analysis: _prepareForRequest($scope.viewer),
@@ -451,7 +451,7 @@ define([
                         $scope.viewer.configuration = dados;
                         //Disable Animation
                         $scope.viewer.configuration.startDuration = 0;
-                        angular.forEach($scope.viewer.configuration.titles, function(title) {
+                        angular.forEach($scope.viewer.configuration.titles, function (title) {
                             title.text = '';
                         });
                         $scope.viewer.configuration.thousandsSeparator = '.';
@@ -465,7 +465,7 @@ define([
 
         var __update = function (array) {
             if ($scope.state.loaded) {
-            	getPreview();
+                getPreview();
             }
 //            angular.forEach(array, function(o){
 //                o = { analysisColumn: o };
@@ -475,12 +475,12 @@ define([
         };
 
         var load = function () {
-             $scope.$watchCollection('viewer.metrics', __update);
-             $scope.$watchCollection('viewer.descriptions', __update);
-             $scope.$watchCollection('viewer.xfields', __update);
-             $scope.$watchCollection('viewer.yfields', __update);
-             $scope.$watchCollection('viewer.valueFields', __update);
-             $scope.$watchCollection('viewer.columns', __update);
+            $scope.$watchCollection('viewer.metrics', __update);
+            $scope.$watchCollection('viewer.descriptions', __update);
+            $scope.$watchCollection('viewer.xfields', __update);
+            $scope.$watchCollection('viewer.yfields', __update);
+            $scope.$watchCollection('viewer.valueFields', __update);
+            $scope.$watchCollection('viewer.columns', __update);
         };
 
         $scope.newInterval = function () {
@@ -514,116 +514,6 @@ define([
                 };
             }
         };
-
-        $scope.export = function (filename) {
-            element = $('.analysis-viewer');
-            type = 'jpeg';
-            isPdf = false;
-
-            wrapper = element[0];
-            svgs = wrapper.getElementsByTagName('svg');
-
-            options = {
-                ignoreAnimation: true,
-                ignoreMouse: true,
-                ignoreClear: true,
-                ignoreDimensions: true,
-                offsetX: 0,
-                offsetY: 0
-            };
-            canvas = document.createElement('canvas');
-            context = canvas.getContext('2d');
-            counter = {
-                height: 0,
-                width: 0
-            };
-
-            function removeImages(svg) {
-                startStr = '<image';
-                stopStr = '</image>';
-                stopStrAlt = '/>';
-                start = svg.indexOf(startStr);
-                match = '';
-
-                if (start !== -1) {
-                    stop = svg.slice(start, start + 1000).indexOf(stopStr);
-                    if (stop !== -1) {
-                        svg = removeImages(svg.slice(0, start) + svg.slice(start + stop + stopStr.length, svg.length));
-                    } else {
-                        stop = svg.slice(start, start + 1000).indexOf(stopStrAlt);
-                        if (stop !== -1) {
-                            svg = removeImages(svg.slice(0, start) + svg.slice(start + stop + stopStr.length, svg.length));
-                        }
-                    }
-                }
-                return svg;
-            }
-
-            canvas.height = wrapper.offsetHeight;
-            canvas.width = wrapper.offsetWidth;
-            context.fillStyle = '#ffffff';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            if (svgs.length > 0) {
-                // Add SVGs
-                for (var i = 0; i < svgs.length; i++) {
-                    var container = svgs[i].parentNode;
-                    var innerHTML = removeImages(container.innerHTML); // remove images from svg until its supported
-
-                    options.offsetY = counter.height;
-                    counter.height += container.offsetHeight;
-                    counter.width = container.offsetWidth;
-                    canvg(canvas, innerHTML, options);
-                }
-
-                var image = canvas.toDataURL('image/' + type);
-                $scope.outputData(image, filename, isPdf);
-                // Adiciona Legenda ao Container inicial da mesma
-            } else {
-                html2canvas([$('.analysis-viewer')[0]], {
-                    useCORS: true
-                }).then(function (canvas) {
-
-                    var image = canvas.toDataURL("image/" + type);
-                    image = image.replace('data:image/jpeg;base64,', '');
-                    finalImageSrc = 'data:image/jpeg;base64,' + image;
-                    $scope.outputData(finalImageSrc, filename, isPdf);
-                });
-            }
-        };
-
-        $scope.outputData = function (image, filename, isPdf) {
-            var obj_url;
-            if (isPdf) {
-
-                var imgData = image;
-                var doc = new jsPDF();
-                doc.addImage(imgData, 'JPEG', 0, 0);
-                // Saída como URI de Dados
-                obj_url = doc.output('dataurlstring');
-            } else {
-
-                window.URL = window.webkitURL || window.URL;
-                var image_data = atob(image.split(',')[1]);
-                // Converter os dados binários em um Blob
-                var arraybuffer = new ArrayBuffer(image_data.length);
-                var view = new Uint8Array(arraybuffer);
-                for (var i = 0; i < image_data.length; i++) {
-                    view[i] = image_data.charCodeAt(i) & 0xff;
-                }
-
-                var oBuilder = new Blob([view], {type: 'application/octet-stream'});
-                obj_url = window.URL.createObjectURL(oBuilder);
-            }
-
-            var a = angular.element("<a/>");
-            angular.element("body").append(a);
-            a[0].href = obj_url;
-            a[0].download = filename + '.jpg';
-            a[0].click();
-            a.remove();
-        };
-
         $scope.$watch('viewer', function () {
             if ($scope.viewer.configuration) {
                 if ($scope.viewer.configuration.type === "gauge") {
