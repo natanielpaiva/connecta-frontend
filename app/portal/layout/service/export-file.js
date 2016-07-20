@@ -82,7 +82,7 @@ define([
                 });
             }
 
-        };
+        }
 
         function _outputData(image, filename, isPdf) {
             var obj_url;

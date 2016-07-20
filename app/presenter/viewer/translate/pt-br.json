@@ -4,7 +4,7 @@
         "TYPE_ANALYSIS":"Análise",
         "TYPE_SINGLESOURCE":"Mídia",
         "TYPE_SINGLESOURCE_GROUP":"Grupo de Mídia",
-        
+
         "INTERVAL":"Intervalo",
         "INTERVAL_FROM":"De",
         "INTERVAL_TO":"Até",
@@ -26,7 +26,7 @@
         "FONT_SIZE": "Tamanho da fonte",
         "VIEW_ANALYSIS": "Resultado da análise",
         "EXPORT": "Exportar imagem",
-        
+
         "FONT_COLOR": "Cor",
         "FONT_FAMILY": "Fonte",
         "HAND_DRAWN": "Desenhado a mão",
@@ -185,7 +185,8 @@
         "SETTINGS_DRILL":"Configurações drill",
         "DRAG_COLUMNS_FOR_DRILL":"Arraste as colunas para a hierarquia de Drill:",
         "SETTINGS_ADVANCED":"Configurações avançadas",
-        "SELECT":"Selecione"
+        "SELECT":"Selecione",
+        "LABEL_TEXT":"Texto do label"
     },
     "VIEWER_TEMPLATE_TYPE": {
         "bar": "Bar",

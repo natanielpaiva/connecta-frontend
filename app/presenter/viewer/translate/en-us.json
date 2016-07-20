@@ -4,7 +4,7 @@
         "TYPE_ANALYSIS": "Analysis",
         "TYPE_SINGLESOURCE": "Media",
         "TYPE_SINGLESOURCE_GROUP": "Media Group",
-        
+
         "INTERVAL":"Interval",
         "INTERVAL_FROM":"From",
         "INTERVAL_TO":"To",
@@ -26,7 +26,7 @@
         "FONT_SIZE": "Font size",
         "VIEW_ANALYSIS": "Analysis result",
         "EXPORT": "Export image",
-        
+
         "FONT_COLOR": "Color",
         "FONT_FAMILY": "Font",
         "HAND_DRAWN": "Hand drawn",
@@ -186,7 +186,8 @@
         "SETTINGS_DRILL":"Settings drill",
         "DRAG_COLUMNS_FOR_DRILL":"Drag columns for drill",
         "SETTINGS_ADVANCED":"Advanced settings",
-        "SELECT":"Select"
+        "SELECT":"Select",
+        "LABEL_TEXT":"Label text"
     },
     "VIEWER_TEMPLATE_TYPE": {
         "bar": "Bar",
@@ -272,9 +273,3 @@
         "donut-3d":"3D Donut"
     }
 }
-
-
-
-
-
-

@@ -20,7 +20,7 @@ define([
                 $scope.drillOrder = 0;
                 $scope.m2a = util.mapToArray;
                 $scope.options = {
-                    isDrilling: false, // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
+                    isDrilling: true, // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
                     filterConfigOpen: false
                 };
 
