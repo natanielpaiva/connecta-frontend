@@ -8,7 +8,6 @@ define([
         var ExportFile = this;
         
         function _exportImage(filename, element) {
-            var isPdf = false;
             var type = 'png';
 
             var svgs = element.getElementsByTagName('svg');
@@ -68,8 +67,7 @@ define([
                 }
 
                 var image = canvas.toDataURL('image/' + type);
-                _outputData(image, filename, isPdf);
-                // Adiciona Legenda ao Container inicial da mesma
+                _outputData(image, filename);
             } else {
                 html2canvas([element], {
                     useCORS: true
@@ -78,36 +76,26 @@ define([
                     var image = canvas.toDataURL("image/" + type);
                     image = image.replace('data:image/' + type + ';base64,', '');
                     finalImageSrc = 'data:image/' + type + ';base64,' + image;
-                    _outputData(finalImageSrc, filename, isPdf);
+                    _outputData(finalImageSrc, filename);
                 });
             }
-
         }
 
-        function _outputData(image, filename, isPdf) {
+        function _outputData(image, filename) {
             var obj_url;
             var type = 'png';
-            if (isPdf) {
 
-                var imgData = image;
-                var doc = new jsPDF();
-                doc.addImage(imgData, type, 0, 0);
-                // Saída como URI de Dados
-                obj_url = doc.output('dataurlstring');
-            } else {
-
-                window.URL = window.webkitURL || window.URL;
-                var image_data = atob(image.split(',')[1]);
-                // Converter os dados binários em um Blob
-                var arraybuffer = new ArrayBuffer(image_data.length);
-                var view = new Uint8Array(arraybuffer);
-                for (var i = 0; i < image_data.length; i++) {
-                    view[i] = image_data.charCodeAt(i) & 0xff;
-                }
-
-                var oBuilder = new Blob([view], {type: 'application/octet-stream'});
-                obj_url = window.URL.createObjectURL(oBuilder);
+            window.URL = window.URL || window.webkitURL;
+            var image_data = atob(image.split(',')[1]);
+            // Converter os dados binários em um Blob
+            var arraybuffer = new ArrayBuffer(image_data.length);
+            var view = new Uint8Array(arraybuffer);
+            for (var i = 0; i < image_data.length; i++) {
+                view[i] = image_data.charCodeAt(i) & 0xff;
             }
+
+            var oBuilder = new Blob([view], {type: 'application/octet-stream'});
+            obj_url = window.URL.createObjectURL(oBuilder);
 
             _download(obj_url, filename + '.' + type);
         }

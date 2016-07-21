@@ -105,12 +105,12 @@
 
     <div class="row">
         <div class="col-md-12 text-right">
+            <button class="btn btn-default" ng-if="datasource.type == 'DATABASE'" ng-click="testConnection()" type="button" translate>
+                DATASOURCE.TEST_CONNECTION
+            </button>
             <a href="#/presenter/datasource" role="button" class="btn btn-default" translate>
                 LAYOUT.BACK
             </a>
-<!--            <button class="btn btn-default" type="button" translate>
-                DATASOURCE.TEST_CONNECTION
-            </button>-->
         </div>
     </div>
 </div>

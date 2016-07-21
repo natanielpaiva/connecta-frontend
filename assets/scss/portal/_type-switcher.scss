@@ -11,6 +11,10 @@ $size:1.5em;
         padding:0;
         position:relative;
         
+        &.portal-type-switcher-item-disabled {
+            opacity:0.3;
+        }
+        
         .portal-type-switcher-icon {
             padding:0;
             background-color:$darkerWhite;

@@ -8,7 +8,7 @@ $boxHeight: 22em;
 }
 
 [layout].login {
-    background-color: $black;
+    background-color: $black !important;
     position: fixed;
     top:0;
     bottom: 0;

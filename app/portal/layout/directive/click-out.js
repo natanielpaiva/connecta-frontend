@@ -2,7 +2,7 @@
 define([
     'connecta.portal'
 ], function (portal) {
-    return portal.lazy.directive('clickOut', function ($window) {
+    return portal.lazy.directive('clickOut', function ($window, $timeout) {
         return {
             restrict: 'A',
             scope: {
@@ -10,10 +10,10 @@ define([
                 clickOutExceptions: '='
             },
             link: function (scope, element) {
+                var _element = element[0];
+                
                 function _getElements(){
-                    var _elements = [
-                        element[0]
-                    ];
+                    var _elements = [];
 
                     scope.clickOutExceptions.forEach(function(exception){
                         _elements.push(angular.element(exception).get(0));
@@ -26,9 +26,10 @@ define([
                     var els = _getElements().filter(function(el){
                         return el && el.contains(event.target);
                     });
-                    if (els.length === 0) {
-                        scope.clickOut();
-                        scope.$apply();
+                    if (!_element.contains(event.target) && els.length === 0) {
+                        $timeout(function(){
+                            scope.clickOut();
+                        });
                     }
                 });
             }
