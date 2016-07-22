@@ -748,6 +748,10 @@ define([
         var configureFunnelAndPie = function (viewer, result) {
             var typeViewer = identifyViewerType(viewer, result);
             var analysisViewerColumns = viewer.analysisViewerColumns;
+            
+            viewer.configuration.colors = ["#FF6600","#FCD202","#0D8ECF","#2A0CD0","#CD0D74"
+                ,"#CC0000","#00CC00","#DDDDDD","#999999","#333333","#990000" ];
+            
             if(viewer.configuration.legend){
                 viewer.configuration.legend.valueWidth = 100;
             }else{
