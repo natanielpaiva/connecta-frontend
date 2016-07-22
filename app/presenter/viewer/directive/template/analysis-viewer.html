@@ -54,13 +54,17 @@
     </table>
 </div>
 
+<!--click-out="options.filterConfigOpen=false" click-out-exceptions="['.filter']"-->
 <div class="viewer-filter-config" ng-class="{'viewer-filter-active':options.filterConfigOpen}"
-     click-out="options.filterConfigOpen=false" click-out-exceptions="['.filter']"
      ng-show="options.filterConfigOpen">
     <div class="viewer-filter-config-header">
         <span class="viewer-filter-config-title" translate>DASHBOARD.FILTER.SELECT_FILTER</span>
+<!--        <span class="icon-cake2" ng-click="options.filterConfigOpen=false"
+              title="{{'DASHBOARD.FILTER.APPLY'|translate}}"></span>-->
         <span class="icon-checkmark3" ng-click="getAnalysisResult()"
               title="{{'DASHBOARD.FILTER.APPLY'|translate}}"></span>
+        <span class="icon-cancel3" ng-click="options.filterConfigOpen=false"
+              title="{{'DASHBOARD.FILTER.CLOSE'|translate}}"></span>
     </div>
     <div class="viewer-filter-config-content">
         <div ng-repeat="filter in model.analysisViewerColumns| filter:{columnType:'FILTER'} | orderBy:'analysisColumn.label' track by $index">
