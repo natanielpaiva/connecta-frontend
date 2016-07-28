@@ -1,5 +1,6 @@
 define([
-    'connecta.portal'
+    'connecta.portal',
+    'portal/layout/service/util'
 ], function (portal) {
     return portal.lazy.directive('viewer', function() {
         return {
@@ -10,7 +11,8 @@ define([
                 type:'=?',
                 edit:'=?'
             },
-            controller: function ($scope, $http) {
+            controller: function ($scope, $http, util) {
+                $scope.uuid = util.uuid();
                 if ( $scope.src ) {
                     $http.get($scope.src).then(function(response){
                         $scope.model = response.data;

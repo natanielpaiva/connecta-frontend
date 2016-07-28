@@ -14,10 +14,12 @@ define([
                 
                 function _getElements(){
                     var _elements = [];
-
-                    scope.clickOutExceptions.forEach(function(exception){
-                        _elements.push(angular.element(exception).get(0));
-                    });
+                    
+                    if (scope.clickOutExceptions) {
+                        scope.clickOutExceptions.forEach(function(exception){
+                            _elements.push(angular.element(exception).get(0));
+                        });
+                    }
                     
                     return _elements;
                 }

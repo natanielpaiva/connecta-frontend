@@ -117,11 +117,13 @@
             </a>
         </h2>
         <div gridster="section.config">
-            <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items"
+            <div class="dashboard-item"
+                 gridster-item="gridsterItemConfig" ng-repeat="item in section.items"
                  ng-style="{
-            'background-color':toRGBA(item.backgroundColor, item.opacity),
-            'background-image':getImage(item.backgroundImage)
-           }">
+                    'background-color':toRGBA(item.backgroundColor, item.opacity),
+                    'background-image':getImage(item.backgroundImage),
+                    'z-index':$index*(-1)
+                   }">
                 <viewer src="item.viewerUrl" type="item.type"></viewer>
             </div>
         </div>

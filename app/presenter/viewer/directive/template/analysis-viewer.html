@@ -1,7 +1,6 @@
 <div class="viewer-header" ng-if="!edit">
     <h3>{{model.name}}</h3>
     <div class="controls">
-
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
         <span class="drill icon-select-arrows" ng-click="options.isDrilling = !options.isDrilling"
@@ -11,10 +10,27 @@
               ng-class="{
                   active:options.filterConfigOpen
                   }"></span>
-        <span class="icon-spread-sheet" ng-click="exportCsv()"
-              title="{{'DASHBOARD.EXPORT_CSV'|translate}}"></span>
-        <span id="png" class="icon-image4" ng-click="model.exportImage()"
-              title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
+<!--    Feio demais essa classe com uuid, mas se não tiver não tem como distinguir
+        se o click fora é nesse visualizador dentro do dashboard ou em qualquer
+        outro, se tirar, só o primeiro dropdown do dashboard abre. -->
+        <div ng-init="openOptionsClass='.connecta-viewer-'+$parent.$parent.uuid+' .icon-dots-three-vertical'"
+            class="other-options" ng-click="options.otherOptionsOpen = true">
+            <span class="icon-dots-three-vertical"></span>
+            <div class="connecta-dropdown" ng-if="options.otherOptionsOpen"
+                 click-out="options.otherOptionsOpen=false"
+                 click-out-exceptions="[openOptionsClass]">
+                <div class="connecta-dropdown-item" ng-click="exportCsv()">
+                    <span class="icon-spread-sheet" 
+                          title="{{'DASHBOARD.EXPORT_CSV'|translate}}"></span>
+                    {{'DASHBOARD.EXPORT_CSV'|translate}}
+                </div>
+                <div class="connecta-dropdown-item" ng-click="model.exportImage()">
+                    <span id="png" class="icon-image4"
+                          title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
+                    {{'DASHBOARD.EXPORT_PNG'|translate}}
+                </div>
+            </div>  
+        </div>
     </div>
 </div>
 
@@ -59,11 +75,9 @@
      ng-show="options.filterConfigOpen">
     <div class="viewer-filter-config-header">
         <span class="viewer-filter-config-title" translate>DASHBOARD.FILTER.SELECT_FILTER</span>
-<!--        <span class="icon-cake2" ng-click="options.filterConfigOpen=false"
-              title="{{'DASHBOARD.FILTER.APPLY'|translate}}"></span>-->
         <span class="icon-checkmark3" ng-click="getAnalysisResult()"
               title="{{'DASHBOARD.FILTER.APPLY'|translate}}"></span>
-        <span class="icon-cancel3" ng-click="options.filterConfigOpen=false"
+        <span class="icon-cancel3" ng-click="options.filterConfigOpen = false"
               title="{{'DASHBOARD.FILTER.CLOSE'|translate}}"></span>
     </div>
     <div class="viewer-filter-config-content">
