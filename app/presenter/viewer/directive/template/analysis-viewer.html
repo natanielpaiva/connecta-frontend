@@ -4,9 +4,11 @@
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
         <span class="drill icon-select-arrows" ng-click="options.isDrilling = !options.isDrilling"
-              ng-class="{active:options.isDrilling}" title="{{'DASHBOARD.ACTIVATE_DRILL'|translate}}"></span>
+              ng-class="{active:options.isDrilling}" title="{{'DASHBOARD.ACTIVATE_DRILL'|translate}}"
+              ng-if="model.analysis.hasDrill"></span>
         <span class="filter icon-filter2" ng-click="options.filterConfigOpen = true"
               title="{{'DASHBOARD.OPEN_FILTER'|translate}}"
+              ng-if="(model.analysisViewerColumns| filter:{columnType:'FILTER'}).length"
               ng-class="{
                   active:options.filterConfigOpen
                   }"></span>
@@ -99,8 +101,12 @@
                      ng-class="{opened:filter.optionsVisible}">
                     <span class="icon-keyboard-arrow-down"></span>
                 </div>
-                <div class="viewer-filter-config-type-options" ng-show="filter.optionsVisible">
-                    <div ng-repeat="operator in m2a(filterOperators)| orderBy:'order'"
+                <div ng-init="openFilterOptionsClass='.connecta-viewer-'+$parent.$parent.uuid+' .viewer-filter-config-type-arrow:eq('+$index+')'"
+                     class="connecta-dropdown viewer-filter-config-type-options"
+                     ng-show="filter.optionsVisible" click-out="filter.optionsVisible=false"
+                     click-out-exceptions="[openFilterOptionsClass]">
+                    <div class="connecta-dropdown-item"
+                         ng-repeat="operator in m2a(filterOperators)| orderBy:'order'"
                          ng-click="filter.type = operator.id; filter.optionsVisible = false"
                          ng-class="{active:filter.type == operator.id}">
                         <span class="{{operator.icon}}"></span>

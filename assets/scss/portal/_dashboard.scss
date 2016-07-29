@@ -951,53 +951,7 @@ viewer {
                     }
                     .viewer-filter-config-type-options {
                         font-size:1.2em;
-                        position:absolute;
-                        top:2.25em;
-                        left:50%;
-                        transform:translateX(-42.5%);
-                        border-radius:0.25em;
-                        background-color:$white;
                         width:14em;
-                        border:solid 0.1em $darkerWhite;
-                        z-index:1;
-                        padding:0.5em;
-
-                        > div {
-                            line-height:1.75em;
-                            padding:0 0.5em;
-                            cursor:pointer;
-                            user-select:none;
-                            border-radius:0.15em;
-
-                            &:hover {
-                                background-color:$backgroundGray;
-                            }
-
-                            &.active {
-                                background-color:$presenterBlue;
-                                color:$white;
-                                &:hover {
-                                    background-color:darken($presenterBlue,5%);
-                                }
-                            }
-                        }
-
-                        &:after {
-                            height:0;
-                            width:0;
-                            content:' ';
-                            display:block;
-                            position:absolute;
-                            top:-0.45em;
-                            left:50%;
-                            transform:translateX(-50%);
-
-                            border-style:solid;
-                            border-width:0.5em;
-                            border-color:transparent;
-                            border-bottom-color:$white;
-                            border-top-width:0;
-                        }
                     }
 
                 }

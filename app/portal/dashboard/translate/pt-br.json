@@ -43,6 +43,7 @@
             "START": "Início",
             "END": "Fim",
             "APPLY": "Aplicar configurações de filtro",
+            "CLOSE": "Fechar configurações de filtro",
             "TYPE": {
                 "TYPE": "Alterar o tipo do filtro",
                 
