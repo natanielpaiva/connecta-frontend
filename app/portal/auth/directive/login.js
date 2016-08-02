@@ -8,14 +8,14 @@ define([
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, LoginService, UserService, $location, notify, DomainService, $translate) { // FacebookService, GPlusService,
+            controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate) { // FacebookService, GPlusService,
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.logged = false;
                 $scope.sections = {
                     login: "login",
                     form: "form",
-                    domain : "domain"
+                    domain: "domain"
                 };
                 $scope.currentSection = $scope.sections.login;
 
@@ -32,16 +32,17 @@ define([
 //                };
 
                 $scope.submit = function () {
-                    LoginService.doLogin($scope.credentials).then(function(response){
-                      $scope.loadDomains($scope.credentials.username);
-                      $scope.setSection('domain');
-                    }, function(){
-                            notify.warning("USER.VALIDATION.USER_OR_PASS_INVALID");
+                    LoginService.doLogin($scope.credentials).then(function (response) {
+                        $scope.loadDomains($scope.credentials.username);
+                        $scope.setSection('domain');
+                    }, function () {
+                        notify.warning("USER.VALIDATION.USER_OR_PASS_INVALID");
                     });
                 };
 
-                $scope.selectDomain = function(domain){
+                $scope.selectDomain = function (domain) {
                     LoginService.selectDomain(domain);
+                    $route.reload();
                 };
 
                 $scope.onFileSelected = function (files, ev, rejFiles) {
@@ -98,7 +99,7 @@ define([
                     UserService.save($scope.user, $scope.fileImage).then(function (response) {
                         LoginService.setAuthenticatedUser(response);
                         $location.path('/');
-                    }, function(response){
+                    }, function (response) {
                         notify.error(response.data);
                     });
                 };
@@ -124,11 +125,10 @@ define([
 
                 $scope.loadDomains = function (username) {
                     //getUserDomains
-                    DomainService.getDomainsByUser(username).then(function(response){
+                    DomainService.getDomainsByUser(username).then(function (response) {
                         $scope.domains = response.data;
                     });
                 };
-
             }
         };
     });

@@ -238,22 +238,22 @@
 }
 
 .dashboard-view-page {
+    @include clearfix;
     @extend .image-on-background;
 
     background-attachment: fixed;
-    background-color: #fafafa;
+    background-color: #fafafa; // de belém
     margin:0;
     width:100%;
     padding:1em;
     padding-top:6em;
-    @include clearfix;
 
     $defaultAnimationDuration:$defaultAnimationDuration*2;
 
     .dashboard-header {
+        @include clearfix;
         background-color:$black;
-        width:60em;
-        max-width:75%;
+        width:75%;
         position:fixed;
         top:0;
         left:0;
@@ -264,7 +264,6 @@
         float:left;
         display:block;
         box-shadow: 0 0 1em $gray;
-        @include clearfix;
 
         transition:width ease $defaultAnimationDuration,
             background-color $defaultAnimationDuration ease,
@@ -275,7 +274,7 @@
             display:block;
             position:absolute;
             top:0;
-            right:-4.49em;
+            right:-58px;
             border-style: solid;
             border-width: 2.275em;
             border-color:$black transparent transparent $black;
@@ -338,18 +337,15 @@
         h1 {
             font-size: 1.4em;
             font-weight: 500;
-            float:left;
             height:3em;
             line-height:3em;
             padding:0 0 0 0.5em;
-            margin:0;
-            width: 25em;
             text-align: center;
             @include clipped-text;
         }
         .dashboard-view-controls {
             float:right;
-            width:13em;
+            width: auto;
             line-height:4.5em;
             height:4.5em;
             text-align: right;
@@ -364,11 +360,8 @@
                 position:relative;
                 text-align: center;
 
-                .icon-rotate-90 {
-                    position:absolute;
-                    top:50%;
-                    left:0;
-                    transform: rotate(90deg) translate(-57%, -40%);
+                .icon-expand {
+                    font-weight:600;
                 }
             }
         }
@@ -480,11 +473,17 @@
         }
     }
     .dashboard-item {
+        /*z-index:0 !important;*/
         @extend .image-on-background;
-        &.gridster-item {
-            overflow:hidden;
+    }
+    
+    [gridster] {
+        z-index:0 !important;
+        
+        [gridster-item] {
         }
     }
+    
     .gridster-preview-holder {
         &.ng-enter, &.ng-leave {
             background-color:$darkerWhite !important;
@@ -530,6 +529,80 @@
     // Widgets
     .redactor-editor {
         padding:5px !important;
+    }
+
+    .print{
+        display: none;
+    }
+}
+
+@media print {
+    body {
+        margin:0;
+        padding:0;
+    }
+    .dashboard-view-page{
+        margin:0;
+        padding:0;
+        
+        .no-print{
+            display: none;
+        }
+        .print{
+            display: block;
+        }
+        .dashboard-header-print {
+            $headerPrintSize:60px;
+            display:block;
+            width:100%;
+            text-align:left;
+            margin:0;
+            padding:0;
+            margin-bottom:2em;
+            @include clearfix;
+            
+            svg {
+                float:left;
+                height:$headerPrintSize;
+                width:$headerPrintSize;
+                margin:0;
+                padding:0;
+            }
+            h1 {
+                margin:0;
+                padding:0;
+                float:left;
+                width:auto;
+                color:$black;
+                height:$headerPrintSize;
+                line-height:$headerPrintSize;
+                font-size:$headerPrintSize*0.5;
+                font-weight:bold;
+            }
+        }
+        
+        .dashboard-section {
+            h2 {
+                font-weight:normal;
+                border-left-width: 0.1em;
+            }
+        }
+        
+        .dashboard-header {
+            display:none;
+        }
+        viewer {
+            display: block;
+            page-break-inside: avoid;
+            &:hover:not(.edit) {
+                border:none;
+            }
+            .viewer-header {
+                .controls {
+                    display: none;
+                }
+            }
+        }
     }
 }
 
@@ -642,15 +715,19 @@
 }
 
 viewer {
-    z-index: 0;
     @include div-block();
+    z-index: 0 !important;
+    
     [ng-switch] {
         @include div-block();
-        z-index: 0;
+        z-index: 0 !important;
 
         map-viewer {
-            z-index: 0;
+            z-index: 0 !important;
             @include div-block();
+        }
+        analysis-viewer {
+            z-index:0 !important;
         }
     }
 
@@ -662,8 +739,6 @@ viewer {
         border:solid 0.1em darken($darkWhite,10%);
 
         .viewer-header {
-            /*border-bottom: solid 0.2em darken($darkWhite,10%);*/
-
             .controls {
                 opacity:1;
             }
@@ -673,6 +748,7 @@ viewer {
     .viewer-header {
         @include clearfix;
         border-bottom: solid 0.2em $presenterBlue;
+        
         h3 {
             font-size: 1.2em;
             font-weight: normal;
@@ -680,18 +756,33 @@ viewer {
             float:left;
         }
         .controls {
+            @include clearfix;
             opacity:0;
             margin:0;
             padding:0;
             float:right;
             cursor:pointer;
-            @include clearfix;
-            > span {
+            
+            .other-options {
+                @include clearfix;
+                position:relative;
+                margin:0;
+                padding:0;
+                float:left;
+                height:auto;
+                width:auto;
+            }
+            
+            .connecta-dropdown {
+                width:10em;
+            }
+            
+            > span, .other-options > span {
                 font-size: 1.5em;
                 display:block;
                 float:left;
                 text-align:center;
-                color:darken($darkWhite,10%);
+                color:darken($darkWhite, 10%);
                 width:1.1em;
                 margin:0;
                 padding:0;
@@ -709,7 +800,7 @@ viewer {
     top:0;
     display:none;
     font-size:0.85em;
-
+    
     &.viewer-filter-active {
         border-radius:0.5em;
         display:block;
@@ -721,8 +812,9 @@ viewer {
         top:3.5em;
         right:0.65em;
         box-shadow:0 0.25em 2em -0.5em $gray;
+        z-index:1 !important;
 
-        &:before {
+        &:after {
             content:' ';
             display:block;
             border-style:solid;
@@ -732,7 +824,7 @@ viewer {
             border-bottom-color: $lighterGray;
             position:absolute;
             top:-0.5em;
-            right:1em;
+            right:3em;
         }
 
         .viewer-filter-config-header {
@@ -747,7 +839,7 @@ viewer {
             border-bottom:solid 0.1em $darkerWhite;
 
             .viewer-filter-config-title {
-                
+
             }
 
             [class*="icon-"] {
@@ -781,10 +873,10 @@ viewer {
                 &:last-of-type {
                     margin:0;
                 }
-                
+
                 .viewer-filter-config-label,
-                    .viewer-filter-config-type,
-                    .viewer-filter-config-value {
+                .viewer-filter-config-type,
+                .viewer-filter-config-value {
                     float:left;
                     display:block;
                     margin:0;
@@ -815,11 +907,11 @@ viewer {
                         border-top-left-radius:0.15em;
                         border-bottom-left-radius:0.15em;
                         margin: 0 auto;
-                        
+
                         &:hover {
                             background-color:$darkWhite;
                         }
-                        
+
                         span {
                             color:$lighterGray;
                             font-size:2em;
@@ -838,9 +930,9 @@ viewer {
                         transform:translateX(0.5px);
                         text-align:center;
                         cursor:pointer;
-                        
+
                         color:$lighterGray;
-                        
+
                         &:hover, &.opened {
                             background-color:$darkWhite;
                         }
@@ -851,7 +943,7 @@ viewer {
                             span {
                                 color:darken($white, 5%);
                             }
-                            
+
                             &:hover, &.opened {
                                 background-color:lighten($presenterBlue, 5%);
                             }
@@ -859,59 +951,13 @@ viewer {
                     }
                     .viewer-filter-config-type-options {
                         font-size:1.2em;
-                        position:absolute;
-                        top:2.25em;
-                        left:50%;
-                        transform:translateX(-42.5%);
-                        border-radius:0.25em;
-                        background-color:$white;
                         width:14em;
-                        border:solid 0.1em $darkerWhite;
-                        z-index:1;
-                        padding:0.5em;
-                        
-                        > div {
-                            line-height:1.75em;
-                            padding:0 0.5em;
-                            cursor:pointer;
-                            user-select:none;
-                            border-radius:0.15em;
-                            
-                            &:hover {
-                                background-color:$backgroundGray;
-                            }
-                            
-                            &.active {
-                                background-color:$presenterBlue;
-                                color:$white;
-                                &:hover {
-                                    background-color:darken($presenterBlue,5%);
-                                }
-                            }
-                        }
-                        
-                        &:before {
-                            height:0;
-                            width:0;
-                            content:' ';
-                            display:block;
-                            position:absolute;
-                            top:-0.45em;
-                            left:50%;
-                            transform:translateX(-50%);
-                            
-                            border-style:solid;
-                            border-width:0.5em;
-                            border-color:transparent;
-                            border-bottom-color:$white;
-                            border-top-width:0;
-                        }
                     }
-                    
+
                 }
                 .viewer-filter-config-value {
                     width:15.8em;
-                    
+
                     .viewer-filter-config-value-between {
                         @include clearfix;
                         input {

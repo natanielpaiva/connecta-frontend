@@ -16,32 +16,22 @@
     </div>
 </div>
 
-<!--<div class="row" >
-   <div class="col-xs-6 form-group">
-        <label for="typeCSV" translate>ANALYSIS.CSV_TYPE</label>
-        <select class="form-control" ng-model="analysis.csvType" ng-options="item.value as item.name for item in csvType">
-            <option value="">Selecione</option>
-        </select>
-        <div ng-show="formulario.typeCSV.$touched" ng-messages="formulario.typeCSV.$error"
-             ng-messages-include="portal-error-messages" ></div>
-    </div>
-</div>-->
-
-<!--<div class="row" ng-if="analysis.csvType === 'file'" >-->
-<!--<div class="row" ng-if="analysis.csvType === 'text'">-->
-<div class="row" >
+<div class="row">
     <div class="col-sm-8 form-group">
-        <label for="textCSV" translate>ANALYSIS.CSV_TEXT</label>
-        <textarea class="form-control" rows="4"
-                        ng-model="analysis.binaryFile" required></textarea>
+        <label for="textCSV" class="required" translate>ANALYSIS.CSV_TEXT</label>
+        <textarea class="form-control" rows="4" ng-model="analysis.binaryFile" required></textarea>
     </div>
-    <div class="col-sm-4 form-group">
-        <label for="description" class="required" translate>ANALYSIS.CSV_FILE</label>
-        <input type="file" ng-model="csv.file" file-model="csv.file"/>
+    <div class="col-sm-4 form-group analysis-csv-file">
+        <label for="csv-file" translate>ANALYSIS.CSV_FILE</label>
+        <input type="file" id="csv-file" ng-model="csv.file" file-model="csv.file"/>
     </div>
 </div>
 
-<button type="button" class="btn" ng-click="getDataCsv()" translate>ANALYSIS.PREVIEW</button>
+<div class="text-right">
+    <button type="button" class="btn btn-sm btn-default" ng-click="getDataCsv()" translate>
+        ANALYSIS.PREVIEW
+    </button>
+</div>
 
 <div class="row margin-top-single" style="overflow: scroll" ng-if="responseCSV">
     <div class="col-md-12">
@@ -65,23 +55,3 @@
              ng-messages-include="portal-error-messages" ></div>
     </div>
 </div>
-
-
-<!--<div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="dropzone" ng-file-drop ng-file-select
-                               ng-accept="'.jpeg,.jpg,.png'"
-                               ng-file-change="fileDropped($files, item)"
-                               drag-over-class="{accept:'accept', reject:'reject'}">
-                            <translate ng-if="!dashboard.backgroundImage">DASHBOARD.BACKGROUND_IMAGE</translate>
-                            <img ng-if="dashboard.backgroundImage"
-                                ng-src="{{dashboard.backgroundImage| dataUri }}" />
-                        </label>
-                        <button class="btn btn-icon-only remove-item"
-                            ng-if="!!dashboard.backgroundImage"
-                            ng-click="dashboard.backgroundImage=null"
-                            title="{{'LAYOUT.REMOVE'|translate}}">&times;</button>
-                    </div>
-                </div>
-            </div>-->

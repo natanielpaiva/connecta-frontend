@@ -11,7 +11,7 @@ require.config({
         'angular-resource': '../bower_components/angular-resource/angular-resource.min',
         'angular-ui-bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-ng-table': '../bower_components/ng-table/ng-table.min',
-        'angular-facebook': '../bower_components/angular-facebook/lib/angular-facebook',
+//        'angular-facebook': '../bower_components/angular-facebook/lib/angular-facebook',
         'portal': 'portal',
         'collector': 'collector',
         'speaknow': 'speaknow',
@@ -56,9 +56,9 @@ require.config({
         'bower_components/angular-translate/angular-translate.min': {
             deps: ['angular']
         },
-        'bower_components/angular-facebook/lib/angular-facebook': {
-            deps: ['angular']
-        },
+//        'bower_components/angular-facebook/lib/angular-facebook': {
+//            deps: ['angular']
+//        },
         'bower_components/angular-scroll/angular-scroll.min': {
             deps: ['angular']
         },
@@ -104,7 +104,6 @@ require.config({
         'bower_components/html2canvas/build': {
             exports: 'Html2canvas'
         },
-
         'bower_components/amcharts/dist/amcharts/themes/black': {
             deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
             exports: 'AmCharts.themes.black'
@@ -149,7 +148,7 @@ require.config({
             deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
             exports: 'AmCharts.AmXYChart'
         },
-        'bower_components/angular-amchart/src/amchart': {
+        'bower_components/angular-amchart-directive/angular-amchart-directive': {
             deps: ['angular',
                 'bower_components/amcharts/dist/amcharts/amcharts',
                 'bower_components/amcharts/dist/amcharts/pie',

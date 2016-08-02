@@ -3,7 +3,7 @@
         <h3 translate>ANALYSIS.REGISTER_ANALYSIS</h3>
     </div>
 </div>
-<form novalidate name="formulario" ng-submit="submit()">
+<form novalidate name="formulario" ng-submit="submit()" class="analysis-form">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -35,11 +35,9 @@
              ng-controller="subform.controller"></div>
     </div>
 
-    <!--DescriÃ§Ã£o das colunas-->
     <h4 translate>ANALYSIS.DESCRIPTION_OF_COLUMNS</h4>
-    <div class="row"  >
+    <div class="row">
         <div class="col-md-12" >
-            <!--style="height:250px; background-color:#F2F2F2; overflow:auto"-->
             <div class="clearfix well" > 
                 <div ng-repeat="columns in analysis.analysisColumns" >
                     <div class="col-md-5 form-group">
@@ -59,17 +57,105 @@
         </div>
     </div>
 
+    <div class="analysis-relations">
+        <h4>
+            {{'ANALYSIS.RELATIONS.RELATIONS'|translate}}
+<!--            <button class="auto-detect btn btn-default btn-sm pull-right"
+                    type="button" translate ng-click="autosuggest()">
+                ANALYSIS.RELATIONS.DETECT
+            </button>-->
+        </h4>
+        <div class="relations">
+            <div class="analysis-relation am-fade-and-slide-left"
+                 ng-repeat="($index, relation) in analysis.analysisRelations">
+                <div class="left-analysis">
+                    <div class="left-analysis-name" title="{{analysis.name}}">
+                        <span class="icon-analysis"></span>
+                        {{analysis.name||'('+('ANALYSIS.NEW_ANALYSIS'|translate)+')'}}
+                    </div>
+                    <div class="left-analysis-column">
+                        <!--Trocar pelo tipo da coluna assim que existir a funcionalidade-->
+                        <span class="column-type type-text">Aa</span>
+                        <select ng-model="relation.leftAnalysisColumn"
+                            ng-show="analysis.analysisColumns.length"
+                            ng-options="column as column.label for column in analysis.analysisColumns track by column.id">
+                        </select>
+                        <span class="no-columns" translate
+                              ng-show="!analysis.analysisColumns.length">
+                            ANALYSIS.RELATIONS.NO_COLUMNS_YET
+                        </span>
+                    </div>
+                </div>
+                <div class="right-analysis">
+                    <div class="right-analysis-column">
+                        <span class="column-type type-text">Aa</span>
+                        <select ng-model="relation.rightAnalysisColumn"
+                            ng-options="column as column.name for column in relation.rightAnalysis.analysisColumns track by column.id"
+                            ng-show="relation.rightAnalysis.analysisColumns.length || !!relation.rightAnalysisColumn">
+                        </select>
+                        <span class="select-right-analysis" translate
+                              ng-show="!relation.rightAnalysis.analysisColumns.length && !relation.rightAnalysisColumn">
+                            ANALYSIS.RELATIONS.SELECT_RIGHT_ANALYSIS
+                        </span>
+                    </div>
+                    <div class="right-analysis-name" title="{{relation.rightAnalysis.name}}">
+                        <span class="icon-analysis"></span>
+                        <select ng-model="relation.rightAnalysis" ng-change="getRightAnalysisColumns(relation)"
+                            ng-options="analysis as analysis.name for analysis in otherAnalysis track by analysis.id">
+                        </select>
+                    </div>
+                    <span ng-click="analysis.analysisRelations.splice($index, 1)"
+                          class="icon-action icon-close"></span>
+                </div>
+            </div>
+            <div class="new-relation" ng-click="addRelation()" translate>
+                ANALYSIS.RELATIONS.NEW_RELATION
+            </div>
+            <h4 class="am-fade-and-slide-top" ng-if="analysisRelationSuggestions.length">
+                Suggestions
+            </h4>
+            <div class="analysis-relation-suggestion am-fade-and-slide-left"
+                 ng-repeat="($index, suggestion) in analysisRelationSuggestions">
+                <div class="left-analysis">
+                    <div class="left-analysis-name" title="{{analysis.name}}">
+                        <span class="icon-analysis"></span>
+                        {{analysis.name||'('+('ANALYSIS.NEW_ANALYSIS'|translate)+')'}}
+                    </div>
+                    <div class="left-analysis-column">
+                        <span class="column-type type-text">Aa</span>
+                        {{suggestion.leftAnalysisColumn.label}}
+                    </div>
+                </div>
+                <div class="right-analysis">
+                    <div class="right-analysis-column">
+                        <span class="column-type type-text">Aa</span>
+                        {{suggestion.rightAnalysisColumn.label}}
+                    </div>
+                    <div class="right-analysis-name" title="{{suggestion.rightAnalysis.name}}">
+                        <span class="icon-analysis"></span>
+                        {{suggestion.rightAnalysis.name}}
+                    </div>
+                    <span ng-click="acceptSuggestion($index, suggestion)"
+                          class="icon-action icon-checkmark3"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="configure-drill">
         <uib-accordion close-others="true">
-            <uib-accordion-group> 
+            <uib-accordion-group is-open="status.open">
                 <uib-accordion-heading>
                     <span translate>VIEWER.SETTINGS_ADVANCED</span>
-                    <i ng-click="changeStatus()" class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
-                    </i>
+                    <span ng-click="changeStatus()" class="pull-right glyphicon" ng-class="{
+                        'icon-chevron-down': status.open,
+                        'icon-chevron-right': !status.open
+                    }">
+                    </span>
                 </uib-accordion-heading>
                 <div class="row">
                     <div class="col-md-6">
-                        <div  translate>VIEWER.DRAG_HERE</div>
+                        <div translate>ANALYSIS.DRILL_SEQUENCE</div>
                         <div class="analysis-drag-here">
                             <ul dnd-list="analysisColumnsDrill" 
                                 ng-class="{
@@ -80,26 +166,22 @@
                                     dnd-moved="analysisColumnsDrill.splice($index, 1)">
                                     {{column.label}}
                                     <span class="icon-close" ng-click="analysisColumnsDrill.splice($index, 1)"></span>
-                                    <div class="icon-arrow-long-down"></div>
                                 </li>
-                                <li class="animate-repeat" ng-if="results.length === 0">
-                                    {{'LAYOUT.NO_RESULTS'| translate}}
-                                </li>
+                                <div class="drag-here-text" translate
+                                     ng-if="!analysisColumnsDrill.length">VIEWER.DRAG_HERE</div>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div  translate>ANALYSIS.COLUMNS</div>
-                        <!--<div  translate>VIEWER.DRAG_COLUMNS_FOR_SET_FILTERS</div>-->
+                        <div translate>ANALYSIS.COLUMNS</div>
                         <div class="analysis-settings-drill">
                             <ul dnd-list="analysis.analysisColumns"
-                                dnd-effect-allowed="move" dnd-allowed-types="[]"
+                                dnd-effect-allowed="copy" dnd-allowed-types="[]"
                                  ng-class="{
                                     'has-item':!!analysis.analysisColumns.length
                                 }">
                                 <li ng-repeat="column in analysis.analysisColumns" 
-                                    dnd-draggable="column" 
-                                    >
+                                    dnd-draggable="column">
                                     {{column.label}}
                                 </li>
                                 <li class="animate-repeat" ng-if="results.length === 0">
@@ -132,7 +214,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="attributeTypes" translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
+                                <label translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
                                 <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
                                         ng-model="$parent.$parent.$item.attributeType" class="form-control" >
                                     <option value="" translate>LAYOUT.SELECT</option>
@@ -149,9 +231,8 @@
 
     <div class="row" >
         <div class="col-md-12 text-right">
-            <a href="#/presenter/analysis"
-               class="btn btn-default" translate>
-                LAYOUT.CANCEL
+            <a href="#/presenter/analysis" class="btn btn-default" translate>
+                LAYOUT.BACK
             </a>
             <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
                 LAYOUT.SAVE

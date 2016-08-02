@@ -1,51 +1,64 @@
 <div class="viewer-header" ng-if="!edit">
     <h3>{{model.name}}</h3>
     <div class="controls">
-        <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder>0"
+        <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
-        <span class="drill icon-select-arrows" ng-click="options.isDrilling=!options.isDrilling"
-              ng-class="{active:options.isDrilling}" title="{{'DASHBOARD.ACTIVATE_DRILL'|translate}}"></span>
-        <span class="filter icon-filter2" ng-click="options.filterConfigOpen = !options.filterConfigOpen"
+        <span class="drill icon-select-arrows" ng-click="options.isDrilling = !options.isDrilling"
+              ng-class="{active:options.isDrilling}" title="{{'DASHBOARD.ACTIVATE_DRILL'|translate}}"
+              ng-if="model.analysis.hasDrill"></span>
+        <span class="filter icon-filter2" ng-click="options.filterConfigOpen = true"
               title="{{'DASHBOARD.OPEN_FILTER'|translate}}"
+              ng-if="(model.analysisViewerColumns| filter:{columnType:'FILTER'}).length"
               ng-class="{
                   active:options.filterConfigOpen
-              }"></span>
+                  }"></span>
+<!--    Feio demais essa classe com uuid, mas se não tiver não tem como distinguir
+        se o click fora é nesse visualizador dentro do dashboard ou em qualquer
+        outro, se tirar, só o primeiro dropdown do dashboard abre. -->
+        <div ng-init="openOptionsClass='.connecta-viewer-'+$parent.$parent.uuid+' .icon-dots-three-vertical'"
+            class="other-options" ng-click="options.otherOptionsOpen = true">
+            <span class="icon-dots-three-vertical"></span>
+            <div class="connecta-dropdown" ng-if="options.otherOptionsOpen"
+                 click-out="options.otherOptionsOpen=false"
+                 click-out-exceptions="[openOptionsClass]">
+                <div class="connecta-dropdown-item" ng-click="exportCsv()">
+                    <span class="icon-spread-sheet" 
+                          title="{{'DASHBOARD.EXPORT_CSV'|translate}}"></span>
+                    {{'DASHBOARD.EXPORT_CSV'|translate}}
+                </div>
+                <div class="connecta-dropdown-item" ng-click="model.exportImage()">
+                    <span id="png" class="icon-image4"
+                          title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
+                    {{'DASHBOARD.EXPORT_PNG'|translate}}
+                </div>
+            </div>  
+        </div>
     </div>
 </div>
-
-<!--<div ng-repeat="drill in drillLevels track by $index" class="inline-block">
-    <div ng-if="drill.filterDrillValue">
-        <span ng-if="$index > 0">-></span>
-        <span>{{drill.label}} : {{drill.filterDrillValue}}</span>
-    </div>
-</div>-->
 
 <div class="drill-breadcrumb" ng-if="notEmpty().length">
     <div class="drill-breadcrumb-item drill-breadcrumb-item-home">
-        <span class="fa fa-home"></span>
+        <span class="fa fa-home" ng-click="drillUpFromBreadCrumb(0)"></span>
     </div>
-    <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index" 
-         title="{{drill.label}}: {{drill.filterDrillValue}}">
+    <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index"
+         title="{{drill.label}}: {{drill.filterDrillValue}}" ng-click="drillUpFromBreadCrumb($index + 1)">
         {{drill.filterDrillValue}}
     </div>
-<!--    <div class="breadcrumb-item">Brazil</div>
-    <div class="breadcrumb-item">Distrito Federal</div>
-    <div class="breadcrumb-item">Restaurante</div>
-    <div class="breadcrumb-item">Vinicius Pires</div>-->
 </div>
 
 <amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration" return-chart="!edit"></amchart>
-<div  ng-if="model.configuration.type === 'table'">
+
+<div ng-if="model.configuration.type === 'table'">
     <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
         <thead>
-            <tr dnd-list="model.metrics" dnd-drop="transformColumnDrop(item, 'METRIC')" class="row">
+            <tr dnd-list="model.columns" dnd-drop="transformColumnDrop(item, 'COLUMN')" class="row">
                 <th class="text-center" ng-if="columnExample === '' && model.configuration.type === 'table'" translate>VIEWER.DRAG_HERE</th>
-                <th dnd-draggable="n" dnd-moved="model.metrics.splice($index, 1)"
-                    ng-repeat="n in model.analysisViewerColumns" class="text-center"
-                    ng-if="columnExample !== '' && n.columnType === 'METRIC'">
+                <th dnd-draggable="n" dnd-moved="model.columns.splice($index, 1)"
+                    ng-repeat="n in model.columns" class="text-center"
+                    ng-if="columnExample !== '' && n.columnType === 'COLUMN'">
 
                     {{n.analysisColumn.label| translate}}
-                    <span ng-if="edit" class="icon-close" ng-click="model.metrics.splice($index, 1)"></span>
+                    <span ng-if="edit" class="icon-close" ng-click="model.columns.splice($index, 1)"></span>
                 </th>
             </tr>
         </thead>
@@ -59,14 +72,18 @@
     </table>
 </div>
 
-<div class="viewer-filter-config" ng-class="{'viewer-filter-active':options.filterConfigOpen}">
+<!--click-out="options.filterConfigOpen=false" click-out-exceptions="['.filter']"-->
+<div class="viewer-filter-config" ng-class="{'viewer-filter-active':options.filterConfigOpen}"
+     ng-show="options.filterConfigOpen">
     <div class="viewer-filter-config-header">
         <span class="viewer-filter-config-title" translate>DASHBOARD.FILTER.SELECT_FILTER</span>
         <span class="icon-checkmark3" ng-click="getAnalysisResult()"
               title="{{'DASHBOARD.FILTER.APPLY'|translate}}"></span>
+        <span class="icon-cancel3" ng-click="options.filterConfigOpen = false"
+              title="{{'DASHBOARD.FILTER.CLOSE'|translate}}"></span>
     </div>
     <div class="viewer-filter-config-content">
-        <div ng-repeat="filter in model.analysisViewerColumns|filter:{columnType:'FILTER'}|orderBy:'analysisColumn.label' track by $index">
+        <div ng-repeat="filter in model.analysisViewerColumns| filter:{columnType:'FILTER'} | orderBy:'analysisColumn.label' track by $index">
             <div class="viewer-filter-config-label"
                  title="{{filter.analysisColumn.label}}">
                 {{filter.analysisColumn.label}}
@@ -80,16 +97,20 @@
                 </div>
                 <div class="viewer-filter-config-type-arrow"
                      title="{{'DASHBOARD.FILTER.TYPE'|translate}}"
-                     ng-click="filter.optionsVisible=!filter.optionsVisible"
+                     ng-click="filter.optionsVisible = !filter.optionsVisible"
                      ng-class="{opened:filter.optionsVisible}">
                     <span class="icon-keyboard-arrow-down"></span>
                 </div>
-                <div class="viewer-filter-config-type-options" ng-if="filter.optionsVisible">
-                    <div ng-repeat="operator in m2a(filterOperators) | orderBy:'order'"
-                         ng-click="filter.type=operator.id;filter.optionsVisible=false"
-                         ng-class="{active:filter.type==operator.id}">
+                <div ng-init="openFilterOptionsClass='.connecta-viewer-'+$parent.$parent.uuid+' .viewer-filter-config-type-arrow:eq('+$index+')'"
+                     class="connecta-dropdown viewer-filter-config-type-options"
+                     ng-show="filter.optionsVisible" click-out="filter.optionsVisible=false"
+                     click-out-exceptions="[openFilterOptionsClass]">
+                    <div class="connecta-dropdown-item"
+                         ng-repeat="operator in m2a(filterOperators)| orderBy:'order'"
+                         ng-click="filter.type = operator.id; filter.optionsVisible = false"
+                         ng-class="{active:filter.type == operator.id}">
                         <span class="{{operator.icon}}"></span>
-                        {{operator.name | translate}}
+                        {{operator.name| translate}}
                     </div>
                 </div>
             </div>

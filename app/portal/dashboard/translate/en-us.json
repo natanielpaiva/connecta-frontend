@@ -26,8 +26,12 @@
         "SLIDE_RIGHT":"Slide right",
         "SLIDE_LEFT":"Slide left",
         "OPACITY":"Opacity",
+        "DOWNLOAD":"Download",
         "EXPORT":"Export",
+        "EXPORT_CSV":"Export CSV",
+        "EXPORT_PNG":"Export PNG",
         "FULLSCREEN":"Fullscreen",
+        "PRINT":"Print",
         "DRILL_UP":"Generalize (Drill up)",
         "ACTIVATE_DRILL":"Activate detailing (Drill)",
         "OPEN_FILTER":"Open filter settings",
@@ -39,6 +43,7 @@
             "START": "Start",
             "END": "End",
             "APPLY": "Apply filter settings",
+            "CLOSE": "Close filter settings",
             "TYPE": {
                 "TYPE": "Change filter type",
                 

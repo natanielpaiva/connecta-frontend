@@ -10,20 +10,17 @@ define([
                 template: 'app/presenter/datasource/template/_datasource-database.html',
                 icon: 'icon-database2'
             },
-            ENDECA: {
-                name: 'Endeca',
-                template: 'app/presenter/datasource/template/_datasource-endeca.html',
-                icon: 'icon-endeca'
-            },
             HDFS: {
                 name: 'HDFS',
                 template: 'app/presenter/datasource/template/_datasource-hdfs.html',
-                icon: 'icon-hadoop'
+                icon: 'icon-hadoop',
+                disabled: true
             },
             OBIEE: {
                 name: 'OBIEE',
                 template: 'app/presenter/datasource/template/_datasource-obiee.html',
-                icon: 'icon-obiee'
+                icon: 'icon-obiee',
+                disabled: true
             },
             SOLR: {
                 name: 'SOLR',
@@ -33,7 +30,8 @@ define([
             WEBSERVICE: {
                 name: 'WebService',
                 template: 'app/presenter/datasource/template/_datasource-webservice.html',
-                icon: 'icon-webservice' // Capitão Planeta?
+                icon: 'icon-webservice', // Capitão Planeta?
+                disabled: true
             }
         };
 
@@ -48,7 +46,7 @@ define([
                 defaultPort: 1521,
                 hasSid: true
             },
-            POSTGRES: {
+            POSTGRESQL: {
                 name: 'PostgreSQL',
                 defaultPort: 5432,
                 hasSid: true

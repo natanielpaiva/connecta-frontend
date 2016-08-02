@@ -302,24 +302,27 @@ heading {
                                             width: 100%;
                                             height: auto;
                                             padding:0;
+                                            margin:0;
 
                                             & > li {
                                                 float: left;
                                                 width: 100%;
                                                 list-style: none;
+                                                margin:0;
 
                                                 & > a {
                                                     font-size: 0.5em;
                                                     line-height: normal;
                                                     color: $lightBlack;
-                                                    width: 100%;
-                                                    padding: 2%;
+                                                    display:block;
+                                                    padding: 0.25em;
                                                     display: block;
-                                                    margin-left: 1.5em;
-                                                }
-
-                                                & > a.selected {
-                                                    color: blue !important;
+                                                    padding-left: 1.9em;
+                                                    
+                                                    &:hover, &.selected {
+                                                        background-color:$darkWhite;
+                                                        color:$black;
+                                                    }
                                                 }
                                             }
                                         }

@@ -39,7 +39,8 @@
         "ADD_ACC": "Create Account",
         "NO_RESULTS": "No results found",
         "MORE_APPS": "Get more apps",
-        "MORE": "And {{size}} more records..."
+        "MORE": "And {{size}} more records...",
+        "NO_CONNECTION":"Can't connect to server. Check if the requested module is installed or if your network has access to the internet."
     },
     "NOTIFICATION": {
         "NOTIFICATIONS": "Notifications",

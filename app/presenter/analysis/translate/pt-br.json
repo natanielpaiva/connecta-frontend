@@ -16,12 +16,12 @@
         "TABLE": "Tabela",
         "COLUMN": "Coluna",
         "COLUMNS": "Colunas",
-        "DESCRIPTION_OF_COLUMNS": "Descrição das colunas",
+        "DESCRIPTION_OF_COLUMNS": "Colunas",
         "SELECT": "Select",
         "SEPARATOR": "Separator",
         "QUOTE": "Quote",
         "CSV_TYPE": "Tipo CSV",
-        "CSV_FILE": "Ou suba o arquivo CSV",
+        "CSV_FILE": "Ou arraste o CSV pra cá",
         "CSV_TEXT": "Texto CSV",
         "DOMAIN": "Dominio",
         "TYPE_QUERY": "Tipo de Query",
@@ -42,6 +42,7 @@
         "FACET": "Facet",
         "RESPONSE_XML": "Resposta XML",
         "RESULTS_OF_THE_ANALYSIS": "Resultado da Análise",
+        "DRILL_SEQUENCE":"Sequência de Drill (detalhamento)",
         "DATABASE": {
             "REQUEST_TABLE": "Tabela",
             "REQUEST_SQL": "Query personalizada"
@@ -50,6 +51,13 @@
         "SOLR":{
            "QUERY_BUILDER": "Construtor de consulta",
            "TEXT_QUERY": "Consulta de texto"
+        },
+        "RELATIONS": {
+            "RELATIONS":"Análises relacionadas",
+            "DETECT":"Auto-detectar",
+            "NEW_RELATION":"+ Relacionar com outra análise",
+            "SELECT_RIGHT_ANALYSIS":"Selecione a análise da direita",
+            "NO_COLUMNS_YET":"Nenhuma coluna ainda"
         }
     }
 }

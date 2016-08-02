@@ -1,22 +1,24 @@
 <div class="row">
     <div class="col-xs-12 form-group" ng-if="!edit">
-        <label for="requestType" translate>ANALYSIS.SOURCE_OF_DATA</label>
-        <select class="form-control" ng-model="analysis.requestType" ng-options="key as (reqType|translate) for (key, reqType) in requestTypes" ng-change="getSourceOfdata()">
+        <label for="database-request-type" translate>ANALYSIS.SOURCE_OF_DATA</label>
+        <select class="form-control" ng-model="analysis.requestType"
+            ng-options="key as (reqType|translate) for (key, reqType) in requestTypes"
+            ng-change="getSourceOfdata()" id="database-request-type">
         </select>
     </div>
-    </div>
-
-    <div class="col-xs-12 form-group" ng-if="edit">
-        <label for="requestType" translate>ANALYSIS.SOURCE_OF_DATA</label>
-        <input type="text" class="form-control" ng-model="analysis.requestType" disabled> 
-    </div>
 </div>
+<div class="row">
+    <div class="col-xs-12 form-group" ng-if="edit">
+        <label for="database-request-type" translate>ANALYSIS.SOURCE_OF_DATA</label>
+        <input type="text" class="form-control" ng-model="analysis.requestType"
+               id="database-request-type" disabled> 
+    </div>
 </div>
 
 <div class="row" ng-if="analysis.requestType === 'TABLE'">
     <div class="col-xs-12 form-group" ng-if="!edit">
         <label for="table" translate  class="required">ANALYSIS.TABLE</label>
-        <select class="form-control" name="table" ng-model="analysis.selectedTable"  ng-options="item as item.tableName for item in (listTableDatasource | orderBy:'tableName')" required>
+        <select class="form-control" name="table" ng-model="analysis.selectedTable" ng-options="item as item.tableName for item in (listTableDatasource | orderBy:'tableName')" required>
             <option value="">Selecione</option>
         </select>
         <div ng-show="formulario.selectedTable.$touched" ng-messages="formulario.selectedTable.$error"
@@ -27,7 +29,6 @@
         <label for="table" translate>ANALYSIS.TABLE</label>
         <input type="text" class="form-control" ng-model="analysis.table" disabled="disabled"> 
     </div>
-</div>
 </div>
 
 <div class="row" ng-if="analysis.requestType === 'SQL'">

@@ -16,12 +16,12 @@
         "TABLE": "Table",
         "COLUMN": "Column",
         "COLUMNS": "Columns",
-        "DESCRIPTION_OF_COLUMNS": "Description of Columns",
+        "DESCRIPTION_OF_COLUMNS": "Columns",
         "SELECT": "Select",
         "SEPARATOR": "Separator",
         "QUOTE": "Quote",
         "CSV_TYPE": "type CSV",
-        "CSV_FILE": "Or upload the CSV File",
+        "CSV_FILE": "Or drag CSV here",
         "CSV_TEXT": "CSV Text",
         "DOMAIN": "Domain",
         "TYPE_QUERY": "Query type",
@@ -41,6 +41,7 @@
         "FACET": "Facet",
         "RESPONSE_XML": "Response XML",
         "RESULTS_OF_THE_ANALYSIS": "Results of the analysis",
+        "DRILL_SEQUENCE":"Drill (detailing) sequence",
         "DATABASE": {
             "REQUEST_TABLE": "Table",
             "REQUEST_SQL": "Custom query"
@@ -49,7 +50,13 @@
         "SOLR":{
            "CUSTOM_QUERY": "Custom query",
            "TEXT_QUERY": "Text query"
+        },
+        "RELATIONS": {
+            "RELATIONS":"Related analysis",
+            "DETECT":"Auto-detect",
+            "NEW_RELATION":"+ Relate with another analysis",
+            "SELECT_RIGHT_ANALYSIS":"Select right analysis",
+            "NO_COLUMNS_YET":"No columns yet"
         }
-        
     }
 }

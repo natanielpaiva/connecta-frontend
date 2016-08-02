@@ -3,7 +3,7 @@ define([
     'connecta.portal'
 ], function (portal) {
 
-    return portal.lazy.service('DashboardService', function (portalResources, $http, $upload, DomainService) {
+    return portal.lazy.service('DashboardService', function (portalResources, $http, $upload, DomainService, applications, $filter) {
 
         this.save = function (dashboard) {
             var url = portalResources.dashboard;
@@ -50,7 +50,18 @@ define([
 
         this.get = function (id) {
             var url = portalResources.dashboard + '/' + id;
-            return $http.get(url);
+            return $http.get(url).then(function (response) {
+                response.data.sections = $filter('orderBy')(response.data.sections, 'order');
+                angular.forEach(response.data.sections, function (section) {
+                    angular.forEach(section.items, function (item) {
+                        var viewerPath = applications[item.module].host +
+                                applications[item.module].viewerPath;
+                        item.viewerUrl = viewerPath.replace(':id', item.viewer);
+                        delete item.id;
+                    });
+                });
+                return response;
+            });
         };
 
         this.searchViewers = function (term) {

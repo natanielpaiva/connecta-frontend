@@ -26,8 +26,12 @@
         "SLIDE_RIGHT":"Deslizar para direita",
         "SLIDE_LEFT":"Deslizar para esquerda",
         "OPACITY":"Opacidade",
+        "DOWNLOAD":"Baixar",
         "EXPORT":"Exportar",
+        "EXPORT_CSV":"Exportar CSV",
+        "EXPORT_PNG":"Exportar PNG",
         "FULLSCREEN":"Tela cheia",
+        "PRINT":"Imprimir",
         "DRILL_UP":"Generalizar (Drill up)",
         "ACTIVATE_DRILL":"Ativar detalhamento (Drill)",
         "OPEN_FILTER":"Abrir configuração do filtro",
@@ -39,6 +43,7 @@
             "START": "Início",
             "END": "Fim",
             "APPLY": "Aplicar configurações de filtro",
+            "CLOSE": "Fechar configurações de filtro",
             "TYPE": {
                 "TYPE": "Alterar o tipo do filtro",
                 

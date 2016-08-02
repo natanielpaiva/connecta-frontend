@@ -64,7 +64,7 @@ define([
             /**
              * Parâmetros do singleSourceAttributes
              */
-            $scope.typeSingleSource.singleSourceAttributes = [{}];
+            $scope.typeSingleSource.singleSourceAttributes = [];
         }
 
         $scope.fileDropped = function (files) {
