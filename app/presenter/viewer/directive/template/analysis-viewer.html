@@ -18,11 +18,11 @@
         <div ng-init="openOptionsClass='.connecta-viewer-'+$parent.$parent.uuid+' .icon-dots-three-vertical'"
             class="other-options" ng-click="options.otherOptionsOpen = true">
             <span class="icon-dots-three-vertical"></span>
-            <div class="connecta-dropdown" ng-if="options.otherOptionsOpen"
+            <div class="connecta-dropdown" ng-show="options.otherOptionsOpen"
                  click-out="options.otherOptionsOpen=false"
                  click-out-exceptions="[openOptionsClass]">
                 <div class="connecta-dropdown-item" ng-click="exportCsv()">
-                    <span class="icon-spread-sheet" 
+                    <span class="icon-spread-sheet"
                           title="{{'DASHBOARD.EXPORT_CSV'|translate}}"></span>
                     {{'DASHBOARD.EXPORT_CSV'|translate}}
                 </div>
@@ -31,7 +31,7 @@
                           title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
                     {{'DASHBOARD.EXPORT_PNG'|translate}}
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@
 
 <!--click-out="options.filterConfigOpen=false" click-out-exceptions="['.filter']"-->
 <div class="viewer-filter-config" ng-class="{'viewer-filter-active':options.filterConfigOpen}"
-     ng-show="options.filterConfigOpen">
+     ng-if="options.filterConfigOpen">
     <div class="viewer-filter-config-header">
         <span class="viewer-filter-config-title" translate>DASHBOARD.FILTER.SELECT_FILTER</span>
         <span class="icon-checkmark3" ng-click="getAnalysisResult()"
@@ -101,10 +101,9 @@
                      ng-class="{opened:filter.optionsVisible}">
                     <span class="icon-keyboard-arrow-down"></span>
                 </div>
-                <div ng-init="openFilterOptionsClass='.connecta-viewer-'+$parent.$parent.uuid+' .viewer-filter-config-type-arrow:eq('+$index+')'"
-                     class="connecta-dropdown viewer-filter-config-type-options"
+                <div class="connecta-dropdown viewer-filter-config-type-options"
                      ng-show="filter.optionsVisible" click-out="filter.optionsVisible=false"
-                     click-out-exceptions="[openFilterOptionsClass]">
+                     click-out-exceptions="['.connecta-viewer-'+$parent.$parent.$parent.uuid+' .viewer-filter-config-type-arrow:eq('+$index+')']">
                     <div class="connecta-dropdown-item"
                          ng-repeat="operator in m2a(filterOperators)| orderBy:'order'"
                          ng-click="filter.type = operator.id; filter.optionsVisible = false"

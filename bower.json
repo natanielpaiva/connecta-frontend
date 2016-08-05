@@ -1,6 +1,5 @@
 {
   "name": "connecta",
-  "version": "0.8.0",
   "private": true,
   "homepage": "http://innovation.cds.com.br/hotsite/connecta/",
   "dependencies": {
