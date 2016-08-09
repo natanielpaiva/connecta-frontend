@@ -8,7 +8,6 @@
               ng-if="model.analysis.hasDrill"></span>
         <span class="filter icon-filter2" ng-click="options.filterConfigOpen = true"
               title="{{'DASHBOARD.OPEN_FILTER'|translate}}"
-              ng-if="(model.analysisViewerColumns | filter:{columnType:'FILTER'}).length"
               ng-class="{active:options.filterConfigOpen}"></span>
         <!--    Feio demais essa classe com uuid, mas se não tiver não tem como distinguir
                 se o click fora é nesse visualizador dentro do dashboard ou em qualquer

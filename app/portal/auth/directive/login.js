@@ -1,14 +1,17 @@
 define([
     'connecta.portal',
+    'json!package',
     'portal/auth/service/login-service',
 //    'portal/auth/service/facebook-service',
 //    'portal/auth/service/google-plus-service',
     'portal/layout/service/notify'
-], function (portal) {
+], function (portal, package) {
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
             controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate) { // FacebookService, GPlusService,
+                $scope.package = package;
+                
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.logged = false;

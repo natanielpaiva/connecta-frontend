@@ -1,6 +1,7 @@
 /* global require */
 require.config({
     paths: {
+        'package':'../package.json',
         'bower_components': '../bower_components',
         'text': '../bower_components/requirejs-text/text',
         'json': '../bower_components/requirejs-json/json',

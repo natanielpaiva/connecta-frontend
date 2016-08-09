@@ -228,6 +228,10 @@ define([
         var _prepareAnalysisRequest = function(analysisExecuteRequest){
             var analysisExecuteRequestCopy = angular.copy(analysisExecuteRequest);
             
+            if (!analysisExecuteRequestCopy.filters) {
+                analysisExecuteRequestCopy.filters = [];
+            }
+            
             analysisExecuteRequestCopy.filters = analysisExecuteRequestCopy.filters.filter(function(filter){
                 return filter.type && filter.analysisColumn && filter.value;
             }).map(function(filter){

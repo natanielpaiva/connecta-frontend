@@ -1,163 +1,163 @@
 <section ng-show="currentSection === sections.login">
-  <div id="header-login">
-    <div id="logo">
-      <img src="assets/img/logo-connecta-negative.png" alt="logo" id="logo-app-master"/>
-    </div>
-    <div id="version-app">
-      v0.8.0
-    </div>
-  </div>
-  <div id="form-login">
-    <form name="loginForm" ng-submit="submit()">
-      <div class="line-form">
-        <img src="assets/img/icon-user.png" alt="icon">
-        <input type="text" class="field-text" placeholder="{{'AUTH.USER'| translate}}" ng-model="credentials.username" required autofocus/>
-      </div>
-      <div class="line-form">
-        <img src="assets/img/icon-password.png" alt="icon">
-        <input type="password" class="field-text" placeholder="{{'AUTH.PASSWORD'| translate}}" ng-model="credentials.password" required/>
-      </div>
-      <div class="line-form">
-        <button id="btn-login" translate>AUTH.LOGIN</button>
-      </div>
-    </form>
-  </div>
-  <!--    <div id="social-login">
-        <div id="separator-login">
-            <div class="line-separator"><hr /></div>
-            <div class="line-separator-txt">{{'LAYOUT.OR' | translate}}</div>
-            <div class="line-separator"><hr /></div>
+    <div id="header-login">
+        <div id="logo">
+            <img src="assets/img/logo-connecta-negative.png" alt="logo" id="logo-app-master"/>
         </div>
-        <a href class="btn-social btn-facebook"
-           data-ng-click="loginWithFacebook()">
-            <span class="icon-facebook-with-circle"></span>
-            {{'LAYOUT.LOGIN_FACEBOOK' | translate}}
-        </a>
-        <div id="loginGoogle" class="btn-social btn-google" ng-click="loginWithGoogle()" style="cursor: pointer">
-            <span class="icon icon-google-with-circle"></span>
-            {{'LAYOUT.LOGIN_GOOGLE' | translate}}
+        <div id="version-app">
+            {{package.version}}
         </div>
-    </div>-->
-  <!--    <div id="create-account">
-        <a href ng-click="setSection(sections.form)" translate>LAYOUT.ADD_ACC</a>
-    </div>-->
+    </div>
+    <div id="form-login">
+        <form name="loginForm" ng-submit="submit()">
+            <div class="line-form">
+                <img src="assets/img/icon-user.png" alt="icon">
+                <input type="text" class="field-text" placeholder="{{'AUTH.USER'| translate}}" ng-model="credentials.username" required autofocus/>
+            </div>
+            <div class="line-form">
+                <img src="assets/img/icon-password.png" alt="icon">
+                <input type="password" class="field-text" placeholder="{{'AUTH.PASSWORD'| translate}}" ng-model="credentials.password" required/>
+            </div>
+            <div class="line-form">
+                <button id="btn-login" translate>AUTH.LOGIN</button>
+            </div>
+        </form>
+    </div>
+    <!--    <div id="social-login">
+          <div id="separator-login">
+              <div class="line-separator"><hr /></div>
+              <div class="line-separator-txt">{{'LAYOUT.OR' | translate}}</div>
+              <div class="line-separator"><hr /></div>
+          </div>
+          <a href class="btn-social btn-facebook"
+             data-ng-click="loginWithFacebook()">
+              <span class="icon-facebook-with-circle"></span>
+              {{'LAYOUT.LOGIN_FACEBOOK' | translate}}
+          </a>
+          <div id="loginGoogle" class="btn-social btn-google" ng-click="loginWithGoogle()" style="cursor: pointer">
+              <span class="icon icon-google-with-circle"></span>
+              {{'LAYOUT.LOGIN_GOOGLE' | translate}}
+          </div>
+      </div>-->
+    <!--    <div id="create-account">
+          <a href ng-click="setSection(sections.form)" translate>LAYOUT.ADD_ACC</a>
+      </div>-->
 </section>
 
 <div class="domain-list" ng-show="currentSection === sections.domain">
-  <div class="row">
-      <div class="col-md-12">
-          <p>Selecione um domínio para começar:</p>
-      </div>
-  </div>
-
-  <div class="thumbnail-grid row">
-    <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains">
-      <a ng-click="selectDomain(domain)" title="{{domain.name}}">
-        <div class="thumbnail-grid-item-inner">
-          <!-- <img src="assets/img/portal/dashboard-icon.svg" alt=""/> -->
-          <span class="icon-domain"></span>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Selecione um domínio para começar:</p>
         </div>
-        <div class="thumbnail-grid-item-name">
-          {{domain.name}}
-        </div>
-      </a>
     </div>
-  </div>
+
+    <div class="thumbnail-grid row">
+        <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains">
+            <a ng-click="selectDomain(domain)" title="{{domain.name}}">
+                <div class="thumbnail-grid-item-inner">
+                    <!-- <img src="assets/img/portal/dashboard-icon.svg" alt=""/> -->
+                    <span class="icon-domain"></span>
+                </div>
+                <div class="thumbnail-grid-item-name">
+                    {{domain.name}}
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
 
 <div ng-show="currentSection === sections.form" class="create-account-form">
 
-  <div class="navbar-form">
-    <div id="header-login">
-      <div id="logo">
-        <img src="assets/img/logo-connecta-negative.png" alt="logo" id="logo-app-master">
-      </div>
-      <div id="version-app">
-        v0.0.1
-      </div>
-    </div>
-  </div>
-
-  <div class="form-account">
-    <div class="row">
-      <div class="col-md-12">
-        <h3 translate>{{isEditing ? 'USER.EDIT': 'USER.ADD'}}</h3>
-      </div>
+    <div class="navbar-form">
+        <div id="header-login">
+            <div id="logo">
+                <img src="assets/img/logo-connecta-negative.png" alt="logo" id="logo-app-master">
+            </div>
+            <div id="version-app">
+                v0.0.1
+            </div>
+        </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <form novalidate name="user_config_form" ng-submit="submit()">
-          <div class="form-group">
-            <label for="first_name" translate>USER.FIRST_NAME</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" ng-model="user.profile.firstName" required maxlength="100"/>
-            <div ng-show="user_config_form.first_name.$touched" ng-messages="user_config_form.first_name.$error" ng-messages-include="portal-error-messages"></div>
-          </div>
-          <div class="form-group">
-            <label for="last_name" translate>USER.LAST_NAME</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" ng-model="user.profile.lastName" required maxlength="100"/>
-            <div ng-show="user_config_form.last_name.$touched" ng-messages="user_config_form.last_name.$error" ng-messages-include="portal-error-messages"></div>
-          </div>
-
-          <div class="form-group">
-            <label for="email" translate>USER.EMAIL</label>
-            <input type="text" class="form-control" id="email" name="email" ng-model="user.profile.email" required maxlength="100"/>
-            <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error" ng-messages-include="portal-error-messages"></div>
-          </div>
-
-          <div class="form-group">
-            <label for="password" translate>USER.PASSWORD</label>
-            <input type="password" class="form-control" id="password" name="password" ng-model="user.credentials.password" maxlength="20" minlength='8' required/>
-            <div ng-show="user_config_form.password.$touched" ng-messages="user_config_form.password.$error" ng-messages-include="portal-error-messages">
-              <p ng-message="minlength" class="help-block">{{'USER.VALIDATION.SHORT_PASS'| translate}}</p>
+    <div class="form-account">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 translate>{{isEditing ? 'USER.EDIT': 'USER.ADD'}}</h3>
             </div>
-          </div>
+        </div>
 
-          <div class="form-group">
-            <label for="passwordConf" translate>USER.CONFIRM</label>
-            <input type="password" class="form-control" id="confirm" name="confirm" ng-model="confirmPass" required maxlength="100" compare-to="user.credentials.password" ng-model-options="{debounce: 500}"/>
-            <div ng-show="user_config_form.confirm.$touched" ng-messages="user_config_form.confirm.$error" ng-messages-include="portal-error-messages">
-              <p ng-message="compareTo" class="help-block">{{'USER.VALIDATION.COMPARE_PASS'| translate}}</p>
+        <div class="row">
+            <div class="col-md-12">
+                <form novalidate name="user_config_form" ng-submit="submit()">
+                    <div class="form-group">
+                        <label for="first_name" translate>USER.FIRST_NAME</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" ng-model="user.profile.firstName" required maxlength="100"/>
+                        <div ng-show="user_config_form.first_name.$touched" ng-messages="user_config_form.first_name.$error" ng-messages-include="portal-error-messages"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name" translate>USER.LAST_NAME</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" ng-model="user.profile.lastName" required maxlength="100"/>
+                        <div ng-show="user_config_form.last_name.$touched" ng-messages="user_config_form.last_name.$error" ng-messages-include="portal-error-messages"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" translate>USER.EMAIL</label>
+                        <input type="text" class="form-control" id="email" name="email" ng-model="user.profile.email" required maxlength="100"/>
+                        <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error" ng-messages-include="portal-error-messages"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" translate>USER.PASSWORD</label>
+                        <input type="password" class="form-control" id="password" name="password" ng-model="user.credentials.password" maxlength="20" minlength='8' required/>
+                        <div ng-show="user_config_form.password.$touched" ng-messages="user_config_form.password.$error" ng-messages-include="portal-error-messages">
+                            <p ng-message="minlength" class="help-block">{{'USER.VALIDATION.SHORT_PASS'| translate}}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passwordConf" translate>USER.CONFIRM</label>
+                        <input type="password" class="form-control" id="confirm" name="confirm" ng-model="confirmPass" required maxlength="100" compare-to="user.credentials.password" ng-model-options="{debounce: 500}"/>
+                        <div ng-show="user_config_form.confirm.$touched" ng-messages="user_config_form.confirm.$error" ng-messages-include="portal-error-messages">
+                            <p ng-message="compareTo" class="help-block">{{'USER.VALIDATION.COMPARE_PASS'| translate}}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group user-avatar-field">
+                        <label for="image" translate>USER.AVATAR</label>
+                        <div class='user-image-container'>
+                            <div
+                                id="image"
+                                class="well drop-box set-file dropzone user-avatar-dropzone"
+                                ng-file-drop
+                                ng-file-select
+                                ng-multiple="false"
+                                ng-file-change="onFileSelected($files, $event, $rejectedFiles)"
+                                ng-accept="'.jpeg,.jpg,.png'"
+                                ng-model-rejected="rejFiles"
+                                allow-dir="false"
+                                drag-over-class="{accept:'accept', reject:'reject'}">
+
+                                <img class="img-user-quad" ng-if="user.image || userImage || user.avatarUrl" ng-src="{{userImage}}"/>
+                            </div>
+                            <div class='user-avatar-info'>
+                                <span translate>USER.GRAVATAR_TEXT</span>
+                                <div class='btn-container'>
+                                    <button class='btn btn-primary btn-user-info' type='button' ng-file-select ng-multiple="false" ng-file-change="onFileSelected($files, $event, $rejectedFiles)" ng-accept="'.jpeg,.jpg,.png'" ng-model-rejected="rejFiles" allow-dir="false" translate>
+                                        USER.CHOOSE_IMAGE</button>
+                                    <span ng-show='imgName'>{{imgName}}</span>
+                                </div>
+                                <button type='button' class='btn btn-danger btn-user-info' ng-click='removeUserImg()' translate>USER.REMOVE_IMAGE</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" type='button' translate ng-disabled="user_config_form.$invalid" ng-click="createUser()">
+                        LAYOUT.SAVE
+                    </button>
+                    <a ng-click="setSection(sections.login)" class="btn btn-default" translate>
+                        LAYOUT.CANCEL
+                    </a>
+                </form>
             </div>
-          </div>
-
-          <div class="form-group user-avatar-field">
-            <label for="image" translate>USER.AVATAR</label>
-            <div class='user-image-container'>
-              <div
-                id="image"
-                class="well drop-box set-file dropzone user-avatar-dropzone"
-                ng-file-drop
-                ng-file-select
-                ng-multiple="false"
-                ng-file-change="onFileSelected($files, $event, $rejectedFiles)"
-                ng-accept="'.jpeg,.jpg,.png'"
-                ng-model-rejected="rejFiles"
-                allow-dir="false"
-                drag-over-class="{accept:'accept', reject:'reject'}">
-
-                <img class="img-user-quad" ng-if="user.image || userImage || user.avatarUrl" ng-src="{{userImage}}"/>
-              </div>
-              <div class='user-avatar-info'>
-                <span translate>USER.GRAVATAR_TEXT</span>
-                <div class='btn-container'>
-                  <button class='btn btn-primary btn-user-info' type='button' ng-file-select ng-multiple="false" ng-file-change="onFileSelected($files, $event, $rejectedFiles)" ng-accept="'.jpeg,.jpg,.png'" ng-model-rejected="rejFiles" allow-dir="false" translate>
-                    USER.CHOOSE_IMAGE</button>
-                  <span ng-show='imgName'>{{imgName}}</span>
-                </div>
-                <button type='button' class='btn btn-danger btn-user-info' ng-click='removeUserImg()' translate>USER.REMOVE_IMAGE</button>
-              </div>
-            </div>
-          </div>
-
-          <button class="btn btn-primary" type='button' translate ng-disabled="user_config_form.$invalid" ng-click="createUser()">
-            LAYOUT.SAVE
-          </button>
-          <a ng-click="setSection(sections.login)" class="btn btn-default" translate>
-            LAYOUT.CANCEL
-          </a>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
