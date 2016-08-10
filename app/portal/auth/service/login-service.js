@@ -21,8 +21,8 @@ define([
          */
         this.checkAuthentication = function () {
             this.setAuthenticated(
-                    this.isAuthenticated()
-                    );
+                this.isAuthenticated()
+            );
         };
 
         /**
@@ -30,6 +30,14 @@ define([
          * @returns {String}
          */
         this.getAuthenticationToken = function () {
+            return $cookieStore.get('portal.auth.access_token');
+        };
+        
+        /**
+         * Recupera o token da autenticação
+         * @returns {String}
+         */
+        this.setAuthenticationToken = function (token) {
             return $cookieStore.get('portal.auth.access_token');
         };
 
@@ -121,7 +129,7 @@ define([
          * @returns {Promise}
          */
         this.doLogin = function (user) {
-            var data = "username=" + user.username + "&password=" + user.password + "&grant_type=password&scope=read%20write&" +
+            var data = "username=" + user.email + "&password=" + user.password + "&grant_type=password&scope=read%20write&" +
                     "client_secret=secret&client_id=frontend";
 
             var deferred = $q.defer();
@@ -135,6 +143,8 @@ define([
             }).then(function (response) {
                 _userToken.access_token = response.data.access_token;
                 _userToken.refresh_token = response.data.refresh_token;
+                $cookieStore.put('portal.auth.access_token', _userToken.access_token);
+                $cookieStore.put('portal.auth.refresh_token', _userToken.refresh_token);
                 deferred.resolve(response);
             }, function (response) {
                 loginService.setAuthenticated(false);
@@ -144,8 +154,6 @@ define([
         };
 
         this.selectDomain = function (domain) {
-            $cookieStore.put('portal.auth.access_token', _userToken.access_token);
-            $cookieStore.put('portal.auth.refresh_token', _userToken.refresh_token);
             $cookieStore.put('user.domain.name', domain.id);
             loginService.setAuthenticated(true);
         };

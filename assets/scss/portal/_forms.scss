@@ -19,6 +19,45 @@ label {
 
 .form-group {
     margin-bottom: 10px;
+
+    .connecta-inline-edit-input, .connecta-inline-edit-textarea {
+        width:100%;
+        margin:0;
+        padding:.25em 0;
+
+        outline:0;
+        border:none;
+        
+        border-bottom-style:solid;
+        border-bottom-width:1px;
+        border-bottom-color: transparent;
+        
+        font-size:2em;
+        font-weight:bold;
+        background-color: transparent;
+        margin-top:0.25em;
+
+        &:hover {
+            border-bottom-color: $darkerWhite;
+        }
+        &:focus {
+            border-bottom-color: lighten($lighterGray,10%);
+        }
+        &.ng-invalid.ng-touched {
+            border-bottom-color: lighten($red,7%);
+            transition:border-bottom-color ease $defaultAnimationDuration;
+            
+            &::-webkit-input-placeholder {
+                color:rgba($red,0.2);
+                transition:color ease $defaultAnimationDuration;
+            }
+        }
+    }
+    .connecta-inline-edit-textarea {
+        font-size:1em;
+        font-weight:normal;
+        resize:none;
+    }
 }
 
 .help-block {

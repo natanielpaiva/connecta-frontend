@@ -4,7 +4,7 @@
         "REGISTER_ANALYSIS_SOURCE": "Cadastro de fontes de análise",
         "VIEW_ANALYSIS_SOURCE": "Visualizar fonte de análise",
         "ANALYSIS_SOURCE": "Fontes de análise",
-        "NAME": "Nome",
+        "NAME": "Nome da fonte de dados",
         "DESCRIPTION": "Descrição",
         "DATASOURCE_TYPE": "Tipo de fonte",
         "ADDRESS": "Endereço",

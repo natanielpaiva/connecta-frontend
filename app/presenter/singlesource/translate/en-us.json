@@ -1,7 +1,7 @@
 {
     "SINGLESOURCE": {
         "REGISTER_MEDIA": "Register Media",
-        "NAME": "Name",
+        "NAME": "Media Name",
         "FILE": "File",
         "DROP_FILE_HERE": "Drop or click here",
         "TYPE": "Type",

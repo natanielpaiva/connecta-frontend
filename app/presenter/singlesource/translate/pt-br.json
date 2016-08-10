@@ -1,7 +1,7 @@
 {
     "SINGLESOURCE": {
         "REGISTER_MEDIA": "Cadastro de Mídias",
-        "NAME": "Nome",
+        "NAME": "Nome de Mídia",
         "FILE": "Arquivo",
         "DROP_FILE_HERE": "Arraste ou clique aqui",
         "TYPE": "Tipo",

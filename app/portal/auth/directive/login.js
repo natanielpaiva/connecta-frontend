@@ -36,7 +36,7 @@ define([
 
                 $scope.submit = function () {
                     LoginService.doLogin($scope.credentials).then(function (response) {
-                        $scope.loadDomains($scope.credentials.username);
+                        $scope.loadDomains($scope.credentials.email);
                         $scope.setSection('domain');
                     }, function () {
                         notify.warning("USER.VALIDATION.USER_OR_PASS_INVALID");
@@ -48,30 +48,30 @@ define([
                     $route.reload();
                 };
 
-                $scope.onFileSelected = function (files, ev, rejFiles) {
-                    if (rejFiles && rejFiles.length) {
-                        $translate('USER.VALIDATION.INVALID_DOCUMENT').then(function (text) {
-                            notify.warning(text);
-                        });
-                        return;
-                    }
-
-                    var file = files[0];
-                    $scope.fileImage = file;
-                    if (file) {
-                        var reader = new FileReader();
-                        reader.onload = function (e) {
-                            if ($scope.validateImage(e)) {
-                                $scope.userImage = e.target.result;
-                                $scope.imgName = file.name;
-                                $scope.$apply();
-                            } else {
-                                $scope.removeUserImg();
-                            }
-                        };
-                        reader.readAsDataURL(files[0]);
-                    }
-                };
+//                $scope.onFileSelected = function (files, ev, rejFiles) {
+//                    if (rejFiles && rejFiles.length) {
+//                        $translate('USER.VALIDATION.INVALID_DOCUMENT').then(function (text) {
+//                            notify.warning(text);
+//                        });
+//                        return;
+//                    }
+//
+//                    var file = files[0];
+//                    $scope.fileImage = file;
+//                    if (file) {
+//                        var reader = new FileReader();
+//                        reader.onload = function (e) {
+//                            if ($scope.validateImage(e)) {
+//                                $scope.userImage = e.target.result;
+//                                $scope.imgName = file.name;
+//                                $scope.$apply();
+//                            } else {
+//                                $scope.removeUserImg();
+//                            }
+//                        };
+//                        reader.readAsDataURL(files[0]);
+//                    }
+//                };
 
                 $scope.removeUserImg = function () {
                     $scope.userImage = null;
@@ -79,21 +79,21 @@ define([
                     $scope.fileImage = null;
                 };
 
-                $scope.validateImage = function (image) {
-                    var isValid = true;
-                    if (image.total / 614400 > 1) {
-                        notify.warning("USER.VALIDATION.IMAGESIZE");
-                        isValid = false;
-                    } else {
-                        var img = angular.element("<img>")[0];
-                        img.src = image.target.result;
-                        if (img.height != img.width) {
-                            notify.warning("USER.VALIDATION.IMAGEFORM");
-                            isValid = false;
-                        }
-                    }
-                    return isValid;
-                };
+//                $scope.validateImage = function (image) {
+//                    var isValid = true;
+//                    if (image.total / 614400 > 1) {
+//                        notify.warning("USER.VALIDATION.IMAGESIZE");
+//                        isValid = false;
+//                    } else {
+//                        var img = angular.element("<img>")[0];
+//                        img.src = image.target.result;
+//                        if (img.height != img.width) {
+//                            notify.warning("USER.VALIDATION.IMAGEFORM");
+//                            isValid = false;
+//                        }
+//                    }
+//                    return isValid;
+//                };
 
                 $scope.createUser = function () {
                     //Por enquanto o login do usuário será o email (easy unique...)

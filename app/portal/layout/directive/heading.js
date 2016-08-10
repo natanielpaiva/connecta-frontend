@@ -10,7 +10,7 @@ define([
      * Componente usado para renderizar e manter o header do portal
      */
     return portal.directive('heading', function (LayoutService, LoginService,
-            HeadingPopoverService, DomainService) {
+            HeadingPopoverService, UserService, DomainService) {
         return {
             restrict: 'E',
             templateUrl: 'app/portal/layout/directive/template/heading.html',
@@ -37,7 +37,7 @@ define([
                 LoginService.checkAuthentication();
 
                 $scope.getUserAvatarUrl = function () {
-                    $scope.avatarUrl = $scope.user.imageUrl;
+                    $scope.avatarUrl = UserService.makeBackgroundImage($scope.user);
                 };
 
                 $scope.logoutUser = function () {

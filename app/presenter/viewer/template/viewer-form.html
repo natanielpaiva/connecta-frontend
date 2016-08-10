@@ -1,24 +1,15 @@
 <form novalidate name="formViewer" ng-submit="submit()" class="viewer-form">
     <div class="row">
         <div class="col-md-12">
-            <h3 translate>VIEWER.VIEWER</h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
             <div class="form-group" validated-field-holder="formObject.name">
-                <label for="name" translate class="required">VIEWER.NAME</label>
                 <input required type="text" ng-model="viewer.name" required
-                       id="name" class="form-control" />
+                       id="name" class="form-control connecta-inline-edit-input" 
+                       placeholder="{{'VIEWER.NAME' | translate}}" autofocus/>
                 <validated-field-messages ng-model="formViewer.name"></validated-field-messages>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="description" translate>VIEWER.DESCRIPTION</label>
+                
                 <input type="text" ng-model="viewer.description"
-                       id="description" class="form-control" />
+                       id="description" class="form-control connecta-inline-edit-textarea"
+                       placeholder="{{'VIEWER.DESCRIPTION' | translate}}"/>
             </div>
         </div>
     </div>

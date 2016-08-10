@@ -1,24 +1,30 @@
 <section ng-show="currentSection === sections.login">
-    <div id="header-login">
-        <div id="logo">
-            <img src="assets/img/logo-connecta-negative.png" alt="logo" id="logo-app-master"/>
+    <div class="header-login">
+        <div class="logo">
+            <img src="assets/img/logo-connecta-negative.png" alt="logo" class="logo-app-master"/>
         </div>
-        <div id="version-app">
+        <div class="version-app">
             {{package.version}}
         </div>
     </div>
-    <div id="form-login">
+    <div class="form-login">
         <form name="loginForm" ng-submit="submit()">
             <div class="line-form">
-                <img src="assets/img/icon-user.png" alt="icon">
-                <input type="text" class="field-text" placeholder="{{'AUTH.USER'| translate}}" ng-model="credentials.username" required autofocus/>
+                <span class="icon-email"></span>
+                <div class="field-text">
+                    <input type="text" placeholder="{{'USER.EMAIL'| translate}}"
+                           ng-model="credentials.email" required autofocus />
+                </div>
             </div>
             <div class="line-form">
-                <img src="assets/img/icon-password.png" alt="icon">
-                <input type="password" class="field-text" placeholder="{{'AUTH.PASSWORD'| translate}}" ng-model="credentials.password" required/>
+                <span class="icon-lock-outline"></span>
+                <div class="field-text">
+                    <input type="password" placeholder="{{'AUTH.PASSWORD'| translate}}"
+                           ng-model="credentials.password" required/>
+                </div>
             </div>
             <div class="line-form">
-                <button id="btn-login" translate>AUTH.LOGIN</button>
+                <button class="btn-login" translate>AUTH.LOGIN</button>
             </div>
         </form>
     </div>
@@ -68,11 +74,11 @@
 <div ng-show="currentSection === sections.form" class="create-account-form">
 
     <div class="navbar-form">
-        <div id="header-login">
-            <div id="logo">
-                <img src="assets/img/logo-connecta-negative.png" alt="logo" id="logo-app-master">
+        <div class="header-login">
+            <div class="logo">
+                <img src="assets/img/logo-connecta-negative.png" alt="logo" class="logo-app-master">
             </div>
-            <div id="version-app">
+            <div class="version-app">
                 v0.0.1
             </div>
         </div>

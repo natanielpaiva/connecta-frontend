@@ -2,7 +2,6 @@
     "USER": {
         "USER": "Usuário",
         "FIRST_NAME": "Nome",
-        "LAST_NAME": "Sobrenome",
         "EMAIL": "Email",
         "AVATAR": "Avatar",
         "ACCOUNT": "Minha Conta",
@@ -10,6 +9,8 @@
         "CONFIG": "Configurações",
         "LOGOUT": "Sair",
         "UPDATE_SUCCESS": "Perfil Atualizado",
+        "CREATE_SUCCESS": "Perfil Criado",
+        "REMOVE_SUCCESS": "Foto removida",
         "CHOOSE_IMAGE": "Escolha uma imagem",
         "REMOVE_IMAGE": "Remover imagem",
         "PASSWORD": "Senha",
@@ -20,6 +21,7 @@
         "CONFIRM": "Confirmar Senha",
         "LANGUAGE": "Idioma",
         "ADD": "Criar Usuário",
+        "EDIT": "Editar Usuário",
         "SAVE_PROFILE": "Salvar Dados",
         "GRAVATAR_TEXT": "Você pode mudar seu avatar abaixo ou remover seu avatar para utilizar o <a href='http://gravatar.com'>gravatar.com</a>",
         "VALIDATION": {
