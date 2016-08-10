@@ -1,7 +1,9 @@
 define([
     'angular'
 ], function (angular) {
-    var maps = angular.module('connecta.maps', ['ngAutocomplete']);
+    var maps = angular.module('connecta.maps', [
+//        'ngAutocomplete'
+    ]);
     
     maps._configKey = 'maps';
     

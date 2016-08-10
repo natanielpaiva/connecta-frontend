@@ -188,9 +188,9 @@ require.config({
             deps: ['jquery'],
             exports: 'jQuery.fn.redactor'
         },
-        'bower_components/ngAutocomplete/src/ngAutocomplete': {
-            deps: ['angular','bower_components/connectaGeoJS/index/openlayersImplementation/async/async!//maps.googleapis.com/maps/api/js?sensor=false&region=br&libraries=places']
-        },
+//        'bower_components/ngAutocomplete/src/ngAutocomplete': {
+//            deps: ['angular','bower_components/connectaGeoJS/index/openlayersImplementation/async/async!//maps.googleapis.com/maps/api/js?sensor=false&region=br&libraries=places']
+//        },
         'connecta': {
             deps: [
                 'angular',

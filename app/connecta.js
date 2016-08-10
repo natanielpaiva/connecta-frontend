@@ -36,7 +36,7 @@ define([
   'bower_components/angular-currency-mask/angular-currency-mask',
   'bower_components/angular-redactor/angular-redactor',
 //  'bower_components/angular-facebook/lib/angular-facebook',
-  'bower_components/ngAutocomplete/src/ngAutocomplete',
+//  'bower_components/ngAutocomplete/src/ngAutocomplete',
   'bower_components/angular-base64/angular-base64',
   'bower_components/angular-ui-select/dist/select',
   'bower_components/angular-scroll/angular-scroll.min',

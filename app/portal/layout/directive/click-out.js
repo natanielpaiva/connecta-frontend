@@ -3,7 +3,7 @@ define([
     'connecta.portal',
     'portal/layout/service/click-out',
     'portal/layout/service/util'
-], function (portal, clickout) {
+], function (portal) {
     return portal.lazy.directive('clickOut', function ($clickOutManager, util, $timeout) {
         return {
             restrict: 'A',
@@ -19,8 +19,6 @@ define([
                        $scope.clickOut();
                    });
                 };
-
-		console.debug($scope.clickOutExceptions);
 
 		$clickOutManager.addListener($scope.__uuid, {
                     exceptions: $scope.clickOutExceptions,
