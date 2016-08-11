@@ -2,8 +2,8 @@
 define([
     'connecta.portal',
     'portal/layout/service/util',
-    'bower_components/html2canvas/dist/html2canvas.min',
-    'bower_components/jspdf/dist/jspdf.min'
+    'bower_components/html2canvas/dist/html2canvas.min'
+    // 'bower_components/jspdf/dist/jspdf.min'
 ], function (portal) {
     return portal.service('ExportFile', function ($q) {
         var ExportFile = this;
