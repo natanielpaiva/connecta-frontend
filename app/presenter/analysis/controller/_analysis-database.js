@@ -3,6 +3,12 @@ define([
 ], function () {
     return function DatabaseAnalysisFormController($scope, AnalysisService) {
 
+        $scope.analysisColumnsCopy = undefined;
+
+        if($scope.edit && $scope.analysisColumnsCopy === undefined){
+            $scope.analysisColumnsCopy = angular.copy($scope.analysis.analysisColumns);
+        }
+
         if (!$scope.analysis.requestType) {
             $scope.analysis.requestType = 'SQL';
         }
@@ -63,25 +69,41 @@ define([
             $scope.component.columns = $scope.analysis.analysisColumns;
         }
 
+
         $scope.executeSQL = function () {
-            if ( $scope.analysis.requestType === 'SQL' ) {
-                $scope.analysis.analysisColumns = [];
-            }
-            
+           
+            $scope.analysis.analysisColumns = [];
+
             AnalysisService.execute({
                 analysis: $scope.analysis
             }).then(function (response) {
                 $scope.responseDataBase = response.data;
-                $scope.analysis.analysisColumns = [];
-                for (var formula in response.data[0]) {
-                    var name = formula.split(".")[1] || formula;    // Tá com um bug nas de SQL
-                    $scope.analysis.analysisColumns.push({
-                        name: name,
-                        label: name,
-                        formula: formula
+                var responseSql = response.data[0];                
+                fillAnalysisColumns(responseSql);
+                if($scope.analysisColumnsCopy !== undefined &&
+                        $scope.analysis.analysisColumns !== undefined){
+
+                    $scope.analysisColumnsCopy.forEach(function(analysisColumn){
+                        $scope.analysis.analysisColumns.forEach(function(analysisColumnNew, index){
+                            if(analysisColumn.formula === analysisColumnNew.formula){
+                                $scope.analysis.analysisColumns[index] = analysisColumn;
+                            }
+                        });
                     });
                 }
             });
         };
+
+        fillAnalysisColumns = function(responseSql){
+            for (var formula in responseSql) {
+                var name = formula.split(".")[1] || formula;    // Tá com um bug nas de SQL
+                $scope.analysis.analysisColumns.push({
+                    name: name,
+                    label: name,
+                    formula: formula
+                });
+            }
+        };
+
     };
 });
