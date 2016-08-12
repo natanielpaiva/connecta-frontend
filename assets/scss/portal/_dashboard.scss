@@ -728,6 +728,12 @@ viewer {
         }
         analysis-viewer {
             z-index:0 !important;
+            
+            .amchart {
+                &.is-drilling {
+                    cursor: crosshair;
+                }
+            }
         }
     }
 
