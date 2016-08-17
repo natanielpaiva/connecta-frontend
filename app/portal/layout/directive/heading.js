@@ -21,23 +21,32 @@ define([
 
                 // adiciona a lista de aplicações no escopo
                 $scope.applications = util.mapToArray(applications);
+                
+                
+                var _getUser = function(){
+                    LoginService.getCurrentUser().then(function (user) {
+                        $scope.user = user;
+                        $scope.getUserAvatarUrl();
+                        $scope.toggleDomain = false;
+                        var currentDomain = $cookieStore.get('user.domain.name');
+                        identifyAndHighlightUserDomain(currentDomain);
+                    });
+                };
 
                 $scope.$on('login.authenticated', function ($event, isAuthenticated) {
                     if (isAuthenticated) {
-                        LoginService.getCurrentUser().then(function (user) {
-                            $scope.user = user;
-                            $scope.getUserAvatarUrl();
-                            $scope.toggleDomain = false;
-                            var currentDomain = $cookieStore.get('user.domain.name');
-                            identifyAndHighlightUserDomain(currentDomain);
-                        });
+                        _getUser();
                     }
+                });
+                
+                $scope.$on('user.update', function(){
+                    _getUser();
                 });
 
                 LoginService.checkAuthentication();
 
                 $scope.getUserAvatarUrl = function () {
-                    $scope.avatarUrl = UserService.makeBackgroundImage($scope.user);
+                    $scope.avatarUrl = UserService.makeBackgroundImage($scope.user.id);
                 };
 
                 $scope.logoutUser = function () {

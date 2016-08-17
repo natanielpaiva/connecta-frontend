@@ -40,7 +40,7 @@
         </li>
         <li ng-class="{'heading-item-focus': userPopoverFocus }">
             <a class="image-on-background user-avatar" href title="{{user.name + ' ' + user.lastName}}"
-               ng-click="toggleUserPopOver()" ng-show='avatarUrl' style="background-image: url('{{avatarUrl}}')">
+               ng-click="toggleUserPopOver()" ng-attr-style="background-image:url({{avatarUrl}})">
             </a>
         </li>
         <heading-popover></heading-popover>

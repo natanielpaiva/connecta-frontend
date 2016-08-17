@@ -10,6 +10,24 @@ define([
 
         function init() {
             $scope.user = {};
+            $scope.credentials = {};
+            $scope.rejFiles = {};
+            $scope.languages = {
+                'pt-br': 'Português (Brasil)',
+                'en-us': 'English (US)'
+            };
+
+            $scope.$watch('user.language', function (lang) {
+                $translate.use(lang);
+            });
+
+            $scope.$watch('image', function () {
+                if ($scope.image) {
+                    $scope.imageURL = $scope.image;
+                } else {
+                    $scope.imageURL = UserService.makeBackgroundImage($scope.user.id);
+                }
+            });
 
             LoginService.getCurrentUser().then(function (data) {
                 $scope.user = data;
@@ -17,36 +35,22 @@ define([
                 if (!$scope.user.language) {
                     $scope.user.language = 'pt-br';
                 }
-            });
 
-            $scope.credentials = {};
-            $scope.rejFiles = {};
+                $scope.imageURL = UserService.makeBackgroundImage($scope.user.id);
+            });
         }
+
+        $scope.createUser = function () {
+            UserService.save($scope.user).then(function (result) {
+                console.log(result);
+            });
+        };
 
         $scope.fileDropped = function ($files) {
             $scope.imageFile = $files[0];
             dataURI($scope.imageFile).then(function (result) {
                 $scope.image = result;
             });
-        };
-
-        $scope.languages = {
-            'pt-br': 'Português (Brasil)',
-            'en-us': 'English (US)'
-        };
-
-        $scope.$watch('user.language', function (lang) {
-            $translate.use(lang);
-        });
-
-        $scope.makeBackgroundImage = function () {
-            var imageURL = '';
-            if ($scope.image) {
-                imageURL = $scope.image;
-            } else {
-                imageURL = UserService.makeBackgroundImage($scope.user);
-            }
-            return imageURL;
         };
 
         $scope.removePhoto = function () {

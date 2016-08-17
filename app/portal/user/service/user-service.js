@@ -2,19 +2,24 @@ define([
     'connecta.portal',
     'portal/auth/service/login-service'
 ], function (portal) {
-    portal.service('UserService', function ($http, portalResources, LoginService, $upload) {
-        
-        this.update = function (user) {
+    portal.service('UserService', function ($http, portalResources, LoginService, $upload, $rootScope) {
+        var UserService = this;
+
+        var _sendUpdateUserEvent = function (response) {
+            $rootScope.$broadcast('user.update', response.data, UserService.makeBackgroundImage(response.data.id));
+        };
+
+        UserService.update = function (user) {
             var url = portalResources.user + '/' + user.id;
 
-            return $http.put(url, user);
+            return $http.put(url, user).then(_sendUpdateUserEvent);
         };
-        
-        this.makeBackgroundImage = function(user){
+
+        UserService.makeBackgroundImage = function (id) {
             return [
                 portalResources.user,
                 '/',
-                user.id,
+                id,
                 '/profile.png?access_token=',
                 LoginService.getAuthenticationToken(),
                 '&_=',
@@ -28,48 +33,41 @@ define([
          * @param {type} user
          * @returns {unresolved}
          */
-        this.upload = function (image, user) {
+        UserService.upload = function (image, user) {
             return $upload.upload({
-                url: portalResources.user+'/'+user.id+'/avatar',
+                url: portalResources.user + '/' + user.id + '/avatar',
                 method: 'POST',
                 headers: {
-                    Authorization:"Bearer " + LoginService.getAuthenticationToken()
+                    Authorization: "Bearer " + LoginService.getAuthenticationToken()
                 },
                 file: image
             }).progress(function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-            });
-        };
-        
-//        this.deletePhoto = function (id) {
-//            var url = portalResources.user + '/delete';
-//
-//            var fd = new FormData();
-//            fd.append('id', JSON.stringify(id));
-//
-//            return $http.delete(url, fd, {
-//                headers: {'Content-Type': undefined}
-//            });
-//        };
-
-        this.save = function (user) {
-            var url = portalResources.user + '/create';
-
-            var fd = new FormData();
-            fd.append('user', JSON.stringify(user));
-
-            return $http.post(url, fd, {
-                headers: {'Content-Type': undefined}
-            });
+            }).then(_sendUpdateUserEvent);
         };
 
-        this.saveFacebook = function (user) {
+        UserService.save = function (user) {
+            var url = portalResources.user;
+            return $http.post(url, user).then(_sendUpdateUserEvent);
+        };
+
+        UserService.getByEmail = function (email) {
+            var url = portalResources.user + '/email';
+            return $http.get(url, email);
+        };
+
+        UserService.getByName = function (name) {
+            var url = portalResources.user + '/name';
+            return $http.get(url, name);
+        };
+
+        UserService.saveFacebook = function (user) {
             var url = portalResources.user;
             return $http.post(url, user);
         };
 
-        this.changePassword = function (credentials) {
+        UserService.changePassword = function (credentials) {
             var url = portalResources.user + '/credentials';
             return $http.put(url, credentials);
         };

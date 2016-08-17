@@ -1,11 +1,11 @@
 <!--<h3 translate>{{isEditing ? 'USER.EDIT': 'USER.ADD'}}</h3>-->
 <h3 translate>{{'USER.EDIT'}}</h3>
-<form novalidate name="userProfileForm" ng-submit="submitUserProfile()">
+<form novalidate name="userProfileForm" ng-submit="createUser()">
     <div class="row">
         <div class="col-md-12 user-profile-form">
             <div class="form-group user-avatar-field" ng-if="user.id">
                 <div class="user-image-container"
-                     ng-style="{'background-image':'url('+makeBackgroundImage()+')'}">
+                     ng-style="{'background-image':'url('+imageURL+')'}">
 
                     <label class="edit" ng-file-drop ng-file-select
                            ng-accept="'.jpeg,.jpg,.png'"
