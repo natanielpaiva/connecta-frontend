@@ -33,7 +33,7 @@
             "USER_OR_PASS_INVALID": "Invalid username or password."
         },
         "ERROR": {
-            "USERNAME_EXISTS": "Email exists"
+            "USERNAME_EXISTS": "There is already someone using this email"
         },
         "DOMAINS" : "Domains"
     }

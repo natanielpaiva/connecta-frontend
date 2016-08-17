@@ -140,7 +140,7 @@ define([
 
         this.TYPE = {
             CSV: _exportCsv,
-            IMAGE: _exportImage,
+            IMAGE: _exportImage
         };
 
         /**

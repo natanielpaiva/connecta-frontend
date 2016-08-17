@@ -2,7 +2,8 @@ define([
     'connecta.portal',
     'portal/layout/service/notify',
     'portal/user/service/user-service',
-    'portal/layout/service/data-uri'
+    'portal/layout/service/data-uri',
+    'portal/user/directive/unique-email'
 ], function (portal) {
 
     return portal.lazy.controller('UserFormController', function ($scope, $translate,
@@ -31,6 +32,7 @@ define([
 
             LoginService.getCurrentUser().then(function (data) {
                 $scope.user = data;
+                $scope.email = $scope.user.email;
 
                 if (!$scope.user.language) {
                     $scope.user.language = 'pt-br';
@@ -60,27 +62,22 @@ define([
             });
         };
 
+        $scope.saveUser = function () {
+            UserService.save($scope.user);
+        };
+
         $scope.submitUserProfile = function () {
             UserService.update($scope.user).then(function () {
                 if ($scope.imageFile) {
-                    UserService.upload($scope.imageFile, $scope.user).then(function () {
-                        $translate('USER.UPDATE_SUCCESS').then(function (text) {
-                            notify.success(text);
-                        });
-                    });
-                } else {
-                    $translate('USER.UPDATE_SUCCESS').then(function (text) {
-                        notify.success(text);
-                    });
+                    UserService.upload($scope.imageFile, $scope.user);
                 }
+                notify.success('USER.UPDATE_SUCCESS');
             });
         };
 
         $scope.submitCredentials = function () {
             UserService.changePassword($scope.credentials).then(function () {
-                $translate('USER.CHANGE_PASSWORD_SUCCESS').then(function (text) {
-                    notify.success(text);
-                });
+                notify.success('USER.CHANGE_PASSWORD_SUCCESS');
             });
         };
 
@@ -88,3 +85,4 @@ define([
     });
 
 });
+

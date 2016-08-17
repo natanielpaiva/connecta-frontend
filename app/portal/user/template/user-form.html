@@ -1,6 +1,6 @@
 <!--<h3 translate>{{isEditing ? 'USER.EDIT': 'USER.ADD'}}</h3>-->
 <h3 translate>{{'USER.EDIT'}}</h3>
-<form novalidate name="userProfileForm" ng-submit="createUser()">
+<form novalidate name="userProfileForm" ng-submit="submitUserProfile()">
     <div class="row">
         <div class="col-md-12 user-profile-form">
             <div class="form-group user-avatar-field" ng-if="user.id">
@@ -31,7 +31,8 @@
                 <div class="form-group">
                     <label for="email" translate>USER.EMAIL</label>
                     <input type="email" class="form-control" id="email" name="email"
-                           ng-model="user.email" required maxlength="100"/>
+                           ng-blur="validateEmail()" ng-init="userProfileForm.$unique=true"
+                           ng-model="user.email" ng-model-options="{updateOn:'blur'}" unique-email initial-email="email" required maxlength="100"/>
                     <div ng-show="userProfileForm.email.$touched" ng-messages="userProfileForm.email.$error"
                          ng-messages-include="portal-error-messages"></div>
                 </div>

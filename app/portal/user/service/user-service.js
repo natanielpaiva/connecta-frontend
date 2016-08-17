@@ -52,14 +52,10 @@ define([
             return $http.post(url, user).then(_sendUpdateUserEvent);
         };
 
-        UserService.getByEmail = function (email) {
-            var url = portalResources.user + '/email';
-            return $http.get(url, email);
-        };
+        UserService.validateEmail = function (email) {
+            var url = portalResources.user + '?email=' + email;
 
-        UserService.getByName = function (name) {
-            var url = portalResources.user + '/name';
-            return $http.get(url, name);
+            return $http.get(url);
         };
 
         UserService.saveFacebook = function (user) {

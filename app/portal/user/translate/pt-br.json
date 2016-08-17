@@ -33,7 +33,7 @@
             "USER_OR_PASS_INVALID": "Usuário ou senha incorreto."
         },
         "ERROR": {
-            "USERNAME_EXISTS": "E-mail ja cadastrado"
+            "USERNAME_EXISTS": "Esse email já está sendo usado"
         },
         "DOMAINS" : "Domínios"
     }
