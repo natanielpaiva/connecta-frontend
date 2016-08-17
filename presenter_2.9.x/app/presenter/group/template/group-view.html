@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>GROUP.GROUP_VIEW</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-offset-10 col-md-2">
+                <div class="pull-right btn-group">
+                    <a title="{{ 'DATASOURCE.EDIT' | translate }}"  href="#/presenter/group/{{group.id}}/edit" class="btn btn-default">
+                        <span class="icon-pencil" aria-hidden="true"></span>
+                    </a>
+                    <button title="{{ 'DATASOURCE.DELETE' | translate }}"  class="btn btn-default" ng-click="excluir(group.id)">
+                        <span class="icon-trash" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row ">
+    <div class="col-md-12">
+        <div class="well margin-top-single">
+            <p ng-if="group.name">
+                <strong translate>GROUP.NAME</strong>: {{group.name}}
+            </p>
+
+            <p ng-if="group.type">
+                <strong translate>GROUP.TYPE</strong>: {{group.type}}
+            </p>
+
+        </div>
+    </div>
+</div>
+<div ng-if="!group.query" class="form-group">
+    <div>
+        <label translate>GROUP.MEDIAS</label>
+    </div>
+</div>
+<div ng-if="!group.query" class="gallery row">
+    <div class="container-gallery">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div>
+                    <ul class="gallery-view">
+                        <li ng-repeat="item in group.singleSource" dnd-effect-allowed="false" ng-if="item.path" ng-style="{'background-image': 'url({{item.path}})'}">
+                            <div ng-if="item.fileType === 'VIDEO'">
+                                <video width="120" height="100">
+                                    <source  ng-if="item.path"  src="{{item.path}}" type="video/mp4">
+                                    Your browser does not support HTML5 video.
+                                </video>
+                                <div class="fill-parent"></div>
+                            </div>
+
+                            <div class="media-item">
+                                {{item.name}}
+                            </div>
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div ng-if="group.query" class="form-group">
+    <div>
+        <label translate>GROUP.MEDIAS</label>
+    </div>
+</div>
+<div ng-if="group.query" class="gallery form-group">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <ul class="gallery-view">
+                    <li ng-repeat="item in medias" dnd-effect-allowed="false" ng-style="{'background-image': 'url({{item.url}})'}">
+                        <div class="media-item">
+                            {{item.name}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <a href="#/presenter/group" class="btn btn-default" translate>LAYOUT.BACK</a>
+    </div>
+</div>

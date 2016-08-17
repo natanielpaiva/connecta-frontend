@@ -1,0 +1,31 @@
+bulk-action-bar {
+    background-color: $black;
+    width: 4em;
+    display: block;
+    right: 0;
+    top: 0;
+    z-index: 1030;
+    bottom: 0;
+    position: fixed;
+    box-shadow:-0.25em 0em 0.1em rgba($black, 0.25);
+
+    .bulk-actions-list {
+        position:absolute;
+        top:50%;
+        transform:translateY(-50%);
+        bulk-action {
+            @extend .cursor-pointer;
+            display: block;
+            width: 2em;
+            height: 2em;
+            line-height: 2em;
+            font-size: 2em;
+            color:$white;
+            text-align: center;
+
+            &:hover, &:active {
+                background-color:$red;
+            }
+        }
+    }
+}

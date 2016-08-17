@@ -1,0 +1,12 @@
+{
+    "DOCUMENT": {
+        "ADD":"Adicionar Documento",
+        "ADD":"Atualizar Documento",
+        "DOCUMENT":"Documento",
+        "DOCUMENTS":"Documentos",
+        "NAME":"Nome",
+        "TYPE":"Tipo",
+        "DESCRIPTION":"Descrição",
+        "PROJECT":"Projeto"
+    }
+}

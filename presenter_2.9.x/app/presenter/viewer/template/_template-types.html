@@ -1,0 +1,107 @@
+<div class="viewer-template-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">{{'VIEWER.CHOOSE_TEMPLATE'| translate}}</h3>
+    </div>
+    <div class="modal-body">
+        <tabset type="pills">
+            <tab ng-repeat="t in templates">
+                <tab-heading>{{ 'VIEWER_TEMPLATE_TYPE.' + t.id | translate}}</tab-heading>
+                <div class="container-gallery clearfix">
+                    <ul class="gallery-view">
+                        <li ng-repeat="types in t.templates" class="item-gallery">
+                            <a ng-click="ok()" href="#/presenter/viewer/new/{{t.id}}/{{types.id}}">
+                                <!-- COLUNA -->
+                                <img ng-if="types.id === 'column-using-custom-colors'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-using-custom-colors.png" />
+                                <img ng-if="types.id === 'column-clustered'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-clustered.png" />
+                                <img ng-if="types.id === 'column-width-scroll'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-width-scroll.png" />
+                                <img ng-if="types.id === 'column-two-value-axes'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-two-value-axes.png" />
+                                <img ng-if="types.id === 'column-clustered-and-stacked'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-clustered-and-stacked.png" />
+                                <img ng-if="types.id === 'column-3d-column'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-3d-column.png" />
+                                <img ng-if="types.id === 'column-clustered-3d'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-clustered-3d.png" />
+                                <img ng-if="types.id === 'column-3d-cem-por-cento-stacked'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-3d-cem-por-cento-stacked.png" />
+                                <img ng-if="types.id === 'column-logarithmic-scale'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-logarithmic-scale.png" />
+                                <img ng-if="types.id === 'column-stacked-3d'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-stacked-3d.png" />
+                                <img ng-if="types.id === 'column-date-based-data'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-date-based-data.png" />
+                                <img ng-if="types.id === 'column-and-line'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-and-line.png" />
+                                <img ng-if="types.id === 'column-stacked'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-stacked.png" />
+                                <img ng-if="types.id === 'column-cem-por-cento-stacked'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-cem-por-cento-stacked.png" />
+                                <img ng-if="types.id === 'column-floating-columns'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-floating-columns.png" />
+
+                                <!-- CHART PIE DONUT -->
+                                <img ng-if="types.id === 'donut-3d'" class="thumb-chart" ng-src="assets/img/presenter/circular/donut-3d.png" />
+                                <img ng-if="types.id === 'pie'" class="thumb-chart" ng-src="assets/img/presenter/circular/pie.png" />
+                                <img ng-if="types.id === 'donut'" class="thumb-chart" ng-src="assets/img/presenter/circular/donut.png" />
+                                <img ng-if="types.id === 'pie-3d'" class="thumb-chart" ng-src="assets/img/presenter/circular/pie-3d.png" />
+
+                                <!-- CHART AREA -->
+                                <img ng-if="types.id === 'area-date-series-yearly'" class="thumb-chart" ng-src="assets/img/presenter/area/area-date-series-yearly.png" />
+                                <img ng-if="types.id === 'area-100-stacked'" class="thumb-chart" ng-src="assets/img/presenter/area/area-100-stacked.png" />
+                                <img ng-if="types.id === 'area-date-series-monthly'" class="thumb-chart" ng-src="assets/img/presenter/area/area-date-series-monthly.png" />
+                                <img ng-if="types.id === 'area-time-series-minutes'" class="thumb-chart" ng-src="assets/img/presenter/area/area-time-series-minutes.png" />
+                                <img ng-if="types.id === 'area-rotated'" class="thumb-chart" ng-src="assets/img/presenter/area/area-rotated.png" />
+                                <img ng-if="types.id === 'area-area'" class="thumb-chart" ng-src="assets/img/presenter/area/area-area.png" />
+                                <img ng-if="types.id === 'area-date-series-daily'" class="thumb-chart" ng-src="assets/img/presenter/area/area-date-series-daily.png" />
+                                <img ng-if="types.id === 'area-time-series-seconds'" class="thumb-chart" ng-src="assets/img/presenter/area/area-time-series-seconds.png" />
+                                <img ng-if="types.id === 'area-stacked'" class="thumb-chart" ng-src="assets/img/presenter/area/area-stacked.png" />
+                                <img ng-if="types.id === 'area-time-series-hourly'" class="thumb-chart" ng-src="assets/img/presenter/area/area-time-series-hourly.png" />
+
+                                <!-- CHART BAR -->
+                                <img ng-if="types.id === 'bar-two-value-axes'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-two-value-axes.png" />
+                                <img ng-if="types.id === 'bar-and-line'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-and-line.png" />
+                                <img ng-if="types.id === 'bar-clustered-3d'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-clustered-3d.png" />
+                                <img ng-if="types.id === 'bar-3d-bar'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-3d-bar.png" />
+                                <img ng-if="types.id === 'bar-width-guide'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-width-guide.png" />
+                                <img ng-if="types.id === 'bar-clustered-and-stacked'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-clustered-and-stacked.png" />
+                                <img ng-if="types.id === 'bar-stacked-3d'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-stacked-3d.png" />
+                                <img ng-if="types.id === 'bar-width-scroll'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-width-scroll.png" />
+                                <img ng-if="types.id === 'bar-clustered'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-clustered.png" />
+                                <img ng-if="types.id === 'bar-dashed-stroke'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-dashed-stroke.png" />
+                                <img ng-if="types.id === 'bar-floating-bars'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-floating-bars.png" />
+                                <img ng-if="types.id === 'bar-3d-cem-por-cento-stacked'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-3d-cem-por-cento-stacked.png" />
+                                <img ng-if="types.id === 'bar-cem-por-cento-stacked'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-cem-por-cento-stacked.png" />
+                                <img ng-if="types.id === 'bar-logarithmic-scale'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-logarithmic-scale.png" />
+                                <img ng-if="types.id === 'bar-stacked'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-stacked.png" />
+
+                                <!-- CHART LINE -->
+                                <img ng-if="types.id === 'line-stacked'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-stacked.png" />
+                                <img ng-if="types.id === 'line-rotate'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-rotate.png" />
+                                <img ng-if="types.id === 'line'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line.png" />
+                                <img ng-if="types.id === 'line-one-hundred-percent-stacked'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-one-hundred-percent-stacked.png" />
+                                <img ng-if="types.id === 'line-time-series-hourly'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-time-series-hourly.png" />
+                                <img ng-if="types.id === 'line-smoothed'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-time-series-hourly.png" />
+                                <img ng-if="types.id === 'line-time-series-minutes'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-time-series-minutes.png" />
+                                <img ng-if="types.id === 'line-step'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-step.png" />
+                                <img ng-if="types.id === 'line-date-series-daily'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-date-series-daily.png" />
+                                <img ng-if="types.id === 'line-step-no-risers'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-step-no-risers.png" />
+                                <img ng-if="types.id === 'line-date-series-monthly'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-date-series-monthly.png" />
+                                <img ng-if="types.id === 'line-time-series-seconds'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-time-series-seconds.png" />
+                                <img ng-if="types.id === 'line-date-series-yearly'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line-date-series-yearly.png" />
+
+                                <!-- CHART OTHER -->
+                                <img ng-if="types.id === 'other-pyramid'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-pyramid.png" />
+                                <img ng-if="types.id === 'other-angular-gauge'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-angular-gauge.png" />
+                                <img ng-if="types.id === 'other-candlestick'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-candlestick.png" />
+                                <img ng-if="types.id === 'other-radar'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-radar.png" />
+                                <img ng-if="types.id === 'other-polar'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-polar.png" />
+                                <img ng-if="types.id === 'other-singlesource'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-singlesource.png" />
+                                <img ng-if="types.id === 'other-funnel'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-funnel.png" />
+                                <img ng-if="types.id === 'other-table'" class="thumb-chart" ng-src="assets/img/presenter/outros/table.png" />
+
+                                <!-- CHART XY -->
+                                <img ng-if="types.id === 'xy-markers'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-markers.png" />
+                                <img ng-if="types.id === 'xy-guides'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-guides.png" />
+                                <img ng-if="types.id === 'xy-trend-lines'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-trend-lines.png" />
+                                <img ng-if="types.id === 'xy-lines'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-lines.png" />
+                                <img ng-if="types.id === 'xy-zoom-scroll'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-zoom-scroll.png" />
+                                <img ng-if="types.id === 'xy-fills'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-fills.png" />
+                                <img ng-if="types.id === 'xy-markers-lines'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-markers-lines.png" />
+
+                                <span>{{'VIEWER_TEMPLATE_ITEM.' + types.id| translate}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+$pageGutter:1em;
+
+// Configurando o container das views
+.page-container {
+    overflow: hidden;
+    background-color: $white;
+    margin-left: $sidebarSize;
+    margin-top: $headerHeight + (2*$pageGutter);
+    transition: margin $defaultAnimationDuration;
+    padding:$pageGutter;
+    border-radius:0.25em;
+    border:solid 0.1em lighten($lighterGray, 35%);
+    @include clearfix();
+
+
+    &.am-fade-and-slide-right.ng-leave {
+        width: calc(100% - (20em + 15px*2));
+        position: absolute;
+        z-index: -1;
+        overflow-x: hidden;
+    }
+
+    h1, h3 {
+        @extend .margin-top-zero;
+    }
+
+    &.flat {
+        margin-left: ($sidebarSize - 1);
+        margin-top: ($headerHeight + (2*$pageGutter)) - 1.4;
+        background-color: transparent;
+        border:none;
+        padding:0;
+    }
+}
+
+.sidebar-mini .page-container {
+    margin-right: 0;
+}
+
+.hide-menu {
+    .page-container {
+        margin-left: $miniSidebarSize;
+
+        &.flat {
+            margin-left: $miniSidebarSize - 1.15;
+        }
+    }
+}
+
+/*** Page title ***/
+.page-title {
+    padding: 0px;
+    letter-spacing: -1px;
+    display: block;
+    color: #666;
+    margin: 0 0 10px;
+    font-weight: 300;
+    font-family: 'Open Sans';
+
+    h3{
+        display:inline-block;
+        top:-5px;
+        position:relative;
+        width: 83%;
+    }
+    p {
+        color:#63696d;
+        letter-spacing:0.5px
+    }
+    i {
+        display:inline-block;
+        color:#73777c;
+        font-size:30px;
+        margin-right:12px;
+        position: relative;
+        top: 7px;
+        float:left
+    }
+    small {
+        font-size: 14px;
+        letter-spacing: 0px;
+        font-weight: 300;
+        color: #888;
+    }
+    .actions{
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+}
+
+[layout] {
+    overflow-x:hidden;
+    border:none;
+    padding: 0 !important;
+    margin:0 !important;
+    display:block;
+    width:100%;
+    @include clearfix();
+
+    heading {
+        transition:transform $defaultAnimationDuration;
+    }
+
+    &.fullscreen {
+        background:darken($white,1%);
+
+        heading {
+            transition:transform $defaultAnimationDuration;
+            transform: translateY(-6em);
+        }
+        .page-container, .container-fluid {
+            background: none;
+            border:none;
+            padding: 0 !important;
+            margin:0 !important;
+            width:100% !important;
+            border-radius: 0;
+        }
+        .container-fluid {
+            position:absolute;
+        }
+
+        menu {
+            transition:transform $defaultAnimationDuration;
+            transform: translate(-1*$sidebarSize, -6em);
+        }
+        &.hide-menu menu {
+            transition:transform $defaultAnimationDuration;
+            transform: translate(-6em, -6em);
+        }
+    }
+}

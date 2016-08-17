@@ -1,0 +1,17 @@
+{
+  "COMPANYGROUP": {
+    "COMPANYGROUP": "Company Group",
+    "COMPANY": "Company",
+    "CONTACTS": "Contacts",
+    "NAME": "Name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "ADDRESS": "Address",
+    "DROP_FILE_HERE": "Drag or click here",
+    "TYPE": "Type",
+    "IMAGE_QUAD": "Square Image",
+    "IMAGE_RECT": "Rectangular Image",
+    "DESCRIPTION":"Description",
+    "REMOVE_SUCCESS":"Grupo de contatos excluído com sucesso."
+  }
+}

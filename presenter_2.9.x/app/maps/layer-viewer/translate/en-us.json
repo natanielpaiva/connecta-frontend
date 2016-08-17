@@ -1,0 +1,32 @@
+{
+    "LAYERVIEWER": {
+        "LAYERVIEWER": "Layer Viewers",
+        "ADD":"Add LayerViewer",
+        "EDIT":"Edit LayerViewer",
+        "VIEW":"View LayerViewer",
+        "TYPE": "Type",
+        "NAME": "Name",
+        "LAYER":"Layer",
+        "SELECT":"Select",
+        "DEFAULT":"Default",
+        "HEATMAP":"Heatmap",
+        "IMPL": "Implementation",
+        "INITIAL_COLOR":"Initial Color",
+        "FINAL_COLOR":"Final Color",
+        "CLUSTER":"Concentration",
+        "INTERVAL_INITIAL":"Initial",
+        "INTERVAL":"Interval",
+        "INTERVAL_FINAL":"Final",
+        "INITIAL_RAIO":"Initial Radius",
+        "FINAL_RAIO":"Final Radius",
+        "OF": "Of:",
+        "TO": "To:",
+        "FILE_SLD":"SLD File",
+        "ANALYSIS":"Analysis Map",
+        "TITLE_CONFIRM_DELETE": "LayerViewer Delete",
+        "CONFIRM_DELETE": "Do you really want to delete LayerViewer?",
+        "ADDED_SUCCESS": "Successfully Added",
+        "REMOVE_SUCCESS":"Successfully removed",
+        "ERROR_REMOVING": "Error Removing LayerViewer"
+    }
+}

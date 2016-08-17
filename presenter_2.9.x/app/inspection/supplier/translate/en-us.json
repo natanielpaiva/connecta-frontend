@@ -1,0 +1,29 @@
+{
+    "SUPPLIER": {
+        "SUPPLIER": "Supplier",
+        "SUPPLIERS": "Suppliers",
+        "ADD": "Add Supplier",
+        "EDIT": "Edit Supplier",
+        "VIEW": "View Supplier",
+        "CNPJ": "CNPJ",
+        "SOCIAL_NAME": "Social Name",
+        "FANTASY_NAME": "Fantasy Name",
+        "STATE_REGISTRATION": "State Registration",
+        "COUNTY_REGISTRATION": "County Registration",
+        "ADDRESSES": "Addresses",
+        "ACTIONS":"Actions",
+        "SAVE_SUCCESS": "Successfully Saving",
+        "ERROR_SAVING": "Error Saving!",
+        "REMOVE_SUCCESS": "Successfully Removed",
+        "ERROR_REMOVING": "Error Removing",
+        "TITLE_CONFIRM_DELETE": "Supplier Delete",
+        "CONFIRM_DELETE": "Do you really want to delete Supplier?",
+        "RESPONSIBLE":"Responsible",
+        "RESPONSIBLE_SELECT":"Select Responsible",
+        "RESPONSIBLE_NAME": "Name",        
+        "RESPONSIBLE_REGISTER": "Add Responsible",
+        "RESPONSIBLE_PHONE": "PHONE",
+        "RESPONSIBLE_EMAIL": "Email",
+        "RESPONSIBLE_CPF": "CPF"
+    }
+}

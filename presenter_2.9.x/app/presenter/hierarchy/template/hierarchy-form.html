@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>HIERARCHY.REGISTER_HIERARCHY</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form class="required" novalidate name="formulario" ng-submit="submit()" >
+            <div class="form-group col-xs-8">
+                <label for="name" translate class="mandatory"> HIERARCHY.NAME</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       ng-model="hierarchy.name" required/>
+            </div>
+
+            <div class="col-md-12">
+                <div class="well clearfix">
+                    <div ui-tree="options"  data-nodrag >
+                        <ul ui-tree-nodes ng-model="hierarchy.hierarchyItem">
+                            <li ng-repeat="item in hierarchy.hierarchyItem" ui-tree-node data-collapsed="{{open}}"
+                                ng-include="'app/presenter/hierarchy/template/_hierarchy-form-tree-item.html'">
+                            </li>
+                        </ul>
+                    </div>
+                </div>   
+            </div>
+            <div class="col-md-12">    
+                <a href="#/presenter/hierarchy/"
+                   class="btn btn-default" translate>
+                    LAYOUT.CANCEL
+                </a>
+                <button ng-if="button" class="btn btn-primary" ng-disabled="formulario.$invalid" translate >
+                    LAYOUT.SAVE
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

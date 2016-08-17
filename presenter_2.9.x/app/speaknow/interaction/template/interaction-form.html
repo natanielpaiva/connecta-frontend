@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>{{isEditing ? 'INTERACTION.EDIT' : 'INTERACTION.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="interaction_form" ng-submit="submit()" class="interaction-form">
+            <div class="form-group">
+                <label class="required" for="name" translate>INTERACTION.NAME</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       ng-model="interaction.name" required maxlength="100" />
+                <div ng-show="interaction_form.$submitted || interaction_form.name.$touched" 
+                     ng-messages="interaction_form.name.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+<!--            <div class="form-group">
+                <label for="image" translate>INTERACTION.IMAGE</label>
+                <label id="image"
+                       class="well drop-box set-file dropzone"
+                       ng-file-drop 
+                       ng-file-select
+                       ng-multiple="false"
+                       ng-file-change="onFileSelected($files, $event, $rejectedFiles)" 
+                       ng-accept="'.jpeg,.jpg,.png'"
+                       ng-model-rejected="rejFiles" 
+                       allow-dir="false" 
+                       drag-over-class="{accept:'accept', reject:'reject'}">
+                    {{imgName || interactionImg}}
+                </label>
+                <img class="img-company-quad" ng-if="interaction.image || interactionImage" ng-src="{{interactionImage}}" />
+                <p ng-show="imageInvalid" class="help-block ng-binding ng-scope">
+                        Esse campo é obrigatório
+                </p>
+            </div>-->
+            
+            <div class="form-group" style="margin-bottom: 185px;">
+                <label translate>INTERACTION.IMAGE</label>
+                <drop-file files="imageFile" 
+                           documents="imageUrl" 
+                           files-type=".jpeg,.jpg,.png"
+                           is-single="true"
+                           type="TEST"
+                           callback="dropImageCallback"/>
+                <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="icon" translate>INTERACTION.ICON</label>
+                <button type="button" class="btn btn-default" 
+                        ng-click="openIconModal()">
+                    <span class="icon-{{interaction.icon}}"></span>
+                    <input type="hidden" class="form-control" id="icon" name="icon"
+                           ng-model="interaction.icon" />
+                </button>
+            </div>
+
+<!--            <div class="form-group">
+                <label for="type" translate>INTERACTION.TYPE</label>
+                <select id="type" name="type" class="form-control" ng-model="interaction.type">
+                    <option ng-repeat="type in interactionTypes" value="{{type}}">
+                        {{'ACTION.' + type| translate}}
+                    </option>
+                </select>
+            </div>-->
+
+            <div class="form-group">
+                <label for="descriptionItem" translate>INTERACTION.DESCRIPTION</label>
+                <textarea class="form-control" id="descriptionItem" name="descriptionItem"
+                          ng-model="interaction.description" maxlength="300"></textarea>
+            </div>
+            <a href="#/speaknow/interaction" class="btn btn-default" translate>
+                LAYOUT.BACK
+            </a>
+            <button class="btn btn-primary" translate 
+               ng-click="nextStep()" ng-show="!isEditing" ng-disable="interaction_form.$invalid">
+                LAYOUT.NEXT
+            </button>
+            <button class="btn btn-primary" translate 
+               ng-click="save()" ng-show="isEditing" ng-disable="interaction_form.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

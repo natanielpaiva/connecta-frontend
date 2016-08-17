@@ -1,0 +1,77 @@
+<div class="dashboard-list">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                {{'DASHBOARD.DASHBOARD_LIST'| translate}}
+
+                <a class="btn btn-primary pull-right" href="#/dashboard/new">
+                    <span class="icon-plus"></span>
+                    <span translate>LAYOUT.NEW_M</span>
+                </a>
+            </h3>
+        </div>
+    </div>
+    <!--    <div class="row search-header">
+            <div class="col-sm-6">
+                <span class="btn-group">
+                    <button btn-radio="'grid'" class="btn btn-default" ng-model="listview.mode">
+                        <span class="glyphicon glyphicon-th-large"></span>
+                        <translate class="sr-only">LAYOUT.SHOW_GRID</translate>
+                    </button>
+                    <button btn-radio="'list'" class="btn btn-default" ng-model="listview.mode">
+                        <span class="glyphicon glyphicon-th-list"></span>
+                        <translate class="sr-only">LAYOUT.SHOW_LIST</translate>
+                    </button>
+                </span>
+                <button class="btn btn-default" ng-click="filter = !filter">
+                    <span class="icon-funnel"></span>
+                    <span class="sr-only" translate>
+                        LAYOUT.FILTER
+                    </span>
+                </button>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group has-feedback">
+                    <input class="form-control" type="text"
+                           placeholder="{{'LAYOUT.SEARCH'| translate}}" autofocus />
+                    <span class="glyphicon glyphicon-search form-control-feedback">
+                    </span>
+                </div>
+            </div>
+        </div>-->
+
+    <div class="thumbnail-grid row">
+        <div class="col-md-12" ng-if="!dashboards.length">
+            <p class="text-center text-muted" translate>LAYOUT.NO_RESULTS</p>
+        </div>
+        <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12"
+             ng-repeat="dashboard in dashboards" ng-class="{
+                 'selected':dashboard.selected
+             }">
+            <a href="#/dashboard/{{dashboard.id}}">
+                <div class="thumbnail-grid-item-inner hidden-checkbox-label"
+                     for="item-{{dashboard.id}}">               
+                    <img src="assets/img/portal/dashboard-icon.svg" alt="" />
+                </div>
+                <div class="thumbnail-grid-item-name">
+                    {{dashboard.name}}
+                </div>
+            </a>
+            <label class="thumbnail-grid-checkbox-label">
+                <input type="checkbox" class="hidden" ng-model="dashboard.selected" />
+                <span ng-class="{
+                        'icon-check-box-outline-blank':!dashboard.selected,
+                        'icon-check-box':dashboard.selected,
+                    }"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+
+<bulk-action-bar ng-show="(dashboards | filter:{selected:true}).length"
+    class="am-slide-right">
+    <bulk-action icon="icon-trash" title="LAYOUT.DELETE"
+        ng-click="bulkRemove((dashboards | filter:{selected:true}))">
+    </bulk-action>
+</bulk-action-bar>

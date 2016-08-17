@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>APPLIEDBUDGET.APPLIEDBUDGET</h3>
+        
+        <a class="btn btn-default" href="#/maps/applied-budget/new" translate>
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+
+        <div class="margin-top-single">
+            <form novalidate name="formulario">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button type="button" ng-click="filter = !filter" class="btn btn-info" translate>LAYOUT.FILTER</button>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <table ng-table class="table table-striped margin-top-single">
+            <thead>
+                <tr>
+                    <th class="text-center" translate>APPLIEDBUDGET.APPLICATION_AREA</th>
+                    <th class="text-center" translate>APPLIEDBUDGET.DESCRIPTION</th>                    
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="appliedBudget in appliedBudgets">                    
+                    <td class="text-center" >
+                        <a class="full-size-block link-no-state" href="#/maps/applied-budget/{{appliedBudget.id}}">
+                        {{appliedBudget.budgetAreaApplication.description}}
+                        </a>
+                    </td>   
+                    <td class="text-center" ><a class="full-size-block link-no-state" href="#/maps/applied-budget/{{appliedBudget.id}}">
+                            {{appliedBudget.description}}</a></td>                   
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

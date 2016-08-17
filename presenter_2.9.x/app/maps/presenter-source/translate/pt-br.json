@@ -1,0 +1,17 @@
+
+{   
+    "PRESENTERSOURCE": {
+        "PRESENTERSOURCE":"Fonte do Presenter",
+        "ADD": "Adicionar Fonte do Presenter",
+        "EDIT": "Editar Fonte do Presenter",        
+        "VIEW":"Visualizar Fonte do Presenter",
+        "URL":"URL",
+        "USER":"Usuário",
+        "PASSWORD":"Senha",
+        "TITLE_CONFIRM_DELETE":"Exclusão de Fonte do Presenter",
+        "CONFIRM_DELETE":"Deseja realmente excluir Fonte do Presenter?",
+        "ADDED_SUCCESS": "Fonte do Presenter adicionada com sucesso!",
+        "REMOVE_SUCCESS": "Fonte do Presenter removida com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover Fonte do Presenter!"
+    }
+}

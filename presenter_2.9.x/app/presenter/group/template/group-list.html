@@ -1,0 +1,74 @@
+<default-list-heading
+    title-text="GROUP.REGISTER_GROUP"
+    add-button-href="#/presenter/group/new"
+    add-button-text="LAYOUT.NEW_M"
+    ></default-list-heading>
+
+<table class="table table-striped table-hover" ng-table="tableParams" show-filter="true">
+    <thead>
+        <tr class="row">
+            <th class="col-lg-1 col-xs-1 text-center">
+                <label class="reset-spacing full-size-block cursor-pointer">
+                    <input type="checkbox" class="reset-spacing cursor-pointer hidden"
+                           select-all="groups" select-all-property="selected"
+                           ng-model="selected" />
+                    <span class="bulk-actions-checkbox" ng-class="{
+                                'icon-check-box-outline-blank':!selected,
+                                'icon-check-box':selected,
+                            }"></span>
+                </label>
+            </th>
+            <th class="col-md-3 col-sm-4 col-xs-4" translate>GROUP.NAME</th>
+            <th class="col-md-5 col-sm-5 col-xs-7" translate>GROUP.DESCRIPTION</th>
+            <th class="col-md-3 col-sm-3 hidden-xs" translate>GROUP.TYPE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-if="!groups.length" class="row">
+            <td class="col-xs-12 text-center" colspan="4" translate>
+                LAYOUT.NO_RESULTS
+            </td>
+        </tr>
+        <tr ng-repeat="group in groups" ng-class="{'selected':group.selected}"
+            class="row am-slide-right">
+            <td class="col-md-1 col-xs-1 text-center">
+                <label class="reset-spacing full-size-block cursor-pointer">
+                    <input type="checkbox" class="reset-spacing cursor-pointer hidden"
+                           ng-model="group.selected" />
+                    <span class="bulk-actions-checkbox"
+                          ng-class="{
+                                'icon-check-box-outline-blank':!group.selected,
+                                'icon-check-box':group.selected,
+                            }"></span>
+                </label>
+            </td>
+            <td class="col-md-3 col-sm-4 col-xs-4">
+                <a href="#/presenter/group/{{group.id}}" class="full-size-block link-no-state">
+                    <span class="list-icon-for-type visible-xs-inline hidden-sm hidden-md hidden-lg {{types[group.type].icon}}"
+                          title="{{types[group.type].name}}"></span>
+                    {{group.name}}
+                </a>
+            </td>
+            <td class="col-md-5 col-sm-5 col-xs-7">
+            <a href="#/presenter/group/{{group.id}}" class="full-size-block link-no-state">
+                <a href="#/presenter/group/{{group.id}}" class="full-size-block link-no-state">
+                    {{group.description}}
+                </a>
+            </a>
+            </td>
+            <td class="col-md-3 col-sm-3 hidden-xs">
+                <a href="#/presenter/group/{{group.id}}" class="full-size-block link-no-state">
+                    <span class="list-icon-for-type {{types[group.type].icon}}"></span>
+                    {{types[group.type].name | translate}}
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<bulk-action-bar ng-show="(groups | filter:{selected:true}).length"
+    class="am-slide-right">
+    <bulk-action icon="icon-trash" title="LAYOUT.DELETE"
+        ng-click="bulkRemove((groups | filter:{selected:true}))">
+    </bulk-action>
+</bulk-action-bar>

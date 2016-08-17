@@ -1,0 +1,37 @@
+<div class="viewer-form-singlesource-search" ng-init="search.doSearch()" >
+    <div class="row">
+        <div class="col-md-12">
+            <label for="search-terms" translate class="sr-only">VIEWER.SEARCH_VIEWERS</label>
+            <input id="search-terms" class="form-control" type="search" autofocus
+                   ng-model="search.name" placeholder="{{'VIEWER.SEARCH_MEDIA'|translate}}" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-unstyled">
+                <li ng-repeat="result in search.results" dnd-draggable="result"
+                    dnd-effect-allowed="move"
+                    dnd-moved="search.results.splice($index, 1)"
+                    class="image-on-background"
+                    style="background-image:url({{result.binaryFile}})"
+                    ng-if="result.type == 'FILE'">
+                    <div class="module-icon image-on-background"></div>
+
+                    <div class="singlesource-name">{{result.name}}</div>
+                    
+                </li>
+                <li ng-repeat="result in search.results" dnd-draggable="result"
+                    dnd-effect-allowed="move"
+                    dnd-moved="search.results.splice($index, 1)"
+                    class="image-on-background"
+                    ng-if="result.type == 'URL'">
+                    <span class="sidebar-result-icon icon-link"></span>
+                    <div class="module-icon image-on-background"></div>
+
+                    <div class="singlesource-name">{{result.name}}</div>
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

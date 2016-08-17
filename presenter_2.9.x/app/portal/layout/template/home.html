@@ -1,0 +1,41 @@
+<div class="home">
+    <h2>{{'LAYOUT.WELCOME'|translate}}{{user.name?', ':''}}<span ng-if="user.name">{{user.name}}</span>!</h2>
+    
+    <p translate>LAYOUT.WELCOME_LONGTEXT</p>
+    
+    <div class="row">
+        <div class="col-md-6" ng-repeat="application in applications | filter:shownModules | orderBy:'title'">
+            <div class="module-box">
+                <figure class="module-icon">
+                    <a href="{{application.home}}">
+                        <img ng-src="{{application.icon}}" alt="{{application.title}}"
+                             title="{{'META.'+(application.id|uppercase)+'.DESCRIPTION'|translate}}" />
+                    </a>
+                </figure>
+                <div class="module-options">
+                    <a style="background-color:{{application.color}};"
+                        ng-href="{{link}}" class="btn btn-default"
+                        ng-repeat="(link, text) in options[application.id]">
+                        {{text|translate}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-repeat="application in applications | filter:unactiveModules | orderBy:'title'">
+            <div class="module-box disabled">
+                <figure class="module-icon">
+                    <img ng-src="{{application.icon}}" alt="{{application.title}}"
+                         title="{{'META.'+(application.id|uppercase)+'.DESCRIPTION'|translate}}" /> 
+                </figure>
+                <div class="module-description" title="{{'META.'+(application.id|uppercase)+'.DESCRIPTION'|translate}}">
+                    {{'META.'+(application.id|uppercase)+'.DESCRIPTION'|translate}}
+                </div>
+                <div class="module-options">
+                    <a target="_blank" ng-href="{{application.site}}" class="btn btn-primary" translate>
+                        LAYOUT.MODULE_GET_IT_NOW
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

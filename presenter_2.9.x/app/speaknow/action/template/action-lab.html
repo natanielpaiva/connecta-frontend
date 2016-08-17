@@ -1,0 +1,13 @@
+<div class="form-group">
+    <label id="image" class="well drop-box set-file" ng-file-select
+           ng-file-change="viewThumb($files);"
+           ng-multiple="false" 
+           ng-accept="'.jpeg,.jpg,.png'" 
+           ng-model-rejected="rejFiles" 
+           allow-dir="false">
+        {{image[0].name}}
+    </label>
+</div>
+<button ng-click="send()">Send</button>
+<img ng-if='imgDataUrl' ng-src="{{imgDataUrl}}"/>
+<debug ng-model="action"></debug>

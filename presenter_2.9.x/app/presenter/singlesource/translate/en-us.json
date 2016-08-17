@@ -1,0 +1,18 @@
+{
+    "SINGLESOURCE": {
+        "REGISTER_MEDIA": "Register Media",
+        "NAME": "Media Name",
+        "FILE": "File",
+        "DROP_FILE_HERE": "Drop or click here",
+        "TYPE": "Type",
+        "TYPE_MEDIA": "Media Type",
+        "MEDIA": "Media",
+        "IMAGE": "Image",
+        "ATTRIBUTE_NAME": "Attribute Name",
+        "ATTRIBUTE_VALUE": "Attribute Value",
+        "ATTRIBUTE TYPE": "Attribute Type",
+        "URL": "URL",
+        "DOWNLOAD":"Download"
+    }
+}
+

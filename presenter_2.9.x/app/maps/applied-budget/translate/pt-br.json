@@ -1,0 +1,30 @@
+
+{
+    "APPLIEDBUDGET": {
+        "VIEW": "Visualizar Orçamento Aplicado",
+        "ADD": "Adicionar Orçamento Aplicado",
+        "EDIT": "Editar Orçamento Aplicado",
+        "APPLIEDBUDGET":"Orçamento Aplicado",        
+        "APPLICATION_AREA": "Área de Aplicação",
+        "SELECT":"Selecione uma opção",
+        "SELECT_APPLICATION_AREA": "Selecione uma Área de Aplicação",
+        "DESCRIPTION": "Descrição",
+        "GEOCODE_SUCCESS":"Endereço Geocodificado com Sucesso",
+        "GEOCODE_ZERO_RESULTS":"Nenhum Resultado Encontrado",
+        "MUNICIPALBUDGET": "Orçamento Municipal",
+        "SELECT_MUNICIPALBUDGET": "Selecione um Orçamento Municipal",
+        "MUNICIPALBUDGET_PROGRAM_NAME": "Nome do Programa",
+        "MUNICIPALBUDGET_PROJECT_ACTIVITY_NAME": "Nome da Atividade do Projeto",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Orçamento Aplicado",
+        "CONFIRM_DELETE": "Deseja realmente excluir o Orçamento Aplicado?",
+        "ADDED_SUCCESS": "Orçamento Aplicado adicionado com sucesso!",
+        "REMOVE_SUCCESS": "Orçamento Aplicado removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!",
+        "BUTTON_CLEAR":"Limpar Endereço",
+        "BUTTON_LOCATE":"Localizar",
+        "BUTTON_SELECT":"Selecionar no Mapa",
+        "BUTTON_DELETE":"Excluir",
+        "BUTTON_DRAG":"Arrastar",
+        "BUTTON_INITIAL_VIEW":"Visão Inicial do Mapa"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "INSPECTION": {
+        "INSPECTION": "Inspection",
+        "NAME": "Name",
+        "INSPECTIONS": "Inspections",
+        "SCHEDULING": "Scheduling",
+        "COSTS": "Costs",
+        "REQUISITION": "Requisition",
+        "PLANNING": "Planning",
+        "FORM": "Form",
+        "DILIGENCE": "Diligence",
+        "DILIGENCES": "Diligences",
+        "FILES": "Files"
+    }
+}

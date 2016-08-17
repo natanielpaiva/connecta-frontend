@@ -1,0 +1,29 @@
+{
+    "SUPPLIER": {
+        "SUPPLIER": "Fornecedor",
+        "SUPPLIERS": "Fornecedores",
+        "ADD": "Cadastrar Fornecedor",
+        "EDIT": "Editar Fornecedor",
+        "VIEW": "Visualizar Fornecedor",
+        "CNPJ": "CNPJ",
+        "SOCIAL_NAME": "Razão Social",
+        "FANTASY_NAME": "Nome Fantasia",
+        "STATE_REGISTRATION": "Inscrição Estadual",
+        "COUNTY_REGISTRATION": "Inscrição Municipal",
+        "ADDRESSES": "Endereços",
+        "ACTIONS":"Ações",
+        "RESPONSIBLE": "Responsável",
+        "SAVE_SUCCESS": "Salvo com sucesso!",
+        "ERROR_SAVING": "Erro ao salvar!",
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Fornecedor",
+        "CONFIRM_DELETE": "Deseja realmente excluir o Fornecedor?",
+        "RESPONSIBLE_SELECT":"Selecione um responsável",
+        "RESPONSIBLE_NAME": "Nome",        
+        "RESPONSIBLE_REGISTER": "Adicionar Responsável",
+        "RESPONSIBLE_PHONE": "Telefone",
+        "RESPONSIBLE_EMAIL": "Email",
+        "RESPONSIBLE_CPF": "CPF"
+    }
+}

@@ -1,0 +1,48 @@
+<div ng-if="setLayoutConfiguration != true">
+    <div class="tab-viewer-settings">
+        <div class="switch-viewer">
+            <div title="{{'VIEWER.ANALYSIS'|translate}}" ng-click="checkViewerBar(analysisBar)"
+                 ng-class="{active:viewerBar == analysisBar}">
+                <span class="icon-grid-on" ng-if="showAnalysis != true" ></span>
+            </div>
+        </div>
+        <div class="switch-viewer">
+            <div title="{{'VIEWER.TYPE'|translate}}" ng-click="checkViewerBar(typeBar)"
+                 ng-class="{active:viewerBar == typeBar}">
+                <span class="icon-chart6" ng-if="showAnalysis != true" ></span>
+            </div>
+        </div>
+        <div class="switch-viewer">
+            <div title="{{'VIEWER.SETTINGS'|translate}}" ng-click="checkViewerBar(settingsBar)"
+                 ng-class="{active:viewerBar == settingsBar}">
+                <span class="icon-settings" ng-if="showAnalysis != true" ></span>
+            </div>
+        </div>
+    </div> 
+    <div ng-if="viewerBar == analysisBar" class="combo-analysis" 
+         ng-include="templateCombo"
+         class="am-fade-and-slide-bottom">
+
+    </div>
+    <div ng-if="viewerBar == settingsBar" class="accordion-viewer am-fade-and-slide-left"
+         ng-include="templateSettings">
+    </div>
+    <div ng-if="viewerBar == typeBar" class="accordion-viewer-type am-fade-and-slide-left"
+         ng-include="templateTypes">
+    </div>
+</div>
+<div ng-if="setLayoutConfiguration">
+    <div class="tab-viewer-settings">
+        <div class="switch-viewer-back" ng-click="disabledLayoutConfig()">
+            <div>
+                <span class="icon-arrow-back"></span>
+            </div>
+        </div>
+        <div class="settings-text">
+             {{layoutConfig.name | translate}}
+        </div>
+    </div>
+    <div class="layout-config margin-top-single"
+         ng-include="layoutConfig.template">
+    </div>
+</div>

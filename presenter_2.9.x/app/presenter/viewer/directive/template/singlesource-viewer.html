@@ -1,0 +1,59 @@
+<div ng-if="isEditing" class="singlesource-viewer" dnd-list="model.singlesource.list">
+    <div ng-if="model.singlesource.list.length > 0" ng-repeat="item in model.singlesource.list">
+        <div ng-if="item.type === 'FILE'" >
+            <div ng-switch="fileExtensions[item.fileType].fileType">
+                <div  class="col-md-10 font-size-big" ng-switch-when="BINARY" >
+                    <a  ng-attr-href="{{item.binaryFile}}">
+                        <span  class="icon-file3"></span>
+                    </a>
+                </div>
+                <div ng-switch-when="IMAGE" >
+                    <img style="width: 340px;" alt="" ng-src="{{item.binaryFile}}" />
+                </div>
+                <div ng-switch-when="VIDEO" >
+                    <video controls>
+                        <source ng-src="{{item.binaryFile}}" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+        <div class="viewer-frame" ng-if="item.type === 'URL'" >
+            <iframe id="{{'iframe_' + item.id}}"
+            src="{{item.url}}"
+            onLoad="loadConnectaMaps()"></iframe>
+        </div>
+    </div>
+    <div class="dropzone" ng-if="model.singlesource.list.length === 0" translate>
+        VIEWER.DRAG_HERE
+    </div>
+</div>
+<!-- FIXME Tive que fazer esse código para a apresentação, separar o código da
+diretiva do código do formulário -->
+<div ng-if="!isEditing" style="width:100%;height:100%;">
+    <div ng-if="model.singleSource.type === 'FILE'" style="width:100%;height:100%;">
+        <div ng-switch="fileExtensions[model.singleSource.fileType].fileType" style="width:100%;height:100%;">
+            <div class="col-md-10 font-size-big" ng-switch-when="BINARY" >
+                <a  ng-attr-href="{{model.singleSource.binaryFile}}">
+                    <span  class="icon-file3"></span>
+                </a>
+            </div>
+            <div ng-switch-when="IMAGE" class="image-on-background"
+                  ng-attr-style="width:100%;height:100%;background-image:url({{model.singleSource.binaryFile}});">
+            </div>
+            <div ng-switch-when="VIDEO" style="width:100%;height:100%;">
+                <video style="width:100%;height:100%;" controls>
+                    <source ng-src="{{model.singleSource.binaryFile}}" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+        </div>
+    </div>
+    <div class="viewer-frame" ng-if="model.singleSource.type === 'URL'"
+         style="width:100%;height:100%;">
+        <iframe id="{{'iframe_' + model.singleSource.id}}"
+            style="width:100%;height:100%;border:none;"
+            src="{{model.singleSource.url}}"
+            onLoad="loadConnectaMaps()"></iframe>
+    </div>
+</div>

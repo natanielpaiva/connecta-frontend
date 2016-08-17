@@ -1,0 +1,41 @@
+<style type="text/css">
+menu ul>li .menu-item.active:hover, menu ul>li .menu-item.active {
+    background-color: {{currentModule.config.color}};
+}
+</style>
+
+<ul class="nav">
+    <li ng-repeat="item in menu">
+        <a ng-class="{
+                'has-child': item.children && item.children.length > 0,
+                'active' : isActive(item)
+            }"
+           href="{{item.href ? '#' + item.href : 'javascript:void(0)' }}"
+           class="menu-item"
+           ng-click="toggle(item)">
+            <span class="menu-item-icon {{item.icon}}" title="{{item.title|translate}}"></span>
+            <span class="menu-item-title" translate>{{item.title}}</span>
+            <span class="menu-item-arrow"
+                  ng-class="{
+                        'icon-chevron-down':isOpened(item),
+                        'icon-chevron-right':!isOpened(item)
+                      }"></span>
+        </a>
+
+        <ul class="nav" ng-if="item.children.length && isOpened(item)">
+            <li ng-repeat="child in item.children">
+                <a class="menu-item" ng-class="{
+                        'has-child': child.children && child.children.length > 0,
+                        'active'   : isActive(child)
+                    }"
+                   href="{{child.href ? '#' + child.href : 'javascript:void(0)' }}">
+                    <span class="menu-item-title" translate>{{child.title}}</span>
+                    <span class="menu-item-arrow" ng-class="{
+                                'icon-chevron-down':isOpened(child),
+                                'icon-chevron-right':!isOpened(child)
+                              }"></span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-12">        
+        <h3 translate>{{isEditing ? 'INSTRUMENT.EDIT' : 'INSTRUMENT.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+
+            <div class="form-group">
+                <label for="code" translate>INSTRUMENT.CODE</label>
+                <input type="number"  class="form-control" id="code" name="code"
+                       ng-model="instrument.code" required/>
+                <div ng-show="formulario.code.$touched" ng-messages="formulario.code.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" translate>INSTRUMENT.NAME</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       ng-model="instrument.name" required/>
+                <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="certificateNumber" translate>INSTRUMENT.CERTIFICATE</label>
+                <input type="text" class="form-control" id="certificateNumber" name="certificateNumber"
+                       ng-model="instrument.certificateNumber" required/>
+                <div ng-show="formulario.certificateNumber.$touched" ng-messages="formulario.certificateNumber.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>                  
+
+            <div class="form-group">
+                <label for="calibrationDate" translate>INSTRUMENT.CALIBRATION_DATE</label>
+                <p class="input-group">
+                    <input type="date" class="form-control" id="calibrationDate" datepicker-popup ng-model="instrument.calibrationDate" is-open="validationPopupOpened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" current-text="{{datePickerMsg.msgToday}}" clear-text="{{datePickerMsg.msgClear}}" close-text="{{datePickerMsg.msgClose}}"  readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id ="btn_validation_date" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>                  
+                <div ng-show="formulario.calibrationDate.$touched" ng-messages="formulario.calibrationDate.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="dueDate" translate>INSTRUMENT.VALIDATION_DATE</label>
+                 <p class="input-group">
+                    <input type="date" class="form-control" datepicker-popup ng-model="instrument.dueDate" is-open="duePopupOpened" datepicker-options="dateOptions"  date-disabled="disabled(date, mode)" ng-required="true" current-text="Hoje" clear-text="Limpar" close-text="Fechar" readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id ="btn_due_date" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p> 
+
+                <div ng-show="formulario.dueDate.$touched" ng-messages="formulario.dueDate.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="manufacturer" translate>INSTRUMENT.MANUFACTURER_NAME</label>
+                <input type="text" class="form-control" id="manufacturer" name="manufacturer"
+                       ng-model="instrument.manufacturer" required/>
+                <div ng-show="formulario.manufacturer.$touched" ng-messages="formulario.manufacturer.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <a href="#/inspection/instrument"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

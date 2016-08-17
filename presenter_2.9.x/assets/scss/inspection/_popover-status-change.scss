@@ -1,0 +1,27 @@
+.popover-status-change {
+
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+
+    li {
+        padding: 7px 15px;
+        cursor: pointer;
+
+        span {
+            margin-right: 5px;
+        }
+
+    }
+    li:hover {
+        background-color: #E2DFDF;
+    }
+}
+
+.popover-content {
+    padding: 0px;
+}
+
+status-change div {
+    cursor: pointer;
+}

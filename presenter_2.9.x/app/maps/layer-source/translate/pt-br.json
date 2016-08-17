@@ -1,0 +1,21 @@
+
+{   
+    "LAYERSOURCE": {
+        "LAYERSOURCE":"Fonte de Camadas",
+        "ADD": "Adicionar Fonte de Camada",
+        "EDIT": "Editar Fonte de Camada",        
+        "VIEW":"Visualizar Fonte de Camada",
+        "NAME":"Nome",
+        "TYPE":"Tipo",
+        "INTERNAL_LINK":"Link Interno",
+        "EXTERNAL_LINK":"Link Externo",
+        "USER":"Usuário",
+        "PASSWORD":"Senha",
+        "SELECT":"Selecione uma Fonte de Camada",
+        "TITLE_CONFIRM_DELETE":"Exclusão de Fonte de Camada",
+        "CONFIRM_DELETE":"Deseja realmente excluir a Fonte de camada?",
+        "ADDED_SUCCESS": "Adicionada com sucesso!",
+        "REMOVE_SUCCESS": "Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover!"
+    }
+}

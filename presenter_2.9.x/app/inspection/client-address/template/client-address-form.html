@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-12">        
+        <h3 translate>{{isEditing ? 'CLIENT_ADDRESS.EDIT' : 'CLIENT_ADDRESS.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+
+            <div class="form-group">
+                <label for="description" translate>CLIENT_ADDRESS.DESCRIPTION</label>
+                <input type="text"  class="form-control" id="description" name="description"
+                       ng-model="clientAddress.description" required/>
+                <div ng-show="formulario.description.$touched" ng-messages="formulario.description.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="cep" translate>CLIENT_ADDRESS.CEP</label>
+                <input type="number" class="form-control" id="cep" name="cep"
+                       ng-model="clientAddress.cep" required/>
+                <div ng-show="formulario.cep.$touched" ng-messages="formulario.cep.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="county" translate>CLIENT_ADDRESS.CITY</label>
+                <input type="text" class="form-control" id="county" name="county"
+                       ng-model="clientAddress.county" required/>
+                <div ng-show="formulario.county.$touched" ng-messages="formulario.county.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>                  
+
+            <div class="form-group">
+                <label for="state" translate>CLIENT_ADDRESS.STATE</label>
+                <input type="text" class="form-control" id="state" name="state"
+                       ng-model="clientAddress.state" required/>
+                <div ng-show="formulario.state.$touched" ng-messages="formulario.state.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="country" translate>CLIENT_ADDRESS.COUNTRY</label>
+                <input type="text" class="form-control" id="country" name="country"
+                       ng-model="clientAddress.country" required/>
+                <div ng-show="formulario.country.$touched" ng-messages="formulario.country.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>            
+   
+
+
+            <a href="" ng-click="previousPage();"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

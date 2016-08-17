@@ -1,0 +1,149 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>PRODUCT.PRODUCT_SERVICE</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portal-type-switcher">
+            <label class="radio-inline portal-type-switcher-item"
+                   title="Cadastrar Produto">
+                <input type="radio" class="portal-type-switcher-input" name="type"
+                       ng-model="product.type" value="PRODUCT"/>
+                <span class="icon-box2"  ng-click="reset()"></span>
+            </label>
+            <label class="radio-inline portal-type-switcher-item"
+                   title="Cadastrar Serviço">
+                <input type="radio" class="portal-type-switcher-input" name="type"
+                       ng-model="product.type" value="SERVICE"/>
+                <span class="icon-tools2" ng-click="reset()"></span>
+            </label>
+        </div>
+
+        <div class="form-group am-fade-and-slide-bottom" ng-show="product.type == 'PRODUCT'" style="padding-top: 10px">
+            <form ng-submit="search()">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="productName">
+                    <span class="input-group-addon search-products" ng-click="search()">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                </div>
+            </form>
+        </div>
+
+        <form novalidate name="formulario" ng-submit="submit()">
+
+
+            <div class="products-reference am-fade-and-slide-bottom ng-scope" ng-show="products.length > 0">
+                <lu>
+                    <li ng-repeat="prod in products"
+                        ng-click="setProductReference(prod)">{{prod.name}}</li>
+                </lu>
+            </div>
+
+            <span class="btn red btn-primary" style="margin-top: 10px" translate ng-show="productNotExist"
+                  ng-click="createProductReference()">
+                PRODUCT.CREATE
+            </span>
+
+            <div ng-show="showForm()" class="am-fade-and-slide-bottom ng-scope">
+                <div class="form-group">
+                    <label for="name" translate>PRODUCT.NAME</label>
+                    <input type="text" class="form-control" id="name" name="name" ng-model="product.name" required/>
+                    <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group" ng-show="newProductReference">
+                    <label for="code" translate>PRODUCT.CODE</label>
+                    <input type="number" class="form-control" id="code" name="code" ng-model="product.productReference.code" />
+                    <div ng-show="formulario.code.$touched" ng-messages="formulario.code.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="measureType" translate>PRODUCT.TYPE</label>
+                    <select id="productType" name="productType" class="form-control" ng-model="product.demand" required>
+                        <option value="false">{{'PRODUCT.OFFER'| translate}}</option>
+                        <option value="true">{{'PRODUCT.DEMAND'| translate}}</option>
+                    </select>
+                    <div ng-show="formulario.productType.$touched" ng-messages="formulario.productType.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="price" translate>PRODUCT.PRICE</label>
+                    <input type="text" class="form-control"
+                           id="price" name="price"
+                           ng-model="product.price"
+                           currency-mask
+                           required/>
+                    <div ng-show="formulario.price.$touched" ng-messages="formulario.price.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="measureType" translate>PRODUCT.MEASURE</label>
+                    <select id="measureType" name="measureType" class="form-control" ng-model="product.measureType" required>
+                        <option ng-repeat="measureType in measureTypes" value="{{measureType}}">
+                            {{'PRODUCT.' + measureType| translate}}
+                        </option>
+                    </select>
+                    <div ng-show="formulario.measureType.$touched" ng-messages="formulario.measureType.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category" translate>PRODUCT.CATEGORY</label>
+                    <select id="category" name="category" class="form-control"
+                            ng-options="category as category.name for category in categories track by category.id"
+                            ng-model="product.subcategory" required/>
+                    </select>
+                    <div ng-show="formulario.category.$touched" ng-messages="formulario.category.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" translate>PRODUCT.DESCRIPTION</label>
+                    <input type="description" class="form-control" id="description" name="description" ng-model="product.description" required/>
+                    <div ng-show="formulario.description.$touched" ng-messages="formulario.description.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label translate>PRODUCT.IMAGE</label>
+                    <p class="help-block ng-binding ng-scope" translate>
+                        COMPANY.VALIDATION.IMAGERESOLUTION
+                    </p>
+                    <label id="file-rect"
+                           class="well drop-box set-file dropzone"
+                           ng-file-drop
+                           ng-file-select
+                           ng-multiple="false"
+                           ng-file-change="fileDropped($files, $event, $rejectedFiles)"
+                           ng-accept="'.jpeg,.jpg,.png'"
+                           ng-model-rejected="rejFiles"
+                           allow-dir="false"
+                           drag-over-class="{accept:'accept', reject:'reject'}" >
+                        <translate>{{productImage.name ? productImage.name : 'COMPANY.DROP_FILE_HERE'}}</translate>
+                    </label>
+                    <img class="img-company-quad" ng-if="product.id || productImage"
+                         ng-src="{{product.id && productImage == undefined ? product.image : image}}" />
+                    <p ng-show="rectInvalid" class="help-block ng-binding ng-scope">
+                        Esse campo é obrigatório
+                    </p>
+                </div>
+                <a href="#/speaknow/product"
+                   class="btn btn-default" translate>
+                    LAYOUT.CANCEL
+                </a>
+                <button class="btn btn-primary" translate
+                        ng-disabled="formulario.$invalid">
+                    LAYOUT.SAVE
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{
+    "PROJECT": {
+        "PROJECT": "Projeto",
+        "ADD":"Cadastrar Projeto",
+        "EDIT":"Editar Projeto",
+        "NAME":"Nome",
+        "DESCRIPTION":"Descrição",
+        "DOCUMENTS":"Documentos",
+        "PURCHASE_ORDER":"Pedido de Compra",
+        "CLIENT":"Cliente",
+        "SAVE_SUCCESS":"Pedido salvo com sucesso."
+    }
+}

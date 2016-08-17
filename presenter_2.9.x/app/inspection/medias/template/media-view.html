@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>MEDIA.VIEW</h3>
+    </div>
+</div>
+
+<!--<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group">
+            <button class="btn btn-default">
+                <span class="icon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default">
+                <span class="icon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>    
+</div>-->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single margin-bottom-single">
+            <p ng-if="media.name">
+                <strong translate>MEDIA.NAME</strong>:
+                    {{media.name}}
+            </p>
+            
+            <p ng-if="media.type">
+                <strong translate>MEDIA.TYPE</strong>:
+                {{media.type}}
+            </p>
+            
+            <p ng-if="media.extension">
+                <strong translate>MEDIA.EXTENSION</strong>:
+                {{media.extension}}
+            </p>
+            
+            <p ng-if="media.description">
+                <strong translate>MEDIA.DESCRIPTION</strong>:
+                {{media.description}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="#/inspection/medias" role="button" class="btn btn-default" translate>
+            LAYOUT.BACK
+        </a>
+    </div>
+</div>

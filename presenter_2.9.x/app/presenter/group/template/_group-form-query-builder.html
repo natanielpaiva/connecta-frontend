@@ -1,0 +1,32 @@
+
+<div class="col-md-12">
+    <div class="well clearfix">
+      <ng-include src="'app/presenter/group/template/_group-form-query-builder-item.html'"
+          onload="statement=query.statement;parent=null"></ng-include>
+    </div>
+</div>
+
+<button type="button" class="btn" ng-click="getResultQueryBuider(query)"  translate>
+    GROUP.SEARCH
+</button>
+
+<div  class="form-group">
+    <div>
+        <label translate>GROUP.MEDIAS</label>
+    </div>
+</div>
+<div class="gallery form-group">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <ul class="gallery-view">
+                    <li ng-repeat="item in medias" dnd-effect-allowed="false" ng-style="{'background-image': 'url({{item.url}})'}">
+                        <div class="media-item">
+                            {{item.name}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

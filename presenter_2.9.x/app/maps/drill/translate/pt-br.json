@@ -1,0 +1,21 @@
+{
+    "DRILL": {
+        "DRILL": "Drill",
+        "DRILLS": "Drills",
+        "ADD": "Cadastrar Drill",
+        "EDIT": "Editar Drill",
+        "VIEW": "Visualizar Drill",
+        "NAME": "Nome",
+        "FANTASY_NAME": "Nome Fantasia",
+        "ANALYSIS": "Análise",
+        "ANALYSIS_SELECT": "Selecione uma Análise",
+        "ACTIONS":"Ações",
+        "SAVE_SUCCESS": "Drill  Salvo com sucesso!",
+        "ERROR_SAVING": "Erro ao salvar Drill !",
+        "REMOVE_SUCCESS": " Drill Removido com sucesso!",
+        "ERROR_REMOVING": "Erro ao remover Drill !",
+        "TITLE_CONFIRM_DELETE": "Exclusão de Drill",
+        "CONFIRM_DELETE": "Deseja realmente excluir o Drill?",
+        "ANALYSIS_SELECT<":"Selecione uma analise"    
+    }
+}

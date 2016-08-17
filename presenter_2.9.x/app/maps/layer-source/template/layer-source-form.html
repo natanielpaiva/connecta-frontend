@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-md-12">        
+        <h3 translate>{{isEditing ? 'LAYERSOURCE.EDIT' : 'LAYERSOURCE.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+            <div class="form-group">
+                <label for="nm_source" translate>LAYERSOURCE.NAME</label>
+                <input type="text" class="form-control" id="nm_source" name="nm_source"
+                       ng-model="layerSource.nm_source" required>
+                <!--                <div ng-show="formulario.nm_source.$touched" ng-messages="formulario.nm_source.$error"
+                                     ng-messages-include="portal-validation-messages"></div>-->
+                <div ng-show="formulario.$submitted || formulario.nm_source.$touched" 
+                     ng-messages="formulario.nm_source.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+
+            <div class="portal-type-switcher">
+                <label for="layerSourceTypeEntity" translate>LAYER.SOURCE_LAYER</label></br>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Geoserver">
+                    <input type="radio" class="portal-type-switcher-input" name="GEOSERVER" id="layerSourceTypeEntity"  
+                           ng-model="layerSource.layerSourceTypeEntity" value="1" required/>
+                    <span class="icon-geoserver"></span>                    
+                </label>
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Arcgis"> 
+                    <input type="radio" class="portal-type-switcher-input" name="ARCGISSERVER" id="layerSourceTypeEntity"  
+                           ng-model="layerSource.layerSourceTypeEntity" value="2" required/>
+                    <span class="icon-esri"></span>
+                </label>
+
+
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Mapviewer"> 
+                    <input type="radio" class="portal-type-switcher-input" name="MAPVIEWER" id="layerSourceTypeEntity"  
+                           ng-model="layerSource.layerSourceTypeEntity" value="3" required/>
+                    <span class="icon-globe"></span>
+                </label>
+
+                <label class="radio-inline portal-type-switcher-item"
+                       title="Mapserver"> 
+                    <input type="radio" class="portal-type-switcher-input" name="MAPSERVER" id="layerSourceTypeEntity"  
+                           ng-model="layerSource.layerSourceTypeEntity" value="4" required/>
+                    <span class="icon-map2"></span>
+                </label>
+                
+                
+                 <div ng-show="formulario.$submitted || formulario.layerSourceTypeEntity.$touched" 
+                     ng-messages="formulario.layerSourceTypeEntity.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+            </br>
+
+           
+            <div class="form-group">
+                <label for="ds_link_interno" translate>LAYERSOURCE.INTERNAL_LINK</label>
+                <input type="text" class="form-control" id="ds_link_interno" name="ds_link_interno"
+                       ng-model="layerSource.ds_link_interno" required>
+                <div ng-show="formulario.$submitted || formulario.ds_link_interno.$touched" 
+                     ng-messages="formulario.ds_link_interno.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="ds_link_externo" translate>LAYERSOURCE.EXTERNAL_LINK</label>
+                <input type="text" class="form-control" id="ds_link_externo" name="ds_link_externo"
+                       ng-model="layerSource.ds_link_externo" required>
+                <div ng-show="formulario.$submitted || formulario.ds_link_externo.$touched" 
+                     ng-messages="formulario.ds_link_externo.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="nm_user_rest" translate>LAYERSOURCE.USER</label>
+                <input type="text" class="form-control" id="nm_user_rest" name="nm_user_rest"
+                       ng-model="layerSource.nm_user_rest" required>
+                <div ng-show="formulario.$submitted || formulario.nm_user_rest.$touched" 
+                     ng-messages="formulario.nm_user_rest.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="nm_pass_rest" translate>LAYERSOURCE.PASSWORD</label>
+                <input type="password" class="form-control" id="nm_pass_rest" name="nm_pass_rest"
+                       ng-model="layerSource.nm_pass_rest" required>
+                <div ng-show="formulario.$submitted || formulario.nm_pass_rest.$touched" 
+                     ng-messages="formulario.nm_pass_rest.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>                        
+
+
+            <a href="#/maps/layer-source"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

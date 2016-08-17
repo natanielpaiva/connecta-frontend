@@ -1,0 +1,503 @@
+.analysis-form {
+    .xml-tree {
+        padding-left: 1em;
+        list-style: none;
+        padding:0;
+        margin:0;
+
+        li {
+            padding:0;
+            margin:0;
+            line-height:1em;
+            list-style: none;
+
+            label {
+                margin:0.3em !important;
+                cursor:pointer;
+                user-select:none;
+            }
+
+            input[name=table] {
+                opacity:0;
+                height:0;
+                width:0;
+
+                &:checked ~ label.radio-table {
+                    background-color:$presenterBlue;
+                }
+            }
+            label.radio-table {
+                background-color:$gray;
+                color:$white;
+                border-radius:0.2em;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                padding:0.25em;
+                font-size:1em;
+            }
+
+            input[name=column] {
+                opacity:0;
+                height:0;
+                width:0;
+
+                &:checked ~ label.checkbox-column {
+                    background-color:$bs-brand-warning;
+                }
+            }
+            label.checkbox-column {
+                background-color:$darkerWhite;
+
+                color:$white;
+                border-radius:0.2em;
+                padding:0.3em;
+                font-size:0.8em;
+                font-weight:normal;
+                line-height:1.25em;
+
+                &.element-level {
+                    margin-right:-0.95em !important;
+                    border-top-right-radius:0;
+                    border-bottom-right-radius:0;
+                }
+            }
+        }
+    }
+
+    .close-column{
+        cursor:pointer;
+    }
+
+    .analysis-settings-drill {
+
+        width: 100%;
+        position: relative;
+
+        ul[dnd-list], ul[dnd-list] > li {
+            position: relative;
+        }
+
+        ul[dnd-list] {
+            min-height: 100px;
+            padding-left: 0px;
+            border: dashed 0.2em $darkerWhite;
+            margin-top:0.5em;
+            padding: 0.8em;
+            min-height: 12em;
+
+            &.has-item {
+                background-color:$white;
+                border: solid 0.2em $darkerWhite;
+
+                .dndPlaceholder {
+                    display:block;
+                    background-color: $darkWhite;
+                    border: dashed 0.2em $darkerWhite;
+                }
+            }
+
+            .dndPlaceholder {
+                display: none;
+            }
+
+            .dndDraggingSource {
+                display: none;
+            }
+
+            li {
+                background-color: $presenterBlue;
+                box-shadow: 0.1em 0.1em 0 $darkerWhite;
+                border-radius: 0.2em;
+                display: inline-block;
+                color: $white;
+                font-size: 14px;
+                line-height:2em;
+                height:2em;
+                width: auto;
+                cursor: pointer;
+                margin-bottom:0.25em;
+                margin-right:0.25em;
+                padding:0 0.5em;
+                @include clearfix;
+
+                &.selected {
+                    background-color: #297eb8;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .analysis-drag-here {
+        width: 100%;
+        ul[dnd-list] {
+            min-height: 100px;
+            padding-left: 0px;
+            border: dashed 0.2em $darkerWhite;
+            margin-top:0.5em;
+            padding: 0.8em;
+            min-height: 12em;
+            position:relative;
+
+            &.has-item {
+                background-color:$white;
+                border: solid 0.2em $darkerWhite;
+            }
+
+            .drag-here-text {
+                line-height:5.5em;
+                font-size:2em;
+                text-align:center;
+                color:$darkerWhite;
+                position:absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+
+            .dndDraggingSource {
+                display: none;
+            }
+
+            .dndPlaceholder {
+                background-color: transparent;
+                border: dashed 0.2em $darkerWhite;
+                border-radius: 0.2em;
+                display: block;
+                color: $white;
+                font-size: 14px;
+                height:2.3em;
+                width:14em;
+                cursor: pointer;
+                margin:0 auto 2em auto;
+                padding:0 0.5em;
+                text-align: center;
+                position:relative;
+                @include clearfix;
+
+
+                &:not(:last-of-type) {
+                    &:after{
+                        width:0;
+                        height:0;
+                        position:absolute;
+                        left:50%;
+                        top:2em;
+                        transform:translate(-50%);
+
+                        border-style:solid;
+                        border-width:2em 1em;
+                        border-color:transparent;
+                        border-top-color: $darkerWhite;
+                    }
+                }
+            }
+            li:not(.dndPlaceholder) {
+                border-radius: 0.2em;
+                display: block;
+                color: $white;
+                font-size: 14px;
+                line-height:2em;
+                width:14em;
+                cursor: pointer;
+                margin:0 auto 2em auto;
+                padding:0 0.5em;
+                text-align: center;
+                @include clearfix;
+
+                background-color: $presenterBlue;
+                box-shadow: 0.1em 0.1em 0 $darkerWhite;
+                position:relative;
+
+                &.selected {
+                    background-color: #297eb8;
+                    color: #fff;
+                }
+                span{
+                    float:right;
+                    padding-top: 0.5em;
+                }
+
+                &:not(:last-of-type) {
+                    &:after{
+                        width:0;
+                        height:0;
+                        position:absolute;
+                        left:50%;
+                        top:2em;
+                        transform:translate(-50%);
+
+                        border-style:solid;
+                        border-width:2em 1em;
+                        border-color:transparent;
+                        border-top-color: $darkerWhite;
+                    }
+                }
+            }
+
+            &.dndDragover {
+                background-color: darken($white,1%);
+            }
+        }
+    }
+
+    .well {
+        margin-bottom: 0;
+    }
+
+    .analysis-csv-file {
+        label {
+            cursor:pointer;
+            font-size:2em;
+            font-weight:500;
+            margin:0;
+            height: 4.5em;
+            line-height: 4.5em;
+            text-align:center;
+            border:dashed 0.1em $darkWhite;
+            color:$darkWhite;
+            border-radius:0.25em;
+            &:hover {
+                border:dashed 0.1em $darkerWhite;
+                color:$darkerWhite;
+            }
+        }
+        input {
+            opacity:0;
+            height:0;
+            width:0;
+        }
+    }
+
+    h4 {
+        @include clearfix;
+        font-size:1.25em;
+        height: 2em;
+        line-height: 2em;
+        font-weight:300;
+    }
+
+    .analysis-relations {
+        .relations {
+            margin-bottom:1em;
+
+            .analysis-relation, .analysis-relation-suggestion {
+                @include clearfix;
+                margin-bottom:1px;
+
+                .column-type {
+                    padding-right:0.5em;
+                    &.type-text {
+                        font-weight:700;
+                        text-decoration: underline;
+                    }
+                }
+
+                .left-analysis {
+                    @include clearfix;
+                    height:2.5em;
+                    line-height:2.5em;
+                    padding:0 1em 0 1em;
+                    float:left;
+                    width:47%;
+                    position:relative;
+                    .left-analysis-name {
+                        @include clipped-text;
+                        cursor:pointer;
+                        float:left;
+                        width:50%;
+                        text-align: left;
+                    }
+                    .left-analysis-column {
+                        @include clipped-text;
+                        float:left;
+                        width:50%;
+                        select {
+                            cursor:pointer;
+                            width:100%;
+                            outline:0;
+                            background-color:transparent;
+                            border:none;
+                            border-bottom:solid 0.15em rgba($white, 0.25);
+                            user-select:none;
+                            position:relative;
+                            
+                            &:focus {
+                                border-bottom-color:rgba($white, 0.75);
+                            }
+                            option {
+                                color:$lighterGray;
+                            }
+                        }
+                        &:hover {
+                            select {
+                                border-bottom-color:$white;
+                            }
+                        }
+                    }
+                    &:after {
+                        content:' ';
+                        display:block;
+                        height:0;
+                        width:0;
+                        border:solid 16.5px transparent;
+                        position:absolute;
+                        top:0;
+                        bottom:0;
+                        right:-32.45px;
+                    }
+                }
+                .right-analysis {
+                    float:right;
+                    width:47%;
+                    height:2.5em;
+                    line-height:2.5em;
+                    padding:0 3em 0 1em;
+
+                    position:relative;
+
+                    &:before {
+                        content:' ';
+                        display:block;
+                        position:absolute;
+                        height:0;
+                        width:0;
+                        border:solid 16.5px transparent;
+                        top:0;
+                        bottom:0;
+                        left:-32.45px;
+                    }
+                    .right-analysis-column {
+                        @include clipped-text;
+                        float:left;
+                        width:50%;
+                        text-align: left;
+                        select {
+                            cursor:pointer;
+                            width:100%;
+                            outline:0;
+                            background-color:transparent;
+                            border:none;
+                            border-bottom:solid 0.15em rgba($white, 0.25);
+                            user-select:none;
+                            position:relative;
+                            
+                            &:focus {
+                                border-bottom-color:rgba($white, 0.75);
+                            }
+                            option {
+                                color:$lighterGray;
+                            }
+                        }
+                        &:hover {
+                            select {
+                                border-bottom-color:$white;
+                            }
+                        }
+                    }
+                    .right-analysis-name {
+                        @include clipped-text;
+                        cursor:pointer;
+                        float:left;
+                        width:50%;
+                        text-align: left;
+                        
+                        select {
+                            cursor:pointer;
+                            width:100%;
+                            outline:0;
+                            background-color:transparent;
+                            border:none;
+                            border-bottom:solid 0.15em rgba($white, 0.25);
+                            user-select:none;
+                            position:relative;
+                            
+                            &:focus {
+                                border-bottom-color:rgba($white, 0.75);
+                            }
+                            option {
+                                color:$lighterGray;
+                            }
+                        }
+                        &:hover {
+                            select {
+                                border-bottom-color:$white;
+                            }
+                        }
+                        &:after {
+                            content:' ';
+                            display:block;
+                            height:0;
+                            width:0;
+                            border:solid 16.5px transparent;
+                            position:absolute;
+                            top:0;
+                            bottom:0;
+                            right:-32.45px;
+                        }
+                    }
+                    .icon-action {
+                        cursor:pointer;
+                        height:2.5em;
+                        line-height:2.5em;
+                        position:absolute;
+                        right:0.5em;
+                    }
+                }
+            }
+
+            .analysis-relation-suggestion {
+                color:lighten($gray, 10%);
+                [class^="icon-"] {
+                    color:lighten($gray, 10%);
+                }
+
+                .left-analysis, .right-analysis {
+                    background-color:$darkWhite;
+                    &:before {
+                        border-right-color:$darkWhite;
+                    }
+                    &:after {
+                        border-left-color:$darkWhite;
+                    }
+                }
+            }
+
+            .analysis-relation {
+                color:$white;
+                .left-analysis {
+                    background-color:$presenterBlue;
+                    &:after {
+                        border-left-color:$presenterBlue;
+                    }
+                }
+                .right-analysis {
+                    background-color:$presenterBlue;
+                    &:before {
+                        border-right-color:$presenterBlue;
+                    }
+                }
+            }
+
+            .new-relation {
+                font-size:1.1em;
+                height:2.5em;
+                line-height:2.5em;
+                margin-top:1em;
+
+                cursor:pointer;
+                text-align:center;
+
+                color:$lighterGray;
+                border:dashed 0.1em $darkWhite;
+                background-color:transparent;
+
+                &:hover {
+                    color:darken($lighterGray,10%);
+                    border:dashed 0.1em darken($lighterGray,10%);
+                }
+            }
+        }
+    }
+}

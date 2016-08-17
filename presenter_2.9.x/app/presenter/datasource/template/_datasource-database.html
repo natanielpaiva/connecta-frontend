@@ -1,0 +1,58 @@
+<!-- Database -->
+<div class="form-group">
+    <label for="database-driver" translate>DATASOURCE.DRIVER_NAME</label>
+    <select id="database-driver" class="form-control"
+            ng-model="object.driver" ng-options="key as driver.name for (key, driver) in aux.drivers">
+    </select>
+    <div ng-show="formulario.driver.$touched" ng-messages="formulario.domain.$error"
+         ng-messages-include="portal-error-messages"></div>
+</div>
+<div class="row">
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseHost">
+        <label for="database-host" translate class="required">DATASOURCE.HOST</label>
+        <input type="text" id="database-host" name="databaseHost" class="form-control"
+               ng-model="object.server" required />
+        <validated-field-messages ng-model="formObject.databaseHost"></validated-field-messages>
+    </div>
+
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.databasePort">
+        <label for="database-port" translate class="required">DATASOURCE.PORT</label>
+        <input type="number" name="databasePort" class="form-control" id="database-port"
+               ng-model="object.port" min="0" max="99999" required>
+        <validated-field-messages ng-model="formObject.databasePort"></validated-field-messages>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseDatabase">
+        <label for="database-database" translate ng-class="{
+            required:aux.drivers[object.driver].hasSid
+        }">DATASOURCE.DATABASE</label>
+        <input type="text" name="databaseDatabase" class="form-control" id="database-database"
+               ng-model="object.sid" ng-disabled="!aux.drivers[object.driver].hasSid"
+               ng-required="aux.drivers[object.driver].hasSid" />
+        <validated-field-messages ng-model="formObject.databaseDatabase"></validated-field-messages>
+    </div>
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseSchema">
+        <label for="database-schema" translate ng-class="{
+            required:!aux.drivers[object.driver].hasSid
+        }">
+            DATASOURCE.SCHEMA
+        </label>
+        <input type="text" id="database-schema" name="databaseSchema" class="form-control"
+               ng-model="object.schema" ng-required="!aux.drivers[object.driver].hasSid" />
+        <validated-field-messages ng-model="formObject.databaseSchema"></validated-field-messages>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseUsername">
+        <label for="database-username" translate class="required">DATASOURCE.USERNAME</label>
+        <input type="text" name="databaseUsername" id="database-username" class="form-control"
+               ng-model="object.user" required />
+        <validated-field-messages ng-model="formObject.databaseUsername"></validated-field-messages>
+    </div>
+    <div class="col-xs-6 form-group">
+        <label for="database-password" translate>DATASOURCE.PASSWORD</label>
+        <input type="password" id="database-password" class="form-control"
+            ng-model="object.password" name="databasePassword" />
+    </div>
+</div>

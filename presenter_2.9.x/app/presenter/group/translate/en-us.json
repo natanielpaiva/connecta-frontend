@@ -1,0 +1,20 @@
+{
+    "GROUP": {
+        "REGISTER_GROUP": "Groups",
+        "NAME": "Name",
+        "TYPE": "Group Type",
+        "DESCRIPTION": "Description",
+        "ATTRIBUTE_NAME": "Attribute Name",
+        "ATTRIBUTE_VALUE": "Attribute Value",
+        "ATTRIBUTE TYPE": "Attribute Type",
+        "SELECT_FILE": "File selection",
+        "FILTER": "Dynamic Filter",
+        "GROUPS": "Groups",
+        "SET_MEDIA": "Media",
+        "MEDIAS": "Media",
+        "GROUP_VIEW": "Group view",
+        "SEARCH": "Search",
+        "SEARCH_SINGLESOURCE": "Media search"
+    }
+}
+

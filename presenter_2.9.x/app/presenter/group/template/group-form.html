@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>GROUP.REGISTER_GROUP</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="groupForm" ng-submit="submit()">
+            <div class="form-group" validated-field-holder="groupForm.name">
+                <label for="model-nome" class="required" translate>GROUP.NAME</label>
+                <input type="text" name="nome" ng-model="group.name" id="model-nome" required class="form-control" maxlength="5"/>
+                <validated-field-messages ng-model="groupForm.name"></validated-field-messages>
+            </div>
+            <div class="form-group">
+                <label for="description" class="required" translate>GROUP.DESCRIPTION</label>
+                <textarea id="description" ng-model="group.description" class="form-control" maxlength="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label ng-repeat="tp in types" class="radio-inline portal-type-switcher-item">
+                    <input type="radio"  ng-model="group.type" class="portal-type-switcher-input" id="single-source-type-{{tp.id}}" ng-value="tp" />
+                    <span translate="">{{tp.name}}</span>
+
+                </label>
+            </div>
+            <ng-include ng-if="group.type.template"
+                        src="'app/presenter/group/template/' + group.type.template">
+            </ng-include>
+
+            <div class="form-group" style="float: left;">
+                <a href="#/presenter/group" class="btn btn-default" translate>
+                    LAYOUT.CANCEL
+                </a>
+                <div class="inline-block" title="{{(groupForm.$invalid ? 'VALIDATION.FILL_REQUIRED_FIELDS_ENABLE_SAVE' : '') | translate}}">
+                    <button class="btn btn-primary" translate ng-disabled="groupForm.$invalid">
+                        LAYOUT.SAVE
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

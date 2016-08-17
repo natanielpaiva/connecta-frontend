@@ -1,0 +1,111 @@
+<div class="dashboard-config-modal">
+    <div class="modal-header">
+        <h3 class="modal-title" translate>DASHBOARD.DASHBOARD_SETTINGS</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="max-rows" translate>DASHBOARD.MAX_ROWS</label>
+                        <input type="number" ng-model="dashboard.maxRows"
+                               class="form-control" id="max-rows" autofocus />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="row-height" translate>DASHBOARD.ROW_HEIGHT</label>
+                        <input type="number" ng-model="dashboard.rowHeight"
+                               class="form-control" id="row-height" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="dashboard-padding" translate>DASHBOARD.PADDING</label>
+                        <input type="number" ng-model="dashboard.padding"
+                               class="form-control" id="dashboard-padding" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="columns" translate>DASHBOARD.COLUMNS</label>
+                        <input type="number" ng-model="dashboard.columns" class="form-control"  id="columns" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="transition-interval" translate>DASHBOARD.TRANSITION_INTERVAL</label>
+                        <input class="form-control" type="number" id="transition-interval"
+                               ng-model="dashboard.sectionTransitionInterval" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="transition-duration" translate>DASHBOARD.ANIMATION_DURATION</label>
+                        <input class="form-control" type="number" id="transition-duration"
+                               ng-model="dashboard.sectionTransitionDuration" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="section-transition-animation" translate>DASHBOARD.SECTION_TRANSITION_ANIMATION</label>
+                        <select class="form-control" id="section-transition-animation"
+                                ng-options="animation as ('DASHBOARD.'+animation|translate) for animation in animations"
+                                ng-model="dashboard.sectionTransitionAnimation">
+                            <option value="" translate>LAYOUT.SELECT</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="background-color" translate>DASHBOARD.BACKGROUND_COLOR</label>
+
+                        <input type="text" class="form-control"
+                               ng-model="dashboard.backgroundColor" />
+                        <input type="color" ng-model="dashboard.backgroundColor"
+                               class="form-control corColorCluster" id="background-color" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <fieldset class="radio-fieldset">
+                            <legend translate>DASHBOARD.DISPLAY_MODE</legend>
+
+                            <label ng-repeat="mode in displayModes" class="radio">
+                                <input type="radio" ng-model="dashboard.displayMode" value="{{mode}}" />
+                                {{ 'DASHBOARD.' + mode | translate}}
+                            </label>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group dashboard-background-image">
+                        <label class="dropzone" ng-file-drop ng-file-select
+                               ng-accept="'.jpeg,.jpg,.png'"
+                               ng-file-change="fileDropped($files, item)"
+                               drag-over-class="{accept:'accept', reject:'reject'}">
+                            <translate ng-if="!dashboard.backgroundImage">DASHBOARD.BACKGROUND_IMAGE</translate>
+                            <img ng-if="dashboard.backgroundImage"
+                                ng-src="{{dashboard.backgroundImage| dataUri }}" />
+                        </label>
+                        <button class="btn btn-icon-only remove-item"
+                            ng-if="!!dashboard.backgroundImage"
+                            ng-click="dashboard.backgroundImage=null"
+                            title="{{'LAYOUT.REMOVE'|translate}}">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="$close()" translate>
+            LAYOUT.CLOSE
+        </button>
+    </div>
+</div>

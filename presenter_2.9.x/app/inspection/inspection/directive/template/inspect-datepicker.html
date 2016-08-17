@@ -1,0 +1,19 @@
+<p class="input-group">
+    <input type="date" class="form-control" id="expectedDeliveryDate" 
+           datepicker-popup 
+           ng-model="dateModel" 
+           is-open="validationPopupOpened" 
+           datepicker-options="dateOptions" 
+           date-disabled="disabled(date, mode)" 
+           ng-required="true" 
+           current-text="{{datePickerMsg.msgToday}}" 
+           clear-text="{{datePickerMsg.msgClear}}" 
+           close-text="{{datePickerMsg.msgClose}}"  
+           readonly />
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" 
+                id="btn_validation_date" 
+                ng-click="open($event)">
+            <i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+</p>      

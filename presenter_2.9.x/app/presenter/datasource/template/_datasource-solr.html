@@ -1,0 +1,24 @@
+<div class="form-group" validated-field-holder="formObject.solrAddress">
+    <label for="address" translate class="required">DATASOURCE.ADDRESS</label>
+    <input type="text" name="solrAddress" id="address" class="form-control"
+           ng-model="object.address" required/>
+    <validated-field-messages ng-model="formObject.solrAddress"></validated-field-messages>
+</div>
+<div class="form-group" validated-field-holder="formObject.solrPath">
+    <label for="path" translate class="required">DATASOURCE.PATH</label>
+    <input type="text" name="solrPath" id="path" class="form-control"
+           ng-model="object.path" required/>
+    <validated-field-messages ng-model="formObject.solrPath"></validated-field-messages>
+</div>
+<div class="row" >
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseHost">
+        <label for="user" translate >DATASOURCE.USERNAME</label>
+        <input type="text" id="user" class="form-control"
+               ng-model="object.user" />
+    </div>
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.databaseHost">
+        <label for="password" translate >DATASOURCE.PASSWORD</label>
+        <input type="text" id="password" class="form-control"
+            ng-model="object.password" />
+    </div>
+</div>

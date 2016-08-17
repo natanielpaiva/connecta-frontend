@@ -1,0 +1,8 @@
+{
+  "AUTH": {
+    "LOGIN" : "Entrar",
+    "USER" : "Usuário",
+    "PASSWORD" : "Senha",
+    "DOMAIN" : "Domínio"
+  }
+}

@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 6, 2015, 5:42:52 PM
+    Author     : nataniel
+*/
+.portal-hover-container{
+    position: relative;
+
+    .portal-hover-item{
+        display: block;
+        opacity: 0;
+        position: absolute;
+        text-align: center;
+        
+        top:0;
+        left:0;
+        bottom:0;
+        right: 0;
+        
+        line-height:inherit;
+        height:inherit;
+        width:inherit;
+        font-size:100%;
+    }
+    &:hover{
+        .portal-hover-item{
+            opacity: 1;
+            background-color: rgba($gray, 0.6);
+        }
+    }
+}
+

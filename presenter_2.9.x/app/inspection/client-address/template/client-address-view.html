@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>CLIENT_ADDRESS.VIEW</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group">
+            <button class="btn btn-default">
+                <span class="icon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default">
+                <span class="icon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>    
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single margin-bottom-single">                       
+            
+
+            <p ng-if="clientAddress.description">
+                <strong translate>CLIENT.DESCRIPTION</strong>:
+                {{clientAddress.description}}
+            </p>
+
+            <p ng-if="clientAddress.cep">
+                <strong translate>CLIENT.CEP</strong>:
+                {{clientAddress.cep}}
+            </p>
+
+            <p ng-if="clientAddress.county">
+                <strong translate>CLIENT.CITY</strong>:
+                {{clientAddress.county}}
+            </p>
+
+            <p ng-if="clientAddress.state">
+                <strong translate>CLIENT.STATE</strong>:
+                {{clientAddress.state}}
+            </p>
+
+            <p ng-if="clientAddress.country">
+                <strong translate>CLIENT.COUNTRY</strong>:
+                {{clientAddress.country}}
+            </p>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="#/inspection/client-address" role="button" class="btn btn-default" translate>
+            LAYOUT.BACK
+        </a>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-md-12">        
+        <h3 translate>{{isEditing ? 'APPLIEDBUDGET.EDIT' : 'APPLIEDBUDGET.ADD'}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+
+
+            <div class="form-group">
+                <label for="municipalBudget" translate>APPLIEDBUDGET.MUNICIPALBUDGET</label>
+
+                <select class="form-control" 
+                        name="municipalBudget" 
+                        ng-model="appliedBudget.municipalBudget"
+                        id="municipalBudget" 
+                        ng-options="municipalBudget.programName + '----> '+ municipalBudget.activityProjectName  for municipalBudget in municipalBudgets" required>
+                    <option value="" translate> APPLIEDBUDGET.SELECT</option>
+                </select>                
+                <div ng-show="formulario.$submitted || formulario.municipalBudget.$touched" 
+                     ng-messages="formulario.municipalBudget.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>      
+            </div>
+
+            <div class="form-group">
+                <label for="budgetAreaApplication" translate>APPLIEDBUDGET.APPLICATION_AREA</label>
+
+                <select class="form-control" 
+                        name="budgetAreaApplication" 
+                        ng-model="appliedBudget.budgetAreaApplication"
+                        id="budgetAreaApplication" 
+                        ng-options="budgetAreaApplication.description for budgetAreaApplication in budgetAreaApplications" required>
+                    <option value="" translate> APPLIEDBUDGET.SELECT</option>
+                </select>                
+                <div ng-show="formulario.$submitted || formulario.budgetAreaApplication.$touched" 
+                     ng-messages="formulario.budgetAreaApplication.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>      
+            </div>
+
+
+            <div class="form-group">
+                <label for="description" translate>APPLIEDBUDGET.DESCRIPTION</label>
+                <textarea maxlength="200"  class="form-control" id="description" name="description"
+                          ng-model="appliedBudget.description" 
+                          required></textarea>
+                <div ng-show="formulario.$submitted || formulario.description.$touched" 
+                     ng-messages="formulario.description.$error"
+                     ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <input type="button" id="btn_clearAddress" ng-click="clearAddress();" class="btn btn-primary" value="{{buttonsText.clear}}" style="position:relative;top:-8px;" translate><input type="text"  ng-autocomplete class="form-control" id="searchAddress" ng-model="searchAddress" style="width:400px;"  name="searchAddress"/>
+                <a id="btn_geocode" ng-click="geocodeAddress();" title="{{buttonsText.locate}}" class="btn btn-sm btn-info icon-magnifying-glass" role="button" style="position:relative;left:403px;top:-34px;height:34px;"></a>
+                <div id="buttons_maps" style="float:right;margin-top: -36px;">
+                <a id="btn_mapExtent" ng-click="zoomMapToFullExtent();" title="{{buttonsText.initialView}}" class="btn btn-sm btn-info icon-resize3" role="button" style="height:34px;" ></a>    
+                <a id="btn_dragMarker" ng-click="toggleDragControl();" title="{{buttonsText.drag}}" class="btn btn-sm btn-info icon-open-with" role="button" style="height:34px;" ></a>    
+                <a id="btn_drawMarker" ng-click="toggleDrawMarker();" title="{{buttonsText.select}}" class="btn btn-sm btn-warning icon-place" role="button" style="height:34px;" ></a>   
+                <a id="btn_removeMarker" ng-click="removeMarkers();" title="{{buttonsText.delete}}" class="btn btn-sm btn-danger icon-cancel3" role="button" style="height:34px;" ></a>
+                </div>
+            </div>      
+
+            <div id="map-view-applied-budget" style="height: 430px;margin-top:-38px!important;"></div>
+
+
+            <a href="#/maps/applied-budget"
+               class="btn btn-default" translate>
+                LAYOUT.CANCEL
+            </a>
+            <!--            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid || addedMarkers()">-->
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid || addedMarkers()">
+                LAYOUT.SAVE
+            </button>
+        </form>
+    </div>
+</div>

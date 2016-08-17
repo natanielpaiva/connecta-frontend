@@ -1,0 +1,11 @@
+
+{
+    "IMPORT": {
+        "IMPORT":"Importar",
+        "INVALID_EXTENSION":"Extensão Inválida",
+        "SHP":"Arquivo Shape",
+        "IMPORT_SHP":"Importar Arquivo Shape",
+        "FILE":"Arquivo",
+        "SELECT_SOURCE":"Selecione uma Origem"
+    }
+}

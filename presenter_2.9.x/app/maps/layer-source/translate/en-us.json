@@ -1,0 +1,20 @@
+{
+    "LAYERSOURCE": {
+        "LAYERSOURCE":"Layers Source",       
+        "ADD": "Add Layer Source",
+        "EDIT": "Edit Layer Source",  
+        "VIEW":"View Layer Source",
+        "NAME":"Name",
+        "TYPE": "Type",
+        "INTERNAL_LINK": "Internal Link",
+        "EXTERNAL_LINK": "External Link",
+        "USER": "User",
+        "PASSWORD": "Password",
+        "SELECT":"Select LayerSource",
+        "TITLE_CONFIRM_DELETE":"LayerSource Delete",
+        "CONFIRM_DELETE":"Do you really want to delete LayerSource??",
+        "ADDED_SUCCESS": "Successfully Added",
+        "REMOVE_SUCCESS":"Successfully removed",
+        "ERROR_REMOVING": "Error Removing"
+    }
+}

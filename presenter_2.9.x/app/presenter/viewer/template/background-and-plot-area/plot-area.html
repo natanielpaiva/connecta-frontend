@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.ANGLE</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.angle"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.DEPTH3D</label>
+            <input class="form-control input-sm" type="number" ng-model="viewer.configuration.depth3D"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.PLOT_AREA_BORDER_ALPHA</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.plotAreaBorderAlpha"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.COLOR</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.plotAreaBorderColor"/>
+            <input class="form-control input-sm corColorCluster" type="color" ng-model="viewer.configuration.plotAreaBorderColor"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.PLOT_AREA_FILL_ALPHAS</label>
+            <input  type="range" min="0" max="1" step="0.01" ng-model="viewer.configuration.plotAreaFillAlphas"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label translate>VIEWER.PLOT_AREA_FILL_COLORS</label>
+            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.plotAreaFillColors"/>
+            <input class="form-control input-sm corColorCluster" type="color" ng-model="viewer.configuration.plotAreaFillColors"/>
+        </div>
+    </div>
+</div>

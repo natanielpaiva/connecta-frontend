@@ -1,0 +1,81 @@
+<div class="singlesource-view">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                <span class="{{getType().icon}}"></span>
+                {{singlesource.name}}
+                <div class="pull-right btn-group">
+                    <a href="#/presenter/singlesource/{{singlesource.id}}/edit"
+                       class="btn btn-default btn-sm" title="{{ 'LAYOUT.EDIT' | translate }}">
+                        <span class="icon-pencil"></span>
+                    </a>
+                    <button class="btn btn-default btn-sm" ng-click="excluir(singlesource.id)"
+                            title="{{ 'LAYOUT.DELETE' | translate }}">
+                        <span class="icon-trash"></span>
+                    </button>
+                </div>
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-if="singlesource.type === 'FILE'" class="singlesource-view-lightbox">
+                <div ng-switch="fileExtensions.fileType">
+                    <a href="{{singlesource.binaryFile}}" ng-switch-when="BINARY" class="singlesource-view-download">
+                        <div class="download-link-container">
+                            <span class="icon-download"></span>
+                            <!--<span>{{singlesource.name}}</span>-->
+                            <span class="text-download" translate>SINGLESOURCE.DOWNLOAD</span>
+                        </div>
+                    </a>
+                    <img ng-switch-when="IMAGE"
+                         ng-src="{{singlesource.binaryFile}}" />
+                    <video controls ng-switch-when="VIDEO">
+                        <source ng-src="{{singlesource.binaryFile}}" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+                <p ng-if="singlesource.type">
+                    <span class="{{getType().icon}}"></span>
+                <translate>{{'SINGLESOURCE.' + getType().name}}</translate>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table margin-top-single">
+                <thead>
+                    <tr>
+                        <th translate>
+                            SINGLESOURCE.ATTRIBUTE_NAME
+                        </th>
+                        <th translate>
+                            SINGLESOURCE.ATTRIBUTE_VALUE
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ssattr in singlesource.singleSourceAttributes">
+                        <td>
+                            {{ssattr.attribute.name}}
+                        </td>
+                        <td>
+                            {{ssattr.value}}
+                        </td>
+                    </tr>
+                    <tr ng-if="!singlesource.singleSourceAttributes.length">
+                        <td colspan="2" class="text-center" translate>
+                            LAYOUT.NO_RESULTS
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <a href="#/presenter/singlesource" class="btn btn-default" translate>LAYOUT.BACK</a>
+        </div>
+    </div>
+</div>

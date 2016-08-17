@@ -1,0 +1,148 @@
+{
+    "menuItems": [
+        {
+            "id": "btn-zoom-total",            
+            "action": "zoomMapToMaxExtent",
+            "img": "assets/img/maps/menu/ico_redimensionar_camada.png",
+            "span": ""
+        },
+        {
+            "id": "btn-swipe",            
+            "action": "toggleSwipe",
+            "img": "assets/img/maps/menu/ico_linha.png",
+            "span": ""
+        },
+        {
+            "id": "btn-zoom-area",            
+            "action": "toggleZoomArea",
+            "img": "assets/img/maps/menu/ico_find.png",
+            "span": ""
+        },
+        {
+            "id": "sub-camadas",
+            "action": "changeBaseMap",
+            "type": "img",
+            "img": "assets/img/maps/menu/ico_camadas.png",
+            "span": "camadas",
+            "items": [
+                {
+                    "id": "btn-physical",
+                    "param": "Google Physical",
+                    "img": "assets/img/maps/menu/ico_terreno.png",
+                    "span": "Terreno"
+                },
+                {
+                    "id": "btn-streets",
+                    "param": "Google Streets",
+                    "img": "assets/img/maps/menu/ico_ruas.png",
+                    "span": "Ruas"
+                },
+                {
+                    "id": "btn-hybrid",
+                    "param": "Google Hybrid",
+                    "img": "assets/img/maps/menu/ico_terreno.png",
+                    "span": "Híbrido"
+                },
+                {
+                    "id": "btn-satellite",
+                    "param": "Google Satellite",
+                    "img": "assets/img/maps/menu/ico_satelite.png",
+                    "span": "Satélite"
+                },
+                {
+                    "id": "btn-bing-road",
+                    "param": "Road",
+                    "img": "assets/img/maps/menu/ico_mapa_bing.png",
+                    "span": "Bing Road"
+                },
+                {
+                    "id": "btn-bing-hybrid",
+                    "param": "Hybrid",
+                    "img": "assets/img/maps/menu/ico_mapa_bing.png",
+                    "span": "Aerial With Labels"
+                },
+                {
+                    "id": "btn-bing-aerial",
+                    "param": "Aerial",
+                    "img": "assets/img/maps/menu/ico_mapa_bing.png",
+                    "span": "Aerial"
+                }, {
+                    "id": "btn-osm",
+                    "param": "OpenStreetMap Base Layer",
+                    "img": "assets/img/maps/menu/ico_open_street.png",
+                    "span": "OSM"
+                }
+            ]
+        },
+        {
+            "id": "opacity",
+            "action": "changeLayerOpacity",
+            "type": "input",
+            "img": "assets/img/maps/menu/ico_camadas_mapa.png",
+            "span": "opacidade",
+            "items": [
+                {
+                    "id": "btn-opacity",
+                    "span": "Opacidade da Layer",
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.1
+                }
+            ]
+        },
+        {
+            "defaultViewerItems": [
+                {
+                    "id": "btn-info",
+                    "action": "toggleInfo",
+                    "img": "assets/img/maps/menu/ico_info.png",
+                    "span": ""
+
+                },
+                {
+                    "id": "btn-legend",
+                    "action": "toggleLegend",
+                    "img": "assets/img/maps/menu/ico_legenda.png",
+                    "span": ""
+
+                },
+                {
+                    "id": "spatial-filter",
+                    "action": "toggleSpatialFilter",
+                    "type": "img",
+                    "img": "assets/img/maps/menu/ico_spatial.png",
+                    "span": "Filtro_Espacial",
+                    "items": [
+                        {
+                            "id": "btn-contains",
+                            "param": "WITHIN",
+                            "img": "assets/img/maps/menu/ico_contido.png",
+                            "span": "Contains"
+                        },
+                        {
+                            "id": "btn-exclusion",
+                            "param": "DISJOINT",
+                            "img": "assets/img/maps/menu/ico_exclusao.png",
+                            "span": "Exclusão"
+                        },
+                        {
+                            "id": "btn-intersects",
+                            "param": "INTERSECTS",
+                            "img": "assets/img/maps/menu/ico_intersecao.png",
+                            "span": "Interseção"
+                        },
+                        {
+                            "id": "btn-clear-spatial-filter",
+                            "param": "",
+                            "img": "assets/img/maps/menu/ico_limpar_spatial.png",
+                            "span": "Limpar Filtro Espacial"
+                        }
+                    ]
+                }
+            ]
+        }
+
+
+
+    ]
+}

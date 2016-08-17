@@ -1,0 +1,60 @@
+{
+    "attributes": {
+        "ui-tree": {},
+        "key-value": {},
+        "app-sidebar": {},
+        "app-search-result-body": {},
+        "app-search": {},
+        "app-pages-tabs": {},
+        "app-layout": {},
+        "translate": {},
+        "app-pages": {},
+        "key-value-item": {},
+        "app-header": {
+            "context": "div"
+        },
+        "ui-tree-handle": {},
+        "portal-tabs-component": {},
+        "app-search-embedded": {},
+        "app-search-page": {}
+    },
+    "elements": {
+        "key-value": {
+            "attributes": {
+                "ng-model": {},
+                "class": {}
+            }
+        },
+        "ng-transclude": {
+            "attributes": {
+                "ng-repeat": {}
+            }
+        },
+        "app-layout": {},
+        "translate": {},
+        "key-value-item": {
+            "attributes": {
+                "class": {}
+            }
+        },
+        "pagination": {
+            "attributes": {
+                "total-items": {},
+                "next-text": {},
+                "page": {},
+                "previous-text": {},
+                "last-text": {},
+                "class": {},
+                "first-text": {},
+                "boundary-links": {}
+            }
+        },
+        "sidebar-navigation": {
+            "attributes": {
+                "menu": {}
+            }
+        },
+        "heading": {},
+        "app-search-embedded": {}
+    }
+}

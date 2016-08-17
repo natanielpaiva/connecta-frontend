@@ -1,0 +1,157 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>EXPENSE.REGISTER_EXPENSE</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form novalidate name="formulario" ng-submit="submit()">
+
+            <div class="col-md-12">
+                
+                <div class="form-group">
+                    <label for="inspection" translate>EXPENSE.INSPECTION</label>
+                    <select id="project" name="inspection" class="form-control" 
+                            ng-options="project as project.name for project in projects track by project.id"
+                            ng-model="expenseItem.project" required/>
+                    </select>
+                    <div ng-show="formulario.project.$touched" ng-messages="formulario.project.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+                
+                <div class="form-group">
+                    <label for="contractualDate" translate>EXPENSE.REGISTRATION_PERIOD</label>
+                    <inspect-datepicker date-model="productItem.contractualDate"/>
+                    <div ng-show="formulario.contractualDate.$touched" ng-messages="formulario.contractualDate.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="valueSundayAndHolidays" translate>EXPENSE.AIRFARE</label>
+                    <input type="text"  class="form-control" id="code" name="valueSundayAndHolidays"
+                           ng-model="client.valueSundayAndHolidays" required/>
+                    <div ng-show="formulario.valueSundayAndHolidays.$touched" ng-messages="formulario.valueSundayAndHolidays.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="valuePerHour100PerCent" translate>EXPENSE.DISTANCE</label>
+                    <input type="number"  class="form-control" id="code" name="valuePerHour100PerCent"
+                           ng-model="client.valuePerHour100PerCent" required/>
+                    <div ng-show="formulario.valuePerHour100PerCent.$touched" ng-messages="formulario.valuePerHour100PerCent.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label style="top: 32px !important;left: -19px !important;position: relative;" for="expectedDeliveryDate" translate>EXPENSE.EXPENSE_TO</label>
+                    <inspect-datepicker date-model="productItem.expectedDeliveryDate"/>
+                    <div ng-show="formulario.expectedDeliveryDate.$touched" ng-messages="formulario.expectedDeliveryDate.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="valuePerHour50PerCent" translate>EXPENSE.ACCOMMODATION</label>
+                    <input type="text"  class="form-control" id="code" name="valuePerHour50PerCent"
+                           ng-model="client.valuePerHour50PerCent" required/>
+                    <div ng-show="formulario.valuePerHour50PerCent.$touched" ng-messages="formulario.valuePerHour50PerCent.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="valuePerHour50PerCent" translate>EXPENSE.DISPLACEMENT_LAND</label>
+                    <input type="text"  class="form-control" id="code" name="valuePerHour50PerCent"
+                           ng-model="client.valuePerHour50PerCent" required/>
+                    <div ng-show="formulario.valuePerHour50PerCent.$touched" ng-messages="formulario.valuePerHour50PerCent.$error"
+                         ng-messages-include="portal-error-messages"></div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+    </div>
+    <div class="col-md-12">
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label for="valuePerHour50PerCent" translate>EXPENSE.TOLLS</label>
+                <input type="text"  class="form-control" id="code" name="valuePerHour50PerCent"
+                       ng-model="client.valuePerHour50PerCent" required/>
+                <div ng-show="formulario.valuePerHour50PerCent.$touched" ng-messages="formulario.valuePerHour50PerCent.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="valuePerHour50PerCent" translate>EXPENSE.COST</label>
+                <input type="text"  class="form-control" id="code" name="valuePerHour50PerCent"
+                       ng-model="client.valuePerHour50PerCent" required/>
+                <div ng-show="formulario.valuePerHour50PerCent.$touched" ng-messages="formulario.valuePerHour50PerCent.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="valuePerHour50PerCent" translate>EXPENSE.OTHERS</label>
+                <input type="text"  class="form-control" id="code" name="valuePerHour50PerCent"
+                       ng-model="client.valuePerHour50PerCent" required/>
+                <div ng-show="formulario.valuePerHour50PerCent.$touched" ng-messages="formulario.valuePerHour50PerCent.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="supplier" translate>EXPENSE.ATTACHMENTS</label>
+                <drop-file files="files" 
+                           documents="project.documents"
+                           files-type=".jpeg,.jpg,.png"
+                           type="TEST" />
+                <div ng-show="formulario.supplier.$touched" ng-messages="formulario.supplier.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            
+            <div class="form-group">
+                <label for="valuePerHour50PerCent" translate>EXPENSE.TAXI</label>
+                <input type="text"  class="form-control" id="code" name="valuePerHour50PerCent"
+                       ng-model="client.valuePerHour50PerCent" required/>
+                <div ng-show="formulario.valuePerHour50PerCent.$touched" ng-messages="formulario.valuePerHour50PerCent.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="valuePerHour50PerCent" translate>EXPENSE.COST_DAILY</label>
+                <input type="text"  class="form-control" id="code" name="valuePerHour50PerCent"
+                       ng-model="client.valuePerHour50PerCent" required/>
+                <div ng-show="formulario.valuePerHour50PerCent.$touched" ng-messages="formulario.valuePerHour50PerCent.$error"
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+        </div>
+
+        </form>
+    </div>
+
+    <a href="#/inspection/expense"
+       class="btn btn-default" translate>
+        LAYOUT.CANCEL
+    </a>
+    <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+        LAYOUT.SAVE
+    </button>
+</div>

@@ -1,0 +1,29 @@
+<!-- HDFS -->
+<div class="row">
+    <div class="col-sm-8">
+        <div class="form-group" validated-field-holder="formObject.hdfsServer">
+            <label for="server" translate class="required">DATASOURCE.SERVER</label>
+            <input type="text" name="hdfsServer" id="server" class="form-control"
+                   ng-model="object.server" required/>
+            <validated-field-messages ng-model="formObject.hdfsServer"></validated-field-messages>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group" validated-field-holder="formObject.hdfsPort">
+            <label for="port" translate class="required">DATASOURCE.PORT</label>
+            <input type="number" name="hdfsPort" id="port" class="form-control"
+                   ng-model="object.hdfsPort" min="0" max="99999" required />
+            <validated-field-messages ng-model="formObject.hdfsPort"></validated-field-messages>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group" validated-field-holder="formObject.hdfsPath">
+            <label for="path" translate class="required">DATASOURCE.PATH</label>
+            <input type="text" name="hdfsPath" id="path" class="form-control"
+                   ng-model="object.path" required/>
+            <validated-field-messages ng-model="formObject.hdfsPath"></validated-field-messages>
+        </div>
+    </div>
+</div>

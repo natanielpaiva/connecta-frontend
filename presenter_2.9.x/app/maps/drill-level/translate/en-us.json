@@ -1,0 +1,13 @@
+{
+    "DRILL_LEVEL": {
+        "NAME":"Name",
+        "PARENT_LEVEL":"Parent Level",
+        "PARENT_LEVEL_COLUMN":"Parent Level Column",
+        "CHILD_LEVEL":"Child Level",
+        "CHILD_LEVEL_COLUMN":"Child Level Column",
+        "ADD": "Add Drill Level",
+        "EDIT": "Edit Drill Level",
+        "VIEW": "View Drill Level",
+        "ACTIONS":"Actions"
+    }
+}

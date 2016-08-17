@@ -1,0 +1,19 @@
+{
+    "WHATSAPP": {
+    	"ADD": "Add Account",
+    	"EDIT": "Edit Account",
+    	"ACCOUNTS": "Accounts",
+    	"WHATSAPP_ACCOUNTS": "Whatsapp",
+    	"ACCOUNTS_DEFAULT": "Default Interactions",
+    	"NAME": "Name",
+    	"ACCOUNT_NAME": "Account Name",
+    	"NUMBER": "Number",
+    	"ACCOUNT_NUMBER": "Account Number",
+    	"PASSWORD": "Password",
+    	"ACTIVE": "Active",
+        "WHATSAPP": "Whatsapp",
+        "LISTENERS": "Listeners",
+        "WITHOUT_COMPANY":"It needs to register a company",
+        "SAVE_SUCCESS":"Conta salva com sucesso."
+    }
+}

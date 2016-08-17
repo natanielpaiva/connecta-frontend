@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate>LAYERVIEWER.VIEW</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group">
+            <button class="btn btn-default">
+                <span class="icon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button class="btn btn-default">
+                <span class="icon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <div class="col-md-offset-8 col-md-2 text-right">
+        <div class="btn-group">
+            <a class="btn btn-default" href="#/maps/layer-viewer/{{layerViewer.id}}/edit">
+                <span class="icon-pencil" aria-hidden="true"></span>
+            </a>
+            <button class="btn btn-default" conf-modal="modalParams" conf-modal-args="[layerViewer.id]">
+                <span class="icon-trash" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well margin-top-single margin-bottom-single">
+            
+             <p ng-if="layerViewer.nm_viewer">
+                <strong translate>LAYERVIEWER.NAME</strong>
+                {{layerViewer.nm_viewer}}
+            </p>
+            
+            <p ng-if="layerViewer.layerViewerTypeEntity">
+                <strong translate>LAYERVIEWER.TYPE</strong>
+                <span class="{{types[layerViewer.layerViewerTypeEntity.id].icon}}"></span>
+                <span translate>{{types[layerViewer.layerViewerTypeEntity.id].name}}</span>
+            </p>
+                       
+            <p ng-if="layerViewer.layerEntity.ds_layer">
+                <strong translate>LAYERVIEWER.LAYER</strong>
+                {{layerViewer.layerEntity.ds_layer}}
+            </p>
+
+            <p ng-if="layerViewer.viewerTypeImplEntity.id" >
+                <strong translate>LAYERVIEWER.IMPL</strong>         
+                <span ng-if="!layerViewer.$edit && layerViewer.viewerTypeImplEntity.id == 1">OpenLayers</span>
+                <span ng-if="!layerViewer.$edit && layerViewer.viewerTypeImplEntity.id == 2">ESRI</span>
+            </p>
+
+            <div id="map-view" style="height: 430px;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <a href="#/maps/layer-viewer" role="button" class="btn btn-default"  translate>
+            LAYOUT.BACK
+        </a>
+    </div>
+</div>
