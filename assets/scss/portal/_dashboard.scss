@@ -476,14 +476,14 @@
         /*z-index:0 !important;*/
         @extend .image-on-background;
     }
-    
+
     [gridster] {
         z-index:0 !important;
-        
+
         [gridster-item] {
         }
     }
-    
+
     .gridster-preview-holder {
         &.ng-enter, &.ng-leave {
             background-color:$darkerWhite !important;
@@ -544,7 +544,7 @@
     .dashboard-view-page{
         margin:0;
         padding:0;
-        
+
         .no-print{
             display: none;
         }
@@ -560,7 +560,7 @@
             padding:0;
             margin-bottom:2em;
             @include clearfix;
-            
+
             svg {
                 float:left;
                 height:$headerPrintSize;
@@ -580,14 +580,14 @@
                 font-weight:bold;
             }
         }
-        
+
         .dashboard-section {
             h2 {
                 font-weight:normal;
                 border-left-width: 0.1em;
             }
         }
-        
+
         .dashboard-header {
             display:none;
         }
@@ -717,7 +717,7 @@
 viewer {
     @include div-block();
     z-index: 0 !important;
-    
+
     [ng-switch] {
         @include div-block();
         z-index: 0 !important;
@@ -728,6 +728,12 @@ viewer {
         }
         analysis-viewer {
             z-index:0 !important;
+            
+            .amchart {
+                &.is-drilling {
+                    cursor: crosshair;
+                }
+            }
         }
     }
 
@@ -748,7 +754,7 @@ viewer {
     .viewer-header {
         @include clearfix;
         border-bottom: solid 0.2em $presenterBlue;
-        
+
         h3 {
             font-size: 1.2em;
             font-weight: normal;
@@ -762,7 +768,7 @@ viewer {
             padding:0;
             float:right;
             cursor:pointer;
-            
+
             .other-options {
                 @include clearfix;
                 position:relative;
@@ -772,11 +778,11 @@ viewer {
                 height:auto;
                 width:auto;
             }
-            
+
             .connecta-dropdown {
                 width:10em;
             }
-            
+
             > span, .other-options > span {
                 font-size: 1.5em;
                 display:block;
@@ -800,7 +806,7 @@ viewer {
     top:0;
     display:none;
     font-size:0.85em;
-    
+
     &.viewer-filter-active {
         border-radius:0.5em;
         display:block;
@@ -855,7 +861,8 @@ viewer {
         }
         .viewer-filter-config-content {
             padding:0.5em;
-            > div {
+
+            .viewer-filter, .viewer-filter-add {
                 @include clearfix;
                 width:100%;
                 padding:0;
@@ -863,140 +870,268 @@ viewer {
                 height: 30px;
                 line-height: 30px;
 
-                &.active {
-                    .viewer-filter-config-label{
-                        background-color:$lighterGray;
-                        color:$white;
-                    }
-                }
-
-                &:last-of-type {
-                    margin:0;
-                }
-
-                .viewer-filter-config-label,
-                .viewer-filter-config-type,
-                .viewer-filter-config-value {
+                /*Internal settings*/
+                .viewer-filter-column {
+                    height:100%;
+                    width:13.15em;
                     float:left;
-                    display:block;
-                    margin:0;
-                    padding:0;
+                }
+                .viewer-filter-type {
+                    height:100%;
+                    width:4.5em;
+                    float:left;
+                }
+                .viewer-filter-value {
+                    height:100%;
+                    width:13.15em;
+                    float:left;
+                }
+                .viewer-filter-options {
+                    display:none;
+                    position:absolute;
+                    top:0;
+                    right:0;
+                    padding:0 0.5em;
                     height: 30px;
                     line-height: 30px;
+                    font-size:1.3em;
+                    color:darken($darkerWhite, 15%);
+
+
+                    * {
+                        cursor:pointer;
+                    }
+                }
+                &:hover {
+                    .viewer-filter-options {
+                        display:block;
+                    }
                 }
 
-                .viewer-filter-config-label {
-                    @include clipped-text;
-                    width:10em;
-                }
-                .viewer-filter-config-type {
-                    @include clearfix;
-                    width:5em;
+
+                .viewer-filter-edit {
+                    display:none;
+                    height:100%;
                     position:relative;
-                    color:$lightBlack;
-                    padding:0 0.4em;
 
-                    .viewer-filter-config-type-button {
-                        width:30px;
-                        height: 30px;
-                        line-height: 30px;
-                        background-color:$darkerWhite;
-                        float:left;
+                    .viewer-filter-type {
+                        @include clearfix;
+                        position:relative;
+                        color:$lightBlack;
+                        padding:0 0.4em;
+                        height:100%;
                         text-align:center;
-                        cursor:pointer;
-                        border-top-left-radius:0.15em;
-                        border-bottom-left-radius:0.15em;
-                        margin: 0 auto;
 
-                        &:hover {
-                            background-color:$darkWhite;
-                        }
-
-                        span {
-                            color:$lighterGray;
-                            font-size:2em;
-                            height: 30px;
+                        .viewer-filter-config-type-button {
+                            width:40px;
+                            height:30px;
                             line-height: 30px;
-                        }
-                    }
-                    .viewer-filter-config-type-arrow {
-                        border-top-right-radius:0.15em;
-                        border-bottom-right-radius:0.15em;
-                        width:15px;
-                        height: 30px;
-                        line-height: 30px;
-                        background-color:$darkerWhite;
-                        float:left;
-                        transform:translateX(0.5px);
-                        text-align:center;
-                        cursor:pointer;
+                            background-color:$darkerWhite;
+                            text-align:left;
+                            cursor:pointer;
+                            border-radius:0.15em;
+                            margin: 0 auto;
+                            color:$lighterGray;
+                            position:relative;
+                            padding-left:0.25em;
 
-                        color:$lighterGray;
+                            .icon-keyboard-arrow-down {
+                                position:absolute;
+                                right:0;
+                                top:0;
+                                font-size:1.5em;
+                            }
 
-                        &:hover, &.opened {
-                            background-color:$darkWhite;
-                        }
-                    }
-                    &.active {
-                        .viewer-filter-config-type-button, .viewer-filter-config-type-arrow {
-                            background-color:$presenterBlue;
                             span {
-                                color:darken($white, 5%);
+                                color:$lighterGray;
+                                font-size:2em;
+                                height: 30px;
+                                line-height: 30px;
                             }
 
                             &:hover, &.opened {
-                                background-color:lighten($presenterBlue, 5%);
+                                /*background-color:$darkWhite;*/
+                                opacity:0.75;
                             }
                         }
-                    }
-                    .viewer-filter-config-type-options {
-                        font-size:1.2em;
-                        width:14em;
-                    }
-
-                }
-                .viewer-filter-config-value {
-                    width:15.8em;
-
-                    .viewer-filter-config-value-between {
-                        @include clearfix;
-                        input {
-                            margin:0;
-                            width:50%;
-                            float:left;
+                        .viewer-filter-config-type-options {
+                            font-size:1.2em;
+                            width:14em;
+                            text-align:left;
                         }
                     }
 
-                    & > div {
-                        height:30px;
-                    }
-
-                    .ui-select-container {
-                        height:30px;
-                        .ui-select-match {
+                    .viewer-filter-value {
+                        .viewer-filter-config-value-between {
+                            @include clearfix;
                             input {
-                                height:30px;
-                            }
-                            .ui-select-toggle {
-                                height:30px;
-                                line-height:15px;
-
-                                &[multiple] {
-                                    min-height:30px;
-                                    height:auto;
+                                margin:0;
+                                width:50%;
+                                float:left;
+                                
+                                &:first-of-type {
+                                    border-right:none;
                                 }
                             }
                         }
-                        .ui-select-choices {
-                            .ui-select-choices-group {
-                                .ui-select-choices-row-inner {
 
+                        & > div {
+                            height:30px;
+                        }
+
+                        .ui-select-container {
+                            height:30px;
+                            .ui-select-match {
+                                input {
+                                    height:30px;
+                                }
+                                .ui-select-toggle {
+                                    height:30px;
+                                    line-height:15px;
+
+                                    &[multiple] {
+                                        min-height:30px;
+                                        height:auto;
+                                    }
+                                }
+                            }
+                            .ui-select-choices {
+                                .ui-select-choices-group {
+                                    .ui-select-choices-row-inner {
+
+                                    }
                                 }
                             }
                         }
+                    }
+
+                    .viewer-filter-options {
+                        background-color:$white;
+                        max-width:40px;
+
+                        &:before {
+                            display:block;
+                            width:30px;
+                            height:100%;
+                            content:' ';
+                            position:absolute;
+                            left:-30px;
+                            top:0;
+
+                            background-image: -webkit-gradient(linear, right top, left top,
+                                from(rgba($white, 1)),
+                                to(rgba($white, 0))
+                            );
+                        }
+                    }
+                }
+                .viewer-filter-view {
+                    display:block;
+                    height:100%;
+                    position:relative;
+                    cursor: text;
+
+                    &:hover {
+                        background-color:darken($white,3%);
+                    }
+
+                    .viewer-filter-column {
+                        @include clipped-text;
+                        padding-left:1.25em;
+                    }
+                    .viewer-filter-value {
+                        @include clipped-text;
+                        padding-left:1em;
+                    }
+
+                    .viewer-filter-type {
+                        @include clearfix;
+                        color:$lightBlack;
+                        height:100%;
+                        text-align:left;
+                        padding-left:0.75em;
+
+                        span {
+                            width:40px;
+                            height:30px;
+                            line-height: 30px;
+                            border-radius:0.15em;
+                            margin: 0 auto;
+                            color:$lighterGray;
+                            position:relative;
+                            font-size:2em;
+                        }
+                    }
+                }
+                &.viewer-filter-is-editing {
+                    .viewer-filter-edit {
+                        display:block;
+                    }
+                    .viewer-filter-view {
+                        display:none;
                     }
                 }
             }
+
+            .viewer-filter-add {
+                background-color:darken($white,3%);
+                cursor:pointer;
+                padding:0.3em;
+
+                &:hover {
+                    opacity:0.75;
+                }
+
+                span {
+                    user-select:none;
+                    font-size:0.9em;
+                    color:darken($darkerWhite,15%);
+                    border:dashed 0.1em darken($darkerWhite,3%);
+                    text-align:center;
+                    text-transform: uppercase;
+                    font-weight:bold;
+                    display:block;
+                    width:100%;
+                    height:100%;
+                    line-height: 2.3em;
+                }
+            }
+
+
+            /*            > div {
+                            @include clearfix;
+                            width:100%;
+                            padding:0;
+                            margin:0 0 0.5em 0;
+                            height: 30px;
+                            line-height: 30px;
+            
+                            &:last-of-type {
+                                margin:0;
+                            }
+            
+                            .viewer-filter-config-label,
+                            .viewer-filter-config-type,
+                            .viewer-filter-config-value {
+                                float:left;
+                                display:block;
+                                margin:0;
+                                padding:0;
+                                height: 30px;
+                                line-height: 30px;
+                            }
+            
+                            .viewer-filter-config-label {
+                                @include clipped-text;
+                                width:10em;
+                            }
+                            
+                            .viewer-filter-config-value {
+                                width:15.8em;
+            
+                                
+                            }
+                        }*/
         }
     }
 }

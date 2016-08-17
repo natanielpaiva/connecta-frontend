@@ -116,10 +116,10 @@ define([
             controllerUrl: 'portal/dashboard/controller/dashboard-form',
             templateUrl: 'app/portal/dashboard/template/dashboard-form.html'
         },
-        '/user/profile': {
-            controller: 'UserProfileController',
-            controllerUrl: 'portal/user/controller/user-profile',
-            templateUrl: 'app/portal/user/template/user-profile.html'
+        '/user/form': {
+            controller: 'UserFormController',
+            controllerUrl: 'portal/user/controller/user-form',
+            templateUrl: 'app/portal/user/template/user-form.html'
         },
         '/user/new': {
             controller: 'UserFormController',
@@ -142,8 +142,8 @@ define([
             children: []
         },
         {
-            href: 'user/profile',
-            title: 'USER.PROFILE',
+            href: 'user/form',
+            title: 'USER.FORM',
             icon: 'icon-user',
             children: []
         }

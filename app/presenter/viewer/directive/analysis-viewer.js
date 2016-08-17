@@ -33,16 +33,32 @@ define([
                 };
 
                 var _prepareFiltersForRequest = function () {
-                    $scope.analysisExecuteRequest.filters = [];
-
-                    angular.forEach($scope.model.analysisViewerColumns, function (column) {
-                        if (column.columnType === "FILTER" && column.active) {
-                            $scope.analysisExecuteRequest.filters.push({
-                                operator: column.type, // o tipo do filtro
-                                columnName: column.analysisColumn.name,
-                                value: column.value
-                            });
-                        }
+//                    $scope.analysisExecuteRequest.filters = [];
+//
+//                    angular.forEach($scope.model.analysisViewerColumns, function (column) {
+//                        if (column.columnType === "FILTER" && column.active) {
+//                            $scope.analysisExecuteRequest.filters.push({
+//                                operator: column.type, // o tipo do filtro
+//                                columnName: column.analysisColumn.name,
+//                                value: column.value
+//                            });
+//                        }
+//                    });
+                };
+                
+                function _closeFilterForms() {
+                    if($scope.analysisExecuteRequest.filters) {
+                        $scope.analysisExecuteRequest.filters.forEach(function(filter){
+                            filter.isEditing=false;
+                        });
+                    }
+                }
+                
+                $scope.addFilter = function(){
+                    _closeFilterForms();
+                    
+                    $scope.analysisExecuteRequest.filters.push({
+                        isEditing:true
                     });
                 };
 
@@ -67,6 +83,7 @@ define([
                 }
 
                 $scope.getAnalysisResult = function (itemClicked) {
+                    _closeFilterForms();
                     _prepareDrillForRequest(itemClicked);
                     _prepareFiltersForRequest();
 

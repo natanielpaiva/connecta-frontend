@@ -10,8 +10,9 @@
 
             <div class="form-group">
                 <label for="code" translate>MEDIA.NAME</label>
-                <input type="text"  class="form-control" id="name" name="name"
-                       ng-model="media.name" required/>
+                <input type="text"  class="form-control connecta-inline-edit-input" id="name" name="name"
+                       ng-model="media.name" 
+                       placeholder="{{MEDIA.NAME | translate}}" required autofocus/>
                 <div ng-show="formulario.name.$touched" ng-messages="formulario.name.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>

@@ -1,17 +1,11 @@
 <div class="row">
     <div class="col-md-12">
-        <h3 translate>SINGLESOURCE.REGISTER_MEDIA</h3>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
         <form novalidate name="singlesourceForm" ng-submit="submit()">
 
             <div class="form-group" validated-field-holder="singlesourceForm.name">
-                <label for="model-nome" translate class="required">SINGLESOURCE.NAME</label>
                 <input type="text" name="nome" ng-model="typeSingleSource.name"
-                       id="model-nome" required class="form-control" required />
+                       id="model-nome" required class="form-control connecta-inline-edit-input" 
+                       placeholder="{{'SINGLESOURCE.NAME' | translate}}"required autofocus/>
                 <validated-field-messages ng-model="singlesourceForm.name"></validated-field-messages>
             </div>
 

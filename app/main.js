@@ -1,6 +1,7 @@
 /* global require */
 require.config({
     paths: {
+        'package':'../package.json',
         'bower_components': '../bower_components',
         'text': '../bower_components/requirejs-text/text',
         'json': '../bower_components/requirejs-json/json',
@@ -187,9 +188,9 @@ require.config({
             deps: ['jquery'],
             exports: 'jQuery.fn.redactor'
         },
-        'bower_components/ngAutocomplete/src/ngAutocomplete': {
-            deps: ['angular','bower_components/connectaGeoJS/index/openlayersImplementation/async/async!//maps.googleapis.com/maps/api/js?sensor=false&region=br&libraries=places']
-        },
+//        'bower_components/ngAutocomplete/src/ngAutocomplete': {
+//            deps: ['angular','bower_components/connectaGeoJS/index/openlayersImplementation/async/async!//maps.googleapis.com/maps/api/js?sensor=false&region=br&libraries=places']
+//        },
         'connecta': {
             deps: [
                 'angular',

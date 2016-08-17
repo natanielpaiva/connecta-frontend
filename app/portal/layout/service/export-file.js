@@ -3,11 +3,12 @@ define([
     'connecta.portal',
     'portal/layout/service/util',
     'bower_components/html2canvas/dist/html2canvas.min'
+    // 'bower_components/jspdf/dist/jspdf.min'
 ], function (portal) {
-    return portal.service('ExportFile', function() {
+    return portal.service('ExportFile', function ($q) {
         var ExportFile = this;
-        
-        function _exportImage(filename, element) {
+
+        function _exportImage(deferred, filename, element) {
             var type = 'png';
 
             var svgs = element.getElementsByTagName('svg');
@@ -68,6 +69,7 @@ define([
 
                 var image = canvas.toDataURL('image/' + type);
                 _outputData(image, filename);
+                deferred.resolve();
             } else {
                 html2canvas([element], {
                     useCORS: true
@@ -75,8 +77,11 @@ define([
 
                     var image = canvas.toDataURL("image/" + type);
                     image = image.replace('data:image/' + type + ';base64,', '');
-                    finalImageSrc = 'data:image/' + type + ';base64,' + image;
-                    _outputData(finalImageSrc, filename);
+                    var finalImageSrc = 'data:image/' + type + ';base64,' + image;
+                    _outputData(deferred, finalImageSrc, filename);
+                    deferred.resolve();
+                }, function(){
+                    deferred.reject();
                 });
             }
         }
@@ -94,14 +99,13 @@ define([
                 view[i] = image_data.charCodeAt(i) & 0xff;
             }
 
-            var oBuilder = new Blob([view], {type: 'application/octet-stream'});
+            var oBuilder = new Blob([view], {type: 'image/png'});
             obj_url = window.URL.createObjectURL(oBuilder);
 
             _download(obj_url, filename + '.' + type);
         }
 
-        function _exportCsv(array, filename) {
-            console.log(array, filename);
+        function _exportCsv(deferred, array, filename) {
             var csv = '';
             for (var head in array[0]) {
                 csv += head + ';';
@@ -120,10 +124,11 @@ define([
             }
             var uri = "data:text/csv;charset=UTF-8," + escape(csv);
             var name = filename + ".csv";
+            
             _download(uri, name);
-
+            deferred.resolve();
         }
-        
+
         function _download(url, filename) {
             var download = document.createElement("a");
             download.href = url;
@@ -132,10 +137,10 @@ define([
             download.click();
             document.body.removeChild(download);
         }
-        
+
         this.TYPE = {
             CSV: _exportCsv,
-            IMAGE: _exportImage
+            IMAGE: _exportImage,
         };
 
         /**
@@ -143,9 +148,17 @@ define([
          * @param {Function} strategy
          * @returns {undefined}
          */
-        ExportFile.export = function(strategy) {
-            strategy.apply(ExportFile, Array.prototype.slice.call(arguments)
-                    .slice(1, arguments.length) );
+        ExportFile.export = function (strategy) {
+            var deferred = $q.defer();
+            
+            var argArray = Array.prototype.slice.call(arguments)
+                    .slice(1, arguments.length);
+            
+            argArray.unshift(deferred);
+            
+            strategy.apply(ExportFile, argArray);
+            
+            return deferred.promise;
         };
 
     });

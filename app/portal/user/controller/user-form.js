@@ -1,81 +1,86 @@
 define([
     'connecta.portal',
     'portal/layout/service/notify',
-    'portal/user/service/user-service'
+    'portal/user/service/user-service',
+    'portal/layout/service/data-uri'
 ], function (portal) {
 
-    return portal.lazy.controller('UserFormController', function ($scope, $translate, $location, notify, UserService, LoginService) {
-        $scope.user = {};
+    return portal.lazy.controller('UserFormController', function ($scope, $translate,
+            notify, UserService, LoginService, dataURI) {
 
-        $scope.onFileSelected = function (files, ev, rejFiles) {
-            if (rejFiles && rejFiles.length) {
-                $translate('USER.VALIDATION.INVALID_DOCUMENT').then(function (text) {
-                    notify.warning(text);
-                });
-                return;
-            }
+        function init() {
+            $scope.user = {};
 
-            var file = files[0];
-            $scope.fileImage = file;
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    if ($scope.validateImage(e)) {
-                        $scope.userImage = e.target.result;
-                        $scope.imgName = file.name;
-                        $scope.$apply();
-                    } else {
-                        $scope.removeUserImg();
-                    }
-                };
-                reader.readAsDataURL(files[0]);
-            }
-        };
+            LoginService.getCurrentUser().then(function (data) {
+                $scope.user = data;
 
-        $scope.removeUserImg = function () {
-            $scope.userImage = null;
-            $scope.imgName = null;
-            $scope.fileImage = null;
-        };
-
-        $scope.validateImage = function (image) {
-            var isValid = true;
-            if (image.total / 614400 > 1) {
-                notify.warning("USER.VALIDATION.IMAGESIZE");
-                isValid = false;
-            } else {
-                var img = angular.element("<img>")[0];
-                img.src = image.target.result;
-                if (img.height != img.width) {
-                    notify.warning("USER.VALIDATION.IMAGEFORM");
-                    isValid = false;
+                if (!$scope.user.language) {
+                    $scope.user.language = 'pt-br';
                 }
-            }
-            return isValid;
-        };
+            });
 
-        $scope.submit = function () {
-            //Por enquanto o login do usuário será o email (easy unique...)
-            $scope.user.login = $scope.user.email;
+            $scope.credentials = {};
+            $scope.rejFiles = {};
+        }
 
-            UserService.save($scope.user, $scope.fileImage).then(function (response) {
-                // LoginService.setAuthenticatedUser(response);
-                $location.path('/');
-                console.log(response);
+        $scope.fileDropped = function ($files) {
+            $scope.imageFile = $files[0];
+            dataURI($scope.imageFile).then(function (result) {
+                $scope.image = result;
             });
         };
-        
-        if (!$scope.user.language) {
-            $scope.user.language = 'pt-br';
-        }
-        
+
         $scope.languages = {
-            'pt-br':'Português (Brasil)',
-            'en-us':'English (US)'
+            'pt-br': 'Português (Brasil)',
+            'en-us': 'English (US)'
         };
 
         $scope.$watch('user.language', function (lang) {
             $translate.use(lang);
         });
+
+        $scope.makeBackgroundImage = function () {
+            var imageURL = '';
+            if ($scope.image) {
+                imageURL = $scope.image;
+            } else {
+                imageURL = UserService.makeBackgroundImage($scope.user);
+            }
+            return imageURL;
+        };
+
+        $scope.removePhoto = function () {
+            UserService.upload(null, $scope.user).then(function () {
+                $scope.image = null;
+                $scope.imageFile = null;
+            });
+        };
+
+        $scope.submitUserProfile = function () {
+            UserService.update($scope.user).then(function () {
+                if ($scope.imageFile) {
+                    UserService.upload($scope.imageFile, $scope.user).then(function () {
+                        $translate('USER.UPDATE_SUCCESS').then(function (text) {
+                            notify.success(text);
+                        });
+                    });
+                } else {
+                    $translate('USER.UPDATE_SUCCESS').then(function (text) {
+                        notify.success(text);
+                    });
+                }
+            });
+        };
+
+        $scope.submitCredentials = function () {
+            UserService.changePassword($scope.credentials).then(function () {
+                $translate('USER.CHANGE_PASSWORD_SUCCESS').then(function (text) {
+                    notify.success(text);
+                });
+            });
+        };
+
+        init();
     });
+
 });

@@ -42,8 +42,10 @@
             "VALUE": "Value",
             "START": "Start",
             "END": "End",
-            "APPLY": "Apply filter settings",
+            "APPLY": "Apply",
             "CLOSE": "Close filter settings",
+            "ADD" : "+ Add filter",
+            "CLEAR" : "Clear",
             "TYPE": {
                 "TYPE": "Change filter type",
                 

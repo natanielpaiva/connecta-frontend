@@ -40,7 +40,7 @@ module.exports = function(grunt) {
           '!nbproject/**',
           '!dist/**',
           '!bower.json',
-          '!package.json',
+//          '!package.json',
           '!app/applications.json.dist',
           '!customs.json',
           '!new-module.sh',

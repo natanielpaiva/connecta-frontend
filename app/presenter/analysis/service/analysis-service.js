@@ -224,22 +224,50 @@ define([
             var url = presenterResources.analysis + "/" + idDataSource + "/columns-datasource";
             return $http.get(url);
         };
+        
+        var _prepareAnalysisRequest = function(analysisExecuteRequest){
+            var analysisExecuteRequestCopy = angular.copy(analysisExecuteRequest);
+            
+            if (!analysisExecuteRequestCopy.filters) {
+                analysisExecuteRequestCopy.filters = [];
+            }
+            
+            analysisExecuteRequestCopy.filters = analysisExecuteRequestCopy.filters.filter(function(filter){
+                return filter.type && filter.analysisColumn && filter.value;
+            }).map(function(filter){
+                return {
+                    operator: filter.type, // o tipo do filtro
+                    columnName: filter.analysisColumn.name,
+                    value: filter.value
+                };
+            });
+            
+            return analysisExecuteRequestCopy;
+        };
 
-        this.execute = function(analysis) {
-            var analysisCopy = angular.copy(analysis);
+        this.execute = function(analysisExecuteRequest) {
             var url = presenterResources.analysis + "/result";
-            return $http.post(url, analysisCopy);
+            
+            var analysisExecuteRequestCopy = _prepareAnalysisRequest(analysisExecuteRequest);
+            
+            return $http.post(url, analysisExecuteRequestCopy);
         };
         
         this.possibleValuesFor = function(analysisExecuteRequest, filter) {
             var url = presenterResources.analysis + "/filter-value?column="+
-                    filter.analysisColumn.name; // Não sei outro jeito de fazer post com parâmetros :/
+                    filter.analysisColumn.name; // Não tem outro jeito de fazer post com parâmetros :/
             
-            return $http.post(url, angular.copy(analysisExecuteRequest));
+            var analysisExecuteRequestCopy = _prepareAnalysisRequest(analysisExecuteRequest);
+            
+            analysisExecuteRequestCopy.filters = analysisExecuteRequestCopy.filters.filter(function(f){
+                return f.columnName !== filter.analysisColumn.name;
+            });
+            
+            return $http.post(url, angular.copy(analysisExecuteRequestCopy));
         };
 
         this.getAnalysis = function (idAnalysis) {
-            var url = presenterResources.analysis + "/" + idAnalysis ;
+            var url = presenterResources.analysis + "/" + idAnalysis;
             return $http.get(url);
         };
 
@@ -251,7 +279,7 @@ define([
             return $http.post(url, analysisCopy);
         };
 
-         var _fixAttributes = function (analysis) {
+        var _fixAttributes = function (analysis) {
             angular.forEach(analysis.analysisAttributes, function (attribute) {
                 if (angular.isString(attribute.attribute)) {
                     attribute.attribute = {name: attribute.attribute, description:"", type:attribute.attributeType.label};

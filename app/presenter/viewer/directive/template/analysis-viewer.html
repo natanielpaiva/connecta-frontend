@@ -8,15 +8,12 @@
               ng-if="model.analysis.hasDrill"></span>
         <span class="filter icon-filter2" ng-click="options.filterConfigOpen = true"
               title="{{'DASHBOARD.OPEN_FILTER'|translate}}"
-              ng-if="(model.analysisViewerColumns| filter:{columnType:'FILTER'}).length"
-              ng-class="{
-                  active:options.filterConfigOpen
-                  }"></span>
-<!--    Feio demais essa classe com uuid, mas se não tiver não tem como distinguir
-        se o click fora é nesse visualizador dentro do dashboard ou em qualquer
-        outro, se tirar, só o primeiro dropdown do dashboard abre. -->
-        <div ng-init="openOptionsClass='.connecta-viewer-'+$parent.$parent.uuid+' .icon-dots-three-vertical'"
-            class="other-options" ng-click="options.otherOptionsOpen = true">
+              ng-class="{active:options.filterConfigOpen}"></span>
+        <!--    Feio demais essa classe com uuid, mas se não tiver não tem como distinguir
+                se o click fora é nesse visualizador dentro do dashboard ou em qualquer
+                outro, se tirar, só o primeiro dropdown do dashboard abre. -->
+        <div ng-init="openOptionsClass = '.connecta-viewer-' + $parent.$parent.uuid + ' .icon-dots-three-vertical'"
+             class="other-options" ng-click="options.otherOptionsOpen = true">
             <span class="icon-dots-three-vertical"></span>
             <div class="connecta-dropdown" ng-show="options.otherOptionsOpen"
                  click-out="options.otherOptionsOpen=false"
@@ -46,7 +43,8 @@
     </div>
 </div>
 
-<amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration" return-chart="!edit"></amchart>
+<amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration" return-chart="!edit"
+         ng-class="{'is-drilling':options.isDrilling}"></amchart>
 
 <div ng-if="model.configuration.type === 'table'">
     <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
@@ -77,77 +75,173 @@
      ng-if="options.filterConfigOpen">
     <div class="viewer-filter-config-header">
         <span class="viewer-filter-config-title" translate>DASHBOARD.FILTER.SELECT_FILTER</span>
-        <span class="icon-checkmark3" ng-click="getAnalysisResult()"
-              title="{{'DASHBOARD.FILTER.APPLY'|translate}}"></span>
+        <!--        <span class="icon-checkmark3" ng-click="getAnalysisResult()"
+                      title="{{'DASHBOARD.FILTER.APPLY'|translate}}"></span>-->
         <span class="icon-cancel3" ng-click="options.filterConfigOpen = false"
               title="{{'DASHBOARD.FILTER.CLOSE'|translate}}"></span>
     </div>
     <div class="viewer-filter-config-content">
-        <div ng-repeat="filter in model.analysisViewerColumns| filter:{columnType:'FILTER'} | orderBy:'analysisColumn.label' track by $index">
-            <div class="viewer-filter-config-label"
-                 title="{{filter.analysisColumn.label}}">
-                {{filter.analysisColumn.label}}
-            </div>
-            <div class="viewer-filter-config-type"
-                 ng-class="{active:filter.active}">
-                <div class="viewer-filter-config-type-button"
-                     title="{{'DASHBOARD.FILTER.SELECTED_FILTER'|translate:{name: (filterOperators[filter.type].name|translate) } }}"
-                     ng-click="filter.active = !filter.active">
-                    <span class="{{filterOperators[filter.type].icon}}"></span>
+        <form ng-submit="getAnalysisResult()">
+            <div class="viewer-filter" ng-repeat="filter in analysisExecuteRequest.filters"
+                 ng-class="{'viewer-filter-is-editing':filter.isEditing}">
+                <div class="viewer-filter-view">
+                    <div class="viewer-filter-column" ng-click="filter.isEditing = true">
+                        {{filter.analysisColumn.label}}
+                    </div>
+                    <div class="viewer-filter-type" ng-click="filter.isEditing = true">
+                        <span class="{{filterOperators[filter.type].icon}}"></span>
+                    </div>
+                    <div class="viewer-filter-value" ng-click="filter.isEditing = true"
+                         ng-switch="filterOperators[filter.type].type">
+                        <div ng-switch-when="STRING">
+                            {{filter.value.value}}
+                        </div>
+
+                        <div ng-switch-when="VALUE">
+                            {{filter.value.value}}
+                        </div>
+
+                        <div ng-switch-when="NUMBER">
+                            {{filter.value.value}}
+                        </div>
+
+                        <div ng-switch-when="INTERVAL" class="viewer-filter-config-value-between">
+                            {{filter.value.between.start}} -
+                            {{filter.value.between.end}}
+                        </div>
+
+                        <div ng-switch-when="ARRAY">
+                            {{filter.value.in.join(', ')}}
+                        </div>
+                    </div>
+                    <div class="viewer-filter-options">
+                        <span class="icon-dump" ng-click="analysisExecuteRequest.filters.splice($index, 1)"></span>
+                    </div>
                 </div>
-                <div class="viewer-filter-config-type-arrow"
-                     title="{{'DASHBOARD.FILTER.TYPE'|translate}}"
-                     ng-click="filter.optionsVisible = !filter.optionsVisible"
-                     ng-class="{opened:filter.optionsVisible}">
-                    <span class="icon-keyboard-arrow-down"></span>
-                </div>
-                <div class="connecta-dropdown viewer-filter-config-type-options"
-                     ng-show="filter.optionsVisible" click-out="filter.optionsVisible=false"
-                     click-out-exceptions="['.connecta-viewer-'+$parent.$parent.$parent.uuid+' .viewer-filter-config-type-arrow:eq('+$index+')']">
-                    <div class="connecta-dropdown-item"
-                         ng-repeat="operator in m2a(filterOperators)| orderBy:'order'"
-                         ng-click="filter.type = operator.id; filter.optionsVisible = false"
-                         ng-class="{active:filter.type == operator.id}">
-                        <span class="{{operator.icon}}"></span>
-                        {{operator.name| translate}}
+                <div class="viewer-filter-edit">
+                    <div class="viewer-filter-column">
+                        <!--model.analysisViewerColumns-->
+                        <select ng-change="possibleValues(filter); filter.value={}" class="form-control input-sm" ng-model="filter.analysisColumn"
+                                ng-options="column as column.label for column in model.analysis.analysisColumns | orderBy:'analysisColumn.label' track by column.id">
+                            <option value>{{'LAYOUT.SELECT'|translate}}</option>
+                        </select>
+                    </div>
+                    <div class="viewer-filter-type" ng-init="filter.type=filter.type?filter.type:'CONTAINS'">
+                        <!--title="{{'DASHBOARD.FILTER.SELECTED_FILTER'|translate:{name: (filterOperators[filter.type].name|translate) } }}"-->
+                        <div class="viewer-filter-config-type-button"
+                             title="{{'DASHBOARD.FILTER.TYPE'|translate}}"
+                             ng-click="filter.optionsVisible = !filter.optionsVisible"
+                             ng-class="{opened:filter.optionsVisible}" >
+                            <span class="{{filterOperators[filter.type].icon}}"></span>
+                            <span class="icon-keyboard-arrow-down"></span>
+                        </div>
+                        <div class="connecta-dropdown viewer-filter-config-type-options"
+                             ng-show="filter.optionsVisible" click-out="filter.optionsVisible=false"
+                             click-out-exceptions="['.connecta-viewer-'+$parent.$parent.$parent.uuid+' .viewer-filter-config-type-button:eq('+$index+')']">
+                            <div class="connecta-dropdown-item"
+                                 ng-repeat="operator in m2a(filterOperators)| orderBy:'order'"
+                                 ng-click="filter.type = operator.id; filter.optionsVisible = false; possibleValues(filter)"
+                                 ng-class="{active:filter.type == operator.id}">
+                                <span class="{{operator.icon}}"></span>
+                                {{operator.name| translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viewer-filter-value" ng-switch="filterOperators[filter.type].type">
+                        <input type="text" class="form-control input-sm"
+                               ng-switch-when="STRING"
+                               placeholder="{{'DASHBOARD.FILTER.VALUE'|translate}}"
+                               ng-model="filter.value.value" />
+
+                        <div ng-switch-when="VALUE">
+                            <!--ng-init="possibleValues(filter)"-->
+                            <ui-select ng-model="filter.value.value">
+                                <ui-select-match placeholder="{{'VIEWER.SELECT'|translate}}">{{$select.selected}}</ui-select-match>
+                                <ui-select-choices repeat="a in filter.possibleValues | filter: $select.search track by a">
+                                    <span ng-bind-html="a | highlight: $select.search"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+
+                        <input type="text" class="form-control input-sm"
+                               ng-switch-when="NUMBER"
+                               placeholder="{{'DASHBOARD.FILTER.VALUE'|translate}}"
+                               ng-model="filter.value.value" />
+
+                        <div ng-switch-when="INTERVAL" class="viewer-filter-config-value-between">
+                            <input type="text" class="form-control input-sm"
+                                   placeholder="{{'DASHBOARD.FILTER.START'|translate}}"
+                                   ng-model="filter.value.between.start" />
+                            <input type="text" class="form-control input-sm"
+                                   placeholder="{{'DASHBOARD.FILTER.END'|translate}}"
+                                   ng-model="filter.value.between.end" />
+                        </div>
+
+                        <div ng-switch-when="ARRAY">
+                            <!--ng-init="possibleValues(filter)"-->
+                            <ui-select ng-model="filter.value.in" multiple>
+                                <ui-select-match placeholder="{{'VIEWER.SELECT'|translate}}">{{$item}}</ui-select-match>
+                                <ui-select-choices repeat="a in filter.possibleValues | filter: $select.search track by a">
+                                    <span ng-bind-html="a | highlight: $select.search"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="viewer-filter-options">
+                        <span class="icon-checkmark3" ng-click="filter.isEditing = false"></span>
                     </div>
                 </div>
             </div>
-            <div class="viewer-filter-config-value" ng-switch="filterOperators[filter.type].type">
-                <input type="text" class="form-control input-sm"
-                       ng-switch-when="STRING"
-                       placeholder="{{'DASHBOARD.FILTER.VALUE'|translate}}"
-                       ng-model="filter.value.value" />
-                <div ng-switch-when="VALUE">
-                    <ui-select ng-model="filter.value.value" ng-init="possibleValues(filter)">
-                        <ui-select-match placeholder="{{'VIEWER.SELECT'|translate}}">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices repeat="a in filter.possibleValues | filter: $select.search track by a">
-                            <span ng-bind-html="a | highlight: $select.search"></span>
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-
-                <input type="text" class="form-control input-sm"
-                       ng-switch-when="NUMBER"
-                       placeholder="{{'DASHBOARD.FILTER.VALUE'|translate}}"
-                       ng-model="filter.value.value" />
-                <div ng-switch-when="INTERVAL" class="viewer-filter-config-value-between">
-                    <input type="text" class="form-control input-sm"
-                           placeholder="{{'DASHBOARD.FILTER.START'|translate}}"
-                           ng-model="filter.value.between.start" />
-                    <input type="text" class="form-control input-sm"
-                           placeholder="{{'DASHBOARD.FILTER.END'|translate}}"
-                           ng-model="filter.value.between.end" />
-                </div>
-                <div ng-switch-when="ARRAY">
-                    <ui-select ng-model="filter.value.in" ng-init="possibleValues(filter)" multiple>
-                        <ui-select-match placeholder="{{'VIEWER.SELECT'|translate}}">{{$item}}</ui-select-match>
-                        <ui-select-choices repeat="a in filter.possibleValues | filter: $select.search track by a">
-                            <span ng-bind-html="a | highlight: $select.search"></span>
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
+            <div class="viewer-filter-add" ng-click="addFilter()">
+                <span translate>DASHBOARD.FILTER.ADD</span>
             </div>
-        </div>
+            <div class="clearfix">
+                <button class="pull-left btn btn-sm btn-default" ng-click="analysisExecuteRequest.filters = []"
+                    type="button" translate>
+                    DASHBOARD.FILTER.CLEAR
+                </button>
+                <button class="pull-right btn btn-sm btn-primary" type="submit" translate>
+                    DASHBOARD.FILTER.APPLY
+                </button>
+            </div>
+            <!--        <div ng-repeat="filter in model.analysisViewerColumns | filter:{columnType:'FILTER'} | orderBy:'analysisColumn.label' track by $index">
+                        <div class="viewer-filter-config-edit">
+                            <div class="viewer-filter-config-label"
+                                 title="{{filter.analysisColumn.label}}">
+                                {{filter.analysisColumn.label}}
+                            </div>
+                            <div class="viewer-filter-config-type"
+                                 ng-class="{active:filter.active}">
+                                <div class="viewer-filter-config-type-button"
+                                     title="{{'DASHBOARD.FILTER.SELECTED_FILTER'|translate:{name: (filterOperators[filter.type].name|translate) } }}"
+                                     ng-click="filter.active = !filter.active">
+                                    <span class="{{filterOperators[filter.type].icon}}"></span>
+                                </div>
+                                <div class="viewer-filter-config-type-arrow"
+                                     title="{{'DASHBOARD.FILTER.TYPE'|translate}}"
+                                     ng-click="filter.optionsVisible = !filter.optionsVisible"
+                                     ng-class="{opened:filter.optionsVisible}">
+                                    <span class="icon-keyboard-arrow-down"></span>
+                                </div>
+                                <div ng-init="openFilterOptionsClass = '.connecta-viewer-' + $parent.$parent.uuid + ' .viewer-filter-config-type-arrow:eq(' + $index + ')'"
+                                     class="connecta-dropdown viewer-filter-config-type-options"
+                                     ng-show="filter.optionsVisible" click-out="filter.optionsVisible=false"
+                                     click-out-exceptions="[openFilterOptionsClass]">
+                                    <div class="connecta-dropdown-item"
+                                         ng-repeat="operator in m2a(filterOperators) | orderBy:'order'"
+                                         ng-click="filter.type = operator.id; filter.optionsVisible = false"
+                                         ng-class="{active:filter.type == operator.id}">
+                                        <span class="{{operator.icon}}"></span>
+                                        {{operator.name| translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="viewer-filter-config-value" ng-switch="filterOperators[filter.type].type">
+                                
+                            </div>
+                        </div>
+                    </div>
+            -->
+        </form>
     </div>
 </div>

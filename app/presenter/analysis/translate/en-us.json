@@ -4,7 +4,7 @@
         "ANALYSIS": "Analysis",
         "REGISTER_ANALYSIS": "Register Analysis",
         "SOURCE_ANALYSIS": "Analysis Source",
-        "NAME": "Name",
+        "NAME": "Analysis name",
         "DESCRIPTION": "Description",
         "ATTRIBUTE": "Attribute",
         "VALUE": "Value",

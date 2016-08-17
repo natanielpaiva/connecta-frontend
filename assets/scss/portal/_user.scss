@@ -1,59 +1,73 @@
-.user-avatar-field {
-    display: block;
-    @extend .cursor-pointer;
-
-    .user-image-container {
-        width: 100%;
+.user-profile-form {
+    .user-avatar-field {
         float:left;
-        margin-bottom: 10px;
-    }
+        margin-right:1em;
 
-    .user-avatar-dropzone, .img-user-quad {
-        width: 200px;
-        height: 200px;
-        padding: 0;
-        margin:0;
-        border:none;
-        background:none;
-    }
-
-    .user-avatar-dropzone {
-        float: left;
-    }
-
-    .img-user-quad {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        margin-top: 8px;
-    }
-
-
-    .user-avatar-info {
-        float: left;
-        margin-left: 10px;
-        width: 700px;
-
-        span:first-child {
-            float: left;
-            display: block;
-            width: 100%;
+        .user-image-container {
+            background-size:cover;
+            background-position:center;
+            width:200px;
+            height:200px;
+            border-radius:50%;
+            overflow:hidden;
+            margin:0;
+            padding:0;
+            position:relative;
+            &:hover {
+                .edit, .delete {
+                    opacity:0.5;
+                }
+            }
+            .edit, .delete {
+                cursor:pointer;
+                overflow:hidden;
+                width:200px;
+                height:50%;
+                position:absolute;
+                margin:0;
+                padding:0;
+                color:white;
+                font-size:3em;
+                text-align:center;
+                line-height:100px;
+                left:0;
+                opacity:0;
+                &:hover {
+                    opacity:1;
+                }
+            }
+            .edit {
+                top:0;
+                background-color:rgba(200,200,200,0.8);
+                input {
+                    opacity:0;
+                    height:0;
+                    width:0;
+                }
+            }
+            .delete {
+                bottom:0;
+                background-color:rgba(250,150,175,0.8);
+            }
         }
-
-        .btn-container {
-            display: block;
-            width: 100%;
-            margin: 8px auto;
-            float: left;
-        }
-
-        .btn-user-info {
-            width: 170px;
+    }
+    .user-other-fields {
+        @include clearfix;
+        /*float:right;*/
+        min-width: 20em;
+        display:block;
+        overflow: hidden;
+        
+        .form-group {
+            width:100%;
         }
     }
+
+
 }
 
 .change-password-container {
-    margin-top: 20px;
+    margin-top:1em;
 }
+
 
