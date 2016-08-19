@@ -26,7 +26,6 @@ define([
             ]
         };
 
-
         var types = {
             ANALYSIS: {
                 type: 'ANALYSIS',
@@ -422,11 +421,11 @@ define([
             });
         };
 
-        this.getAnalysisById = function(id){
-            return $http.get(presenterResources.analysis + "/" + id );
+        this.getAnalysisById = function (id) {
+            return $http.get(presenterResources.analysis + "/" + id);
         };
 
-        this.analysisList = function(){
+        this.analysisList = function () {
             return $http.get(presenterResources.analysis);
         };
 
@@ -618,6 +617,8 @@ define([
 //            var viewerConfiguration = analysisViewerResult.analysisViewer.configuration;
 //            viewer.configuration = analysisViewerResult.analysisViewer.configuration;
 //            viewer.configuration.export = {enabled: true};
+            viewer.configuration.colors = [ '#d80000', '#2f469a' , '#c6c6c6', '#132053'
+            ];
             viewer.configuration.fontFamily = 'Arial';
             if (viewer.configuration.type !== "gauge") {
                 viewer.configuration.data = result;
@@ -703,9 +704,9 @@ define([
             var analysisViewerColumns = viewer.analysisViewerColumns;
             var typeViewer = identifyViewerType(viewer, result);
             var negativeValue = false;
-            if(typeViewer.type === 2){
+            if (typeViewer.type === 2) {
                 negativeValue = montaSerialType2(viewer, result, typeViewer, standardGraph);
-            }else{
+            } else {
                 for (var i in analysisViewerColumns) {
                     if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
                         viewer.configuration.categoryField = analysisViewerColumns[i].analysisColumn.label;
@@ -720,14 +721,14 @@ define([
                         viewer.configuration.graphs.push(graph);
 
                         //verifica se tem algum numero negativo para setar ou não a escala
-                        for(var r in result){
+                        for (var r in result) {
                             var labelMetric = analysisViewerColumns[i].analysisColumn.label;
                             var valueMetric;
                             var object = result[r];
-                            for (var t in object){
-                                if(t === labelMetric){
+                            for (var t in object) {
+                                if (t === labelMetric) {
                                     valueMetric = object[t];
-                                    if(valueMetric < 0){
+                                    if (valueMetric < 0) {
                                         negativeValue = true;
                                     }
                                 }
@@ -738,9 +739,12 @@ define([
                 }
             }
 
-            viewer.configuration.valueAxes.forEach(function(valueAxis){
+            viewer.configuration.valueAxes.forEach(function (valueAxis) {
                 valueAxis.title = "";
-                if(!negativeValue) valueAxis.minimum = 0;
+                if (!negativeValue)
+                    valueAxis.minimum = 0;
+                else
+                    delete valueAxis.minimum;
             });
 
             delete viewer.configuration.dataProvider;
@@ -748,19 +752,17 @@ define([
         var configureFunnelAndPie = function (viewer, result) {
             var typeViewer = identifyViewerType(viewer, result);
             var analysisViewerColumns = viewer.analysisViewerColumns;
-            
-            viewer.configuration.colors = ['#FF6600','#FCD202','#0D8ECF','#2A0CD0','#CD0D74',
-                '#CC0000','#00CC00','#DDDDDD','#999999','#333333','#990000'];
-            
-            if(viewer.configuration.legend){
+
+
+            if (viewer.configuration.legend) {
                 viewer.configuration.legend.valueWidth = 100;
-            }else{
+            } else {
                 viewer.configuration.legend = {};
                 viewer.configuration.legend.valueWidth = 100;
             }
-            if(typeViewer.type === 2){
+            if (typeViewer.type === 2) {
                 montaPieType2(viewer, result, typeViewer);
-            }else{
+            } else {
                 for (var i in analysisViewerColumns) {
                     if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
                         viewer.configuration.titleField = analysisViewerColumns[i].analysisColumn.label;
@@ -775,26 +777,26 @@ define([
         };
 
 
-        var montaPieType2 = function(viewer, result, typeViewer){
+        var montaPieType2 = function (viewer, result, typeViewer) {
             viewer.configuration.data = [];
             var description = typeViewer.descriptionLabel;
             var value = "value";
             viewer.configuration.titleField = description;
             viewer.configuration.valueField = value;
-            viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
-                if(analysisViewerColumn.columnType === 'METRIC'){
-                    for(var r in result){
+            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                if (analysisViewerColumn.columnType === 'METRIC') {
+                    for (var r in result) {
                         var obj = {};
                         var labelMetric = analysisViewerColumn.analysisColumn.label;
                         var valueMetric;
                         var object = result[r];
-                        for (var t in object){
-                            if(t === labelMetric){
+                        for (var t in object) {
+                            if (t === labelMetric) {
                                 valueMetric = object[t];
                             }
                         }
 
-                        if(valueMetric !== undefined){
+                        if (valueMetric !== undefined) {
                             obj[description] = labelMetric;
                             obj.value = valueMetric;
                         }
@@ -804,7 +806,7 @@ define([
             });
         };
 
-        var montaSerialType2 = function(viewer, result, typeViewer, standardGraph){
+        var montaSerialType2 = function (viewer, result, typeViewer, standardGraph) {
             var negative;
             viewer.configuration.data = [];
             var description = typeViewer.descriptionLabel;
@@ -818,23 +820,23 @@ define([
             graph.balloonText = "[[category]] de [[title]] : [[value]]";
             viewer.configuration.graphs.push(graph);
 
-            viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
-                if(analysisViewerColumn.columnType === 'METRIC'){
-                    for(var r in result){
+            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                if (analysisViewerColumn.columnType === 'METRIC') {
+                    for (var r in result) {
                         var obj = {};
                         var labelMetric = analysisViewerColumn.analysisColumn.label;
                         var valueMetric;
                         var object = result[r];
-                        for (var t in object){
-                            if(t === labelMetric){
+                        for (var t in object) {
+                            if (t === labelMetric) {
                                 valueMetric = object[t];
                             }
                         }
 
-                        if(valueMetric !== undefined){
+                        if (valueMetric !== undefined) {
                             obj[description] = labelMetric;
                             obj.value = valueMetric;
-                            if(valueMetric < 0){
+                            if (valueMetric < 0) {
                                 negative = true;
                             }
                         }
@@ -846,35 +848,35 @@ define([
             return negative;
         };
 
-        var identifyViewerType = function(viewer, result){
+        var identifyViewerType = function (viewer, result) {
             var descriptionCount = 0;
             var metricCount = 0;
             var drillCount = 0;
             var descriptionLabel;
-            viewer.analysisViewerColumns.forEach(function(analysisViewerColumn){
-                if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                if (analysisViewerColumn.columnType === 'DESCRIPTION') {
                     descriptionCount++;
                     descriptionLabel = analysisViewerColumn.analysisColumn.label;
-                }else if(analysisViewerColumn.columnType === 'METRIC'){
+                } else if (analysisViewerColumn.columnType === 'METRIC') {
                     metricCount++;
                 }
             });
 
-            viewer.analysis.analysisColumns.forEach(function(analysisColumn){
+            viewer.analysis.analysisColumns.forEach(function (analysisColumn) {
                 if (analysisColumn.orderDrill !== undefined &&
                         analysisColumn.orderDrill !== '') {
                     drillCount++;
                 }
             });
 
-            if(metricCount > 1 && result.length === 1 && drillCount < 2){
+            if (metricCount > 1 && result.length === 1 && drillCount < 2) {
                 return {
-                    "type" : 2,
-                    "descriptionLabel" : descriptionLabel
+                    "type": 2,
+                    "descriptionLabel": descriptionLabel
                 };
             }
 
-            return {"type" : 1};
+            return {"type": 1};
         };
 
         this.getTypes = function () {
