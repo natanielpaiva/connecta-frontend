@@ -345,7 +345,7 @@ define([
                     XFIELD: viewer.xfields,
                     YFIELD: viewer.yfields,
                     VALUEFIELD: viewer.valueFields,
-                    FILTER: viewer.filters,
+//                    FILTER: viewer.filters,
                     COLUMN: viewer.columns
                 };
 
