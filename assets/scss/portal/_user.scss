@@ -1,10 +1,12 @@
 .user-header{
-    padding-top: 0.50em;
-    padding-bottom: 0.50em;
+    padding:1em 1em 0.5em 1em;
     background-color: #e6e6e6;
-    input{
+    margin:-1em -1em 0 -1em;
+
+    .connecta-inline-edit-input{
         text-align: center;
-        border-bottom-color: red;
+        width: 100%;
+        margin:0 auto;
     }
 
     .user-avatar-field {
@@ -63,13 +65,19 @@
 .user-forms {
     margin: 2.5em;
 
+    /*    hr{
+            background:black; 
+            height: 50%;
+            size:10;
+        }*/
+
     .user-profile-form {
+        border-right:solid 1px $darkerWhite;
         .user-other-fields {
             @include clearfix;
-            /*float:right;*/
             min-width: 20em;
             overflow: hidden;
-            margin-left: 10em;
+            margin: 0 auto;
 
             .form-group {
                 width:100%;
@@ -77,9 +85,7 @@
         }
     }
     .change-password-container {
-        float: right;
-        margin-right: 10em; 
-
+        /*float: right;*/
     }
 }
 
