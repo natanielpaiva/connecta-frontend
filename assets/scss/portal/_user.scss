@@ -1,6 +1,14 @@
-.user-profile-form {
+.user-header{
+    padding-top: 0.50em;
+    padding-bottom: 0.50em;
+    background-color: #e6e6e6;
+    input{
+        text-align: center;
+        border-bottom-color: red;
+    }
+
     .user-avatar-field {
-        float:left;
+        /*        float:left;*/
         margin-right:1em;
 
         .user-image-container {
@@ -10,7 +18,7 @@
             height:200px;
             border-radius:50%;
             overflow:hidden;
-            margin:0;
+            margin:0 auto;
             padding:0;
             position:relative;
             &:hover {
@@ -51,23 +59,28 @@
             }
         }
     }
-    .user-other-fields {
-        @include clearfix;
-        /*float:right;*/
-        min-width: 20em;
-        display:block;
-        overflow: hidden;
-        
-        .form-group {
-            width:100%;
+}
+.user-forms {
+    margin: 2.5em;
+
+    .user-profile-form {
+        .user-other-fields {
+            @include clearfix;
+            /*float:right;*/
+            min-width: 20em;
+            overflow: hidden;
+            margin-left: 10em;
+
+            .form-group {
+                width:100%;
+            }
         }
     }
+    .change-password-container {
+        float: right;
+        margin-right: 10em; 
 
-
-}
-
-.change-password-container {
-    margin-top:1em;
+    }
 }
 
 
