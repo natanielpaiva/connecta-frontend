@@ -13,6 +13,7 @@
         "REMOVE_SUCCESS": "Foto removida",
         "CHOOSE_IMAGE": "Escolha uma imagem",
         "REMOVE_IMAGE": "Remover imagem",
+        "CREATE_ACCOUNT": "Criar minha conta",
         "PASSWORD": "Senha",
         "NEW_PASSWORD": "Nova Senha",
         "CONFIRM_PASS": "Repita a senha",
@@ -20,7 +21,7 @@
         "CHANGE_PASSWORD_SUCCESS": "Senha Atualizada",
         "CONFIRM": "Confirmar Senha",
         "LANGUAGE": "Idioma",
-        "ADD": "Criar Usuário",
+        "NEW": "Conheça a sua empresa melhor a cada dia.",
         "EDIT": "Editar Usuário",
         "SAVE_PROFILE": "Salvar Dados",
         "GRAVATAR_TEXT": "Você pode mudar seu avatar abaixo ou remover seu avatar para utilizar o <a href='http://gravatar.com'>gravatar.com</a>",
@@ -30,7 +31,9 @@
             "COMPARE_PASS": "As senhas não conferem.",
             "SHORT_PASS": "A senha deve ter pelo menos 8 caracteres.",
             "INVALID_DOCUMENT": "Imagem Inválida",
-            "USER_OR_PASS_INVALID": "Usuário ou senha incorreto."
+            "USER_OR_PASS_INVALID": "Usuário ou senha incorreto.",
+            "USER_INVALID": "Senha incorreta.",
+            "USER_UNAUTHORIZED": "Usuario não autorizado."
         },
         "ERROR": {
             "USERNAME_EXISTS": "Esse email já está sendo usado"

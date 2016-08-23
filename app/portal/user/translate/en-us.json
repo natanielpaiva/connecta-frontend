@@ -10,6 +10,7 @@
         "LOGOUT": "Logout",
         "UPDATE_SUCCESS": "Profile Updated",
         "CREATE_SUCCESS": "Perfil Created",
+        "CREATE_ACCOUNT": "Create my account",
         "REMOVE_SUCCESS": "Photo removed",
         "CHOOSE_IMAGE": "Choose Image",
         "REMOVE_IMAGE": "Remove Image",
@@ -20,7 +21,7 @@
         "CHANGE_PASSWORD_SUCCESS": "Password Updated",
         "CONFIRM": "Confirm Password",
         "LANGUAGE": "Language",
-        "ADD": "Add User",
+        "NEW": "Get to know your company better every day.",
         "EDIT": "Edit User",
         "SAVE_PROFILE": "Save Profile",
         "GRAVATAR_TEXT": "You can change your avatar here or remove the current avatar to revert to <a href='http://gravatar.com'>gravatar.com</a>",
@@ -30,7 +31,9 @@
             "COMPARE_PASS": "Passwords do not match.",
             "SHORT_PASS": "Password needs to be at least 8 characters long.",
             "INVALID_DOCUMENT": "Invalid Image",
-            "USER_OR_PASS_INVALID": "Invalid username or password."
+            "USER_OR_PASS_INVALID": "Invalid username or password.",
+            "USER_INVALID": "Invalid password.",
+            "USER_UNAUTHORIZED": "Unauthorized User."
         },
         "ERROR": {
             "USERNAME_EXISTS": "There is already someone using this email"
