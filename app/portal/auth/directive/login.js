@@ -1,8 +1,8 @@
 define([
     'connecta.portal',
     'json!package',
-    'portal/auth/service/login-service',
-//    'portal/auth/service/facebook-service',
+    'portal/user/directive/unique-email',
+//    'portal/auth/service/facebook-service',s
 //    'portal/auth/service/google-plus-service',
     'portal/layout/service/notify'
 ], function (portal, package) {
@@ -14,6 +14,7 @@ define([
                 
                 $scope.credentials = {};
                 $scope.authResponse = {};
+                $scope.email = "";
                 $scope.logged = false;
                 $scope.sections = {
                     login: "login",
@@ -97,11 +98,11 @@ define([
 
                 $scope.createUser = function () {
                     //Por enquanto o login do usuário será o email (easy unique...)
-                    $scope.user.profile.id = $scope.user.profile.email;
-
-                    UserService.save($scope.user, $scope.fileImage).then(function (response) {
+//                    $scope.user.profile.id = $scope.user.profile.email;
+                    UserService.save($scope.user).then(function (response) {
                         LoginService.setAuthenticatedUser(response);
-                        $location.path('/');
+                        $scope.currentSection = $scope.sections.domain;
+//                        $location.path('/');
                     }, function (response) {
                         notify.error(response.data);
                     });

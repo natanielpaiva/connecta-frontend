@@ -143,7 +143,7 @@ define([
         },
         {
             href: 'user/form',
-            title: 'USER.FORM',
+            title: 'USER.PROFILE',
             icon: 'icon-user',
             children: []
         }

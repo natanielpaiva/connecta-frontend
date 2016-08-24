@@ -42,12 +42,6 @@ define([
             });
         }
 
-        $scope.createUser = function () {
-            UserService.save($scope.user).then(function (result) {
-                console.log(result);
-            });
-        };
-
         $scope.fileDropped = function ($files) {
             $scope.imageFile = $files[0];
             dataURI($scope.imageFile).then(function (result) {
@@ -62,25 +56,28 @@ define([
             });
         };
 
-        $scope.saveUser = function () {
-            UserService.save($scope.user);
-        };
-
         $scope.submitUserProfile = function () {
             UserService.update($scope.user).then(function () {
                 if ($scope.imageFile) {
-                    UserService.upload($scope.imageFile, $scope.user);
+                    UserService.upload($scope.imageFile, $scope.user)
+                            .error(function () {
+                                notify.warning('USER.VALIDATION.USER_UNAUTHORIZED');
+                            });
                 }
                 notify.success('USER.UPDATE_SUCCESS');
             });
         };
 
         $scope.submitCredentials = function () {
-            UserService.changePassword($scope.credentials).then(function () {
-                notify.success('USER.CHANGE_PASSWORD_SUCCESS');
-            });
+            if ($scope.credentials.password !== $scope.credentials.authenticatedUserPassword) {
+                UserService.changePassword($scope.user.id, $scope.credentials)
+                        .error(function () {
+                            notify.warning('USER.VALIDATION.USER_INVALID');
+                        }).success(function () {
+                    notify.success('USER.CHANGE_PASSWORD_SUCCESS');
+                });
+            }
         };
-
         init();
     });
 

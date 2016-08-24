@@ -48,12 +48,13 @@ define([
         };
 
         UserService.save = function (user) {
-            var url = portalResources.user;
+            var url = portalResources.user + '/createUser';
+            console.log(url,user);
             return $http.post(url, user).then(_sendUpdateUserEvent);
         };
 
         UserService.validateEmail = function (email) {
-            var url = portalResources.user + '?email=' + email;
+            var url = portalResources.user + '/getByEmail' + '?email=' + email;
 
             return $http.get(url);
         };
@@ -63,9 +64,11 @@ define([
             return $http.post(url, user);
         };
 
-        UserService.changePassword = function (credentials) {
-            var url = portalResources.user + '/credentials';
-            return $http.put(url, credentials);
+        UserService.changePassword = function (id, credentials) {
+            var url = portalResources.user + '/credentials' + '?id=' + id +
+                      '&newPassword=' + credentials.password +
+                      '&oldPassword=' + credentials.authenticatedUserPassword;
+            return $http.post(url);
         };
 
     });

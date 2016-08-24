@@ -1,4 +1,3 @@
-<!--<h3 translate>{{isEditing ? 'USER.EDIT': 'USER.ADD'}}</h3>-->
 <div class="user-header">
     <div class="form-group user-avatar-field" ng-if="user.id">
         <div class="user-image-container"
@@ -36,8 +35,9 @@
             <div class="form-group">
                 <label for="email" translate>USER.EMAIL</label>
                 <input type="email" class="form-control" id="email" name="email"
-                       ng-blur="validateEmail()" ng-init="userProfileForm.$unique = true"
-                       ng-model="user.email" ng-model-options="{updateOn: 'blur'}" unique-email initial-email="email" required maxlength="100"/>
+                       ng-init="userProfileForm.$unique = true"
+                       ng-model="user.email" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }"
+                       unique-email initial-email="email" required maxlength="100"/>
                 <div ng-show="userProfileForm.email.$touched" ng-messages="userProfileForm.email.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
