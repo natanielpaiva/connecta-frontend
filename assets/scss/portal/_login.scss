@@ -2,6 +2,7 @@ $boxWidth: 20em;
 $boxHeight: 22em;
 
 $loginGray:#bcbcbc;
+$loginWhite: #F6F6F6;
 
 [layout] {
     login {
@@ -51,7 +52,7 @@ $loginGray:#bcbcbc;
         .form-account {
             width:$boxWidth*1.5;
             margin:0 auto;
-            
+
             label {
                 color:$lighterGray !important;
             }
@@ -196,76 +197,92 @@ $loginGray:#bcbcbc;
     }
 }
 
+/*@media(min-width:)*/
+
 .domain-list {
-    width: 60em;
-    margin: 5em auto 0 auto;
+    width: 90em;
+    height:auto;
     background-color: rgba(255, 255, 255, 0.1);
     padding: 1.4em 2em 0em 2em;
     border-radius:0.25em;
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
 
-    p{
-        color: $white;
-        margin: 0 0 .75em 0;
-        font-size: 1.75em;
-        font-weight: 100;
-    }
-    .thumbnail-grid {
-        .thumbnail-grid-item {
-            position: relative;
-            cursor: pointer;
-            a {
-                height:12em;
-                display:block;
-                width:100%;
-                position: relative;
-                margin-bottom: 2em;
-                &:link, &:hover, &:visited {
-                    * {
-                        color:$white;
-                    }
-                }
-                &:hover {
-                    .thumbnail-grid-item-name {
-                        background-color:$gray;
-                    }
-                }
-                .thumbnail-grid-item-inner {
-                    border:solid 0.5em transparent;
-                    border-bottom-width: 0;
-                    height:9em;
-                    width:100%;
-                    background-color:$darkWhite;
-                    position:relative;
-                    overflow:hidden;
-                    text-align:center;
+    h3 {
+        span {
+            cursor: help;
+            font-size: 0.5em;
+            color: $blue;
+            border: solid 1px $blue;
+            border-radius: 50%;
+            line-height: 1.5em;
+            height: 1.5em;
+            width: 1.5em;
+            display: inline-block;
+            text-align: center;
+            position:relative;
 
-                    .icon-domain {
-                        font-size:4em;
-                        color:$gray;
-                        line-height: 2em;
-                        height: 2em;
-                        display: block;
-                        text-align: center;
-                        width:100%;
-                    }
-                }
-                .thumbnail-grid-item-name {
-                    background-color:rgba($black, 0.6);
-                    color:$white;
-                    line-height:2.4em;
-                    font-size:1.25em;
-                    bottom:0;
-                    left:0;
-                    display: block;
-                    width: 100%;
-                    text-align: center;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    padding: 0 0.5em;
-                }
+            .help-info {
+                display: none;
             }
 
+            &:hover .help-info {
+                font-weight: normal;
+                display:block;
+                background-color: white;
+                border:solid 0.5px $black;
+                color:$gray;
+                padding:1em;
+                max-width:20em;
+                width:auto;
+                position:absolute;
+                bottom:200%;
+                left:50%;
+                transform: translateX(-50%);
+                min-height:2em;
+                border-radius:1em;
+                
+                &:before {
+
+                }
+                &:after {
+                    
+                }
+            }
+        }
+    }
+
+    .thumbnail-grid {
+        .thumbnail-grid-item {
+            cursor: pointer;
+            background-color:$blue;
+            color:$white;
+            line-height:2.9em;
+            font-size:1.25em;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 0.5em;
+            color: $white;
+            margin: 1em;
+            position:relative;
+            &:hover {
+                opacity:0.9;
+            }
+
+            span[class*="icon-"] {
+                font-size:1.4em;
+                position:absolute;
+                left:0.5em;
+                top:50%;
+                transform:translateY(-50%);
+            }
+        }
+        .thumbnail-grid-item-new {
+            background-color:$lighterGray;
         }
     }
 }

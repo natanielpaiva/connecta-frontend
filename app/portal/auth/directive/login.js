@@ -11,7 +11,7 @@ define([
             templateUrl: 'app/portal/auth/directive/template/login.html',
             controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate) { // FacebookService, GPlusService,
                 $scope.package = package;
-                
+
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.email = "";
@@ -47,6 +47,12 @@ define([
                 $scope.selectDomain = function (domain) {
                     LoginService.selectDomain(domain);
                     $route.reload();
+                };
+                $scope.configureDomain = function ($event) {
+//               TODO
+                };
+                $scope.createDomain = function () {
+//                    TODO
                 };
 
 //                $scope.onFileSelected = function (files, ev, rejFiles) {

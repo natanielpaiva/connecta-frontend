@@ -54,22 +54,24 @@
 </section>
 
 <div class="domain-list" ng-show="currentSection === sections.domain">
-    <div class="row">
-        <div class="col-md-12">
-            <p>Selecione um domínio para começar:</p>
-        </div>
-    </div>
+    <h3>
+        {{'DOMAIN.SELECT_DOMAIN_START'|translate}}
+
+        <span class="icon-info">
+            <div class="help-info" translate>
+                DOMAIN.HELP_INFO
+            </div>
+        </span>
+    </h3>
 
     <div class="thumbnail-grid row">
-        <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains">
-            <a ng-click="selectDomain(domain)" title="{{domain.name}}">
-                <div class="thumbnail-grid-item-inner">
-                    <span class="icon-domain"></span>
-                </div>
-                <div class="thumbnail-grid-item-name">
-                    {{domain.name}}
-                </div>
-            </a>
+        <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains" ng-click="selectDomain(domain)">
+            <span ng-click="configureDomain($event)" class="icon-cog "></span>
+            {{domain.name}}
+        </div>
+        <div class="thumbnail-grid-item thumbnail-grid-item-new col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <span class="icon-plus2"></span>
+            {{'DOMAIN.NEW'| translate}}
         </div>
     </div>
 </div>
