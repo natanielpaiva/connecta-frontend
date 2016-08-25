@@ -48,13 +48,13 @@ define([
         };
 
         UserService.save = function (user) {
-            var url = portalResources.user + '/createUser';
+            var url = portalResources.user + '/new';
             console.log(url,user);
             return $http.post(url, user).then(_sendUpdateUserEvent);
         };
 
         UserService.validateEmail = function (email) {
-            var url = portalResources.user + '/getByEmail' + '?email=' + email;
+            var url = portalResources.user + '/get' + '?email=' + email;
 
             return $http.get(url);
         };

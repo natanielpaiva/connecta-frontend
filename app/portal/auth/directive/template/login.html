@@ -69,13 +69,24 @@
             <span ng-click="configureDomain($event)" class="icon-cog "></span>
             {{domain.name}}
         </div>
-        <div class="thumbnail-grid-item thumbnail-grid-item-new col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <span class="icon-plus2"></span>
-            {{'DOMAIN.NEW'| translate}}
-        </div>
+        <a href="#demo" data-toggle="collapse">
+            <div class="thumbnail-grid-item thumbnail-grid-item-new col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <span class="icon-plus2" ng-click="configureDomain($event)"></span>
+                {{'DOMAIN.NEW'| translate}}
+            </div>
+                <div id="demo" class="collapse">
+                    <h3>DOMAIN.NEW</h3>
+                    <form ng-submit="createDomain()">
+                        <label>DOMAIN.NAME</label>
+                        <input ng-model="domain.name"type="text" placeholder="Nome"/>
+                        <button ng-click="createDomain()" class="btn btn-primary" type='button' translate>
+                            DOMAIN.CREATE
+                        </button>
+                    </form>
+                </div>
+        </a>
     </div>
 </div>
-
 <div ng-show="currentSection === sections.form" class="create-account-form">
 
     <div class="header-login">

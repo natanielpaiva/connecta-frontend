@@ -49,10 +49,16 @@ define([
                     $route.reload();
                 };
                 $scope.configureDomain = function ($event) {
-//               TODO
+                    event.stopPropagation();
+//                    TODO
+//                    LoginService.
+                    
                 };
                 $scope.createDomain = function () {
-//                    TODO
+                    console.log('Entrei');
+                    DomainService.createDomain($scope.domain).then(function () {
+                        $location.path('/');
+                    });
                 };
 
 //                $scope.onFileSelected = function (files, ev, rejFiles) {
