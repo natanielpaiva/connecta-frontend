@@ -64,27 +64,36 @@
         </span>
     </h3>
 
+
     <div class="thumbnail-grid row">
         <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains" ng-click="selectDomain(domain)">
-            <span ng-click="configureDomain($event)" class="icon-cog "></span>
+            <span  ng-click="showConfiguration(domain)" class="icon-cog"></span>
             {{domain.name}}
+            <div ng-class="{'thumbnail-grid-item-edit':domain.isEditing}" class="thumbnail-grid-item-naotoaparenco">
+                <form ng-submit="configureDomain(domain)">
+                    <h3>DOMAIN.INVITE</h3>
+                    <button class="btn btn-primary" ng-click="configureDomain(domain)" translate>
+                        DOMAIN.SAVE
+                    </button>
+                </form>
+            </div>
         </div>
         <a href="#demo" data-toggle="collapse">
             <div class="thumbnail-grid-item thumbnail-grid-item-new col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <span class="icon-plus2" ng-click="configureDomain($event)"></span>
+                <span class="icon-plus2"></span>
                 {{'DOMAIN.NEW'| translate}}
             </div>
-                <div id="demo" class="collapse">
-                    <h3>DOMAIN.NEW</h3>
-                    <form ng-submit="createDomain()">
-                        <label>DOMAIN.NAME</label>
-                        <input ng-model="domain.name"type="text" placeholder="Nome"/>
-                        <button ng-click="createDomain()" class="btn btn-primary" type='button' translate>
-                            DOMAIN.CREATE
-                        </button>
-                    </form>
-                </div>
         </a>
+        <div id="demo" class="collapse thumbnail-grid-item-new">
+            <h3>{{'DOMAIN.NEW'| translate}}</h3>
+            <form ng-submit="createDomain()">
+                <label>{{'DOMAIN.NAME'| translate}}</label>
+                <input ng-model="domain.name"type="text" placeholder="Nome"/>
+                <button ng-click="createDomain()" class="btn btn-primary" type='button' translate>
+                    DOMAIN.CREATE
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 <div ng-show="currentSection === sections.form" class="create-account-form">

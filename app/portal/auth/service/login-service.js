@@ -21,8 +21,8 @@ define([
          */
         this.checkAuthentication = function () {
             this.setAuthenticated(
-                this.isAuthenticated()
-            );
+                    this.isAuthenticated()
+                    );
         };
 
         /**
@@ -32,7 +32,7 @@ define([
         this.getAuthenticationToken = function () {
             return $cookieStore.get('portal.auth.access_token');
         };
-        
+
         /**
          * Recupera o token da autenticação
          * @returns {String}
@@ -157,7 +157,7 @@ define([
             $cookieStore.put('user.domain.name', domain.id);
             loginService.setAuthenticated(true);
         };
-        this.configDomain = function(domain){
+        this.configDomain = function (domain) {
             
         };
 

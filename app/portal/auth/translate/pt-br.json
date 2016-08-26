@@ -1,8 +1,16 @@
 {
-  "AUTH": {
-    "LOGIN" : "Entrar",
-    "USER" : "Usuário",
-    "PASSWORD" : "Senha",
-    "DOMAIN" : "Domínio"
-  }
+    "AUTH": {
+        "LOGIN": "Entrar",
+        "USER": "Usuário",
+        "PASSWORD": "Senha",
+        "DOMAIN": "Domínio"
+    },
+    "DOMAIN": {
+        "SELECT_DOMAIN_START": "Selecione um dominio pra começar",
+        "CREATE": "Criar Domínio",
+        "NEW": "Novo Domínio",
+        "HELP_INFO": "Domínios são grupos onde podemos dividir equipes e projetos.",
+        "NAME": "Nome do domínio",
+        "SAVE": "Salvar"
+    }
 }

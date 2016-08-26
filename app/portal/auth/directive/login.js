@@ -22,7 +22,6 @@ define([
                     domain: "domain"
                 };
                 $scope.currentSection = $scope.sections.login;
-
                 $scope.setSection = function (section) {
                     $scope.user = {};
                     $scope.userImage = undefined;
@@ -48,17 +47,15 @@ define([
                     LoginService.selectDomain(domain);
                     $route.reload();
                 };
-                $scope.configureDomain = function ($event) {
+                $scope.showConfiguration = function (domain) {
                     event.stopPropagation();
-//                    TODO
-//                    LoginService.
-                    
+                    domain.isEditing = domain.isEditing === false ? true : false;
+                };
+                $scope.configureDomain = function (domain) {
+                    console.log(domain);
                 };
                 $scope.createDomain = function () {
-                    console.log('Entrei');
-                    DomainService.createDomain($scope.domain).then(function () {
-                        $location.path('/');
-                    });
+                    DomainService.createDomain($scope.domain);
                 };
 
 //                $scope.onFileSelected = function (files, ev, rejFiles) {
