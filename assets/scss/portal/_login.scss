@@ -202,7 +202,6 @@ $loginWhite: #F6F6F6;
 .domain-list {
     width: 90em;
     height:auto;
-    background-color: rgba(255, 255, 255, 0.1);
     padding: 1.4em 2em 0em 2em;
     border-radius:0.25em;
     position:fixed;
@@ -291,7 +290,6 @@ $loginWhite: #F6F6F6;
             overflow: hidden;
             text-overflow: ellipsis;
             padding: 0 0.5em;
-            color: $white;
             margin: 1em;
             position:relative;
             &:hover {
@@ -305,16 +303,25 @@ $loginWhite: #F6F6F6;
                 top:50%;
                 transform:translateY(-50%);
             }
-            .thumbnail-grid-item-naotoaparenco{
-                background-color: red;
+            
+            .thumbnail-grid-item-edit{
+                display: none;
+                
+                &.thumbnail-grid-item-editing{
+                    display: block;
+                    color: black;
+                    background-color: $loginWhite;
+                    cursor: auto;
+                }
+            }
+            .thumbnail-grid-item-head{
                 display: none;
             }
-            .thumbnail-grid-item-edit{
-                display: block;
-            }
+            
         }
         .thumbnail-grid-item-new {
             background-color:$lighterGray;
         }
+
     }
 }

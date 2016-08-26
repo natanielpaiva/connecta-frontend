@@ -11,6 +11,8 @@
         "NEW": "Novo Domínio",
         "HELP_INFO": "Domínios são grupos onde podemos dividir equipes e projetos.",
         "NAME": "Nome do domínio",
-        "SAVE": "Salvar"
+        "SAVE": "Salvar",
+        "INVITE": "Convidar Participantes",
+        "SEARCH": "Pesquisar por nome ou email"
     }
 }

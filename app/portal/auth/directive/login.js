@@ -16,6 +16,7 @@ define([
                 $scope.authResponse = {};
                 $scope.email = "";
                 $scope.logged = false;
+                $scope.isCreating = false;
                 $scope.sections = {
                     login: "login",
                     form: "form",
@@ -49,13 +50,18 @@ define([
                 };
                 $scope.showConfiguration = function (domain) {
                     event.stopPropagation();
-                    domain.isEditing = domain.isEditing === false ? true : false;
+                    domain.isEditing = domain.isEditing === false || 
+                                       domain.isEditing === undefined? true : false;
                 };
+                
                 $scope.configureDomain = function (domain) {
-                    console.log(domain);
+                    //TODO update domain
+                    event.stopPropagation();
                 };
                 $scope.createDomain = function () {
-                    DomainService.createDomain($scope.domain);
+                    DomainService.createDomain($scope.domain).then(function (){
+                        selectDomain($scope.domain);
+                    });
                 };
 
 //                $scope.onFileSelected = function (files, ev, rejFiles) {

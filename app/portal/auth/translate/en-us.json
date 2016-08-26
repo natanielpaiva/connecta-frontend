@@ -6,11 +6,13 @@
     "DOMAIN" : "Domain"
   },
   "DOMAIN": {
-      "SELECT_DOMAIN_START": "Select an domain to start",
+      "SELECT_DOMAIN_START": "Select a domain to start",
       "CREATE": "Create Domain",
       "NEW": "New Domain",
       "HELP_INFO": "Domains are groups where you can divide teams and projects.",
       "NAME": "Domain name",
-      "SAVE": "Save"
+      "SAVE": "Save",
+      "INVITE": "Invite Participants",
+      "SEARCH": "Search by name or email"
   }
 }
