@@ -34,7 +34,7 @@ define([
         };
 
         /**
-         * Recupera o token da autenticação
+         * Seta o token da autenticação
          * @returns {String}
          */
         this.setAuthenticationToken = function (token) {
@@ -165,7 +165,7 @@ define([
             if (_reloadNeeded) {
                 // TODO Fazer o retry dos requests, ao invés de dar um reload
                 _reloadNeeded = false;
-                $route.reload();
+//                $route.reload();
             }
         };
 

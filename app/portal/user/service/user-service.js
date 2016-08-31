@@ -49,8 +49,7 @@ define([
 
         UserService.save = function (user) {
             var url = portalResources.user + '/new';
-            console.log(url,user);
-            return $http.post(url, user).then(_sendUpdateUserEvent);
+            return $http.post(url, user);
         };
 
         UserService.validateEmail = function (email) {
