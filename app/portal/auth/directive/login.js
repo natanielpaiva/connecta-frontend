@@ -50,17 +50,25 @@ define([
                 };
                 $scope.showConfiguration = function (domain) {
                     event.stopPropagation();
-                    domain.isEditing = domain.isEditing === false || 
-                                       domain.isEditing === undefined? true : false;
+                    domain.isEditing = domain.isEditing === false ||
+                            domain.isEditing === undefined ? true : false;
                 };
-                
+
                 $scope.configureDomain = function (domain) {
-                    //TODO update domain
                     event.stopPropagation();
+                    DomainService.updateDomain(domain);
+                    domain.isEditing = false;
+
                 };
                 $scope.createDomain = function () {
-                    DomainService.createDomain($scope.domain).then(function (){
+                    DomainService.createDomain($scope.domain).then(function () {
                         selectDomain($scope.domain);
+                    });
+                };
+                $scope.deleteDomain = function (id) {
+                    console.log(id);
+                    DomainService.deleteDomain(id).then(function(){
+                        notify.success('DOMAIN.DELETED');
                     });
                 };
 

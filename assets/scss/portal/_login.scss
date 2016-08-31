@@ -308,6 +308,7 @@ $loginWhite: #F6F6F6;
                 display: none;
                 
                 &.thumbnail-grid-item-editing{
+                    margin: -0.25em;
                     display: block;
                     color: black;
                     background-color: $loginWhite;

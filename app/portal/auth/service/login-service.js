@@ -157,10 +157,6 @@ define([
             $cookieStore.put('user.domain.name', domain.id);
             loginService.setAuthenticated(true);
         };
-        this.configDomain = function (domain) {
-            
-        };
-
         this.setAuthenticatedUser = function (response) {
             _currentUser = response.data;
 
