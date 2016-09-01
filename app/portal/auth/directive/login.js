@@ -62,9 +62,11 @@ define([
                 };
 
                 $scope.createUser = function () {
+                    $scope.credentials = $scope.user;
                     UserService.save($scope.user).then(function () {
-                        LoginService.doLogin($scope.user);
-                        $scope.setSection($scope.sections.domain);
+                        LoginService.doLogin($scope.user).then(function () {
+                            $scope.setSection($scope.sections.domain);
+                        });
                     }, function (response) {
                         notify.error(response.data);
                     });
