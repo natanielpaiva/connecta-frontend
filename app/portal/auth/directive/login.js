@@ -76,7 +76,6 @@ define([
                 $scope.createDomain = function () {
                     DomainService.createDomain($scope.domain).then(function (response) {
                         $scope.selectDomain(response.data);
-                        console.log('certu');
                     });
                 };
                 $scope.deleteDomain = function (id) {
