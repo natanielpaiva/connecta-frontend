@@ -36,7 +36,7 @@ define([
 //                };
 
                 $scope.submit = function () {
-                    LoginService.doLogin($scope.credentials).then(function (response) {
+                    LoginService.doLogin($scope.credentials).then(function () {
                         $scope.loadDomains($scope.credentials.email);
                         $scope.setSection($scope.sections.domain);
                     }, function () {
@@ -62,11 +62,8 @@ define([
                 };
 
                 $scope.createUser = function () {
-                    //Por enquanto o login do usuário será o email (easy unique...)
-//                    $scope.user.profile.id = $scope.user.profile.email;
-                    UserService.save($scope.user).then(function (response) {
+                    UserService.save($scope.user).then(function () {
                         LoginService.doLogin($scope.user);
-//                        LoginService.setAuthenticatedUser(response);
                         $scope.setSection($scope.sections.domain);
                     }, function (response) {
                         notify.error(response.data);
@@ -74,10 +71,14 @@ define([
                 };
 
                 $scope.createDomain = function () {
-                    DomainService.createDomain($scope.domain).then(function (response) {
-                        $scope.selectDomain(response.data);
+                    DomainService.createDomain($scope.domain).then(function () {
+                        $scope.loadDomains($scope.credentials.email);
+                        $scope.setSection($scope.sections.domain);
+                        $scope.isCreating = false;
+                        notify.success('DOMAIN.CREATED');
                     });
                 };
+
                 $scope.deleteDomain = function (id) {
                     console.log(id);
                     DomainService.deleteDomain(id).then(function () {
