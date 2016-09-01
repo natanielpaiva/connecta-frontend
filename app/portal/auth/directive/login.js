@@ -14,6 +14,7 @@ define([
 
                 $scope.credentials = {};
                 $scope.authResponse = {};
+                $scope.domains = [];
                 $scope.email = "";
                 $scope.logged = false;
                 $scope.isCreating = false;
@@ -74,8 +75,7 @@ define([
 
                 $scope.createDomain = function () {
                     DomainService.createDomain($scope.domain).then(function () {
-                        $scope.loadDomains($scope.credentials.email);
-                        $scope.setSection($scope.sections.domain);
+                        $scope.domains.push($scope.domain);
                         $scope.isCreating = false;
                         notify.success('DOMAIN.CREATED');
                     });
