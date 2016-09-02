@@ -26,24 +26,16 @@ define([
         };
 
         this.success = function (text) {
-            $translate(text).then(function (translate) {
-                toastr.success(translate);
-            });
+            toastr.success($translate.instant(text));
         };
         this.info = function (text) {
-            $translate(text).then(function (translate) {
-                toastr.info(translate);
-            });
+            toastr.info($translate.instant(text));
         };
         this.warning = function (text) {
-            $translate(text).then(function (translate) {
-                toastr.warning(translate);
-            });
+            toastr.warning($translate.instant(text));
         };
         this.error = function (text) {
-            $translate(text).then(function (translate) {
-                toastr.error(translate);
-            });
+            toastr.error($translate.instant(text));
         };
         
         var notify = this;
