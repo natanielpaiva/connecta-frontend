@@ -303,25 +303,44 @@ $loginWhite: #F6F6F6;
                 top:50%;
                 transform:translateY(-50%);
             }
-            
+
             .thumbnail-grid-item-edit{
                 display: none;
-                
+
                 &.thumbnail-grid-item-editing{
-                    margin: -0.25em;
+                    margin: -0.35em;
                     display: block;
                     color: black;
                     background-color: $loginWhite;
                     cursor: auto;
+                    margin-bottom: 0.15em;
+                    .form-group{
+                        label{
+                            margin-top: 0;
+                        }
+                    }
+                    input {
+                        display: block;
+                        text-align: center;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    button {
+                        margin-bottom: 2em;
+                    }
                 }
             }
             .thumbnail-grid-item-head{
                 display: none;
             }
-            
+
         }
         .thumbnail-grid-item-new {
             background-color:$lighterGray;
+            h3{
+                margin-top: 0.35em;
+                padding-top: 1em; 
+            }
         }
 
     }

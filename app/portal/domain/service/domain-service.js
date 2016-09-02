@@ -22,12 +22,12 @@ define([
         };
 
         this.createDomain = function (domain) {
-            var url = portalResources.domain + '/create';
+            var url = portalResources.domain;
             return $http.post(url, domain);
         };
         this.updateDomain = function (domain) {
             var url = portalResources.domain + '/' + domain.id;
-            return $http.post(url, domain);
+            return $http.put(url, domain);
         };
         this.deleteDomain = function (id) {
 

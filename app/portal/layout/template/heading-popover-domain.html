@@ -1,0 +1,32 @@
+<!--<div class='popover-container user-popover'>
+    <div class="heading-popover-title">
+            {{domain.name?domain.name:('DOMAIN.DOMAIN'|translate)}}
+    </div>
+    <div class="heading-popover-content user-popover-content">
+        <nav>
+            <ul>
+                <li><a href="#/user/form"><span class='icon-user'></span>{{'USER.PROFILE' | translate}}</a></li>
+                <li>
+                    <a href="" ng-click="toggleDomainMenu($event)">
+                        <span class='icon-domain'></span>{{'USER.DOMAINS' | translate}}
+                        <span class="menu-item-arrow" ng-class="{
+                                    'icon-chevron-down': toggleDomain,
+                                    'icon-chevron-right': !toggleDomain
+                                  }"></span>
+                    </a>
+                    <ul ng-if="toggleDomain">
+                        <li ng-repeat="domain in user.domains">
+                            <a href="" ng-click="changeDomain(domain)"
+                                ng-class="{selected: domain.selected}">
+                                {{domain.name}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                 <li><a href="#/user/config"><span class='icon-settings'></span>{{'USER.CONFIG' | translate}}</a></li> 
+                <li visible-to-roles="ROLE_ADMIN"><a href="#/user/new"><span class='icon-settings'></span>{{'USER.ADD' | translate}}</a></li>
+                <li><a href="" ng-click="logoutUser()"><span class='icon-exit-to-app'></span>{{'USER.LOGOUT'| translate}}</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>-->
