@@ -26,6 +26,7 @@ define([
                 $scope.currentSection = $scope.sections.login;
                 $scope.setSection = function (section) {
                     $scope.user = {};
+                    $scope.user.email = null; // Parece que não faz sentido. Mas faz. Acredite. E tem que ser nessa ordem.
                     $scope.userImage = undefined;
                     $scope.currentSection = section;
                 };
@@ -77,13 +78,14 @@ define([
                     DomainService.createDomain($scope.domain).then(function (response) {
                         $scope.domains.push(response.data);
                         $scope.isCreating = false;
+                        $scope.domain = {};
                         notify.success('DOMAIN.CREATED');
                     });
                 };
 
-                $scope.deleteDomain = function (id) {
-                    console.log(id);
+                $scope.deleteDomain = function (id, index) {
                     DomainService.deleteDomain(id).then(function () {
+                        $scope.domains.splice(index, 1);
                         notify.success('DOMAIN.DELETED');
                     });
                 };

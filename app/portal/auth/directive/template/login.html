@@ -79,9 +79,9 @@
                         <label translate>DOMAIN.INVITE</label>
                         <input ng-model="domain.email" placeholder="{{'DOMAIN.SEARCH'| translate}}"/><br>
                     </div>-->
-<!--                    <button class="btn btn-primary " ng-click="deleteDomain(domain.id)" translate>
+                    <button class="btn btn-primary " ng-click="deleteDomain(domain.id, $index)" translate>
                         DOMAIN.DELETE
-                    </button>-->
+                    </button>
                     <button class="btn btn-primary " ng-click="configureDomain(domain)" translate>
                         DOMAIN.SAVE
                     </button>

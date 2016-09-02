@@ -14,6 +14,8 @@
         "NAME": "Nome do domínio",
         "SAVE": "Salvar",
         "INVITE": "Convidar Participantes",
-        "SEARCH": "Pesquisar por nome ou email"
+        "SEARCH": "Pesquisar por nome ou email",
+        "DELETE": "Remover Domínio",
+        "DELETED": "Domínio removido"
     }
 }
