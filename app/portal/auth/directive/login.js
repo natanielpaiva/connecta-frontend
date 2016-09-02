@@ -74,8 +74,8 @@ define([
                 };
 
                 $scope.createDomain = function () {
-                    DomainService.createDomain($scope.domain).then(function () {
-                        $scope.domains.push($scope.domain);
+                    DomainService.createDomain($scope.domain).then(function (response) {
+                        $scope.domains.push(response.data);
                         $scope.isCreating = false;
                         notify.success('DOMAIN.CREATED');
                     });
