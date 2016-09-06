@@ -129,7 +129,7 @@ define([
          * @returns {Promise}
          */
         this.doLogin = function (user) {
-            var data = "username=" + user.email + "&password=" + user.password + "&grant_type=password&scope=read%20write&" +
+            var data = "username=" + user.email + "&password=" + encodeURIComponent(user.password) + "&grant_type=password&scope=read%20write&" +
                     "client_secret=secret&client_id=frontend";
 
             var deferred = $q.defer();
