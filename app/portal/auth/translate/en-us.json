@@ -16,6 +16,7 @@
       "INVITE": "Invite Participants",
       "SEARCH": "Search by name or email",
       "DELETE": "Delete",
-      "DELETED": "Domain deleted"
+      "DELETED": "Domain deleted",
+      "UPDATED" : "Domain updated"
   }
 }

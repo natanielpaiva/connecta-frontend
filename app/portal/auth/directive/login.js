@@ -60,6 +60,7 @@ define([
                     event.stopPropagation();
                     DomainService.updateDomain(domain);
                     domain.isEditing = false;
+                    notify.success('DOMAIN.UPDATED');
 
                 };
 

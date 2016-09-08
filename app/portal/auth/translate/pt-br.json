@@ -15,7 +15,8 @@
         "SAVE": "Salvar",
         "INVITE": "Convidar Participantes",
         "SEARCH": "Pesquisar por nome ou email",
-        "DELETE": "Remover Domínio",
-        "DELETED": "Domínio removido"
+        "DELETE": "Deletar",
+        "DELETED": "Domínio removido",
+        "UPDATED" : "Domínio atualizado"
     }
 }

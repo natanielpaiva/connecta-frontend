@@ -73,13 +73,14 @@
             <div ng-class="{'thumbnail-grid-item-editing':domain.isEditing}" class="thumbnail-grid-item-edit">
                 <form >
                     <div class="form-group">
+                        <span ng-click="domain.isEditing = false" class="icon-backspace"></span>
                         <input ng-model="domain.name" class=" connecta-inline-edit-input" placeholder="{{domain.name}}"/><br>
                     </div>
-<!--                    <div class="form-group">
-                        <label translate>DOMAIN.INVITE</label>
-                        <input ng-model="domain.email" placeholder="{{'DOMAIN.SEARCH'| translate}}"/><br>
-                    </div>-->
-                    <button class="btn btn-primary " ng-click="deleteDomain(domain.id, $index)" translate>
+                    <!--                    <div class="form-group">
+                                            <label translate>DOMAIN.INVITE</label>
+                                            <input ng-model="domain.email" placeholder="{{'DOMAIN.SEARCH'| translate}}"/><br>
+                                        </div>-->
+                    <button class="btn btn-danger " ng-click="deleteDomain(domain.id, $index)" translate>
                         DOMAIN.DELETE
                     </button>
                     <button class="btn btn-primary " ng-click="configureDomain(domain)" translate>

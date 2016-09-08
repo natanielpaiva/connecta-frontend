@@ -70,12 +70,12 @@ define([
 
         $scope.submitCredentials = function () {
             if ($scope.credentials.password !== $scope.credentials.authenticatedUserPassword) {
-                UserService.changePassword($scope.user.id, $scope.credentials)
-                        .error(function () {
-                            notify.warning('USER.VALIDATION.USER_INVALID');
-                        }).success(function () {
+                UserService.changePassword($scope.credentials).then(function () {
                     notify.success('USER.CHANGE_PASSWORD_SUCCESS');
-                });
+                }, function () {
+                    notify.warning('USER.VALIDATION.USER_INVALID');
+                }
+                );
             }
         };
         init();
