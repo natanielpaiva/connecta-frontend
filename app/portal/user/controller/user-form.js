@@ -72,6 +72,7 @@ define([
             if ($scope.credentials.password !== $scope.credentials.authenticatedUserPassword) {
                 UserService.changePassword($scope.credentials).then(function () {
                     notify.success('USER.CHANGE_PASSWORD_SUCCESS');
+                    $scope.credentials = {};
                 }, function () {
                     notify.warning('USER.VALIDATION.USER_INVALID');
                 }

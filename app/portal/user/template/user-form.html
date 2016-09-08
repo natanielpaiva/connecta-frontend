@@ -38,7 +38,7 @@
                        ng-init="userProfileForm.$unique = true"
                        ng-model="user.email" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }"
                        unique-email initial-email="email" required maxlength="100"/>
-                <div ng-show="userProfileForm.email.$touched" ng-messages="userProfileForm.email.$error"
+                <div class="has-error has-feedback" ng-show="userProfileForm.email.$touched" ng-messages="userProfileForm.email.$error"
                      ng-messages-include="portal-error-messages"></div>
             </div>
             <div class="form-group">
@@ -64,25 +64,25 @@
             <label for="authenticated_user_password" translate>USER.PASSWORD</label>
             <input type="password" class="form-control" id="authenticated_user_password" name="authenticated_user_password"
                    ng-model="credentials.authenticatedUserPassword" maxlength="20" minlength='8' required />
-            <div ng-show="user_credentials_form.authenticated_user_password.$touched" ng-messages="user_credentials_form.authenticated_user_password.$error"
+            <div class="has-error has-feedback" ng-show="user_credentials_form.authenticated_user_password.$touched" ng-messages="user_credentials_form.authenticated_user_password.$error"
                  ng-messages-include="portal-error-messages"></div>
         </div>
         <div class="form-group">
             <label for="new_password" translate>USER.NEW_PASSWORD</label>
             <input type="password" class="form-control" id="new_password" name="new_password"
                    ng-model="credentials.password" maxlength="20" minlength='8' required />
-            <div ng-show="user_credentials_form.new_password.$touched" ng-messages="user_credentials_form.new_password.$error"
-                 ng-messages-include="portal-error-messages">
+            <div class="has-error has-feedback" ng-show="user_credentials_form.new_password.$touched" ng-messages="user_credentials_form.new_password.$error"
+                 ng-messages-include="portal-error-messages"><span></span>
                 <p ng-message="minlength" class="help-block">{{'USER.VALIDATION.SHORT_PASS'| translate}}</p>
             </div>
         </div>
         <div class="form-group">
             <label for="confirm_pass" translate>USER.CONFIRM_PASS</label>
             <input type="password" class="form-control" id="confirm_pass" name="confirm_pass"
-                   ng-model="confirm_pass" compare-to='credentials.password'
+                   ng-model="credentials.confirm_pass" compare-to='credentials.password'
                    ng-model-options="{debounce: 500}" required>
-                   <div ng-show="user_credentials_form.confirm_pass.$dirty" ng-messages="user_credentials_form.confirm_pass.$error"
-                   ng-messages-include="portal-error-messages">
+            <div class="has-error has-feedback"ng-show="user_credentials_form.confirm_pass.$dirty" ng-messages="user_credentials_form.confirm_pass.$error"
+                 ng-messages-include="portal-error-messages">
                 <p ng-message="compareTo" class="help-block">{{'USER.VALIDATION.COMPARE_PASS'| translate}}</p>
             </div>
         </div>

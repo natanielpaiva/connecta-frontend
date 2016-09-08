@@ -65,8 +65,8 @@ define([
 
         UserService.changePassword = function (credentials) {
             var url = portalResources.user + '/credentials?' +
-                      'newPassword=' + credentials.password +
-                      '&oldPassword=' + credentials.authenticatedUserPassword;
+                      'newPass=' + credentials.password +
+                      '&oldPass=' + credentials.authenticatedUserPassword;
             return $http.post(url);
         };
 
