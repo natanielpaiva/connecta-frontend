@@ -117,14 +117,14 @@ define([
      */
     function configureTranslations($translateProvider, navigator) {
         var _availableMappings = {
-            
+
         };
-        
-        
+
+
         $translateProvider.useLoader('$translatePartialLoader', {
             urlTemplate: 'app/{part}/translate/{lang}.json'
         });
-        
+
 //        $translateProvider.registerAvailableLanguageKeys(['en', 'pt'], {
 //            'en-us': 'en-us',
 //            'en-gb': 'en-us',
@@ -134,11 +134,11 @@ define([
 
 //        $translateProvider.determinePreferredLanguage(function () {
 //            var lang = 'en-us';
-//            
+//
 //            if (navigator.userLanguage || navigator.language) {
 //                lang = navigator.userLanguage || navigator.language;
 //            }
-//            
+//
 //            return lang.toLowerCase();
 //        });
 
@@ -374,7 +374,6 @@ define([
         'portal/layout/directive/conf-modal',
         'portal/auth/directive/login',
         'inspection/inspection/directive/box-table-inspection',
-        'maps/drill/directive/box-table-maps',
         'inspection/inspection/directive/status-change',
         'inspection/inspection/directive/inspect-datepicker',
         'inspection/inspection/directive/drop-file',
