@@ -21,7 +21,7 @@ define([
 
             function onSuccess (response) {
 
-                $scope.projects = response.data
+                $scope.projects = response.data;
 
             }
 
