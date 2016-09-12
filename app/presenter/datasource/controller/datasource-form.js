@@ -2,8 +2,7 @@ define([
     'connecta.presenter',
     'presenter/datasource/service/datasource-service'
 ], function (presenter) {
-    return presenter.lazy.controller('DatasourceFormController', function ($scope, DatasourceService, $location, $routeParams, $rootScope, util, notify) {
-        
+    return presenter.lazy.controller('DatasourceFormController', function ($scope, DatasourceService, $location, $routeParams, util, notify) {
         $scope.mapToArray = util.mapToArray;
 
         $scope.form = {
@@ -28,6 +27,7 @@ define([
                 }
             });
         }
+        
         $scope.testConnection = function () {
             DatasourceService.testConnection($scope.datasource).then(function () {
                 notify.success('Conexão feita com sucesso!');
@@ -39,5 +39,6 @@ define([
                 $location.path('presenter/datasource');
             });
         };
+        
     });
 });

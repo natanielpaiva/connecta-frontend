@@ -1,10 +1,13 @@
+<img alt="detail" class="top-left-detail" src="assets/img/bottom-right.svg" 
+     ng-class="{active:(currentSection === sections.login)}" />
+<img alt="detail" class="top-left-detail-big" src="assets/img/top-left.svg"
+     ng-class="{active:(currentSection === sections.login)}" />
+
 <section ng-show="currentSection === sections.login">
     <div class="header-login">
         <div class="logo">
-            <img src="assets/img/connecta.png" alt="logo" class="logo-app-master"/>
-        </div>
-        <div class="version-app">
-            {{package.version}}
+            <img src="assets/img/connecta.png" alt="logo"
+                 title="Connecta version {{package.version}}" class="logo-app-master"/>
         </div>
     </div>
     <div class="form-login">
@@ -14,43 +17,39 @@
                 <div class="field-text">
                     <input type="text" placeholder="{{'USER.EMAIL'| translate}}"
                            ng-model="credentials.email" required autofocus />
+                    <div class="material-border"></div>
                 </div>
             </div>
             <div class="line-form">
                 <span class="icon-lock"></span>
                 <div class="field-text">
                     <input type="password" placeholder="{{'AUTH.PASSWORD'| translate}}"
-                           ng-model="credentials.password" required/>
+                           ng-model="credentials.password" required />
+                    <div class="material-border"></div>
                 </div>
             </div>
-            <div class="line-form">
-                <button class="btn-login" translate>AUTH.LOGIN</button>
-            </div>
+            <button class="btn-login" translate>AUTH.LOGIN</button>
         </form>
-        <div class="line-form text-center">
+        <div class="add-account">
             <a href="javascript:void(0);" ng-click="setSection(sections.form)" translate="">LAYOUT.ADD_ACC</a>
         </div>
-
     </div>
-    <!--    <div id="social-login">
-          <div id="separator-login">
-              <div class="line-separator"><hr /></div>
-              <div class="line-separator-txt">{{'LAYOUT.OR' | translate}}</div>
-              <div class="line-separator"><hr /></div>
-          </div>
-          <a href class="btn-social btn-facebook"
-             data-ng-click="loginWithFacebook()">
-              <span class="icon-facebook-with-circle"></span>
-              {{'LAYOUT.LOGIN_FACEBOOK' | translate}}
-          </a>
-          <div id="loginGoogle" class="btn-social btn-google" ng-click="loginWithGoogle()" style="cursor: pointer">
-              <span class="icon icon-google-with-circle"></span>
-              {{'LAYOUT.LOGIN_GOOGLE' | translate}}
-          </div>
-      </div>-->
-    <!--    <div id="create-account">
-          <a href ng-click="setSection(sections.form)" translate>LAYOUT.ADD_ACC</a>
-      </div>-->
+<!--    <div id="social-login">
+      <div id="separator-login">
+          <div class="line-separator"><hr /></div>
+          <div class="line-separator-txt">{{'LAYOUT.OR' | translate}}</div>
+          <div class="line-separator"><hr /></div>
+      </div>
+      <a href class="btn-social btn-facebook"
+         data-ng-click="loginWithFacebook()">
+          <span class="icon-facebook-with-circle"></span>
+          {{'LAYOUT.LOGIN_FACEBOOK' | translate}}
+      </a>
+      <div id="loginGoogle" class="btn-social btn-google" ng-click="loginWithGoogle()" style="cursor: pointer">
+          <span class="icon icon-google-with-circle"></span>
+          {{'LAYOUT.LOGIN_GOOGLE' | translate}}
+      </div>
+</div>-->
 </section>
 
 <div class="domain-list" ng-show="currentSection === sections.domain">
@@ -161,3 +160,5 @@
         </form>
     </div>
 </div>
+
+<img alt="detail" class="bottom-right-detail" src="assets/img/bottom-right.svg" />
