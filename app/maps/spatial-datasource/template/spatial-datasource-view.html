@@ -1,0 +1,70 @@
+<span>Visualizar<strong>Fonte de dados Geo</strong></span>
+<div class="row">
+
+  <button class="btn btn-default" ng-click="delete(spatialDataSource._id)">
+    Excluir
+  </button>
+
+  <button class="btn btn-default" ng-click="edit(spatialDataSource._id)">
+    Editar
+  </button>
+
+</div>
+
+<form>
+  <div class="tab-pane">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Titulo</label>
+        <span>{{spatialDataSource.title}}</span>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label>Descricao</label>
+        <span>{{spatialDataSource.description}} </span>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label>Server</label>
+        <span>{{spatialDataSource.serverType}} </span>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="form-group col-md-4">
+        <label>DSN</label>
+        <span>{{spatialDataSource.dsn}} </span>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label>Usuario</label>
+        <span>{{spatialDataSource.user}} </span>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label>Senha</label>
+        <span>{{spatialDataSource.password}} </span>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="form-group col-md-4">
+        <label>Info</label>
+        <span>{{spatialDataSource.info}} </span>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <a href="#/maps/spatial-datasource">
+          <button title="Cancelar" class="btn btn-default pull-right" type="button" ng-click="backToList()">
+            Cancelar
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</form>
