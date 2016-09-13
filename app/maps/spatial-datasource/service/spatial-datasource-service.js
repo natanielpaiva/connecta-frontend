@@ -18,8 +18,8 @@ define([
             return $http.put(url, datasource);
         };
 
-        this.list = function (params) {
-            return $http.post(url, params);
+        this.list = function (queryString) {
+            return $http.get(url + queryString);
         };
 
         this.delete = function (id) {

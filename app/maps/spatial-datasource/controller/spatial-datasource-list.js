@@ -19,13 +19,9 @@ define([
             return {
                 getData : function ($defer, params) {
 
-                    var objRequest = {
-                        size : params.count(),
-                        page : params.page(),
-                        filter : getObjectFilter()
-                    };
+                    var queryString = getQueryString(params);
 
-                    SpatialDataSourceService.list(objRequest).then(onSuccess, onError);
+                    SpatialDataSourceService.list(queryString).then(onSuccess, onError);
 
                     function onSuccess(response) {
                         $scope.tableOfDataSourcesParams.total(response.data.totalDocuments);
@@ -40,12 +36,11 @@ define([
             }
         }
 
-        function getObjectFilter () {
-            var array = [],
-                  fieldObj;
+        function getQueryString (params) {
 
-            if (!$scope.filter)
-                return;
+            var array = [],
+                  fieldObj,
+              queryString;
 
             for (var field in $scope.tableOfDataSourcesParams.filter()) {
                 fieldObj = {};
@@ -53,7 +48,14 @@ define([
                 array.push(fieldObj);
             }
 
-            return array;
+            queryString = "?size=" + params.count() +
+                          "&page=" + params.page();
+
+            if ($scope.filter) {
+                queryString += "&filter=" + JSON.stringify(array);
+            }
+
+            return queryString;
         }
 
     });
