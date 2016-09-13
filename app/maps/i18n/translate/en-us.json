@@ -4,5 +4,19 @@
     "GEO_LAYERS" : "Camadas geográficas",
     "DATA_SOURCE" : "Fonte de dados tabular",
     "PROJECTS" : "Projetos"
+  },
+  "GEO_DATASOURCE": {
+    "TITLE": "Title",
+    "DESCRIPTION": "Description",
+    "SERVER": "Server",
+    "USER": "User",
+    "PASSWORD": "Password",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "TYPE": "Type",
+    "SAVE_ERROR": "Error saving record",
+    "SAVE_SUCCESS": "Registration successfully saved",
+    "DELETE_ERROR": "Error delete the record",
+    "DELETE_SUCCESS": "Successfully deleted record"
   }
 }

@@ -1,8 +1,22 @@
 {
-    "MENU" : {
-        "GEO_DATASOURCE" : "Fonte de dados Geo",
-        "GEO_LAYERS" : "Camadas geográficas",
-        "DATA_SOURCE" : "Fonte de dados tabular",
-        "PROJECTS" : "Projetos"
-    }
+  "MENU": {
+    "GEO_DATASOURCE": "Fonte de dados Geo",
+    "GEO_LAYERS": "Camadas geográficas",
+    "DATA_SOURCE": "Fonte de dados tabular",
+    "PROJECTS": "Projetos"
+  },
+  "GEO_DATASOURCE": {
+    "TITLE": "Título",
+    "DESCRIPTION": "Descrição",
+    "SERVER": "Servidor",
+    "USER": "Usuário",
+    "PASSWORD": "Senha",
+    "CANCEL": "Cancelar",
+    "SAVE": "Salvar",
+    "TYPE": "Tipo",
+    "SAVE_ERROR": "Erro ao salvar o registro",
+    "SAVE_SUCCESS": "Registro salvo com sucesso",
+    "DELETE_ERROR": "Erro ao excluir o registro",
+    "DELETE_SUCCESS": "Registro excluído com sucesso"
+  }
 }

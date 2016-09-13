@@ -5,22 +5,27 @@ define([
 
   return maps.lazy.controller("GeoDataSourceFormController", function ($scope, SpatialDataSourceService, $location, $routeParams, notify) {
     $scope.spatialDataSource = {};
-    $scope.isEdit = false;
+    var isEdit = false;
 
     if ($routeParams.id) {
       SpatialDataSourceService.get($routeParams.id).success(function (data) {
         $scope.spatialDataSource = data;
-        $scope.isEdit = true;
+        isEdit = true;
       });
     }
 
     $scope.save = function (spatialDataSource) {
-      SpatialDataSourceService.save(spatialDataSource).success(function (data) {
-        notify.success("Deu certo");
-        console.info('OK ==>', data);
-      }).error(function (error) {
-        notify.error("Deu errado");
-        console.info('Erro ==>', error);
+
+      if (isEdit) {
+        update(spatialDataSource);
+        return;
+      }
+
+      SpatialDataSourceService.save(spatialDataSource).then(function (response) {
+        $location.path("/maps/spatial-datasource/" + response.data._id + "/edit");
+        notify.success("GEO_DATASOURCE.SAVE_SUCCESS");
+      }, function (error) {
+        notify.error("GEO_DATASOURCE.SAVE_ERROR");
       });
     };
 
@@ -29,11 +34,12 @@ define([
     };
 
 
-    $scope.update = function (spatialDataSource) {
-      SpatialDataSourceService.update(spatialDataSource).success(function (data) {
-        notify.success("Deu certo");
-      }).error(function (error) {
-        notify.error("Deu errado");
+    function update(spatialDataSource) {
+      SpatialDataSourceService.update(spatialDataSource).then(function (response) {
+        $scope.backToList();
+        notify.success("GEO_DATASOURCE.SAVE_SUCCESS");
+      }, function (error) {
+        notify.error("GEO_DATASOURCE.SAVE_ERROR");
       });
     };
 
