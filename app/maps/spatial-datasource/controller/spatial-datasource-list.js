@@ -52,7 +52,7 @@ define([
                           "&page=" + params.page();
 
             if ($scope.filter) {
-                queryString += "&filter=" + JSON.stringify(array);
+                queryString += "&filter=" + JSON.stringify({ $or : array });
             }
 
             return queryString;
