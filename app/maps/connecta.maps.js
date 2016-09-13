@@ -35,7 +35,7 @@ define([
             controllerUrl: 'maps/spatial-datasource/controller/spatial-datasource-form',
             templateUrl: 'app/maps/spatial-datasource/template/spatial-datasource-form.html'
         },
-        '/maps/spatial-datasource/:id/view':{
+        '/maps/spatial-datasource/:id':{
             controller: 'SpatialDataSourceViewController',
             controllerUrl: 'maps/spatial-datasource/controller/spatial-datasource-view',
             templateUrl:   'app/maps/spatial-datasource/template/spatial-datasource-view.html'
