@@ -5,7 +5,9 @@ define([
 
     return maps.lazy.controller("ProjectFormController", function ($scope, ProjectService) {
 
-
+          $scope.callback = function () {
+              alert("teste");
+          };
 
 
     });

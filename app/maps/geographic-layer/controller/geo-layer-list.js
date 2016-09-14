@@ -1,43 +1,43 @@
 define([
     "connecta.maps",
+    "maps/helper/filter",
     "maps/geographic-layer/service/geo-layer-service"
-], function (maps) {
+], function (maps, filterHelper) {
 
-    return maps.lazy.controller("GeoLayerListController", function ($scope, GeoLayerService) {
+    return maps.lazy.controller("GeoLayerListController", function ($scope, GeoLayerService, ngTableParams) {
 
+        $scope.geometryMap = {
+            esriGeometryPolygon : "Polígono",
+            esriGeometryPoint : "Ponto",
+            esriGeometryPolyline : "Linhas",
+            esriGeometryMultipoint : "Pontos"
+        };
 
-        init();
+        $scope.tableLayerParams = new ngTableParams({
+            page : 1,
+            count : 10,
+            filter : {}
+        }, buildNgTable());
 
-        function init() {
+        function buildNgTable () {
+            return {
+                getData : function ($defer, params) {
 
-            getAllLayers();
+                    var queryString = filterHelper.getQueryString(params, $scope.filter, $scope.tableLayerParams.filter());
 
+                    GeoLayerService.list(queryString).then(onSuccess, onError);
+
+                    function onSuccess(response) {
+                        $scope.tableLayerParams.total(response.data.totalDocuments);
+                        $defer.resolve(response.data.content);
+                    }
+
+                    function onError(err) {
+                        throw Error(err);
+                    }
+                }
+            };
         }
-
-        function getAllLayers () {
-
-            var promise = GeoLayerService.list();
-
-            promise.then(onSuccess, onError);
-
-            function onSuccess(response) {
-
-              $scope.layers = response.data;
-
-            }
-
-            function onError (err) {
-
-              throw new Error(err);
-
-            }
-
-        }
-
-
-
-
-
 
     });
 

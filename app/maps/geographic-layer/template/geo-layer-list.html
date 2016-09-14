@@ -15,75 +15,42 @@
         </div>
     </div>
 
-    <table class="table table-striped table-hover" ng-table="tableParams" show-filter="true">
+    <table class="table table-striped table-hover" ng-table="tableLayerParams">
         <thead>
             <tr class="row">
-                <th class="col-md-1">
-                    <label class="reset-spacing full-size-block cursor-pointer">
-                        <input type="checkbox" class="reset-spacing cursor-pointer hidden"
-                               select-all="analysisList" select-all-property="selected"
-                               ng-model="selected" />
-                        <span class="bulk-actions-checkbox" ng-class="{
-                                      'icon-check-box-outline-blank':!selected,
-                                      'icon-check-box':selected,
-                                  }"></span>
-                    </label>
-                </th>
-              <th class="col-md-3" translate>Título para publicação</th>
-              <th class="col-md-2" translate>Fonte geo/camada</th>
-              <th class="col-md-2" translate>Tipo geométrico</th>
-              <th class="col-md-2" translate>SRID</th>
-              <th class="col-md-2" translate>Opções</th>
+              <th class="col-md-4" translate>Título para publicação</th>
+              <th class="col-md-4" translate>Fonte geo/camada</th>
+              <th class="col-md-4" translate>Tipo geométrico</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr ng-if="!analysisList.length" class="row">
+            <tr ng-if="!$data.length" class="row">
                 <td class="col-xs-12 text-center" colspan="12" translate>
                   LAYOUT.NO_RESULTS
                 </td>
             </tr>
 
-            <tr ng-repeat="a in analysisList" class="row am-slide-right"
-                ng-class="{'selected':a.selected}">
-                <td class="col-md-1">
-                    <label class="reset-spacing full-size-block cursor-pointer">
-                        <input type="checkbox" class="reset-spacing cursor-pointer hidden"
-                               ng-model="a.selected" />
-                        <span class="bulk-actions-checkbox"
-                              ng-class="{
-                                              'icon-check-box-outline-blank':!a.selected,
-                                              'icon-check-box':a.selected,
-                                          }"></span>
-                    </label>
-                </td>
-                <td class="text-left col-md-8">
-                    <a href="" class="full-size-block link-no-state">
-                        {{a.name}}
+            <tr ng-repeat="layer in $data" class="row am-slide-right">
+                <td class="text-left col-md-4">
+                    <a href="#/maps/geo-layer/{{layer._id}}" class="full-size-block link-no-state">
+                        {{layer.title}}
                     </a>
                 </td>
-                <td class="text-left col-md-3">
-                    <a href="" class="full-size-block link-no-state">
-                        <div class="row">
-                            <div class="col-xs-2">
-                               <span class="{{types[a.type].icon}}"></span>
-                            </div>
-                            <div class="col-xs-10">
-                               {{types[a.type].name}}
-                            </div>
-                        </div>
+                <td class="text-left col-md-4">
+                    <a href="#/maps/geo-layer/{{layer._id}}" class="full-size-block link-no-state">
+                        {{layer.spatialDataSource.title}}
                     </a>
                 </td>
+                <td class="text-left col-md-4">
+                    <a href="#/maps/geo-layer/{{layer._id}}" class="full-size-block link-no-state">
+                      {{geometryMap[layer.geometryType]}}
+                    </a>
+                </td>
+
             </tr>
 
         </tbody>
     </table>
-
-    <bulk-action-bar ng-show="(analysisList | filter:{selected:true}).length"
-                     class="am-slide-right">
-        <bulk-action icon="icon-trash" title="LAYOUT.DELETE"
-                     ng-click="bulkRemove((analysisList | filter:{selected:true}))">
-        </bulk-action>
-    </bulk-action-bar>
 
 </section>

@@ -1,5 +1,6 @@
 {
   "MENU": {
+    "ANALYSIS" : "Análise",
     "GEO_DATASOURCE": "Fonte de dados Geo",
     "GEO_LAYERS": "Camadas geográficas",
     "DATA_SOURCE": "Fonte de dados tabular",

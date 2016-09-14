@@ -1,7 +1,8 @@
 define([
     "connecta.maps",
+    "maps/helper/filter",
     "maps/spatial-datasource/service/spatial-datasource-service"
-], function (maps) {
+], function (maps, filterHelper) {
 
     return maps.lazy.controller("SpatialDataSourceListController", function ($scope, SpatialDataSourceService, ngTableParams) {
 
@@ -19,7 +20,7 @@ define([
             return {
                 getData : function ($defer, params) {
 
-                    var queryString = getQueryString(params);
+                    var queryString = filterHelper.getQueryString(params, $scope.filter, $scope.tableOfDataSourcesParams.filter());
 
                     SpatialDataSourceService.list(queryString).then(onSuccess, onError);
 
@@ -33,29 +34,7 @@ define([
                     }
 
                 }
-            }
-        }
-
-        function getQueryString (params) {
-
-            var array = [],
-                  fieldObj,
-              queryString;
-
-            for (var field in $scope.tableOfDataSourcesParams.filter()) {
-                fieldObj = {};
-                fieldObj[field] = $scope.filter;
-                array.push(fieldObj);
-            }
-
-            queryString = "?size=" + params.count() +
-                          "&page=" + params.page();
-
-            if ($scope.filter) {
-                queryString += "&filter=" + JSON.stringify({ $or : array });
-            }
-
-            return queryString;
+            };
         }
 
     });
