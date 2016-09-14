@@ -17,7 +17,7 @@ define([
         $scope.save = function (spatialDataSource) {
 
             if (isEdit) {
-                update(spatialDataSource);
+                update(spatialDataSource._id, spatialDataSource);
                 return;
             }
 
@@ -33,8 +33,8 @@ define([
             $location.path("/maps/spatial-datasource");
         };
 
-        function update(spatialDataSource) {
-            SpatialDataSourceService.update(spatialDataSource).then(function (response) {
+        function update(id, spatialDataSource) {
+            SpatialDataSourceService.update(id, spatialDataSource).then(function (response) {
                 $scope.backToList();
                 notify.success("GEO_DATASOURCE.SAVE_SUCCESS");
             }, function (error) {

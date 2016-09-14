@@ -18,16 +18,16 @@
             </div>
 
             <div class="form-group col-md-3">
-                <label>Usuário</label>
+                <label ng-class="{'required': spatialDataSource.serverType === 'MapViewer'}">Usuário</label>
                 <div>
-                    <input type="text" ng-model="spatialDataSource.user" class="form-control" />
+                    <input  ng-required="spatialDataSource.serverType === 'MapViewer'" type="text" ng-model="spatialDataSource.user" class="form-control" />
                 </div>
             </div>
 
             <div class="form-group col-md-3">
-                <label>Senha</label>
+                <label ng-class="{'required': spatialDataSource.serverType === 'MapViewer'}">Senha</label>
                 <div>
-                    <input type="password" ng-model="spatialDataSource.password" class="form-control" />
+                    <input  ng-required="spatialDataSource.serverType === 'MapViewer'"  type="password" ng-model="spatialDataSource.password" class="form-control" />
                 </div>
             </div>
         </div>
