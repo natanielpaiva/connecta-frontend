@@ -1,0 +1,68 @@
+<section>
+  <form name="layer" ng-submit="save(layer)" novalidate>
+    <div class="row">
+
+      <div class="form-group col-md-6">
+        <label class="required">Titulo</label>
+        <input type="text" ng-model="layer.title" class="form-control" required/>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="required">Servidor</label>
+        <select ng-model="layer.server" class="form-control"
+                ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources " required>
+          <option value="">Selecione</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label class="required">Camadas</label>
+        <select ng-model="layer.layerIdentifier" class="form-control" ng-required="spatialDataSources.length" required>
+          <option value="">Selecione</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-3">
+       <label>Cache query</label>
+        <label class="switch">
+          <input type="checkbox">
+          <div class="slider round"></div>
+        </label>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label>Cache dados estatisticos</label>
+        <label class="switch">
+          <input type="checkbox">
+          <div class="slider round"></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Descrição</label>
+        <div>
+          <textarea type="text" ng-model="layer.description" class="form-control" height="100"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <a href="#/maps/spatial-datasource" class="btn btn-default">
+          Cancelar
+        </a>
+        <button class="btn btn-primary" ng-disabled="layer.$invalid">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

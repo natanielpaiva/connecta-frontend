@@ -14,12 +14,17 @@ define([
             return $http.post(url, datasource);
         };
 
-        this.update = function (datasource) {
-            return $http.put(url, datasource);
+        this.update = function (id, datasource) {
+            return $http.put(url + '/' + id, datasource);
         };
 
         this.list = function (queryString) {
-            return $http.get(url + queryString);
+            var request = $http.get(url);
+            if(queryString){
+              request = $http.get(url + queryString);
+            }
+
+            return request;
         };
 
         this.delete = function (id) {
