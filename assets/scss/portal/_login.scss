@@ -28,7 +28,7 @@ $loginWhite: #F6F6F6;
 
     login {
         display: block;
-        
+
         .top-left-detail {
             position:fixed;
             top:0;
@@ -47,12 +47,33 @@ $loginWhite: #F6F6F6;
             position:fixed;
             top:0;
             left:0;
+            width:540px;
             transform:translate(-500px, -500px);
             transition:transform $defaultAnimationDuration*2;
             &.active {
                 transition:transform $defaultAnimationDuration*2;
                 transform:translate(0, 0);
             }
+            
+            @keyframes fade {
+                0% {
+                    opacity:0.75;
+                }
+                50% {
+                    opacity:1;
+                }
+                100% {
+                    opacity:0.75;
+                }
+            }
+            
+            $time:10s;
+            svg {
+                path:nth-child(3), path:nth-child(5) {
+                    animation:fade $time linear infinite;
+                }
+            }
+            
         }
 
         .bottom-right-detail {
@@ -164,12 +185,12 @@ $loginWhite: #F6F6F6;
             }
         }
     }
-    
+
     .add-account {
         text-align: center;
         padding-top:0.5em;
     }
-    
+
     .btn-login {
         background-color: $presenterBlue;
         width: 100%;
