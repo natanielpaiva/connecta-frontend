@@ -38,7 +38,7 @@ $loginWhite: #F6F6F6;
             transition:transform $defaultAnimationDuration*1.5;
             &.active {
                 transform-origin: 50% 50%;
-                transition:transform $defaultAnimationDuration*1.5;
+                transition:transform $defaultAnimationDuration*2;
                 transform:rotate(180deg) scale(2) translate(-25%, -25%);
             }
         }
@@ -49,7 +49,8 @@ $loginWhite: #F6F6F6;
             left:0;
             width:540px;
             transform:translate(-500px, -500px);
-            transition:transform $defaultAnimationDuration*2;
+            transition:transform $defaultAnimationDuration*1.8;
+            
             &.active {
                 transition:transform $defaultAnimationDuration*2;
                 transform:translate(0, 0);
