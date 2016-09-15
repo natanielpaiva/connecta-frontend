@@ -6,7 +6,7 @@ define([
 
     return maps.lazy.controller("SpatialDataSourceListController", function ($scope, SpatialDataSourceService, ngTableParams) {
 
-        $scope.tableOfDataSourcesParams = new ngTableParams({
+        $scope.tableSpatialDataSourcesParams = new ngTableParams({
             page : 1,
             count : 10,
             filter : {
@@ -20,12 +20,12 @@ define([
             return {
                 getData : function ($defer, params) {
 
-                    var queryString = filterHelper.getQueryString(params, $scope.filter, $scope.tableOfDataSourcesParams.filter());
+                    var queryString = filterHelper.getQueryString(params, $scope.filter, $scope.tableSpatialDataSourcesParams.filter());
 
                     SpatialDataSourceService.list(queryString).then(onSuccess, onError);
 
                     function onSuccess(response) {
-                        $scope.tableOfDataSourcesParams.total(response.data.totalDocuments);
+                        $scope.tableSpatialDataSourcesParams.total(response.data.totalDocuments);
                         $defer.resolve(response.data.content);
                     }
 

@@ -14,6 +14,7 @@ define([
     maps.run(function (applications) {
         var appMaps = applications.maps;
         maps.lazy.value('mapsResources', {
+            analysis : 'analysis',
             dataSource : appMaps.host + '/data-source',
             layer : appMaps.host + '/layer',
             project : appMaps.host + '/project',
@@ -25,6 +26,28 @@ define([
      * Layer-Source
      */
     maps._routes = {
+        // Análise
+        '/maps/analysis' : {
+            controller : 'AnalysisListController',
+            controllerUrl : 'maps/analysis/controller/analysis-list',
+            templateUrl : 'app/maps/analysis/template/analysis-list.html'
+        },
+        '/maps/analysis/new' : {
+            controller : 'AnalysisFormController',
+            controllerUrl : 'maps/analysis/controller/analysis-form',
+            templateUrl : 'app/maps/analysis/template/analysis-form.html'
+        },
+        '/maps/analysis/:id' : {
+            controller : 'AnalysisViewController',
+            controllerUrl : 'maps/analysis/controller/analysis-view',
+            templateUrl : 'app/maps/analysis/template/analysis-view.html'
+        },
+        '/maps/analysis/:id/edit' : {
+            controller : 'AnalysisFormController',
+            controllerUrl : 'maps/analysis/controller/analysis-form',
+            templateUrl : 'app/maps/analysis/template/analysis-form.html'
+        },
+
         //Fonte de dados Geo
         '/maps/spatial-datasource': {
             controller: 'SpatialDataSourceListController',
@@ -80,24 +103,44 @@ define([
             controllerUrl : 'maps/project/controller/project-form',
             templateUrl : 'app/maps/project/template/project-form.html'
         },
+        '/maps/project/:id' : {
+            controller : 'ProjectViewController',
+            controllerUrl : 'maps/project/controller/project-view',
+            templateUrl : 'app/maps/project/template/project-view.html'
+        },
         '/maps/project/:id/edit' : {
             controller : 'ProjectFormController',
             controllerUrl : 'maps/project/controller/project-form',
             templateUrl : 'app/maps/project/template/project-form.html'
         },
 
-        //Origem de dados Tabular
+        //Fonte de dados Tabular
         '/maps/datasource' : {
             controller : 'DatasourceListController',
             controllerUrl : 'maps/datasource/controller/datasource-list',
             templateUrl : 'app/maps/datasource/template/datasource-list.html'
-        }
+        },
+        '/maps/datasource/new' : {
+            controller : 'DatasourceFormController',
+            controllerUrl : 'maps/datasource/controller/datasource-form',
+            templateUrl : 'app/maps/datasource/template/datasource-form.html'
+        },
+        '/maps/datasource/:id' : {
+            controller : 'DatasourceViewController',
+            controllerUrl : 'maps/datasource/controller/datasource-view',
+            templateUrl : 'app/maps/datasource/template/datasource-view.html'
+        },
+        '/maps/datasource/:id/edit' : {
+            controller : 'DatasourceFormController',
+            controllerUrl : 'maps/datasource/controller/datasource-form',
+            templateUrl : 'app/maps/datasource/template/datasource-form.html'
+      }
 
     };
 
     maps._menu = [
         {
-            href: "",
+            href: "/maps/analysis",
             title: "MENU.ANALYSIS",
             icon: "icon-analysis"
         },

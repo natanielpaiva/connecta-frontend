@@ -7,21 +7,15 @@ define([
         var url = mapsResources.dataSource;
 
         this.get = function (id) {
-
             return $http.get(url + '/' + id);
-
         };
 
         this.save = function (datasource) {
-
             return $http.post(url, datasource);
-
         };
 
-        this.list = function () {
-
-            return $http.get(url);
-
+        this.list = function (queryString) {
+            return $http.get(url + queryString);
         };
 
     });

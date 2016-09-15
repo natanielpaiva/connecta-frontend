@@ -19,12 +19,7 @@ define([
         };
 
         this.list = function (queryString) {
-            var request = $http.get(url);
-            if(queryString){
-              request = $http.get(url + queryString);
-            }
-
-            return request;
+            return $http.get(url + queryString);
         };
 
         this.delete = function (id) {

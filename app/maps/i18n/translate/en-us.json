@@ -1,9 +1,10 @@
 {
   "MENU" : {
-    "GEO_DATASOURCE" : "Fonte de dados Geo",
-    "GEO_LAYERS" : "Camadas geográficas",
-    "DATA_SOURCE" : "Fonte de dados tabular",
-    "PROJECTS" : "Projetos"
+    "ANALYSIS" : "Analysis",
+    "GEO_DATASOURCE" : "Spatial Datasource",
+    "GEO_LAYERS" : "Geo Layers",
+    "DATA_SOURCE" : "Datasource",
+    "PROJECTS" : "Projects"
   },
   "GEO_DATASOURCE": {
     "TITLE": "Title",
@@ -17,6 +18,34 @@
     "SAVE_ERROR": "Error saving record",
     "SAVE_SUCCESS": "Registration successfully saved",
     "DELETE_ERROR": "Error delete the record",
-    "DELETE_SUCCESS": "Successfully deleted record"
+    "DELETE_SUCCESS": "Successfully deleted record",
+    "NEW_SPATIAL_DATASOURCE" : "New Spatial Datasource",
+    "PUBLISHED_DATASOURCE_LIST" : "Published <b>Spatial Datasource</b> list"
+  },
+  "GEO_LAYER" : {
+    "ADD_LAYER" : "ADD LAYER",
+    "PUBLISHED_LAYERS_LIST" : "Published <b>Layers</b> list",
+    "TITLE_PUBLICATION" : "Publication Title",
+    "GEO_DATASOURCE_LAYER" : "Publication Title",
+    "GEOMETRY_TYPE" : "Geometry type"
+  },
+  "DATASOURCE" : {
+    "ADD_DATASOURCE" : "ADD DATASOURCE",
+    "DATASOURCE_LIST" : "Published <b>Datasource</b> list",
+    "TITLE_PUBLICATION" : "Publication Title",
+    "GEO_DATASOURCE_LAYER" : "Publication Title",
+    "GEOMETRY_TYPE" : "Geometry type"
+  },
+  "PROJECT" : {
+    "NEW_PROJECT" : "NEW PROJECT",
+    "PROJECTS_LIST" : "<b>Projects</b> List",
+    "PROJECT_NAME" : "Project Name",
+    "DESCRIPTION" : "Description"
+  },
+  "ANALYSIS" : {
+    "NAME" : "Analysis name",
+    "DESCRIPTION" : "Description",
+    "ANALYSIS_LIST" : "<b>Analysis</b> list",
+    "ADD_ANALYSIS" : "ADD ANALYSIS"
   }
 }

@@ -7,21 +7,15 @@ define([
         var url = mapsResources.analysis;
 
         this.get = function (id) {
-
-          return $http.get(url + '/' + id);
-
+            return $http.get(url + '/' + id);
         };
 
         this.save = function (analysis) {
-
-          return $http.post(url, analysis);
-
+            return $http.post(url, analysis);
         };
 
-        this.list = function () {
-
-          return $http.get(url);
-
+        this.list = function (queryString) {
+            return $http.get(url + queryString);
         };
     });
 

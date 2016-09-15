@@ -1,6 +1,6 @@
 {
   "MENU": {
-    "ANALYSIS" : "Análise",
+    "ANALYSIS" : "Analises",
     "GEO_DATASOURCE": "Fonte de dados Geo",
     "GEO_LAYERS": "Camadas geográficas",
     "DATA_SOURCE": "Fonte de dados tabular",
@@ -18,6 +18,34 @@
     "SAVE_ERROR": "Erro ao salvar o registro",
     "SAVE_SUCCESS": "Registro salvo com sucesso",
     "DELETE_ERROR": "Erro ao excluir o registro",
-    "DELETE_SUCCESS": "Registro excluído com sucesso"
+    "DELETE_SUCCESS": "Registro excluído com sucesso",
+    "NEW_SPATIAL_DATASOURCE" : "Nova Fonte de Dados",
+    "PUBLISHED_DATASOURCE_LIST" : "Lista de <b>Fontes Geo</b> publicadas"
+  },
+  "GEO_LAYER" : {
+    "ADD_LAYER" : "ADICIONAR CAMADA",
+    "PUBLISHED_LAYERS_LIST" : "Lista de <b>Camadas</b> publicadas",
+    "TITLE_PUBLICATION" : "Título para publicação",
+    "GEO_DATASOURCE_LAYER" : "Fonte geo/camada",
+    "GEOMETRY_TYPE" : "Tipo geométrico"
+  },
+  "DATASOURCE" : {
+    "ADD_DATASOURCE" : "ADICIONAR FONTE DE DADOS",
+    "DATASOURCE_LIST" : "Lista de <b>Fonte de Dados</b>",
+    "TITLE_PUBLICATION" : "Título para publicação",
+    "GEO_DATASOURCE_LAYER" : "Fonte geo/camada",
+    "GEOMETRY_TYPE" : "Tipo geométrico"
+  },
+  "PROJECT" : {
+    "NEW_PROJECT" : "NOVO PROJETO",
+    "PROJECTS_LIST" : "Lista de <b>Projetos</b>",
+    "PROJECT_NAME" : "Nome do Projeto",
+    "DESCRIPTION" : "Descrição"
+  },
+  "ANALYSIS" : {
+    "NAME" : "Nome da análise",
+    "DESCRIPTION" : "Descrição",
+    "ANALYSIS_LIST" : "Lista de <b>Análises</b>",
+    "ADD_ANALYSIS" : "ADICIONAR ANÁLISE"
   }
 }

@@ -1,9 +1,0 @@
-define([
-  "connecta.maps"
-], function (maps) {
-
-    return maps.lazy.controller("AnalysisListController", function ($scope) {
-
-    });
-
-});
