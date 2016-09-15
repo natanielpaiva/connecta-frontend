@@ -113,26 +113,28 @@ define([
 
                     $scope.changeTypeChart = function (template, type) {
                         ViewerService.getTemplates(type, template).then(function (response) {
-                            var data = angular.copy($scope.viewer.configuration.data);
-                            var titles = angular.copy($scope.viewer.configuration.titles);
-                            var titleField = angular.copy($scope.viewer.configuration.titleField);
-                            var valueField = angular.copy($scope.viewer.configuration.valueField);
-                            var categoryField = angular.copy($scope.viewer.configuration.categoryField);
-                            var graphs = angular.copy($scope.viewer.configuration.graphs);
+                            // var data = angular.copy($scope.viewer.configuration.data);
+                            // var titles = angular.copy($scope.viewer.configuration.titles);
+                            // var titleField = angular.copy($scope.viewer.configuration.titleField);
+                            // var valueField = angular.copy($scope.viewer.configuration.valueField);
+                            // var categoryField = angular.copy($scope.viewer.configuration.categoryField);
+                            // var graphs = angular.copy($scope.viewer.configuration.graphs);
 
-                            $scope.viewer.configuration = response.data;
-                            delete $scope.viewer.configuration.dataProvider;
+                            $scope.viewer.configuration = response.data;                            
+                            getPreview();
+                            defaultChartConfigs();
+                            // delete $scope.viewer.configuration.dataProvider;
 
-                            $scope.viewer.configuration.data = data;
-                            $scope.viewer.configuration.titles = titles;
+                            // $scope.viewer.configuration.data = data;
+                            // $scope.viewer.configuration.titles = titles;
 
-                            if (response.data.type === 'serial') {
-                                dataSerial(categoryField, graphs);
-                            }
-                            if (response.data.type === 'pie') {
-                                dataPie(titleField, valueField);
-                            }
-                        });
+                            // if (response.data.type === 'serial') {
+                            //     dataSerial(categoryField, graphs);
+                            // }
+                            // if (response.data.type === 'pie') {
+                            //     dataPie(titleField, valueField);
+                            // }
+                        });                        
                     };
 
                     var dataSerial = function (categoryField, graphs) {
@@ -449,19 +451,23 @@ define([
                         var dados = response.data;
                         dados.data = response.data.dataProvider;
                         $scope.viewer.configuration = dados;
-                        //Disable Animation
-                        $scope.viewer.configuration.startDuration = 0;
-                        angular.forEach($scope.viewer.configuration.titles, function (title) {
-                            title.text = '';
-                        });
-                        $scope.viewer.configuration.thousandsSeparator = '.';
-                        $scope.viewer.configuration.decimalSeparator = ',';
+                        defaultChartConfigs();
                         load();
                     });
                     break;
             }
             $scope.state.loaded = true;
         }
+
+        var defaultChartConfigs = function(){
+            //Disable Animation
+            $scope.viewer.configuration.startDuration = 0;
+            angular.forEach($scope.viewer.configuration.titles, function (title) {
+                title.text = '';
+            });
+            $scope.viewer.configuration.thousandsSeparator = '.';
+            $scope.viewer.configuration.decimalSeparator = ',';
+        };
 
         var __update = function (array) {
             if ($scope.state.loaded) {

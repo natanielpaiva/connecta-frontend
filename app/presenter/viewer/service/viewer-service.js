@@ -72,8 +72,8 @@ define([
             ],
             area: [
                 {
-                    id: 'area-date-series-yearly',
-                    src: 'assets/img/presenter/area/area-date-series-yearly.png'
+                    id: 'area-area',
+                    src: 'assets/img/presenter/area/area-area.png'
                 }
             ],
             line: [
