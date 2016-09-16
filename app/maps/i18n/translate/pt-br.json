@@ -40,7 +40,9 @@
     "NEW_PROJECT" : "NOVO PROJETO",
     "PROJECTS_LIST" : "Lista de <b>Projetos</b>",
     "PROJECT_NAME" : "Nome do Projeto",
-    "DESCRIPTION" : "Descrição"
+    "DESCRIPTION" : "Descrição",
+    "MAP_TOOLS" : "Ferramentas do <b>Mapa</b>",
+    "ENABLE_BASEMAP_SELECTOR" : "Habilitar seletor de mapas base"
   },
   "ANALYSIS" : {
     "NAME" : "Nome da análise",
