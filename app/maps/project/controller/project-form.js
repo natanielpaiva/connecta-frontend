@@ -1,11 +1,33 @@
 define([
     "connecta.maps",
-    "maps/project/service/project-service"
+    "maps/project/service/project-service",
+    'maps/project/directive/menu-carrousel'
 ], function (maps) {
 
     return maps.lazy.controller("ProjectFormController", function ($scope, $timeout) {
 
         $scope.currentStep = 1;
+
+        $scope.itemTemplateUrl = 'app/maps/project/template/_project_base_map_thumb.html';
+        $scope.items = [{
+            name: 'TESTE',
+            thumb: ''
+        },{
+            name: 'TESTE'
+        },{
+            name: 'TESTE'
+        },{
+            name: 'TESTE'
+        },{
+            name: 'TESTE'
+        },{
+            name: 'TESTE'
+        },{
+            name: 'TESTE'
+        },{
+            name: 'TESTE'
+        }];
+
 
         $scope.steps = {
             1 : {

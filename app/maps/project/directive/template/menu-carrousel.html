@@ -1,0 +1,15 @@
+<div class="row carrousel-main">
+    <div class="col-md-1 col-xs-1 buttons">
+        <a class="icon-navigate-before" ng-click="$ctrl.previous()"></a>
+    </div>
+    <div class="carrousel-container col-md-10 col-xs-10 ">
+        <div id="carrousel-content" class="carrousel-content">
+            <div ng-repeat="item in items" class="carrousel-item">
+                <div ng-include="itemTemplateUrl"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1 col-xs-1 buttons">
+        <a class="icon-navigate-next" ng-click="$ctrl.next()"></a>
+    </div>
+</div>

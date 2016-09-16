@@ -1,0 +1,36 @@
+$carrouseHeight: 150px;
+
+.carrousel-main {
+    height: $carrouseHeight;
+    border: solid 1px #cacaca;
+    margin: 13px;
+    position: relative;
+
+    .carrousel-item{
+        max-height: $carrouseHeight;
+        min-height: $carrouseHeight;
+        max-width: $carrouseHeight;
+        min-width: $carrouseHeight;
+    }
+
+}
+
+.carrousel-main .buttons{
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 4em;
+}
+
+.carrousel-container{
+    overflow: hidden;
+}
+
+.carrousel-content{
+    position: relative;
+    display: table;
+    white-space: nowrap;
+}
+
+.carrousel-content > div{
+    display: inline-block;
+}
