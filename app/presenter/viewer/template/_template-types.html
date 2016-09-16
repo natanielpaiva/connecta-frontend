@@ -9,7 +9,7 @@
                 <div class="container-gallery clearfix">
                     <ul class="gallery-view">
                         <li ng-repeat="types in t.templates" class="item-gallery">
-                            <a ng-click="ok()" href="#/presenter/viewer/new/{{t.id}}/{{types.id}}">
+                            <a ng-click="ok()" href="#/presenter/viewer/new/{{t.id}}/{{types.id}}/{{analysis}}">
                                 <!-- COLUNA -->
                                 <img ng-if="types.id === 'column-using-custom-colors'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-using-custom-colors.png" />
                                 <img ng-if="types.id === 'column-clustered'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-clustered.png" />

@@ -7,22 +7,53 @@ define([
     'presenter/singlesource/service/singlesource-service'
 ], function (presenter) {
     return presenter.lazy.controller('AnalysisFormController', function ($scope,
-        AnalysisService, DatasourceService, SingleSourceService, ViewerService,
-        $timeout, $routeParams, $location) {
+            AnalysisService, DatasourceService, SingleSourceService, ViewerService,
+            $timeout, $routeParams, $location) {
 
         //modelo de um 'DataSource' de CSV para ajustar os problemas nas tabelas
         //este conceito será refatorado, visto que um CSV não é um dataSource.
         var csvDS = {id: 'csv', name: 'CSV', type: 'CSV'};
-        
+
         $scope.analysis = {
-            analysisRelations:[]
+            analysisRelations: [],
+            datasource: {id: null}
         };
-        
+
         $scope.edit = false;
         $scope.optionsAttributeTypes = SingleSourceService.getAttributeTypes();
         $scope.datasourceCurrent = null;
         $scope.analysisColumnsDrill = [];
         $scope.analysisRelationSuggestions = [];
+
+        function updateAnalysisType() {
+            $scope.showForm = false;
+
+            if ($scope.listDatasource && $scope.analysis.datasource.id) {
+                var datasource = $scope.listDatasource.filter(function (object) {
+                    return $scope.analysis.datasource.id === object.id;
+                }).pop();
+
+                $scope.datasourceCurrent = datasource;
+                $scope.analysis.datasource = datasource;
+                //Monta o template de acordo com o datasource
+
+                $scope.analysis.type = $scope.datasourceCurrent.type;
+                $scope.analysis.datasource.type = $scope.datasourceCurrent.type;
+                $scope.subform = $scope.types[$scope.datasourceCurrent.type];
+
+                if ($scope.types[$scope.datasourceCurrent.type].start) {
+                    resetComponent();
+
+                    $scope.types[$scope.datasourceCurrent.type].start(
+                            $scope.datasourceCurrent,
+                            $scope.component);
+                }
+
+                $scope.analysis.analysisAttributes = [];
+
+                timeReload();
+            }
+        }
 
         if ($routeParams.id) {
             $scope.edit = true;
@@ -38,10 +69,10 @@ define([
                     $scope.analysis.datasource.type = response.data.type;
                 }
                 $scope.subform = $scope.types[response.data.type];
-                
+
                 if ($scope.analysis.analysisRelations &&
-                    $scope.analysis.analysisRelations.length) {
-                    $scope.analysis.analysisRelations.forEach(function(relation){
+                        $scope.analysis.analysisRelations.length) {
+                    $scope.analysis.analysisRelations.forEach(function (relation) {
                         $scope.getRightAnalysisColumns(relation);
                     });
                 }
@@ -55,33 +86,16 @@ define([
                 $scope.listDatasource.splice(0, 0, csvDS);
             });
 
-            $scope.$watch('analysis.datasource.id', function (idDatasouce) {
-                $scope.showForm = false;
-                for (var ds  in $scope.listDatasource) {
-                    if (idDatasouce === $scope.listDatasource[ds].id.toString()) {
-
-                        $scope.datasourceCurrent = $scope.listDatasource[ds];
-                        //Monta o template de acordo com o datasource
-
-                        $scope.analysis.type = $scope.datasourceCurrent.type;
-                        $scope.analysis.datasource.type = $scope.datasourceCurrent.type;
-                        $scope.subform = $scope.types[$scope.datasourceCurrent.type];
-
-                        if ($scope.types[$scope.datasourceCurrent.type].start) {
-                            resetComponent();
-
-                            $scope.types[$scope.datasourceCurrent.type].start(
-                                    $scope.datasourceCurrent,
-                                    $scope.component);
-                        }
-                    }
-                }
-
-                $scope.analysis.analysisAttributes = [];
-
-                timeReload();
-            });
+            $scope.$watch('analysis.datasource.id', updateAnalysisType);
+            $scope.$watch('listDatasource', updateAnalysisType);
         }
+
+        if ($routeParams.datasource) {
+            timeReload();
+            $scope.analysis.datasource.id = parseInt($routeParams.datasource);
+            $scope.cameFromAnalysis = true;
+        }
+
 
         $scope.getAttributes = function (val) {
             return SingleSourceService.getAttribute(val);
@@ -126,72 +140,49 @@ define([
                 $scope.analysisColumnsDrill.push(array[key]);
             }
         }
-        
+
         // Analysis relations
-        $scope.autosuggest = function() {
-            $scope.analysisRelationSuggestions.push({
-                id: 1,
-                leftAnalysisColumn:{
-                    name:'UF'
-                },
-                rightAnalysis:{
-                    name:'Outra Análise'
-                },
-                rightAnalysisColumn:{
-                    name:'Estado'
-                }
-            });
-            $scope.analysisRelationSuggestions.push({
-                id: 1,
-                leftAnalysisColumn:{
-                    name:'Batata'
-                },
-                rightAnalysis:{
-                    name:'Guloseimas'
-                },
-                rightAnalysisColumn:{
-                    name:'Frita'
-                }
-            });
+        $scope.autosuggest = function () {
+            
         };
-        
-        $scope.acceptSuggestion = function(index, suggestion) {
+
+        $scope.acceptSuggestion = function (index, suggestion) {
             $scope.analysis.analysisRelations.push(suggestion);
             $scope.analysisRelationSuggestions.splice(index, 1);
         };
-        
+
         $scope.otherAnalysis = [];
         ViewerService.analysisList().then(function (response) {
-            $scope.otherAnalysis = response.data.filter(function(other){
+            $scope.otherAnalysis = response.data.filter(function (other) {
                 return other.id !== $scope.analysis.id;
             });
         });
-        
-        $scope.addRelation = function(){
+
+        $scope.addRelation = function () {
             var leftAnalysisColumn = $scope.analysis.analysisColumns && $scope.analysis.analysisColumns.length ?
-                        $scope.analysis.analysisColumns[0] : null;
-            
+                    $scope.analysis.analysisColumns[0] : null;
+
             var relation = {
                 leftAnalysisColumn: leftAnalysisColumn,
                 rightAnalysis: null,
-                rightAnalysisColumn:null
+                rightAnalysisColumn: null
             };
-            
+
             $scope.analysis.analysisRelations.push(relation);
             $scope.getRightAnalysisColumns(relation);
         };
-        
-        $scope.getRightAnalysisColumns = function(relation){
-            if( !relation.rightAnalysis ||
-                !relation.rightAnalysis.analysisColumns ||
-                !relation.rightAnalysis.analysisColumns.length) {
-            
-                AnalysisService.getAnalysis(relation.rightAnalysis.id).then(function(response){
+
+        $scope.getRightAnalysisColumns = function (relation) {
+            if (!relation.rightAnalysis ||
+                    !relation.rightAnalysis.analysisColumns ||
+                    !relation.rightAnalysis.analysisColumns.length) {
+
+                AnalysisService.getAnalysis(relation.rightAnalysis.id).then(function (response) {
                     relation.rightAnalysis.analysisColumns = response.data.analysisColumns;
                 });
             }
         };
-        
+
         $scope.attributeTypes = ["Select", "Map", "Date", "Text", "Etc"];
 
         //###############################################################################################
@@ -232,7 +223,7 @@ define([
                 } else if ($scope.analysis.requestType === "TEXT_QUERY") {
                     $scope.analysis.query = null;
                 }
-                console.log("submit", $scope.analysis);
+                //console.log("submit", $scope.analysis);
                 AnalysisService.save($scope.analysis).then(function (response) {
                     $location.path('presenter/analysis/' + response.data.id);
                 });
@@ -245,6 +236,6 @@ define([
                     $location.path('presenter/analysis/' + response.data.id);
                 });
             }
-        }; 
-   });
+        };
+    });
 });

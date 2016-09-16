@@ -35,8 +35,8 @@ define([
         };
 
         $scope.submit = function () {
-            DatasourceService.save($scope.datasource).then(function () {
-                $location.path('presenter/datasource');
+            DatasourceService.save($scope.datasource).then(function (response) {
+                $location.path('presenter/datasource/'+response.data.id);
             });
         };
         

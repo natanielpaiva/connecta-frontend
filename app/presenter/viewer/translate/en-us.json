@@ -1,6 +1,7 @@
 {
     "VIEWER": {
         "NEW_VIEWER":"New viewer",
+        "EDIT_VIEWER":"Edit viewer",
         "TYPE_ANALYSIS": "Analysis",
         "TYPE_SINGLESOURCE": "Media",
         "TYPE_SINGLESOURCE_GROUP": "Media Group",

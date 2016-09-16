@@ -1,77 +1,144 @@
 define([
     'connecta.presenter',
-    'presenter/viewer/service/viewer-service'
+    'presenter/viewer/service/viewer-service',
+    'presenter/analysis/service/analysis-service',
+    'portal/dashboard/directive/viewer',
+    'presenter/viewer/directive/analysis-viewer',
+    'presenter/viewer/directive/singlesource-viewer',
+    'presenter/viewer/directive/singlesource-group-viewer',
+    'presenter/viewer/directive/combined-viewer',
+    'presenter/viewer/controller/modal-analysis',
+    'bower_components/amcharts/dist/amcharts/exporting/canvg',
+    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
+    'bower_components/html2canvas/dist/html2canvas.min',
+    'bower_components/html2canvas/dist/html2canvas',
+    'bower_components/angular-ui-select/dist/select'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerViewController', function ($scope, ViewerService, SidebarService, $routeParams) {
+    return presenter.lazy.controller('ViewerViewController', function ($scope, ViewerService, $routeParams, AnalysisService) {
 
-        SidebarService.config({
-            controller: function ($scope) {
-                $scope.analysisViewer = getAnalysisViewer();
-            },
-            src: 'app/presenter/viewer/template/_settings.html'
-        }).show();
-        
-        $scope.$on("$locationChangeStart", function(){
-            SidebarService.hide();
-        });
+        $scope.state = {loaded: false};
+        $scope.chartCursor = {ativo: false};
+        $scope.chartScrollbar = {ativo: false};
+        $scope.legend = {ativo: false};
 
-        $scope.analysisViewer = {
-            "viewer": {
-                "name": "",
-                "description": ""
-            },
-            "analysisVwColumn": [],
-            "metrics": [],
-            "descriptions": [],
-            "xfields": [],
-            "yfields": [],
-            "valueFields": []
+        $scope.status = {
+            open: false
         };
 
+        $scope.viewer = {
+            name: "",
+            description: "",
+            type: "ANALYSIS",
+            analysisViewerColumns: [],
+            metrics: [],
+            descriptions: [],
+            xfields: [],
+            yfields: [],
+            valueFields: [],
+            columns: [],
+            filters: []
+        };
+
+        var _prepareForRequest = function (viewer) {
+            var analysisCopy = angular.copy(viewer.analysis);
+            analysisCopy.analysisColumns = [];
+
+            var populateAnalysis = function (o) {
+                analysisCopy.analysisColumns.push(o.analysisColumn);
+            };
+
+            angular.forEach(viewer.metrics, populateAnalysis);
+            angular.forEach(viewer.descriptions, populateAnalysis);
+            angular.forEach(viewer.xfields, populateAnalysis);
+            angular.forEach(viewer.yfields, populateAnalysis);
+            angular.forEach(viewer.valueFields, populateAnalysis);
+
+            return analysisCopy;
+        };
+
+        function populateDrillIfExists(viewer) {
+            drill = {};
+            if (viewer.analysis.hasDrill) {
+                drill.columnsToSum = [];
+
+                angular.forEach(viewer.analysisViewerColumns, function (column) {
+                    if (column.columnType === "DESCRIPTION" &&
+                            column.analysisColumn.orderDrill !== undefined) {
+                        drill.columnToDrill = column.analysisColumn.name;
+                    }
+                });
+                populateColumnsToSum(viewer, drill);
+            }
+            return drill;
+        }
+
+        function populateColumnsToSum(viewer, drill) {
+            angular.forEach(viewer.analysisViewerColumns, function (column) {
+                if (column.columnType === "METRIC") {
+                    drill.columnsToSum.push(column.analysisColumn.name);
+                }
+            });
+        }
+
         var getPreview = function () {
-            if (($scope.analysisViewer.metrics.length > 0) ||
-                    ($scope.analysisViewer.xfields.length > 0 &&
-                            $scope.analysisViewer.yfields.length > 0)) {
-                ViewerService.preview($scope.analysisViewer).then(function (response) {
-                    ViewerService.getPreview($scope.analysisViewer, response.data);
-                }, function (response) {
-                    console.log(response.data);
+            var readyForPreview = ($scope.viewer.metrics.length > 0 &&
+                    $scope.viewer.descriptions.length > 0) ||
+                    ($scope.viewer.xfields.length > 0 &&
+                            $scope.viewer.yfields.length > 0);
+
+            if (readyForPreview || $scope.viewer.columns.length > 0) {
+                AnalysisService.execute({
+                    analysis: _prepareForRequest($scope.viewer),
+                    drill: populateDrillIfExists($scope.viewer)
+                }).then(function (response) {
+                    ViewerService.getPreview($scope.viewer, response.data);
+                    $scope.state.loaded = true;
                 });
             }
         };
-        
-        var getAnalysisViewer = function(){
-            return $scope.analysisViewer;
-        };
 
-        ViewerService.getAnalysisViewer($routeParams.id).then(function (response) {
-            $scope.analysisViewer.viewer.configuration = response.data.viewer.configuration;
-            $scope.analysisViewer.viewer.name = response.data.viewer.name;
-            $scope.analysisViewer.viewer.description = response.data.viewer.description;
-            $scope.analysisViewer.id = response.data.id;
-            var analysisColumns = response.data.analysisVwColumn;
-            for (var k in analysisColumns) {
-                if (analysisColumns[k].type === "METRIC") {
-                    $scope.analysisViewer.metrics.push(analysisColumns[k].analysisColumn);
-                }
-                if (analysisColumns[k].type === "DESCRIPTION") {
-                    $scope.analysisViewer.descriptions.push(analysisColumns[k].analysisColumn);
-                }
-                if (analysisColumns[k].type === "XFIELD") {
-                    $scope.analysisViewer.xfields.push(analysisColumns[k].analysisColumn);
-                }
-                if (analysisColumns[k].type === "YFIELD") {
-                    $scope.analysisViewer.yfields.push(analysisColumns[k].analysisColumn);
-                }
-                if (analysisColumns[k].type === "VALUEFIELD") {
-                    $scope.analysisViewer.valueFields.push(analysisColumns[k].analysisColumn);
-                }
-            }
-            $scope.analysisViewer.viewer.configuration = response.data.viewer.configuration;
-            getPreview();
-        }, function (response) {
-            console.log(response.data);
-        });
 
+        if ($routeParams.id) {
+            ViewerService.getAnalysisViewer($routeParams.id).then(function (response) {
+                angular.extend($scope.viewer, response.data);
+
+                switch ($scope.viewer.type) {
+                    case 'SINGLESOURCE':
+                        $scope.viewer.singlesource = {list: []};
+                        //sidebarSinglesource();
+
+                        ViewerService.getSinglesource($scope.viewer.singleSource.id).then(function (response) {
+                            var data = response.data;
+                            if (data.type === 'FILE') {
+                                data.binaryFile = ViewerService.getBinaryFile(data);
+                            }
+                            $scope.viewer.singlesource.list.push(data);
+                        });
+
+                        break;
+                    default:
+                        var analysisViewerColumns = $scope.viewer.analysisViewerColumns;
+
+                        var arrays = {
+                            METRIC: $scope.viewer.metrics,
+                            DESCRIPTION: $scope.viewer.descriptions,
+                            XFIELD: $scope.viewer.xfields,
+                            YFIELD: $scope.viewer.yfields,
+                            VALUEFIELD: $scope.viewer.valueFields,
+                            COLUMN: $scope.viewer.columns,
+                            FILTER: $scope.viewer.filters
+                        };
+
+                        for (var k in analysisViewerColumns) {
+                            var columnType = analysisViewerColumns[k].columnType;
+                            arrays[columnType].push(analysisViewerColumns[k]);
+                        }
+                        //sidebarAnalysis();
+                        getPreview();
+                        load();
+                        break;
+                }
+            });
+        } 
     });
 });

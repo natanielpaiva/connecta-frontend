@@ -385,14 +385,77 @@ define([
             }
         };
 
+
         $scope.submit = function () {
             _prepareSave($scope.viewer);
-            ViewerService.save($scope.viewer).then(function () {
-                $location.path('presenter/viewer');
+            ViewerService.save($scope.viewer).then(function (response) {
+                if ($routeParams.dashborad) {
+                    $location.path('dashboard/' + $routeParams.dashborad);
+                } else {
+                    $location.path('presenter/viewer/'+response.data.id);
+                }
             });
         };
 
-        if ($routeParams.id) {
+        if ($routeParams.template && $routeParams.type && $routeParams.analysis) {
+
+            switch ($routeParams.template) {
+                case "other-singlesource":
+                    $scope.viewer = {
+                        singleSource: {id: ""},
+                        singlesource: {list: []},
+                        name: "",
+                        description: "",
+                        type: "SINGLESOURCE"
+                    };
+                    sidebarSinglesource();
+                    break;
+                default:
+                    sidebarAnalysis();
+                    ViewerService.getTemplates($routeParams.type, $routeParams.template).then(function (response) {
+                        var dados = response.data;
+                        dados.data = response.data.dataProvider;
+                        $scope.viewer.configuration = dados;
+                        //Disable Animation
+                        $scope.viewer.configuration.startDuration = 0;
+                        angular.forEach($scope.viewer.configuration.titles, function (title) {
+                            title.text = '';
+                        });
+                        $scope.viewer.configuration.thousandsSeparator = '.';
+                        $scope.viewer.configuration.decimalSeparator = ',';
+                        load();
+                    });
+                    break;
+            }
+
+            ViewerService.getAnalysisById($routeParams.analysis).then(function (response) {
+                $scope.viewer.analysis = response.data;
+                //Torna todos as columns filtraveis
+                if ($scope.viewer.analysis !== undefined &&
+                        (oldValue === undefined || newValue.id !== oldValue.id)) {
+                    //remove os atributos da analise
+                    $scope.viewer.filters = [];
+                    $scope.viewer.metrics = [];
+                    $scope.viewer.descriptions = [];
+                    $scope.viewer.xfields = [];
+                    $scope.viewer.yfields = [];
+                    $scope.viewer.valueFields = [];
+                    $scope.viewer.columns = [];
+
+                    angular.forEach($scope.viewer.analysis.analysisColumns, function (column) {
+                        var colunaFiltravel = {
+                            analysisColumn: angular.copy(column),
+                            columnType: 'FILTER'
+                        };
+                        $scope.viewer.filters.push(colunaFiltravel);
+                    });
+                }
+            });
+
+            $scope.state.loaded = true;
+
+        }
+        else if ($routeParams.id) {
             ViewerService.getAnalysisViewer($routeParams.id).then(function (response) {
                 angular.extend($scope.viewer, response.data);
 

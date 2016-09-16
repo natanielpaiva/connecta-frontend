@@ -105,6 +105,9 @@
 
     <div class="row">
         <div class="col-md-12 text-right">
+             <a href="#/presenter/analysis/new/datasource/{{datasource.id}}" role="button" class="btn btn-default" translate>
+                ANALYSIS.NEW_ANALYSIS
+            </a>
             <button class="btn btn-default" ng-if="datasource.type == 'DATABASE'" ng-click="testConnection()" type="button" translate>
                 DATASOURCE.TEST_CONNECTION
             </button>
