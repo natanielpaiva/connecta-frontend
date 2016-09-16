@@ -18,8 +18,12 @@ define([
             return $http.put(url + '/' + id, datasource);
         };
 
-        this.list = function (queryString) {
+        this.search = function (queryString) {
             return $http.get(url + queryString);
+        };
+
+        this.list = function (){
+          return $http.get(url);
         };
 
         this.delete = function (id) {

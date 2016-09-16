@@ -22,7 +22,7 @@ define([
 
                     var queryString = filterHelper.getQueryString(params, $scope.filter, $scope.tableSpatialDataSourcesParams.filter());
 
-                    SpatialDataSourceService.list(queryString).then(onSuccess, onError);
+                    SpatialDataSourceService.search(queryString).then(onSuccess, onError);
 
                     function onSuccess(response) {
                         $scope.tableSpatialDataSourcesParams.total(response.data.totalDocuments);
