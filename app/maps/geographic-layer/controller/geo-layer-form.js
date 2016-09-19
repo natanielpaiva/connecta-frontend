@@ -54,14 +54,14 @@ define([
     }
 
     function onSuccessEdit(response) {
-      if (response.data.geoCache && response.data.geoCache.query) {
-          response.data.query = {};
-          response.data.query = response.data.geoCache.query;
+      if (response.data.geoCache && response.data.geoCache.queryCache) {
+          response.data.queryCache = {};
+          response.data.queryCache = response.data.geoCache.queryCache;
       }
 
-      if (response.data.geoCache && response.data.geoCache.getBreaks) {
-          response.data.getBreaks = {};
-          response.data.getBreaks = response.data.geoCache.getBreaks;
+      if (response.data.geoCache && response.data.geoCache.getBreaksCache) {
+          response.data.getBreaksCache = {};
+          response.data.getBreaksCache = response.data.geoCache.getBreaksCache;
       }
 
       $scope.geoLayer = response.data;
