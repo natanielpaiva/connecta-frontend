@@ -37,7 +37,7 @@ define([
     }
 
     function onError(error) {
-      if(error){
+      if (error) {
         notify.error(error.statusText);
       }
 
@@ -55,13 +55,13 @@ define([
 
     function onSuccessEdit(response) {
       if (response.data.geoCache && response.data.geoCache.queryCache) {
-          response.data.queryCache = {};
-          response.data.queryCache = response.data.geoCache.queryCache;
+        response.data.queryCache = {};
+        response.data.queryCache = response.data.geoCache.queryCache;
       }
 
       if (response.data.geoCache && response.data.geoCache.getBreaksCache) {
-          response.data.getBreaksCache = {};
-          response.data.getBreaksCache = response.data.geoCache.getBreaksCache;
+        response.data.getBreaksCache = {};
+        response.data.getBreaksCache = response.data.geoCache.getBreaksCache;
       }
 
       $scope.geoLayer = response.data;
@@ -76,6 +76,7 @@ define([
       geoLayer.serverType = geoLayer.server.serverType;
       geoLayer.spatialDataSourceId = geoLayer.server._id;
       geoLayer.layerIdentifier = geoLayer.layerIdentifier.id;
+
       return geoLayer;
     }
 
@@ -85,6 +86,13 @@ define([
     }
 
     function update(id, geoLayer) {
+      if (geoLayer.queryCache !== undefined|| geoLayer.getBreaksCache !== undefined) {
+          geoLayer.geoCache = {
+            "queryCache": geoLayer.queryCache,
+            "getBreaksCache": geoLayer.getBreaksCache
+          }
+      }
+
       GeoLayerService.update(id, geoLayer).then(onSuccessUpdate, onError);
     }
 
