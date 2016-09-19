@@ -27,7 +27,17 @@
     "PUBLISHED_LAYERS_LIST" : "Lista de <b>Camadas</b> publicadas",
     "TITLE_PUBLICATION" : "Título para publicação",
     "GEO_DATASOURCE_LAYER" : "Fonte geo/camada",
-    "GEOMETRY_TYPE" : "Tipo geométrico"
+    "GEOMETRY_TYPE" : "Tipo geométrico",
+    "TITLE": "Título",
+    "SERVER":"Servidor",
+    "LAYER":"Camada",
+    "LAYERS":"Camadas",
+    "DESCRIPTION":"Descrição",
+    "CACHE_QUERY":"Cache consultas geográficas",
+    "CACHE_STATISTIC_DATA":"Cache dados estatísticos",
+    "CANCEL":"CANCELAR",
+    "SAVE":"SALVAR",
+    "DETAILING_LAYER":"Detalhamento da <b>layer</b> "
   },
   "DATASOURCE" : {
     "ADD_DATASOURCE" : "ADICIONAR FONTE DE DADOS",

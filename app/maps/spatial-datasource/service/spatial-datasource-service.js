@@ -22,12 +22,16 @@ define([
             return $http.get(url + queryString);
         };
 
-        this.list = function (){
-          return $http.get(url);
+        this.listAll = function (){
+          return $http.get(url + '/listAll');
         };
 
         this.delete = function (id) {
             return $http.delete(url + '/' + id);
+        };
+
+        this.getLayersBySpatialDS = function(id) {
+          return $http.get(url + '/' + id + '/layers');
         };
 
     });

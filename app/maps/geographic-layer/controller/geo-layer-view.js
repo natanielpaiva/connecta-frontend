@@ -1,36 +1,50 @@
 define([
-    "connecta.maps",
-    "maps/geographic-layer/service/geo-layer-service"
+  "connecta.maps",
+  "maps/geographic-layer/service/geo-layer-service",
+  "maps/spatial-datasource/service/spatial-datasource-service"
 ], function (maps) {
 
-    return maps.lazy.controller("GeoLayerViewController", function ($scope, $routeParams,GeoLayerService) {
+  return maps.lazy.controller("GeoLayerViewController", function ($scope, $routeParams, GeoLayerService, SpatialDataSourceService) {
 
-        var id;
+    var id;
 
-        init();
+    init();
 
-        function init() {
+    function init() {
 
-            id = $routeParams.id;
+      id = $routeParams.id;
 
-            getLayer();
+      getLayer();
 
-        }
+    }
 
-        function getLayer() {
+    function getLayer() {
 
-            GeoLayerService.get(id).then(onSuccess, onError);
+      GeoLayerService.get(id).then(onSuccess, onError);
 
-            function onSuccess(response) {
-                $scope.layer = response.data;
-            }
+      function onSuccess(response) {
+        $scope.layer = response.data;
+        getSpatialDS($scope.layer.spatialDataSourceId);
+      }
 
-            function onError(err) {
-                throw Error(err);
-            }
+      function onError(err) {
+        throw Error(err);
+      }
 
-        }
+    }
 
-    });
+    function getSpatialDS(id) {
+      SpatialDataSourceService.get(id).then(onSuccess, onError);
+
+      function onSuccess(response) {
+        $scope.layer.spatialDataSource = response.data;
+      }
+
+      function onError(err) {
+        throw Error(err);
+      }
+    }
+
+  });
 
 });

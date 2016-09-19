@@ -10,12 +10,16 @@ define([
             return $http.get(url + '/' + id);
         };
 
-        this.save = function (layer) {
-            return $http.post(url, layer);
+        this.save = function (geoLayer) {
+            return $http.post(url, geoLayer);
         };
 
         this.list = function (queryString) {
             return $http.get(url + queryString);
+        };
+
+        this.update = function (id, geoLayer){
+          return $http.put(url + '/' + id, geoLayer);
         };
 
     });

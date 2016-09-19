@@ -26,8 +26,18 @@
     "ADD_LAYER" : "ADD LAYER",
     "PUBLISHED_LAYERS_LIST" : "Published <b>Layers</b> list",
     "TITLE_PUBLICATION" : "Publication Title",
-    "GEO_DATASOURCE_LAYER" : "Publication Title",
-    "GEOMETRY_TYPE" : "Geometry type"
+    "GEO_DATASOURCE_LAYER" : "Datasource Layer",
+    "GEOMETRY_TYPE" : "Geometry type",
+    "TITLE": "Title",
+    "SERVER":"Server",
+    "LAYER":"Layer",
+    "LAYERS":"Layers",
+    "DESCRIPTION":"Description",
+    "CACHE_QUERY":"Cache geographic queries",
+    "CACHE_STATISTIC_DATA":"Cache statistic data",
+    "CANCEL":"CANCEL",
+    "SAVE":"SAVE",
+    "DETAILING_LAYER":"Detailing <strong>Layer</strong>"
   },
   "DATASOURCE" : {
     "ADD_DATASOURCE" : "ADD DATASOURCE",
