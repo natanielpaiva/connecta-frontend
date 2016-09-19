@@ -1,0 +1,61 @@
+<section>
+  <form name="data_source" ng-submit="save(datasource)" novalidate>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="required" translate>DATASOURCE.SERVER</label>
+        <select ng-model="datasource.contextType" class="form-control" required>
+          <option value="">Selecione</option>
+          <option value="OBIEE">OBIEE</option>
+          <option value="CONNECTA">Connecta</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="required">URL</label>
+        <input type="text" ng-model="datasource.dsn" class="form-control" required/>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label ng-class="{'required': datasource.contextType === 'OBIEE'}" translate>DATASOURCE.USER</label>
+        <div>
+          <input  ng-required="datasource.contextType === 'OBIEE'" type="text" ng-model="datasource.user" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label ng-class="{'required': datasource.contextType === 'OBIEE'} " translate>DATASOURCE.PASSWORD</label>
+        <div>
+          <input  ng-required="datasource.contextType === 'OBIEE'"  type="password" ng-model="datasource.password" class="form-control" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label class="required" translate>DATASOURCE.TITLE</label>
+        <input type="text" ng-model="datasource.title" class="form-control" required  />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label translate>DATASOURCE.DESCRIPTION</label>
+        <div>
+          <textarea type="text" ng-model="datasource.description" class="form-control" height="100"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <a href="#/maps/datasource" class="btn btn-default" translate>
+          DATASOURCE.CANCEL
+        </a>
+        <button class="btn btn-primary" ng-disabled="data_source.$invalid" translate>
+          DATASOURCE.SAVE
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

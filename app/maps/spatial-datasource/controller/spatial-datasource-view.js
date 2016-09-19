@@ -4,24 +4,42 @@ define([
 ], function (maps) {
 
 
-    return maps.lazy.controller("SpatialDataSourceViewController", function ($scope, $routeParams, SpatialDataSourceService, $location, notify) {
+  return maps.lazy.controller("SpatialDataSourceViewController", function ($scope, $routeParams, SpatialDataSourceService, $location, notify) {
 
-        SpatialDataSourceService.get($routeParams.id).success(function (data) {
-            $scope.spatialDataSource = data;
-            console.info("OK ==>", data);
-        }).error(function (error) {
-            console.info("Erro ==>", error);
-        });
+    if ($routeParams.id) {
+
+      DatasourceService.get($routeParams.id).then(onSuccess, onError);
+
+      function onSuccess(response) {
+        $scope.spatialDataSource= response.data;
+      }
+
+      function onError(error) {
+        if (error) {
+          notify.error(error.statusText);
+        } else {
+          notify.error("DATASOURCE.ERROR_OPERATION");
+        }
+      }
+    }
 
 
-        $scope.delete = function (id) {
-            SpatialDataSourceService.delete(id).success(function () {
-                notify.info('Registro excluido com sucesso!');
-                $scope.backToList();
-            }).error(function () {
-                notify.error('Erro ao excluir registro');
-            });
-        };
+    $scope.delete = function (id) {
+      SpatialDataSourceService.delete(id).then(onSuccess, onError);
 
-    });
+      function onSuccess() {
+        $location.path("/maps/spatial-datasource");
+        notify.info("GEO_DATASOURCE.DELETE_SUCCESS");
+      }
+
+      function onError(error) {
+        if (error) {
+          notify.error(error.statusText);
+        } else {
+          notify.error("GEO_DATASOURCE.DELETE_ERROR");
+        }
+      }
+    };
+
+  });
 });

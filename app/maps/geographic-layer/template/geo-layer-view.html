@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-10">
         <h3>
-          <h4 translate>{{"GEO_LAYER.DETAILING_LAYER"}}</h4>
+          <h4 translate>GEO_LAYER.DETAILING_LAYER</h4>
         </h3>
     </div>
 
@@ -10,7 +10,7 @@
             <a class="btn btn-default" href="#/maps/geo-layer/{{layer._id}}/edit">
                 <span class="icon-pencil" aria-hidden="true"></span>
             </a>
-            <button class="btn btn-default">
+            <button class="btn btn-default" ng-click="delete(layer._id)">
                 <span class="icon-trash" aria-hidden="true"></span>
             </button>
         </div>

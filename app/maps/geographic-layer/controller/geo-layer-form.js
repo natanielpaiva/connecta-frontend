@@ -39,6 +39,8 @@ define([
     function onError(error) {
       if (error) {
         notify.error(error.statusText);
+      }else {
+        notify.error("GEO_LAYER.ERROR_OPERATION");
       }
 
       throw Error(error);
@@ -50,7 +52,7 @@ define([
 
     function onSuccessSaveLayer(response) {
       $location.path("/maps/geo-layer/" + response.data._id + "/edit");
-      notify.success("Sucesso");
+      notify.success("GEO_LAYER.SAVE_SUCCESS");
     }
 
     function onSuccessEdit(response) {
@@ -82,7 +84,7 @@ define([
 
     function onSuccessUpdate(response) {
       $location.path("/maps/geo-layer");
-      notify.success("GEO_DATASOURCE.SAVE_SUCCESS");
+      notify.success("GEO_LAYER.SAVE_SUCCESS");
     }
 
     function update(id, geoLayer) {

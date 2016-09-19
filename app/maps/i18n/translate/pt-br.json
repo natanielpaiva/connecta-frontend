@@ -20,7 +20,8 @@
     "DELETE_ERROR": "Erro ao excluir o registro",
     "DELETE_SUCCESS": "Registro excluído com sucesso",
     "NEW_SPATIAL_DATASOURCE" : "Nova Fonte de Dados",
-    "PUBLISHED_DATASOURCE_LIST" : "Lista de <b>Fontes Geo</b> publicadas"
+    "PUBLISHED_DATASOURCE_LIST" : "Lista de <b>Fontes Geo</b> publicadas",
+    "DETAILING_SPATIAL_DATASOURCE":"Detalhamento da <strong>Fonte Geo</strong>"
   },
   "GEO_LAYER" : {
     "ADD_LAYER" : "ADICIONAR CAMADA",
@@ -37,14 +38,32 @@
     "CACHE_STATISTIC_DATA":"Cache dados estatísticos",
     "CANCEL":"CANCELAR",
     "SAVE":"SALVAR",
-    "DETAILING_LAYER":"Detalhamento da <b>layer</b> "
+    "DETAILING_LAYER":"Detalhamento da <b>layer</b> ",
+    "SAVE_ERROR": "Erro ao salvar o registro",
+    "SAVE_SUCCESS": "Registro salvo com sucesso",
+    "DELETE_ERROR": "Erro ao excluir o registro",
+    "DELETE_SUCCESS": "Registro excluído com sucesso",
+    "ERROR_OPERATION": "Erro ao efetuar a operação"
   },
   "DATASOURCE" : {
     "ADD_DATASOURCE" : "ADICIONAR FONTE DE DADOS",
     "DATASOURCE_LIST" : "Lista de <b>Fonte de Dados</b>",
     "TITLE_PUBLICATION" : "Título para publicação",
     "GEO_DATASOURCE_LAYER" : "Fonte geo/camada",
-    "GEOMETRY_TYPE" : "Tipo geométrico"
+    "GEOMETRY_TYPE" : "Tipo geométrico",
+    "TITLE": "Título",
+    "DESCRIPTION": "Descrição",
+    "SERVER": "Servidor",
+    "USER": "Usuário",
+    "PASSWORD": "Senha",
+    "CANCEL": "Cancelar",
+    "SAVE": "Salvar",
+    "SAVE_SUCCESS": "Registro salvo com sucesso",
+    "DELETE_ERROR": "Erro ao excluir o registro",
+    "DELETE_SUCCESS": "Registro excluído com sucesso",
+    "ERROR_OPERATION": "Erro ao efetuar a operação",
+    "DETAILING_DATASOURCE":"Detalhamento da <strong>Fonte de Dados</strong>",
+    "SOURCE": "Origem"
   },
   "PROJECT" : {
     "NEW_PROJECT" : "NOVO PROJETO",

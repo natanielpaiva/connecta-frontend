@@ -20,7 +20,9 @@
     "DELETE_ERROR": "Error delete the record",
     "DELETE_SUCCESS": "Successfully deleted record",
     "NEW_SPATIAL_DATASOURCE" : "New Spatial Datasource",
-    "PUBLISHED_DATASOURCE_LIST" : "Published <b>Spatial Datasource</b> list"
+    "PUBLISHED_DATASOURCE_LIST" : "Published <b>Spatial Datasource</b> list",
+    "DETAILING_SPATIAL_DATASOURCE":"Detailing <strong>Source Geo</strong>"
+
   },
   "GEO_LAYER" : {
     "ADD_LAYER" : "ADD LAYER",
@@ -37,14 +39,33 @@
     "CACHE_STATISTIC_DATA":"Cache statistic data",
     "CANCEL":"CANCEL",
     "SAVE":"SAVE",
-    "DETAILING_LAYER":"Detailing <strong>Layer</strong>"
+    "DETAILING_LAYER":"Detailing <strong>Layer</strong>",
+    "SAVE_ERROR": "Error saving record",
+    "SAVE_SUCCESS": "Registration successfully saved",
+    "DELETE_ERROR": "Error delete the record",
+    "DELETE_SUCCESS": "Successfully deleted record",
+    "ERROR_OPERATION": "Error to perform the operation"
   },
   "DATASOURCE" : {
     "ADD_DATASOURCE" : "ADD DATASOURCE",
     "DATASOURCE_LIST" : "Published <b>Datasource</b> list",
     "TITLE_PUBLICATION" : "Publication Title",
     "GEO_DATASOURCE_LAYER" : "Publication Title",
-    "GEOMETRY_TYPE" : "Geometry type"
+    "GEOMETRY_TYPE" : "Geometry type",
+    "TITLE": "Title",
+    "DESCRIPTION": "Description",
+    "SERVER": "Server",
+    "USER": "User",
+    "PASSWORD": "Password",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "SAVE_SUCCESS": "Registration successfully saved",
+    "DELETE_ERROR": "Error delete the record",
+    "DELETE_SUCCESS": "Successfully deleted record",
+    "ERROR_OPERATION": "Error to perform the operation",
+    "DETAILING_DATASOURCE":"Detailing <strong>Datasource</strong>",
+    "SOURCE": "Source"
+
   },
   "PROJECT" : {
     "NEW_PROJECT" : "NEW PROJECT",

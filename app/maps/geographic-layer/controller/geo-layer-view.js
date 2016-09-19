@@ -45,6 +45,24 @@ define([
       }
     }
 
+    $scope.delete = function (id) {
+      GeoLayerService.delete(id).then(onSucess, onError);
+
+      function onSuccess() {
+        notify.info("GEO_LAYER.DELETE_SUCCESS");
+      }
+
+      function onError(error) {
+        if (error) {
+          notify.error(error.statusText);
+        } else {
+          notify.error("GEO_LAYER.DELETE_ERROR");
+        }
+      }
+
+    };
+
+
   });
 
 });
