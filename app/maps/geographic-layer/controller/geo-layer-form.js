@@ -90,7 +90,7 @@ define([
           geoLayer.geoCache = {
             "queryCache": geoLayer.queryCache,
             "getBreaksCache": geoLayer.getBreaksCache
-          }
+          };
       }
 
       GeoLayerService.update(id, geoLayer).then(onSuccessUpdate, onError);
