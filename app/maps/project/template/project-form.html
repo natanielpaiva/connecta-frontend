@@ -24,26 +24,24 @@
     </div>
 </div>
 
-<div ng-include="steps[3].templateUrl"></div>
+<div ng-include="steps[currentStep].templateUrl"></div>
 
 <div class="row">
     <div class="col-md-12 text-right">
-        <button class="btn btn-default" type="button">
+        <button class="btn btn-default">
             CANCELAR
         </button>
-        <button ng-click="changeStep(false)"
+        <button ng-click="changeStep()"
                 class="btn btn-default"
-                type="button"
                 ng-disabled="steps[currentStep].first">
             VOLTAR
         </button>
         <button ng-click="changeStep(true)"
                 class="btn btn-default"
-                type="button"
                 ng-disabled="steps[currentStep].last">
             AVANÇAR
         </button>
-        <button class="btn btn-primary" type="button"
+        <button class="btn btn-primary"
                 ng-disabled="!steps[currentStep].last">
             SALVAR
         </button>

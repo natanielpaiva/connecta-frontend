@@ -1,28 +1,36 @@
-$carrouseHeight: 150px;
+$carrouselHeight: 150px;
+$carrouselItemHeight: $carrouselHeight - 2px;
 
 .carrousel-main {
-    height: $carrouseHeight;
+    height: $carrouselHeight;
     border: solid 1px #cacaca;
     margin: 13px;
     position: relative;
 
     .carrousel-item{
-        max-height: $carrouseHeight;
-        min-height: $carrouseHeight;
-        max-width: $carrouseHeight;
-        min-width: $carrouseHeight;
+        max-height: $carrouselItemHeight;
+        min-height: $carrouselItemHeight;
+        max-width: $carrouselItemHeight;
+        min-width: $carrouselItemHeight;
     }
-
 }
 
 .carrousel-main .buttons{
     top: 50%;
     transform: translateY(-50%);
     font-size: 4em;
+    position: absolute;
+    width: 90px;
+    height: 80px;
+    z-index: 10;
+    text-align: center;
 }
 
 .carrousel-container{
     overflow: hidden;
+    position: absolute;
+    left: 90px;
+    right: 90px;
 }
 
 .carrousel-content{
@@ -34,3 +42,46 @@ $carrouseHeight: 150px;
 .carrousel-content > div{
     display: inline-block;
 }
+
+.enabled-map{
+    top: -25px;
+    bottom: 0;
+    right: 70px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    transition: transform 0.5s, background 0.5s;
+
+    &:before {
+        content: 'X';
+        position: absolute;
+        font-size: 40px;
+        top: calc(50% - 30px);
+        left: calc(50% - 13px);
+        color: #bdb6b6;
+    }
+
+    input[type=checkbox]:checked ~ &{
+        border-radius: 0;
+        background: transparent;
+        left: 8px;
+        top: -30px;
+        width: 25px;
+        height: 40px;
+        border: solid #3BB79D;
+        border-width: 0 5px 5px 0;
+        transform: rotate(45deg);
+
+        &:before {
+           content: ' ';
+        }
+    }
+}
+
+input[type=checkbox] {
+    visibility: hidden;
+    position: absolute;
+}
+

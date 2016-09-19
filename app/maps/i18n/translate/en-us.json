@@ -52,7 +52,16 @@
     "PROJECT_NAME" : "Project Name",
     "DESCRIPTION" : "Description",
     "MAP_TOOLS" : "<b>Map</b> Tools",
-    "ENABLE_BASEMAP_SELECTOR" : "Enable basemap selector"
+    "ENABLE_BASEMAP_SELECTOR" : "Enable basemap selector",
+    "GENERAL_MAP_SCALE" : "General <b>Map</b> scale",
+    "NAVIGATION_TYPE" : "Navigation type",
+    "DESC_NAVIGATION_TYPE" : "What kind of map navigation",
+    "INITIAL_EXTENT_AREA" : "Initial Extent area",
+    "DESC_INITIAL_EXTENT_AREA" : "Browse on map and select the initial extent area",
+    "ZOOM_MAX_MIN" : "Zoom Max/Min",
+    "DESC_ZOOM_MAX_MIN" : "To define minimal and maximum zoom, use the slider or browse on map and click on use",
+    "STATIC_NAVIGATION" :"Static navigation",
+    "DYNAMIC_NAVIGATION" :"Dynamic navigation"
   },
   "ANALYSIS" : {
     "NAME" : "Analysis name",

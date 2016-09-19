@@ -52,7 +52,16 @@
     "PROJECT_NAME" : "Nome do Projeto",
     "DESCRIPTION" : "Descrição",
     "MAP_TOOLS" : "Ferramentas do <b>Mapa</b>",
-    "ENABLE_BASEMAP_SELECTOR" : "Habilitar seletor de mapas base"
+    "ENABLE_BASEMAP_SELECTOR" : "Habilitar seletor de mapas base",
+    "GENERAL_MAP_SCALE" : "Escala geral do <b>Mapa</b>",
+    "NAVIGATION_TYPE" : "Tipo de navegação",
+    "DESC_NAVIGATION_TYPE" : "Qual o tipo de navegação do mapa",
+    "INITIAL_EXTENT_AREA" : "Enquadramento Inicial",
+    "DESC_INITIAL_EXTENT_AREA" : "Navegue no mapa e escolha o enquadramento inicial",
+    "ZOOM_MAX_MIN" : "Zoom Max/Min",
+    "DESC_ZOOM_MAX_MIN" : "Para definir zoom máximo e mínimo, utilize o slider ou navegue pelo mapa e clique em usar",
+    "STATIC_NAVIGATION" :"Navegação estática",
+    "DYNAMIC_NAVIGATION" :"Navegação dinâminca"
   },
   "ANALYSIS" : {
     "NAME" : "Nome da análise",

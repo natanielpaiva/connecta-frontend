@@ -22,6 +22,7 @@ define([
     MenuCarrousel.prototype.move = function(back){
         if(this.moving) return;
         this.moving = true;
+        containerWidth = container.width();
 
         var currentLeft = content.position().left;
         var max = Math.abs(currentLeft) + containerWidth;

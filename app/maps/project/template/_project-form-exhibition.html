@@ -7,29 +7,24 @@
         </div>
     </div>
 
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <h5 translate>PROJECT.NAVIGATION_TYPE</h5>
-                <p>Qual o tipo de navegação do mapa</p>
+                <p translate>PROJECT.DESC_NAVIGATION_TYPE</p>
                 <div class="input-group">
                     <div class="row">
-                        <input type="radio" />Navegação estática
+                        <input name="navigation-type" type="radio" />{{ 'PROJECT.STATIC_NAVIGATION' | translate }}
                     </div>
                     <div class="row">
-                        <input type="radio" />Navegação dinâmina
+                        <input name="navigation-type" type="radio" />{{ 'PROJECT.DYNAMIC_NAVIGATION' | translate }}
                     </div>
                 </div>
 
             </div>
             <div class="col-md-4">
-                <h5>Enquadramento Inicial</h5>
-                <p>Navegue no mapa e escolha o enquadramento inicial</p>
-
-                <!--TODO: Tirar esse br daqui-->
-                <br />
+                <h5 translate>PROJECT.INITIAL_EXTENT_AREA</h5>
+                <p translate>PROJECT.DESC_INITIAL_EXTENT_AREA</p>
 
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -53,22 +48,27 @@
                 </div>
             </div>
             <div class="col-md-5">
-                  <h5>Zoom Max/Min</h5>
-                  <p>Para definir zoom máximo e mínimo, utilize o slider ou navegue pelo mapa e clique em usar</p>
+                  <h5 translate>PROJECT.ZOOM_MAX_MIN</h5>
+                  <p translate>PROJECT.DESC_ZOOM_MAX_MIN</p>
 
                   <div class="row">
                       <div class="col-md-3 pull-left">
                           <label>Zoom Max</label>
                           <input class="form-control" type="text">
                       </div>
+
                       <div class="col-md-3 pull-right">
                           <label>Zoom Min</label>
                           <input class="form-control" type="text">
                       </div>
+
+                      <p style="color: red" class="text-center margin-top-double">|--------------Slider Aqui--------------|</p>
                   </div>
-
-
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="bg-success" style="height: 500px"></div>
+    </div>
+
 </section>

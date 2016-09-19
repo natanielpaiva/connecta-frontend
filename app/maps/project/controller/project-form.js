@@ -1,54 +1,20 @@
 define([
     "connecta.maps",
+    "maps/project/storage/basemaps",
+    "maps/project/storage/steps",
     "maps/project/service/project-service",
     'maps/project/directive/menu-carrousel'
-], function (maps) {
+], function (maps, baseMapsConfig, stepsConfig) {
 
-    return maps.lazy.controller("ProjectFormController", function ($scope, $timeout) {
+    return maps.lazy.controller("ProjectFormController", function ($scope) {
 
         $scope.currentStep = 1;
 
-        $scope.itemTemplateUrl = 'app/maps/project/template/_project_base_map_thumb.html';
-        $scope.items = [{
-            name: 'TESTE',
-            thumb: ''
-        },{
-            name: 'TESTE'
-        },{
-            name: 'TESTE'
-        },{
-            name: 'TESTE'
-        },{
-            name: 'TESTE'
-        },{
-            name: 'TESTE'
-        },{
-            name: 'TESTE'
-        },{
-            name: 'TESTE'
-        }];
+        $scope.steps = stepsConfig;
 
+        $scope.baseMapThumbUrl = 'app/maps/project/template/_project_base_map_thumb.html';
 
-        $scope.steps = {
-            1 : {
-                style : "active",
-                templateUrl : "app/maps/project/template/_project-form-general-information.html",
-                first : true
-            },
-            2 : {
-                style : "disabled",
-                templateUrl : "app/maps/project/template/_project-form-link-datasource.html"
-            },
-            3 : {
-                style : "disabled",
-                templateUrl : "app/maps/project/template/_project-form-tools.html"
-            },
-            4 : {
-                style : "disabled",
-                templateUrl : "app/maps/project/template/_project-form-exhibition.html",
-                last : true
-            }
-        };
+        $scope.baseMaps = baseMapsConfig.baseMaps;
 
         $scope.changeStep = function (increment) {
 
