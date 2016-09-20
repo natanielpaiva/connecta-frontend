@@ -29,8 +29,9 @@
                 <p translate>PROJECT.DESC_INITIAL_EXTENT_AREA</p>
 
                 <div class="row">
-                    <div class="form-group col-md-12">
-                        <div class="col-md-4">
+                    <div class="form-group">
+
+                        <div class="col-md-3" style="padding-right: 0">
                             <label>Zoom</label>
                             <select class="form-control">
                                 <option value="">Selecione</option>
@@ -38,48 +39,54 @@
                                 <option value="">30</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+
+                        <div class="col-md-4" style="padding-right: 0">
                             <label>Coord X</label>
-                            <input ng-model="mapCenter.lng" ng-change="updateCenter()" class="form-control" type="number" step="0.1" />
+                            <input ng-model="mapCenter.lng" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
                         </div>
-                        <div class="col-md-4">
-                            <label>Coord Y</label>
-                            <input ng-model="mapCenter.lat" ng-change="updateCenter()" class="form-control" type="number" step="0.1" />
-                            <button ng-click="setCurrentWatcher('mapCenter')">
-                              <i class="icon-link"></i>
-                            </button>
+
+                        <div class="col-md-5" style="padding-right: 0; padding-left: 0">
+                            <div class="col-md-8" style="padding-right: 0; padding-left: 2px">
+                                <label>Coord Y</label>
+                                <input ng-model="mapCenter.lat" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
+                            </div>
+                            <div class="col-md-4" style="padding-right: 0; padding-left: 2px">
+                                <button class="btn btn-success margin-top-label" ng-click="setCurrentWatcher('mapCenter')">
+                                   <i class="icon-link"></i>
+                                </button>
+                            </div>
                         </div>
 
                     </div>
                 </div>
             </div>
             <div class="col-md-5">
-                  <h5 translate>PROJECT.ZOOM_MAX_MIN</h5>
-                  <p translate>PROJECT.DESC_ZOOM_MAX_MIN</p>
+                <h5 translate>PROJECT.ZOOM_MAX_MIN</h5>
+                <p translate>PROJECT.DESC_ZOOM_MAX_MIN</p>
 
-                  <div class="row">
-                      <div class="col-md-3 pull-left">
-                          <label>Zoom Max</label>
-                          <button ng-click="setCurrentWatcher('maxZoom')">
-                            <i class="icon-link"></i>
-                          </button>
-                          <input ng-model="zoomConfig.max" ng-change="updateMaxZoom()" class="form-control" type="number">
-                      </div>
+                <div class="row">
+                    <div class="col-md-3 pull-left">
+                        <label>Zoom Max</label>
+                        <button ng-click="setCurrentWatcher('maxZoom')">
+                          <i class="icon-link"></i>
+                        </button>
+                        <input ng-model="zoomConfig.max" ng-change="updateMaxZoom()" class="form-control" type="number">
+                    </div>
 
-                      <div class="col-md-3 pull-right">
-                          <label>Zoom Min</label>
-                          <button ng-click="setCurrentWatcher('minZoom')">
-                            <i class="icon-link"></i>
-                          </button>
-                          <input ng-model="zoomConfig.min" ng-change="updateMinZoom()" class="form-control" type="number">
-                      </div>
+                    <div class="col-md-3 pull-right">
+                        <label>Zoom Min</label>
+                        <button ng-click="setCurrentWatcher('minZoom')">
+                          <i class="icon-link"></i>
+                        </button>
+                        <input ng-model="zoomConfig.min" ng-change="updateMinZoom()" class="form-control" type="number">
+                    </div>
 
-                      <p style="color: red" class="text-center margin-top-double">|--------------Slider Aqui--------------|</p>
-                  </div>
+                    <p style="color: red" class="text-center margin-top-double">|--------------Slider Aqui--------------|</p>
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div id="_mapDiv" ng-init="mapInit()" style="height: 500px;"></div>
+        <div id="_mapDiv" ng-init="mapInit()" style="height: 500px; margin: 14px"></div>
     </div>
 </section>

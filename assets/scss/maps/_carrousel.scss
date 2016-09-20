@@ -1,8 +1,9 @@
-$carrouselHeight: 150px;
-$carrouselItemHeight: $carrouselHeight - 2px;
+$carrouselHeight: 200px;
+$carrouselItemHeight: 150px;
+$carrouselMainHeight: 180px;
 
 .carrousel-main {
-    height: $carrouselHeight;
+    height: $carrouselMainHeight;
     border: solid 1px #cacaca;
     margin: 13px;
     position: relative;
@@ -27,10 +28,11 @@ $carrouselItemHeight: $carrouselHeight - 2px;
 }
 
 .carrousel-container{
-    overflow: hidden;
+    overflow-x: hidden;
     position: absolute;
     left: 90px;
     right: 90px;
+    height: $carrouselHeight;
 }
 
 .carrousel-content{
@@ -83,5 +85,21 @@ $carrouselItemHeight: $carrouselHeight - 2px;
 input[type=checkbox] {
     visibility: hidden;
     position: absolute;
+}
+
+.disabled-container {
+    position: absolute;
+    background: #ccc;
+    z-index: 11;
+    opacity: 0.6;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.disabled-container-true {
+    opacity: 0;
+    display: none;
 }
 

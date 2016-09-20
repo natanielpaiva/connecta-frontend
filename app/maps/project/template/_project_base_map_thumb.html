@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <input type="checkbox" id="item{{$index}}">
+            <input ng-model="item.checked" type="checkbox" id="item{{$index}}">
             <label for="item{{$index}}" class="enabled-map"></label>
 
             <!--Botao de configuração de Mapa Inicial-->
@@ -21,10 +21,16 @@
                   <!--<input type="checkbox" name="">-->
             <!--</label>-->
 
-            <div class="favorite"></div>
-            <div class="thumbnail">
-                <img src="{{item.thumb}}" alt="teste">
+            <div class="thumbnail margin-bottom-zero">
+                <img src="{{item.thumb}}" alt="{{item.title}}">
             </div>
+          <div class="row">
+            <span class="col-xs-12">
+                <p class="text-center">{{item.title}}</p>
+            </span>
+
+          </div>
+
         </div>
     </div>
 </div>

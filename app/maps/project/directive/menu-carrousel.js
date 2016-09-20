@@ -5,8 +5,6 @@ define([
     var container, content, itemWidth, containerWidth;
 
     function MenuCarrousel($scope) {
-        console.log($scope);
-
         var self = this;
         self.moving = false;
 
@@ -54,7 +52,8 @@ define([
             controllerAs: '$ctrl',
             scope:{
                 items: '=',
-                itemTemplateUrl: '='
+                itemTemplateUrl: '=',
+                enabled: '='
             },
             link: function link(scope, element){
                 container = $('.carrousel-container', element);
