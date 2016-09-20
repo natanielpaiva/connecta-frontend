@@ -52,22 +52,31 @@ define([
         };
 
         $scope.setCurrentWatcher = function (watcher) {
-          if (watcher === $scope.currentWatcher) {
+
+          if ($scope.currentWatcher) {
             $scope.watchers[$scope.currentWatcher].pause();
-            $scope.currentWatcher = undefined;
-          } else {
-            if (watcher === WatcherEnum.MAP_CENTER) {
-              mapHelper.setCenter($scope.mapCenter);
-            }
-            if (watcher === WatcherEnum.MAX_ZOOM) {
-              mapHelper.setZoom($scope.zoomConfig.max);
-            }
-            if (watcher === WatcherEnum.MIN_ZOOM) {
-              mapHelper.setZoom($scope.zoomConfig.min);
-            }
-            $scope.currentWatcher = watcher;
-            $scope.watchers[$scope.currentWatcher].resume();
           }
+
+          if (watcher === $scope.currentWatcher) {
+            $scope.currentWatcher = undefined;
+            return;
+          }
+
+          $scope.currentWatcher = watcher;
+
+          if (watcher === WatcherEnum.MAP_CENTER) {
+            mapHelper.setCenter($scope.mapCenter);
+          }
+          if (watcher === WatcherEnum.MAX_ZOOM) {
+            mapHelper.setZoom($scope.zoomConfig.max);
+          }
+          if (watcher === WatcherEnum.MIN_ZOOM) {
+            mapHelper.setZoom($scope.zoomConfig.min);
+          }
+
+          $scope.currentWatcher = watcher;
+          $scope.watchers[$scope.currentWatcher].resume();
+
         };
 
         $scope.updateMaxZoom = function () {
