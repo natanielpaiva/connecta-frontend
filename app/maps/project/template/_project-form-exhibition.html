@@ -63,7 +63,7 @@
                           <button ng-click="setCurrentWatcher('maxZoom')">
                             <i class="icon-link"></i>
                           </button>
-                          <input ng-model="zoomConfig.max" ng-change="updateZoomConfig()" class="form-control" type="number">
+                          <input ng-model="zoomConfig.max" ng-change="updateMaxZoom()" class="form-control" type="number">
                       </div>
 
                       <div class="col-md-3 pull-right">
@@ -71,7 +71,7 @@
                           <button ng-click="setCurrentWatcher('minZoom')">
                             <i class="icon-link"></i>
                           </button>
-                          <input ng-model="zoomConfig.min" ng-change="updateZoomConfig()" class="form-control" type="number">
+                          <input ng-model="zoomConfig.min" ng-change="updateMinZoom()" class="form-control" type="number">
                       </div>
 
                       <p style="color: red" class="text-center margin-top-double">|--------------Slider Aqui--------------|</p>
