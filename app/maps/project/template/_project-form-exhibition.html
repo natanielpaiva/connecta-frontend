@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../../../node_modules/leaflet/dist/leaflet.css">
+
 <section>
     <div class="row margin-top-single">
         <div class="col-md-6">
@@ -38,12 +40,16 @@
                         </div>
                         <div class="col-md-4">
                             <label>Coord X</label>
-                            <input class="form-control" type="text" />
+                            <input ng-model="mapCenter.lng" ng-change="updateCenter()" class="form-control" type="number" step="0.1" />
                         </div>
                         <div class="col-md-4">
                             <label>Coord Y</label>
-                            <input class="form-control" type="text" />
+                            <input ng-model="mapCenter.lat" ng-change="updateCenter()" class="form-control" type="number" step="0.1" />
+                            <button ng-click="setCurrentWatcher('mapCenter')">
+                              <i class="icon-link"></i>
+                            </button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -54,12 +60,18 @@
                   <div class="row">
                       <div class="col-md-3 pull-left">
                           <label>Zoom Max</label>
-                          <input class="form-control" type="text">
+                          <button ng-click="setCurrentWatcher('maxZoom')">
+                            <i class="icon-link"></i>
+                          </button>
+                          <input ng-model="zoomConfig.max" ng-change="updateZoomConfig()" class="form-control" type="number">
                       </div>
 
                       <div class="col-md-3 pull-right">
                           <label>Zoom Min</label>
-                          <input class="form-control" type="text">
+                          <button ng-click="setCurrentWatcher('minZoom')">
+                            <i class="icon-link"></i>
+                          </button>
+                          <input ng-model="zoomConfig.min" ng-change="updateZoomConfig()" class="form-control" type="number">
                       </div>
 
                       <p style="color: red" class="text-center margin-top-double">|--------------Slider Aqui--------------|</p>
@@ -68,7 +80,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="bg-success" style="height: 500px"></div>
+        <div id="_mapDiv" ng-init="mapInit()" style="height: 500px;"></div>
     </div>
-
 </section>
