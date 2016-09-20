@@ -7,39 +7,37 @@ define([
   return maps.lazy.controller("SpatialDataSourceViewController", function ($scope, $routeParams, SpatialDataSourceService, $location, notify) {
 
     if ($routeParams.id) {
+      DatasourceService.get($routeParams.id).then(onSuccessGet, onErrorGet);
+    }
 
-      DatasourceService.get($routeParams.id).then(onSuccess, onError);
+    $scope.delete = function (id) {
+      SpatialDataSourceService.delete(id).then(onSuccessDelete, onErrorDelete);
+    };
 
-      function onSuccess(response) {
-        $scope.spatialDataSource= response.data;
-      }
+    function onSuccessDelete() {
+      $location.path("/maps/spatial-datasource");
+      notify.info("GEO_DATASOURCE.DELETE_SUCCESS");
+    }
 
-      function onError(error) {
-        if (error) {
-          notify.error(error.statusText);
-        } else {
-          notify.error("DATASOURCE.ERROR_OPERATION");
-        }
+    function onErrorDelete(error) {
+      if (error) {
+        notify.error(error.statusText);
+      } else {
+        notify.error("GEO_DATASOURCE.DELETE_ERROR");
       }
     }
 
+    function onSuccessGet(response) {
+      $scope.spatialDataSource = response.data;
+    }
 
-    $scope.delete = function (id) {
-      SpatialDataSourceService.delete(id).then(onSuccess, onError);
-
-      function onSuccess() {
-        $location.path("/maps/spatial-datasource");
-        notify.info("GEO_DATASOURCE.DELETE_SUCCESS");
+    function onErrorGet(error) {
+      if (error) {
+        notify.error(error.statusText);
+      } else {
+        notify.error("DATASOURCE.ERROR_OPERATION");
       }
-
-      function onError(error) {
-        if (error) {
-          notify.error(error.statusText);
-        } else {
-          notify.error("GEO_DATASOURCE.DELETE_ERROR");
-        }
-      }
-    };
+    }
 
   });
 });
