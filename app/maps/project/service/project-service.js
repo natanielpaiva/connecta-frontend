@@ -18,6 +18,10 @@ define([
             return $http.get(url + queryString);
         };
 
+        this.listAll = function (){
+          return $http.get(url + '/listAll');
+        };
+
     });
 
 });

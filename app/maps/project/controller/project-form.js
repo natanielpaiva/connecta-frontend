@@ -5,10 +5,13 @@ define([
     'maps/project/helper/map-helper',
     "maps/project/storage/tools",
     "maps/project/service/project-service",
-    'maps/project/directive/menu-carrousel'
+    "maps/spatial-datasource/service/spatial-datasource-service",
+    "maps/geographic-layer/service/geo-layer-service",
+    "maps/project/directive/menu-carrousel"
 ], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig) {
 
-    return maps.lazy.controller("ProjectFormController", function ($scope, $timeout) {
+    return maps.lazy.controller("ProjectFormController", function (
+      $scope, ProjectService, SpatialDataSourceService, GeoLayerService) {
 
         $scope.project = {
             baseMaps : [],
@@ -16,7 +19,7 @@ define([
             geoTools : {}
         };
 
-        const WatcherEnum = {
+        var WatcherEnum = {
             MAP_CENTER: 'mapCenter',
             MAX_ZOOM: 'maxZoom',
             MIN_ZOOM: 'minZoom',
@@ -146,6 +149,55 @@ define([
         };
 
 
+
+
+//---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
+
+      $scope.flag_add = true;
+      $scope.layersBySpatials = [];
+      $scope.columnsByLayer = [];
+
+      $scope.toggleOptionAdd = function () {
+        if ($scope.flag_add)
+          SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
+
+        $scope.flag_add = !$scope.flag_add;
+      };
+
+      $scope.getLayersBySpatialDS = function (id_spatial_ds) {
+        GeoLayerService.getLayersByDS(id_spatial_ds).then(onSuccessGetLayerBySpatialDS, onError);
+      };
+
+      $scope.getColumnsByLayer = function (id_layer) {
+        if (typeof id_layer != 'undefined') {
+          for (var i in $scope.layersBySpatials) {
+            if ($scope.layersBySpatials[i]._id == id_layer)
+              $scope.columnsByLayer = $scope.layersBySpatials[i].layerFields;
+          }
+        } else {
+          $scope.columnsByLayer = [];
+        }
+      };
+
+      function onSuccessListSpatialDS(response) {
+        $scope.spatialDataSources = response.data;
+      }
+
+      function onSuccessGetLayerBySpatialDS(response) {
+        $scope.layersBySpatials = response.data.content;
+        if ($scope.layersBySpatials.length === 0)
+          $scope.columnsByLayer = [];
+          // notify.error("Nenhuma camada cadastrada");
+      }
+
+      function onError(error) {
+        if (error) {
+          // notify.error(error.statusText);
+        }
+        throw Error(error);
+      }
+
+//---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
     });
 
 });

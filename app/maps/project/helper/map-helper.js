@@ -38,7 +38,7 @@ define(['esri-leaflet'], function (esri) {
         resume : function () {
           self.map.on('move', positionChanged);
         }
-      }
+      };
     },
 
     watchZoomChange: function (callback, startPaused) {
@@ -59,7 +59,7 @@ define(['esri-leaflet'], function (esri) {
         resume : function () {
           self.map.on('zoom', zoomChanged);
         }
-      }
+      };
     },
 
     getCenter: function () {
@@ -81,5 +81,5 @@ define(['esri-leaflet'], function (esri) {
     setMinZoom: function (minZoom) {
       this.map.setMinZoom(minZoom);
     }
-  }
+  };
 });
