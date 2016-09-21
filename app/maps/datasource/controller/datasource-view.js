@@ -7,22 +7,19 @@ define([
     $scope.datasource = {};
 
     if($routeParams.id){
-
       DatasourceService.get($routeParams.id).then(onSuccessGet, onErrorGet);
-
     }
 
     $scope.delete = function(id){
-
-      DatasourceService.delete(id).then(onSuccessSave, onErrorSave);
+      DatasourceService.delete(id).then(onSuccessDelete, onErrorDelete);
     };
 
-    function onSuccessSave(){
+    function onSuccessDelete(){
       $location.path("/maps/datasource");
       notify.info("DATASOURCE.DELETE_SUCCESS");
     }
 
-    function onErrorSave(error){
+    function onErrorDelete(error){
       if(error){
         notify.error(error.statusText);
       }else{

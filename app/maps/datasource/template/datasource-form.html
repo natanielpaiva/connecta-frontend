@@ -5,8 +5,8 @@
         <label class="required" translate>DATASOURCE.SERVER</label>
         <select ng-model="datasource.contextType" class="form-control" required>
           <option value="">Selecione</option>
-          <option value="OBIEE">OBIEE</option>
-          <option value="CONNECTA">Connecta</option>
+          <option value="obiee">OBIEE</option>
+          <option value="connecta">Connecta</option>
         </select>
       </div>
     </div>
@@ -18,16 +18,16 @@
       </div>
 
       <div class="form-group col-md-3">
-        <label ng-class="{'required': datasource.contextType === 'OBIEE'}" translate>DATASOURCE.USER</label>
+        <label ng-class="{'required': datasource.contextType === 'obiee'}" translate>DATASOURCE.USER</label>
         <div>
-          <input  ng-required="datasource.contextType === 'OBIEE'" type="text" ng-model="datasource.user" class="form-control" />
+          <input  ng-required="datasource.contextType === 'obiee'" type="text" ng-model="datasource.user" class="form-control" />
         </div>
       </div>
 
       <div class="form-group col-md-3">
-        <label ng-class="{'required': datasource.contextType === 'OBIEE'} " translate>DATASOURCE.PASSWORD</label>
+        <label ng-class="{'required': datasource.contextType === 'obiee'} " translate>DATASOURCE.PASSWORD</label>
         <div>
-          <input  ng-required="datasource.contextType === 'OBIEE'"  type="password" ng-model="datasource.password" class="form-control" />
+          <input  ng-required="datasource.contextType === 'obiee'"  type="password" ng-model="datasource.password" class="form-control" />
         </div>
       </div>
     </div>

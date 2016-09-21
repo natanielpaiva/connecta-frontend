@@ -7,7 +7,7 @@ define([
   return maps.lazy.controller("SpatialDataSourceViewController", function ($scope, $routeParams, SpatialDataSourceService, $location, notify) {
 
     if ($routeParams.id) {
-      DatasourceService.get($routeParams.id).then(onSuccessGet, onErrorGet);
+      SpatialDataSourceService.get($routeParams.id).then(onSuccessGet, onErrorGet);
     }
 
     $scope.delete = function (id) {

@@ -22,6 +22,10 @@ define([
       return $http.get(url + queryString);
     };
 
+    this.delete = function(id){
+      return $http.delete(url, id);
+    };
+
   });
 
 });
