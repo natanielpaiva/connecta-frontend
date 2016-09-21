@@ -57,7 +57,6 @@ define([
     }
 
     function onErrorUpdate(error) {
-
       if (error) {
         notify.error(error.statusText);
       } else {

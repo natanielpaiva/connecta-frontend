@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-10">
-      <h3>
-        <h4 translate>GEO_DATASOURCE.DETAILING_SPATIAL_DATASOURCE</h4>
-      </h3>
+        <h3>
+            <h4 translate>GEO_DATASOURCE.DETAILING_SPATIAL_DATASOURCE</h4>
+        </h3>
     </div>
 
     <div class="col-md-2">
@@ -10,7 +10,7 @@
             <a class="btn btn-default" href="#/maps/spatial-datasource/{{spatialDataSource._id}}/edit">
                 <span class="icon-pencil" aria-hidden="true"></span>
             </a>
-            <button class="btn btn-default">
+            <button class="btn btn-default" ng-click="delete(spatialDataSource._id)">
                 <span class="icon-trash" aria-hidden="true"></span>
             </button>
         </div>
@@ -47,7 +47,7 @@
 <div class="row">
     <div class="col-md-12 text-right">
         <a href="#/maps/spatial-datasource" role="button" class="btn btn-default" translate>
-          LAYOUT.BACK
+            LAYOUT.BACK
         </a>
     </div>
 </div>
