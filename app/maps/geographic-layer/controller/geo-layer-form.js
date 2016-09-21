@@ -1,25 +1,53 @@
 define([
   "connecta.maps",
+  'maps/helper/map',
   "maps/spatial-datasource/service/spatial-datasource-service",
   "maps/geographic-layer/service/geo-layer-service"
-], function (maps) {
+], function (maps, mapHelper) {
 
-  return maps.lazy.controller("GeoLayerFormController", function ($scope, SpatialDataSourceService, GeoLayerService, notify, $location, $routeParams) {
+  return maps.lazy.controller("GeoLayerFormController", function ($scope, SpatialDataSourceService, GeoLayerService, $location, $routeParams) {
 
     $scope.geoLayer = {};
     $scope.layers = [];
     $scope.spatialDataSources = {};
     var isEdit = false;
 
+    $scope.initMap = function () {
+      var promise = mapHelper.buildMap('_mapDiv');
+      promise.catch(function (err) {
+        console.error(err);
+      });
+      promise.then(function (map) {
+
+      });
+    };
 
     if ($routeParams.id) {
       GeoLayerService.get($routeParams.id).then(onSuccessEdit, onError);
     }
 
+    $scope.changeSelectedLayer = function (layerId) {
+      var params = {};
+      params.layer = {
+        layerIdentifier: layerId,
+        spatialDataSourceId: $scope.selectedSpatialDatasource._id
+      };
+
+      var promise = GeoLayerService.query(params);
+      promise.catch(function (err) {
+        console.error(err);
+      });
+      promise.then(function (response) {
+        mapHelper.addLayer(response.data);
+      });
+
+    };
+
     SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
 
-    $scope.getLayersBySpatialDS = function (idSpatialDS) {
-      SpatialDataSourceService.getLayersBySpatialDS(idSpatialDS).then(onSuccessGetLayers, onError);
+    $scope.getLayersBySpatialDS = function (spatialDatasource) {
+      $scope.selectedSpatialDatasource = spatialDatasource;
+      SpatialDataSourceService.getLayersBySpatialDS(spatialDatasource._id).then(onSuccessGetLayers, onError);
     };
 
     $scope.save = function (geoLayer) {
@@ -38,9 +66,9 @@ define([
 
     function onError(error) {
       if (error) {
-        notify.error(error.statusText);
+        // notify.error(error.statusText);
       }else {
-        notify.error("GEO_LAYER.ERROR_OPERATION");
+        // notify.error("GEO_LAYER.ERROR_OPERATION");
       }
 
       throw Error(error);
@@ -52,7 +80,7 @@ define([
 
     function onSuccessSaveLayer(response) {
       $location.path("/maps/geo-layer/" + response.data._id + "/edit");
-      notify.success("GEO_LAYER.SAVE_SUCCESS");
+      // notify.success("GEO_LAYER.SAVE_SUCCESS");
     }
 
     function onSuccessEdit(response) {
@@ -84,7 +112,7 @@ define([
 
     function onSuccessUpdate(response) {
       $location.path("/maps/geo-layer");
-      notify.success("GEO_LAYER.SAVE_SUCCESS");
+      // notify.success("GEO_LAYER.SAVE_SUCCESS");
     }
 
     function update(id, geoLayer) {

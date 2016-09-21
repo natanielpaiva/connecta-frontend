@@ -14,7 +14,7 @@ define([
     maps.run(function (applications) {
         var appMaps = applications.maps;
         maps.lazy.value('mapsResources', {
-            analysis : 'analysis',
+            analysis : appMaps.host + '/analysis',
             dataSource : appMaps.host + '/data-source',
             layer : appMaps.host + '/layer',
             project : appMaps.host + '/project',

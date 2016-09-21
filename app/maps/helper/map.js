@@ -20,6 +20,21 @@ define(['esri-leaflet'], function (esri) {
       });
     },
 
+    addLayer: function (layer) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        try {
+            var geoJSON = L.esri.Util.responseToFeatureCollection(layer);
+            var geoJSONLayer = L.geoJSON(geoJSON);
+            geoJSONLayer.addTo(self.map);
+            self.map.fitBounds(geoJSONLayer.getBounds());
+            resolve();
+        } catch (err) {
+            reject(err);
+        }
+      });
+    },
+
     watchCenterChange: function (callback, startPaused) {
       var self = this;
       function positionChanged(event) {

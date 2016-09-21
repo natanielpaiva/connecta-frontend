@@ -2,7 +2,7 @@ define([
     "connecta.maps",
     "maps/project/storage/basemaps",
     "maps/project/storage/steps",
-    'maps/project/helper/map-helper',
+    'maps/helper/map',
     "maps/project/storage/tools",
     "maps/project/service/project-service",
     "maps/spatial-datasource/service/spatial-datasource-service",

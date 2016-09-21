@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../../../node_modules/leaflet/dist/leaflet.css">
+
 <section>
   <form name="geo_layer" ng-submit="save(geoLayer)" novalidate>
     <div class="row">
@@ -13,7 +15,7 @@
       <div class="form-group col-md-6">
         <label class="required" translate>{{"GEO_LAYER.SERVER"}}</label>
         <select ng-model="geoLayer.server" class="form-control"
-                ng-change="getLayersBySpatialDS(geoLayer.server._id)"
+                ng-change="getLayersBySpatialDS(geoLayer.server)"
                 ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource._id" required>
           <option value="">Selecione</option>
         </select>
@@ -22,7 +24,7 @@
       <div class="form-group col-md-6">
         <label class="required" translate>{{"GEO_LAYER.LAYERS"}}</label>
         <select ng-model="geoLayer.layerIdentifier" ng-disabled="!layers.length" class="form-control"
-                ng-options="layer.name for layer in layers track by layer.id" required>
+                ng-options="layer.name for layer in layers track by layer.id" ng-change="changeSelectedLayer(geoLayer.layerIdentifier.id)" required>
           <option value="">Selecione</option>
         </select>
       </div>
@@ -67,4 +69,7 @@
       </div>
     </div>
   </form>
+
+  <div id="_mapDiv" ng-init="initMap()" style="height: 500px; margin: 14px"></div>
+
 </section>
