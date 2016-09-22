@@ -5,127 +5,138 @@ define([
   "maps/geographic-layer/service/geo-layer-service"
 ], function (maps, mapHelper) {
 
-  return maps.lazy.controller("GeoLayerFormController", function ($scope, SpatialDataSourceService, GeoLayerService, $location, $routeParams) {
+  return maps.lazy.controller("GeoLayerFormController", function ($scope, $location, $routeParams, SpatialDataSourceService, GeoLayerService) {
 
-    $scope.geoLayer = {};
-    $scope.layers = [];
-    $scope.spatialDataSources = {};
-    var isEdit = false;
+    var geometryType = {
+      'esriGeometryPolygon': 'LAYER_TYPE.POLYGON',
+      'esriGeometryPoint': 'LAYER_TYPE.POINT',
+      'esriGeometryLine': 'LAYER_TYPE.LINE'
+    };
+
+    $scope.layer = {
+      geoCache: {
+        queryCache: true,
+        getBreaksCache: true
+      }
+    };
+
+    SpatialDataSourceService.list({size: '*'})
+      .catch(function (err) {
+        console.error(err);
+      })
+      .then(function (response) {
+        $scope.spatialDataSources = response.data.content;
+        loadForEdit();
+      });
+
+    function loadForEdit() {
+      if ($routeParams.id) {
+        var promise = GeoLayerService.get($routeParams.id);
+        promise.catch(function (err) {
+          console.error(err);
+        });
+        promise.then(function (response) {
+          try {
+            var layer = response.data;
+            $scope.layer = {
+              _id: layer._id,
+              title: layer.title,
+              description: layer.description,
+              geoCache: layer.geoCache,
+              spatialDataSourceId: layer.spatialDataSourceId,
+              layerIdentifier: layer.layerIdentifier
+            };
+            $scope.selectedSpatialDataSource = {_id: $scope.layer.spatialDataSourceId}
+            SpatialDataSourceService.getLayersBySpatialDS($scope.layer.spatialDataSourceId)
+              .catch(function (err) {
+                console.error(err);
+              })
+              .then(function (response) {
+                $scope.layers = response.data;
+                $scope.selectedLayer = {layerIdentifier: $scope.layer.layerIdentifier};
+                $scope.changeSelectedLayer($scope.layer.layerIdentifier);
+                $scope.isEditing = true;
+              });
+          } catch (err) {
+            console.error(err);
+          }
+        });
+      }
+    }
 
     $scope.initMap = function () {
-      var promise = mapHelper.buildMap('_mapDiv');
+      var promise = mapHelper.buildMap('_mapDivLayer');
       promise.catch(function (err) {
         console.error(err);
       });
       promise.then(function (map) {
-
+        //
       });
     };
 
-    if ($routeParams.id) {
-      GeoLayerService.get($routeParams.id).then(onSuccessEdit, onError);
-    }
+    $scope.listLayers = function (spatialDataSourceId) {
+      try {
+        var promise = SpatialDataSourceService.getLayersBySpatialDS(spatialDataSourceId);
+        promise.catch(function (err) {
+          console.error(err);
+        });
+        promise.then(function (response) {
+          $scope.layer.spatialDataSourceId = spatialDataSourceId;
+          $scope.layers = response.data;
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
     $scope.changeSelectedLayer = function (layerId) {
-      var params = {};
-      params.layer = {
-        layerIdentifier: layerId,
-        spatialDataSourceId: $scope.selectedSpatialDatasource._id
-      };
+      if ($scope.selectedSpatialDataSource[layerId]) {
+        mapHelper.previewLayer($scope.selectedSpatialDataSource[layerId]);
+      } else {
+        var params = {};
+        params.layer = {
+          layerIdentifier: layerId,
+          spatialDataSourceId: $scope.selectedSpatialDataSource._id
+        };
 
-      var promise = GeoLayerService.query(params);
+        var promise = GeoLayerService.query(params);
+        promise.catch(function (err) {
+          console.error(err);
+        });
+        promise.then(function (response) {
+          try {
+            var layer = mapHelper.buildLayer(response.data);
+            $scope.selectedSpatialDataSource[layerId] = layer;
+            $scope.selectedSpatialDataSource[layerId].type = geometryType[response.data.geometryType];
+            $scope.selectedSpatialDataSource[layerId].srid = response.data.spatialReference.wkid;
+            mapHelper.previewLayer(layer);
+          } catch (err) {
+            throw new Error(err);
+          }
+        });
+        $scope.layer.layerIdentifier = layerId;
+      }
+    };
+
+    $scope.save = function () {
+      var promise;
+      if ($scope.isEditing) {
+        promise = GeoLayerService.update($scope.layer._id, $scope.layer);
+      } else {
+        promise = GeoLayerService.save($scope.layer);
+      }
       promise.catch(function (err) {
         console.error(err);
       });
       promise.then(function (response) {
-        mapHelper.addLayer(response.data);
+        if (!$scope.isEditing) {
+          $location.path("/maps/geo-layer/" + response.data._id);
+        } else {
+          $location.path("/maps/geo-layer");
+        }
+        console.info(response);
       });
-
     };
-
-    SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
-
-    $scope.getLayersBySpatialDS = function (spatialDatasource) {
-      $scope.selectedSpatialDatasource = spatialDatasource;
-      SpatialDataSourceService.getLayersBySpatialDS(spatialDatasource._id).then(onSuccessGetLayers, onError);
-    };
-
-    $scope.save = function (geoLayer) {
-      geoLayer = packObject(geoLayer);
-      if (isEdit) {
-        update(geoLayer._id, geoLayer);
-        return;
-      }
-      GeoLayerService.save(geoLayer).then(onSuccessSaveLayer, onError);
-    };
-
-
-    function onSuccessListSpatialDS(response) {
-      $scope.spatialDataSources = response.data;
-    }
-
-    function onError(error) {
-      if (error) {
-        // notify.error(error.statusText);
-      }else {
-        // notify.error("GEO_LAYER.ERROR_OPERATION");
-      }
-
-      throw Error(error);
-    }
-
-    function onSuccessGetLayers(response) {
-      $scope.layers = response.data;
-    }
-
-    function onSuccessSaveLayer(response) {
-      $location.path("/maps/geo-layer/" + response.data._id + "/edit");
-      // notify.success("GEO_LAYER.SAVE_SUCCESS");
-    }
-
-    function onSuccessEdit(response) {
-      if (response.data.geoCache && response.data.geoCache.queryCache) {
-        response.data.queryCache = {};
-        response.data.queryCache = response.data.geoCache.queryCache;
-      }
-
-      if (response.data.geoCache && response.data.geoCache.getBreaksCache) {
-        response.data.getBreaksCache = {};
-        response.data.getBreaksCache = response.data.geoCache.getBreaksCache;
-      }
-
-      $scope.geoLayer = response.data;
-      $scope.geoLayer.server = {"_id": response.data.spatialDataSourceId};
-      $scope.getLayersBySpatialDS(response.data.spatialDataSourceId);
-      $scope.geoLayer.layerIdentifier = {"id": response.data.layerIdentifier.toString()};
-
-      isEdit = true;
-    }
-
-    function packObject(geoLayer) {
-      geoLayer.serverType = geoLayer.server.serverType;
-      geoLayer.spatialDataSourceId = geoLayer.server._id;
-      geoLayer.layerIdentifier = geoLayer.layerIdentifier.id;
-
-      return geoLayer;
-    }
-
-    function onSuccessUpdate(response) {
-      $location.path("/maps/geo-layer");
-      // notify.success("GEO_LAYER.SAVE_SUCCESS");
-    }
-
-    function update(id, geoLayer) {
-      if (geoLayer.queryCache !== undefined|| geoLayer.getBreaksCache !== undefined) {
-          geoLayer.geoCache = {
-            "queryCache": geoLayer.queryCache,
-            "getBreaksCache": geoLayer.getBreaksCache
-          };
-      }
-
-      GeoLayerService.update(id, geoLayer).then(onSuccessUpdate, onError);
-    }
-
   });
-
 });
+

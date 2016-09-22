@@ -87,5 +87,10 @@
     "DESCRIPTION" : "Descrição",
     "ANALYSIS_LIST" : "Lista de <b>Análises</b>",
     "ADD_ANALYSIS" : "ADICIONAR ANÁLISE"
+  },
+  "LAYER_TYPE" : {
+    "POINT": "Ponto",
+    "POLYGON": "Polígono",
+    "LINE": "Linha"
   }
 }

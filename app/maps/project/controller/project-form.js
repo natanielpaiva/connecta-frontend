@@ -36,7 +36,7 @@ define([
         $scope.currentWatcher = undefined;
 
         $scope.mapInit = function () {
-            mapHelper.buildMap('_mapDiv', [37.75, -122.23], 10)
+            mapHelper.buildMap('_mapDiv')
 
             .catch(function (error) {
                 console.error(error);

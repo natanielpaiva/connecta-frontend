@@ -4,7 +4,7 @@ define([
   "maps/spatial-datasource/service/spatial-datasource-service"
 ], function (maps) {
 
-  return maps.lazy.controller("GeoLayerViewController", function ($scope, $routeParams, GeoLayerService, SpatialDataSourceService) {
+  return maps.lazy.controller("GeoLayerViewController", function ($scope, $routeParams, $location, GeoLayerService, SpatialDataSourceService) {
 
     var id;
 
@@ -28,7 +28,7 @@ define([
       }
 
       function onError(err) {
-        throw Error(err);
+        console.error(err);
       }
 
     }
@@ -41,22 +41,23 @@ define([
       }
 
       function onError(err) {
-        throw Error(err);
+        console.error(err);
       }
     }
 
     $scope.delete = function (id) {
-      GeoLayerService.delete(id).then(onSucess, onError);
+      GeoLayerService.delete(id).then(onSuccess, onError);
 
       function onSuccess() {
-        notify.info("GEO_LAYER.DELETE_SUCCESS");
+        $location.path('/maps/geo-layer');
+        // notify.info("GEO_LAYER.DELETE_SUCCESS");
       }
 
       function onError(error) {
         if (error) {
-          notify.error(error.statusText);
+          // notify.error(error.statusText);
         } else {
-          notify.error("GEO_LAYER.DELETE_ERROR");
+          // notify.error("GEO_LAYER.DELETE_ERROR");
         }
       }
 

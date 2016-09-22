@@ -1,6 +1,7 @@
 define([
-  "connecta.maps"
-], function (maps) {
+  "connecta.maps",
+  '../../helper/url'
+], function (maps, urlHelper) {
 
     return maps.lazy.service("SpatialDataSourceService", function ($http, mapsResources) {
 
@@ -22,8 +23,9 @@ define([
             return $http.get(url + queryString);
         };
 
-        this.listAll = function (){
-          return $http.get(url + '/listAll');
+        this.list = function (params){
+            var queryString = params ? urlHelper.queryStringify(params) : '';
+            return $http.get(url + queryString);
         };
 
         this.delete = function (id) {

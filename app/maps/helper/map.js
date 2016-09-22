@@ -3,31 +3,47 @@ define(['esri-leaflet'], function (esri) {
   return {
 
     map: undefined,
+    featureGroup: undefined,
 
     buildMap: function (mapDiv, center, zoom, basemap) {
       var self = this;
       return new Promise(function (resolve, reject) {
         try {
+          if (self.map) {
+            delete self.featureGroup;
+            self.map.remove();
+          }
           self.map = L.map(mapDiv);
           self.map.on('load', function () {
+            self.featureGroup = L.featureGroup([]);
+            self.featureGroup.addTo(self.map);
             resolve(self.map);
           });
           L.esri.basemapLayer(basemap || 'Streets').addTo(self.map);
-          self.map.setView(center || [45.528, -122.680], zoom || 13);
+          self.map.setView(center || [-15.623036831528252, -49.6142578125], zoom || 4);
         } catch (err) {
           reject(err);
         }
       });
     },
 
-    addLayer: function (layer) {
+    buildLayer: function (data) {
+      try {
+        var geoJSON = L.esri.Util.responseToFeatureCollection(data);
+        var geoJSONLayer = L.geoJSON(geoJSON);
+        return geoJSONLayer;
+      } catch (err) {
+          throw new Error(err);
+      }
+    },
+
+    previewLayer: function (layer) {
       var self = this;
       return new Promise(function (resolve, reject) {
         try {
-            var geoJSON = L.esri.Util.responseToFeatureCollection(layer);
-            var geoJSONLayer = L.geoJSON(geoJSON);
-            geoJSONLayer.addTo(self.map);
-            self.map.fitBounds(geoJSONLayer.getBounds());
+            self.featureGroup.clearLayers();
+            self.featureGroup.addLayer(layer);
+            self.map.fitBounds(self.featureGroup.getBounds());
             resolve();
         } catch (err) {
             reject(err);
