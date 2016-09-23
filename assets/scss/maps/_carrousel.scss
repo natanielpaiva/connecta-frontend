@@ -54,7 +54,6 @@ $carrouselMainHeight: 180px;
     left: 0;
     height: 50px;
     width: 50px;
-    transition: transform 0.5s, background 0.5s;
 
     &:before {
         content: 'X';
