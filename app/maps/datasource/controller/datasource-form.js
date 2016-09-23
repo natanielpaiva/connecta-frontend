@@ -1,69 +1,84 @@
 define([
-  "connecta.maps",
-  "maps/datasource/service/datasource-service"
+    "connecta.maps",
+    "maps/datasource/service/datasource-service"
 ], function (maps) {
 
-  return maps.lazy.controller("DatasourceFormController", function ($scope, DatasourceService, $location, $routeParams, notify) {
-    $scope.datasource = {};
-    var isEdit = false;
+    return maps.lazy.controller("DatasourceFormController", function ($scope, DatasourceService, $location, $routeParams) {
+        $scope.datasource = {};
+        var isEdit = false;
 
-    if ($routeParams.id) {
-      DatasourceService.get($routeParams.id).then(onSuccessGet, onErrorGet);
-    }
+        if ($routeParams.id) {
+            try {
+                var promise = DatasourceService.get($routeParams.id);
+                promise.catch(function (error) {
+                    console.error(error);
+                });
+                promise.then(function (response) {
+                    $scope.datasource = response.data;
+                    isEdit = true;
+                });
 
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
-    $scope.save = function (datasource) {
-      if (isEdit) {
-        update(datasource._id, datasource);
-        return;
-      }
+        $scope.validateDatasource = function (datasource) {
 
-      DatasourceService.save(datasource).then(onSuccessSave, onErrorSave);
-    };
+            if (datasource.contextType === "obiee") {
+                try {
+                    var promise = DatasourceService.catalogObiee(datasource.dsn, datasource.user, datasource.password, '/shared');
+                    promise.catch(function (error) {
+                        console.error(error);
+                        return;
+                    });
+                    promise.then(function () {
+                        try {
+                            if(datasource._id){
+                                update(datasource._id, datasource);
+                            }else{
+                                save(datasource);
+                            }
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    });
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                if(datasource._id){
+                    update(datasource._id, datasource);
+                }else{
+                    save(datasource);
+                }
+            }
+        };
 
-    function onSuccessGet(response) {
-      $scope.datasource = response.data;
-      isEdit = true;
-    }
+        function save(datasource){
+            try {
+                var promise = DatasourceService.save(datasource);
+                promise.catch(function (error) {
+                    console.error(error);
+                });
+                promise.then(function(response){
+                    $location.path("/maps/datasource");
+                });
+            } catch (error) {
+               console.error(error);
+            }
+        }
 
-    function onErrorGet(error) {
-      if (error) {
-        notify.error(error.statusText);
-      } else {
-        notify.error("DATASOURCE.ERROR_OPERATION");
-      }
-    }
+        function update(id, datasource) {
+           var promise =  DatasourceService.update(id, datasource);
+            promise.catch(function (error) {
+               console.error(error);
+            });
+            promise.then(function (response) {
+                $location.path("/maps/datasource");
+            });
+        }
 
-    function onSuccessSave(response) {
-      $location.path("/maps/datasource/" + response.data._id + "/edit");
-      notify.success("DATASOURCE.SAVE_SUCCESS");
-    }
-
-    function onErrorSave(error) {
-      if (error) {
-        notify.error(error.statusText);
-      } else {
-        notify.error("DATASOURCE.ERROR_OPERATION");
-      }
-    }
-
-    function update(id, datasource) {
-      DatasourceService.update(id, datasource).then(onSuccessUpdate, onErrorUpdate);
-    }
-
-    function onSuccessUpdate(response) {
-      $location.path("/maps/datasource");
-      notify.success("DATASOURCE.SAVE_SUCCESS");
-    }
-
-    function onErrorUpdate(error) {
-      if (error) {
-        notify.error(error.statusText);
-      } else {
-        notify.error("DATASOURCE.ERROR_OPERATION");
-      }
-    }
-
-  });
+    });
 
 });
