@@ -46,7 +46,7 @@ define([
               spatialDataSourceId: layer.spatialDataSourceId,
               layerIdentifier: layer.layerIdentifier
             };
-            $scope.selectedSpatialDataSource = {_id: $scope.layer.spatialDataSourceId}
+            $scope.selectedSpatialDataSource = {_id: $scope.layer.spatialDataSourceId};
             SpatialDataSourceService.getLayersBySpatialDS($scope.layer.spatialDataSourceId)
               .catch(function (err) {
                 console.error(err);
