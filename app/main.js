@@ -25,7 +25,8 @@ require.config({
         'connecta.maps': 'maps/connecta.maps',
         'connecta.inspection': 'inspection/connecta.inspection',
         'leaflet': '../node_modules/leaflet/dist/leaflet',
-        'esri-leaflet': '../node_modules/esri-leaflet/dist/esri-leaflet'
+        'esri-leaflet': '../node_modules/esri-leaflet/dist/esri-leaflet',
+        'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min'
     },
     shim: {
         'angular': {

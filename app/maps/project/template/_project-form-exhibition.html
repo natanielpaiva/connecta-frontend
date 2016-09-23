@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../../../node_modules/leaflet/dist/leaflet.css">
+<link rel="stylesheet" href="../../../../bower_components/angularjs-slider/dist/rzslider.min.css">
 
 <section>
     <div class="row margin-top-single">
@@ -64,29 +65,14 @@
                 <h5 translate>PROJECT.ZOOM_MAX_MIN</h5>
                 <p translate>PROJECT.DESC_ZOOM_MAX_MIN</p>
 
-                <div class="row">
-                    <div class="col-md-3 pull-left">
-                        <label>Zoom Max</label>
-                        <button ng-click="setCurrentWatcher('maxZoom')">
-                          <i class="icon-link"></i>
-                        </button>
-                        <input ng-model="zoomConfig.max" ng-change="updateMaxZoom()" class="form-control" type="number">
-                    </div>
+                <input-slider config-slider="configSlider"
+                              toggle-zoom-bind="setCurrentWatcher"
+                              update-zoom-config="updateZoomConfig"></input-slider>
 
-                    <div class="col-md-3 pull-right">
-                        <label>Zoom Min</label>
-                        <button ng-click="setCurrentWatcher('minZoom')">
-                          <i class="icon-link"></i>
-                        </button>
-                        <input ng-model="zoomConfig.min" ng-change="updateMinZoom()" class="form-control" type="number">
-                    </div>
-
-                    <p style="color: red" class="text-center margin-top-double">|--------------Slider Aqui--------------|</p>
-                </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div id="_mapDiv" ng-init="mapInit()" style="height: 500px; margin: 14px"></div>
+        <div id="_mapDiv" ng-init="mapInit()" style="height: 500px; margin-top: 30px"></div>
     </div>
 </section>

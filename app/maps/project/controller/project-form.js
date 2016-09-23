@@ -7,11 +7,12 @@ define([
     "maps/project/service/project-service",
     "maps/spatial-datasource/service/spatial-datasource-service",
     "maps/geographic-layer/service/geo-layer-service",
-    "maps/project/directive/menu-carrousel"
+    "maps/project/directive/menu-carrousel",
+    "maps/project/directive/input-slider"
 ], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig) {
 
     return maps.lazy.controller("ProjectFormController", function (
-      $scope, ProjectService, SpatialDataSourceService, GeoLayerService) {
+        $scope, $timeout, ProjectService, SpatialDataSourceService, GeoLayerService) {
 
         $scope.project = {
             baseMaps : [],
@@ -29,8 +30,8 @@ define([
         $scope.watchers = {};
 
         $scope.zoomConfig = {
-            min: 1,
-            max: 10
+            minZoom: 1,
+            maxZoom: 10
         };
 
         $scope.currentWatcher = undefined;
@@ -38,28 +39,28 @@ define([
         $scope.mapInit = function () {
             mapHelper.buildMap('_mapDiv')
 
-            .catch(function (error) {
-                console.error(error);
-            })
-            .then(function (map) {
-                $scope.mapCenter = mapHelper.getCenter();
-                $scope.$apply();
-                $scope.watchers[WatcherEnum.MAP_CENTER] = mapHelper.watchCenterChange(function (position) {
-                    $scope.mapCenter = position;
+                .catch(function (error) {
+                    console.error(error);
+                })
+                .then(function (map) {
+                    $scope.mapCenter = mapHelper.getCenter();
                     $scope.$apply();
-                }, true);
+                    $scope.watchers[WatcherEnum.MAP_CENTER] = mapHelper.watchCenterChange(function (position) {
+                        $scope.mapCenter = position;
+                        $scope.$apply();
+                    }, true);
 
-                $scope.watchers[WatcherEnum.MIN_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
-                    $scope.zoomConfig.min = zoom;
-                    $scope.$apply();
-                }, true);
+                    $scope.watchers[WatcherEnum.MIN_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
+                        $scope.configSlider.minZoom = zoom;
+                        $scope.$apply();
+                    }, true);
 
-                $scope.watchers[WatcherEnum.MAX_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
-                    $scope.zoomConfig.max = zoom;
-                    $scope.$apply();
-                }, true);
+                    $scope.watchers[WatcherEnum.MAX_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
+                        $scope.configSlider.maxZoom = zoom;
+                        $scope.$apply();
+                    }, true);
 
-            });
+                });
         };
 
         $scope.setCurrentWatcher = function (watcher) {
@@ -79,10 +80,10 @@ define([
                 mapHelper.setCenter($scope.mapCenter);
             }
             if (watcher === WatcherEnum.MAX_ZOOM) {
-                mapHelper.setZoom($scope.zoomConfig.max);
+                mapHelper.setZoom($scope.configSlider.maxZoom);
             }
             if (watcher === WatcherEnum.MIN_ZOOM) {
-                mapHelper.setZoom($scope.zoomConfig.min);
+                mapHelper.setZoom($scope.configSlider.minZoom);
             }
 
             $scope.currentWatcher = watcher;
@@ -90,15 +91,9 @@ define([
 
         };
 
-        $scope.updateMaxZoom = function () {
-            if ($scope.currentWatcher === WatcherEnum.MAX_ZOOM) {
-                mapHelper.setZoom($scope.zoomConfig.max);
-            }
-        };
-
-        $scope.updateMinZoom = function () {
-            if ($scope.currentWatcher === WatcherEnum.MIN_ZOOM) {
-                mapHelper.setZoom($scope.zoomConfig.min);
+        $scope.updateZoomConfig = function (sender) {
+            if ($scope.currentWatcher === sender) {
+                mapHelper.setZoom($scope.configSlider[sender]);
             }
         };
 
@@ -148,54 +143,69 @@ define([
 
         };
 
-
-
+        $scope.configSlider = {
+            minZoom : 3,
+            maxZoom : 13,
+            options : {
+                floor: 1,
+                ceil: 15,
+                step: 1,
+                getPointerColor : function () {
+                    return '#3bb79d';
+                },
+                getSelectionBarColor : function () {
+                    return '#3bb79d';
+                },
+                minRange: 1,
+                pushRange: true
+            }
+        };
 
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
 
-      $scope.flag_add = true;
-      $scope.layersBySpatials = [];
-      $scope.columnsByLayer = [];
+        $scope.flag_add = true;
+        $scope.layersBySpatials = [];
+        $scope.columnsByLayer = [];
 
-      $scope.toggleOptionAdd = function () {
-        if ($scope.flag_add)
-          SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
+        $scope.toggleOptionAdd = function () {
+            if ($scope.flag_add)
+                SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
 
-        $scope.flag_add = !$scope.flag_add;
-      };
+            $scope.flag_add = !$scope.flag_add;
+        };
 
-      $scope.getLayersBySpatialDS = function (id_spatial_ds) {
-        GeoLayerService.getLayersByDS(id_spatial_ds).then(onSuccessGetLayerBySpatialDS, onError);
-      };
+        $scope.getLayersBySpatialDS = function (id_spatial_ds) {
+            GeoLayerService.getLayersByDS(id_spatial_ds).then(onSuccessGetLayerBySpatialDS, onError);
+        };
 
-      $scope.getColumnsByLayer = function (id_layer) {
-        if (typeof id_layer != 'undefined') {
-          for (var i in $scope.layersBySpatials) {
-            if ($scope.layersBySpatials[i]._id == id_layer)
-              $scope.columnsByLayer = $scope.layersBySpatials[i].layerFields;
-          }
-        } else {
-          $scope.columnsByLayer = [];
+        $scope.getColumnsByLayer = function (id_layer) {
+            if (typeof id_layer != 'undefined') {
+                for (var i in $scope.layersBySpatials) {
+                    if ($scope.layersBySpatials[i]._id == id_layer)
+                        $scope.columnsByLayer = $scope.layersBySpatials[i].layerFields;
+                }
+            } else {
+                $scope.columnsByLayer = [];
+            }
+        };
+
+        function onSuccessListSpatialDS(response) {
+            $scope.spatialDataSources = response.data;
         }
-      };
 
-      function onSuccessListSpatialDS(response) {
-        $scope.spatialDataSources = response.data;
-      }
-
-      function onSuccessGetLayerBySpatialDS(response) {
-        $scope.layersBySpatials = response.data.content;
-        if ($scope.layersBySpatials.length === 0)
-          $scope.columnsByLayer = [];
-          // notify.error("Nenhuma camada cadastrada");
-      }
-
-      function onError(error) {
-        if (error) {
-          // notify.error(error.statusText);
+        function onSuccessGetLayerBySpatialDS(response) {
+            $scope.layersBySpatials = response.data.content;
+            if ($scope.layersBySpatials.length === 0)
+                $scope.columnsByLayer = [];
+            // notify.error("Nenhuma camada cadastrada");
         }
-        throw Error(error);
-      }
+
+        function onError(error) {
+            if (error) {
+                // notify.error(error.statusText);
+            }
+            throw Error(error);
+        }
 
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
     });

@@ -1,0 +1,41 @@
+<section class="cm-slider-container">
+    <div class="cm-max-zoom">
+        <div ng-click="$ctrl.onClickToggleBindZoom('minZoom')"
+             class="btn btn-success cm-slider-item">
+            <i class="icon-link"></i>
+        </div>
+
+        <div class="cm-slider-item cm-slider-text">
+            <label>Zoom Min</label>
+            <input ng-model="configSlider.minZoom"
+                   ng-model-options="{debounce : 500}"
+                   ng-change="$ctrl.updateZoomConfig('minZoom')"
+                   type="number"
+                   class="form-control" />
+        </div>
+    </div>
+
+    <div class="cm-slider-width">
+        <rzslider rz-slider-model="configSlider.minZoom"
+                  rz-slider-high="configSlider.maxZoom"
+                  rz-slider-options="configSlider.options">
+        </rzslider>
+    </div>
+
+    <div class="cm-min-zoom">
+        <div class="cm-slider-item cm-slider-text">
+            <label>Zoom Max</label>
+            <input ng-model="configSlider.maxZoom"
+                   ng-model-options="{debounce : 500}"
+                   ng-change="$ctrl.updateZoomConfig('maxZoom')"
+                   class="form-control"
+                   type="number">
+        </div>
+
+        <div ng-click="$ctrl.onClickToggleBindZoom('maxZoom')"
+             class="btn btn-success cm-slider-item">
+            <i class="icon-link"></i>
+        </div>
+    </div>
+</section>
+

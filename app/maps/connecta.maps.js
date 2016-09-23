@@ -1,8 +1,10 @@
 define([
-    'angular'
+    'angular',
+    'angularjs-slider'
 ], function (angular) {
     var maps = angular.module('connecta.maps', [
 //        'ngAutocomplete'
+        'rzModule'
     ]);
 
     maps._configKey = 'maps';
