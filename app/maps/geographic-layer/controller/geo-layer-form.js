@@ -26,6 +26,7 @@ define([
 
     function loadForEdit() {
       if ($routeParams.id) {
+        $scope.isEditing = true;
         var promise = GeoLayerService.get($routeParams.id);
         promise.catch(function (err) {
           console.error(err);
@@ -50,7 +51,6 @@ define([
                 $scope.layers = response.data;
                 $scope.selectedLayer = {layerIdentifier: $scope.layer.layerIdentifier};
                 $scope.changeSelectedLayer($scope.layer.layerIdentifier);
-                $scope.isEditing = true;
               });
           } catch (err) {
             console.error(err);
