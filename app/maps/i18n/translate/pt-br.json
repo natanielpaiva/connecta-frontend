@@ -84,13 +84,31 @@
   },
   "ANALYSIS" : {
     "NAME" : "Nome da análise",
-    "DESCRIPTION" : "Descrição",
-    "ANALYSIS_LIST" : "Lista de <b>Análises</b>",
-    "ADD_ANALYSIS" : "ADICIONAR ANÁLISE"
+    "PROJECT" : "Projeto",
+    "BASIC_INFO": "Informações <b>Básicas</b>",
+    "MAP_TITLE" : "Título do Mapa",
+    "RICH_LAYER" : "Camada Enriquecida",
+    "ALLOW_DRILL" : "Permitir <b>drill</b>",
+    "ENABLE_INFOWINDOW" : "Habilitar <b>InfoWindow</b>",
+    "POSITIONING" : "Posicionamento",
+    "TOOLTIP" : "Tooltip",
+    "PANEL" : "Painel",
+    "ORDER" : "Ordem",
+    "CRITERIA_NAME" : "Nome na 'Criteria'",
+    "TITLE" : "Título",
+    "TYPE" : "TIPO",
+    "DESCRIPTION" : "Description",
+    "ANALYSIS_LIST" : "<b>Analysis</b> list",
+    "NO_OUTFIELDS" : "Nenhuma variável salva",
+    "ADD_ANALYSIS" : "ADD ANALYSIS"
   },
   "LAYER_TYPE" : {
     "POINT": "Ponto",
     "POLYGON": "Polígono",
     "LINE": "Linha"
+  },
+  "LAYOUT" : {
+    "SAVE" : "SALVAR",
+    "CANCEL" : "CANCELAR"
   }
 }

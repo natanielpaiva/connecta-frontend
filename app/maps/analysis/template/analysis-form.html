@@ -1,0 +1,105 @@
+<section>
+  <h4 translate>ANALYSIS.BASIC_INFO</h4>
+  <form name="analsysis" ng-submit="save()" novalidate>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label class="required" translate>ANALYSIS.PROJECT</label>
+        <select class="form-control"
+                ng-model="selectedProject"
+                ng-change="projectChanged(selectedProject)"
+                ng-options="project.title for project in projects track by project._id" required>
+          <option value="">Selecione</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <h5 translate>ANALYSIS.ALLOW_DRILL</h5>
+        <label class="switch">
+          <input ng-model="analysis.allowDrill" type="checkbox">
+          <div class="slider round"></div>
+        </label>
+      </div>
+
+      <div class="col-md-2">
+        <h5 translate>ANALYSIS.ENABLE_INFOWINDOW</h5>
+        <label class="switch">
+          <input ng-model="analysis.popupConfig.enabled" type="checkbox">
+          <div class="slider round"></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label class="required" translate>ANALYSIS.RICH_LAYER</label>
+        <select class="form-control"
+                ng-model="selectedRichLayer"
+                ng-change="richLayerChanged(selectedRichLayer)"
+                ng-options="richLayer.title for richLayer in selectedProject.richLayers track by richLayer._id"
+                ng-disabled="!selectedProject || !selectedProject.richLayers.length" required>
+          <option value="">Selecione</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <h5 translate>ANALYSIS.POSITIONING</h5>
+        <div class="col-md-12">
+          <label class="radio-inline">
+            <input type="radio" name="positioning" value="tooltip" ng-model="analysis.popupConfig.positioning" />
+            <span translate>ANALYSIS.TOOLTIP</span>
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="positioning" value="panel" ng-model="analysis.popupConfig.positioning" />
+            <span translate>ANALYSIS.PANEL</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label class="required" translate>ANALYSIS.MAP_TITLE</label>
+        <input type="text" class="col-md-12 form-control" ng-model="analysis.title" required>
+      </div>
+    </div>
+
+
+
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr class="row">
+        <th class="col-md-5" translate>ANALYSIS.CRITERIA_NAME</th>
+        <th class="col-md-5" translate>ANALYSIS.TITLE</th>
+        <th class="col-md-2" translate>ANALYSIS.TYPE</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="!analysis || !analysis.outFields.length" class="row">
+        <td class="col-xs-12 text-center" colspan="12" translate>
+          ANALYSIS.NO_OUTFIELDS
+        </td>
+      </tr>
+      <tr class="row am-slide-right" ng-repeat="outField in analysis.outFields track by $index"
+          ng-click="editOutField($index)">
+        <td class="text-left col-md-5">{{outField.name}}</td>
+        <td class="text-left col-md-5">{{outField.alias}}</td>
+        <td class="text-left col-md-2">{{outField.valueType}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <a href="#/maps/analysis" class="btn btn-default" translate>
+          LAYOUT.CANCEL
+        </a>
+        <button class="btn btn-primary" translate>
+          LAYOUT.SAVE
+        </button>
+      </div>
+    </div>
+  </form>
+
+
+</section>

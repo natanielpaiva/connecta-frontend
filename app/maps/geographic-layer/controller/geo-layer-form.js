@@ -15,6 +15,8 @@ define([
 
     $scope.mapNodeId = '_mapDivId' + String (Math.round(Math.random() * 1000));
 
+    $scope.selectedSpatialDataSource = {};
+
     SpatialDataSourceService.list({size: '*'})
       .catch(function (err) {
         console.error(err);
@@ -80,6 +82,7 @@ define([
 
     $scope.listLayers = function (spatialDataSourceId) {
       try {
+        $scope.layer.spatialDataSourceId = spatialDataSourceId;
         var promise = SpatialDataSourceService.getLayersBySpatialDS(spatialDataSourceId);
         promise.catch(function (err) {
           console.error(err);
@@ -100,7 +103,7 @@ define([
         var params = {};
         params.layer = {
           layerIdentifier: layerId,
-          spatialDataSourceId: $scope.selectedSpatialDataSource._id
+          spatialDataSourceId: $scope.layer.spatialDataSourceId
         };
         var mapId = mapHelper.map._leaflet_id;
         var promise = GeoLayerService.query(params);
@@ -136,11 +139,7 @@ define([
         console.error(err);
       });
       promise.then(function (response) {
-        if (!$scope.isEditing) {
-          $location.path("/maps/geo-layer/" + response.data._id + '/edit');
-        } else {
-          $location.path("/maps/geo-layer");
-        }
+        $location.path("/maps/geo-layer");
         console.info(response);
       });
     };

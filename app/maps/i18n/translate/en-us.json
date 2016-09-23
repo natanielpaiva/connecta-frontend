@@ -86,13 +86,31 @@
   },
   "ANALYSIS" : {
     "NAME" : "Analysis name",
+    "BASIC_INFO": "<b>Basic</b> Info",
+    "PROJECT" : "Project",
+    "MAP_TITLE" : "Map Title",
+    "RICH_LAYER" : "Rich Layer",
+    "ALLOW_DRILL" : "Allow <b>drill</b>",
+    "ENABLE_INFOWINDOW" : "Enable <b>InfoWindow</b>",
+    "POSITIONING" : "Positioning",
+    "TOOLTIP" : "Tooltip",
+    "PANEL" : "Panel",
+    "ORDER" : "Order",
+    "CRITERIA_NAME" : "'Criteria' Name",
+    "TITLE" : "Title",
+    "TYPE" : "Type",
     "DESCRIPTION" : "Description",
     "ANALYSIS_LIST" : "<b>Analysis</b> list",
+    "NO_OUTFIELDS" : "No variables saved",
     "ADD_ANALYSIS" : "ADD ANALYSIS"
   },
   "LAYER_TYPE" : {
     "POINT": "Point",
     "POLYGON": "Polygon",
     "LINE": "Line"
+  },
+  "LAYOUT" : {
+    "SAVE" : "SAVE",
+    "CANCEL" : "CANCEL"
   }
 }

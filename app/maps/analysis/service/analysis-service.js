@@ -1,8 +1,9 @@
 define([
-    "connecta.maps"
-], function (maps) {
+    'connecta.maps',
+    '../../helper/url'
+], function (maps, urlHelper) {
 
-    return maps.lazy.service("AnalysisService", function ($http, mapsResources) {
+    return maps.lazy.service('AnalysisService', function ($http, mapsResources) {
 
         var url = mapsResources.analysis;
 
@@ -14,9 +15,19 @@ define([
             return $http.post(url, analysis);
         };
 
-        this.list = function (queryString) {
+        this.update = function (id, analysis) {
+          return $http.put(url + '/' + id, analysis);
+        };
+
+        this.list = function (params) {
+            var queryString = params ? urlHelper.queryStringify(params) : '';
             return $http.get(url + queryString);
         };
+
+        this.delete = function (id) {
+          return $http.delete(url + '/' + id);
+        };
+
     });
 
 });
