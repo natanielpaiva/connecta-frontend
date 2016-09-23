@@ -12,6 +12,7 @@ define(['esri-leaflet'], function (esri) {
           if (self.map) {
             delete self.featureGroup;
             self.map.remove();
+            delete self.map;
           }
           self.map = L.map(mapDiv);
           self.map.on('load', function () {

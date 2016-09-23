@@ -13,12 +13,7 @@ define([
       'esriGeometryLine': 'LAYER_TYPE.LINE'
     };
 
-    $scope.layer = {
-      geoCache: {
-        queryCache: true,
-        getBreaksCache: true
-      }
-    };
+    $scope.mapNodeId = '_mapDivId' + String (Math.round(Math.random() * 1000));
 
     SpatialDataSourceService.list({size: '*'})
       .catch(function (err) {
@@ -61,17 +56,26 @@ define([
             console.error(err);
           }
         });
+      } else {
+        $scope.layer = {
+          geoCache: {
+            queryCache: true,
+            getBreaksCache: true
+          }
+        };
       }
     }
 
     $scope.initMap = function () {
-      var promise = mapHelper.buildMap('_mapDivLayer');
-      promise.catch(function (err) {
-        console.error(err);
-      });
-      promise.then(function (map) {
-        //
-      });
+      setTimeout(function () {
+        var promise = mapHelper.buildMap($scope.mapNodeId);
+        promise.catch(function (err) {
+          console.error(err);
+        });
+        promise.then(function (map) {
+          //
+        });
+      }, 10);
     };
 
     $scope.listLayers = function (spatialDataSourceId) {
@@ -98,13 +102,16 @@ define([
           layerIdentifier: layerId,
           spatialDataSourceId: $scope.selectedSpatialDataSource._id
         };
-
+        var mapId = mapHelper.map._leaflet_id;
         var promise = GeoLayerService.query(params);
         promise.catch(function (err) {
           console.error(err);
         });
         promise.then(function (response) {
           try {
+            if (mapId !== mapHelper.map._leaflet_id) {
+              return;
+            }
             var layer = mapHelper.buildLayer(response.data);
             $scope.selectedSpatialDataSource[layerId] = layer;
             $scope.selectedSpatialDataSource[layerId].type = geometryType[response.data.geometryType];
@@ -130,7 +137,7 @@ define([
       });
       promise.then(function (response) {
         if (!$scope.isEditing) {
-          $location.path("/maps/geo-layer/" + response.data._id);
+          $location.path("/maps/geo-layer/" + response.data._id + '/edit');
         } else {
           $location.path("/maps/geo-layer");
         }
