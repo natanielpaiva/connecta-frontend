@@ -1,7 +1,8 @@
 define([
     "connecta.maps",
+    "maps/datasource/storage/context",
     "maps/datasource/service/datasource-service"
-], function (maps) {
+], function (maps, contextConfig) {
 
     return maps.lazy.controller("DatasourceFormController", function ($scope, DatasourceService, $location, $routeParams) {
         $scope.datasource = {};
@@ -78,6 +79,15 @@ define([
                 $location.path("/maps/datasource");
             });
         }
+
+        $scope.contextTemplate = contextConfig;
+
+        $scope.onServerChange = function (context) {
+            if(context)
+                context = context.toLowerCase();
+
+            $scope.currentState = context;
+        };
 
     });
 

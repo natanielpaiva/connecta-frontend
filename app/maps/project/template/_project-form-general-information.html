@@ -3,35 +3,30 @@
 
     <div class="row">
         <div class="col-md-12">
-            <label class="required">Serviço de origem de dados
-                <div class="col-md-4 input-group">
-                    <select class="form-control">
-                        <option value="">Selecione</option>
-                        <option value="OBIEE">OBIEE</option>
-                        <option value="Connecta">Connecta</option>
-                    </select>
-                </div>
-            </label>
+            <label class="required">Serviço de origem de dados</label>
+            <div class="col-md-4 input-group">
+                <select ng-model="project.serviceType" class="form-control">
+                    <option value="">Selecione</option>
+                    <option value="obiee">OBIEE</option>
+                    <option value="connecta">Connecta</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <label class="required">
-                Título
-                <div class="col-md-4 input-group">
-                    <input type="text" class="form-control">
-                </div>
-            </label>
+            <label class="required">Título</label>
+            <div class="col-md-4 input-group">
+                <input ng-model="project.title" type="text" class="form-control">
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <label>
-                Descrição
-                <div class="col-md-12 input-group">
-                    <textarea class="form-control"></textarea>
-                </div>
-            </label>
+            <label>Descrição</label>
+            <div class="col-md-12 input-group">
+                <textarea ng-model="project.description" class="form-control"></textarea>
+            </div>
         </div>
     </div>
 </section>
