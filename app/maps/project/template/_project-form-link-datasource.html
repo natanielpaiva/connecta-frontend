@@ -1,72 +1,65 @@
 <section>
-    <h4>Camadas geográficas</h4>
-    <!--TABELA-->
-    <table class="table table-striped table-hover" ng-table="tableParams" show-filter="true">
-        <thead>
-            <tr class="row">
-                <th class="col-md-1" translate>Nível</th>
-                <th class="col-md-3" translate>Título</th>
-                <th class="col-md-3" translate>Camada</th>
-                <th class="col-md-2" translate>Drill down</th>
-                <th class="col-md-2" translate>Drill up</th>
-                <th class="col-md-1" translate>Associar</th>
-            </tr>
-        </thead>
-        <tbody>
-        <!--<tr ng-if="!analysisList.length" class="row">-->
-        <!--<td class="col-xs-12 text-center" colspan="12" translate>-->
-        <!--LAYOUT.NO_RESULTS-->
-        <!--</td>-->
-        <!--</tr>-->
+  <h4>Camadas geográficas</h4>
+  <!--TABELA-->
+  <table class="table table-striped table-hover" show-filter="true">
+    <thead>
+    <tr class="row">
+      <th class="col-md-1" translate>Nível</th>
+      <th class="col-md-3" translate>Título</th>
+      <th class="col-md-3" translate>Camada</th>
+      <th class="col-md-2" translate>Campo</th>
+      <th class="col-md-2" translate>Tabela</th>
+      <th class="col-md-2" translate>Campo</th>
+      <th class="col-md-1" translate>Associar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-if="projects.length === 0" class="row">
+      <td class="col-xs-12 text-center" colspan="12" translate>
+        LAYOUT.NO_RESULTS
+      </td>
+    </tr>
 
-            <tr class="row am-slide-right">
-                <td class="">
-                  name
-                </td>
-                <td class="">
-                  name
-                </td>
-                <td class="">
-                  name
-                </td>
-                <td class="">
-                  name
-                </td>
-                <td class="">
-                  name
-                </td>
-                <td class="">
-                    <a href="" class="full-size-block link-no-state">
-                        <div class="col-xs-2">
-                           <span class="glyphicon glyphicon-link"></span>
-                        </div>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <!--//TABELA-->
-    <!--CADASTRO DE DRILL-->
+    <tr class="row am-slide-right" ng-repeat="project in projects" ng-click="edit(project)">
+      <td class=""></td>
+      <td class="">{{project.title}}</td>
+      <td class="">{{project.layer.title}}</td>
+      <td class="">name</td>
+      <td class="">name</td>
+      <td class="">name</td>
+      <td class="">
+        <a href="" class="full-size-block link-no-state">
+          <div class="col-xs-2">
+            <span class="glyphicon glyphicon-link"></span>
+          </div>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!--//TABELA-->
+  <!--CADASTRO DE DRILL-->
 
   <div ng-if="!flag_add">
-  <div class="row">
+    <div class="row">
 
-    <div class="form-group col-md-4">
-      <label class="required" translate>Título</label>
-      <input type="text" class="form-control" required/>
+      <div class="form-group col-md-4">
+        <label class="required" translate>Título</label>
+        <input type="text" class="form-control" required/>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-md-4">
-      <label class="required" translate>Camada Geo</label>
-      <select ng-model="geoLayer.server" class="form-control"
-              ng-change="getLayersBySpatialDS(geoLayer.server._id)"
-              ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource.title" required>
-        <option value="">Selecione</option>
-      </select>
-    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label class="required" translate>Camada Geo</label>
+        <select ng-model="geoLayer.server" class="form-control"
+                ng-change="getLayersBySpatialDS(geoLayer.server._id)"
+                ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource.title"
+                required>
+          <option value="">Selecione</option>
+        </select>
+      </div>
 
-    <div class="form-group col-md-4">
+      <div class="form-group col-md-4">
         <label class="required" translate>Camada 1</label>
         <select ng-model="geoLayer.layer" class="form-control"
                 ng-change="getColumnsByLayer(geoLayer.layer._id)"
@@ -74,51 +67,52 @@
                 ng-options="layers.title for layers in layersBySpatials track by layers._id" required>
           <option value="">Selecione</option>
         </select>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label class="required" translate>Camada 2</label>
+        <select ng-model="geoLayer.layerIdentifier" ng-disabled="columnsByLayer.length == 0" class="form-control"
+                ng-options="column.name for column in columnsByLayer track by column.name" required>
+          <option value="">Selecione</option>
+        </select>
+      </div>
+
     </div>
 
-    <div class="form-group col-md-4">
-      <label class="required" translate>Camada 2</label>
-      <select ng-model="geoLayer.layerIdentifier" ng-disabled="columnsByLayer.length == 0" class="form-control"
-              ng-options="column.name for column in columnsByLayer track by column.name" required>
-        <option value="">Selecione</option>
-      </select>
-    </div>
+    <!--<div class="row">-->
+    <!--<div class="form-group col-md-4">-->
+    <!--<label class="required" translate>De onde vem</label>-->
+    <!--<select ng-model="geoLayer.server" class="form-control"-->
+    <!--ng-change="getLayersBySpatialDS(geoLayer.server._id)"-->
+    <!--ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource._id" required>-->
+    <!--<option value="">Selecione</option>-->
+    <!--</select>-->
+    <!--</div>-->
 
+    <!--<div class="form-group col-md-4">-->
+    <!--<label class="required" translate>Camada 1</label>-->
+    <!--<select ng-model="geoLayer.server" class="form-control"-->
+    <!--ng-change="getLayersBySpatialDS(geoLayer.server._id)"-->
+    <!--ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource._id" required>-->
+    <!--<option value="">Selecione</option>-->
+    <!--</select>-->
+    <!--</div>-->
+
+    <!--<div class="form-group col-md-4">-->
+    <!--<label class="required" translate>Camada 2</label>-->
+    <!--<select ng-model="geoLayer.layerIdentifier" ng-disabled="!layers.length" class="form-control"-->
+    <!--ng-options="layer.name for layer in layers track by layer.id" required>-->
+    <!--<option value="">Selecione</option>-->
+    <!--</select>-->
+    <!--</div>-->
+
+    <!--</div>-->
   </div>
 
-  <!--<div class="row">-->
-    <!--<div class="form-group col-md-4">-->
-      <!--<label class="required" translate>De onde vem</label>-->
-      <!--<select ng-model="geoLayer.server" class="form-control"-->
-              <!--ng-change="getLayersBySpatialDS(geoLayer.server._id)"-->
-              <!--ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource._id" required>-->
-        <!--<option value="">Selecione</option>-->
-      <!--</select>-->
-    <!--</div>-->
-
-    <!--<div class="form-group col-md-4">-->
-      <!--<label class="required" translate>Camada 1</label>-->
-      <!--<select ng-model="geoLayer.server" class="form-control"-->
-              <!--ng-change="getLayersBySpatialDS(geoLayer.server._id)"-->
-              <!--ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource._id" required>-->
-        <!--<option value="">Selecione</option>-->
-      <!--</select>-->
-    <!--</div>-->
-
-    <!--<div class="form-group col-md-4">-->
-      <!--<label class="required" translate>Camada 2</label>-->
-      <!--<select ng-model="geoLayer.layerIdentifier" ng-disabled="!layers.length" class="form-control"-->
-              <!--ng-options="layer.name for layer in layers track by layer.id" required>-->
-        <!--<option value="">Selecione</option>-->
-      <!--</select>-->
-    <!--</div>-->
-
-  <!--</div>-->
-  </div>
-
-    <!--//CADASTRO DE DRILL-->
-    <button class="btn btn-block margin-bottom-double {{flag_add ? 'btn-default' : 'btn-danger'}}" ng-click="toggleOptionAdd()">
-      {{flag_add ? 'Adicionar' : 'Salvar'}}
-    </button>
+  <!--//CADASTRO DE DRILL-->
+  <button class="btn btn-block margin-bottom-double {{flag_add ? 'btn-default' : 'btn-danger'}}"
+          ng-click="toggleOptionAdd()">
+    {{flag_add ? 'Adicionar' : 'Salvar'}}
+  </button>
 
 </section>

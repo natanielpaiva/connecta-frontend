@@ -1,213 +1,319 @@
 define([
-    "connecta.maps",
-    "maps/project/storage/basemaps",
-    "maps/project/storage/steps",
-    'maps/helper/map',
-    "maps/project/storage/tools",
-    "maps/project/service/project-service",
-    "maps/spatial-datasource/service/spatial-datasource-service",
-    "maps/geographic-layer/service/geo-layer-service",
-    "maps/project/directive/menu-carrousel",
-    "maps/project/directive/input-slider"
+  "connecta.maps",
+  "maps/project/storage/basemaps",
+  "maps/project/storage/steps",
+  'maps/helper/map',
+  "maps/project/storage/tools",
+  "maps/project/service/project-service",
+  "maps/spatial-datasource/service/spatial-datasource-service",
+  "maps/geographic-layer/service/geo-layer-service",
+  "maps/project/directive/menu-carrousel",
+  "maps/project/directive/input-slider"
 ], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig) {
 
-    return maps.lazy.controller("ProjectFormController", function (
-        $scope, $timeout, ProjectService, SpatialDataSourceService, GeoLayerService) {
+  return maps.lazy.controller("ProjectFormController", function ($scope, $timeout, ProjectService, SpatialDataSourceService, GeoLayerService) {
 
-        $scope.project = {
-            baseMaps : [],
-            navigationTools : {},
-            geoTools : {}
-        };
+    $scope.project = {
+      baseMaps: [],
+      navigationTools: {},
+      geoTools: {}
+    };
 
-        var WatcherEnum = {
-            MAP_CENTER: 'mapCenter',
-            MAX_ZOOM: 'maxZoom',
-            MIN_ZOOM: 'minZoom',
-            INITIAL_ZOOM: 'initialZoom'
-        };
+    var WatcherEnum = {
+      MAP_CENTER: 'mapCenter',
+      MAX_ZOOM: 'maxZoom',
+      MIN_ZOOM: 'minZoom',
+      INITIAL_ZOOM: 'initialZoom'
+    };
 
-        $scope.watchers = {};
+    $scope.watchers = {};
 
-        $scope.zoomConfig = {
-            minZoom: 1,
-            maxZoom: 10
-        };
+    $scope.zoomConfig = {
+      minZoom: 1,
+      maxZoom: 10
+    };
 
+    $scope.currentWatcher = undefined;
+
+    $scope.mapInit = function () {
+      mapHelper.buildMap('_mapDiv')
+
+        .catch(function (error) {
+          console.error(error);
+        })
+        .then(function (map) {
+          $scope.mapCenter = mapHelper.getCenter();
+          $scope.$apply();
+          $scope.watchers[WatcherEnum.MAP_CENTER] = mapHelper.watchCenterChange(function (position) {
+            $scope.mapCenter = position;
+            $scope.$apply();
+          }, true);
+
+          $scope.watchers[WatcherEnum.MIN_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
+            $scope.configSlider.minZoom = zoom;
+            $scope.$apply();
+          }, true);
+
+          $scope.watchers[WatcherEnum.MAX_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
+            $scope.configSlider.maxZoom = zoom;
+            $scope.$apply();
+          }, true);
+
+        });
+    };
+
+    $scope.setCurrentWatcher = function (watcher) {
+
+      if ($scope.currentWatcher) {
+        $scope.watchers[$scope.currentWatcher].pause();
+      }
+
+      if (watcher === $scope.currentWatcher) {
         $scope.currentWatcher = undefined;
+        return;
+      }
 
-        $scope.mapInit = function () {
-            mapHelper.buildMap('_mapDiv')
+      $scope.currentWatcher = watcher;
 
-                .catch(function (error) {
-                    console.error(error);
-                })
-                .then(function (map) {
-                    $scope.mapCenter = mapHelper.getCenter();
-                    $scope.$apply();
-                    $scope.watchers[WatcherEnum.MAP_CENTER] = mapHelper.watchCenterChange(function (position) {
-                        $scope.mapCenter = position;
-                        $scope.$apply();
-                    }, true);
+      if (watcher === WatcherEnum.MAP_CENTER) {
+        mapHelper.setCenter($scope.mapCenter);
+      }
+      if (watcher === WatcherEnum.MAX_ZOOM) {
+        mapHelper.setZoom($scope.configSlider.maxZoom);
+      }
+      if (watcher === WatcherEnum.MIN_ZOOM) {
+        mapHelper.setZoom($scope.configSlider.minZoom);
+      }
 
-                    $scope.watchers[WatcherEnum.MIN_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
-                        $scope.configSlider.minZoom = zoom;
-                        $scope.$apply();
-                    }, true);
+      $scope.currentWatcher = watcher;
+      $scope.watchers[$scope.currentWatcher].resume();
 
-                    $scope.watchers[WatcherEnum.MAX_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
-                        $scope.configSlider.maxZoom = zoom;
-                        $scope.$apply();
-                    }, true);
+    };
 
-                });
-        };
+    $scope.updateZoomConfig = function (sender) {
+      if ($scope.currentWatcher === sender) {
+        mapHelper.setZoom($scope.configSlider[sender]);
+      }
+    };
 
-        $scope.setCurrentWatcher = function (watcher) {
+    $scope.updateCenter = function () {
+      if ($scope.currentWatcher === WatcherEnum.MAP_CENTER) {
+        $scope.watchers[$scope.currentWatcher].pause();
+        mapHelper.setCenter($scope.mapCenter);
+        $scope.watchers[$scope.currentWatcher].resume();
+      }
+    };
 
-            if ($scope.currentWatcher) {
-                $scope.watchers[$scope.currentWatcher].pause();
-            }
+    $scope.currentStep = 1;
 
-            if (watcher === $scope.currentWatcher) {
-                $scope.currentWatcher = undefined;
-                return;
-            }
+    $scope.steps = stepsConfig;
 
-            $scope.currentWatcher = watcher;
+    $scope.baseMapThumbUrl = 'app/maps/project/template/_project_base_map_thumb.html';
 
-            if (watcher === WatcherEnum.MAP_CENTER) {
-                mapHelper.setCenter($scope.mapCenter);
-            }
-            if (watcher === WatcherEnum.MAX_ZOOM) {
-                mapHelper.setZoom($scope.configSlider.maxZoom);
-            }
-            if (watcher === WatcherEnum.MIN_ZOOM) {
-                mapHelper.setZoom($scope.configSlider.minZoom);
-            }
+    $scope.baseMaps = baseMapsConfig.baseMaps;
 
-            $scope.currentWatcher = watcher;
-            $scope.watchers[$scope.currentWatcher].resume();
+    $scope.tools = toolsConfig;
 
-        };
+    $scope.changeStep = function (increment) {
 
-        $scope.updateZoomConfig = function (sender) {
-            if ($scope.currentWatcher === sender) {
-                mapHelper.setZoom($scope.configSlider[sender]);
-            }
-        };
+      var active = "active",
+        disabled = "disabled",
+        complete = "complete",
+        nextStep;
 
-        $scope.updateCenter = function () {
-            if ($scope.currentWatcher === WatcherEnum.MAP_CENTER) {
-                $scope.watchers[$scope.currentWatcher].pause();
-                mapHelper.setCenter($scope.mapCenter);
-                $scope.watchers[$scope.currentWatcher].resume();
-            }
-        };
+      if (increment) {
+        $scope.steps[$scope.currentStep].style = complete;
+        nextStep = $scope.currentStep + 1;
+      } else {
+        $scope.steps[$scope.currentStep].style = disabled;
+        nextStep = $scope.currentStep - 1;
+      }
 
-        $scope.currentStep = 1;
+      $scope.steps[nextStep].style = active;
+      $scope.currentStep = nextStep;
 
-        $scope.steps = stepsConfig;
+    };
 
-        $scope.baseMapThumbUrl = 'app/maps/project/template/_project_base_map_thumb.html';
+    $scope.checkAllMapTools = function (sectionName, value) {
 
-        $scope.baseMaps = baseMapsConfig.baseMaps;
+      for (var tool in $scope.tools[sectionName]) {
+        $scope.project[sectionName][tool] = value;
+      }
 
-        $scope.tools = toolsConfig;
+    };
 
-        $scope.changeStep = function (increment) {
-
-            var active = "active",
-                disabled = "disabled",
-                complete = "complete",
-                nextStep;
-
-            if (increment) {
-                $scope.steps[$scope.currentStep].style = complete;
-                nextStep = $scope.currentStep + 1;
-            } else {
-                $scope.steps[$scope.currentStep].style = disabled;
-                nextStep = $scope.currentStep - 1;
-            }
-
-            $scope.steps[nextStep].style = active;
-            $scope.currentStep = nextStep;
-
-        };
-
-        $scope.checkAllMapTools = function (sectionName, value) {
-
-            for (var tool in $scope.tools[sectionName]) {
-                $scope.project[sectionName][tool] = value;
-            }
-
-        };
-
-        $scope.configSlider = {
-            minZoom : 3,
-            maxZoom : 13,
-            options : {
-                floor: 1,
-                ceil: 15,
-                step: 1,
-                getPointerColor : function () {
-                    return '#3bb79d';
-                },
-                getSelectionBarColor : function () {
-                    return '#3bb79d';
-                },
-                minRange: 1,
-                pushRange: true
-            }
-        };
+    $scope.configSlider = {
+      minZoom: 3,
+      maxZoom: 13,
+      options: {
+        floor: 1,
+        ceil: 15,
+        step: 1,
+        getPointerColor: function () {
+          return '#3bb79d';
+        },
+        getSelectionBarColor: function () {
+          return '#3bb79d';
+        },
+        minRange: 1,
+        pushRange: true
+      }
+    };
 
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
 
-        $scope.flag_add = true;
-        $scope.layersBySpatials = [];
+    $scope.flag_add = true;
+    $scope.layersBySpatials = [];
+    $scope.columnsByLayer = [];
+    $scope.projects = [];
+
+    // ProjectService.get().then(onSuccessListProject, onError);
+    $scope.projects = {
+      "size": 10,
+      "currentPage": 1,
+      "totalDocuments": 2,
+      "content": [{
+        "_id": "57d2bb1ec6355446cd202dd3",
+        "title": "Teste",
+        "contextType": "OBIEE",
+        "__v": 0,
+        "analyses": [],
+        "richLayers": [{
+          "layer": {
+            "isVector": true,
+            "geometryField": {"name": "Shape", "type": "esriFieldTypeGeometry", "alias": "Shape", "domain": null},
+            "geometryType": "esriGeometryPoint",
+            "layerIdentifier": "0",
+            "title": "Teste",
+            "geoCache": {"query": true, "getBreaks": true},
+            "spatialDataSourceId": "34140",
+            "__v": 0,
+            "_id": "57dad801feed85063f871206",
+            "layerFields": [{
+              "name": "FID",
+              "type": "esriFieldTypeOID",
+              "alias": "FID",
+              "domain": null
+            }, {"name": "Shape", "type": "esriFieldTypeGeometry", "alias": "Shape", "domain": null}, {
+              "name": "Shape__",
+              "type": "esriFieldTypeString",
+              "alias": "Shape__",
+              "length": 254,
+              "domain": null
+            }, {
+              "name": "OBJECTID__",
+              "type": "esriFieldTypeDouble",
+              "alias": "OBJECTID__",
+              "domain": null
+            }, {
+              "name": "Plan1__CD",
+              "type": "esriFieldTypeString",
+              "alias": "Plan1__CD",
+              "length": 254,
+              "domain": null
+            }, {
+              "name": "Plan1__NOM",
+              "type": "esriFieldTypeString",
+              "alias": "Plan1__NOM",
+              "length": 254,
+              "domain": null
+            }, {
+              "name": "Plan1__TIP",
+              "type": "esriFieldTypeString",
+              "alias": "Plan1__TIP",
+              "length": 254,
+              "domain": null
+            }, {
+              "name": "Plan1__CAP",
+              "type": "esriFieldTypeDouble",
+              "alias": "Plan1__CAP",
+              "domain": null
+            }, {
+              "name": "Plan1__POP",
+              "type": "esriFieldTypeDouble",
+              "alias": "Plan1__POP",
+              "domain": null
+            }, {
+              "name": "Plan1__MUN",
+              "type": "esriFieldTypeString",
+              "alias": "Plan1__MUN",
+              "length": 254,
+              "domain": null
+            }, {
+              "name": "Plan1__UF",
+              "type": "esriFieldTypeString",
+              "alias": "Plan1__UF",
+              "length": 254,
+              "domain": null
+            }]
+          }, "outFields": []
+        }],
+        "tools": []
+      }, {
+        "_id": "57e2cc6bd3a3cb194be34a0c",
+        "title": "Project Test",
+        "contextType": "obiee",
+        "__v": 0,
+        "analyses": [],
+        "richLayers": [],
+        "tools": []
+      }]
+    };
+
+    $scope.edit = function (project) {
+      console.log(project);
+      $scope.flag_add = false;
+    };
+    $scope.flag_add = true;
+    $scope.layersBySpatials = [];
+    $scope.columnsByLayer = [];
+
+    $scope.toggleOptionAdd = function () {
+      if ($scope.flag_add)
+        // SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
+
+      $scope.flag_add = !$scope.flag_add;
+    };
+
+    $scope.getLayersBySpatialDS = function (id_spatial_ds) {
+      GeoLayerService.getLayersByDS(id_spatial_ds).then(onSuccessGetLayerBySpatialDS, onError);
+    };
+
+    $scope.getColumnsByLayer = function (id_layer) {
+      if (typeof id_layer != 'undefined') {
+        for (var i in $scope.layersBySpatials) {
+          if ($scope.layersBySpatials[i]._id == id_layer)
+            $scope.columnsByLayer = $scope.layersBySpatials[i].layerFields;
+        }
+      } else {
         $scope.columnsByLayer = [];
+      }
+    };
 
-        $scope.toggleOptionAdd = function () {
-            if ($scope.flag_add)
-                SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
+    function onSuccessListProject(response) {
+      $scope.projects = response.data.content;
+      console.log($scope.projects);
+    }
 
-            $scope.flag_add = !$scope.flag_add;
-        };
+    function onSuccessListSpatialDS(response) {
+      $scope.spatialDataSources = response.data;
+    }
 
-        $scope.getLayersBySpatialDS = function (id_spatial_ds) {
-            GeoLayerService.getLayersByDS(id_spatial_ds).then(onSuccessGetLayerBySpatialDS, onError);
-        };
+    function onSuccessGetLayerBySpatialDS(response) {
+      $scope.layersBySpatials = response.data.content;
+      if ($scope.layersBySpatials.length === 0)
+        $scope.columnsByLayer = [];
+      // notify.error("Nenhuma camada cadastrada");
+    }
 
-        $scope.getColumnsByLayer = function (id_layer) {
-            if (typeof id_layer != 'undefined') {
-                for (var i in $scope.layersBySpatials) {
-                    if ($scope.layersBySpatials[i]._id == id_layer)
-                        $scope.columnsByLayer = $scope.layersBySpatials[i].layerFields;
-                }
-            } else {
-                $scope.columnsByLayer = [];
-            }
-        };
-
-        function onSuccessListSpatialDS(response) {
-            $scope.spatialDataSources = response.data;
-        }
-
-        function onSuccessGetLayerBySpatialDS(response) {
-            $scope.layersBySpatials = response.data.content;
-            if ($scope.layersBySpatials.length === 0)
-                $scope.columnsByLayer = [];
-            // notify.error("Nenhuma camada cadastrada");
-        }
-
-        function onError(error) {
-            if (error) {
-                // notify.error(error.statusText);
-            }
-            throw Error(error);
-        }
+    function onError(error) {
+      if (error) {
+        // notify.error(error.statusText);
+      }
+      throw Error(error);
+    }
 
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
-    });
+  });
 
 });
