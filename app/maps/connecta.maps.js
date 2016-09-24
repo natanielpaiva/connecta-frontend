@@ -1,12 +1,15 @@
 define([
-    'angular'
+    'angular',
+    'angularjs-slider',
+    'angular-tree-control'
 ], function (angular) {
 
     invokeCSS('/bower_components/angular-tree-control/css/tree-control.css');
 
     var maps = angular.module('connecta.maps', [
 //        'ngAutocomplete'
-        'rzModule'
+        "treeControl",
+        "rzModule"
     ]);
 
     maps._configKey = 'maps';
