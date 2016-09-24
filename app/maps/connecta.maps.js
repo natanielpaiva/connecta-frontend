@@ -1,7 +1,9 @@
 define([
-    'angular',
-    'angularjs-slider'
+    'angular'
 ], function (angular) {
+
+    invokeCSS('/bower_components/angular-tree-control/css/tree-control.css');
+
     var maps = angular.module('connecta.maps', [
 //        'ngAutocomplete'
         'rzModule'
@@ -169,4 +171,15 @@ define([
     ];
 
     return maps;
+
+
+    function invokeCSS(path) {
+        var head = document.head;
+        var link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('href', path);
+        head.appendChild(link);
+        return link;
+    }
 });
