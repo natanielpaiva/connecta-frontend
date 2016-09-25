@@ -1,15 +1,17 @@
 <section>
+  <!--<div>{{ selectedRichLayer | json }}</div>-->
   <h4 translate>ANALYSIS.BASIC_INFO</h4>
-  <form name="analsysis" ng-submit="save()" novalidate>
+  <form name="analysisForm" novalidate>
 
     <div class="row">
       <div class="col-md-6 form-group">
         <label class="required" translate>ANALYSIS.PROJECT</label>
         <select class="form-control"
-                ng-model="selectedProject"
-                ng-change="projectChanged(selectedProject)"
-                ng-options="project.title for project in projects track by project._id" required>
-          <option value="">Selecione</option>
+                ng-model="analysis.project"
+                ng-change="projectChanged(analysis.project)"
+                ng-options="project.title for project in projects track by project._id"
+                ng-disabled="analysis.outFields.length || outField" required>
+          <option value="" translate>LAYOUT.SELECT</option>
         </select>
       </div>
 
@@ -36,9 +38,9 @@
         <select class="form-control"
                 ng-model="selectedRichLayer"
                 ng-change="richLayerChanged(selectedRichLayer)"
-                ng-options="richLayer.title for richLayer in selectedProject.richLayers track by richLayer._id"
-                ng-disabled="!selectedProject || !selectedProject.richLayers.length" required>
-          <option value="">Selecione</option>
+                ng-disabled="!analysis.project || !analysis.project.richLayers.length || analysis.outFields.length || outField"
+                ng-options="richLayer.title for richLayer in analysis.project.richLayers" required>
+          <option value="" translate>LAYOUT.SELECT</option>
         </select>
       </div>
 
@@ -84,22 +86,77 @@
           ng-click="editOutField($index)">
         <td class="text-left col-md-5">{{outField.name}}</td>
         <td class="text-left col-md-5">{{outField.alias}}</td>
-        <td class="text-left col-md-2">{{outField.valueType}}</td>
+        <td class="text-left col-md-2" translate>{{valueTypeMap[outField.valueType]}}</td>
       </tr>
       </tbody>
     </table>
+  </form>
 
-    <div class="row">
+
+
+  <form name="out_field" novalidate>
+    <div class="row" ng-if="!outField">
+      <div class="col-md-2 form-group" >
+        <a class="btn btn-primary form-control" href="" ng-click="addOutField()" ng-if="selectedRichLayer">
+          <span class="icon-plus"></span>
+          <translate>ANALYSIS.ADD_OUTFIELD</translate>
+        </a>
+      </div>
+    </div>
+    <div class="row" ng-if="outField">
+      <div class="form-group col-md-5">
+        <label class="required" translate>ANALYSIS.CRITERIA_NAME</label>
+        <select class="form-control"
+                ng-model="selectedColumn"
+                ng-change="columnChanged(selectedColumn.name)"
+                ng-options="column.alias for column in dataSourceColumns track by column.name" required>
+          <option value="" translate>LAYOUT.SELECT</option>
+        </select>
+      </div>
+      <div class="form-group col-md-5">
+        <label translate>ANALYSIS.TITLE</label>
+        <input type="text" class="form-control" ng-model="outField.alias">
+      </div>
+      <div class="form-group col-md-2">
+        <label class="required" translate>ANALYSIS.TYPE</label>
+        <select class="form-control" ng-model="outField.valueType" ng-model="outField.valueType" required>
+          <option value="" translate>LAYOUT.SELECT</option>
+          <option value="string" translate>ANALYSIS.TYPE_STRING</option>
+          <option value="number" translate>ANALYSIS.TYPE_NUMBER</option>
+          <option value="date" translate>ANALYSIS.TYPE_DATE</option>
+          <option value="disabled" translate>ANALYSIS.TYPE_DISABLED</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" ng-if="outField">
       <div class="col-md-12 text-right">
-        <a href="#/maps/analysis" class="btn btn-default" translate>
+        <a href="" class="btn btn-danger pull-left" ng-click="deleteOutField()" ng-if="outFieldEditIndex !== undefined" translate>
+          ANALYSIS.DELETE_OUTFIELD
+        </a>
+        <a href="" class="btn btn-default" ng-click="cancelOutField()" translate>
           LAYOUT.CANCEL
         </a>
-        <button class="btn btn-primary" translate>
-          LAYOUT.SAVE
+        <button class="btn btn-primary" ng-disabled="out_field.$invalid" ng-click="saveOutField()" translate>
+          ANALYSIS.SAVE_OUTFIELD
         </button>
       </div>
     </div>
   </form>
+  </div>
+
+
+
+  <div class="row" ng-if="!outField">
+    <div class="col-md-12 text-right">
+      <a href="#/maps/analysis" class="btn btn-default" translate>
+        LAYOUT.CANCEL
+      </a>
+      <button class="btn btn-primary" ng-click="saveProject()" ng-disabled="analysisForm.$invalid" translate>
+        LAYOUT.SAVE
+      </button>
+    </div>
+  </div>
+
 
 
 </section>

@@ -101,8 +101,16 @@
     "TYPE" : "Type",
     "DESCRIPTION" : "Description",
     "ANALYSIS_LIST" : "<b>Analysis</b> list",
-    "NO_OUTFIELDS" : "No variables saved",
-    "ADD_ANALYSIS" : "ADD ANALYSIS"
+    "NO_OUTFIELDS" : "No out fields saved",
+    "ADD_ANALYSIS" : "ADD ANALYSIS",
+    "DELETE_OUTFIELD" : "DELETE OUTFIELD",
+    "ADD_OUTFIELD" : "ADD OUTFIELD",
+    "SAVE_OUTFIELD" : "SAVE OUTFIELD",
+    "TYPE_STRING" : "Text",
+    "TYPE_NUMBER" : "Number",
+    "TYPE_DATE" : "Date",
+    "TYPE_DISABLED" : "Disabled",
+    "DETAILING_ANALYSIS" : "Detailing <b>Analysis</b>"
   },
   "LAYER_TYPE" : {
     "POINT": "Point",
@@ -111,6 +119,7 @@
   },
   "LAYOUT" : {
     "SAVE" : "SAVE",
-    "CANCEL" : "CANCEL"
+    "CANCEL" : "CANCEL",
+    "SELECT": "Select"
   }
 }

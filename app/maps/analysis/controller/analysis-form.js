@@ -4,7 +4,7 @@ define([
   '../../project/service/project-service'
 ], function (maps) {
 
-  return maps.lazy.controller('AnalysisFormController', function ($scope, AnalysisService, ProjectService) {
+  return maps.lazy.controller('AnalysisFormController', function ($scope, $location, $routeParams, AnalysisService, ProjectService) {
 
     $scope.analysis = {
       popupConfig: {
@@ -15,12 +15,41 @@ define([
       outFields: []
     };
 
+    $scope.valueTypeMap = {
+      'string': 'ANALYSIS.TYPE_STRING',
+      'number': 'ANALYSIS.TYPE_NUMBER',
+      'date': 'ANALYSIS.TYPE_DATE',
+      'disabled': 'ANALYSIS.TYPE_DISABLED'
+    };
+
+    if ($routeParams.id) {
+      $scope.isEditing = true;
+      AnalysisService.get($routeParams.id)
+        .catch(function (err) {
+          console.error(err);
+        })
+        .then(function (response) {
+          try {
+            var analysis = response.data;
+            $scope.analysis = {
+              _id: analysis._id,
+              title: analysis.title,
+              allowDrill: analysis.allowDrill,
+              popupConfig: analysis.popupConfig,
+              outFields: analysis.outFields,
+              project: analysis.project
+            };
+          } catch (err) {
+            console.error(err);
+          }
+        });
+    }
+
     ProjectService.list({size: '*'})
       .catch(function (err) {
         console.error(err);
       })
       .then(function (response) {
-        console.log(response.data.content);
         $scope.projects = response.data.content;
       });
 
@@ -29,21 +58,81 @@ define([
     };
 
     $scope.richLayerChanged = function (richLayer) {
-      $scope.analysis.richLayer = richLayer;
-    };
-
-    $scope.editOutField = function (variableIndex) {
-      console.info($scope.analysis.outFields[variableIndex]);
-    };
-
-    $scope.save = function () {
-      AnalysisService.save($scope.analysis)
-        .catch(function (err) {
-          console.error(err);
-        })
-        .then(function (response) {
-          console.info(response);
+      var promise;
+      if ($scope.analysis.project.serviceType === 'obiee') {
+        promise = AnalysisService.getMetaData(richLayer.info.analysisPath);
+        promise.then(function (response) {
+          console.log(response);
+          $scope.dataSourceColumns = response;
         });
+      } else if ($scope.analysis.project.serviceType === 'connecta') {
+        promise = AnalysisService.getMetaData(richLayer.info.analysisId);
+        promise.then(function (response) {
+          $scope.dataSourceColumns =  [];
+          if (response.analysisColumns && response.analysisColumns.length) {
+            response.analysisColumns.forEach(function (column) {
+              $scope.dataSourceColumns.push({name: column.name, alias: column.label});
+            });
+          } else {
+            return console.error('analysis-form.js#richLayerChanged => Não foi possível encontrar colunas.');
+          }
+        });
+      } else {
+        return console.error('analysis-form.js#richLayerChanged => Service type faltando ou não suportado.');
+      }
+      promise.catch(function (err) {
+        console.error(err);
+      });
+    };
+
+    $scope.columnChanged = function (columnName) {
+      $scope.outField.name = columnName;
+    };
+
+    $scope.addOutField = function () {
+      $scope.outField = {};
+    };
+
+    $scope.editOutField = function (outfieldIndex) {
+      $scope.outField = Object.assign({}, $scope.analysis.outFields[outfieldIndex]);
+      $scope.outFieldEditIndex = outfieldIndex;
+    };
+
+    $scope.deleteOutField = function () {
+      $scope.analysis.outFields.splice($scope.outFieldEditIndex, 1);
+      delete $scope.outFieldEditIndex;
+      delete $scope.outField;
+    };
+
+    $scope.saveOutField = function () {
+      $scope.outField.alias = $scope.outField.alias || $scope.outField.name;
+      if ($scope.outFieldEditIndex !== undefined) {
+        $scope.analysis.outFields.splice($scope.outFieldEditIndex, 1, $scope.outField);
+      } else {
+        $scope.analysis.outFields.push($scope.outField);
+      }
+      delete $scope.outFieldEditIndex;
+      delete $scope.outField;
+    };
+
+    $scope.cancelOutField = function () {
+      delete $scope.outField;
+    };
+
+    $scope.saveProject = function () {
+      var promise;
+      if (!$scope.isEditing) {
+        promise = AnalysisService.save($scope.analysis);
+      } else {
+        promise = AnalysisService.update($scope.analysis._id, $scope.analysis);
+      }
+      promise.catch(function (err) {
+        console.error(err);
+      });
+      promise.then(function (response) {
+        console.info(response);
+        $location.path('/maps/analysis');
+      });
     };
 
   });

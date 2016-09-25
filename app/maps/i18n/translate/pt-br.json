@@ -100,7 +100,15 @@
     "DESCRIPTION" : "Description",
     "ANALYSIS_LIST" : "<b>Analysis</b> list",
     "NO_OUTFIELDS" : "Nenhuma variável salva",
-    "ADD_ANALYSIS" : "ADD ANALYSIS"
+    "ADD_ANALYSIS" : "ADD ANALYSIS",
+    "ADD_OUTFIELD" : "ADICIONAR VARIÁVEL",
+    "DELETE_OUTFIELD" : "EXCLUIR VARIÁVEL",
+    "SAVE_OUTFIELD" : "SALVAR VARIÁVEL",
+    "TYPE_STRING" : "Texto",
+    "TYPE_NUMBER" : "Número",
+    "TYPE_DATE" : "Data",
+    "TYPE_DISABLED" : "Não utilizar",
+    "DETAILING_ANALYSIS" : "Detalhamento da <b>Análise</b>"
   },
   "LAYER_TYPE" : {
     "POINT": "Ponto",
@@ -109,6 +117,7 @@
   },
   "LAYOUT" : {
     "SAVE" : "SALVAR",
-    "CANCEL" : "CANCELAR"
+    "CANCEL" : "CANCELAR",
+    "SELECT": "Selecione"
   }
 }
