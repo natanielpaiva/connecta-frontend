@@ -4,9 +4,10 @@ define([
     "maps/datasource/service/datasource-service"
 ], function (maps, contextConfig) {
 
-    return maps.lazy.controller("DatasourceFormController", function ($scope, DatasourceService, $location, $routeParams, notify) {
+    return maps.lazy.controller("DatasourceFormController", function ($scope, DatasourceService, $location, $routeParams) {
         $scope.datasource = {};
         var isEdit = false;
+        $scope.listAnalysis = [];
 
         init();
 
@@ -44,9 +45,9 @@ define([
                     });
                     promise.then(function () {
                         try {
-                            if(datasource._id){
+                            if (datasource._id) {
                                 update(datasource._id, datasource);
-                            }else{
+                            } else {
                                 save(datasource);
                             }
                         } catch (error) {
@@ -57,15 +58,15 @@ define([
                     notify.error(error);
                 }
             } else {
-                if(datasource._id){
+                if (datasource._id) {
                     update(datasource._id, datasource);
-                }else{
+                } else {
                     save(datasource);
                 }
             }
         };
 
-        function save(datasource){
+        function save(datasource) {
             try {
                 var promise = DatasourceService.save(datasource);
                 promise.catch(function (error) {
@@ -80,7 +81,7 @@ define([
         }
 
         function update(id, datasource) {
-           var promise =  DatasourceService.update(id, datasource);
+            var promise = DatasourceService.update(id, datasource);
             promise.catch(function (error) {
                notify.error(error);
             });
@@ -92,10 +93,24 @@ define([
         $scope.contextTemplate = contextConfig;
 
         $scope.onServerChange = function (context) {
-            if (context)
+            if (context) {
                 context = context.toLowerCase();
+            }
+
+            if (context === "connecta") {
+                var promise = DatasourceService.listAnalysisConnecta();
+                promise.catch(function (error) {
+                    console.error(error);
+                });
+
+                promise.then(function (response) {
+                    $scope.listAnalysis = response.data;
+                });
+            }
+
             $scope.currentState = context;
         };
+
 
     });
 

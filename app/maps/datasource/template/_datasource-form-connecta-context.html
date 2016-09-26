@@ -2,9 +2,12 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label class="required">Análises</label>
-            <select class="form-control" required>
+            <select class="form-control"
+                    ng-model="datasource.info.analysis"
+                    ng-options="item as item.name for item in listAnalysis" required>
                 <option value="">Selecione</option>
             </select>
         </div>
+
     </div>
 </section>
