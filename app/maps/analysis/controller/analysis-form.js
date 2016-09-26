@@ -146,7 +146,7 @@ define([
         };
 
         $scope.saveOutField = function () {
-            $scope.outField.alias = $scope.outField.alias || $scope.outField.name;
+            $scope.outField.alias = $scope.outField.alias || $scope.selectedColumn.alias;
             if ($scope.outFieldEditIndex !== undefined) {
                 $scope.analysis.outFields.splice($scope.outFieldEditIndex, 1, $scope.outField);
             } else {

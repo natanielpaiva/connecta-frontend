@@ -106,8 +106,8 @@
             <div class="form-group col-md-5">
                 <label class="required" translate>ANALYSIS.CRITERIA_NAME</label>
                 <select class="form-control"
-                        ng-model="selectedColumn"
-                        ng-change="columnChanged(selectedColumn.name)"
+                        ng-model="$parent.selectedColumn"
+                        ng-change="columnChanged($parent.selectedColumn.name)"
                         ng-options="column.alias for column in dataSourceColumns track by column.name" required>
                     <option value="" translate>LAYOUT.SELECT</option>
                 </select>
