@@ -28,7 +28,7 @@ define([
                     }
 
                     function onError(err) {
-                        console.error(err);
+                        console.error(err.statusText);
                     }
 
                 }

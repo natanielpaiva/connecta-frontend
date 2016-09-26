@@ -27,7 +27,7 @@ define([
                 $scope.isEditing = true;
                 AnalysisService.get($routeParams.id)
                     .catch(function (err) {
-                        notify.error(err);
+                        notify.error(err.statusText);
                     })
                     .then(function (response) {
                         try {
@@ -39,9 +39,17 @@ define([
                                 allowDrill: analysis.allowDrill,
                                 popupConfig: analysis.popupConfig,
                                 outFields: analysis.outFields,
-                                project: analysis.project
+                                projectId: analysis.projectId
                             };
-                            var richLayer = $scope.analysis.project.richLayers.filter(function (richLayer) {
+                            var project = $scope.projects.filter(function (project) {
+                                return project._id === analysis.projectId;
+                            });
+
+                            if (project.length) {
+                                $scope.selectedProject = project[0];
+                            }
+
+                            var richLayer = $scope.selectedProject.richLayers.filter(function (richLayer) {
                                 return richLayer._id === $scope.analysis.richLayerId;
                             });
                             if (richLayer.length) {
@@ -76,8 +84,8 @@ define([
                 });
         }
 
-        $scope.projectChanged = function (project) {
-            $scope.analysis.project = project;
+        $scope.projectChanged = function (projectId) {
+            $scope.analysis.projectId = projectId;
         };
 
         $scope.richLayerChanged = function (richLayer) {
@@ -87,7 +95,7 @@ define([
 
         function populateMetadataFields(richLayer) {
             var promise;
-            if ($scope.analysis.project.serviceType === 'obiee') {
+            if ($scope.selectedProject.serviceType === 'obiee') {
                 promise = AnalysisService.getMetaData(richLayer.info.analysisPath);
                 promise.then(function (response) {
                     if (!response) {
@@ -95,7 +103,7 @@ define([
                     }
                     $scope.dataSourceColumns = response;
                 });
-            } else if ($scope.analysis.project.serviceType === 'connecta') {
+            } else if ($scope.selectedProject.serviceType === 'connecta') {
                 promise = AnalysisService.getMetaData(richLayer.info.analysisId);
                 promise.then(function (response) {
                     if (!response) {
@@ -107,11 +115,11 @@ define([
                             $scope.dataSourceColumns.push({name: column.name, alias: column.label});
                         });
                     } else {
-                        return notify.error('analysis-form.js#richLayerChanged => Não foi possível encontrar colunas.');
+                        return notify.error('Não foi possível carregar as colunas de criteria.');
                     }
                 });
             } else {
-                return notify.error('analysis-form.js#richLayerChanged => Service type faltando ou não suportado.');
+                return notify.error('Service type faltando ou não suportado.');
             }
             promise.catch(function (err) {
                 notify.error(err.statusText);
@@ -160,7 +168,6 @@ define([
                 promise = AnalysisService.update($scope.analysis._id, $scope.analysis);
             }
             promise.catch(function (err) {
-                console.dir(err);
                 notify.error(err.statusText);
             });
             promise.then(function () {

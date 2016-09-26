@@ -14,7 +14,7 @@ define([
         function checkEdit() {
             AnalysisService.get($routeParams.id)
                 .catch(function (err) {
-                    notify.error(err);
+                    notify.error(err.statusText);
                 })
                 .then(function (response) {
                     var analysis = response.data;

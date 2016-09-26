@@ -6,8 +6,8 @@
             <div class="col-md-6 form-group">
                 <label class="required" translate>ANALYSIS.PROJECT</label>
                 <select class="form-control"
-                        ng-model="analysis.project"
-                        ng-change="projectChanged(analysis.project)"
+                        ng-model="selectedProject"
+                        ng-change="projectChanged(selectedProject._id)"
                         ng-options="project.title for project in projects track by project._id"
                         ng-disabled="analysis.outFields.length || outField" required>
                     <option value="" translate>LAYOUT.SELECT</option>
@@ -37,8 +37,8 @@
                 <select class="form-control"
                         ng-model="selectedRichLayer"
                         ng-change="richLayerChanged(selectedRichLayer)"
-                        ng-disabled="!analysis.project || !analysis.project.richLayers.length || analysis.outFields.length || outField"
-                        ng-options="richLayer.title for richLayer in analysis.project.richLayers" required>
+                        ng-disabled="!selectedProject || !selectedProject.richLayers.length || analysis.outFields.length || outField"
+                        ng-options="richLayer.title for richLayer in selectedProject.richLayers" required>
                     <option value="" translate>LAYOUT.SELECT</option>
                 </select>
             </div>

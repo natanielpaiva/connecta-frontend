@@ -61,9 +61,12 @@ define([
                         $scope.selectedSpatialDataSource = {_id: $scope.layer.spatialDataSourceId};
                         SpatialDataSourceService.getLayersBySpatialDS($scope.layer.spatialDataSourceId)
                             .catch(function (err) {
-                                notify.error(err);
+                                notify.error(err.statusText);
                             })
                             .then(function (response) {
+                                if (!response) {
+                                    return notify.error('Não foi possível obter resposta do servidor.');
+                                }
                                 $scope.layers = response.data;
                                 $scope.selectedLayer = {layerIdentifier: $scope.layer.layerIdentifier};
                                 $scope.changeSelectedLayer($scope.layer.layerIdentifier);
@@ -86,7 +89,7 @@ define([
             setTimeout(function () {
                 var promise = mapHelper.buildMap($scope.mapNodeId);
                 promise.catch(function (err) {
-                    notify.error(err);
+                    notify.error(err.statusText);
                 });
                 promise.then(function (map) {
                     //
@@ -99,7 +102,7 @@ define([
                 $scope.layer.spatialDataSourceId = spatialDataSourceId;
                 var promise = SpatialDataSourceService.getLayersBySpatialDS(spatialDataSourceId);
                 promise.catch(function (err) {
-                    notify.error(err);
+                    notify.error(err.statusText);
                 });
                 promise.then(function (response) {
                     if (!response) {
