@@ -50,7 +50,7 @@ define([
                                 populateMetadataFields(richLayer);
                             }
                         } catch (err) {
-                            notify.error(err.message);
+                            notify.error(err.statusText);
                         }
                     });
             }
@@ -66,7 +66,7 @@ define([
         function loadProjects() {
             ProjectService.list({size: '*'})
                 .catch(function (err) {
-                    notify.error(err.message);
+                    notify.error(err.statusText);
                 })
                 .then(function (response) {
                     if (!response) {
@@ -114,7 +114,7 @@ define([
                 return notify.error('analysis-form.js#richLayerChanged => Service type faltando ou não suportado.');
             }
             promise.catch(function (err) {
-                notify.error(err.message);
+                notify.error(err.statusText);
             });
         }
 
@@ -160,7 +160,8 @@ define([
                 promise = AnalysisService.update($scope.analysis._id, $scope.analysis);
             }
             promise.catch(function (err) {
-                notify.error(err.message);
+                console.dir(err);
+                notify.error(err.statusText);
             });
             promise.then(function () {
                 $location.path('/maps/analysis');
