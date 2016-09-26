@@ -4,33 +4,42 @@ define([
     "maps/datasource/service/datasource-service"
 ], function (maps, contextConfig) {
 
-    return maps.lazy.controller("DatasourceFormController", function ($scope, DatasourceService, $location, $routeParams) {
+    return maps.lazy.controller("DatasourceFormController", function ($scope, DatasourceService, $location, $routeParams, notify) {
         $scope.datasource = {};
         var isEdit = false;
 
-        if ($routeParams.id) {
+        init();
+
+        function init() {
+          checkEdit();
+        }
+
+
+        function checkEdit() {
+          if ($routeParams.id) {
             try {
-                var promise = DatasourceService.get($routeParams.id);
-                promise.catch(function (error) {
-                    console.error(error);
-                });
-                promise.then(function (response) {
-                    $scope.datasource = response.data;
-                    isEdit = true;
-                });
+              var promise = DatasourceService.get($routeParams.id);
+              promise.catch(function (error) {
+                notify.error(error);
+              });
+              promise.then(function (response) {
+                $scope.datasource = response.data;
+                isEdit = true;
+              });
 
             } catch (error) {
-                console.error(error);
+              notify.error(error);
             }
+          }
         }
 
         $scope.validateDatasource = function (datasource) {
 
-            if (datasource.contextType === "obiee") {
+            if (datasource.serviceType === "obiee") {
                 try {
                     var promise = DatasourceService.catalogObiee(datasource.dsn, datasource.user, datasource.password, '/shared');
                     promise.catch(function (error) {
-                        console.error(error);
+                        notify.error(error);
                         return;
                     });
                     promise.then(function () {
@@ -41,11 +50,11 @@ define([
                                 save(datasource);
                             }
                         } catch (error) {
-                            console.error(error);
+                            notify.error(error);
                         }
                     });
                 } catch (error) {
-                    console.error(error);
+                    notify.error(error);
                 }
             } else {
                 if(datasource._id){
@@ -60,20 +69,20 @@ define([
             try {
                 var promise = DatasourceService.save(datasource);
                 promise.catch(function (error) {
-                    console.error(error);
+                    notify.error(error);
                 });
                 promise.then(function(response){
                     $location.path("/maps/datasource");
                 });
             } catch (error) {
-               console.error(error);
+               notify.error(error);
             }
         }
 
         function update(id, datasource) {
            var promise =  DatasourceService.update(id, datasource);
             promise.catch(function (error) {
-               console.error(error);
+               notify.error(error);
             });
             promise.then(function (response) {
                 $location.path("/maps/datasource");
@@ -83,9 +92,8 @@ define([
         $scope.contextTemplate = contextConfig;
 
         $scope.onServerChange = function (context) {
-            if(context)
+            if (context)
                 context = context.toLowerCase();
-
             $scope.currentState = context;
         };
 

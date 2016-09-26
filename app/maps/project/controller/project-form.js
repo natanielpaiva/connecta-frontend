@@ -170,52 +170,52 @@ define([
         $scope.layersBySpatials = [];
         $scope.columnsByLayer = [];
 
-    $scope.toggleOptionAdd = function () {
-      if ($scope.flag_add)
-        // SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
+        $scope.toggleOptionAdd = function () {
+            if ($scope.flag_add)
+            // SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
 
-      $scope.flag_add = !$scope.flag_add;
-    };
+                $scope.flag_add = !$scope.flag_add;
+        };
 
-    $scope.getLayersBySpatialDS = function (id_spatial_ds) {
-      GeoLayerService.getLayersByDS(id_spatial_ds).then(onSuccessGetLayerBySpatialDS, onError);
-    };
+        $scope.getLayersBySpatialDS = function (id_spatial_ds) {
+            GeoLayerService.getLayersByDS(id_spatial_ds).then(onSuccessGetLayerBySpatialDS, onError);
+        };
 
-    $scope.getColumnsByLayer = function (id_layer) {
-      if (typeof id_layer != 'undefined') {
-        for (var i in $scope.layersBySpatials) {
-          if ($scope.layersBySpatials[i]._id == id_layer)
-            $scope.columnsByLayer = $scope.layersBySpatials[i].layerFields;
+        $scope.getColumnsByLayer = function (id_layer) {
+            if (typeof id_layer != 'undefined') {
+                for (var i in $scope.layersBySpatials) {
+                    if ($scope.layersBySpatials[i]._id == id_layer)
+                        $scope.columnsByLayer = $scope.layersBySpatials[i].layerFields;
+                }
+            } else {
+                $scope.columnsByLayer = [];
+            }
+        };
+
+        function onSuccessListProject(response) {
+            $scope.projects = response.data.content;
+            console.log($scope.projects);
         }
-      } else {
-        $scope.columnsByLayer = [];
-      }
-    };
 
-    function onSuccessListProject(response) {
-      $scope.projects = response.data.content;
-      console.log($scope.projects);
-    }
+        function onSuccessListSpatialDS(response) {
+            $scope.spatialDataSources = response.data;
+        }
 
-    function onSuccessListSpatialDS(response) {
-      $scope.spatialDataSources = response.data;
-    }
+        function onSuccessGetLayerBySpatialDS(response) {
+            $scope.layersBySpatials = response.data.content;
+            if ($scope.layersBySpatials.length === 0)
+                $scope.columnsByLayer = [];
+            // notify.error("Nenhuma camada cadastrada");
+        }
 
-    function onSuccessGetLayerBySpatialDS(response) {
-      $scope.layersBySpatials = response.data.content;
-      if ($scope.layersBySpatials.length === 0)
-        $scope.columnsByLayer = [];
-      // notify.error("Nenhuma camada cadastrada");
-    }
-
-    function onError(error) {
-      if (error) {
-        // notify.error(error.statusText);
-      }
-      throw Error(error);
-    }
+        function onError(error) {
+            if (error) {
+                // notify.error(error.statusText);
+            }
+            throw Error(error);
+        }
 
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
-  });
+    });
 
 });

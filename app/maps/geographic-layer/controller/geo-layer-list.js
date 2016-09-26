@@ -4,7 +4,7 @@ define([
     "maps/geographic-layer/service/geo-layer-service"
 ], function (maps, filterHelper) {
 
-    return maps.lazy.controller("GeoLayerListController", function ($scope, GeoLayerService, ngTableParams) {
+    return maps.lazy.controller("GeoLayerListController", function ($scope, GeoLayerService, ngTableParams, notify) {
 
         $scope.geometryMap = {
             esriGeometryPolygon : "Polígono",
@@ -28,12 +28,15 @@ define([
                     GeoLayerService.list(queryString).then(onSuccess, onError);
 
                     function onSuccess(response) {
+                        if (!response) {
+                            return notify.error('Não foi possível obter resposta do servidor.');
+                        }
                         $scope.tableLayerParams.total(response.data.totalDocuments);
                         $defer.resolve(response.data.content);
                     }
 
                     function onError(err) {
-                        throw Error(err);
+                        notify.error(err);
                     }
                 }
             };
