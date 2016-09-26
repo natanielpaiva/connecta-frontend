@@ -20,9 +20,29 @@ define([
             return $http.get(url + queryString);
         };
 
-        this.listAll = function (){
-          return $http.get(url + '/listAll');
+        this.listAll = function () {
+            return $http.get(url + '/listAll');
         };
+
+        this.initCatalogObiee = function () {
+            return $http.get(url + '/teste/catalog');
+        };
+
+        this.getChildCatalogObiee = function (path) {
+            path = '?' +path;
+            return $http.get(url + '/teste/catalog' + path);
+        };
+
+        this.listAnalysisConnecta = function() {
+            var url = 'http://connectad.cds.com.br/connecta-presenter/analysis';
+            return $http.get(url);
+        };
+
+        this.getAnalysisConnecta = function(id) {
+            var url = 'http://connectad.cds.com.br/connecta-presenter/analysis/';
+            return $http.get(url + id);
+        };
+
 
     });
 
