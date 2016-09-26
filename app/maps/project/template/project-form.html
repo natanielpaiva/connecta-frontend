@@ -24,26 +24,30 @@
     </div>
 </div>
 
-<div ng-include="steps[currentStep].templateUrl"></div>
+<form name="project_form" novalidate>
 
-<div class="row">
-    <div class="col-md-12 text-right">
-        <button class="btn btn-default">
-            CANCELAR
-        </button>
-        <button ng-click="changeStep()"
-                class="btn btn-default"
-                ng-disabled="steps[currentStep].first">
-            VOLTAR
-        </button>
-        <button ng-click="changeStep(true)"
-                class="btn btn-default"
-                ng-disabled="steps[currentStep].last">
-            AVANÇAR
-        </button>
-        <button class="btn btn-primary"
-                ng-disabled="!steps[currentStep].last">
-            SALVAR
-        </button>
+    <div ng-include="steps[currentStep].templateUrl"></div>
+
+    <div class="row margin-top-double">
+        <div class="col-md-12 text-right">
+            <button class="btn btn-default">
+                CANCELAR
+            </button>
+            <button ng-click="changeStep()"
+                    class="btn btn-default"
+                    ng-disabled="steps[currentStep].first">
+                VOLTAR
+            </button>
+            <button ng-click="changeStep(true)"
+                    class="btn btn-default"
+                    ng-disabled="steps[currentStep].last || project_form.$invalid">
+                AVANÇAR
+            </button>
+            <button class="btn btn-primary"
+                    ng-disabled="!steps[currentStep].last">
+                SALVAR
+            </button>
+        </div>
     </div>
-</div>
+
+</form>

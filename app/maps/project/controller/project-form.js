@@ -9,16 +9,24 @@ define([
     "maps/spatial-datasource/service/spatial-datasource-service",
     "maps/geographic-layer/service/geo-layer-service",
     "maps/project/directive/menu-carrousel",
-    "maps/project/directive/input-slider"
+    "maps/project/directive/input-slider",
+    "maps/datasource/service/datasource-service"
 ], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig, contextConfig) {
 
-    return maps.lazy.controller("ProjectFormController", function (
-        $scope, $timeout, ProjectService, SpatialDataSourceService, GeoLayerService) {
+    return maps.lazy.controller("ProjectFormController", function ($scope, $timeout, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
 
         $scope.project = {
             baseMaps : [],
-            navigationTools : {},
-            geoTools : {}
+            widgets : {},
+            tools : [],
+            serviceType : "connecta"
+        };
+
+        $scope.richLayer = {
+            crossingKeys : {
+                geoKey : {},
+                resultSetkey : {}
+            }
         };
 
         var WatcherEnum = {
@@ -140,8 +148,16 @@ define([
 
         $scope.checkAllMapTools = function (sectionName, value) {
 
-            for (var tool in $scope.tools[sectionName]) {
-                $scope.project[sectionName][tool] = value;
+            var sectionTools = $scope.tools[sectionName];
+
+            if (sectionTools instanceof Array) {
+                for (var tool in $scope.project[sectionName]) {
+                    $scope.project[sectionName][tool].active = value;
+                }
+            } else {
+                for (var tool in $scope.tools[sectionName]) {
+                    $scope.project[sectionName][tool] = value;
+                }
             }
 
         };
@@ -171,10 +187,12 @@ define([
         $scope.columnsByLayer = [];
 
         $scope.toggleOptionAdd = function () {
-            if ($scope.flag_add)
-            // SpatialDataSourceService.listAll().then(onSuccessListSpatialDS, onError);
+            if ($scope.flag_add) {
+                SpatialDataSourceService.list({size : "*"}).then(onSuccessListSpatialDS, onError);
+                DatasourceService.listConnectaDatasources().then(onSuccesListDataSources, onError);
+            }
 
-                $scope.flag_add = !$scope.flag_add;
+            $scope.flag_add = !$scope.flag_add;
         };
 
         $scope.getLayersBySpatialDS = function (id_spatial_ds) {
@@ -192,27 +210,40 @@ define([
             }
         };
 
+        $scope.onDataSourceChange = function (id) {
+            DatasourceService.listColumnsByDatasourceId(id).then(function (response) {
+                if (response.data) {
+                    $scope.columns = response.data.analysisColumns;
+                }
+            });
+        };
+
         function onSuccessListProject(response) {
             $scope.projects = response.data.content;
             console.log($scope.projects);
         }
 
         function onSuccessListSpatialDS(response) {
-            $scope.spatialDataSources = response.data;
+            $scope.spatialDataSources = response.data.content;
         }
 
         function onSuccessGetLayerBySpatialDS(response) {
             $scope.layersBySpatials = response.data.content;
-            if ($scope.layersBySpatials.length === 0)
-                $scope.columnsByLayer = [];
-            // notify.error("Nenhuma camada cadastrada");
+            if ($scope.layersBySpatials.length === 0) {
+                notify.error("Nenhuma camada cadastrada");
+            }
+            $scope.columnsByLayer = [];
         }
 
         function onError(error) {
             if (error) {
-                // notify.error(error.statusText);
+                notify.error(error.statusText);
             }
             throw Error(error);
+        }
+
+        function onSuccesListDataSources(response) {
+            $scope.datasources = response.data.content;
         }
 
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//

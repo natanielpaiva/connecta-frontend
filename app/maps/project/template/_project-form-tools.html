@@ -17,22 +17,22 @@
 
     <div class="row margin-top-single">
         <div class="col-md-12">
-          <label translate>Ferramentas de navegação e visualização disponibilizadas ao usuário</label>
-          <label class="switch">
-              <input ng-model="allNavigationToolsAreEnabled"
-                     ng-change="checkAllMapTools('navigationTools', allNavigationToolsAreEnabled)" type="checkbox">
-              <div class="slider round"></div>
-          </label>
+            <label translate>Ferramentas de navegação e visualização disponibilizadas ao usuário</label>
+            <label class="switch">
+                <input ng-model="allNavigationToolsAreEnabled"
+                       ng-change="checkAllMapTools('widgets', allNavigationToolsAreEnabled)" type="checkbox">
+                <div class="slider round"></div>
+            </label>
         </div>
 
         <div id="project-navigation-tools">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <div class="col-md-2" ng-repeat="tool in tools.navigationTools">
+                    <div class="col-md-2" ng-repeat="tool in tools.widgets">
                         <p>{{tool.title}}</p>
                         <label class="switch">
-                            <input ng-init="project.navigationTools[tool.model] = tool.checked"
-                                   ng-model="project.navigationTools[tool.model]" type="checkbox">
+                            <input ng-init="project.widgets[tool.model] = tool.checked"
+                                   ng-model="project.widgets[tool.model]" type="checkbox">
                             <div class="slider round"></div>
                         </label>
                     </div>
@@ -43,21 +43,21 @@
 
     <div class="row margin-top-single">
         <div class="col-md-12">
-          <label translate>Ferramentas Geospaciais a serem disponibilizadas</label>
-          <label class="switch">
-            <input ng-model="allGeoToolsAreEnabled"
-                   ng-change="checkAllMapTools('geoTools', allGeoToolsAreEnabled)" type="checkbox">
-            <div class="slider round"></div>
-          </label>
+            <label translate>Ferramentas Geospaciais a serem disponibilizadas</label>
+            <label class="switch">
+                <input ng-model="allGeoToolsAreEnabled"
+                       ng-change="checkAllMapTools('tools', allGeoToolsAreEnabled)" type="checkbox">
+                <div class="slider round"></div>
+            </label>
         </div>
 
         <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="col-md-2" ng-repeat="tool in tools.geoTools">
+            <div class="col-md-12 text-center" ng-repeat="mapTools in tools.tools track by $index">
+                <div class="col-md-2" ng-repeat="tool in mapTools track by $index">
                     <p>{{tool.title}}</p>
                     <label class="switch">
-                        <input ng-init="project.geoTools[tool.model] = tool.checked"
-                               ng-model="project.geoTools[tool.model]" type="checkbox">
+                        <input ng-init="project.tools[$index].name = tool.model; project.tools[$index].active = tool.checked" type="hidden">
+                        <input ng-model="project.tools[$index].active" type="checkbox">
                         <div class="slider round"></div>
                     </label>
                 </div>

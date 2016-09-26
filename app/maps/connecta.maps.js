@@ -21,11 +21,11 @@ define([
     maps.run(function (applications) {
         var appMaps = applications.maps;
         maps.lazy.value('mapsResources', {
-            analysis : appMaps.host + '/analysis',
-            dataSource : appMaps.host + '/data-source',
-            layer : appMaps.host + '/layer',
-            project : appMaps.host + '/project',
-            spatialDataSource : appMaps.host + '/spatial-data-source'
+            analysis : appMaps.host + '/admin/analysis',
+            dataSource : appMaps.host + '/admin/data-source',
+            layer : appMaps.host + '/admin/layer',
+            project : appMaps.host + '/admin/project',
+            spatialDataSource : appMaps.host + '/admin/spatial-data-source'
         });
     });
 

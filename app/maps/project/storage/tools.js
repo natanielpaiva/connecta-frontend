@@ -1,10 +1,5 @@
 define({
-    navigationTools : {
-        legend : {
-            model : 'legend',
-            title : 'Legenda',
-            checked : false
-        },
+    widgets : {
         areaZoom : {
             model : 'areaZoom',
             title : 'Zoom em área',
@@ -41,7 +36,7 @@ define({
             checked : false
         }
     },
-    geoTools : {
+    tools : [{
         buffer : {
             model : 'buffer',
             title : 'Buffer',
@@ -55,6 +50,11 @@ define({
         fileUpload : {
             model : 'fileUpload',
             title : 'Upload de arquivo',
+            checked : false
+        },
+        legend : {
+            model : 'legend',
+            title : 'Legenda',
             checked : false
         },
         timeline : {
@@ -72,5 +72,5 @@ define({
             title : 'Comparação',
             checked : false
         }
-    }
+    }]
 });

@@ -1,6 +1,7 @@
 define([
-    "connecta.maps"
-], function (maps) {
+    "connecta.maps",
+    "maps/helper/url"
+], function (maps, urlHelper) {
 
     return maps.lazy.service("DatasourceService", function ($http, mapsResources, presenterResources) {
 
@@ -42,6 +43,16 @@ define([
 
         this.getAnalysisConnecta = function(id) {
             return $http.get(presenterResources.analysis + '/' + id);
+        };
+
+        this.listConnectaDatasources = function () {
+            var params = '?size=*&filter={"serviceType":"connecta"}';
+
+            return $http.get(url + params);
+        };
+
+        this.listColumnsByDatasourceId = function (datasourceId) {
+            return $http.get(presenterResources.analysis + "/" + datasourceId);
         };
 
     });
