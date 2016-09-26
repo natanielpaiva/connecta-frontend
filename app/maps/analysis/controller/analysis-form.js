@@ -46,7 +46,7 @@ define([
                             });
                             if (richLayer.length) {
                                 richLayer = richLayer[0];
-                                $scope.selectedRichLayer =richLayer;
+                                $scope.selectedRichLayer = richLayer;
                                 populateMetadataFields(richLayer);
                             }
                         } catch (err) {
@@ -81,6 +81,7 @@ define([
         };
 
         $scope.richLayerChanged = function (richLayer) {
+            $scope.analysis.richLayerId = richLayer._id;
             populateMetadataFields(richLayer);
         };
 
