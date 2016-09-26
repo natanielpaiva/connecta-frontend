@@ -2,7 +2,7 @@ define([
     "connecta.maps"
 ], function (maps) {
 
-    return maps.lazy.service("DatasourceService", function ($http, mapsResources) {
+    return maps.lazy.service("DatasourceService", function ($http, mapsResources, presenterResources) {
 
         var url = mapsResources.dataSource;
 
@@ -35,6 +35,15 @@ define([
 
             return $http.get(url);
         };
+
+        this.listAnalysisConnecta = function() {
+            return $http.get(presenterResources.analysis);
+        };
+
+        this.getAnalysisConnecta = function(id) {
+            return $http.get(presenterResources.analysis + '/' + id);
+        };
+
     });
 
 });
