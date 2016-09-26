@@ -36,7 +36,7 @@ define([
                     }
 
                     function onError(err) {
-                        notify.error(err);
+                        notify.error(err.message);
                     }
                 }
             };

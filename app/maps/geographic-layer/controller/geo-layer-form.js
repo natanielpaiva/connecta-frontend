@@ -27,7 +27,7 @@ define([
         function loadSpatialDataSources() {
             SpatialDataSourceService.list({size: '*'})
                 .catch(function (err) {
-                    notify.error(err);
+                    notify.error(err.message);
                 })
                 .then(function (response) {
                     if (!response) {
@@ -42,7 +42,7 @@ define([
                 $scope.isEditing = true;
                 var promise = GeoLayerService.get($routeParams.id);
                 promise.catch(function (err) {
-                    notify.error(err);
+                    notify.error(err.message);
                 });
                 promise.then(function (response) {
                     try {
@@ -69,7 +69,7 @@ define([
                                 $scope.changeSelectedLayer($scope.layer.layerIdentifier);
                             });
                     } catch (err) {
-                        notify.error(err);
+                        notify.error(err.message);
                     }
                 });
             } else {
@@ -109,7 +109,7 @@ define([
                     $scope.layers = response.data;
                 });
             } catch (err) {
-                notify.error(err);
+                notify.error(err.message);
             }
         };
 
@@ -125,7 +125,7 @@ define([
                 var mapId = mapHelper.map._leaflet_id;
                 var promise = GeoLayerService.query(params);
                 promise.catch(function (err) {
-                    notify.error(err);
+                    notify.error(err.message);
                 });
                 promise.then(function (response) {
                     try {
@@ -141,7 +141,7 @@ define([
                         $scope.selectedSpatialDataSource[layerId].srid = response.data.spatialReference.wkid;
                         mapHelper.previewLayer(layer);
                     } catch (err) {
-                        throw new Error(err);
+                        notify.error(err.message);
                     }
                 });
                 $scope.layer.layerIdentifier = layerId;
@@ -156,7 +156,7 @@ define([
                 promise = GeoLayerService.save($scope.layer);
             }
             promise.catch(function (err) {
-                notify.error(err);
+                notify.error(err.message);
             });
             promise.then(function (response) {
                 $location.path("/maps/geo-layer");

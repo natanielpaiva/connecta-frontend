@@ -35,13 +35,22 @@ define([
                             $scope.analysis = {
                                 _id: analysis._id,
                                 title: analysis.title,
+                                richLayerId: analysis.richLayerId,
                                 allowDrill: analysis.allowDrill,
                                 popupConfig: analysis.popupConfig,
                                 outFields: analysis.outFields,
                                 project: analysis.project
                             };
+                            var richLayer = $scope.analysis.project.richLayers.filter(function (richLayer) {
+                                return richLayer._id === $scope.analysis.richLayerId;
+                            });
+                            if (richLayer.length) {
+                                richLayer = richLayer[0];
+                                $scope.selectedRichLayer =richLayer;
+                                populateMetadataFields(richLayer);
+                            }
                         } catch (err) {
-                            notify.error(err);
+                            notify.error(err.message);
                         }
                     });
             }
@@ -57,7 +66,7 @@ define([
         function loadProjects() {
             ProjectService.list({size: '*'})
                 .catch(function (err) {
-                    notify.error(err);
+                    notify.error(err.message);
                 })
                 .then(function (response) {
                     if (!response) {
@@ -72,6 +81,10 @@ define([
         };
 
         $scope.richLayerChanged = function (richLayer) {
+            populateMetadataFields(richLayer);
+        };
+
+        function populateMetadataFields(richLayer) {
             var promise;
             if ($scope.analysis.project.serviceType === 'obiee') {
                 promise = AnalysisService.getMetaData(richLayer.info.analysisPath);
@@ -100,9 +113,9 @@ define([
                 return notify.error('analysis-form.js#richLayerChanged => Service type faltando ou não suportado.');
             }
             promise.catch(function (err) {
-                notify.error(err);
+                notify.error(err.message);
             });
-        };
+        }
 
         $scope.columnChanged = function (columnName) {
             $scope.outField.name = columnName;
@@ -146,7 +159,7 @@ define([
                 promise = AnalysisService.update($scope.analysis._id, $scope.analysis);
             }
             promise.catch(function (err) {
-                notify.error(err);
+                notify.error(err.message);
             });
             promise.then(function () {
                 $location.path('/maps/analysis');

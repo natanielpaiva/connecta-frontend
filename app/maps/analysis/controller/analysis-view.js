@@ -33,10 +33,9 @@ define([
         $scope.delete = function () {
             AnalysisService.delete($scope.analysis._id)
                 .catch(function (err) {
-                    notify.error(err);
+                    notify.error(err.message);
                 })
                 .then(function (response) {
-                    notify.info(response);
                     $location.path('/maps/analysis');
                 });
         };
