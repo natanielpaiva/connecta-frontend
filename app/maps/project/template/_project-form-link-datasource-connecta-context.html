@@ -1,15 +1,15 @@
 <div class="row">
     <div class="form-group col-md-4">
         <label class="required" translate>Título</label>
-        <input ng-model="richLayer.title" type="text" class="form-control" required/>
+        <input ng-model="richLayerAdd.title" type="text" class="form-control" required/>
     </div>
 </div>
 
 <div class="row">
     <div class="form-group col-md-4">
         <label class="required" translate>Origem de dados espacial</label>
-        <select ng-model="spatialDatasource" class="form-control"
-                ng-change="getLayersBySpatialDS(spatialDatasource._id)"
+        <select ng-model="richLayerAdd.spatialDatasource" class="form-control"
+                ng-change="getLayersBySpatialDS(richLayerAdd.spatialDatasource._id)"
                 ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource.title"
                 required>
             <option value="">Selecione</option>
@@ -18,8 +18,8 @@
 
     <div class="form-group col-md-4">
         <label class="required" translate>Camada Geo</label>
-        <select ng-model="richLayer.layer" class="form-control"
-                ng-change="getColumnsByLayer(richLayer.layer._id)"
+        <select ng-model="richLayerAdd.layer" class="form-control"
+                ng-change="getColumnsByLayer(richLayerAdd.layer._id)"
                 ng-disabled="layersBySpatials.length == 0"
                 ng-options="layers.title for layers in layersBySpatials track by layers._id" required>
             <option value="">Selecione</option>
@@ -28,7 +28,7 @@
 
     <div class="form-group col-md-4">
         <label class="required" translate>Campo</label>
-        <select ng-model="richLayer.crossingKeys.geoKey" ng-disabled="columnsByLayer.length == 0" class="form-control"
+        <select ng-model="richLayerAdd.crossingKeys.geoKey" ng-disabled="columnsByLayer.length == 0" class="form-control"
                 ng-options="column.name as column.name for column in columnsByLayer" required>
             <option value="">Selecione</option>
         </select>
@@ -38,8 +38,8 @@
 <div class="row">
     <div class="form-group col-md-4">
         <label class="required" translate>Origem de dados tabular</label>
-        <select ng-model="datasource"
-                ng-change="onDataSourceChange(datasource.info.analysis.id)"
+        <select ng-model="richLayerAdd.datasource"
+                ng-change="onDataSourceChange(richLayerAdd.datasource.info.analysis.id)"
                 ng-options="datasource.title for datasource in datasources track by datasource._id"
                 class="form-control"
                 required>
@@ -49,9 +49,19 @@
 
     <div class="form-group col-md-4">
         <label class="required" translate>Campo</label>
-        <select ng-model="richLayer.crossingKeys.resultSetkey" class="form-control"
+        <select ng-model="richLayerAdd.crossingKeys.resultSetKey" class="form-control"
                 ng-options="column.name as column.label for column in columns" required>
             <option value="">Selecione</option>
         </select>
     </div>
 </div>
+
+<button class="btn btn-block"
+        ng-click="toggleOptionAdd(richLayerAdd)">
+    Salvar
+</button>
+
+<button class="btn btn-block margin-bottom-double btn-danger"
+        ng-click="cancel()">
+    Cancelar
+</button>

@@ -35,12 +35,13 @@
              ng-repeat="richLayer in project.richLayers"
              dnd-draggable="richLayer"
              dnd-moved="project.richLayers.splice($index, 1)"
-             dnd-effect-allowed="move">
+             dnd-effect-allowed="move"
+             ng-click="editRichLayer(richLayer)">
             <td class="col-md-2">{{$index + 1}}</td>
             <td class="col-md-2">{{richLayer.title}}</td>
             <td class="col-md-2">{{richLayer.layer.title}}</td>
             <td class="col-md-2">{{richLayer.crossingKeys.geoKey}}</td>
-            <td class="col-md-2">{{richLayer.dataSource.title}}</td>
+            <td class="col-md-2">{{richLayer.datasource.title}}</td>
             <td class="col-md-2">{{richLayer.crossingKeys.resultSetKey}}</td>
             <td class="">
                 <a href="" class="full-size-block link-no-state">
@@ -61,9 +62,10 @@
     </div>
 
     <!--//CADASTRO DE DRILL-->
-    <button class="btn btn-block margin-bottom-double {{flag_add ? 'btn-default' : 'btn-danger'}}"
-            ng-click="toggleOptionAdd()">
-        {{flag_add ? 'Adicionar' : 'Salvar'}}
+    <button class="btn btn-block margin-bottom-double"
+            ng-click="toggleOptionAdd()"
+            ng-if="flag_add">
+        Adicionar
     </button>
 
     <style>

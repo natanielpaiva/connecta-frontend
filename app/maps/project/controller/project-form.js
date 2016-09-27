@@ -185,11 +185,45 @@ define([
         $scope.flag_add = true;
         $scope.layersBySpatials = [];
         $scope.columnsByLayer = [];
+        $scope.cancel = function () {
+            $scope.flag_add = true;
+        }
 
-        $scope.toggleOptionAdd = function () {
+        $scope.editRichLayer = function (richLayer) {
+            SpatialDataSourceService.list({size : "*"}).then(function (response) {
+                $scope.spatialDataSources = response.data.content;
+                return GeoLayerService.getLayersByDS(richLayer.spatialDatasource._id);
+            }, onError).then(function(response){
+                $scope.layersBySpatials = response.data.content;
+                return DatasourceService.listColumnsByDatasourceId(richLayer.datasource.info.analysis.id);
+            }, onError).then(function(response){
+                $scope.columns = response.data.analysisColumns;
+                $scope.getColumnsByLayer(richLayer.layer._id);
+                $scope.flag_add = false;
+                $scope.richLayerAdd = angular.copy(richLayer);
+            });
+
+            DatasourceService.listConnectaDatasources().then(onSuccesListDataSources, onError);
+        }
+
+        $scope.toggleOptionAdd = function (richLayer) {
+            if (typeof richLayer == 'undefined') {
+                $scope.richLayerAdd = {};
+                $scope.layersBySpatials = [];
+                $scope.columnsByLayer = [];
+            }
             if ($scope.flag_add) {
                 SpatialDataSourceService.list({size : "*"}).then(onSuccessListSpatialDS, onError);
                 DatasourceService.listConnectaDatasources().then(onSuccesListDataSources, onError);
+
+                if (richLayer) {
+                    $scope.richLayerAdd = angular.copy(richLayer);
+                    if (!$scope.flag_add)
+                        return false;
+                }
+
+            } else {
+                $scope.project.richLayers.push(angular.copy(richLayer));
             }
 
             $scope.flag_add = !$scope.flag_add;
@@ -211,11 +245,13 @@ define([
         };
 
         $scope.onDataSourceChange = function (id) {
-            DatasourceService.listColumnsByDatasourceId(id).then(function (response) {
-                if (response.data) {
-                    $scope.columns = response.data.analysisColumns;
-                }
-            });
+            if (id) {
+                DatasourceService.listColumnsByDatasourceId(id).then(function (response) {
+                    if (response.data) {
+                        $scope.columns = response.data.analysisColumns;
+                    }
+                });
+            }
         };
 
         function onSuccessListProject(response) {
@@ -268,7 +304,7 @@ define([
                 info : {
 
                 },
-                dataSource : {
+                datasource : {
                    title : "DataSourceTitle"
                 }
             },
@@ -290,8 +326,125 @@ define([
                 info : {
 
                 },
-                dataSource : {
+                datasource : {
                     title : "DataSourceTitle2"
+                }
+            },
+            {
+                "title": "lol",
+                "spatialDatasource": {
+                    "dsn": "http://arcgis.cds.com.br/arcgis/rest/services/CNJ/ESTABELECIMENTOS_PRISIONAIS_SP/MapServer",
+                    "title": "FUNFA",
+                    "serverType": "ArcGIS",
+                    "_id": "48430",
+                    "__v": 0
+                },
+                "layer": {
+                    "__v": 0,
+                    "_id": "57dff63d1ebc303b416ff73a",
+                    "geometryField": {
+                        "domain": null,
+                        "alias": "Shape",
+                        "type": "esriFieldTypeGeometry",
+                        "name": "Shape"
+                    },
+                    "geometryType": "esriGeometryPolygon",
+                    "isVector": true,
+                    "layerIdentifier": "3",
+                    "spatialDataSourceId": "48430",
+                    "title": "FUNFA Layer",
+                    "layerFields": [
+                        {
+                            "domain": null,
+                            "alias": "OBJECTID",
+                            "type": "esriFieldTypeOID",
+                            "name": "OBJECTID"
+                        },
+                        {
+                            "domain": null,
+                            "alias": "Shape",
+                            "type": "esriFieldTypeGeometry",
+                            "name": "Shape"
+                        },
+                        {
+                            "domain": null,
+                            "length": 60,
+                            "alias": "NM_MUNICIP",
+                            "type": "esriFieldTypeString",
+                            "name": "NM_MUNICIP"
+                        },
+                        {
+                            "domain": null,
+                            "length": 7,
+                            "alias": "CD_GEOCMU",
+                            "type": "esriFieldTypeString",
+                            "name": "CD_GEOCMU"
+                        },
+                        {
+                            "domain": null,
+                            "length": 2,
+                            "alias": "CD_UF",
+                            "type": "esriFieldTypeString",
+                            "name": "MAX_CD_UF"
+                        },
+                        {
+                            "domain": null,
+                            "alias": "SUM_Plan1__CAP",
+                            "type": "esriFieldTypeDouble",
+                            "name": "SUM_Plan1__CAP"
+                        },
+                        {
+                            "domain": null,
+                            "alias": "SUM_Plan1__POP",
+                            "type": "esriFieldTypeDouble",
+                            "name": "SUM_Plan1__POP"
+                        },
+                        {
+                            "domain": null,
+                            "alias": "MEAN_PERC_OCUP",
+                            "type": "esriFieldTypeDouble",
+                            "name": "MEAN_PERC_OCUP"
+                        },
+                        {
+                            "domain": null,
+                            "alias": "Shape_Length",
+                            "type": "esriFieldTypeDouble",
+                            "name": "Shape_Length"
+                        },
+                        {
+                            "domain": null,
+                            "alias": "Shape_Area",
+                            "type": "esriFieldTypeDouble",
+                            "name": "Shape_Area"
+                        }
+                    ]
+                },
+                "crossingKeys": {
+                    "geoKey": "NM_MUNICIP",
+                    "resultSetKey": "MUNICIPIO"
+                },
+                "datasource": {
+                    "serviceType": "connecta",
+                    "info": {
+                        "analysis": {
+                            "id": 147,
+                            "name": "sssssss",
+                            "datasource": null,
+                            "analysisColumns": null,
+                            "analysisAttributes": null,
+                            "analysisRelations": null,
+                            "hasDrill": false,
+                            "type": "DATABASE",
+                            "domain": "28",
+                            "table": "CMSP_TSE_PERFIL_ELEITORADO",
+                            "requestType": "TABLE",
+                            "cached": false
+                        }
+                    },
+                    "title": "lol",
+                    "description": "lool",
+                    "_id": "57ea6ff21d84412407a103c2",
+                    "__v": 0
                 }
             }
         ];
