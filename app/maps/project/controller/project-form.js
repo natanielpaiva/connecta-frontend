@@ -198,7 +198,7 @@ define([
                 return GeoLayerService.getLayersByDS(richLayer.spatialDatasource._id);
             }, onError).then(function(response){
                 $scope.layersBySpatials = response.data.content;
-                return DatasourceService.listColumnsByDatasourceId(richLayer.dataSourceIdentifier.info.analysis.id);
+                return DatasourceService.listColumnsByDatasourceId(richLayer.dataSourceIdentifier);
             }, onError).then(function(response){
                 $scope.columns = response.data.analysisColumns;
                 $scope.getColumnsByLayer(richLayer.layer._id);
@@ -248,6 +248,7 @@ define([
         };
 
         $scope.onDataSourceChange = function (id) {
+            console.log(id);
             if (id) {
                 DatasourceService.listColumnsByDatasourceId(id).then(function (response) {
                     if (response.data) {

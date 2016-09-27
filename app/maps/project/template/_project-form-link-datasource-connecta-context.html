@@ -39,8 +39,8 @@
     <div class="form-group col-md-4">
         <label class="required" translate>Origem de dados tabular</label>
         <select ng-model="richLayerAdd.dataSourceIdentifier"
-                ng-change="onDataSourceChange(richLayerAdd.dataSourceIdentifier.info.analysis.id)"
-                ng-options="datasource.title for datasource in datasources track by datasource._id"
+                ng-change="onDataSourceChange(richLayerAdd.dataSourceIdentifier)"
+                ng-options="datasource.info.analysis.id as datasource.title for datasource in datasources"
                 class="form-control"
                 required>
             <option value="">Selecione</option>
@@ -65,3 +65,5 @@
         ng-click="cancel()">
     Cancelar
 </button>
+<pre>{{datasources | json}}</pre>
+<pre>{{richLayerAdd | json}}</pre>
