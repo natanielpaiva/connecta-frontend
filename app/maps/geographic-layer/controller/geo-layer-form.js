@@ -121,10 +121,10 @@ define([
                 mapHelper.previewLayer($scope.selectedSpatialDataSource[layerId]);
             } else {
                 var params = {};
-                params.layer = {
+                params.layer = JSON.stringify({
                     layerIdentifier: layerId,
                     spatialDataSourceId: $scope.layer.spatialDataSourceId
-                };
+                });
                 var mapId = mapHelper.map._leaflet_id;
                 var promise = GeoLayerService.query(params);
                 promise.catch(function (err) {
