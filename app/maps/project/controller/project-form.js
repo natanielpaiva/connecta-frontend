@@ -19,7 +19,11 @@ define([
             baseMaps : [],
             widgets : {},
             tools : [],
-            serviceType : "connecta"
+            serviceType : "connecta",
+            mapConfig: {
+                minZoom : 3,
+                maxZoom : 13
+            }
         };
 
         $scope.richLayer = {
@@ -30,7 +34,7 @@ define([
         };
 
         var WatcherEnum = {
-            MAP_CENTER: 'mapCenter',
+            INITIAL_EXTENT: 'initialExtent',
             MAX_ZOOM: 'maxZoom',
             MIN_ZOOM: 'minZoom',
             INITIAL_ZOOM: 'initialZoom'
@@ -52,20 +56,20 @@ define([
                     console.error(error);
                 })
                 .then(function (map) {
-                    $scope.mapCenter = mapHelper.getCenter();
+                    $scope.project.mapConfig.initialExtent = mapHelper.getCenter();
                     $scope.$apply();
-                    $scope.watchers[WatcherEnum.MAP_CENTER] = mapHelper.watchCenterChange(function (position) {
-                        $scope.mapCenter = position;
+                    $scope.watchers[WatcherEnum.INITIAL_EXTENT] = mapHelper.watchCenterChange(function (position) {
+                        $scope.project.mapConfig.initialExtent = position;
                         $scope.$apply();
                     }, true);
 
                     $scope.watchers[WatcherEnum.MIN_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
-                        $scope.configSlider.minZoom = zoom;
+                        $scope.project.mapConfig.minZoom = zoom;
                         $scope.$apply();
                     }, true);
 
                     $scope.watchers[WatcherEnum.MAX_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
-                        $scope.configSlider.maxZoom = zoom;
+                        $scope.project.mapConfig.maxZoom = zoom;
                         $scope.$apply();
                     }, true);
 
@@ -79,20 +83,20 @@ define([
             }
 
             if (watcher === $scope.currentWatcher) {
-                $scope.currentWatcher = undefined;
+                delete $scope.currentWatcher;
                 return;
             }
 
             $scope.currentWatcher = watcher;
 
-            if (watcher === WatcherEnum.MAP_CENTER) {
-                mapHelper.setCenter($scope.mapCenter);
+            if (watcher === WatcherEnum.INITIAL_EXTENT) {
+                mapHelper.setCenter($scope.project.mapConfig.initialExtent);
             }
             if (watcher === WatcherEnum.MAX_ZOOM) {
-                mapHelper.setZoom($scope.configSlider.maxZoom);
+                mapHelper.setZoom($scope.project.mapConfig.maxZoom);
             }
             if (watcher === WatcherEnum.MIN_ZOOM) {
-                mapHelper.setZoom($scope.configSlider.minZoom);
+                mapHelper.setZoom($scope.project.mapConfig.minZoom);
             }
 
             $scope.currentWatcher = watcher;
@@ -102,14 +106,14 @@ define([
 
         $scope.updateZoomConfig = function (sender) {
             if ($scope.currentWatcher === sender) {
-                mapHelper.setZoom($scope.configSlider[sender]);
+                mapHelper.setZoom($scope.project.mapConfig[sender]);
             }
         };
 
         $scope.updateCenter = function () {
-            if ($scope.currentWatcher === WatcherEnum.MAP_CENTER) {
+            if ($scope.currentWatcher === WatcherEnum.INITIAL_EXTENT) {
                 $scope.watchers[$scope.currentWatcher].pause();
-                mapHelper.setCenter($scope.mapCenter);
+                mapHelper.setCenter($scope.project.mapConfig.initialExtent);
                 $scope.watchers[$scope.currentWatcher].resume();
             }
         };
@@ -163,8 +167,6 @@ define([
         };
 
         $scope.configSlider = {
-            minZoom : 3,
-            maxZoom : 13,
             options : {
                 floor: 1,
                 ceil: 15,
@@ -187,7 +189,7 @@ define([
         $scope.columnsByLayer = [];
         $scope.cancel = function () {
             $scope.flag_add = true;
-        }
+        };
 
         $scope.editRichLayer = function (richLayer) {
             SpatialDataSourceService.list({size : "*"}).then(function (response) {

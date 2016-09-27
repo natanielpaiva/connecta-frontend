@@ -24,6 +24,7 @@
         <label class="required" translate>{{"GEO_LAYER.SERVER"}}</label>
         <select ng-model="selectedSpatialDataSource" class="form-control"
                 ng-change="listLayers(selectedSpatialDataSource._id)"
+                ng-disabled="isLoadingLayer"
                 ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource._id" required>
           <option value="">Selecione</option>
         </select>
@@ -31,8 +32,10 @@
 
       <div class="form-group col-md-6" ng-if="!isEditing">
         <label class="required" translate>{{"GEO_LAYER.LAYERS"}}</label>
-        <select ng-model="selectedLayer" ng-disabled="!layers.length" class="form-control"
-                ng-options="layer.name for layer in layers track by layer.layerIdentifier" ng-change="changeSelectedLayer(selectedLayer.layerIdentifier)" required>
+        <select ng-model="$parent.selectedLayer" class="form-control"
+                ng-options="layer.name for layer in layers track by layer.layerIdentifier"
+                ng-disabled="isLoadingLayer || !layers.length"
+                ng-change="changeSelectedLayer(selectedLayer)" required>
           <option value="">Selecione</option>
         </select>
       </div>

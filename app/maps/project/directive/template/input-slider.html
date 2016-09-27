@@ -7,7 +7,7 @@
 
         <div class="cm-slider-item cm-slider-text">
             <label>Zoom Min</label>
-            <input ng-model="configSlider.minZoom"
+            <input ng-model="project.mapConfig.minZoom"
                    ng-model-options="{debounce : 500}"
                    ng-change="$ctrl.updateZoomConfig('minZoom')"
                    type="number"
@@ -16,8 +16,8 @@
     </div>
 
     <div class="cm-slider-width">
-        <rzslider rz-slider-model="configSlider.minZoom"
-                  rz-slider-high="configSlider.maxZoom"
+        <rzslider rz-slider-model="project.mapConfig.minZoom"
+                  rz-slider-high="project.mapConfig.maxZoom"
                   rz-slider-options="configSlider.options">
         </rzslider>
     </div>
@@ -25,7 +25,7 @@
     <div class="cm-min-zoom">
         <div class="cm-slider-item cm-slider-text">
             <label>Zoom Max</label>
-            <input ng-model="configSlider.maxZoom"
+            <input ng-model="project.mapConfig.maxZoom"
                    ng-model-options="{debounce : 500}"
                    ng-change="$ctrl.updateZoomConfig('maxZoom')"
                    class="form-control"

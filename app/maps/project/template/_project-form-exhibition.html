@@ -43,16 +43,16 @@
 
                         <div class="col-md-4" style="padding-right: 0">
                             <label>Coord X</label>
-                            <input ng-model="mapCenter.lng" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
+                            <input ng-model="project.mapConfig.initialExtent.lng" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
                         </div>
 
                         <div class="col-md-5" style="padding-right: 0; padding-left: 0">
                             <div class="col-md-8" style="padding-right: 0; padding-left: 2px">
                                 <label>Coord Y</label>
-                                <input ng-model="mapCenter.lat" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
+                                <input ng-model="project.mapConfig.initialExtent.lat" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
                             </div>
                             <div class="col-md-4" style="padding-right: 0; padding-left: 2px">
-                                <button class="btn btn-success margin-top-label" ng-click="setCurrentWatcher('mapCenter')">
+                                <button class="btn btn-success margin-top-label" ng-click="setCurrentWatcher('initialExtent')">
                                    <i class="icon-link"></i>
                                 </button>
                             </div>
@@ -67,7 +67,9 @@
 
                 <input-slider config-slider="configSlider"
                               toggle-zoom-bind="setCurrentWatcher"
-                              update-zoom-config="updateZoomConfig"></input-slider>
+                              update-zoom-config="updateZoomConfig"
+                              project="project"
+                ></input-slider>
 
             </div>
         </div>

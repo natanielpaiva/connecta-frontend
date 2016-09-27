@@ -7,10 +7,10 @@ define([
         var minZoom;
         var maxZoom;
 
-        minZoom = $scope.configSlider.minZoom;
-        maxZoom = $scope.configSlider.maxZoom;
+        minZoom = $scope.project.mapConfig.minZoom;
+        maxZoom = $scope.project.mapConfig.maxZoom;
 
-        Object.defineProperties($scope.configSlider, {
+        Object.defineProperties($scope.project.mapConfig, {
 
             minZoom : {
                 get : function() {
@@ -50,6 +50,7 @@ define([
             templateUrl: 'app/maps/project/directive/template/input-slider.html',
             controllerAs: '$ctrl',
             scope: {
+                project : '=',
                 configSlider : '=',
                 toggleZoomBind : '=',
                 updateZoomConfig : '='

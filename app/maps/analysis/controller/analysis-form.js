@@ -89,11 +89,18 @@ define([
         };
 
         $scope.richLayerChanged = function (richLayer) {
+            if (!richLayer) {
+                delete $scope.analysis.richLayerId;
+                return;
+            }
             $scope.analysis.richLayerId = richLayer._id;
             populateMetadataFields(richLayer);
         };
 
         function populateMetadataFields(richLayer) {
+            if (!richLayer) {
+                return;
+            }
             var promise;
             if ($scope.selectedProject.serviceType === 'obiee') {
                 promise = AnalysisService.getMetaData(richLayer.info.analysisPath);
@@ -162,6 +169,9 @@ define([
 
         $scope.saveProject = function () {
             var promise;
+
+
+
             if (!$scope.isEditing) {
                 promise = AnalysisService.save($scope.analysis);
             } else {
