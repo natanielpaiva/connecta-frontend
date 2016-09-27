@@ -247,6 +247,55 @@ define([
         }
 
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
+
+
+        $scope.project.richLayers = [
+            {
+                level : "1",
+                title : "RichLayer Title",
+                layer : {
+                    title : "layerTitle"
+                },
+                drillLabels : {
+                    up : "Drill UP",
+                    down : "Drill DOWN"
+                },
+                resultSetId : "resultID",
+                crossingKeys : {
+                    geoKey : "geoKey",
+                    resultSetKey : "resultSetKey"
+                },
+                info : {
+
+                },
+                dataSource : {
+                   title : "DataSourceTitle"
+                }
+            },
+            {
+                level : "2",
+                title : "RichLayer Title2",
+                layer : {
+                    title : "layerTitle2"
+                },
+                drillLabels : {
+                    up : "Drill UP",
+                    down : "Drill DOWN"
+                },
+                resultSetId : "resultID",
+                crossingKeys : {
+                    geoKey : "geoKey",
+                    resultSetKey : "resultSetKey"
+                },
+                info : {
+
+                },
+                dataSource : {
+                    title : "DataSourceTitle2"
+                }
+            }
+        ];
+
     });
 
 });
