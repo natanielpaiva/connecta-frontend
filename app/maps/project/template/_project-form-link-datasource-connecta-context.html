@@ -38,8 +38,8 @@
 <div class="row">
     <div class="form-group col-md-4">
         <label class="required" translate>Origem de dados tabular</label>
-        <select ng-model="richLayerAdd.datasource"
-                ng-change="onDataSourceChange(richLayerAdd.datasource.info.analysis.id)"
+        <select ng-model="richLayerAdd.dataSourceIdentifier"
+                ng-change="onDataSourceChange(richLayerAdd.dataSourceIdentifier.info.analysis.id)"
                 ng-options="datasource.title for datasource in datasources track by datasource._id"
                 class="form-control"
                 required>

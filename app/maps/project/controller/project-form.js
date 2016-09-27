@@ -304,7 +304,7 @@ define([
                 info : {
 
                 },
-                datasource : {
+                dataSourceIdentifier : {
                    title : "DataSourceTitle"
                 }
             },
@@ -326,7 +326,7 @@ define([
                 info : {
 
                 },
-                datasource : {
+                dataSourceIdentifier : {
                     title : "DataSourceTitle2"
                 }
             },
@@ -423,7 +423,7 @@ define([
                     "geoKey": "NM_MUNICIP",
                     "resultSetKey": "MUNICIPIO"
                 },
-                "datasource": {
+                "dataSourceIdentifier": {
                     "serviceType": "connecta",
                     "info": {
                         "analysis": {
