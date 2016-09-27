@@ -1,10 +1,11 @@
 define([
     "connecta.maps",
     "maps/helper/filter",
-    "maps/geographic-layer/service/geo-layer-service"
+    "maps/geographic-layer/service/geo-layer-service",
+    "maps/spatial-datasource/service/spatial-datasource-service"
 ], function (maps, filterHelper) {
 
-    return maps.lazy.controller("GeoLayerListController", function ($scope, GeoLayerService, ngTableParams, notify) {
+    return maps.lazy.controller("GeoLayerListController", function ($scope, $q, GeoLayerService, SpatialDataSourceService, ngTableParams, notify) {
 
         $scope.geometryMap = {
             esriGeometryPolygon : "Polígono",
@@ -31,8 +32,23 @@ define([
                         if (!response) {
                             return notify.error('Não foi possível obter resposta do servidor.');
                         }
-                        $scope.tableLayerParams.total(response.data.totalDocuments);
-                        $defer.resolve(response.data.content);
+                        var promises = [];
+                        response.data.content.forEach(function (layer) {
+                            promises.push(SpatialDataSourceService.get(layer.spatialDataSourceId));
+                        });
+
+                        var promise = Promise.all(promises);
+                        promise.catch(function (err) {
+                            notify.error(err.statusText);
+                        });
+                        promise.then(function (result) {
+                            response.data.content.forEach(function (layer, index) {
+                                layer.spatialDataSource = result[index].data;
+                            });
+                            $scope.tableLayerParams.total(response.data.totalDocuments);
+                            $defer.resolve(response.data.content);
+                        });
+
                     }
 
                     function onError(err) {
