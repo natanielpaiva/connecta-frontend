@@ -24,27 +24,35 @@
     </div>
 </div>
 
-<form name="project_form" novalidate>
+<form name="project_form" ng-submit="saveProject()" novalidate>
 
     <div ng-include="steps[currentStep].templateUrl"></div>
 
     <div class="row margin-top-double">
         <div class="col-md-12 text-right">
-            <button class="btn btn-default">
+            <button class="btn btn-default"
+                    type="button">
                 CANCELAR
             </button>
             <button ng-click="changeStep()"
+                    type="button"
                     class="btn btn-default"
                     ng-disabled="steps[currentStep].first">
                 VOLTAR
             </button>
             <button ng-click="changeStep(true)"
+                    type="button"
                     class="btn btn-default"
                     ng-disabled="steps[currentStep].last || project_form.$invalid">
                 AVANÇAR
             </button>
-            <button class="btn btn-primary"
-                    ng-disabled="!steps[currentStep].last">
+
+            <!--<button class="btn btn-primary"-->
+                    <!--ng-disabled="!steps[currentStep].last">-->
+                <!--SALVAR-->
+            <!--</button>-->
+            <!---->
+            <button class="btn btn-primary">
                 SALVAR
             </button>
         </div>

@@ -19,6 +19,7 @@ define([
             baseMaps : [],
             widgets : {},
             tools : [],
+            richLayers : [],
             serviceType : "connecta",
             mapConfig: {
                 minZoom : 3,
@@ -206,7 +207,7 @@ define([
             });
 
             DatasourceService.listConnectaDatasources().then(onSuccesListDataSources, onError);
-        }
+        };
 
         $scope.toggleOptionAdd = function (richLayer) {
             if (typeof richLayer == 'undefined') {
@@ -256,11 +257,6 @@ define([
             }
         };
 
-        function onSuccessListProject(response) {
-            $scope.projects = response.data.content;
-            console.log($scope.projects);
-        }
-
         function onSuccessListSpatialDS(response) {
             $scope.spatialDataSources = response.data.content;
         }
@@ -284,172 +280,33 @@ define([
             $scope.datasources = response.data.content;
         }
 
-//---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
+        function getCheckedBaseMaps () {
 
+            var checkedBaseMaps = [];
 
-        $scope.project.richLayers = [
-            {
-                level : "1",
-                title : "RichLayer Title",
-                layer : {
-                    title : "layerTitle"
-                },
-                drillLabels : {
-                    up : "Drill UP",
-                    down : "Drill DOWN"
-                },
-                resultSetId : "resultID",
-                crossingKeys : {
-                    geoKey : "geoKey",
-                    resultSetKey : "resultSetKey"
-                },
-                info : {
-
-                },
-                dataSourceIdentifier : {
-                   title : "DataSourceTitle"
-                }
-            },
-            {
-                level : "2",
-                title : "RichLayer Title2",
-                layer : {
-                    title : "layerTitle2"
-                },
-                drillLabels : {
-                    up : "Drill UP",
-                    down : "Drill DOWN"
-                },
-                resultSetId : "resultID",
-                crossingKeys : {
-                    geoKey : "geoKey",
-                    resultSetKey : "resultSetKey"
-                },
-                info : {
-
-                },
-                dataSourceIdentifier : {
-                    title : "DataSourceTitle2"
-                }
-            },
-            {
-                "title": "lol",
-                "spatialDatasource": {
-                    "dsn": "http://arcgis.cds.com.br/arcgis/rest/services/CNJ/ESTABELECIMENTOS_PRISIONAIS_SP/MapServer",
-                    "title": "FUNFA",
-                    "serverType": "ArcGIS",
-                    "_id": "48430",
-                    "__v": 0
-                },
-                "layer": {
-                    "__v": 0,
-                    "_id": "57dff63d1ebc303b416ff73a",
-                    "geometryField": {
-                        "domain": null,
-                        "alias": "Shape",
-                        "type": "esriFieldTypeGeometry",
-                        "name": "Shape"
-                    },
-                    "geometryType": "esriGeometryPolygon",
-                    "isVector": true,
-                    "layerIdentifier": "3",
-                    "spatialDataSourceId": "48430",
-                    "title": "FUNFA Layer",
-                    "layerFields": [
-                        {
-                            "domain": null,
-                            "alias": "OBJECTID",
-                            "type": "esriFieldTypeOID",
-                            "name": "OBJECTID"
-                        },
-                        {
-                            "domain": null,
-                            "alias": "Shape",
-                            "type": "esriFieldTypeGeometry",
-                            "name": "Shape"
-                        },
-                        {
-                            "domain": null,
-                            "length": 60,
-                            "alias": "NM_MUNICIP",
-                            "type": "esriFieldTypeString",
-                            "name": "NM_MUNICIP"
-                        },
-                        {
-                            "domain": null,
-                            "length": 7,
-                            "alias": "CD_GEOCMU",
-                            "type": "esriFieldTypeString",
-                            "name": "CD_GEOCMU"
-                        },
-                        {
-                            "domain": null,
-                            "length": 2,
-                            "alias": "CD_UF",
-                            "type": "esriFieldTypeString",
-                            "name": "MAX_CD_UF"
-                        },
-                        {
-                            "domain": null,
-                            "alias": "SUM_Plan1__CAP",
-                            "type": "esriFieldTypeDouble",
-                            "name": "SUM_Plan1__CAP"
-                        },
-                        {
-                            "domain": null,
-                            "alias": "SUM_Plan1__POP",
-                            "type": "esriFieldTypeDouble",
-                            "name": "SUM_Plan1__POP"
-                        },
-                        {
-                            "domain": null,
-                            "alias": "MEAN_PERC_OCUP",
-                            "type": "esriFieldTypeDouble",
-                            "name": "MEAN_PERC_OCUP"
-                        },
-                        {
-                            "domain": null,
-                            "alias": "Shape_Length",
-                            "type": "esriFieldTypeDouble",
-                            "name": "Shape_Length"
-                        },
-                        {
-                            "domain": null,
-                            "alias": "Shape_Area",
-                            "type": "esriFieldTypeDouble",
-                            "name": "Shape_Area"
-                        }
-                    ]
-                },
-                "crossingKeys": {
-                    "geoKey": "NM_MUNICIP",
-                    "resultSetKey": "MUNICIPIO"
-                },
-                "dataSourceIdentifier": {
-                    "serviceType": "connecta",
-                    "info": {
-                        "analysis": {
-                            "id": 147,
-                            "name": "sssssss",
-                            "datasource": null,
-                            "analysisColumns": null,
-                            "analysisAttributes": null,
-                            "analysisRelations": null,
-                            "hasDrill": false,
-                            "type": "DATABASE",
-                            "domain": "28",
-                            "table": "CMSP_TSE_PERFIL_ELEITORADO",
-                            "requestType": "TABLE",
-                            "cached": false
-                        }
-                    },
-                    "title": "lol",
-                    "description": "lool",
-                    "_id": "57ea6ff21d84412407a103c2",
-                    "__v": 0
+            for (var index in $scope.baseMaps) {
+                if ($scope.baseMaps[index].checked) {
+                    checkedBaseMaps.push($scope.baseMaps[index].name);
                 }
             }
-        ];
+
+            return checkedBaseMaps;
+
+        }
+
+        function getResultSetId () {
+            return btoa(String(Math.floor(Math.random()*1000 + Date.now()))).replace(/\=/g, '').substr(-7);
+        }
+
+//---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
+
+        $scope.saveProject = function () {
+
+            $scope.project.baseMaps = getCheckedBaseMaps();
+            $scope.project.resultSetId = $scope.project.resultSetId || getResultSetId();
+
+            console.log($scope.project);
+        };
 
     });
 

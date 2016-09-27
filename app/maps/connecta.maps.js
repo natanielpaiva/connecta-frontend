@@ -147,11 +147,6 @@ define([
 
     maps._menu = [
         {
-            href: "/maps/analysis",
-            title: "MENU.ANALYSIS",
-            icon: "icon-analysis"
-        },
-        {
             href: "/maps/spatial-datasource",
             title: "MENU.GEO_DATASOURCE",
             icon: "icon-database"
@@ -170,6 +165,11 @@ define([
             href: "/maps/project",
             title: "MENU.PROJECTS",
             icon: "icon-folder"
+        },
+        {
+            href: "/maps/analysis",
+            title: "MENU.ANALYSIS",
+            icon: "icon-analysis"
         }
     ];
 
