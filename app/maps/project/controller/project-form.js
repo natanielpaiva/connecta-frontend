@@ -151,8 +151,8 @@ define([
             var sectionTools = $scope.tools[sectionName];
 
             if (sectionTools instanceof Array) {
-                for (var tool in $scope.project[sectionName]) {
-                    $scope.project[sectionName][tool].active = value;
+                for (var indexTool in $scope.project[sectionName]) {
+                    $scope.project[sectionName][indexTool].active = value;
                 }
             } else {
                 for (var tool in $scope.tools[sectionName]) {
