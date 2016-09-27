@@ -70,15 +70,25 @@ define([
 
         $scope.submitCredentials = function () {
             if ($scope.credentials.password !== $scope.credentials.authenticatedUserPassword) {
+                
                 UserService.changePassword($scope.credentials).then(function () {
                     notify.success('USER.CHANGE_PASSWORD_SUCCESS');
-                    $scope.credentials = {};
+                    _resetInput();
                 }, function () {
-                    notify.warning('USER.VALIDATION.USER_INVALID');
-                }
-                );
+                    notify.warning('USER.VALIDATION.PASS_INVALID');
+                });
+                
+            }else{
+                notify.warning('USER.VALIDATION.PASS_INVALID');
             }
         };
+
+        function _resetInput() {
+            $scope.credentials = {};
+            $scope.user_credentials_form.$setUntouched();
+            $scope.user_credentials_form.$setPristine();
+        }
+        
         init();
     });
 

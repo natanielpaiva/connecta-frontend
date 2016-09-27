@@ -16,9 +16,9 @@ define([
                         var deferred = $q.defer();
 
                         UserService.validateEmail(modelValue).then(function () {
-                            deferred.reject();
-                        }, function () {
                             deferred.resolve(modelValue);
+                        }, function () {
+                            deferred.reject();
                         });
                         
                         return deferred.promise;

@@ -53,7 +53,7 @@ define([
         };
 
         UserService.validateEmail = function (email) {
-            var url = portalResources.user + '/get' + '?email=' + email;
+            var url = portalResources.user + '/mail' + '?email=' + email;
 
             return $http.get(url);
         };

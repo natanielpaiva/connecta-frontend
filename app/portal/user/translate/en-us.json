@@ -32,7 +32,7 @@
             "SHORT_PASS": "Password needs to be at least 8 characters long.",
             "INVALID_DOCUMENT": "Invalid Image",
             "USER_OR_PASS_INVALID": "Invalid username or password.",
-            "USER_INVALID": "Invalid password.",
+            "PASS_INVALID": "Invalid password.",
             "USER_UNAUTHORIZED": "Unauthorized User."
         },
         "ERROR": {

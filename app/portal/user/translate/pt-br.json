@@ -32,7 +32,7 @@
             "SHORT_PASS": "A senha deve ter pelo menos 8 caracteres.",
             "INVALID_DOCUMENT": "Imagem Inválida",
             "USER_OR_PASS_INVALID": "Usuário ou senha incorreto.",
-            "USER_INVALID": "Senha incorreta.",
+            "PASS_INVALID": "Senha incorreta.",
             "USER_UNAUTHORIZED": "Usuario não autorizado."
         },
         "ERROR": {

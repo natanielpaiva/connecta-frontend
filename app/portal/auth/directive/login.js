@@ -14,6 +14,7 @@ define([
 
                 $scope.credentials = {};
                 $scope.authResponse = {};
+                $scope.user = {};
                 $scope.domains = [];
                 $scope.email = "";
                 $scope.logged = false;
