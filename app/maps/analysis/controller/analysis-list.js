@@ -11,7 +11,7 @@ define([
             count : 10,
             page : 1,
             filter : {
-
+                title: {}
             }
         }, buildNgTable());
 
