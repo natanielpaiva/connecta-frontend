@@ -295,7 +295,7 @@ define([
             if (error) {
                 notify.error(error.statusText);
             }
-            throw Error(error);
+            console.error(error);
         }
 
         function onSuccesListDataSources(response) {
@@ -319,7 +319,7 @@ define([
         function init () {
 
             if ($routeParams.id) {
-                getProjectById($routeParams.id).then(onSuccess, onError);
+                getProjectById($routeParams.id).then(onSuccess, onErrorGet);
             }
 
             function onSuccess(response) {
@@ -329,7 +329,7 @@ define([
                 setAllWidgetsSelected();
             }
 
-            function onError(err) {
+            function onErrorGet(err) {
                 console.error(err);
             }
 
