@@ -115,7 +115,8 @@
         "TYPE_NUMBER" : "Number",
         "TYPE_DATE" : "Date",
         "TYPE_DISABLED" : "Disabled",
-        "DETAILING_ANALYSIS" : "Detailing <b>Analysis</b>"
+        "DETAILING_ANALYSIS" : "Detailing <b>Analysis</b>",
+        "CROSSING_KEY" : "Crossing Key"
     },
     "LAYER_TYPE" : {
         "POINT": "Point",

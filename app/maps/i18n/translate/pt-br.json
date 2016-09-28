@@ -112,7 +112,8 @@
         "SAVE_ERROR": "Erro ao salvar análise",
         "SAVE_SUCCESS": "Análise salva com sucesso",
         "DELETE_ERROR": "Erro ao excluir análise",
-        "DELETE_SUCCESS": "Análise excluída com sucesso"
+        "DELETE_SUCCESS": "Análise excluída com sucesso",
+        "CROSSING_KEY" : "Chave de cruzamento"
     },
     "LAYER_TYPE" : {
         "POINT": "Ponto",

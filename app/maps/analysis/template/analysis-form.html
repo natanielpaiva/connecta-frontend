@@ -81,6 +81,11 @@
                     ANALYSIS.NO_OUTFIELDS
                 </td>
             </tr>
+            <!--<tr class="row am-slide-right" ng-if="selectedRichLayer">-->
+                <!--<td class="text-left col-md-5">{{selectedRichLayer.crossingKeys.resultSetKey}}</td>-->
+                <!--<td class="text-left col-md-5">{{selectedRichLayer.crossingKeys.geoKey}}</td>-->
+                <!--<td class="text-left col-md-2" translate>ANALYSIS.CROSSING_KEY</td>-->
+            <!--</tr>-->
             <tr class="row am-slide-right" ng-repeat="outField in analysis.outFields track by $index"
                 ng-click="editOutField($index)">
                 <td class="text-left col-md-5">{{outField.name}}</td>
@@ -150,7 +155,7 @@
             <a href="#/maps/analysis" class="btn btn-default" translate>
                 LAYOUT.CANCEL
             </a>
-            <button class="btn btn-primary" ng-click="saveProject()" ng-disabled="analysisForm.$invalid" translate>
+            <button class="btn btn-primary" ng-click="saveAnalysis()" ng-disabled="analysisForm.$invalid" translate>
                 LAYOUT.SAVE
             </button>
         </div>

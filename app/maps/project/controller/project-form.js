@@ -20,8 +20,6 @@ define([
 
         init();
 
-
-
         $scope.project = {
             basemaps : [],
             widgets : {},

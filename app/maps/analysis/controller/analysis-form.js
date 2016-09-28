@@ -80,7 +80,7 @@ define([
         function loadProjects() {
             return new Promise(function (resolve, reject) {
                 try {
-                    ProjectService.list({size: '*'})
+                    ProjectService.list('?size=*')
                         .catch(function (err) {
                             reject(err);
                         })
@@ -91,7 +91,6 @@ define([
                 } catch (err) {
                     reject(err);
                 }
-
             });
         }
 
@@ -181,7 +180,7 @@ define([
             delete $scope.outField;
         };
 
-        $scope.saveProject = function () {
+        $scope.saveAnalysis = function () {
             var promise;
             if (!$scope.isEditing) {
                 promise = AnalysisService.save($scope.analysis);

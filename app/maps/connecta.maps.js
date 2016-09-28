@@ -149,7 +149,7 @@ define([
         {
             href: "/maps/spatial-datasource",
             title: "MENU.GEO_DATASOURCE",
-            icon: "icon-database"
+            icon: "icon-location-pin"
         },
         {
             href: "/maps/geo-layer",
@@ -159,7 +159,7 @@ define([
         {
             href: "/maps/datasource",
             title: "MENU.DATA_SOURCE",
-            icon: "icon-location-pin"
+            icon: "icon-database"
         },
         {
             href: "/maps/project",
