@@ -36,7 +36,8 @@
             "USER_UNAUTHORIZED": "Usuario não autorizado."
         },
         "ERROR": {
-            "USERNAME_EXISTS": "Esse email já está sendo usado"
+            "USERNAME_EXISTS": "Esse email já está sendo usado",
+            "INVITE_EXPIRED": "Esse convite expirou"
         },
         "DOMAINS" : "Domínios"
     }

@@ -28,7 +28,7 @@ define([
         };
 
         /**
-         * 
+         *
          * @param {type} image
          * @param {type} user
          * @returns {unresolved}
@@ -48,12 +48,30 @@ define([
         };
 
         UserService.save = function (user) {
-            var url = portalResources.user + '/new';
+            var url = portalResources.user + '/user';
+
+            return $http.post(url, user);
+        };
+        UserService.saveInvited = function (user) {
+            var url = portalResources.user + '/invited' ;
+
             return $http.post(url, user);
         };
 
-        UserService.validateEmail = function (email) {
+        UserService.getByEmail = function (email) {
             var url = portalResources.user + '/mail' + '?email=' + email;
+
+            return $http.get(url);
+        };
+
+        UserService.getByHash = function (hash) {
+            var url = portalResources.user + '/hash?hash=' + hash;
+
+            return $http.get(url);
+        };
+
+        UserService.getAll = function () {
+            var url = portalResources.user;
 
             return $http.get(url);
         };
@@ -67,6 +85,7 @@ define([
             var url = portalResources.user + '/credentials?' +
                       'newPass=' + credentials.password +
                       '&oldPass=' + credentials.authenticatedUserPassword;
+
             return $http.post(url);
         };
 

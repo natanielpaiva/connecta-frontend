@@ -1,7 +1,6 @@
 $boxWidth: 16em;
 $boxHeight: 20em;
-
-$loginGray:#bcbcbc;
+$loginGray: #bcbcbc;
 $loginWhite: #F6F6F6;
 
 [layout] {
@@ -13,16 +12,16 @@ $loginWhite: #F6F6F6;
 [layout].login {
     background-color: #f6f6f6 !important;
     position: fixed;
-    top:0;
+    top: 0;
     bottom: 0;
-    left:0;
-    right:0;
-    overflow-y:hidden;
+    left: 0;
+    right: 0;
+    overflow-y: hidden;
 
-    menu,
-    heading,
+    .connecta-sidebar,
     .page-container,
-    .connecta-sidebar {
+    heading,
+    menu {
         display: none;
     }
 
@@ -30,57 +29,59 @@ $loginWhite: #F6F6F6;
         display: block;
 
         .top-left-detail {
-            position:fixed;
-            top:0;
-            left:0;
-            transform:rotate(180deg) scale(1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: rotate(180deg) scale(1);
             transform-origin: 50% 50%;
-            transition:transform $defaultAnimationDuration*1.5;
+            transition: transform $defaultAnimationDuration*1.5;
+
             &.active {
                 transform-origin: 50% 50%;
-                transition:transform $defaultAnimationDuration*2;
-                transform:rotate(180deg) scale(2) translate(-25%, -25%);
+                transition: transform $defaultAnimationDuration*2;
+                transform: rotate(180deg) scale(2) translate(-25%, -25%);
             }
         }
 
         .top-left-detail-big {
-            position:fixed;
-            top:0;
-            left:0;
-            width:540px;
-            transform:translate(-500px, -500px);
-            transition:transform $defaultAnimationDuration*1.8;
-            
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 540px;
+            transform: translate(-500px, -500px);
+            transition: transform $defaultAnimationDuration*1.8;
+
             &.active {
-                transition:transform $defaultAnimationDuration*2;
-                transform:translate(0, 0);
+                transition: transform $defaultAnimationDuration*2;
+                transform: translate(0, 0);
             }
-            
             @keyframes fade {
                 0% {
-                    opacity:0.75;
+                    opacity: 0.75;
                 }
+
                 50% {
-                    opacity:1;
+                    opacity: 1;
                 }
+
                 100% {
-                    opacity:0.75;
+                    opacity: 0.75;
                 }
             }
-            
-            $time:10s;
+            $time: 10s;
+
             svg {
-                path:nth-child(3), path:nth-child(5) {
-                    animation:fade $time linear infinite;
+                path:nth-child(3),
+                path:nth-child(5) {
+                    animation: fade $time linear infinite;
                 }
             }
-            
         }
 
         .bottom-right-detail {
-            position:fixed;
-            bottom:0;
-            right:0;
+            position: fixed;
+            bottom: 0;
+            right: 0;
         }
     }
 
@@ -96,32 +97,33 @@ $loginWhite: #F6F6F6;
     }
 
     .create-account-form {
-        width:$boxWidth*3;
-        margin:0 auto;
+        width: $boxWidth*3;
+        margin: 0 auto;
         position: fixed;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
 
         .form-account {
-            width:$boxWidth*1.5;
-            margin:0 auto;
+            width: $boxWidth*1.5;
+            margin: 0 auto;
 
             label {
-                color:$lighterGray !important;
+                color: $lighterGray !important;
             }
         }
 
         h3 {
             text-align: center;
-            margin:0;
-            margin-bottom: 1em;
+            margin: 0 0 1em;
         }
+
         .header-login {
             .logo {
                 text-align: center;
+
                 img {
-                    margin-bottom:0.5em;
+                    margin-bottom: 0.5em;
                     width: 24em !important;
                 }
             }
@@ -130,13 +132,14 @@ $loginWhite: #F6F6F6;
 }
 
 .header-login {
-    margin:0;
+    margin: 0;
+
     .logo {
-        margin:0;
-        margin-bottom:1em;
+        margin: 0 0 1em;
+
         img {
             width: 100%;
-            margin:0;
+            margin: 0;
         }
     }
 }
@@ -144,44 +147,50 @@ $loginWhite: #F6F6F6;
 .form-login {
     @include clearfix;
     width: 100%;
+
     .line-form {
         @include clearfix;
         width: 100%;
         line-height: 2.2em;
-        margin-bottom:1em;
-        position:relative;
+        margin-bottom: 1em;
+        position: relative;
+
         span {
             width: 1em;
             line-height: 2.5em;
             color: $loginGray;
-            position:absolute;
-            left:0;
-            top:0.1em;
+            position: absolute;
+            left: 0;
+            top: 0.1em;
         }
+
         .field-text {
-            overflow:hidden;
-            position:relative;
+            overflow: hidden;
+            position: relative;
+
             input {
                 outline: none;
-                width:100%;
+                width: 100%;
                 color: $lightBlack;
                 background-color: transparent;
                 border: none;
                 border-bottom: 1px solid $loginGray;
-                padding-left:1.5em;
+                padding-left: 1.5em;
+
                 .material-border {
-                    transition:width ease $defaultAnimationDuration;
-                    width:1em;
-                    height:1em;
+                    transition: width ease $defaultAnimationDuration;
+                    width: 1em;
+                    height: 1em;
                     background-color: green;
-                    position:absolute;
-                    left:0;
-                    bottom:0;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
                     border-bottom: 1px solid $presenterBlue;
                 }
+
                 &:focus ~ .material-border {
-                    width:100%;
-                    transition:width ease $defaultAnimationDuration;
+                    width: 100%;
+                    transition: width ease $defaultAnimationDuration;
                 }
             }
         }
@@ -189,7 +198,7 @@ $loginWhite: #F6F6F6;
 
     .add-account {
         text-align: center;
-        padding-top:0.5em;
+        padding-top: 0.5em;
     }
 
     .btn-login {
@@ -201,8 +210,9 @@ $loginWhite: #F6F6F6;
         /*margin-top: 1.5em;*/
         transition: background-color 250ms;
         border: none;
-        &:hover,
-            &:focus {
+
+        &:focus,
+        &:hover {
             background-color: lighten($presenterBlue, $defaultLight);
             cursor: pointer;
             transition: background-color 250ms;
@@ -210,20 +220,20 @@ $loginWhite: #F6F6F6;
     }
 }
 
-#social-login{
-    #separator-login{
+#social-login {
+    #separator-login {
         float: left;
         width: 280px;
         margin-top: 14px;
         margin-bottom: 14px;
 
-        .line-separator{
+        .line-separator {
             float: left;
             width: 124px;
             height: 25px;
         }
 
-        .line-separator-txt{
+        .line-separator-txt {
             float: left;
             width: 20px;
             height: 25px;
@@ -243,40 +253,38 @@ $loginWhite: #F6F6F6;
         border-radius: 3px;
     }
 
-    .btn-facebook{
+    .btn-facebook {
         background-color: #3B5A98;
 
-        &:hover{
+        &:hover {
             background-color: lighten(#3B5A98, $defaultLight);
         }
     }
 
-    .btn-google{
+    .btn-google {
         background-color: #f63e28;
 
-        &:hover{
+        &:hover {
             background-color: lighten(#f63e28, $defaultLight);
         }
     }
 
-    span{
+    span {
         font-size: 30px;
         margin: 6px 10px 6px 50px;
         float: left;
     }
 }
-
 /*@media(min-width:)*/
-
 .domain-list {
     width: 90em;
-    height:auto;
-    padding: 1.4em 2em 0em 2em;
-    border-radius:0.25em;
-    position:fixed;
-    left:50%;
-    top:50%;
-    transform:translate(-50%, -50%);
+    height: auto;
+    padding: 1.4em 2em 0;
+    border-radius: 0.25em;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     h3 {
         span {
@@ -290,7 +298,7 @@ $loginWhite: #F6F6F6;
             width: 1.5em;
             display: inline-block;
             text-align: center;
-            position:relative;
+            position: relative;
 
             .help-info {
                 display: none;
@@ -298,50 +306,49 @@ $loginWhite: #F6F6F6;
 
             &:hover .help-info {
                 font-weight: normal;
-                display:block;
+                display: block;
                 background-color: white;
-                border:solid 0.5px $black;
-                color:$gray;
-                padding:1em;
-                width:33em;
-                position:absolute;
-                bottom:200%;
-                left:50%;
+                border: solid 0.5px $black;
+                color: $gray;
+                padding: 1em;
+                width: 33em;
+                position: absolute;
+                bottom: 200%;
+                left: 50%;
                 transform: translateX(-50%);
-                min-height:2em;
-                border-radius:1em;
+                min-height: 2em;
+                border-radius: 1em;
 
                 &:before {
-                    height:0;
-                    width:0;
-                    content:' ';
-                    display:block;
-                    position:absolute;
-                    bottom:-0.55em;
-                    left:50%;
-                    transform:translateX(-50%);
-
-                    border-style:solid;
-                    border-width:0.5em;
-                    border-color:transparent;
-                    border-top-color:$black;
-                    border-bottom-width:0;
+                    height: 0;
+                    width: 0;
+                    content: ' ';
+                    display: block;
+                    position: absolute;
+                    bottom: -0.55em;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-style: solid;
+                    border-width: 0.5em;
+                    border-color: transparent;
+                    border-top-color: $black;
+                    border-bottom-width: 0;
                 }
-                &:after {
-                    height:0;
-                    width:0;
-                    content:' ';
-                    display:block;
-                    position:absolute;
-                    bottom:-0.475em;
-                    left:50%;
-                    transform:translateX(-50%);
 
-                    border-style:solid;
-                    border-width:0.5em;
-                    border-color:transparent;
-                    border-top-color:$white;
-                    border-bottom-width:0;
+                &:after {
+                    height: 0;
+                    width: 0;
+                    content: ' ';
+                    display: block;
+                    position: absolute;
+                    bottom: -0.475em;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-style: solid;
+                    border-width: 0.5em;
+                    border-color: transparent;
+                    border-top-color: $white;
+                    border-bottom-width: 0;
                 }
             }
         }
@@ -349,72 +356,134 @@ $loginWhite: #F6F6F6;
 
     .thumbnail-grid {
         .thumbnail-grid-item {
-            cursor: pointer;
-            background-color:$blue;
-            color:$white;
-            line-height:2.9em;
-            font-size:1.25em;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding: 0 0.5em;
-            margin: 1em;
-            position:relative;
-            &:hover {
-                opacity:0.9;
-            }
+            line-height: 2.9em;
+            height: 2.9em;
+            padding: 0;
+            margin: 1em 0;
+            position: relative;
 
-            span[class*="icon-"] {
-                font-size:1.4em;
-                position:absolute;
-                left:0.5em;
-                top:50%;
-                transform:translateY(-50%);
-            }
+            .thumbnail-grid-item-head {
 
-            .thumbnail-grid-item-edit{
+                @include clearfix;
+                display: block;
+                padding-left:0.5em;
+                cursor: pointer;
+                background-color: $blue;
+                color: $white;
+                line-height: 2.9em;
+                height: 2.9em;
+                font-size: 1.25em;
+                position:relative;
+
+                [class*="icon-"] {
+                    font-size: 1em;
+                    width:2em;
+                    float:left;
+                    height:2.9em;
+                    line-height: 2.9em;
+                    position: absolute;
+                    left: 0.5em;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                .thumbnail-grid-item-head-name {
+                    width:100%;
+                    padding: 0 1.25em;
+                    text-align:center;
+                    @include clipped-text;
+                }
+
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
+            .thumbnail-grid-item-form {
                 display: none;
+            }
 
-                &.thumbnail-grid-item-editing{
-                    margin: -0.35em;
+            &.thumbnail-grid-item-editing {
+                .thumbnail-grid-item-head {
+                    display: none;
+                }
+                .thumbnail-grid-item-form {
                     display: block;
-                    color: black;
-                    background-color: $loginWhite;
-                    cursor: auto;
-                    margin-bottom: 0.15em;
-                    .form-group{
-                        label{
-                            margin-top: 0;
-                        }
-                        span{
+                }
+            }
 
-                            float: right;
-                        }
+            .thumbnail-grid-item-form {
+                position:absolute;
+                top: 0;
+                left: 0;
+                z-index: 2;
+                min-height:2.9em;
+                padding:0.25em 1em 1em 1em;
+                margin:0;
+                border: solid 1px $presenterBlue;
+                color: $black;
+                background-color: $loginWhite;
+                width:100%;
+
+                .form-group {
+                    margin:1em 0;
+                }
+
+                label {
+                    text-align: left;
+                    font-weight: normal;
+                    margin:0;
+                    padding:0;
+                    line-height: 2em;
+                    font-size:1.1em;
+                }
+
+                .icon-edit2 {
+                    font-size:1.5em;
+                    top: 0.5em;
+                    color: darken($darkerWhite, 8%);
+                    position: absolute;
+                }
+
+                input {
+                    // line-height: 2em;
+                    width:100%;
+                    padding:0;
+                    margin:0;
+
+                    &:not(.name-input) {
+                        font-size: 1em;
+                        padding:0 0.75em;
                     }
-                    input {
-                        display: block;
-                        text-align: center;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-                    button {
-                        margin-bottom: 2em;
+
+                    &.name-input {
+                        color: $gray;
+                        line-height: 1.75em;
+                        font-weight: 600;
+                        font-size:1.2em;
+                        padding:0;
+                        padding-left:1.5em;
+                        margin:0;
+                        background-color: transparent;
+                        border: none;
+                        border-bottom: 1px solid $presenterBlue;
+                        outline: none;
                     }
                 }
             }
-            .thumbnail-grid-item-head{
-                display: none;
-            }
-
         }
+
+        .thumbnail-grid-item-head {
+            display: none;
+        }
+
         .thumbnail-grid-item-new {
-            background-color:$lighterGray;
-            h3{
+            .thumbnail-grid-item-head {
+                background-color: $lighterGray;
+            }
+
+            h3 {
                 margin-top: 0.35em;
-                padding-top: 1em; 
+                padding-top: 1em;
             }
         }
-
     }
 }

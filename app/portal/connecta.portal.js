@@ -10,7 +10,7 @@ define([
         'angular-redactor'
 //        ,'facebook'
     ]);
-    
+
     portal._configKey = 'portal';
 
     portal.constant('portalResources', {
@@ -69,6 +69,10 @@ define([
             {
                 name: 'heading-popover-apps.html',
                 url: 'app/portal/layout/template/heading-popover-apps.html'
+            },
+            {
+                name: 'heading-popover-domain.html',
+                url: 'app/portal/layout/template/heading-popover-domain.html'
             }
         ];
 

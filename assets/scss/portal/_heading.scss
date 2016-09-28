@@ -189,7 +189,7 @@ heading {
                         width: 8.15em;
                         background-color: #fff;
                         font-size: 32px;
-                        right: 3.91em;
+                        right: 5.85em;
 
                         .apps-title {
                             text-align: center;
@@ -239,7 +239,7 @@ heading {
                         width: 8.15em;
                         background-color: #fff;
                         font-size: 32px;
-                        right: 2.025em;
+                        right: 3.97em;
 
                         .notifications-title {
                             text-align: center;
@@ -314,11 +314,11 @@ heading {
                                                     font-size: 0.5em;
                                                     line-height: normal;
                                                     color: $lightBlack;
-                                                    display:block;
+                                                    display:block;padding: 0;
                                                     padding: 0.25em;
                                                     display: block;
                                                     padding-left: 1.9em;
-                                                    
+
                                                     &:hover, &.selected {
                                                         background-color:$darkWhite;
                                                         color:$black;
@@ -332,7 +332,53 @@ heading {
                         }
                     }
                     &.domain-popover{
-                        background-color: red;
+                      width: 8.15em;
+                      background-color: #fff;
+                      right: 2.1em;
+                      font-size: 32px;
+
+                      .domain-popover-content {
+                          padding: 0;
+                          nav{
+
+                            float: left;
+                            height: 100%;
+                            width: auto;
+
+                            & > ul {
+                              float:left;
+                              width: 100%;
+                              height: auto;
+                              padding:0;
+                              margin:0;
+
+                                  & > li {
+                                    float: left;
+                                    width: 100%;
+                                    list-style: none;
+                                    margin:0;
+
+                                    & > a {
+
+                                      font-size: 0.5em;
+                                      line-height: normal;
+                                      color: $lightBlack;
+                                      display:block;
+                                      padding: 0.25em;
+                                      display: block;
+                                        & > span {
+                                          padding-right: 0.75em;
+                                        }
+
+                                        &:hover, &.selected {
+                                            background-color:$darkWhite;
+                                            color:$black;
+                                        }
+                                      }
+                                  }
+                              }
+                          }
+                      }
                     }
                 }
             }

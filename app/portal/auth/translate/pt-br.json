@@ -17,6 +17,11 @@
         "SEARCH": "Pesquisar por nome ou email",
         "DELETE": "Deletar",
         "DELETED": "Domínio removido",
-        "UPDATED" : "Domínio atualizado"
+        "UPDATED" : "Domínio atualizado",
+        "INVITE_USER" : "Convidar Participantes",
+        "CONFIGURE" : "Configurar Domínio",
+        "CHANGE": "Trocar de Domínio",
+        "NULL_NAME": "Digite um nome para o domínio",
+        "DELETE_CONFIRM": "Se você fizer isso todos os relacionamentos no domínio serão removidos. Deseja realmente removê-lo"
     }
 }
