@@ -44,7 +44,7 @@ define([
         };
     }
 
-    return maps.lazy.directive("inputSlider", function () {
+    return maps.lazy.directive("inputSlider", function ($timeout) {
         return {
             restrict: 'AE',
             templateUrl: 'app/maps/project/directive/template/input-slider.html',
@@ -56,7 +56,9 @@ define([
                 updateZoomConfig : '='
             },
             link : function (scope) {
-
+                $timeout(function () {
+                    scope.$broadcast('rzSliderForceRender');
+                });
             },
             controller : InputSlider
         };

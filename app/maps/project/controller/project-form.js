@@ -13,7 +13,7 @@ define([
     "maps/datasource/service/datasource-service"
 ], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig, contextConfig) {
 
-    return maps.lazy.controller("ProjectFormController", function ($scope, $timeout, $routeParams, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
+    return maps.lazy.controller("ProjectFormController", function ($scope, $timeout, $location, $routeParams, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
 
         var baseMapsList = angular.copy(baseMapsConfig.baseMaps);
         var toolAndWidgetsList = angular.copy(toolsConfig);
@@ -426,7 +426,8 @@ define([
             ProjectService.save($scope.project).then(onSuccess, onError);
 
             function onSuccess (response) {
-                notify.success("Salvo");
+                notify.success("Registro salvo com sucesso.");
+                $location.path('/maps/project');
             }
 
         };

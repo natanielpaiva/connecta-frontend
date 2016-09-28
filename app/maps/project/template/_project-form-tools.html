@@ -32,6 +32,7 @@
                         <p translate>{{tool.title}}</p>
                         <label class="switch">
                             <input ng-model="project.widgets[tool.model]"
+                                   ng-init="project.widgets[tool.model] = project.widgets[tool.model] || tool.checked"
                                    ng-change="setAllWidgetsSelected()"
                                    type="checkbox">
                             <div class="slider round"></div>

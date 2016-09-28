@@ -30,10 +30,9 @@
 
     <div class="row margin-top-double">
         <div class="col-md-12 text-right">
-            <button class="btn btn-default"
-                    type="button">
+            <a class="btn btn-default" href="#/maps/project">
                 CANCELAR
-            </button>
+            </a>
             <button ng-click="changeStep()"
                     type="button"
                     class="btn btn-default"
@@ -47,12 +46,9 @@
                 AVANÇAR
             </button>
 
-            <!--<button class="btn btn-primary"-->
-                    <!--ng-disabled="!steps[currentStep].last">-->
-                <!--SALVAR-->
-            <!--</button>-->
-            <!---->
-            <button class="btn btn-primary" ng-click="saveProject()">
+            <button class="btn btn-primary"
+                    ng-click="saveProject()"
+                    ng-disabled="(!steps[currentStep].last && !project._id) || project_form.$invalid">
                 SALVAR
             </button>
         </div>

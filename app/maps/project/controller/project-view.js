@@ -9,7 +9,8 @@ define([
     return maps.lazy.controller("ProjectViewController", function ($scope, ProjectService, $routeParams, $translate) {
 
         $scope.project = {};
-        $scope.basemaps = [];
+
+        $scope.widgets = [];
 
         if ($routeParams.id) {
             try {
@@ -36,29 +37,36 @@ define([
         };
 
         function prepareProject(data) {
-            var toolsSelected = [];
             var promises = [];
-
-
+            var basemaps = [];
 
             baseMapsJson.baseMaps.forEach(function(item){
                 if (data.basemaps.indexOf(item.name) > -1){
-                    $scope.basemaps.push(item);
+                    basemaps.push(item);
                 }
             });
 
+            $scope.basemaps = basemaps;
+
             toolsConfig.tools.forEach(function(item){
-               for(var l in data.tools){
+                for(var l in data.tools){
                     if (data.tools[l].active && item.model === data.tools[l].name) {
                         promises.push($translate(item.title));
                         break;
                     }
-               }
+                }
             });
 
             Promise.all(promises).then(function (labels) {
                 $scope.listTools = labels.join(', ');
+                $scope.$apply();
             }).catch(console.error.bind(console));
+
+            for (var index in data.widgets) {
+                $scope.widgets.push(toolsConfig.widgets[index].title);
+            }
+
+            $scope.widgets = $scope.widgets.join(", ");
 
             return data;
 

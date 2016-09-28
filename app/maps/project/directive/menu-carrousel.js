@@ -2,7 +2,7 @@ define([
     'connecta.maps'
 ], function (maps) {
 
-    var container, content, itemWidth, containerWidth;
+    var container, content, itemWidth, containerWidth, element;
 
     function MenuCarrousel($scope) {
         var self = this;
@@ -18,6 +18,10 @@ define([
     }
 
     MenuCarrousel.prototype.move = function(back){
+        container = $('.carrousel-container', element);
+        content = $('.carrousel-content', element);
+        itemWidth = $(':first', content).outerWidth();
+
         if(this.moving) return;
         this.moving = true;
         containerWidth = container.width();
@@ -56,18 +60,8 @@ define([
                 enabled: '=',
                 enableCheck: '='
             },
-            link: function link(scope, element){
-                container = $('.carrousel-container', element);
-                content = $('.carrousel-content', element);
-                itemWidth = $(':first', content).outerWidth();
-                containerWidth = container.width();
-
-                scope.$watch(scope.items, function(){
-                    if(scope.items){
-                        itemWidth = $(':first', content).outerWidth();
-                        containerWidth = container.width();
-                    }
-                });
+            link: function link(scope, el){
+                element = el;
             },
             controller: MenuCarrousel
         };
