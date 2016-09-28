@@ -15,7 +15,7 @@ define([
         }
 
         $scope.save = function (spatialDataSource) {
-
+            testeConnectionObiee(spatialDataSource);
             if (isEdit) {
                 update(spatialDataSource._id, spatialDataSource);
                 return;
@@ -32,6 +32,23 @@ define([
         $scope.backToList = function () {
             $location.path("/maps/spatial-datasource");
         };
+
+        function testeConnectionObiee(spatialDataSource){
+            var params = {
+                location: spatialDataSource.dsn,
+                user: spatialDataSource.user,
+                password: spatialDataSource.password
+            };
+            var promise = SpatialDataSourceService.testeConnectionObiee(params);
+            promise.catch(function(error){
+                notify.error("Erro na conexão com o OBIEE");
+            });
+
+            promise.then(function (response) {
+                notify.success("deu bom");
+            });
+
+        }
 
         function update(id, spatialDataSource) {
             SpatialDataSourceService.update(id, spatialDataSource).then(function (response) {

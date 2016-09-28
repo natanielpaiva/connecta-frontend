@@ -13,7 +13,7 @@
         <div class="slider round"></div>
     </label>
 
-    <menu-carrousel items="baseMaps" item-template-url="baseMapThumbUrl" enabled="enableBaseMapSelector"></menu-carrousel>
+    <menu-carrousel enable-check="true" items="baseMaps" item-template-url="baseMapThumbUrl" enabled="enableBaseMapSelector"></menu-carrousel>
 
     <div class="row margin-top-single">
         <div class="col-md-12">
@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="col-md-2" ng-repeat="tool in tools.widgets">
-                        <p>{{tool.title}}</p>
+                        <p translate>{{tool.title}}</p>
                         <label class="switch">
                             <input ng-model="project.widgets[tool.model]"
                                    ng-change="setAllWidgetsSelected()"
@@ -55,8 +55,9 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="col-md-2" ng-repeat="tool in tools.tools track by $index">
-                    <p>{{tool.title}}</p>
+                    <p translate>{{tool.title}}</p>
                     <label class="switch">
+                        <input type="hidden" ng-init="project.tools[$index].name = tool.model">
                         <input ng-model="project.tools[$index].active"
                                ng-change="setAllToolsSelected()"
                                type="checkbox">

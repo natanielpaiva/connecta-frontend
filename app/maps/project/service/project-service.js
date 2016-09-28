@@ -3,7 +3,7 @@ define([
     '../../helper/url'
 ], function (maps, urlHelper) {
 
-    return maps.lazy.service("ProjectService", function ($http, mapsResources) {
+    return maps.lazy.service("ProjectService", function ($http, mapsResources, presenterResources) {
 
         var url = mapsResources.project;
 
@@ -37,16 +37,9 @@ define([
             return $http.get(url + '/teste/catalog' + path);
         };
 
-        this.listAnalysisConnecta = function() {
-            var url = 'http://connectad.cds.com.br/connecta-presenter/analysis';
-            return $http.get(url);
-        };
-
         this.getAnalysisConnecta = function(id) {
-            var url = 'http://connectad.cds.com.br/connecta-presenter/analysis/';
-            return $http.get(url + id);
+            return $http.get(presenterResources.analysis + '/' + id);
         };
-
 
     });
 

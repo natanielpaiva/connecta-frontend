@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-10">
+        <h3>
+            <h4>Detalhamento de Projeto</h4>
+        </h3>
+    </div>
+
+    <div class="col-md-2">
+        <div class="btn-group pull-right">
+            <a class="btn btn-default" href="#/maps/project/{{project._id}}/edit">
+                <span class="icon-pencil" aria-hidden="true"></span>
+            </a>
+            <button class="btn btn-default" ng-click="delete(project._id)">
+                <span class="icon-trash" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <p>
+            <strong>Titulo:</strong>
+            {{project.title}}
+        </p>
+        <p>
+            <strong>Origem de Dados:</strong>
+            {{project.serviceType}}
+        </p>
+        <p>
+            <strong>Descricao:</strong>
+            {{project.serviceType}}
+        </p>
+
+        <p>
+            <strong>Ferramentas:</strong>
+                {{listTools}}
+        </p>
+
+    </div>
+</div>
+<div class="row">
+        <menu-carrousel items="basemaps" item-template-url="'app/maps/project/template/_project_base_map_thumb.html'"
+                        enabled="true"></menu-carrousel>
+
+</div>
+

@@ -2,42 +2,41 @@ define({
     baseMaps : [
         {
             name: 'topo',
-            title : 'Topográfico',
+            title : 'NAME_BASE_MAPS.TOPO',
             thumb: '/assets/img/maps/basemaps/topografico.jpg'
         },
         {
             name : 'satellite',
-            title : 'Satélite',
+            title : 'NAME_BASE_MAPS.SATELLITE',
             thumb : '/assets/img/maps/basemaps/satelite.jpg'
         },
         {
             name : 'streets',
-            title : 'Ruas',
+            title : 'NAME_BASE_MAPS.STREETS',
             thumb : '/assets/img/maps/basemaps/ruas.jpg'
         },
-        {
-            name : 'dark-gray',
-            title : 'Cinza escuro',
+        {   name : 'dark-gray',
+            title : 'NAME_BASE_MAPS.DARK_GRAY',
             thumb : '/assets/img/maps/basemaps/dark-grey.jpg'
         },
         {
             name : 'gray',
-            title : 'Cinza',
+            title : 'NAME_BASE_MAPS.GRAY',
             thumb : '/assets/img/maps/basemaps/gray.jpg'
         },
         {
             name : 'national-geographic',
-            title : 'National Geographic',
+            title : 'NAME_BASE_MAPS.NATIONAL_GEOGRAPHIC',
             thumb : '/assets/img/maps/basemaps/national-geo.jpg'
         },
         {
             name : 'oceans',
-            title : 'Oceanos',
+            title : 'NAME_BASE_MAPS.OCEANS',
             thumb : '/assets/img/maps/basemaps/oceans.jpg'
         },
         {
             name : 'osm',
-            title : 'Open Street Map',
+            title : 'NAME_BASE_MAPS.OSM',
             thumb : '/assets/img/maps/basemaps/openstreet.jpg'
         }
     ]

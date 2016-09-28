@@ -3,7 +3,7 @@
         <div class="col-xs-12">
 
             <input ng-model="item.checked" type="checkbox" class="carousel-checkbox" id="item{{$index}}">
-            <label for="item{{$index}}" class="enabled-map"></label>
+            <label ng-show="enableCheck" for="item{{$index}}" class="enabled-map"></label>
 
             <!--Botao de configuração de Mapa Inicial-->
             <!--<label class="initial-map"-->
@@ -26,7 +26,7 @@
             </div>
           <div class="row">
             <span class="col-xs-12">
-                <p class="text-center">{{item.title}}</p>
+                <p class="text-center" translate>{{item.title}}</p>
             </span>
 
           </div>

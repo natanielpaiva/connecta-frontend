@@ -53,7 +53,8 @@ define([
             scope:{
                 items: '=',
                 itemTemplateUrl: '=',
-                enabled: '='
+                enabled: '=',
+                enableCheck: '='
             },
             link: function link(scope, element){
                 container = $('.carrousel-container', element);
