@@ -29,9 +29,6 @@ define([
                     GeoLayerService.list(queryString).then(onSuccess, onError);
 
                     function onSuccess(response) {
-                        if (!response) {
-                            return notify.error('Não foi possível obter resposta do servidor.');
-                        }
                         var promises = [];
                         response.data.content.forEach(function (layer) {
                             promises.push(SpatialDataSourceService.get(layer.spatialDataSourceId));

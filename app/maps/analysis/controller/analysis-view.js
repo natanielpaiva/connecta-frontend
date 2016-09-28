@@ -1,17 +1,18 @@
 define([
     "connecta.maps",
-    "../service/analysis-service"
+    "../service/analysis-service",
+    "../../project/service/project-service"
 ], function (maps) {
 
-    return maps.lazy.controller("AnalysisViewController", function ($scope, $location, $routeParams, AnalysisService, notify) {
+    return maps.lazy.controller("AnalysisViewController", function ($scope, $location, $routeParams, AnalysisService, ProjectService, notify) {
 
         init();
 
         function init() {
-            checkEdit();
+            loadAnalysis();
         }
 
-        function checkEdit() {
+        function loadAnalysis() {
             AnalysisService.get($routeParams.id)
                 .catch(function (err) {
                     notify.error(err.statusText);
@@ -24,8 +25,23 @@ define([
                         allowDrill: analysis.allowDrill,
                         popupConfig: analysis.popupConfig,
                         outFields: analysis.outFields,
-                        project: analysis.project
+                        projectId: analysis.projectId
                     };
+
+                    ProjectService.get(analysis.projectId)
+                        .catch(function (err) {
+                            console.error(err);
+                        })
+                        .then(function (response) {
+                            var project = response.data;
+                            $scope.analysis.project = project;
+                            var filteredRichLayers = project.richLayers.filter(function (richLayer) {
+                                return richLayer._id === analysis.richLayerId;
+                            });
+                            if (filteredRichLayers.length) {
+                                $scope.analysis.richLayer = filteredRichLayers[0];
+                            }
+                        });
                 });
         }
 

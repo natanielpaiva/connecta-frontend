@@ -21,8 +21,9 @@
     <table class="table table-striped table-hover" ng-table="tableAnalysisParams">
         <thead>
         <tr class="row">
-            <th class="col-md-12" translate>ANALYSIS.NAME</th>
-            <!--<th class="col-md-8" translate>ANALYSIS.DESCRIPTION</th>-->
+            <th class="col-md-4" translate>ANALYSIS.NAME</th>
+            <th class="col-md-4" translate>ANALYSIS.PROJECT</th>
+            <th class="col-md-4" translate>ANALYSIS.RICH_LAYER</th>
         </tr>
         </thead>
 
@@ -34,9 +35,19 @@
         </tr>
 
         <tr ng-repeat="analysis in $data" class="row am-slide-right">
-            <td class="text-left col-md-12">
+            <td class="text-left col-md-4">
                 <a href="#/maps/analysis/{{analysis._id}}" class="full-size-block link-no-state">
                     {{analysis.title}}
+                </a>
+            </td>
+            <td class="text-left col-md-4">
+                <a href="#/maps/analysis/{{analysis._id}}" class="full-size-block link-no-state">
+                    {{analysis.project.title}}
+                </a>
+            </td>
+            <td class="text-left col-md-4">
+                <a href="#/maps/analysis/{{analysis._id}}" class="full-size-block link-no-state">
+                    {{analysis.richLayer.title}}
                 </a>
             </td>
         </tr>
