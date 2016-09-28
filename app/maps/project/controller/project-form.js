@@ -13,10 +13,80 @@ define([
     "maps/datasource/service/datasource-service"
 ], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig, contextConfig) {
 
-    return maps.lazy.controller("ProjectFormController", function ($scope, $timeout, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
+    return maps.lazy.controller("ProjectFormController", function ($scope, $timeout, $routeParams, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
+
+        var baseMapsList = angular.copy(baseMapsConfig.baseMaps);
+        var toolAndWidgetsList = angular.copy(toolsConfig);
+
+        init();
+
+        function init () {
+
+            if ($routeParams.id) {
+                getProjectById($routeParams.id).then(onSuccess, onError);
+            }
+
+            function onSuccess(response) {
+                $scope.project = response.data;
+                setSelectedBaseMaps();
+                setAllToolsSelected();
+                setAllWidgetsSelected();
+            }
+
+            function onError(err) {
+                console.error(err);
+            }
+
+        }
+
+        function getProjectById (id) {
+            if (id) {
+                return ProjectService.get(id);
+            }
+        }
+
+        function setSelectedBaseMaps () {
+            if ($scope.project.basemaps.length) {
+                $scope.enableBaseMapSelector = true;
+                baseMapsList.forEach( function (configBasemap) {
+                    if ($scope.project.basemaps.indexOf(configBasemap.name) >= 0) {
+                        configBasemap.checked = true;
+                    }
+                });
+            }
+        }
+
+        function setAllWidgetsSelected() {
+            for (var key in $scope.project.widgets) {
+                if (!$scope.project.widgets[key]) {
+                    $scope.allWidgetsAreEnabled = false;
+                    break;
+                }
+                $scope.allWidgetsAreEnabled = true;
+            }
+        }
+
+        function setAllToolsSelected() {
+
+            var flag;
+
+            for (var index in $scope.project.tools) {
+                if (!$scope.project.tools[index].active) {
+                    flag = false;
+                    break;
+                }
+                flag = true;
+            }
+
+            $scope.allGeoToolsAreEnabled = flag;
+
+        }
+
+        $scope.setAllToolsSelected = setAllToolsSelected;
+        $scope.setAllWidgetsSelected = setAllWidgetsSelected;
 
         $scope.project = {
-            baseMaps : [],
+            basemaps : [],
             widgets : {},
             tools : [],
             richLayers : [],
@@ -125,9 +195,9 @@ define([
 
         $scope.baseMapThumbUrl = 'app/maps/project/template/_project_base_map_thumb.html';
 
-        $scope.baseMaps = baseMapsConfig.baseMaps;
+        $scope.baseMaps = baseMapsList;
 
-        $scope.tools = toolsConfig;
+        $scope.tools = toolAndWidgetsList;
 
         $scope.context = contextConfig;
 
@@ -156,11 +226,14 @@ define([
             var sectionTools = $scope.tools[sectionName];
 
             if (sectionTools instanceof Array) {
-                for (var indexTool in $scope.project[sectionName]) {
+                for (var indexTool in sectionTools) {
+                    if (!$scope.project[sectionName][indexTool]) {
+                        $scope.project[sectionName][indexTool] = sectionTools[indexTool];
+                    }
                     $scope.project[sectionName][indexTool].active = value;
                 }
             } else {
-                for (var tool in $scope.tools[sectionName]) {
+                for (var tool in sectionTools) {
                     $scope.project[sectionName][tool] = value;
                 }
             }
@@ -195,7 +268,7 @@ define([
         $scope.editRichLayer = function (richLayer) {
             SpatialDataSourceService.list({size : "*"}).then(function (response) {
                 $scope.spatialDataSources = response.data.content;
-                return GeoLayerService.getLayersByDS(richLayer.spatialDatasource._id);
+                return GeoLayerService.getLayersByDS(richLayer.layer.spatialDataSourceId);
             }, onError).then(function(response){
                 $scope.layersBySpatials = response.data.content;
                 return DatasourceService.listColumnsByDatasourceId(richLayer.dataSourceIdentifier);
@@ -226,6 +299,7 @@ define([
                 }
 
             } else {
+                richLayer.resultSetId = richLayer.resultSetId || getResultSetId();
                 $scope.project.richLayers.push(angular.copy(richLayer));
             }
 
@@ -257,6 +331,10 @@ define([
                 });
             }
         };
+
+        function getResultSetId () {
+            return btoa(String(Math.floor(Math.random()*1000 + Date.now()))).replace(/\=/g, '').substr(-7);
+        }
 
         function onSuccessListSpatialDS(response) {
             $scope.spatialDataSources = response.data.content;
@@ -295,18 +373,20 @@ define([
 
         }
 
-        function getResultSetId () {
-            return btoa(String(Math.floor(Math.random()*1000 + Date.now()))).replace(/\=/g, '').substr(-7);
-        }
+
 
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
 
         $scope.saveProject = function () {
 
-            $scope.project.baseMaps = getCheckedBaseMaps();
-            $scope.project.resultSetId = $scope.project.resultSetId || getResultSetId();
+            $scope.project.basemaps = getCheckedBaseMaps();
 
-            console.log($scope.project);
+            ProjectService.save($scope.project).then(onSuccess, onError);
+
+            function onSuccess (response) {
+                notify.success("Salvo");
+            }
+
         };
 
     });

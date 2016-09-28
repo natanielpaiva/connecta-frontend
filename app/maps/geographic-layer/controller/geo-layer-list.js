@@ -17,7 +17,10 @@ define([
         $scope.tableLayerParams = new ngTableParams({
             page : 1,
             count : 10,
-            filter : {}
+            filter : {
+                title : {},
+                geometryType : {}
+            }
         }, buildNgTable());
 
         function buildNgTable () {
@@ -29,6 +32,7 @@ define([
                     GeoLayerService.list(queryString).then(onSuccess, onError);
 
                     function onSuccess(response) {
+
                         var promises = [];
                         response.data.content.forEach(function (layer) {
                             promises.push(SpatialDataSourceService.get(layer.spatialDataSourceId));

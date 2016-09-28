@@ -6,12 +6,12 @@ define([
 
     return maps.lazy.controller("ProjectListController", function ($scope, ProjectService, ngTableParams) {
 
-
         $scope.tableProjectsParams = new ngTableParams({
             count : 10,
             page : 1,
             filter : {
-
+                title : {},
+                description : {}
             }
         }, buildNgTable());
 

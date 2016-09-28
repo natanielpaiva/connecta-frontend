@@ -37,40 +37,39 @@ define({
         }
     },
     tools : [{
-        buffer : {
-            model : 'buffer',
-            title : 'Buffer',
-            checked : false
-        },
-        geoProcessing : {
+        model : 'buffer',
+        title : 'Buffer',
+        checked : false
+    },
+        {
             model : 'geoProcessing',
             title : 'Geoprocessing',
             checked : false
         },
-        fileUpload : {
+        {
             model : 'fileUpload',
             title : 'Upload de arquivo',
             checked : false
         },
-        legend : {
+        {
             model : 'legend',
             title : 'Legenda',
             checked : false
         },
-        timeline : {
+        {
             model : 'timeline',
             title : 'Timeline',
             checked : false
         },
-        spatialFilter : {
+        {
             model : 'spatialFilter',
             title : 'Filtro Espacial',
             checked : false
         },
-        comparison : {
+        {
             model : 'comparison',
             title : 'Comparação',
             checked : false
         }
-    }]
+    ]
 });

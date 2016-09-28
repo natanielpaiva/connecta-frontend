@@ -21,8 +21,7 @@ define([
         };
 
         this.list = function (params) {
-            var queryString = params ? urlHelper.queryStringify(params) : '';
-            return $http.get(url + queryString);
+            return $http.get(url + params);
         };
 
         this.update = function (id, geoLayer) {

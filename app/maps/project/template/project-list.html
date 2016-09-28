@@ -10,7 +10,7 @@
         <div class="col-md-3 col-md-offset-3">
             <div class="input-group list-layers-search">
               <span class="input-group-addon"><i class="icon-search"></i></span>
-              <input type="text" class="form-control">
+              <input ng-model="filter" ng-model-options="{debounce : 1000}" ng-change="tableProjectsParams.reload()" type="text" class="form-control">
             </div>
         </div>
     </div>
@@ -32,13 +32,13 @@
 
             <tr ng-repeat="project in $data" class="row am-slide-right">
                 <td class="text-left col-md-6">
-                    <a href="" class="full-size-block link-no-state">
+                    <a href="#/maps/project/{{project._id}}" class="full-size-block link-no-state">
                         {{project.title}}
                     </a>
                 </td>
 
                 <td class="text-left col-md-6">
-                    <a href="" class="full-size-block link-no-state">
+                    <a href="#/maps/project/{{project._id}}" class="full-size-block link-no-state">
                         {{project.description}}
                     </a>
                 </td>

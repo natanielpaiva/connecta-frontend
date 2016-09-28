@@ -17,7 +17,7 @@ define(function () {
 
             for (var field in fields) {
                 fieldObj = {};
-                fieldObj[field] = filter;
+                fieldObj[field] = {$regex : filter, $options : 'i'};
                 array.push(fieldObj);
             }
 

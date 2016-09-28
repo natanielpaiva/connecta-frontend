@@ -12,12 +12,16 @@ define([
         };
 
         this.save = function (project) {
+
+            if (project._id) {
+                return $http.put(url + "/" + project._id, project);
+            }
+
             return $http.post(url, project);
         };
 
         this.list = function (params) {
-            var queryString = params ? urlHelper.queryStringify(params) : '';
-            return $http.get(url + queryString);
+            return $http.get(url + params);
         };
 
         this.listAll = function () {

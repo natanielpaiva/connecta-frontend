@@ -19,8 +19,8 @@
         <div class="col-md-12">
             <label translate>Ferramentas de navegação e visualização disponibilizadas ao usuário</label>
             <label class="switch">
-                <input ng-model="allNavigationToolsAreEnabled"
-                       ng-change="checkAllMapTools('widgets', allNavigationToolsAreEnabled)" type="checkbox">
+                <input ng-model="$parent.allWidgetsAreEnabled"
+                       ng-change="checkAllMapTools('widgets', $parent.allWidgetsAreEnabled)" type="checkbox">
                 <div class="slider round"></div>
             </label>
         </div>
@@ -31,8 +31,9 @@
                     <div class="col-md-2" ng-repeat="tool in tools.widgets">
                         <p>{{tool.title}}</p>
                         <label class="switch">
-                            <input ng-init="project.widgets[tool.model] = tool.checked"
-                                   ng-model="project.widgets[tool.model]" type="checkbox">
+                            <input ng-model="project.widgets[tool.model]"
+                                   ng-change="setAllWidgetsSelected()"
+                                   type="checkbox">
                             <div class="slider round"></div>
                         </label>
                     </div>
@@ -45,19 +46,20 @@
         <div class="col-md-12">
             <label translate>Ferramentas Geospaciais a serem disponibilizadas</label>
             <label class="switch">
-                <input ng-model="allGeoToolsAreEnabled"
-                       ng-change="checkAllMapTools('tools', allGeoToolsAreEnabled)" type="checkbox">
+                <input ng-model="$parent.allGeoToolsAreEnabled"
+                       ng-change="checkAllMapTools('tools', $parent.allGeoToolsAreEnabled)" type="checkbox">
                 <div class="slider round"></div>
             </label>
         </div>
 
         <div class="row">
-            <div class="col-md-12 text-center" ng-repeat="mapTools in tools.tools track by $index">
-                <div class="col-md-2" ng-repeat="tool in mapTools track by $index">
+            <div class="col-md-12 text-center">
+                <div class="col-md-2" ng-repeat="tool in tools.tools track by $index">
                     <p>{{tool.title}}</p>
                     <label class="switch">
-                        <input ng-init="project.tools[$index].name = tool.model; project.tools[$index].active = tool.checked" type="hidden">
-                        <input ng-model="project.tools[$index].active" type="checkbox">
+                        <input ng-model="project.tools[$index].active"
+                               ng-change="setAllToolsSelected()"
+                               type="checkbox">
                         <div class="slider round"></div>
                     </label>
                 </div>
