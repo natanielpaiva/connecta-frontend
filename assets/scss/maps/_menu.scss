@@ -24,11 +24,11 @@
                 transition: right $defaultAnimationDuration;
 
                 #btn-active-bar {
-                    #link-active-bar{    
+                    #link-active-bar{
                         display: block;
                         width: 100%;
-                        height: 100%;     
-                        background: url('#{$mapsImagePath}/menu/ico_arrow_inactive_bar.png') center no-repeat; 
+                        height: 100%;
+                        background: url('#{$mapsImagePath}/menu/ico_arrow_inactive_bar.png') center no-repeat;
                         cursor: pointer;
                     }
                 }
@@ -42,8 +42,8 @@
                     #link-active-bar{
                         display: block;
                         width: 100%;
-                        height: 100%;     
-                        background: url('#{$mapsImagePath}/menu/ico_arrow_active_bar.png') center no-repeat; 
+                        height: 100%;
+                        background: url('#{$mapsImagePath}/menu/ico_arrow_active_bar.png') center no-repeat;
                         cursor: pointer;
                     }
                 }
@@ -111,7 +111,7 @@
     padding:0;
     padding-bottom:.5em;
     color:$white;
-    
+
     & * {
         user-select:none;
     }
@@ -239,5 +239,9 @@ input[type='range'].range-maps::-webkit-slider-thumb {
 
 .icon_swipe_active {
     border-color: green !important;
-    border-style: solid !important;  
+    border-style: solid !important;
+}
+
+.maozinha {
+    cursor: pointer;
 }

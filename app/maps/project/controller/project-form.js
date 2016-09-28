@@ -198,11 +198,42 @@ define([
         $scope.flag_add = true;
         $scope.layersBySpatials = [];
         $scope.columnsByLayer = [];
+        $scope.index_edit = null;
+        var richLayerOriginal;
+
+        function returnRichLayerList () {
+            if ($scope.index_edit != null) {
+                $scope.project.richLayers.splice($scope.index_edit, 0, richLayerOriginal);
+            }
+        }
+
+
         $scope.cancel = function () {
+            returnRichLayerList();
+            $scope.index_edit = null;
             $scope.flag_add = true;
         };
 
-        $scope.editRichLayer = function (richLayer) {
+        $scope.editRichLayer = function (richLayer, index) {
+            // if ($scope.index_edit != null && $scope.index_edit >= 0) {
+            //     return;
+            // }
+
+            console.log(index);
+            $scope.richLayerAdd = {};
+
+            var copyRichLayer = angular.copy(richLayer);
+            delete copyRichLayer.$$hashKey;
+
+            $scope.removeRichLayer(index);
+            if (JSON.stringify($scope.richLayerAdd) != JSON.stringify(copyRichLayer)) {
+                returnRichLayerList();
+            }
+
+            richLayerOriginal = angular.copy(richLayer);
+            delete richLayerOriginal.$$hashKey;
+            $scope.index_edit = index;
+
             SpatialDataSourceService.list({size : "*"}).then(function (response) {
                 $scope.spatialDataSources = response.data.content;
                 return GeoLayerService.getLayersByDS(richLayer.layer.spatialDataSourceId);
@@ -218,6 +249,10 @@ define([
 
             DatasourceService.listConnectaDatasources().then(onSuccesListDataSources, onError);
         };
+
+        $scope.removeRichLayer = function (index) {
+            $scope.project.richLayers.splice(index, 1)
+        }
 
         $scope.toggleOptionAdd = function (richLayer) {
             if (typeof richLayer == 'undefined') {
@@ -237,10 +272,15 @@ define([
 
             } else {
                 richLayer.resultSetId = richLayer.resultSetId || getResultSetId();
-                $scope.project.richLayers.push(angular.copy(richLayer));
+                if ($scope.index_edit) {
+                    $scope.project.richLayers.splice($scope.index_edit, 0, $scope.richLayerAdd);
+                } else {
+                    $scope.project.richLayers.push(angular.copy(richLayer));
+                }
             }
-
+            $scope.index_edit = null;
             $scope.flag_add = !$scope.flag_add;
+
         };
 
         $scope.getLayersBySpatialDS = function (id_spatial_ds) {
@@ -259,7 +299,6 @@ define([
         };
 
         $scope.onDataSourceChange = function (id) {
-            console.log(id);
             if (id) {
                 DatasourceService.listColumnsByDatasourceId(id).then(function (response) {
                     if (response.data) {

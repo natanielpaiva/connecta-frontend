@@ -8,7 +8,6 @@
     <!--<span ng-click="getPath($index, node.path)">{{node.name}}</span>-->
     <!--</treecontrol>-->
 
-
     <h4>Camadas geográficas</h4>
     <!--TABELA-->
     <table class="table table-striped table-hover" show-filter="true">
@@ -20,7 +19,7 @@
             <th class="col-md-2">Campo</th>
             <th class="col-md-2">Identificador</th>
             <th class="col-md-2">Campo</th>
-            <th class="col-md-1">Associar</th>
+            <th class="col-md-1">Ações</th>
         </tr>
         </thead>
         <tbody dnd-list="project.richLayers" class="rich-layers-table">
@@ -35,8 +34,7 @@
              ng-repeat="richLayer in project.richLayers"
              dnd-draggable="richLayer"
              dnd-moved="project.richLayers.splice($index, 1)"
-             dnd-effect-allowed="move"
-             ng-click="editRichLayer(richLayer)">
+             dnd-effect-allowed="move">
             <td class="col-md-2">{{$index + 1}}</td>
             <td class="col-md-2">{{richLayer.title}}</td>
             <td class="col-md-2">{{richLayer.layer.title}}</td>
@@ -44,17 +42,15 @@
             <td class="col-md-2">{{richLayer.resultSetId}}</td>
             <td class="col-md-2">{{richLayer.crossingKeys.resultSetKey}}</td>
             <td class="">
-                <a href="" class="full-size-block link-no-state">
-                    <div class="col-xs-2">
-                        <span class="glyphicon glyphicon-link"></span>
-                    </div>
-                </a>
+                <span class="glyphicon glyphicon-pencil maozinha"
+                      ng-hide="index_edit != null && index_edit >= 0"
+                      ng-click="editRichLayer(richLayer, $index)"></span>
+                <span class="glyphicon glyphicon-trash maozinha" ng-click="removeRichLayer($index)"></span>
             </td>
         </tr>
 
         </tbody>
     </table>
-
     <!--//TABELA-->
     <!--CADASTRO DE DRILL-->
     <div ng-if="!flag_add">
