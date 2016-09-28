@@ -1,10 +1,11 @@
 define([
     'connecta.maps',
     '../service/analysis-service',
-    '../../project/service/project-service'
+    '../../project/service/project-service',
+    '../../datasource/service/datasource-service'
 ], function (maps) {
 
-    return maps.lazy.controller('AnalysisFormController', function ($scope, $location, $routeParams, AnalysisService, ProjectService, notify) {
+    return maps.lazy.controller('AnalysisFormController', function ($scope, $location, $routeParams, AnalysisService, ProjectService, DatasourceService, notify) {
 
         init();
 
@@ -77,9 +78,6 @@ define([
                     notify.error(err.statusText);
                 })
                 .then(function (response) {
-                    if (!response) {
-                        return notify.error('Não foi possível obter resposta do servidor.');
-                    }
                     $scope.projects = response.data.content;
                 });
         }
@@ -103,26 +101,21 @@ define([
             }
             var promise;
             if ($scope.selectedProject.serviceType === 'obiee') {
-                promise = AnalysisService.getMetaData(richLayer.info.analysisPath);
-                promise.then(function (response) {
-                    if (!response) {
-                        return notify.error('Não foi possível obter resposta do servidor.');
-                    }
-                    $scope.dataSourceColumns = response;
-                });
+                // promise = DatasourceService.getCa(richLayer.info.analysisId);
+                // promise.then(function (response) {
+                //     if (!response) {
+                //         return notify.error('Não foi possível obter resposta do servidor.');
+                //     }
+                //     $scope.dataSourceColumns = response;
+                // });
             } else if ($scope.selectedProject.serviceType === 'connecta') {
-                promise = AnalysisService.getMetaData(richLayer.info.analysisId);
+                promise = DatasourceService.getAnalysisConnecta(richLayer.dataSourceIdentifier);
                 promise.then(function (response) {
-                    if (!response) {
-                        return notify.error('Não foi possível obter resposta do servidor.');
-                    }
                     $scope.dataSourceColumns =  [];
                     if (response.analysisColumns && response.analysisColumns.length) {
                         response.analysisColumns.forEach(function (column) {
                             $scope.dataSourceColumns.push({name: column.name, alias: column.label});
                         });
-                    } else {
-                        return notify.error('Não foi possível carregar as colunas de criteria.');
                     }
                 });
             } else {
@@ -178,10 +171,11 @@ define([
                 promise = AnalysisService.update($scope.analysis._id, $scope.analysis);
             }
             promise.catch(function (err) {
-                notify.error(err.statusText);
+                notify.error('ANALYSIS.SAVE_ERROR');
             });
             promise.then(function () {
                 $location.path('/maps/analysis');
+                notify.info('ANALYSIS.SAVE_SUCCESS');
             });
         };
 

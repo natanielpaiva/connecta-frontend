@@ -5,7 +5,7 @@ define([
     "maps/spatial-datasource/service/spatial-datasource-service"
 ], function (maps, filterHelper) {
 
-    return maps.lazy.controller("GeoLayerListController", function ($scope, $q, GeoLayerService, SpatialDataSourceService, ngTableParams, notify) {
+    return maps.lazy.controller("GeoLayerListController", function ($scope, GeoLayerService, SpatialDataSourceService, ngTableParams, notify) {
 
         $scope.geometryMap = {
             esriGeometryPolygon : "Polígono",
