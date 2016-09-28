@@ -21,16 +21,20 @@
     <div class="col-md-12">
         <div class="well margin-top-single margin-bottom-single">
             <p>
-                <strong translate>{{"GEO_LAYER.TITLE"}}:</strong>
+                <strong translate>GEO_LAYER.TITLE</strong>:
                 {{layer.title}}
             </p>
             <p>
-                <strong translate>{{"GEO_LAYER.GEO_DATASOURCE_LAYER"}}:</strong>
+                <strong translate>GEO_LAYER.GEO_DATASOURCE_LAYER</strong>:
                 {{layer.spatialDataSource.title}}
             </p>
             <p>
-                <strong translate>{{"GEO_LAYER.GEOMETRY_TYPE"}} :</strong>
-                {{layer.geometryType}}
+                <strong translate>GEO_LAYER.GEOMETRY_TYPE</strong>:
+                <translate>{{geometryType[layer.geometryType]}}</translate>
+            </p>
+            <p ng-if="layer.description">
+                <strong translate>GEO_LAYER.DESCRIPTION</strong>:
+                {{layer.description}}
             </p>
         </div>
     </div>

@@ -8,6 +8,12 @@ define([
 
         var id;
 
+        $scope.geometryType = {
+            'esriGeometryPolygon': 'LAYER_TYPE.POLYGON',
+            'esriGeometryPoint': 'LAYER_TYPE.POINT',
+            'esriGeometryLine': 'LAYER_TYPE.LINE'
+        };
+
         init();
 
         function init() {
