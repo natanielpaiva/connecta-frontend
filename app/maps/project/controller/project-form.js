@@ -20,70 +20,7 @@ define([
 
         init();
 
-        function init () {
 
-            if ($routeParams.id) {
-                getProjectById($routeParams.id).then(onSuccess, onError);
-            }
-
-            function onSuccess(response) {
-                $scope.project = response.data;
-                setSelectedBaseMaps();
-                setAllToolsSelected();
-                setAllWidgetsSelected();
-            }
-
-            function onError(err) {
-                console.error(err);
-            }
-
-        }
-
-        function getProjectById (id) {
-            if (id) {
-                return ProjectService.get(id);
-            }
-        }
-
-        function setSelectedBaseMaps () {
-            if ($scope.project.basemaps.length) {
-                $scope.enableBaseMapSelector = true;
-                baseMapsList.forEach( function (configBasemap) {
-                    if ($scope.project.basemaps.indexOf(configBasemap.name) >= 0) {
-                        configBasemap.checked = true;
-                    }
-                });
-            }
-        }
-
-        function setAllWidgetsSelected() {
-            for (var key in $scope.project.widgets) {
-                if (!$scope.project.widgets[key]) {
-                    $scope.allWidgetsAreEnabled = false;
-                    break;
-                }
-                $scope.allWidgetsAreEnabled = true;
-            }
-        }
-
-        function setAllToolsSelected() {
-
-            var flag;
-
-            for (var index in $scope.project.tools) {
-                if (!$scope.project.tools[index].active) {
-                    flag = false;
-                    break;
-                }
-                flag = true;
-            }
-
-            $scope.allGeoToolsAreEnabled = flag;
-
-        }
-
-        $scope.setAllToolsSelected = setAllToolsSelected;
-        $scope.setAllWidgetsSelected = setAllWidgetsSelected;
 
         $scope.project = {
             basemaps : [],
@@ -332,6 +269,10 @@ define([
             }
         };
 
+        $scope.setAllToolsSelected = setAllToolsSelected;
+
+        $scope.setAllWidgetsSelected = setAllWidgetsSelected;
+
         function getResultSetId () {
             return btoa(String(Math.floor(Math.random()*1000 + Date.now()))).replace(/\=/g, '').substr(-7);
         }
@@ -370,6 +311,68 @@ define([
             }
 
             return checkedBaseMaps;
+
+        }
+
+        function init () {
+
+            if ($routeParams.id) {
+                getProjectById($routeParams.id).then(onSuccess, onError);
+            }
+
+            function onSuccess(response) {
+                $scope.project = response.data;
+                setSelectedBaseMaps();
+                setAllToolsSelected();
+                setAllWidgetsSelected();
+            }
+
+            function onError(err) {
+                console.error(err);
+            }
+
+        }
+
+        function getProjectById (id) {
+            if (id) {
+                return ProjectService.get(id);
+            }
+        }
+
+        function setSelectedBaseMaps () {
+            if ($scope.project.basemaps.length) {
+                $scope.enableBaseMapSelector = true;
+                baseMapsList.forEach( function (configBasemap) {
+                    if ($scope.project.basemaps.indexOf(configBasemap.name) >= 0) {
+                        configBasemap.checked = true;
+                    }
+                });
+            }
+        }
+
+        function setAllWidgetsSelected() {
+            for (var key in $scope.project.widgets) {
+                if (!$scope.project.widgets[key]) {
+                    $scope.allWidgetsAreEnabled = false;
+                    break;
+                }
+                $scope.allWidgetsAreEnabled = true;
+            }
+        }
+
+        function setAllToolsSelected() {
+
+            var flag;
+
+            for (var index in $scope.project.tools) {
+                if (!$scope.project.tools[index].active) {
+                    flag = false;
+                    break;
+                }
+                flag = true;
+            }
+
+            $scope.allGeoToolsAreEnabled = flag;
 
         }
 
