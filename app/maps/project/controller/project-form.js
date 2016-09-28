@@ -64,8 +64,6 @@ define([
                     console.error(error);
                 })
                 .then(function (map) {
-                    $scope.project.mapConfig.initialExtent = mapHelper.getCenter();
-                    $scope.$apply();
                     $scope.watchers[WatcherEnum.INITIAL_EXTENT] = mapHelper.watchCenterChange(function (position) {
                         $scope.project.mapConfig.initialExtent = position;
                         $scope.$apply();
@@ -80,6 +78,13 @@ define([
                         $scope.project.mapConfig.maxZoom = zoom;
                         $scope.$apply();
                     }, true);
+
+                    if ($routeParams.id) {
+                        mapHelper.setCenter($scope.project.mapConfig.initialExtent);
+                    } else {
+                        $scope.project.mapConfig.initialExtent = mapHelper.getCenter();
+                        $scope.$apply();
+                    }
 
                 });
         };
@@ -106,10 +111,7 @@ define([
             if (watcher === WatcherEnum.MIN_ZOOM) {
                 mapHelper.setZoom($scope.project.mapConfig.minZoom);
             }
-
-            $scope.currentWatcher = watcher;
             $scope.watchers[$scope.currentWatcher].resume();
-
         };
 
         $scope.updateZoomConfig = function (sender) {

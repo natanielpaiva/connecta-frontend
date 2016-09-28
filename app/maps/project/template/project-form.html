@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<form name="project_form" ng-submit="saveProject()" novalidate>
+<form name="project_form" novalidate>
 
     <div ng-include="steps[currentStep].templateUrl"></div>
 
@@ -52,7 +52,7 @@
                 <!--SALVAR-->
             <!--</button>-->
             <!---->
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" ng-click="saveProject()">
                 SALVAR
             </button>
         </div>
