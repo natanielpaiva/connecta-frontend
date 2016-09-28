@@ -10,8 +10,13 @@ define([
         init();
 
         function init() {
-            loadProjects();
-            checkEditing();
+            var promise = loadProjects();
+            promise.catch(function (err) {
+                console.error(err);
+            });
+            promise.then(function () {
+                checkEditing();
+            });
         }
 
         $scope.analysis = {
@@ -73,13 +78,21 @@ define([
         };
 
         function loadProjects() {
-            ProjectService.list({size: '*'})
-                .catch(function (err) {
-                    notify.error(err.statusText);
-                })
-                .then(function (response) {
-                    $scope.projects = response.data.content;
-                });
+            return new Promise(function (resolve, reject) {
+                try {
+                    ProjectService.list({size: '*'})
+                        .catch(function (err) {
+                            reject(err);
+                        })
+                        .then(function (response) {
+                            $scope.projects = response.data.content;
+                            resolve();
+                        });
+                } catch (err) {
+                    reject(err);
+                }
+
+            });
         }
 
         $scope.projectChanged = function (projectId) {
@@ -111,15 +124,18 @@ define([
             } else if ($scope.selectedProject.serviceType === 'connecta') {
                 promise = DatasourceService.getAnalysisConnecta(richLayer.dataSourceIdentifier);
                 promise.then(function (response) {
-                    $scope.dataSourceColumns =  [];
-                    if (response.analysisColumns && response.analysisColumns.length) {
-                        response.analysisColumns.forEach(function (column) {
-                            $scope.dataSourceColumns.push({name: column.name, alias: column.label});
-                        });
+                    try {
+                        $scope.dataSourceColumns =  [];
+                        var metadata = response.data;
+                        if (metadata.analysisColumns && metadata.analysisColumns.length) {
+                            metadata.analysisColumns.forEach(function (column) {
+                                $scope.dataSourceColumns.push({name: column.name, alias: column.label});
+                            });
+                        }
+                    } catch (err) {
+                        console.error(err);
                     }
                 });
-            } else {
-                return notify.error('Service type faltando ou não suportado.');
             }
             promise.catch(function (err) {
                 notify.error(err.statusText);
@@ -137,6 +153,11 @@ define([
         $scope.editOutField = function (outfieldIndex) {
             $scope.outField = Object.assign({}, $scope.analysis.outFields[outfieldIndex]);
             $scope.outFieldEditIndex = outfieldIndex;
+            $scope.dataSourceColumns.forEach(function (column) {
+                if (column.name === $scope.outField.name) {
+                    $scope.selectedColumn = column;
+                }
+            });
         };
 
         $scope.deleteOutField = function () {
@@ -162,9 +183,6 @@ define([
 
         $scope.saveProject = function () {
             var promise;
-
-
-
             if (!$scope.isEditing) {
                 promise = AnalysisService.save($scope.analysis);
             } else {
