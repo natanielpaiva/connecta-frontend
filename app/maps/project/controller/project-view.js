@@ -33,7 +33,6 @@ define([
                                 clearInterval(timer);
                             }
                         }, 100);
-                        console.info(response.data);
                     });
                 } catch (error) {
                     console.error(error);
