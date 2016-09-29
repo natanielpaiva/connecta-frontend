@@ -44,6 +44,11 @@ define([
             $rootScope.$broadcast('sidebar.show', val);
             return this;
         };
+        
+        this.showHeading = function (val) {
+            $rootScope.$broadcast('heading.show', val);
+            return this;
+        };
 
         this.setFullscreen = function (fullscreen) {
             $rootScope.$broadcast('page.fullscreen', fullscreen);

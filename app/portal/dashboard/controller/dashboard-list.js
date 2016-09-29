@@ -1,9 +1,16 @@
+/* global angular */
 define([
     'connecta.portal',
+    'portal/layout/service/layout',
     'portal/dashboard/service/dashboard-service'
 ], function (portal) {
-    return portal.lazy.controller('DashboardListController', function ($scope, DashboardService) {
+    return portal.lazy.controller('DashboardListController', function ($scope, DashboardService, LayoutService) {
         $scope.dashboards = [];
+        
+//        LayoutService.showHeading(false);
+//        $scope.$on("$locationChangeStart", function () {
+//            LayoutService.showHeading(true);
+//        });
 
         $scope.listview = {
             mode: 'grid'

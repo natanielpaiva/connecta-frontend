@@ -1,7 +1,7 @@
 $boxWidth: 16em;
 $boxHeight: 20em;
 $loginGray: #bcbcbc;
-$loginWhite: #F6F6F6;
+$loginWhite: #f6f6f6;
 
 [layout] {
     login {
@@ -10,7 +10,7 @@ $loginWhite: #F6F6F6;
 }
 
 [layout].login {
-    background-color: #f6f6f6 !important;
+    background-color: $loginWhite !important;
     position: fixed;
     top: 0;
     bottom: 0;
