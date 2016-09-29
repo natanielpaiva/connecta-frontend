@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../../../node_modules/leaflet/dist/leaflet.css">
+
 <section>
     <div class="row">
         <div class="col-md-10">
@@ -50,6 +52,9 @@
     <menu-carrousel items="basemaps" item-template-url="'app/maps/project/template/_project_base_map_thumb.html'"
                     enabled="true">
     </menu-carrousel>
+
+    <div id="_mapDivProjectView" ng-init="initMap()" style="height: 500px; margin-top: 10px"></div>
+
 </section>
 
 

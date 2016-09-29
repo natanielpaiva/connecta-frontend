@@ -2,9 +2,10 @@ define([
     "connecta.maps",
     "maps/project/storage/basemaps",
     "maps/project/storage/tools",
+    "maps/helper/map",
     "maps/project/directive/menu-carrousel",
-    "maps/project/service/project-service"
-], function (maps, baseMapsJson, toolsConfig) {
+    "maps/project/service/project-service",
+], function (maps, baseMapsJson, toolsConfig, mapHelper) {
 
     return maps.lazy.controller("ProjectViewController", function ($scope, ProjectService, $routeParams, $translate, $location, notify) {
 
@@ -12,14 +13,31 @@ define([
 
         $scope.widgets = [];
 
-        if ($routeParams.id) {
-            try {
-                var promise = ProjectService.get($routeParams.id);
-                promise.then(function (response) {
-                    $scope.project = prepareProject(response.data);
-                });
-            } catch (error) {
+        init();
 
+        function init() {
+            loadProject();
+        }
+
+        function loadProject() {
+            if ($routeParams.id) {
+                try {
+                    var promise = ProjectService.get($routeParams.id);
+                    promise.then(function (response) {
+                        $scope.project = prepareProject(response.data);
+                        var timer = setInterval(function () {
+                            if (mapHelper.map) {
+                                var zoomConfig = $scope.project.mapConfig;
+                                mapHelper.map.setView(zoomConfig.center, zoomConfig.zoom);
+                                mapHelper.freezeCurrentBounds();
+                                clearInterval(timer);
+                            }
+                        }, 100);
+                        console.info(response.data);
+                    });
+                } catch (error) {
+                    console.error(error);
+                }
             }
         }
 
@@ -71,6 +89,18 @@ define([
             return data;
 
         }
+
+        $scope.initMap = function () {
+            setTimeout(function () {
+                var promise = mapHelper.buildMap('_mapDivProjectView');
+                promise.catch(function (err) {
+                    notify.error(err.statusText);
+                });
+                promise.then(function (map) {
+                    //
+                });
+            }, 10);
+        };
 
     });
 

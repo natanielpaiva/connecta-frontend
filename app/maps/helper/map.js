@@ -94,12 +94,36 @@ define(['esri-leaflet'], function (esri) {
             };
         },
 
+        getBounds: function () {
+            return this.map.getBounds();
+        },
+
+        fitBounds: function (latLngBounds) {
+            this.map.fitBounds(latLngBounds);
+        },
+
+        setMaxBounds: function (latLngBounds) {
+            this.map.setMaxBounds(latLngBounds);
+        },
+
+        freezeCurrentBounds: function () {
+            var currentBounds = this.map.getBounds();
+            var staticZoom = this.map.getBoundsZoom(currentBounds);
+            this.setMaxZoom(staticZoom);
+            this.setMinZoom(staticZoom);
+            this.map.setMaxBounds(currentBounds);
+        },
+
         getCenter: function () {
             return this.map.getCenter();
         },
 
         setZoom: function (zoom) {
             this.map.setZoom(zoom);
+        },
+
+        getZoom: function () {
+            return this.map.getZoom();
         },
 
         setCenter: function (position) {

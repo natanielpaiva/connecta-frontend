@@ -34,25 +34,26 @@
 
                         <div class="col-md-3" style="padding-right: 0">
                             <label>Zoom</label>
-                            <select class="form-control">
-                                <option value="">Selecione</option>
-                                <option value="">15</option>
-                                <option value="">30</option>
-                            </select>
+                            <input class="form-control"
+                                   type="number"
+                                   min="1"
+                                   max="18"
+                                   ng-change="updateZoomConfig('zoom')"
+                                   ng-model="project.mapConfig.zoom" />
                         </div>
 
                         <div class="col-md-4" style="padding-right: 0">
                             <label>Coord X</label>
-                            <input ng-model="project.mapConfig.initialExtent.lng" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
+                            <input ng-model="project.mapConfig.center.lng" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
                         </div>
 
                         <div class="col-md-5" style="padding-right: 0; padding-left: 0">
                             <div class="col-md-8" style="padding-right: 0; padding-left: 2px">
                                 <label>Coord Y</label>
-                                <input ng-model="project.mapConfig.initialExtent.lat" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
+                                <input ng-model="project.mapConfig.center.lat" ng-change="updateCenter()" class="form-control" type="text" step="0.1" />
                             </div>
                             <div class="col-md-4" style="padding-right: 0; padding-left: 2px">
-                                <button class="btn btn-success margin-top-label" ng-click="setCurrentWatcher('initialExtent')">
+                                <button class="btn btn-success margin-top-label" ng-click="setCurrentWatcher('center')">
                                    <i class="icon-link"></i>
                                 </button>
                             </div>

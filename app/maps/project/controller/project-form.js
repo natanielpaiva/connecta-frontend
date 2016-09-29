@@ -40,10 +40,10 @@ define([
         };
 
         var WatcherEnum = {
-            INITIAL_EXTENT: 'initialExtent',
+            INITIAL_EXTENT: 'center',
             MAX_ZOOM: 'maxZoom',
             MIN_ZOOM: 'minZoom',
-            INITIAL_ZOOM: 'initialZoom'
+            INITIAL_ZOOM: 'zoom'
         };
 
         $scope.watchers = {};
@@ -63,7 +63,12 @@ define([
                 })
                 .then(function (map) {
                     $scope.watchers[WatcherEnum.INITIAL_EXTENT] = mapHelper.watchCenterChange(function (position) {
-                        $scope.project.mapConfig.initialExtent = position;
+                        $scope.project.mapConfig.center = position;
+                        $scope.$apply();
+                    }, true);
+
+                    $scope.watchers[WatcherEnum.INITIAL_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
+                        $scope.project.mapConfig.zoom = zoom;
                         $scope.$apply();
                     }, true);
 
@@ -78,9 +83,11 @@ define([
                     }, true);
 
                     if ($routeParams.id) {
-                        mapHelper.setCenter($scope.project.mapConfig.initialExtent);
+                        mapHelper.setCenter($scope.project.mapConfig.center);
+                        mapHelper.setZoom($scope.project.mapConfig.zoom);
                     } else {
-                        $scope.project.mapConfig.initialExtent = mapHelper.getCenter();
+                        $scope.project.mapConfig.center = mapHelper.getCenter();
+                        $scope.project.mapConfig.zoom = mapHelper.getZoom();
                         $scope.$apply();
                     }
 
@@ -90,6 +97,9 @@ define([
         $scope.setCurrentWatcher = function (watcher) {
 
             if ($scope.currentWatcher) {
+                if (watcher === WatcherEnum.INITIAL_EXTENT) {
+                    $scope.watchers[WatcherEnum.INITIAL_ZOOM].pause();
+                }
                 $scope.watchers[$scope.currentWatcher].pause();
             }
 
@@ -101,7 +111,8 @@ define([
             $scope.currentWatcher = watcher;
 
             if (watcher === WatcherEnum.INITIAL_EXTENT) {
-                mapHelper.setCenter($scope.project.mapConfig.initialExtent);
+                mapHelper.map.setView($scope.project.mapConfig.center, $scope.project.mapConfig.zoom);
+                $scope.watchers[WatcherEnum.INITIAL_ZOOM].resume();
             }
             if (watcher === WatcherEnum.MAX_ZOOM) {
                 mapHelper.setZoom($scope.project.mapConfig.maxZoom);
@@ -115,13 +126,17 @@ define([
         $scope.updateZoomConfig = function (sender) {
             if ($scope.currentWatcher === sender) {
                 mapHelper.setZoom($scope.project.mapConfig[sender]);
+            } else if (sender === WatcherEnum.INITIAL_ZOOM) {
+                $scope.watchers[WatcherEnum.INITIAL_EXTENT].pause();
+                mapHelper.setZoom($scope.project.mapConfig[WatcherEnum.INITIAL_ZOOM]);
+                $scope.watchers[WatcherEnum.INITIAL_EXTENT].resume();
             }
         };
 
         $scope.updateCenter = function () {
             if ($scope.currentWatcher === WatcherEnum.INITIAL_EXTENT) {
                 $scope.watchers[$scope.currentWatcher].pause();
-                mapHelper.setCenter($scope.project.mapConfig.initialExtent);
+                mapHelper.setCenter($scope.project.mapConfig.center);
                 $scope.watchers[$scope.currentWatcher].resume();
             }
         };
