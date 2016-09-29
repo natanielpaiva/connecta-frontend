@@ -230,11 +230,7 @@ define([
         };
 
         $scope.editRichLayer = function (richLayer, index) {
-            // if ($scope.index_edit != null && $scope.index_edit >= 0) {
-            //     return;
-            // }
 
-            console.log(index);
             $scope.richLayerAdd = {};
 
             var copyRichLayer = angular.copy(richLayer);
@@ -252,10 +248,10 @@ define([
             SpatialDataSourceService.list({size : "*"}).then(function (response) {
                 $scope.spatialDataSources = response.data.content;
                 return GeoLayerService.getLayersByDS(richLayer.layer.spatialDataSourceId);
-            }, onError).then(function(response){
+            }, onErrorEdit).then(function(response){
                 $scope.layersBySpatials = response.data.content;
                 return DatasourceService.listColumnsByDatasourceId(richLayer.dataSourceIdentifier);
-            }, onError).then(function(response){
+            }, onErrorEdit).then(function(response){
                 $scope.columns = response.data.analysisColumns;
                 $scope.getColumnsByLayer(richLayer.layer._id);
                 $scope.flag_add = false;
@@ -347,6 +343,14 @@ define([
             if (error) {
                 notify.error(error.statusText);
             }
+            console.error(error);
+        }
+
+        function onErrorEdit(error) {
+            if (error) {
+                notify.error(error.statusText);
+            }
+            $scope.cancel();
             console.error(error);
         }
 
