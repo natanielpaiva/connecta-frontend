@@ -6,7 +6,7 @@ define([
     "maps/project/service/project-service"
 ], function (maps, baseMapsJson, toolsConfig) {
 
-    return maps.lazy.controller("ProjectViewController", function ($scope, ProjectService, $routeParams, $translate) {
+    return maps.lazy.controller("ProjectViewController", function ($scope, ProjectService, $routeParams, $translate, $location, notify) {
 
         $scope.project = {};
 
@@ -16,7 +16,6 @@ define([
             try {
                 var promise = ProjectService.get($routeParams.id);
                 promise.then(function (response) {
-                    console.info(response.data);
                     $scope.project = prepareProject(response.data);
                 });
             } catch (error) {
@@ -28,7 +27,8 @@ define([
             try {
                 var promise = ProjectService.delete(id);
                 promise.then(function () {
-                    notify.info("Item deletado");
+                    $location.path("/maps/project");
+                    notify.error("PROJECT.DELETE");
                 });
 
             } catch (error) {
@@ -40,16 +40,16 @@ define([
             var promises = [];
             var basemaps = [];
 
-            baseMapsJson.baseMaps.forEach(function(item){
-                if (data.basemaps.indexOf(item.name) > -1){
+            baseMapsJson.baseMaps.forEach(function (item) {
+                if (data.basemaps.indexOf(item.name) > -1) {
                     basemaps.push(item);
                 }
             });
 
             $scope.basemaps = basemaps;
 
-            toolsConfig.tools.forEach(function(item){
-                for(var l in data.tools){
+            toolsConfig.tools.forEach(function (item) {
+                for (var l in data.tools) {
                     if (data.tools[l].active && item.model === data.tools[l].name) {
                         promises.push($translate(item.title));
                         break;

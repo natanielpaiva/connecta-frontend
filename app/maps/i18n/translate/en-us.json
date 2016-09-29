@@ -81,7 +81,8 @@
         "ZOOM_MAX_MIN": "Zoom Max/Min",
         "DESC_ZOOM_MAX_MIN": "To define minimal and maximum zoom, use the slider or browse on map and click on use",
         "STATIC_NAVIGATION": "Static navigation",
-        "DYNAMIC_NAVIGATION": "Dynamic navigation"
+        "DYNAMIC_NAVIGATION": "Dynamic navigation",
+        "DELETE_SUCCESS": "Successfully deleted record"
     },
     "ANALYSIS": {
         "NAME": "Analysis name",

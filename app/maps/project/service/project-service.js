@@ -41,6 +41,10 @@ define([
             return $http.get(presenterResources.analysis + '/' + id);
         };
 
+        this.delete = function(id) {
+          return $http.delete(url + '/'+ id);
+        };
+
     });
 
 });
