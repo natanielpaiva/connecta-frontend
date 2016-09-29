@@ -202,7 +202,7 @@ define([
         var richLayerOriginal;
 
         function returnRichLayerList () {
-            if ($scope.index_edit != null) {
+            if ($scope.index_edit !== null) {
                 $scope.project.richLayers.splice($scope.index_edit, 0, richLayerOriginal);
             }
         }
@@ -251,8 +251,8 @@ define([
         };
 
         $scope.removeRichLayer = function (index) {
-            $scope.project.richLayers.splice(index, 1)
-        }
+            $scope.project.richLayers.splice(index, 1);
+        };
 
         $scope.toggleOptionAdd = function (richLayer) {
             if (typeof richLayer == 'undefined') {
