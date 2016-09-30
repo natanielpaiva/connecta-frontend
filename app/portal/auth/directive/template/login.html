@@ -109,7 +109,7 @@
                         <div>
                             <!-- <span ng-click="domain.isEditing = false" class="icon-backspace return"></span> -->
                             <span class="icon-edit2"></span>
-                            <input ng-model="domain.name" class="name-input" placeholder="{{'DOMAIN.NAME'|translate}}" autofocus />
+                            <input ng-model="domain.name" class="name-input" placeholder="{{'DOMAIN.NAME'|translate}}" autofocus required />
                         </div>
                         <div class="form-group">
                             <label translate>DOMAIN.INVITE</label>
@@ -138,28 +138,11 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <!-- ng-class="{'thumbnail-grid-item-editing':isCreating}" -->
             <div class="thumbnail-grid-item thumbnail-grid-item-new" ng-click="newDomain()">
                 <div class="thumbnail-grid-item-head">
                     <div class="thumbnail-grid-item-head-name" translate>DOMAIN.NEW</div>
                     <div class="icon-plus2"></div>
                 </div>
-
-                <!-- <div class="thumbnail-grid-item-form">
-                    <h3>{{'DOMAIN.NEW'| translate}}</h3>
-                    <form novalidate name="domain_new" ng-submit="createDomain()">
-                        <div class="form-group">
-                            <label for="domain_name">{{'DOMAIN.NAME'| translate}}</label>
-                            <input name="domain_name" class="form-control" ng-model="domain.name" type="text" required />
-                            <div ng-show="domain_new.domain_name.$touched" ng-messages="domain_new.domain_name.$error" ng-messages-include="portal-error-messages">
-                            </div>
-                        </div>
-
-                        <button ng-click="createDomain()" class="btn btn-primary" type='button' ng-disabled="domain_new.$invalid" translate>
-                            DOMAIN.CREATE
-                        </button>
-                    </form>
-                </div> -->
             </div>
         </div>
     </div>

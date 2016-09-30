@@ -48,7 +48,7 @@ define([
         };
 
         UserService.save = function (user) {
-            var url = portalResources.user + '/user';
+            var url = portalResources.user + '/new';
 
             return $http.post(url, user);
         };
