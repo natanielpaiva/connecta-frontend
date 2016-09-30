@@ -27,6 +27,8 @@
         "FONT_SIZE": "Tamanho da fonte",
         "VIEW_ANALYSIS": "Resultado da análise",
         "EXPORT": "Exportar imagem",
+        "DELETE":"Excluir",
+        "EDIT":"Editar",
 
         "FONT_COLOR": "Cor",
         "FONT_FAMILY": "Fonte",
