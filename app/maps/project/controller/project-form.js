@@ -13,7 +13,7 @@ define([
     "maps/datasource/service/datasource-service"
 ], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig, contextConfig) {
 
-    return maps.lazy.controller("ProjectFormController", function ($scope, $timeout, $location, $routeParams, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
+    return maps.lazy.controller("ProjectFormController", function ($scope, $q, $timeout, $location, $routeParams, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
 
         var baseMapsList = angular.copy(baseMapsConfig.baseMaps);
         var toolAndWidgetsList = angular.copy(toolsConfig);
@@ -230,20 +230,10 @@ define([
         };
 
         $scope.editRichLayer = function (richLayer, index) {
-
             $scope.richLayerAdd = {};
-
             var copyRichLayer = angular.copy(richLayer);
             delete copyRichLayer.$$hashKey;
 
-            $scope.removeRichLayer(index);
-            if (JSON.stringify($scope.richLayerAdd) != JSON.stringify(copyRichLayer)) {
-                returnRichLayerList();
-            }
-
-            richLayerOriginal = angular.copy(richLayer);
-            delete richLayerOriginal.$$hashKey;
-            $scope.index_edit = index;
 
             SpatialDataSourceService.list({size : "*"}).then(function (response) {
                 $scope.spatialDataSources = response.data.content;
@@ -252,11 +242,18 @@ define([
                 $scope.layersBySpatials = response.data.content;
                 return DatasourceService.listColumnsByDatasourceId(richLayer.dataSourceIdentifier);
             }, onErrorEdit).then(function(response){
+                $scope.removeRichLayer(index);
                 $scope.columns = response.data.analysisColumns;
                 $scope.getColumnsByLayer(richLayer.layer._id);
                 $scope.flag_add = false;
+
                 $scope.richLayerAdd = angular.copy(richLayer);
-            });
+                richLayerOriginal = angular.copy(richLayer);
+                delete richLayerOriginal.$$hashKey;
+
+                $scope.index_edit = index;
+            }, onErrorEdit);
+
 
             DatasourceService.listConnectaDatasources().then(onSuccesListDataSources, onError);
         };
@@ -340,18 +337,11 @@ define([
         }
 
         function onError(error) {
-            if (error) {
-                notify.error(error.statusText);
-            }
-            console.error(error);
+            //console.error(error);
         }
 
-        function onErrorEdit(error) {
-            if (error) {
-                notify.error(error.statusText);
-            }
+        function onErrorEdit() {
             $scope.cancel();
-            console.error(error);
         }
 
         function onSuccesListDataSources(response) {
