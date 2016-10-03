@@ -91,7 +91,7 @@ define([
 
         $scope.initMap = function () {
             setTimeout(function () {
-                var promise = mapHelper.buildMap('_mapDivProjectView');
+                var promise = mapHelper.buildMap('_mapDivProjectView', {attributionControl: false, zoomControl: false});
                 promise.catch(function (err) {
                     notify.error(err.statusText);
                 });

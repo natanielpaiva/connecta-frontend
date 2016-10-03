@@ -56,8 +56,7 @@ define([
         $scope.currentWatcher = undefined;
 
         $scope.mapInit = function () {
-            mapHelper.buildMap('_mapDiv')
-
+            mapHelper.buildMap('_mapDiv', {attributionControl: false})
                 .catch(function (error) {
                     console.error(error);
                 })
@@ -74,11 +73,15 @@ define([
 
                     $scope.watchers[WatcherEnum.MIN_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
                         $scope.project.mapConfig.minZoom = zoom;
+                        mapHelper.setMaxZoom($scope.project.mapConfig.maxZoom);
+                        mapHelper.setMinZoom($scope.configSlider.options.floor);
                         $scope.$apply();
                     }, true);
 
                     $scope.watchers[WatcherEnum.MAX_ZOOM] = mapHelper.watchZoomChange(function (zoom) {
                         $scope.project.mapConfig.maxZoom = zoom;
+                        mapHelper.setMinZoom($scope.project.mapConfig.minZoom);
+                        mapHelper.setMaxZoom($scope.configSlider.options.ceil);
                         $scope.$apply();
                     }, true);
 
@@ -97,7 +100,7 @@ define([
         $scope.setCurrentWatcher = function (watcher) {
 
             if ($scope.currentWatcher) {
-                if (watcher === WatcherEnum.INITIAL_EXTENT) {
+                if ($scope.currentWatcher === WatcherEnum.INITIAL_EXTENT) {
                     $scope.watchers[WatcherEnum.INITIAL_ZOOM].pause();
                 }
                 $scope.watchers[$scope.currentWatcher].pause();
@@ -116,6 +119,7 @@ define([
             }
             if (watcher === WatcherEnum.MAX_ZOOM) {
                 mapHelper.setZoom($scope.project.mapConfig.maxZoom);
+
             }
             if (watcher === WatcherEnum.MIN_ZOOM) {
                 mapHelper.setZoom($scope.project.mapConfig.minZoom);
@@ -203,8 +207,7 @@ define([
                 getSelectionBarColor : function () {
                     return '#3bb79d';
                 },
-                minRange: 1,
-                pushRange: true
+                noSwitching: true
             }
         };
 

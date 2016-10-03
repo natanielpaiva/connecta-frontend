@@ -11,6 +11,8 @@
                    ng-model-options="{debounce : 500}"
                    ng-change="$ctrl.updateZoomConfig('minZoom')"
                    type="number"
+                   min="{{configSlider.options.floor}}"
+                   max="{{configSlider.options.ceil}}"
                    class="form-control" />
         </div>
     </div>
@@ -29,6 +31,8 @@
                    ng-model-options="{debounce : 500}"
                    ng-change="$ctrl.updateZoomConfig('maxZoom')"
                    class="form-control"
+                   min="{{configSlider.options.floor}}"
+                   max="{{configSlider.options.ceil}}"
                    type="number">
         </div>
 

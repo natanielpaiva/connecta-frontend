@@ -192,7 +192,7 @@ define([
             });
             promise.then(function () {
                 $location.path('/maps/analysis');
-                notify.info('ANALYSIS.SAVE_SUCCESS');
+                notify.success('ANALYSIS.SAVE_SUCCESS');
             });
         };
 

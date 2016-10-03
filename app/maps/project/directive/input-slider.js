@@ -18,6 +18,9 @@ define([
                 },
 
                 set : function(value) {
+                    if (value > maxZoom) {
+                        return;
+                    }
                     minZoom = value;
                     self.updateZoomConfig('minZoom');
                 }
@@ -29,6 +32,9 @@ define([
                 },
 
                 set : function(value) {
+                    if (value < minZoom) {
+                        return;
+                    }
                     maxZoom = value;
                     self.updateZoomConfig('maxZoom');
                 }

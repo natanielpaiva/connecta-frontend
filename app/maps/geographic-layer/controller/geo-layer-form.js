@@ -94,7 +94,7 @@ define([
 
         $scope.initMap = function () {
             setTimeout(function () {
-                var promise = mapHelper.buildMap($scope.mapNodeId);
+                var promise = mapHelper.buildMap($scope.mapNodeId, {attributionControl: false});
                 promise.catch(function (err) {
                     notify.error(err.statusText);
                 });

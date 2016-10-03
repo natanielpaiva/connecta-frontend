@@ -63,11 +63,8 @@ define([
             }
 
             function onError(error) {
-                if (error) {
-                    notify.error(error.statusText);
-                } else {
-                    notify.error("GEO_LAYER.DELETE_ERROR");
-                }
+                console.error(error);
+                notify.error("GEO_LAYER.DELETE_ERROR");
             }
 
         };
