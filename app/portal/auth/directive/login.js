@@ -5,17 +5,18 @@ define([
     // 'portal/layout/directive/click-out',
     'portal/layout/service/confirm',
     'portal/layout/service/notify'
-    //    'portal/auth/service/facebook-service',
-    //    'portal/auth/service/google-plus-service',
-], function(portal, package) {
-    return portal.directive('login', function() {
+            //    'portal/auth/service/facebook-service',
+            //    'portal/auth/service/google-plus-service',
+], function (portal, package) {
+    return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate, $confirm) { // FacebookService, GPlusService,
+            controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate, $confirm) { // FacebookService, GPlusService,
                 $scope.package = package;
 
                 $scope.invite = {};
                 $scope.invite.user = {};
+                $scope.invited = {};
                 $scope.credentials = {};
                 $scope.authResponse = {};
                 $scope.user = {};
@@ -30,38 +31,37 @@ define([
                     formInvited: "formInvited"
                 };
 
-                $scope.prepareInviteSection = function() {
-                    UserService.getByHash($location.hash()).then(function(response) {
-                        $scope.user.email = response.data.email;
-                        // location.hash = '';
-                    }, function() {
-                        location.hash = '';
+                $scope.prepareInviteSection = function () {
+                    UserService.getByHash($location.hash()).then(function (response) {
+                        $scope.invited.email = response.data.email;
+                    }, function () {
                         $scope.setSection($scope.sections.login);
                         notify.warning('USER.ERROR.INVITE_EXPIRED');
                     });
+                    location.hash = '';
                     return $scope.sections.formInvited;
                 };
 
                 $scope.currentSection = $location.hash() !== '' ?
-                    $scope.prepareInviteSection() : $scope.sections.login;
+                        $scope.prepareInviteSection() : $scope.sections.login;
 
-                $scope.setSection = function(section) {
+                $scope.setSection = function (section) {
                     $scope.user = {};
                     $scope.user.email = null; // Parece que não faz sentido. Mas faz. Acredite. E tem que ser nessa ordem.
                     $scope.currentSection = section;
                 };
 
-                $scope.loadDomains = function(username) {
-                    DomainService.getDomainsByUser(username).then(function(response) {
+                $scope.loadDomains = function (username) {
+                    DomainService.getDomainsByUser(username).then(function (response) {
                         $scope.domains = response.data;
                     });
                 };
 
-                $scope.submit = function() {
-                    LoginService.doLogin($scope.credentials).then(function() {
+                $scope.submit = function () {
+                    LoginService.doLogin($scope.credentials).then(function () {
                         $scope.loadDomains($scope.credentials.email);
                         $scope.setSection($scope.sections.domain);
-                    }, function() {
+                    }, function () {
                         notify.warning("USER.VALIDATION.USER_OR_PASS_INVALID");
                     });
                 };
@@ -72,12 +72,12 @@ define([
                 //                    FacebookService.login();
                 //                };
 
-                $scope.selectDomain = function(domain) {
+                $scope.selectDomain = function (domain) {
                     LoginService.selectDomain(domain);
                     $route.reload();
                 };
 
-                $scope.showConfiguration = function(domain, index) {
+                $scope.showConfiguration = function (domain, index) {
                     event.stopPropagation();
                     $scope.invite.emails = null;
                     $scope.domainBeingEdited = index;
@@ -95,21 +95,21 @@ define([
                 //
                 //  });
 
-                $scope.configureDomain = function(domain) {
+                $scope.configureDomain = function (domain) {
                     event.stopPropagation();
 
                     if ($scope.invite.emails) {
                         $scope.inviteUser(domain.id);
                     }
 
-                    DomainService.updateDomain(domain).then(function(response) {
+                    DomainService.updateDomain(domain).then(function (response) {
                         $scope.domainBeingEdited = null;
                         notify.success('DOMAIN.UPDATED');
                     });
                 };
 
-                $scope.createDomain = function(domain) {
-                    DomainService.createDomain(domain).then(function(response) {
+                $scope.createDomain = function (domain) {
+                    DomainService.createDomain(domain).then(function (response) {
                         // $scope.domains.push(response.data);
                         angular.extend(domain, response.data);
                         $scope.domainBeingEdited = null;
@@ -119,16 +119,16 @@ define([
 
                 $scope.domainBeingEdited = null;
 
-                $scope.newDomain = function() {
+                $scope.newDomain = function () {
                     $scope.domains.push({});
                     $scope.domainBeingEdited = $scope.domains.length - 1;
                     // $scope.domain = null;
                     // $scope.isCreating = true;
                 };
 
-                $scope.deleteDomain = function(id, index) {
-                    $confirm('LAYOUT.CONFIRM_DELETE', 'DOMAIN.DELETE_CONFIRM').then(function() {
-                        DomainService.deleteDomain(id).then(function() {
+                $scope.deleteDomain = function (id, index) {
+                    $confirm('LAYOUT.CONFIRM_DELETE', 'DOMAIN.DELETE_CONFIRM').then(function () {
+                        DomainService.deleteDomain(id).then(function () {
                             $scope.domains.splice(index, 1);
                             $scope.domainBeingEdited = null;
                             notify.success('DOMAIN.DELETED');
@@ -136,28 +136,29 @@ define([
                     });
                 };
 
-                $scope.createUser = function() {
+                $scope.createUser = function () {
                     $scope.credentials = $scope.user;
-                    UserService.save($scope.user).then(function(response) {
+                    UserService.save($scope.user).then(function (response) {
 
-                        LoginService.doLogin($scope.user).then(function() {
+                        LoginService.doLogin($scope.user).then(function () {
                             $scope.setSection($scope.sections.domain);
                         });
 
-                    }, function(response) {
+                    }, function (response) {
                         notify.error(response.data);
                     });
                 };
-                $scope.createInvited = function() {
-                    $scope.credentials = $scope.user;
-                    UserService.saveInvited($scope.user).then(function(response) {
+                
+                $scope.createInvited = function () {
+                    $scope.credentials = $scope.invited;
+                    UserService.saveInvited($scope.invited).then(function (response) {
                         $scope.submit();
-                    }, function(response) {
+                    }, function (response) {
                         notify.error(response.data);
                     });
                 };
 
-                $scope.inviteUser = function(id) {
+                $scope.inviteUser = function (id) {
                     $scope.emails = $scope.invite.emails.split(" ");
                     DomainService.inviteUser($scope.emails, id);
                 };
