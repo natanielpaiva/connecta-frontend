@@ -14,8 +14,27 @@ define([
 
     maps._configKey = 'maps';
 
-    maps.config(function ($translatePartialLoaderProvider) {
+    maps.config(function ($translatePartialLoaderProvider, $httpProvider) {
         $translatePartialLoaderProvider.addPart('maps/i18n');
+
+        $httpProvider.interceptors.push( function ($cookieStore) {
+            return {
+                request : function (config) {
+                    var cookies = document.cookie;
+
+                    if (cookies) {
+                        var accessToken = $cookieStore.get('portal.auth.access_token');
+                        var domainId = $cookieStore.get('user.domain.name');
+
+                        config.headers['c-maps-access-token'] = accessToken;
+                        config.headers['c-maps-domain-id'] = domainId;
+                    }
+
+                    return config;
+
+                }
+            }
+        });
     });
 
     maps.run(function (applications) {
@@ -174,7 +193,6 @@ define([
     ];
 
     return maps;
-
 
     function invokeCSS(path) {
         var head = document.head;

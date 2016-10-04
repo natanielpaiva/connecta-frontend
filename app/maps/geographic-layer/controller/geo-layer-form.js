@@ -185,6 +185,7 @@ define([
             });
             promise.then(function (response) {
                 $location.path("/maps/geo-layer");
+                notify.success("GEO_LAYER.SAVE_SUCCESS");
             });
         };
     });

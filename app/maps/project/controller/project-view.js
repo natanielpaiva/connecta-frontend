@@ -45,7 +45,7 @@ define([
                 var promise = ProjectService.delete(id);
                 promise.then(function () {
                     $location.path("/maps/project");
-                    notify.error("PROJECT.DELETE");
+                    notify.info("PROJECT.DELETE_SUCCESS");
                 });
 
             } catch (error) {
