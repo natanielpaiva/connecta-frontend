@@ -1,6 +1,6 @@
 {
     "MENU": {
-        "ANALYSIS": "Analises",
+        "VIEWER": "Visualizadores",
         "GEO_DATASOURCE": "Fonte de dados Geo",
         "GEO_LAYERS": "Camadas geográficas",
         "DATA_SOURCE": "Fonte de dados tabular",
@@ -83,12 +83,12 @@
         "DYNAMIC_NAVIGATION": "Navegação dinâmica",
         "DELETE_SUCCESS": "Registro excluído com sucesso"
     },
-    "ANALYSIS": {
-        "NAME": "Nome da análise",
+    "VIEWER": {
+        "NAME": "Nome do visualizador",
         "PROJECT": "Projeto",
         "BASIC_INFO": "Informações <b>Básicas</b>",
         "MAP_TITLE": "Título do Mapa",
-        "RICH_LAYER": "Camada Enriquecida",
+        "INITIAL_RICH_LAYER": "Camada Enriquecida Inicial",
         "ALLOW_DRILL": "Permitir <b>drill</b>",
         "ENABLE_INFOWINDOW": "Habilitar <b>InfoWindow</b>",
         "POSITIONING": "Posicionamento",
@@ -99,9 +99,9 @@
         "TITLE": "Título",
         "TYPE": "TIPO",
         "DESCRIPTION": "Descrição",
-        "ANALYSIS_LIST": "Lista de <b>Análises</b>",
+        "VIEWER_LIST": "Lista de <b>Visualizadores</b>",
         "NO_OUTFIELDS": "Nenhuma variável salva",
-        "ADD_ANALYSIS": "NOVA ANÁLISE",
+        "ADD_VIEWER": "NOVA ANÁLISE",
         "ADD_OUTFIELD": "NOVA VARIÁVEL",
         "DELETE_OUTFIELD": "EXCLUIR VARIÁVEL",
         "SAVE_OUTFIELD": "SALVAR VARIÁVEL",
@@ -109,11 +109,11 @@
         "TYPE_NUMBER": "Número",
         "TYPE_DATE": "Data",
         "TYPE_DISABLED": "Não utilizar",
-        "DETAILING_ANALYSIS": "Detalhamento da <b>Análise</b>",
-        "SAVE_ERROR": "Erro ao salvar análise",
-        "SAVE_SUCCESS": "Análise salva com sucesso",
-        "DELETE_ERROR": "Erro ao excluir análise",
-        "DELETE_SUCCESS": "Análise excluída com sucesso",
+        "DETAILING_VIEWER": "Detalhamento do <b>Visualizador</b>",
+        "SAVE_ERROR": "Erro ao salvar visualizador",
+        "SAVE_SUCCESS": "Visualizador salvo com sucesso",
+        "DELETE_ERROR": "Erro ao excluir visualizador",
+        "DELETE_SUCCESS": "Visualizador excluído com sucesso",
         "CROSSING_KEY" : "Chave de cruzamento"
     },
     "LAYER_TYPE": {
@@ -124,7 +124,9 @@
     "LAYOUT": {
         "SAVE": "SALVAR",
         "CANCEL": "CANCELAR",
-        "SELECT": "Selecione"
+        "SELECT": "Selecione",
+        "BACK" : "VOLTAR",
+        "CLOSE" : "FECHAR"
     },
     "NAME_BASE_MAPS": {
         "TOPO": "Topográfico",

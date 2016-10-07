@@ -1,6 +1,6 @@
 {
     "MENU": {
-        "ANALYSIS": "Analysis",
+        "VIEWER": "Viewers",
         "GEO_DATASOURCE": "Spatial Datasource",
         "GEO_LAYERS": "Geo Layers",
         "DATA_SOURCE": "Datasource",
@@ -84,12 +84,12 @@
         "DYNAMIC_NAVIGATION": "Dynamic navigation",
         "DELETE_SUCCESS": "Successfully deleted record"
     },
-    "ANALYSIS": {
-        "NAME": "Analysis name",
+    "VIEWER": {
+        "NAME": "Viewer name",
         "BASIC_INFO": "<b>Basic</b> Info",
         "PROJECT": "Project",
         "MAP_TITLE": "Map Title",
-        "RICH_LAYER": "Rich Layer",
+        "INITIAL_RICH_LAYER": "Initial Rich Layer",
         "ALLOW_DRILL": "Allow <b>drill</b>",
         "ENABLE_INFOWINDOW": "Enable <b>InfoWindow</b>",
         "POSITIONING": "Positioning",
@@ -100,21 +100,21 @@
         "TITLE": "Title",
         "TYPE": "Type",
         "DESCRIPTION": "Description",
-        "ANALYSIS_LIST": "<b>Analysis</b> list",
+        "VIEWER_LIST": "<b>Viewer</b> list",
         "NO_OUTFIELDS": "No out fields saved",
-        "ADD_ANALYSIS": "NEW ANALYSIS",
+        "ADD_VIEWER": "NEW VIEWER",
         "DELETE_OUTFIELD": "DELETE OUTFIELD",
-        "SAVE_SUCCESS": "Analysis successfully saved",
-        "SAVE_ERROR": "Error saving analysis",
-        "DELETE_ERROR": "Error deleting the analysis",
-        "DELETE_SUCCESS": "Successfully deleted analysis",
+        "SAVE_SUCCESS": "Viewer successfully saved",
+        "SAVE_ERROR": "Error saving viewer",
+        "DELETE_ERROR": "Error deleting the viewer",
+        "DELETE_SUCCESS": "Successfully deleted viewer",
         "ADD_OUTFIELD" : "NEW OUTFIELD",
         "SAVE_OUTFIELD" : "SAVE OUTFIELD",
         "TYPE_STRING" : "Text",
         "TYPE_NUMBER" : "Number",
         "TYPE_DATE" : "Date",
         "TYPE_DISABLED" : "Disabled",
-        "DETAILING_ANALYSIS" : "Detailing <b>Analysis</b>",
+        "DETAILING_VIEWER" : "Detailing <b>Viewer</b>",
         "CROSSING_KEY" : "Crossing Key"
     },
     "LAYER_TYPE": {
@@ -125,7 +125,9 @@
     "LAYOUT": {
         "SAVE": "SAVE",
         "CANCEL": "CANCEL",
-        "SELECT": "Select"
+        "SELECT": "Select",
+        "BACK" : "BACK",
+        "CLOSE" : "CLOSE"
     },
     "NAME_BASE_MAPS": {
         "TOPO": "Topographical",

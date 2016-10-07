@@ -3,20 +3,20 @@ define([
     '../../helper/url'
 ], function (maps, urlHelper) {
 
-    return maps.lazy.service('AnalysisService', function ($http, mapsResources) {
+    return maps.lazy.service('ViewerService', function ($http, mapsResources) {
 
-        var url = mapsResources.analysis;
+        var url = mapsResources.viewer;
 
         this.get = function (id) {
             return $http.get(url + '/' + id);
         };
 
-        this.save = function (analysis) {
-            return $http.post(url, analysis);
+        this.save = function (viewer) {
+            return $http.post(url, viewer);
         };
 
-        this.update = function (id, analysis) {
-            return $http.put(url + '/' + id, analysis);
+        this.update = function (id, viewer) {
+            return $http.put(url + '/' + id, viewer);
         };
 
         this.list = function (params) {

@@ -1,13 +1,13 @@
 define([
     "connecta.maps",
     "maps/helper/filter",
-    "maps/analysis/service/analysis-service",
+    "../service/viewer-service",
     "maps/project/service/project-service"
 ], function (maps, helperFilter) {
 
-    return maps.lazy.controller("AnalysisListController", function ($scope, ngTableParams, AnalysisService, ProjectService, notify) {
+    return maps.lazy.controller("ViewerListController", function ($scope, ngTableParams, ViewerService, ProjectService, notify) {
 
-        $scope.tableAnalysisParams = new ngTableParams({
+        $scope.tableViewerParams = new ngTableParams({
             count : 10,
             page : 1,
             filter : {
@@ -19,14 +19,14 @@ define([
             return {
                 getData : function ($defer, params) {
 
-                    var queryString = helperFilter.getQueryString(params, $scope.filter, $scope.tableAnalysisParams.filter());
+                    var queryString = helperFilter.getQueryString(params, $scope.filter, $scope.tableViewerParams.filter());
 
-                    AnalysisService.list(queryString).then(onSuccess, onError);
+                    ViewerService.list(queryString).then(onSuccess, onError);
 
                     function onSuccess (response) {
                         var promises = [];
-                        response.data.content.forEach(function (analysis) {
-                            promises.push(ProjectService.get(analysis.projectId));
+                        response.data.content.forEach(function (viewer) {
+                            promises.push(ProjectService.get(viewer.projectId));
                         });
 
                         var promise = Promise.all(promises);
@@ -34,18 +34,18 @@ define([
                             notify.error(err.statusText);
                         });
                         promise.then(function (result) {
-                            response.data.content.forEach(function (analysis, index) {
+                            response.data.content.forEach(function (viewer, index) {
                                 var project = result[index].data;
-                                analysis.project = project;
-                                var filteredRichLayers = project.richLayers.filter(filterRichLayers.bind(analysis));
+                                viewer.project = project;
+                                var filteredRichLayers = project.richLayers.filter(filterRichLayers.bind(viewer));
                                 if (filteredRichLayers.length) {
-                                    analysis.richLayer = filteredRichLayers[0];
+                                    viewer.richLayer = filteredRichLayers[0];
                                 }
                             });
                             function filterRichLayers(richLayer) {
-                                return richLayer._id === this.richLayerId;
+                                return richLayer._id === this.initialRichLayerId;
                             }
-                            $scope.tableAnalysisParams.total(response.data.totalDocuments);
+                            $scope.tableViewerParams.total(response.data.totalDocuments);
                             $defer.resolve(response.data.content);
                         });
 

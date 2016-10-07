@@ -1,11 +1,27 @@
 define([
     'connecta.maps',
-    '../service/analysis-service',
+    '../service/viewer-service',
     '../../project/service/project-service',
     '../../datasource/service/datasource-service'
 ], function (maps) {
 
-    return maps.lazy.controller('AnalysisFormController', function ($scope, $location, $routeParams, AnalysisService, ProjectService, DatasourceService, notify) {
+    return maps.lazy.controller('ViewerFormController', function ($scope, $location, $routeParams, ViewerService, ProjectService, DatasourceService, notify) {
+
+        $scope.viewer = {
+            popupConfig: {
+                enabled: false,
+                positioning: 'tooltip'
+            },
+            allowDrill: false,
+            richLayersInfo: []
+        };
+
+        $scope.valueTypeMap = {
+            'string': 'VIEWER.TYPE_STRING',
+            'number': 'VIEWER.TYPE_NUMBER',
+            'date': 'VIEWER.TYPE_DATE',
+            'disabled': 'VIEWER.TYPE_DISABLED'
+        };
 
         init();
 
@@ -19,36 +35,27 @@ define([
             });
         }
 
-        $scope.analysis = {
-            popupConfig: {
-                enabled: false,
-                positioning: 'tooltip'
-            },
-            allowDrill: false,
-            outFields: []
-        };
-
         function checkEditing() {
             if ($routeParams.id) {
                 $scope.isEditing = true;
-                AnalysisService.get($routeParams.id)
+                ViewerService.get($routeParams.id)
                     .catch(function (err) {
                         notify.error(err.statusText);
                     })
                     .then(function (response) {
                         try {
-                            var analysis = response.data;
-                            $scope.analysis = {
-                                _id: analysis._id,
-                                title: analysis.title,
-                                richLayerId: analysis.richLayerId,
-                                allowDrill: analysis.allowDrill,
-                                popupConfig: analysis.popupConfig,
-                                outFields: analysis.outFields,
-                                projectId: analysis.projectId
+                            var viewer = response.data;
+                            $scope.viewer = {
+                                _id: viewer._id,
+                                title: viewer.title,
+                                initialRichLayerId: viewer.initialRichLayerId,
+                                allowDrill: viewer.allowDrill,
+                                popupConfig: viewer.popupConfig,
+                                richLayersInfo: viewer.richLayersInfo,
+                                projectId: viewer.projectId
                             };
                             var project = $scope.projects.filter(function (project) {
-                                return project._id === analysis.projectId;
+                                return project._id === viewer.projectId;
                             });
 
                             if (project.length) {
@@ -56,8 +63,9 @@ define([
                             }
 
                             var richLayer = $scope.selectedProject.richLayers.filter(function (richLayer) {
-                                return richLayer._id === $scope.analysis.richLayerId;
+                                return richLayer._id === $scope.viewer.initialRichLayerId;
                             });
+
                             if (richLayer.length) {
                                 richLayer = richLayer[0];
                                 $scope.selectedRichLayer = richLayer;
@@ -69,13 +77,6 @@ define([
                     });
             }
         }
-
-        $scope.valueTypeMap = {
-            'string': 'ANALYSIS.TYPE_STRING',
-            'number': 'ANALYSIS.TYPE_NUMBER',
-            'date': 'ANALYSIS.TYPE_DATE',
-            'disabled': 'ANALYSIS.TYPE_DISABLED'
-        };
 
         function loadProjects() {
             return new Promise(function (resolve, reject) {
@@ -95,15 +96,24 @@ define([
         }
 
         $scope.projectChanged = function (projectId) {
-            $scope.analysis.projectId = projectId;
+            $scope.viewer.projectId = projectId;
+            $scope.viewer.richLayersInfo = [];
+            $scope.selectedProject.richLayers.forEach(function (richLayer) {
+                $scope.viewer.richLayersInfo.push({
+                    richLayerId: richLayer._id,
+                    outFields: []
+                });
+            });
         };
 
-        $scope.richLayerChanged = function (richLayer) {
+        $scope.selectRichLayer = function (richLayer) {
             if (!richLayer) {
-                delete $scope.analysis.richLayerId;
                 return;
             }
-            $scope.analysis.richLayerId = richLayer._id;
+            $scope.richLayer = richLayer;
+            $scope.richLayerModel = $scope.viewer.richLayersInfo.filter(function (richLayerInfo) {
+                return richLayerInfo.richLayerId === $scope.richLayer._id;
+            })[0];
             populateMetadataFields(richLayer);
         };
 
@@ -113,13 +123,7 @@ define([
             }
             var promise;
             if ($scope.selectedProject.serviceType === 'obiee') {
-                // promise = DatasourceService.getCa(richLayer.info.analysisId);
-                // promise.then(function (response) {
-                //     if (!response) {
-                //         return notify.error('Não foi possível obter resposta do servidor.');
-                //     }
-                //     $scope.dataSourceColumns = response;
-                // });
+                // TODO Implementar consumo do OBIEE
             } else if ($scope.selectedProject.serviceType === 'connecta') {
                 promise = DatasourceService.getAnalysisConnecta(richLayer.dataSourceIdentifier);
                 promise.then(function (response) {
@@ -150,7 +154,7 @@ define([
         };
 
         $scope.editOutField = function (outfieldIndex) {
-            $scope.outField = Object.assign({}, $scope.analysis.outFields[outfieldIndex]);
+            $scope.outField = Object.assign({}, $scope.richLayerModel.outFields[outfieldIndex]);
             $scope.outFieldEditIndex = outfieldIndex;
             $scope.dataSourceColumns.forEach(function (column) {
                 if (column.name === $scope.outField.name) {
@@ -160,17 +164,18 @@ define([
         };
 
         $scope.deleteOutField = function () {
-            $scope.analysis.outFields.splice($scope.outFieldEditIndex, 1);
+            $scope.richLayerModel.outFields.splice($scope.outFieldEditIndex, 1);
             delete $scope.outFieldEditIndex;
             delete $scope.outField;
         };
 
         $scope.saveOutField = function () {
             $scope.outField.alias = $scope.outField.alias || $scope.selectedColumn.alias;
+            $scope.outField.name = $scope.outField.name || $scope.selectedColumn.name;
             if ($scope.outFieldEditIndex !== undefined) {
-                $scope.analysis.outFields.splice($scope.outFieldEditIndex, 1, $scope.outField);
+                $scope.richLayerModel.outFields.splice($scope.outFieldEditIndex, 1, $scope.outField);
             } else {
-                $scope.analysis.outFields.push($scope.outField);
+                $scope.richLayerModel.outFields.push($scope.outField);
             }
             delete $scope.outFieldEditIndex;
             delete $scope.outField;
@@ -180,19 +185,23 @@ define([
             delete $scope.outField;
         };
 
-        $scope.saveAnalysis = function () {
+        $scope.backRichLayer = function () {
+            delete $scope.richLayer;
+        };
+
+        $scope.saveViewer = function () {
             var promise;
             if (!$scope.isEditing) {
-                promise = AnalysisService.save($scope.analysis);
+                promise = ViewerService.save($scope.viewer);
             } else {
-                promise = AnalysisService.update($scope.analysis._id, $scope.analysis);
+                promise = ViewerService.update($scope.viewer._id, $scope.viewer);
             }
             promise.catch(function (err) {
-                notify.error('ANALYSIS.SAVE_ERROR');
+                notify.error('VIEWER.SAVE_ERROR');
             });
             promise.then(function () {
-                $location.path('/maps/analysis');
-                notify.success('ANALYSIS.SAVE_SUCCESS');
+                $location.path('/maps/viewer');
+                notify.success('VIEWER.SAVE_SUCCESS');
             });
         };
 

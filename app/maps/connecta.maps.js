@@ -40,7 +40,7 @@ define([
     maps.run(function (applications) {
         var appMaps = applications.maps;
         maps.lazy.value('mapsResources', {
-            analysis : appMaps.host + '/admin/analysis',
+            viewer : appMaps.host + '/admin/viewer',
             dataSource : appMaps.host + '/admin/data-source',
             layer : appMaps.host + '/admin/layer',
             project : appMaps.host + '/admin/project',
@@ -52,26 +52,26 @@ define([
      * Layer-Source
      */
     maps._routes = {
-        // Análise
-        '/maps/analysis' : {
-            controller : 'AnalysisListController',
-            controllerUrl : 'maps/analysis/controller/analysis-list',
-            templateUrl : 'app/maps/analysis/template/analysis-list.html'
+        // Viewer
+        '/maps/viewer' : {
+            controller : 'ViewerListController',
+            controllerUrl : 'maps/viewer/controller/viewer-list',
+            templateUrl : 'app/maps/viewer/template/viewer-list.html'
         },
-        '/maps/analysis/new' : {
-            controller : 'AnalysisFormController',
-            controllerUrl : 'maps/analysis/controller/analysis-form',
-            templateUrl : 'app/maps/analysis/template/analysis-form.html'
+        '/maps/viewer/new' : {
+            controller : 'ViewerFormController',
+            controllerUrl : 'maps/viewer/controller/viewer-form',
+            templateUrl : 'app/maps/viewer/template/viewer-form.html'
         },
-        '/maps/analysis/:id' : {
-            controller : 'AnalysisViewController',
-            controllerUrl : 'maps/analysis/controller/analysis-view',
-            templateUrl : 'app/maps/analysis/template/analysis-view.html'
+        '/maps/viewer/:id' : {
+            controller : 'ViewerViewController',
+            controllerUrl : 'maps/viewer/controller/viewer-view',
+            templateUrl : 'app/maps/viewer/template/viewer-view.html'
         },
-        '/maps/analysis/:id/edit' : {
-            controller : 'AnalysisFormController',
-            controllerUrl : 'maps/analysis/controller/analysis-form',
-            templateUrl : 'app/maps/analysis/template/analysis-form.html'
+        '/maps/viewer/:id/edit' : {
+            controller : 'ViewerFormController',
+            controllerUrl : 'maps/viewer/controller/viewer-form',
+            templateUrl : 'app/maps/viewer/template/viewer-form.html'
         },
 
         //Fonte de dados Geo
@@ -186,9 +186,9 @@ define([
             icon: "icon-folder"
         },
         {
-            href: "/maps/analysis",
-            title: "MENU.ANALYSIS",
-            icon: "icon-analysis"
+            href: "/maps/viewer",
+            title: "MENU.VIEWER",
+            icon: "icon-viewer"
         }
     ];
 
