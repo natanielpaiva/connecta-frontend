@@ -2,7 +2,7 @@ define({
     widgets: {
         areaZoom: {
             model: 'areaZoom',
-            title: 'Zoom em área',
+            title: 'WIDGETS_NAMES.AREA_ZOOM',
             checked: false
         },
         zoom: {
@@ -12,27 +12,27 @@ define({
         },
         miniature: {
             model: 'miniature',
-            title: 'Miniatura',
+            title: 'WIDGETS_NAMES.MINIATURE',
             checked: false
         },
         northScale: {
             model: 'northScale',
-            title: 'Escala + Norte',
+            title: 'WIDGETS_NAMES.NORTH_SCALE',
             checked: false
         },
         localization: {
             model: 'localization',
-            title: 'Localização',
+            title: 'WIDGETS_NAMES.LOCALIZATION',
             checked: false
         },
         zoomHistory: {
             model: 'zoomHistory',
-            title: 'Histórico de Zoom',
+            title: 'WIDGETS_NAMES.ZOOM_HISTORIC',
             checked: false
         },
         geoSearch: {
             model: 'geoSearch',
-            title: 'Busca',
+            title: 'WIDGETS_NAMES.SEARCH',
             checked: false
         }
     },

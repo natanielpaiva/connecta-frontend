@@ -137,6 +137,7 @@
         "OSM": "OSM"
     },
     "NAME_TOOLS": {
+        "TOOLS_DESC" : "Ferramentas de navegação e visualização disponibilizadas ao usuário",
         "BUFFER": "Buffer",
         "GEOPROCESSING": "Geoprocessamento",
         "FILE_UPLOAD": "Upload de arquivo",
@@ -144,5 +145,20 @@
         "TIMELINE": "Linha do Tempo",
         "SPATIAL_FILTER": "Filtro Espacial",
         "COMPARISON": "Comparação"
+    },
+    "WIDGETS_NAMES" : {
+        "WIDGETS_DESC" : "Ferramentas Geospaciais a serem disponibilizadas",
+        "AREA_ZOOM" : "Zoom em área",
+        "SEARCH" : "Busca",
+        "LOCALIZATION" : "Localização",
+        "MINIATURE" : "Miniatura",
+        "NORTH_SCALE" : "Escala + Norte",
+        "ZOOM_HISTORIC" : "Histórico de Zoom"
+    },
+    "WIZARD" : {
+        "GENERAL_INFORMATION" : "Informações Gerais",
+        "LINK_DATASOURCE" : "Ligação com Datasource",
+        "TOOLS" : "Ferramentas",
+        "EXHIBITION" : "Exibição"
     }
 }
