@@ -28,7 +28,6 @@ define([
 
         this.createDomain = function (domain) {
             var url = portalResources.domain;
-            console.log(domain);
             return $http.post(url, domain);
         };
 

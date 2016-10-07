@@ -90,18 +90,11 @@ define([
                     // }
                 };
 
-                //  $scope.$watch('invite.emails', function () {
-                //      //TODO Verificar ocorrencias de scope.invite.emails em $scope.invite.users
-                //
-                //  });
 
                 $scope.configureDomain = function (domain) {
                     event.stopPropagation();
 
-                    if ($scope.invite.emails) {
-                        $scope.inviteUser(domain.id);
-                    }
-
+                    $scope.inviteUser(domain.id);
                     DomainService.updateDomain(domain).then(function (response) {
                         $scope.domainBeingEdited = null;
                         notify.success('DOMAIN.UPDATED');
@@ -112,6 +105,7 @@ define([
                     DomainService.createDomain(domain).then(function (response) {
                         // $scope.domains.push(response.data);
                         angular.extend(domain, response.data);
+                        $scope.inviteUser(domain.id);
                         $scope.domainBeingEdited = null;
                         notify.success('DOMAIN.CREATED');
                     });
@@ -122,6 +116,8 @@ define([
                 $scope.newDomain = function () {
                     $scope.domains.push({});
                     $scope.domainBeingEdited = $scope.domains.length - 1;
+                    $scope.invite.emails = null;
+
                     // $scope.domain = null;
                     // $scope.isCreating = true;
                 };
@@ -148,7 +144,7 @@ define([
                         notify.error(response.data);
                     });
                 };
-                
+
                 $scope.createInvited = function () {
                     $scope.credentials = $scope.invited;
                     UserService.saveInvited($scope.invited).then(function (response) {
@@ -159,8 +155,11 @@ define([
                 };
 
                 $scope.inviteUser = function (id) {
-                    $scope.emails = $scope.invite.emails.split(" ");
-                    DomainService.inviteUser($scope.emails, id);
+                    if ($scope.invite.emails) {
+                        $scope.emails = $scope.invite.emails.split(" ");
+                        DomainService.inviteUser($scope.emails, id);
+                    }
+
                 };
 
 
