@@ -7,7 +7,7 @@
     },
     "DOMAIN": {
         "SELECT_DOMAIN_START": "Selecione um dominio pra começar",
-        "CREATE": "Criar Domínio",
+        "CREATE": "Criar",
         "CREATED": "Domínio criado",
         "NEW": "Novo Domínio",
         "HELP_INFO": "Domínios são grupos onde podemos dividir equipes e projetos.",

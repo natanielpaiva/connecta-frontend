@@ -11,6 +11,7 @@
         "UPDATE_SUCCESS": "Perfil Atualizado",
         "CREATE_SUCCESS": "Perfil Criado",
         "REMOVE_SUCCESS": "Foto removida",
+        "INVITED_SUCCESS": "Usuario convidado",
         "CHOOSE_IMAGE": "Escolha uma imagem",
         "REMOVE_IMAGE": "Remover imagem",
         "CREATE_ACCOUNT": "Criar minha conta",

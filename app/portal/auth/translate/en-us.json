@@ -8,7 +8,7 @@
     "DOMAIN": {
         "SELECT_DOMAIN_START": "Select a domain to start",
         "CREATE": "Create",
-        "CREATED": "Domain created",
+        "CREATED": "Domain",
         "NEW": "New Domain",
         "HELP_INFO": "Domains are groups where you can divide teams and projects.",
         "NAME": "Domain name",

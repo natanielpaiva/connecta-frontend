@@ -99,17 +99,18 @@
 
     <div class="thumbnail-grid row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains">
-            <div class="thumbnail-grid-item" ng-class="{'thumbnail-grid-item-editing':domainBeingEdited===$index}">
+            <div class="thumbnail-grid-item" ng-class="{'thumbnail-grid-item-editing':domainBeingEdited === $index}">
                 <div class="thumbnail-grid-item-head" ng-click="selectDomain(domain)">
                     <div class="thumbnail-grid-item-head-name">{{domain.name}}</div>
-                    <div ng-click="showConfiguration(domain, $index)" class="icon-cog"></div>
+                    <div ng-click="showConfiguration($index)" class="icon-cog"></div>
                 </div>
                 <div class="thumbnail-grid-item-form" click-out="domainBeingEdited=null">
-                    <form name="domainForm" ng-submit="domain.id? configureDomain(domain) : createDomain(domain)">
+                    <form novalidate name="domainForm" ng-submit="domain.id ? updateDomain(domain) : createDomain(domain)">
                         <div>
-                            <!-- <span ng-click="domain.isEditing = false" class="icon-backspace return"></span> -->
                             <span class="icon-edit2"></span>
-                            <input ng-model="domain.name" class="name-input" placeholder="{{'DOMAIN.NAME'|translate}}" autofocus required />
+                            <input ng-model="domain.name" name="name" class="name-input" placeholder="{{'DOMAIN.NAME'|translate}}" autofocus required />
+                            <div ng-show="domainForm.name.$touched" ng-messages="domainForm.name.$error" 
+                                 ng-messages-include="portal-error-messages"></div>
                         </div>
                         <div class="form-group">
                             <label translate>DOMAIN.INVITE</label>
@@ -123,7 +124,7 @@
                                 DOMAIN.DELETE
                             </button>
                             <button type="button" class="btn btn-default pull-left" ng-if="!domain.id" translate
-                                ng-click="domains.splice($index, 1)">
+                                    ng-click="domains.splice($index, 1)">
                                 LAYOUT.CANCEL
                             </button>
                             <button class="btn btn-primary pull-right" ng-if="domain.id" translate>
@@ -167,9 +168,11 @@
             </div>
             <div class="form-group has-feedback">
                 <label for="email" translate>USER.EMAIL</label>
-                <input type="email" class="form-control" id="email" name="email" ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}" ng-model="user.email" unique-email required maxlength="100" />
-                <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error" ng-messages-include="portal-error-messages">
-                </div>
+                <input type="email" class="form-control" id="email" name="email"
+                       ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+                       ng-model="user.email" unique-email required maxlength="100" />
+                <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error" 
+                     ng-messages-include="portal-error-messages"></div>
             </div>
             <div class="form-group has-feedback">
                 <label for="password" translate>USER.PASSWORD</label>
@@ -207,30 +210,33 @@
     <h3 translate>USER.NEW</h3>
 
     <div class="form-account">
-        <form novalidate name="user_config_form" ng-submit="createUser()">
+        <form novalidate name="user_form" ng-submit="createUser()">
             <div class="form-group has-feedback">
                 <label for="first_name" translate>USER.FIRST_NAME</label>
                 <input type="text" class="form-control" id="first_name" name="first_name" ng-model="invited.name" required maxlength="100" />
-                <div ng-show="user_config_form.first_name.$touched" ng-messages="user_config_form.first_name.$error" ng-messages-include="portal-error-messages">
+                <div ng-show="user_form.first_name.$touched" ng-messages="user_form.first_name.$error" ng-messages-include="portal-error-messages">
                 </div>
             </div>
             <div class="form-group has-feedback">
                 <label for="email" translate>USER.EMAIL</label>
-                <input type="email" class="form-control" id="email" name="email" ng-model="invited.email" required maxlength="100" />
-                <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error" ng-messages-include="portal-error-messages">
-                </div>
+                <input type="email" class="form-control" id="email" name="email" 
+                       ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+                       ng-model="invited.email" unique-email initial-email="email"
+                       required maxlength="100" />
+                <div ng-show="user_form.email.$touched" ng-messages="user_form.email.$error" 
+                     ng-messages-include="portal-error-messages"></div>
             </div>
             <div class="form-group has-feedback">
                 <label for="password" translate>USER.PASSWORD</label>
                 <input type="password" class="form-control" id="password" name="password" ng-model="invited.password" maxlength="20" minlength='8' required/>
-                <div ng-show="user_config_form.password.$touched" ng-messages="user_config_form.password.$error" ng-messages-include="portal-error-messages">
+                <div ng-show="user_form.password.$touched" ng-messages="user_form.password.$error" ng-messages-include="portal-error-messages">
                     <p ng-message="minlength" class="help-block">{{'USER.VALIDATION.SHORT_PASS'| translate}}</p>
                 </div>
             </div>
             <div class="form-group has-feedback">
                 <label for="passwordConf" translate>USER.CONFIRM</label>
                 <input type="password" class="form-control" id="confirm" name="confirm" ng-model="confirmPass" required maxlength="100" compare-to="invited.password" ng-model-options="{debounce: 500}" />
-                <div ng-show="user_config_form.confirm.$touched" ng-messages="user_config_form.confirm.$error" ng-messages-include="portal-error-messages">
+                <div ng-show="user_form.confirm.$touched" ng-messages="user_form.confirm.$error" ng-messages-include="portal-error-messages">
                     <p ng-message="compareTo" class="help-block">{{'USER.VALIDATION.COMPARE_PASS'| translate}}</p>
                 </div>
             </div>
@@ -238,7 +244,7 @@
                 <a ng-click="setSection(sections.login)" class="btn btn-default" translate>
                     LAYOUT.BACK
                 </a>
-                <button class="btn btn-primary" type='button' translate ng-disabled="user_config_form.$invalid" ng-click="createInvited()">
+                <button class="btn btn-primary" type='button' translate ng-disabled="user_form.$invalid" ng-click="createInvited()">
                     USER.CREATE_ACCOUNT
                 </button>
             </div>

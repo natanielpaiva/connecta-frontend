@@ -12,6 +12,7 @@
         "CREATE_SUCCESS": "Perfil Created",
         "CREATE_ACCOUNT": "Create my account",
         "REMOVE_SUCCESS": "Photo removed",
+        "INVITED_SUCCESS": "User invited",
         "CHOOSE_IMAGE": "Choose Image",
         "REMOVE_IMAGE": "Remove Image",
         "PASSWORD": "Password",

@@ -59,7 +59,7 @@ define([
         };
 
         UserService.getByEmail = function (email) {
-            var url = portalResources.user + '/mail' + '?email=' + email;
+            var url = portalResources.user + '/mail?email=' + email;
 
             return $http.get(url);
         };
@@ -71,7 +71,7 @@ define([
         };
 
         UserService.getAll = function () {
-            var url = portalResources.user;
+            var url = portalResources.user + '/all';
 
             return $http.get(url);
         };
