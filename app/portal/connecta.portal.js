@@ -16,6 +16,7 @@ define([
     portal.constant('portalResources', {
         base: applications.portal.host,
         dashboard: applications.portal.host + '/dashboard',
+        publicDashboard: applications.portal.host + '/dashboard/public',
         dashboardViewers: applications.portal.host + '/dashboard/viewer',
         login: applications.portal.host + '/oauth/token',
         user: applications.portal.host + '/user',
@@ -114,6 +115,11 @@ define([
             controller: 'DashboardViewController',
             controllerUrl: 'portal/dashboard/controller/dashboard-view',
             templateUrl: 'app/portal/dashboard/template/dashboard-view.html'
+        },
+        '/dashboard/public/:id': {
+            controller: 'PublicDashboardViewController',
+            controllerUrl: 'portal/dashboard/controller/dashboard-view-public',
+            templateUrl: 'app/portal/dashboard/template/dashboard-view-public.html'
         },
         '/dashboard/:id/edit': {
             controller: 'DashboardFormController',

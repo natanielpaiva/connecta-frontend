@@ -305,10 +305,23 @@ define([
      * @param {type} DomainService
      * @returns {undefined}
      */
-    function configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService) {
+    function configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService) {
         $http.defaults.transformRequest.push(function (data, getHeaders) {
-            getHeaders().Authorization = "Bearer " + LoginService.getAuthenticationToken();
-            getHeaders().Domain = DomainService.getDomainName();
+            var token = LoginService.getAuthenticationToken();
+            if(token)
+                getHeaders().Authorization = "Bearer " + token;
+            
+            var domain = DomainService.getDomainName();
+            if(domain)
+                getHeaders().Domain = domain;
+
+            var publicDashboardValidated = PublicDashboardService.isPublicDashboardValidated();
+            if(publicDashboardValidated){
+                getHeaders().publicDashboardValidated = publicDashboardValidated;
+                getHeaders().publicDashboardId = PublicDashboardService.getDashboardId();
+                getHeaders().publicDashboardKey = PublicDashboardService.getDashboardPublicKey();
+            }
+        
             return data;
         });
 
@@ -331,9 +344,9 @@ define([
         //$locationProvider.html5Mode(true);
     });
 
-    connecta.run(function ($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService) {
+    connecta.run(function ($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService, PublicDashboardService) {
 
-        configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService);
+        configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService);
         configureRouteChangeListener($rootScope, $menu, LayoutService);
 
     });
@@ -380,7 +393,8 @@ define([
         'speaknow/company/service/company-service',
         'portal/user/service/user-service',
         'portal/domain/service/domain-service',
-        'portal/auth/directive/visibleToRoles'
+        'portal/auth/directive/visibleToRoles',
+        'portal/dashboard/service/dashboard-service-public'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });
