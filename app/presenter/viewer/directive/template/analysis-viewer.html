@@ -28,6 +28,14 @@
                           title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
                     {{'DASHBOARD.EXPORT_PNG'|translate}}
                 </div>
+                <div class="connecta-dropdown-item">
+                    <span id="png" class="icon-viewer"
+                          title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
+                    <a href="#/presenter/viewer/{{model.id}}/edit/dashboard/{{idDashboard}}"  translate>
+                        VIEWER.EDIT_VIEWER
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +52,7 @@
 </div>
 
 <amchart ng-if="model.configuration.type !== 'table'" ng-model="model.configuration" return-chart="!edit"
-         ng-class="{'is-drilling':options.isDrilling}"></amchart>
+         ng-class="{'is-drilling':options.isDrilling && model.analysis.hasDrill}"></amchart>
 
 <div ng-if="model.configuration.type === 'table'">
     <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
@@ -121,7 +129,7 @@
                 <div class="viewer-filter-edit">
                     <div class="viewer-filter-column">
                         <!--model.analysisViewerColumns-->
-                        <select ng-change="possibleValues(filter); filter.value={}" class="form-control input-sm" ng-model="filter.analysisColumn"
+                        <select ng-change="possibleValues(filter); filter.value = {}" class="form-control input-sm" ng-model="filter.analysisColumn"
                                 ng-options="column as column.label for column in model.analysis.analysisColumns | orderBy:'analysisColumn.label' track by column.id">
                             <option value>{{'LAYOUT.SELECT'|translate}}</option>
                         </select>
@@ -197,7 +205,7 @@
             </div>
             <div class="clearfix">
                 <button class="pull-left btn btn-sm btn-default" ng-click="analysisExecuteRequest.filters = []"
-                    type="button" translate>
+                        type="button" translate>
                     DASHBOARD.FILTER.CLEAR
                 </button>
                 <button class="pull-right btn btn-sm btn-primary" type="submit" translate>

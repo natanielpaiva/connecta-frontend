@@ -1,0 +1,71 @@
+<section>
+    <div class="row margin-top-single">
+        <div class="col-md-6">
+            <div class="list-layers-title">
+                <h4 translate>PROJECT.MAP_TOOLS</h4>
+            </div>
+        </div>
+    </div>
+
+    <label translate>PROJECT.ENABLE_BASEMAP_SELECTOR</label>
+    <label class="switch">
+        <input ng-model="enableBaseMapSelector" type="checkbox">
+        <div class="slider round"></div>
+    </label>
+
+    <menu-carrousel enable-check="true" items="baseMaps" item-template-url="baseMapThumbUrl" enabled="enableBaseMapSelector"></menu-carrousel>
+
+    <div class="row margin-top-single">
+        <div class="col-md-12">
+            <label translate>NAME_TOOLS.TOOLS_DESC</label>
+            <label class="switch">
+                <input ng-model="$parent.allWidgetsAreEnabled"
+                       ng-change="checkAllMapTools('widgets', $parent.allWidgetsAreEnabled)" type="checkbox">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div id="project-navigation-tools">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="col-md-2" ng-repeat="tool in tools.widgets">
+                        <p translate>{{tool.title}}</p>
+                        <label class="switch">
+                            <input ng-model="project.widgets[tool.model]"
+                                   ng-init="project.widgets[tool.model] = project.widgets[tool.model] || tool.checked"
+                                   ng-change="setAllWidgetsSelected()"
+                                   type="checkbox">
+                            <div class="slider round"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row margin-top-single">
+        <div class="col-md-12">
+            <label translate>WIDGETS_NAMES.WIDGETS_DESC</label>
+            <label class="switch">
+                <input ng-model="$parent.allGeoToolsAreEnabled"
+                       ng-change="checkAllMapTools('tools', $parent.allGeoToolsAreEnabled)" type="checkbox">
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="col-md-2" ng-repeat="tool in tools.tools track by $index">
+                    <p translate>{{tool.title}}</p>
+                    <label class="switch">
+                        <input type="hidden" ng-init="project.tools[$index].name = tool.model">
+                        <input ng-model="project.tools[$index].active"
+                               ng-change="setAllToolsSelected()"
+                               type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

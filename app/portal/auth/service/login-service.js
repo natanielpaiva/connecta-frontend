@@ -21,8 +21,8 @@ define([
          */
         this.checkAuthentication = function () {
             this.setAuthenticated(
-                this.isAuthenticated()
-            );
+                    this.isAuthenticated()
+                    );
         };
 
         /**
@@ -32,9 +32,9 @@ define([
         this.getAuthenticationToken = function () {
             return $cookieStore.get('portal.auth.access_token');
         };
-        
+
         /**
-         * Recupera o token da autenticação
+         * Seta o token da autenticação
          * @returns {String}
          */
         this.setAuthenticationToken = function (token) {
@@ -129,7 +129,7 @@ define([
          * @returns {Promise}
          */
         this.doLogin = function (user) {
-            var data = "username=" + user.email + "&password=" + user.password + "&grant_type=password&scope=read%20write&" +
+            var data = "username=" + user.email + "&password=" + encodeURIComponent(user.password) + "&grant_type=password&scope=read%20write&" +
                     "client_secret=secret&client_id=frontend";
 
             var deferred = $q.defer();
@@ -157,7 +157,6 @@ define([
             $cookieStore.put('user.domain.name', domain.id);
             loginService.setAuthenticated(true);
         };
-
         this.setAuthenticatedUser = function (response) {
             _currentUser = response.data;
 

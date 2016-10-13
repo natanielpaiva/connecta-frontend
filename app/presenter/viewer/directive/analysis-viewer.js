@@ -9,7 +9,7 @@ define([
     'bower_components/amcharts/dist/amcharts/exporting/canvg',
     'bower_components/amcharts/dist/amcharts/exporting/rgbcolor'
 ], function (portal) {
-    return portal.lazy.directive('analysisViewer', function (ExportFile) {
+    return portal.lazy.directive('analysisViewer', function (ExportFile, $routeParams) {
         return {
             templateUrl: 'app/presenter/viewer/directive/template/analysis-viewer.html',
             scope: {
@@ -23,6 +23,7 @@ define([
                     isDrilling: true, // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
                     filterConfigOpen: false
                 };
+                $scope.idDashboard = $routeParams.id;
 
                 $scope.filterOperators = AnalysisService.getFilterOperators();
 

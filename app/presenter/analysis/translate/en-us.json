@@ -34,6 +34,7 @@
         "PARAMETER": "Parameter",
         "PARAMETER_METHOD": "Parametros do Método",
         "FETCH_DATA": "Fetch Data",
+        "IS_COLUMN":"Column",
         "UNTITLED_OBJECT": "Untitled Object",
         "UNTITLED_LIST": "Untitled List",
         "UNKNOWN": "Unknown",
@@ -57,6 +58,8 @@
             "NEW_RELATION":"+ Relate with another analysis",
             "SELECT_RIGHT_ANALYSIS":"Select right analysis",
             "NO_COLUMNS_YET":"No columns yet"
-        }
+        },
+        "DELETE":"Delete",
+        "EDIT":"Edit"
     }
 }

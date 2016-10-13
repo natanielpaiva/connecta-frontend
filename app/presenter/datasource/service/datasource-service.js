@@ -55,6 +55,11 @@ define([
                 name: 'MySQL',
                 defaultPort: 3306,
                 hasSid: false
+            },
+            SQLSERVER: {
+                name: 'Sql Server',
+                defaultPort: 1433,
+                hasSid: false
             }
         };
 

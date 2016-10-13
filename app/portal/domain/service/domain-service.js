@@ -1,3 +1,4 @@
+/* global domain */
 define([
     'connecta.portal'
 ], function (portal) {
@@ -5,6 +6,7 @@ define([
 
         this.getAll = function () {
             var url = portalResources.domain;
+
             return $http.get(url);
         };
 
@@ -16,8 +18,37 @@ define([
             });
         };
 
+        this.getCurrentDomain = function(){
+            return $http.get(portalResources.domain + '/' + $cookieStore.get('user.domain.name'));
+        };
+
         this.getDomainName = function () {
             return $cookieStore.get('user.domain.name');
+        };
+
+        this.createDomain = function (domain) {
+            var url = portalResources.domain;
+            return $http.post(url, domain);
+        };
+
+        this.updateDomain = function (domain) {
+            var url = portalResources.domain + '/' + domain.id;
+
+            return $http.put(url, domain);
+        };
+
+        this.deleteDomain = function (id) {
+            var url = portalResources.domain + '/' + id;
+
+            return $http.delete(url);
+
+        };
+
+        this.inviteUser = function (emailInvite, idDomain) {
+            var url = portalResources.domain + '/invite?listEmails=' +
+                    emailInvite + '&idDomain=' + idDomain;
+
+            return $http.post(url);
         };
 
     });

@@ -6,7 +6,7 @@ define([
     'portal/layout/service/layout'
 ], function (portal) {
     /**
-     * Componente usado para renderizar e manter o header do portal
+     * Componente usado para renderizar e manter o layout do portal
      *
      * @returns {undefined}
      */
@@ -22,6 +22,7 @@ define([
                 $scope.showSidebar = false;
                 $scope.sidebarMini = SidebarService.isSidebarMini();
                 $scope.authenticated = false;
+                $scope.showHeading = true;
 
                 /**
                  * Evento para exibir o menu
@@ -34,6 +35,12 @@ define([
                  */
                 $scope.$on('login.authenticated', function (ev, authenticated) {
                     $scope.authenticated = authenticated;
+                });
+                /**
+                 * Evento para esconder o header
+                 */
+                $scope.$on('heading.show', function (ev, show) {
+                    $scope.showHeading = show;
                 });
                 /**
                  * Evento para mostrar a barra lateral

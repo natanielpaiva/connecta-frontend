@@ -1,36 +1,65 @@
 <div class="row">
-    <div class="col-xs-12">
-        <div class="form-group checkbox">
-            <label> 
-                <translate>
-                    VIEWER.ROTATE
-                </translate>
-                <input  type="checkbox" ng-model="viewer.configuration.rotate"/>
-            </label>
+<div class="col-xs-12">
+<div class="form-group checkbox">
+<label> 
+<translate>
+VIEWER.ROTATE
+</translate>
+<input type="checkbox" ng-model="viewer.configuration.rotate"/>
+</label>
 
-        </div>
-    </div>
+</div>
+</div>
 </div>
 <div class="row">
-    <div class="col-xs-12">
-        <div class="form-group">
-            <label translate>VIEWER.THEME</label>
-            <select class="form-control input-sm" ng-model="viewer.configuration.theme">
-                <option value="">None</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="black">Black</option>
-                <option value="patterns">Patterns</option>
-                <option value="chalk">Chalk</option>
-            </select>
-        </div>
-    </div>
+<div class="col-xs-12">
+<div class="form-group">
+<label translate>VIEWER.THEME</label>
+<select class="form-control input-sm" ng-model="viewer.configuration.theme">
+<option value="">None</option>
+<option value="light">Light</option>
+<option value="dark">Dark</option>
+<option value="black">Black</option>
+<option value="patterns">Patterns</option>
+<option value="chalk">Chalk</option>
+</select>
+</div>
+</div>
 </div>
 <div class="row">
-    <div class="col-xs-12">
-        <div class="form-group">
-            <label translate>VIEWER.LABEL_TEXT</label>
-            <input class="form-control input-sm" type="text" ng-model="viewer.configuration.labelText"/>
-        </div>
-    </div>
+<div class="col-xs-12">
+<div class="form-group">
+<label translate>VIEWER.LABEL_TEXT</label>
+<input class="form-control input-sm" type="text" ng-model="viewer.configuration.labelText"/>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+<div class="form-group">
+<label translate>Balloon Text</label>
+<input class="form-control input-sm" type="text" ng-model="viewer.configuration.balloonText"/>
+</div>
+</div>
+</div>
+<div ng-repeat="obj in viewer.configuration.valueAxes track by $index">
+<div class="row">
+<div class="col-xs-12">
+<div class="form-group">
+<label translate>Unit Position</label>
+<select class="form-control input-sm" ng-model="obj.unitPosition">
+<option value="right">Right</option>
+<option value="left">Left</option>
+</select>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+<div class="form-group">
+<label translate>Unit</label>
+<input class="form-control input-sm" type="text" ng-model="obj.unit"/>
+</div>
+</div>
+</div>
 </div>

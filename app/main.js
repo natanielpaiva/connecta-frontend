@@ -23,7 +23,11 @@ require.config({
         'connecta.speaknow': 'speaknow/connecta.speaknow',
         'connecta.presenter': 'presenter/connecta.presenter',
         'connecta.maps': 'maps/connecta.maps',
-        'connecta.inspection': 'inspection/connecta.inspection'
+        'connecta.inspection': 'inspection/connecta.inspection',
+        'leaflet': '../node_modules/leaflet/dist/leaflet',
+        'esri-leaflet': '../node_modules/esri-leaflet/dist/esri-leaflet',
+        'angular-tree-control' : '../bower_components/angular-tree-control/angular-tree-control',
+        'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min'
     },
     shim: {
         'angular': {
@@ -163,6 +167,9 @@ require.config({
         'angular-ng-table': {
             deps: ['angular']
         },
+        'angular-tree-control' : {
+            deps : ['angular']
+        },
         'bower_components/ngDraggable/ngDraggable': {
             deps: ['angular']
         },
@@ -191,6 +198,9 @@ require.config({
 //        'bower_components/ngAutocomplete/src/ngAutocomplete': {
 //            deps: ['angular','bower_components/connectaGeoJS/index/openlayersImplementation/async/async!//maps.googleapis.com/maps/api/js?sensor=false&region=br&libraries=places']
 //        },
+        'esri-leaflet' : {
+            deps : ['leaflet']
+        },
         'connecta': {
             deps: [
                 'angular',

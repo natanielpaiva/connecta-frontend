@@ -13,6 +13,9 @@
           placeholder="{{'DASHBOARD.DASHBOARD_NAME'|translate}}"
           class="form-control connecta-inline-edit-input" id="dashboard-name" required autofocus/>
       </div>
+      <div class="form-group checkbox">
+       <label> Público <input type="checkbox" ng-model="dashboard.public"/> </label>
+      </div>
     </div>
     <div class="col-xs-4 text-right">
       <button class="btn btn-default" type="button" ng-click="config()">

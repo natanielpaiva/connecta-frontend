@@ -1,10 +1,53 @@
-<amchart ng-model="analysisViewer.viewer.configuration">
-</amchart>
-<div class="form-group">
-    <a href="#/presenter/viewer/{{analysisViewer.id}}/edit" class="btn btn-default" translate>
-        LAYOUT.CANCEL
-    </a>
-    <button class="btn btn-primary" translate>
-        LAYOUT.SAVE
-    </button>
+<div class="datasource-view">
+    <div class="row">
+        <div class="col-md-10">
+            <h3>
+                <!--                <span class="{{types[datasource.type].icon}}"></span>-->
+                {{viewer.name}}
+            </h3>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group pull-right">
+                <a title="{{ 'VIEWER.EDIT' | translate }}" 
+                class="btn btn-default btn-sm" href="#/presenter/viewer/{{viewer.id}}/edit">
+                    <span class="icon-pencil" aria-hidden="true"></span>
+                </a>
+                <button title="{{ 'VIEWER.DELETE' | translate }}" class="btn btn-default btn-sm" ng-click="excluir(viewer.id)">
+                    <span class="icon-trash" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well margin-top-single margin-bottom-single">
+                <p ng-if="viewer.description">
+                    <strong translate>VIEWER.DESCRIPTION</strong>:
+                    {{viewer.description}}
+                </p>
+                
+                <div class="row margin-bottom-single">
+                    <div class="col-md-12 analysis-viewer">
+                        <viewer ng-model="viewer" edit="true"></viewer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <a href="#/presenter/viewer" class="btn btn-default" translate>
+                LAYOUT.BACK
+            </a>
+            <button type="button" class="btn btn-default" translate
+                    ng-click="viewer.exportImage()">
+                VIEWER.EXPORT
+            </button>
+        </div>
+    </div>
 </div>
+
+
+

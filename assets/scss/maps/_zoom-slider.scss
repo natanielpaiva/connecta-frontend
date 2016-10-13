@@ -1,0 +1,44 @@
+.cm-max-zoom {
+    position:absolute;
+    left:0;
+    top:0;
+    width: 115px;
+}
+
+.cm-slider-width {
+    position: absolute;
+    left: 120px;
+    right: 130px;
+    top:0;
+}
+
+.cm-min-zoom {
+    position:absolute;
+    right: 0;
+    top:0;
+    width: 115px;
+}
+
+.cm-slider-container {
+    position: relative;
+}
+
+.cm-slider-item {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.cm-slider-text {
+    width: 70px;
+}
+
+.rzslider .rz-pointer {
+    top: -8px !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.rzslider .rz-pointer:after {
+    top: 6px !important;
+    left: 6px !important;
+}

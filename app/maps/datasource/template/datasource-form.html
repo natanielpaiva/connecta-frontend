@@ -1,0 +1,43 @@
+<section>
+    <form name="data_source" ng-submit="validateDatasource(datasource)" novalidate>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="required" translate>DATASOURCE.SERVER</label>
+                <select ng-change="onServerChange(datasource.serviceType)"
+                        ng-model="datasource.serviceType" class="form-control" required>
+                    <option value="">Selecione</option>
+                    <option value="obiee">OBIEE</option>
+                    <option value="connecta">Connecta</option>
+                </select>
+            </div>
+        </div>
+
+        <div ng-include="contextTemplate[currentState].templateUrl"></div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="required" translate>DATASOURCE.TITLE</label>
+                <input type="text" ng-model="datasource.title" class="form-control" required  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label translate>DATASOURCE.DESCRIPTION</label>
+                <div>
+                    <textarea type="text" ng-model="datasource.description" class="form-control" height="100"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="#/maps/datasource" class="btn btn-default" translate>
+                    DATASOURCE.CANCEL
+                </a>
+                <button class="btn btn-primary" ng-disabled="data_source.$invalid" translate>
+                    DATASOURCE.SAVE
+                </button>
+            </div>
+        </div>
+    </form>
+</section>

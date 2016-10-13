@@ -4,7 +4,7 @@ define([
     'presenter/viewer/service/viewer-service',
     'presenter/viewer/controller/modal-instance-ctrl'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerListController', function ($scope, ViewerService, ngTableParams, $modal) {
+    return presenter.lazy.controller('ViewerListController', function ($scope, ViewerService, ngTableParams, $modal, $routeParams) {
         $scope.viewers = [];
         
         $scope.types = ViewerService.getTypes();
@@ -31,14 +31,22 @@ define([
             });
         };
 
-        $scope.open = function (size) {
+        function openModal(){
             $modal.open({
                 animation: true,
                 templateUrl: 'app/presenter/viewer/template/_template-types.html',
                 controller: 'ModalInstanceCtrl',
-                size: size
+                size: 'lg'
             });
-        };
+        }
 
+        $scope.open = function () {
+            openModal();
+        };
+        
+        if($routeParams.analysis){
+             openModal();
+        }
+        
     });
 });
