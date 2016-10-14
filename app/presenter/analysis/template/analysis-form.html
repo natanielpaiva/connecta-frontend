@@ -12,13 +12,14 @@
                           ng-model="analysis.description" maxlength="500" rows="1"
                           placeholder="{{'ANALYSIS.DESCRIPTION'|translate}}" ></textarea>
             </div>
-            <div class="form-group" ng-if="!edit">
+            <div class="form-group" ng-if="!edit&&!cameFromAnalysis">
                 <label for="datasource" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
-                <select class="form-control" id="datasource" ng-model="analysis.datasource.id">
-                    <option ng-repeat="ds in listDatasource" value="{{ds.id}}">{{ds.name}}</option>
+                <select class="form-control" id="datasource" ng-model="analysis.datasource"
+                        ng-options="ds as ds.name for ds in listDatasource track by ds.id">
                 </select>
+                <!--<option ng-selected="{{ds.id == testDatasource}}" value="{{ds.id}}">{{ds.name}}</option>-->
             </div>
-            <div class="form-group" ng-if="edit">
+            <div class="form-group" ng-if="edit||cameFromAnalysis">
                 <label for="datasource" translate>ANALYSIS.SOURCE_ANALYSIS</label>
                 <input type="text" id="datasource" class="form-control"
                        disabled="disabled" ng-model="analysis.datasource.name" />
@@ -53,13 +54,13 @@
         </div>
     </div>
 
-    <div class="analysis-relations">
+<!--    <div class="analysis-relations">
         <h4>
             {{'ANALYSIS.RELATIONS.RELATIONS'|translate}}
-<!--            <button class="auto-detect btn btn-default btn-sm pull-right"
+            <button class="auto-detect btn btn-default btn-sm pull-right"
                     type="button" translate ng-click="autosuggest()">
                 ANALYSIS.RELATIONS.DETECT
-            </button>-->
+            </button>
         </h4>
         <div class="relations">
             <div class="analysis-relation am-fade-and-slide-left"
@@ -70,7 +71,7 @@
                         {{analysis.name||'('+('ANALYSIS.NEW_ANALYSIS'|translate)+')'}}
                     </div>
                     <div class="left-analysis-column">
-                        <!--Trocar pelo tipo da coluna assim que existir a funcionalidade-->
+                        Trocar pelo tipo da coluna assim que existir a funcionalidade
                         <span class="column-type type-text">Aa</span>
                         <select ng-model="relation.leftAnalysisColumn"
                             ng-show="analysis.analysisColumns.length"
@@ -136,9 +137,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
-    <div class="configure-drill">
+    <div class="configure-drill margin-top-single">
         <uib-accordion close-others="true">
             <uib-accordion-group is-open="status.open">
                 <uib-accordion-heading>

@@ -50,7 +50,9 @@
     "angular-base64": "~2.0.4",
     "angular-ui-select": "0.16.1",
     "angular-scroll": "^1.0.0",
-    "angular-show-on-konami-code": "^0.0.1"
+    "angular-show-on-konami-code": "^0.0.1",
+    "angular-tree-control": "^0.2.28",
+    "angularjs-slider": "^5.5.0"
   },
   "authors": [],
   "moduleType": [

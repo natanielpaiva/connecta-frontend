@@ -1,6 +1,16 @@
-.user-profile-form {
+.user-header{
+    padding:1em 1em 0.5em 1em;
+    background-color: #e6e6e6;
+    margin:-1em -1em 0 -1em;
+
+    .connecta-inline-edit-input{
+        text-align: center;
+        width: 100%;
+        margin:0 auto;
+    }
+
     .user-avatar-field {
-        float:left;
+        /*        float:left;*/
         margin-right:1em;
 
         .user-image-container {
@@ -10,7 +20,7 @@
             height:200px;
             border-radius:50%;
             overflow:hidden;
-            margin:0;
+            margin:0 auto;
             padding:0;
             position:relative;
             &:hover {
@@ -51,23 +61,23 @@
             }
         }
     }
-    .user-other-fields {
-        @include clearfix;
-        /*float:right;*/
-        min-width: 20em;
-        display:block;
-        overflow: hidden;
-        
-        .form-group {
-            width:100%;
+}
+.user-forms {
+    margin: 2.5em;
+
+    .user-profile-form {
+        border-right:solid 1px $darkerWhite;
+        .user-other-fields {
+            @include clearfix;
+            min-width: 20em;
+            overflow: hidden;
+            margin: 0 auto;
+
+            .form-group {
+                width:100%;
+            }
         }
     }
-
-
-}
-
-.change-password-container {
-    margin-top:1em;
 }
 
 

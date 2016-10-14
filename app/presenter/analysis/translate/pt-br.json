@@ -58,6 +58,8 @@
             "NEW_RELATION":"+ Relacionar com outra análise",
             "SELECT_RIGHT_ANALYSIS":"Selecione a análise da direita",
             "NO_COLUMNS_YET":"Nenhuma coluna ainda"
-        }
+        },
+        "DELETE":"Excluir",
+        "EDIT":"Editar"
     }
 }

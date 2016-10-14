@@ -1,31 +1,70 @@
 define([
     'connecta.portal',
     'json!package',
-    'portal/auth/service/login-service',
-//    'portal/auth/service/facebook-service',
-//    'portal/auth/service/google-plus-service',
+    'portal/user/directive/unique-email',
+    // 'portal/layout/directive/click-out',
+    'portal/layout/service/confirm',
     'portal/layout/service/notify'
+            //    'portal/auth/service/facebook-service',
+            //    'portal/auth/service/google-plus-service',
 ], function (portal, package) {
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate) { // FacebookService, GPlusService,
+            controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate, $confirm) { // FacebookService, GPlusService,
                 $scope.package = package;
-                
+
+                $scope.invite = {};
+                $scope.invite.user = {};
+                $scope.invited = {};
                 $scope.credentials = {};
                 $scope.authResponse = {};
+                $scope.user = {};
+                $scope.domains = [];
+                $scope.email = "";
+                $scope.hash = $location.search().hash;
+                $scope.domainBeingEdited = null;
                 $scope.logged = false;
+                $scope.isCreating = false;
                 $scope.sections = {
                     login: "login",
                     form: "form",
-                    domain: "domain"
+                    domain: "domain",
+                    formInvited: "formInvited"
                 };
-                $scope.currentSection = $scope.sections.login;
 
                 $scope.setSection = function (section) {
                     $scope.user = {};
-                    $scope.userImage = undefined;
-                    $scope.currentSection = $scope.sections[section];
+                    $scope.user.email = null; // Parece que não faz sentido. Mas faz. Acredite. E tem que ser nessa ordem.
+                    $scope.currentSection = section;
+                };
+
+                $scope.prepareInviteSection = function () {
+                    UserService.getByHash($scope.hash).then(function (response) {
+                        $scope.invited.email = response.data.email;
+                        $scope.email = $scope.invited.email;
+
+                    });
+                    location.hash = '';
+                    return $scope.sections.formInvited;
+                };
+
+                $scope.currentSection = $scope.hash && $scope.hash !== '' ?
+                        $scope.prepareInviteSection() : $scope.sections.login;
+
+                $scope.loadDomains = function (username) {
+                    DomainService.getDomainsByUser(username).then(function (response) {
+                        $scope.domains = response.data;
+                    });
+                };
+
+                $scope.submit = function () {
+                    LoginService.doLogin($scope.credentials).then(function () {
+                        $scope.loadDomains($scope.credentials.email);
+                        $scope.setSection($scope.sections.domain);
+                    }, function () {
+                        notify.warning("USER.VALIDATION.USER_OR_PASS_INVALID");
+                    });
                 };
 
                 LoginService.checkAuthentication();
@@ -34,104 +73,118 @@ define([
 //                    FacebookService.login();
 //                };
 
-                $scope.submit = function () {
-                    LoginService.doLogin($scope.credentials).then(function (response) {
-                        $scope.loadDomains($scope.credentials.email);
-                        $scope.setSection('domain');
-                    }, function () {
-                        notify.warning("USER.VALIDATION.USER_OR_PASS_INVALID");
-                    });
-                };
-
                 $scope.selectDomain = function (domain) {
                     LoginService.selectDomain(domain);
                     $route.reload();
                 };
 
-//                $scope.onFileSelected = function (files, ev, rejFiles) {
-//                    if (rejFiles && rejFiles.length) {
-//                        $translate('USER.VALIDATION.INVALID_DOCUMENT').then(function (text) {
-//                            notify.warning(text);
-//                        });
-//                        return;
-//                    }
-//
-//                    var file = files[0];
-//                    $scope.fileImage = file;
-//                    if (file) {
-//                        var reader = new FileReader();
-//                        reader.onload = function (e) {
-//                            if ($scope.validateImage(e)) {
-//                                $scope.userImage = e.target.result;
-//                                $scope.imgName = file.name;
-//                                $scope.$apply();
-//                            } else {
-//                                $scope.removeUserImg();
-//                            }
-//                        };
-//                        reader.readAsDataURL(files[0]);
-//                    }
-//                };
+                function _removeInvalidDomain() {
+                    var domain = $scope.domains[$scope.domains.length - 1];
+                    if (domain && !domain.id) {
+                        $scope.domains.pop();
+                    }
+                }
 
-                $scope.removeUserImg = function () {
-                    $scope.userImage = null;
-                    $scope.imgName = null;
-                    $scope.fileImage = null;
+                $scope.showConfiguration = function (index) {
+                    event.stopPropagation();
+
+                    $scope.invite.emails = null;
+                    $scope.domainBeingEdited = index;
+                    _removeInvalidDomain();
+
+//                    UserService.getAll().then(function (response) {
+//                        $scope.invite.users = response.data;
+//                    });
                 };
 
-//                $scope.validateImage = function (image) {
-//                    var isValid = true;
-//                    if (image.total / 614400 > 1) {
-//                        notify.warning("USER.VALIDATION.IMAGESIZE");
-//                        isValid = false;
-//                    } else {
-//                        var img = angular.element("<img>")[0];
-//                        img.src = image.target.result;
-//                        if (img.height != img.width) {
-//                            notify.warning("USER.VALIDATION.IMAGEFORM");
-//                            isValid = false;
-//                        }
-//                    }
-//                    return isValid;
-//                };
+                $scope.updateDomain = function (domain) {
+                    event.stopPropagation();
+
+                    DomainService.updateDomain(domain).then(function () {
+                        $scope.domainBeingEdited = null;
+                        notify.success('DOMAIN.UPDATED');
+                        $scope.inviteUser(domain.id);
+                    });
+                };
+
+                $scope.createDomain = function (domain) {
+                    DomainService.createDomain(domain).then(function (response) {
+                        angular.extend(domain, response.data);
+                        $scope.domainBeingEdited = null;
+                        notify.success('DOMAIN.CREATED');
+                        $scope.inviteUser(domain.id);
+                    });
+                };
+
+                $scope.newDomain = function () {
+                    _removeInvalidDomain();
+                    $scope.domains.push({});
+                    $scope.domainBeingEdited = $scope.domains.length - 1;
+                    $scope.invite.emails = null;
+
+                };
+
+                $scope.deleteDomain = function (id, index) {
+                    $confirm('LAYOUT.CONFIRM_DELETE', 'DOMAIN.DELETE_CONFIRM').then(function () {
+                        DomainService.deleteDomain(id).then(function () {
+                            $scope.domains.splice(index, 1);
+                            $scope.domainBeingEdited = null;
+                            notify.success('DOMAIN.DELETED');
+                        });
+                    });
+                };
 
                 $scope.createUser = function () {
-                    //Por enquanto o login do usuário será o email (easy unique...)
-                    $scope.user.profile.id = $scope.user.profile.email;
+                    $scope.credentials = $scope.user;
+                    UserService.save($scope.user).then(function () {
+                        LoginService.doLogin($scope.user).then(function () {
+                            $scope.setSection($scope.sections.domain);
+                        });
 
-                    UserService.save($scope.user, $scope.fileImage).then(function (response) {
-                        LoginService.setAuthenticatedUser(response);
-                        $location.path('/');
                     }, function (response) {
                         notify.error(response.data);
                     });
                 };
 
-//                $scope.loginWithGoogle = function(){
-//                    GPlusService.loginWithGoogle();
-//                };
-
-//                $scope.$on('facebook-without-email', function (event, userFacebook) {
-//                    console.log("User: ", userFacebook);
-//                    $scope.user = {
-//                        profile: {
-//                            "firstName": userFacebook.first_name,
-//                            "lastName": userFacebook.last_name,
-//                            "avatarUrl": "http://graph.facebook.com/" + userFacebook.id + "/picture?type=large"
-//                        },
-//                        credentials: {
-//                        }
-//                    };
-//                    $scope.userImage = $scope.user.profile.avatarUrl;
-//                    $scope.currentSection = $scope.sections.form;
-//                });
-
-                $scope.loadDomains = function (username) {
-                    //getUserDomains
-                    DomainService.getDomainsByUser(username).then(function (response) {
-                        $scope.domains = response.data;
+                $scope.createInvited = function () {
+                    $scope.credentials = $scope.invited;
+                    UserService.saveInvited($scope.invited).then(function () {
+                        $scope.submit();
+                    }, function (response) {
+                        notify.error(response.data);
                     });
                 };
+
+                $scope.inviteUser = function (id) {
+                    if ($scope.invite.emails) {
+                        $scope.emails = $scope.invite.emails.split(" ");
+                        DomainService.inviteUser($scope.emails, id).then(function () {
+                            notify.success('USER.INVITED_SUCCESS');
+                        });
+                    }
+
+                };
+
+
+                //                $scope.loginWithGoogle = function(){
+                //                    GPlusService.loginWithGoogle();
+                //                };
+
+                //                $scope.$on('facebook-without-email', function (event, userFacebook) {
+                //                    console.log("User: ", userFacebook);
+                //                    $scope.user = {
+                //                        profile: {
+                //                            "firstName": userFacebook.first_name,
+                //                            "lastName": userFacebook.last_name,
+                //                            "avatarUrl": "http://graph.facebook.com/" + userFacebook.id + "/picture?type=large"
+                //                        },
+                //                        credentials: {
+                //                        }
+                //                    };
+                //                    $scope.userImage = $scope.user.profile.avatarUrl;
+                //                    $scope.currentSection = $scope.sections.form;
+                //                });
+
             }
         };
     });

@@ -6,10 +6,8 @@
   'login' : !authenticated
   }">
     <login class="am-slide-top" ng-if="!authenticated"></login>
-    <div id="fb-root"></div>
-    <heading class="navbar navbar-fixed-top">
-
-    </heading>
+<!--    <div id="fb-root"></div>-->
+    <heading class="navbar navbar-fixed-top" ng-if="showHeading"></heading>
     <menu></menu>
     <sidebar></sidebar>
     <div class="container-fluid">

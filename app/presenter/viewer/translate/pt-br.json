@@ -1,6 +1,7 @@
 {
     "VIEWER": {
         "NEW_VIEWER":"Novo visualizador",
+        "EDIT_VIEWER":"Editar visualizador",
         "TYPE_ANALYSIS":"Análise",
         "TYPE_SINGLESOURCE":"Mídia",
         "TYPE_SINGLESOURCE_GROUP":"Grupo de Mídia",
@@ -26,6 +27,8 @@
         "FONT_SIZE": "Tamanho da fonte",
         "VIEW_ANALYSIS": "Resultado da análise",
         "EXPORT": "Exportar imagem",
+        "DELETE":"Excluir",
+        "EDIT":"Editar",
 
         "FONT_COLOR": "Cor",
         "FONT_FAMILY": "Fonte",

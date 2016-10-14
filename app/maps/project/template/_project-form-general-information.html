@@ -1,0 +1,32 @@
+<section>
+    <h4>Informações <strong>Gerais</strong></h4>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label class="required">Serviço de origem de dados</label>
+            <div class="col-md-4 input-group">
+                <select ng-model="project.serviceType" class="form-control" required>
+                    <option value="">Selecione</option>
+                    <!--<option value="obiee">OBIEE</option>-->
+                    <option value="connecta">Connecta</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label class="required">Título</label>
+            <div class="col-md-4 input-group">
+                <input ng-model="project.title" type="text" class="form-control" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label>Descrição</label>
+            <div class="col-md-12 input-group">
+                <textarea ng-model="project.description" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+</section>

@@ -10,12 +10,13 @@ define([
         'angular-redactor'
 //        ,'facebook'
     ]);
-    
+
     portal._configKey = 'portal';
 
     portal.constant('portalResources', {
         base: applications.portal.host,
         dashboard: applications.portal.host + '/dashboard',
+        publicDashboard: applications.portal.host + '/dashboard/public',
         dashboardViewers: applications.portal.host + '/dashboard/viewer',
         login: applications.portal.host + '/oauth/token',
         user: applications.portal.host + '/user',
@@ -69,6 +70,10 @@ define([
             {
                 name: 'heading-popover-apps.html',
                 url: 'app/portal/layout/template/heading-popover-apps.html'
+            },
+            {
+                name: 'heading-popover-domain.html',
+                url: 'app/portal/layout/template/heading-popover-domain.html'
             }
         ];
 
@@ -111,6 +116,11 @@ define([
             controllerUrl: 'portal/dashboard/controller/dashboard-view',
             templateUrl: 'app/portal/dashboard/template/dashboard-view.html'
         },
+        '/dashboard/public/:id': {
+            controller: 'PublicDashboardViewController',
+            controllerUrl: 'portal/dashboard/controller/dashboard-view-public',
+            templateUrl: 'app/portal/dashboard/template/dashboard-view-public.html'
+        },
         '/dashboard/:id/edit': {
             controller: 'DashboardFormController',
             controllerUrl: 'portal/dashboard/controller/dashboard-form',
@@ -143,7 +153,7 @@ define([
         },
         {
             href: 'user/form',
-            title: 'USER.FORM',
+            title: 'USER.PROFILE',
             icon: 'icon-user',
             children: []
         }

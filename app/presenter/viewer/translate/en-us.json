@@ -1,6 +1,7 @@
 {
     "VIEWER": {
         "NEW_VIEWER":"New viewer",
+        "EDIT_VIEWER":"Edit viewer",
         "TYPE_ANALYSIS": "Analysis",
         "TYPE_SINGLESOURCE": "Media",
         "TYPE_SINGLESOURCE_GROUP": "Media Group",
@@ -26,6 +27,8 @@
         "FONT_SIZE": "Font size",
         "VIEW_ANALYSIS": "Analysis result",
         "EXPORT": "Export image",
+        "DELETE":"Delete",
+        "EDIT":"Edit",
 
         "FONT_COLOR": "Color",
         "FONT_FAMILY": "Font",

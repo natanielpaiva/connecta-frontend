@@ -3,7 +3,8 @@ define([
     'connecta.portal'
 ], function (portal) {
 
-    return portal.lazy.service('DashboardService', function (portalResources, $http, $upload, DomainService, applications, $filter) {
+    return portal.lazy.service('DashboardService', function (portalResources, $http, $upload, 
+                                                                DomainService, applications, $filter, $cookieStore) {
 
         this.save = function (dashboard) {
             var url = portalResources.dashboard;
@@ -64,6 +65,22 @@ define([
             });
         };
 
+        this.getPublic = function (id) {
+            var url = portalResources.publicDashboard + '/' + id;
+            return $http.get(url).then(function (response) {
+                response.data.sections = $filter('orderBy')(response.data.sections, 'order');
+                angular.forEach(response.data.sections, function (section) {
+                    angular.forEach(section.items, function (item) {
+                        var viewerPath = applications[item.module].host +
+                                applications[item.module].publicViewerPath + getPublicKey(response.data);
+                        item.viewerUrl = viewerPath.replace(/:id/g, item.viewer);
+                        delete item.id;
+                    });
+                });
+                return response;
+            });
+        };
+
         this.searchViewers = function (term) {
             var url = portalResources.dashboardViewers;
             return $http.get(url, {
@@ -82,6 +99,16 @@ define([
                     'Content-Type': 'application/json'
                 }
             });
+        };
+
+        getPublicKey = function(dashboard){
+            if(dashboard !== undefined &&
+                dashboard.public === true &&
+                dashboard.publicKey !== undefined){
+                $cookieStore.put('portal.domain.name', dashboard.domain);
+                return '?key=' + dashboard.publicKey + '&viewerId=:id';
+            }
+            return '';
         };
 
     });

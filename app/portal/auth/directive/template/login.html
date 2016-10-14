@@ -1,32 +1,72 @@
+<img alt="detail" class="top-left-detail" src="assets/img/bottom-right.svg" ng-class="{active:(currentSection === sections.login)}" />
+<div class="top-left-detail-big" ng-class="{active:(currentSection === sections.login)}">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 350">
+        <path fill="#600202">
+            <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                     keyTimes="0; 0.5; 1"
+                     values="
+                     M0,0 V311 L79.4,208.5 L196.7,155.5 L304.7,78.5 L412.4,52.3 L531.4,0 Z;
+                     M0,0 V350 L79,208     L170,180     L304.7,75   L412.4,55   L500,0   Z;
+                     M0,0 V311 L79.4,208.5 L196.7,155.5 L304.7,78.5 L412.4,52.3 L531.4,0 Z" />
+        </path>
+        <path fill="#9b0d0d">
+            <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                     keyTimes="0; 0.5; 1"
+                     values="
+                     M0,0 V124.4 L79.4,208.8 L150.4,0 Z;
+                     M0,0 V75    L79,208     L145,0 Z;
+                     M0,0 V124.4 L79.4,208.8 L150.4,0 Z" />
+        </path>
+        <path fill="#d30f0f">
+            <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0; 0.5; 1" values="
+                     M150.5,0 L106.3,129.3 L251.60000000000002,116.30000000000001 L304.6,78.30000000000001 L150.60000000000002,1.4210854715202004e-14 Z;
+                     M145,0   L104,128     L235,130                               L304.6,75                L150.60000000000002,1.4210854715202004e-14 Z;
+                     M150.5,0 L106.3,129.3 L251.60000000000002,116.30000000000001 L304.6,78.30000000000001 L150.60000000000002,1.4210854715202004e-14 Z" />
+        </path>
+        <path fill="#9b0d0d">
+            <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0; 0.5; 1" values="
+                     M375.5,0 L304.5,78.7 L412.5,52.5 L410.7,0 Z;
+                     M380,0   L304.5,75   L412.5,55   L385,0 Z;
+                     M375.5,0 L304.5,78.7 L412.5,52.5 L410.7,0 Z" />
+        </path>
+        <path fill="#d30f0f">
+            <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0; 0.5; 1" values="
+                     M0,241.8 V311 L80,208.00000000000003 L0,242.00000000000003 Z;
+                     M0,100   V350 L79,208                L0,242.00000000000003 Z;
+                     M0,241.8 V311 L80,208.00000000000003 L0,242.00000000000003 Z" />
+        </path>
+        <!--     calcMode="spline" keySplines="0 0.75 0.25 1" -->
+    </svg>
+</div>
+
+
 <section ng-show="currentSection === sections.login">
     <div class="header-login">
         <div class="logo">
-            <img src="assets/img/logo-connecta-negative.png" alt="logo" class="logo-app-master"/>
-        </div>
-        <div class="version-app">
-            {{package.version}}
+            <img src="assets/img/connecta.png" alt="logo" title="Connecta version {{package.version}}" class="logo-app-master" />
         </div>
     </div>
     <div class="form-login">
         <form name="loginForm" ng-submit="submit()">
             <div class="line-form">
-                <span class="icon-email"></span>
+                <span class="icon-mail"></span>
                 <div class="field-text">
-                    <input type="text" placeholder="{{'USER.EMAIL'| translate}}"
-                           ng-model="credentials.email" required autofocus />
+                    <input type="text" placeholder="{{'USER.EMAIL'| translate}}" ng-model="credentials.email" required autofocus />
+                    <div class="material-border"></div>
                 </div>
             </div>
             <div class="line-form">
-                <span class="icon-lock-outline"></span>
+                <span class="icon-lock"></span>
                 <div class="field-text">
-                    <input type="password" placeholder="{{'AUTH.PASSWORD'| translate}}"
-                           ng-model="credentials.password" required/>
+                    <input type="password" placeholder="{{'AUTH.PASSWORD'| translate}}" ng-model="credentials.password" required />
+                    <div class="material-border"></div>
                 </div>
             </div>
-            <div class="line-form">
-                <button class="btn-login" translate>AUTH.LOGIN</button>
-            </div>
+            <button class="btn-login" translate>AUTH.LOGIN</button>
         </form>
+        <div class="add-account">
+            <a href="javascript:void(0);" ng-click="setSection(sections.form)" translate="">LAYOUT.ADD_ACC</a>
+        </div>
     </div>
     <!--    <div id="social-login">
           <div id="separator-login">
@@ -43,127 +83,173 @@
               <span class="icon icon-google-with-circle"></span>
               {{'LAYOUT.LOGIN_GOOGLE' | translate}}
           </div>
-      </div>-->
-    <!--    <div id="create-account">
-          <a href ng-click="setSection(sections.form)" translate>LAYOUT.ADD_ACC</a>
-      </div>-->
+    </div>-->
 </section>
 
 <div class="domain-list" ng-show="currentSection === sections.domain">
-    <div class="row">
-        <div class="col-md-12">
-            <p>Selecione um domínio para começar:</p>
-        </div>
-    </div>
+    <h3>
+        {{'DOMAIN.SELECT_DOMAIN_START'|translate}}
+
+        <span class="icon-info">
+            <div class="help-info" translate>
+                DOMAIN.HELP_INFO
+            </div>
+        </span>
+    </h3>
 
     <div class="thumbnail-grid row">
-        <div class="thumbnail-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains">
-            <a ng-click="selectDomain(domain)" title="{{domain.name}}">
-                <div class="thumbnail-grid-item-inner">
-                    <!-- <img src="assets/img/portal/dashboard-icon.svg" alt=""/> -->
-                    <span class="icon-domain"></span>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains">
+            <div class="thumbnail-grid-item" ng-class="{'thumbnail-grid-item-editing':domainBeingEdited === $index}">
+                <div class="thumbnail-grid-item-head" ng-click="selectDomain(domain)">
+                    <div class="thumbnail-grid-item-head-name">{{domain.name}}</div>
+                    <div ng-click="showConfiguration($index)" class="icon-cog"></div>
                 </div>
-                <div class="thumbnail-grid-item-name">
-                    {{domain.name}}
+                <div class="thumbnail-grid-item-form" click-out="domainBeingEdited=null">
+                    <form novalidate name="domainForm" ng-submit="domain.id ? updateDomain(domain) : createDomain(domain)">
+                        <div>
+                            <span class="icon-edit2"></span>
+                            <input ng-model="domain.name" name="name" class="name-input" placeholder="{{'DOMAIN.NAME'|translate}}" autofocus required />
+                            <div ng-show="domainForm.name.$touched" ng-messages="domainForm.name.$error" 
+                                 ng-messages-include="portal-error-messages"></div>
+                        </div>
+                        <div class="form-group">
+                            <label translate>DOMAIN.INVITE</label>
+                            <input ng-model="invite.emails" class="form-control" placeholder="{{'DOMAIN.SEARCH'| translate}}" />
+                        </div>
+                        <!-- <div class="form-group">
+                            TODO Implementar Cores do Tema
+                        </div> -->
+                        <div class="clearfix margin-top-single">
+                            <button type="button" class="btn btn-default pull-left" ng-click="deleteDomain(domain.id, $index)" ng-if="domain.id" translate>
+                                DOMAIN.DELETE
+                            </button>
+                            <button type="button" class="btn btn-default pull-left" ng-if="!domain.id" translate
+                                    ng-click="domains.splice($index, 1)">
+                                LAYOUT.CANCEL
+                            </button>
+                            <button class="btn btn-primary pull-right" ng-if="domain.id" translate>
+                                DOMAIN.SAVE
+                            </button>
+                            <button ng-if="!domain.id" class="btn btn-primary pull-right" ng-disabled="domainForm.$invalid" translate>
+                                DOMAIN.CREATE
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail-grid-item thumbnail-grid-item-new" ng-click="newDomain()">
+                <div class="thumbnail-grid-item-head">
+                    <div class="thumbnail-grid-item-head-name" translate>DOMAIN.NEW</div>
+                    <div class="icon-plus2"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 <div ng-show="currentSection === sections.form" class="create-account-form">
 
-    <div class="navbar-form">
-        <div class="header-login">
-            <div class="logo">
-                <img src="assets/img/logo-connecta-negative.png" alt="logo" class="logo-app-master">
-            </div>
-            <div class="version-app">
-                v0.0.1
-            </div>
+    <div class="header-login">
+        <div class="logo">
+            <img src="assets/img/connecta.png" alt="logo" class="logo-app-master" />
         </div>
     </div>
+
+    <h3 translate>USER.NEW</h3>
 
     <div class="form-account">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 translate>{{isEditing ? 'USER.EDIT': 'USER.ADD'}}</h3>
+        <form novalidate name="user_config_form" ng-submit="createUser()">
+            <div class="form-group has-feedback">
+                <label for="first_name" translate>USER.FIRST_NAME</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" ng-model="user.name" required maxlength="100" />
+                <div ng-show="user_config_form.first_name.$touched" ng-messages="user_config_form.first_name.$error" ng-messages-include="portal-error-messages">
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <form novalidate name="user_config_form" ng-submit="submit()">
-                    <div class="form-group">
-                        <label for="first_name" translate>USER.FIRST_NAME</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name" ng-model="user.profile.firstName" required maxlength="100"/>
-                        <div ng-show="user_config_form.first_name.$touched" ng-messages="user_config_form.first_name.$error" ng-messages-include="portal-error-messages"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name" translate>USER.LAST_NAME</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name" ng-model="user.profile.lastName" required maxlength="100"/>
-                        <div ng-show="user_config_form.last_name.$touched" ng-messages="user_config_form.last_name.$error" ng-messages-include="portal-error-messages"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" translate>USER.EMAIL</label>
-                        <input type="text" class="form-control" id="email" name="email" ng-model="user.profile.email" required maxlength="100"/>
-                        <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error" ng-messages-include="portal-error-messages"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" translate>USER.PASSWORD</label>
-                        <input type="password" class="form-control" id="password" name="password" ng-model="user.credentials.password" maxlength="20" minlength='8' required/>
-                        <div ng-show="user_config_form.password.$touched" ng-messages="user_config_form.password.$error" ng-messages-include="portal-error-messages">
-                            <p ng-message="minlength" class="help-block">{{'USER.VALIDATION.SHORT_PASS'| translate}}</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="passwordConf" translate>USER.CONFIRM</label>
-                        <input type="password" class="form-control" id="confirm" name="confirm" ng-model="confirmPass" required maxlength="100" compare-to="user.credentials.password" ng-model-options="{debounce: 500}"/>
-                        <div ng-show="user_config_form.confirm.$touched" ng-messages="user_config_form.confirm.$error" ng-messages-include="portal-error-messages">
-                            <p ng-message="compareTo" class="help-block">{{'USER.VALIDATION.COMPARE_PASS'| translate}}</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group user-avatar-field">
-                        <label for="image" translate>USER.AVATAR</label>
-                        <div class='user-image-container'>
-                            <div
-                                id="image"
-                                class="well drop-box set-file dropzone user-avatar-dropzone"
-                                ng-file-drop
-                                ng-file-select
-                                ng-multiple="false"
-                                ng-file-change="onFileSelected($files, $event, $rejectedFiles)"
-                                ng-accept="'.jpeg,.jpg,.png'"
-                                ng-model-rejected="rejFiles"
-                                allow-dir="false"
-                                drag-over-class="{accept:'accept', reject:'reject'}">
-
-                                <img class="img-user-quad" ng-if="user.image || userImage || user.avatarUrl" ng-src="{{userImage}}"/>
-                            </div>
-                            <div class='user-avatar-info'>
-                                <span translate>USER.GRAVATAR_TEXT</span>
-                                <div class='btn-container'>
-                                    <button class='btn btn-primary btn-user-info' type='button' ng-file-select ng-multiple="false" ng-file-change="onFileSelected($files, $event, $rejectedFiles)" ng-accept="'.jpeg,.jpg,.png'" ng-model-rejected="rejFiles" allow-dir="false" translate>
-                                        USER.CHOOSE_IMAGE</button>
-                                    <span ng-show='imgName'>{{imgName}}</span>
-                                </div>
-                                <button type='button' class='btn btn-danger btn-user-info' ng-click='removeUserImg()' translate>USER.REMOVE_IMAGE</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary" type='button' translate ng-disabled="user_config_form.$invalid" ng-click="createUser()">
-                        LAYOUT.SAVE
-                    </button>
-                    <a ng-click="setSection(sections.login)" class="btn btn-default" translate>
-                        LAYOUT.CANCEL
-                    </a>
-                </form>
+            <div class="form-group has-feedback">
+                <label for="email" translate>USER.EMAIL</label>
+                <input type="email" class="form-control" id="email" name="email"
+                       ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+                       ng-model="user.email" unique-email required maxlength="100" />
+                <div ng-show="user_config_form.email.$touched" ng-messages="user_config_form.email.$error" 
+                     ng-messages-include="portal-error-messages"></div>
             </div>
-        </div>
+            <div class="form-group has-feedback">
+                <label for="password" translate>USER.PASSWORD</label>
+                <input type="password" class="form-control" id="password" name="password" ng-model="user.password" maxlength="20" minlength='8' required/>
+                <div ng-show="user_config_form.password.$touched" ng-messages="user_config_form.password.$error" ng-messages-include="portal-error-messages">
+                    <p ng-message="minlength" class="help-block">{{'USER.VALIDATION.SHORT_PASS'| translate}}</p>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="passwordConf" translate>USER.CONFIRM</label>
+                <input type="password" class="form-control" id="confirm" name="confirm" ng-model="confirmPass" required maxlength="100" compare-to="user.password" ng-model-options="{debounce: 500}" />
+                <div ng-show="user_config_form.confirm.$touched" ng-messages="user_config_form.confirm.$error" ng-messages-include="portal-error-messages">
+                    <p ng-message="compareTo" class="help-block">{{'USER.VALIDATION.COMPARE_PASS'| translate}}</p>
+                </div>
+            </div>
+            <div class="text-right margin-top-single">
+                <a ng-click="setSection(sections.login)" class="btn btn-default" translate>
+                    LAYOUT.BACK
+                </a>
+                <button class="btn btn-primary" type='button' translate ng-disabled="user_config_form.$invalid" ng-click="createUser()">
+                    USER.CREATE_ACCOUNT
+                </button>
+            </div>
+        </form>
     </div>
 </div>
+<div ng-show="currentSection === sections.formInvited" class="create-account-form">
+
+    <div class="header-login">
+        <div class="logo">
+            <img src="assets/img/connecta.png" alt="logo" class="logo-app-master" />
+        </div>
+    </div>
+
+    <h3 translate>USER.NEW</h3>
+
+    <div class="form-account">
+        <form novalidate name="user_form" ng-submit="createUser()">
+            <div class="form-group has-feedback">
+                <label for="first_name" translate>USER.FIRST_NAME</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" ng-model="invited.name" required maxlength="100" />
+                <div ng-show="user_form.first_name.$touched" ng-messages="user_form.first_name.$error" ng-messages-include="portal-error-messages">
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="email" translate>USER.EMAIL</label>
+                <input type="email" class="form-control" id="email" name="email" 
+                       ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+                       ng-model="invited.email" unique-email initial-email="email"
+                       required maxlength="100" />
+                <div ng-show="user_form.email.$touched" ng-messages="user_form.email.$error" 
+                     ng-messages-include="portal-error-messages"></div>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="password" translate>USER.PASSWORD</label>
+                <input type="password" class="form-control" id="password" name="password" ng-model="invited.password" maxlength="20" minlength='8' required/>
+                <div ng-show="user_form.password.$touched" ng-messages="user_form.password.$error" ng-messages-include="portal-error-messages">
+                    <p ng-message="minlength" class="help-block">{{'USER.VALIDATION.SHORT_PASS'| translate}}</p>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="passwordConf" translate>USER.CONFIRM</label>
+                <input type="password" class="form-control" id="confirm" name="confirm" ng-model="confirmPass" required maxlength="100" compare-to="invited.password" ng-model-options="{debounce: 500}" />
+                <div ng-show="user_form.confirm.$touched" ng-messages="user_form.confirm.$error" ng-messages-include="portal-error-messages">
+                    <p ng-message="compareTo" class="help-block">{{'USER.VALIDATION.COMPARE_PASS'| translate}}</p>
+                </div>
+            </div>
+            <div class="text-right margin-top-single">
+                <a ng-click="setSection(sections.login)" class="btn btn-default" translate>
+                    LAYOUT.BACK
+                </a>
+                <button class="btn btn-primary" type='button' translate ng-disabled="user_form.$invalid" ng-click="createInvited()">
+                    USER.CREATE_ACCOUNT
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<img alt="detail" class="bottom-right-detail" src="assets/img/bottom-right.svg" />

@@ -17,37 +17,50 @@ define([
             controller: function ($scope, applications, util, $route, $cookieStore) {
 
                 $scope.user = {};
+                $scope.domain = {};
                 $scope.avatarUrl = null;
+                $scope.teste = false;
 
                 // adiciona a lista de aplicações no escopo
                 $scope.applications = util.mapToArray(applications);
+                var _getUser = function () {
+                    LoginService.getCurrentUser().then(function (user) {
+                        $scope.user = user;
+                        $scope.getUserAvatarUrl();
+                        $scope.toggleDomain = false;
+                        var currentDomain = $cookieStore.get('user.domain.name');
+                        identifyAndHighlightUserDomain(currentDomain);
 
+                    });
+                };
+                var _getDomain = function () {
+                    DomainService.getCurrentDomain().then(function (response) {
+                        $scope.domain = response.data;
+
+                    });
+
+
+                };
                 $scope.$on('login.authenticated', function ($event, isAuthenticated) {
                     if (isAuthenticated) {
-                        LoginService.getCurrentUser().then(function (user) {
-                            $scope.user = user;
-                            $scope.getUserAvatarUrl();
-                            $scope.toggleDomain = false;
-                            var currentDomain = $cookieStore.get('user.domain.name');
-                            identifyAndHighlightUserDomain(currentDomain);
-                        });
+                        _getUser();
+                        _getDomain();
+
                     }
                 });
-
+                $scope.$on('user.update', function () {
+                    _getUser();
+                });
                 LoginService.checkAuthentication();
-
                 $scope.getUserAvatarUrl = function () {
-                    $scope.avatarUrl = UserService.makeBackgroundImage($scope.user);
+                    $scope.avatarUrl = UserService.makeBackgroundImage($scope.user.id);
                 };
-
                 $scope.logoutUser = function () {
                     LoginService.unauthenticate();
                 };
-
                 $scope.closePopOver = function () {
                     HeadingPopoverService.hide();
                 };
-
                 $scope.toggleAppsPopOver = function () {
                     $scope.appsPopoverFocus = true;
                     var popoverOptions = {
@@ -60,10 +73,22 @@ define([
                             $scope.appsPopoverFocus = false;
                         }
                     };
-
                     HeadingPopoverService.active(popoverOptions);
                 };
-
+                $scope.toggleDomainPopOver = function () {
+                    $scope.domainPopoverFocus = true;
+                    var popoverOptions = {
+                        id: 'domainPopOver',
+                        templateurl: 'heading-popover-domain.html',
+                        controller: function ($scope) {
+                            $scope.applications = util.mapToArray(applications);
+                        },
+                        close: function () {
+                            $scope.domainPopoverFocus = false;
+                        }
+                    };
+                    HeadingPopoverService.active(popoverOptions);
+                };
                 $scope.toggleUserPopOver = function () {
                     $scope.userPopoverFocus = true;
                     var popoverOptions = {
@@ -76,11 +101,8 @@ define([
                             $scope.userPopoverFocus = false;
                         }
                     };
-
                     HeadingPopoverService.active(popoverOptions);
                 };
-
-
                 $scope.toggleNotificationsPopOver = function () {
                     $scope.notificationPopoverFocus = true;
                     var popoverOptions = {
@@ -93,10 +115,8 @@ define([
                             $scope.notificationPopoverFocus = false;
                         }
                     };
-
                     HeadingPopoverService.active(popoverOptions);
                 };
-
                 /**
                  * Oculta e exibe a barra lateral
                  *
@@ -105,46 +125,38 @@ define([
                 $scope.toggleSidebar = function () {
                     LayoutService.toggleSidebar();
                 };
-
                 $scope.shownModules = function (obj) {
                     return (!obj.hide && obj.active);
                 };
-
                 $scope.$on('heading.change-logo', function ($event, logoSrc) {
                     $scope.logoSrc = logoSrc + "?_=" + new Date().getTime();
                 });
-
                 $scope.$on('heading.remove-logo', function ($event, logoSrc) {
                     $scope.logoSrc = null;
                 });
-
                 $scope.$on('user.refresh.done', function ($event, user) {
                     $scope.user = user;
                     $scope.getUserAvatarUrl();
                 });
-
                 $scope.$on('layout.modulechange', function ($event, module) {
                     $scope.currentModule = module;
                 });
-
-                identifyAndHighlightUserDomain = function(domainSelected){
-                    for(var i = 0; i < $scope.user.domains.length; i++){
-                        if($scope.user.domains[i].id === domainSelected){
+                identifyAndHighlightUserDomain = function (domainSelected) {
+                    for (var i = 0; i < $scope.user.domains.length; i++) {
+                        if ($scope.user.domains[i].id === domainSelected) {
                             $scope.user.domains[i].selected = true;
-                        }else{
+                        } else {
                             $scope.user.domains[i].selected = false;
                         }
                     }
                 };
-
-                $scope.toggleDomainMenu = function($event){
+                $scope.toggleDomainMenu = function ($event) {
                     $scope.toggleDomain = !$scope.toggleDomain;
                     $event.stopPropagation();
                 };
-
-                $scope.changeDomain = function(domain){
+                $scope.changeDomain = function (domain) {
                     var currentDomain = $cookieStore.get('user.domain.name');
-                    if(currentDomain !== domain.name){
+                    if (currentDomain !== domain.name) {
                         $cookieStore.put('user.domain.name', domain.id);
                         identifyAndHighlightUserDomain(domain.id);
                         reloadPageAfterDomainSelection();
@@ -152,10 +164,22 @@ define([
                     $scope.toggleDomain = false;
                 };
 
-                reloadPageAfterDomainSelection = function(){
-                    $route.reload();
+                $scope.switchDomain = function () {
+                    // TODO  Criar um evento para ficar escutando o domain
                 };
 
+                $scope.configureDomain = function () {
+                    $scope.teste = true;
+                    console.log($scope.domain);
+                };
+
+                $scope.cancelConfigure = function () {
+                    $scope.teste = false;
+                };
+
+                reloadPageAfterDomainSelection = function () {
+                    $route.reload();
+                };
             }
         };
     });

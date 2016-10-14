@@ -50,7 +50,8 @@ define([
             hierarchy: appPresenter.host + '/hierarchy',
             hierarchyItem: appPresenter.host + '/hierarchy/hierarchy-item',
             group: appPresenter.host + '/group',
-            viewer: appPresenter.host + '/viewer'
+            viewer: appPresenter.host + '/viewer',
+            publicViewer: appPresenter.host + 'viewer/public'
         });
     });
 
@@ -110,6 +111,11 @@ define([
             controllerUrl: 'presenter/analysis/controller/analysis-form',
             templateUrl: 'app/presenter/analysis/template/analysis-form.html'
         },
+        '/presenter/analysis/new/datasource/:datasource': {
+            controller: 'AnalysisFormController',
+            controllerUrl: 'presenter/analysis/controller/analysis-form',
+            templateUrl: 'app/presenter/analysis/template/analysis-form.html'
+        },
         '/presenter/analysis/:id': {
             controller: 'AnalysisViewController',
             controllerUrl: 'presenter/analysis/controller/analysis-view',
@@ -165,6 +171,11 @@ define([
             controllerUrl: 'presenter/viewer/controller/viewer-form',
             templateUrl: 'app/presenter/viewer/template/viewer-form.html'
         },
+        '/presenter/viewer/new/:type/:template/analysis/:analysis': {
+            controller: 'ViewerFormController',
+            controllerUrl: 'presenter/viewer/controller/viewer-form',
+            templateUrl: 'app/presenter/viewer/template/viewer-form.html'
+        },
         '/presenter/viewer/new': {
             controller: 'ViewerFormController',
             controllerUrl: 'presenter/viewer/controller/viewer-form',
@@ -180,16 +191,26 @@ define([
             controllerUrl: 'presenter/viewer/controller/viewer-list',
             templateUrl: 'app/presenter/viewer/template/viewer-list.html'
         },
+        '/presenter/viewer/:id/edit/dashboard/:dashborad': {
+            controller: 'ViewerFormController',
+            controllerUrl: 'presenter/viewer/controller/viewer-form',
+            templateUrl: 'app/presenter/viewer/template/viewer-form.html'
+        },
         '/presenter/viewer/:id/edit': {
             controller: 'ViewerFormController',
             controllerUrl: 'presenter/viewer/controller/viewer-form',
             templateUrl: 'app/presenter/viewer/template/viewer-form.html'
         },
-        '/presenter/viewer/:id/view': {
+        '/presenter/viewer/:id': {
             controller: 'ViewerViewController',
             controllerUrl: 'presenter/viewer/controller/viewer-view',
             templateUrl: 'app/presenter/viewer/template/viewer-view.html'
-        }
+        },
+        '/presenter/viewer/analysis/:analysis': {
+            controller: 'ViewerListController',
+            controllerUrl: 'presenter/viewer/controller/viewer-list',
+            templateUrl: 'app/presenter/viewer/template/viewer-list.html'
+        },
     };
 
     presenter._menu = [

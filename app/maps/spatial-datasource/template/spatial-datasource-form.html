@@ -1,0 +1,61 @@
+<section>
+    <form name="spatial_data_source" ng-submit="save(spatialDataSource)" novalidate>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="required" translate>GEO_DATASOURCE.SERVER</label>
+                <select ng-model="spatialDataSource.serverType" class="form-control" required>
+                    <option value="">Selecione</option>
+                    <option value="ArcGIS">ArcGIS</option>
+                    <option value="MapViewer">MapViewer</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="required">URL</label>
+                    <input type="text" ng-model="spatialDataSource.dsn" class="form-control" required/>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label ng-class="{'required': spatialDataSource.serverType === 'MapViewer'}" translate>GEO_DATASOURCE.USER</label>
+                <div>
+                    <input  ng-required="spatialDataSource.serverType === 'MapViewer'" type="text" ng-model="spatialDataSource.user" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label ng-class="{'required': spatialDataSource.serverType === 'MapViewer'} " translate>GEO_DATASOURCE.PASSWORD</label>
+                <div>
+                    <input  ng-required="spatialDataSource.serverType === 'MapViewer'"  type="password" ng-model="spatialDataSource.password" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="required" translate>GEO_DATASOURCE.TITLE</label>
+                    <input type="text" ng-model="spatialDataSource.title" class="form-control" required  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label translate>GEO_DATASOURCE.DESCRIPTION</label>
+                <div>
+                    <textarea type="text" ng-model="spatialDataSource.description" class="form-control" height="100"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="#/maps/spatial-datasource" class="btn btn-default" translate>
+                  GEO_DATASOURCE.CANCEL
+                </a>
+                <button class="btn btn-primary" ng-disabled="spatial_data_source.$invalid" translate>
+                  GEO_DATASOURCE.SAVE
+                </button>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,60 @@
+<div class="row bs-wizard">
+    <div class="col-xs-3 bs-wizard-step {{steps['1'].style}}">
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="javascript:void(0)" class="bs-wizard-dot one"><strong>1</strong></a>
+        <div class="bs-wizard-info text-center" translate>WIZARD.GENERAL_INFORMATION</div>
+    </div>
+
+    <div class="col-xs-3 bs-wizard-step {{steps['2'].style}}">
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="javascript:void(0)" class="bs-wizard-dot two"><strong>2</strong></a>
+        <div class="bs-wizard-info text-center" translate>WIZARD.LINK_DATASOURCE</div>
+    </div>
+
+    <div class="col-xs-3 bs-wizard-step {{steps['3'].style}}">
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="javascript:void(0)" class="bs-wizard-dot three"><strong>3</strong></a>
+        <div class="bs-wizard-info text-center" translate>WIZARD.TOOLS</div>
+    </div>
+
+    <div class="col-xs-3 bs-wizard-step {{steps['4'].style}}">
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="javascript:void(0)" class="bs-wizard-dot three"><strong>4</strong></a>
+        <div class="bs-wizard-info text-center" translate>WIZARD.EXHIBITION</div>
+    </div>
+</div>
+
+<form name="project_form" novalidate>
+
+    <div ng-include="steps[currentStep].templateUrl"></div>
+
+    <div class="row margin-top-double">
+        <div class="col-md-12 text-right">
+            <a class="btn btn-default" href="#/maps/project" translate>
+                LAYOUT.CANCEL
+            </a>
+            <button ng-click="changeStep()"
+                    type="button"
+                    class="btn btn-default"
+                    ng-disabled="steps[currentStep].first"
+                    translate>
+                LAYOUT.BACK
+            </button>
+            <button ng-click="changeStep(true)"
+                    type="button"
+                    class="btn btn-default"
+                    ng-disabled="steps[currentStep].last || project_form.$invalid"
+                    translate>
+                LAYOUT.NEXT
+            </button>
+
+            <button class="btn btn-primary"
+                    ng-click="saveProject()"
+                    ng-disabled="(!steps[currentStep].last && !project._id) || project_form.$invalid"
+                    translate>
+                LAYOUT.SAVE
+            </button>
+        </div>
+    </div>
+
+</form>

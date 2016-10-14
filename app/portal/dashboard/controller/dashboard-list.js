@@ -1,5 +1,7 @@
+/* global angular */
 define([
     'connecta.portal',
+    'portal/layout/service/layout',
     'portal/dashboard/service/dashboard-service'
 ], function (portal) {
     return portal.lazy.controller('DashboardListController', function ($scope, DashboardService) {

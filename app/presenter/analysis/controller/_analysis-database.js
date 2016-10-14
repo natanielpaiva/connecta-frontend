@@ -37,15 +37,16 @@ define([
 
         $scope.$watch('analysis.selectedTable', function (table) {
             if (table !== null) {
+                
                 $scope.analysis.table = table.tableName;
 
                 $scope.analysis.analysisColumns = [];
 
-                for (var tb in table.columns) {
+                for (var tb in table.connectorColumn) {
                     $scope.analysis.analysisColumns.push({
-                        name: table.columns[tb].name,
-                        label: table.columns[tb].name,
-                        formula: table.tableName + "." + table.columns[tb].name
+                        name: table.connectorColumn[tb].name,
+                        label: table.connectorColumn[tb].name,
+                        formula: table.tableName + "." + table.connectorColumn[tb].name
                     });
                 }
 

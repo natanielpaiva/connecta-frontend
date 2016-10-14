@@ -12,7 +12,7 @@ define([
             var url = inspectionResource.project;
             return $http.get(url, {params: params});
         };
-        
+
         this.save = function (project, image) {
             var url = inspectionResource.project + "/save";
             var fd = new FormData();
