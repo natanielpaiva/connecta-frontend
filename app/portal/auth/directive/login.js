@@ -2,6 +2,7 @@ define([
     'connecta.portal',
     'json!package',
     'portal/user/directive/unique-email',
+    'portal/domain/service/domain-config',
     // 'portal/layout/directive/click-out',
     'portal/layout/service/confirm',
     'portal/layout/service/notify'
@@ -11,7 +12,7 @@ define([
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate, $confirm) { // FacebookService, GPlusService,
+            controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, DomainConfig, $translate, $confirm) { // FacebookService, GPlusService,
                 $scope.package = package;
 
                 $scope.invite = {};
@@ -156,14 +157,17 @@ define([
                 };
 
                 $scope.inviteUser = function (id) {
-                    if ($scope.invite.emails) {
-                        $scope.emails = $scope.invite.emails.split(" ");
-                        DomainService.inviteUser($scope.emails, id).then(function () {
-                            notify.success('USER.INVITED_SUCCESS');
-                        });
-                    }
-
+                    DomainConfig.inviteUser(id,$scope.invite.emails);
                 };
+//                $scope.inviteUser = function (id) {
+//                    if ($scope.invite.emails) {
+//                        $scope.emails = $scope.invite.emails.split(" ");
+//                        DomainService.inviteUser($scope.emails, id).then(function () {
+//                            notify.success('USER.INVITED_SUCCESS');
+//                        });
+//                    }
+//
+//                };
 
 
                 //                $scope.loginWithGoogle = function(){

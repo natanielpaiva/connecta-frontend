@@ -332,53 +332,54 @@ heading {
                         }
                     }
                     &.domain-popover{
-                      width: 8.15em;
-                      background-color: #fff;
-                      right: 2.1em;
-                      font-size: 32px;
+                        width: 8.15em;
+                        background-color: #fff;
+                        right: 2.1em;
+                        font-size: 32px;
 
-                      .domain-popover-content {
-                          padding: 0;
-                          nav{
+                        .domain-popover-content {
+                            padding: 0;
+                            nav{
 
-                            float: left;
-                            height: 100%;
-                            width: auto;
+                                float: left;
+                                height: 100%;
+                                width: auto;
 
-                            & > ul {
-                              float:left;
-                              width: 100%;
-                              height: auto;
-                              padding:0;
-                              margin:0;
-
-                                  & > li {
-                                    float: left;
+                                & > ul {
+                                    float:left;
                                     width: 100%;
-                                    list-style: none;
+                                    height: auto;
+                                    padding:0;
                                     margin:0;
 
-                                    & > a {
+                                    & > li {
+                                        float: left;
+                                        width: 100%;
+                                        list-style: none;
+                                        margin:0;
 
-                                      font-size: 0.5em;
-                                      line-height: normal;
-                                      color: $lightBlack;
-                                      display:block;
-                                      padding: 0.25em;
-                                      display: block;
-                                        & > span {
-                                          padding-right: 0.75em;
-                                        }
+                                        & > a {
 
-                                        &:hover, &.selected {
-                                            background-color:$darkWhite;
-                                            color:$black;
+                                            font-size: 0.5em;
+                                            line-height: normal;
+                                            color: $lightBlack;
+                                            display:block;
+                                            padding: 0.25em;
+                                            display: block;
+                                            & > span {
+                                                padding-right: 0.75em;
+                                            }
+
+                                            &:hover, &.selected {
+                                                background-color:$darkWhite;
+                                                color:$black;
+                                            }
                                         }
-                                      }
-                                  }
-                              }
-                          }
-                      }
+                                    }
+                                }
+                            }
+
+                        }
                     }
                 }
             }
@@ -409,4 +410,32 @@ heading {
 
     //Fallback
     background-image: url("../img//horizontal-logos/connecta.png");
+}
+.domain-config{
+
+    input {
+        // line-height: 2em;
+        width:100%;
+        padding:0;
+        margin:0;
+
+        &:not(.name-input) {
+            font-size: 1em;
+            padding:0 0.75em;
+        }
+
+        &.name-input {
+            color: $gray;
+            line-height: 1.75em;
+            font-weight: 600;
+            font-size:1.2em;
+            padding:0;
+            padding-left:1.5em;
+            margin:0;
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid $presenterBlue;
+            outline: none;
+        }
+    }
 }

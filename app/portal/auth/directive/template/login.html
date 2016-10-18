@@ -67,6 +67,9 @@
         <div class="add-account">
             <a href="javascript:void(0);" ng-click="setSection(sections.form)" translate="">LAYOUT.ADD_ACC</a>
         </div>
+        <div class="add-account">
+            <a href="javascript:void(0);" ng-click="setSection(sections.form)" translate="">LAYOUT.ADD_ACC</a>
+        </div>
     </div>
     <!--    <div id="social-login">
           <div id="separator-login">
@@ -210,7 +213,7 @@
     <h3 translate>USER.NEW</h3>
 
     <div class="form-account">
-        <form novalidate name="user_form" ng-submit="createUser()">
+        <form novalidate name="user_form" ng-submit="createInvited()">
             <div class="form-group has-feedback">
                 <label for="first_name" translate>USER.FIRST_NAME</label>
                 <input type="text" class="form-control" id="first_name" name="first_name" ng-model="invited.name" required maxlength="100" />
