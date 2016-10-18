@@ -30,7 +30,7 @@ define([
                     }
 
                     function onError(err) {
-                        throw Error(err);
+                        console.error(err);
                     }
 
                 }

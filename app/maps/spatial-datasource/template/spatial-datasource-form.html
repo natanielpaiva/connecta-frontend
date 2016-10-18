@@ -52,6 +52,14 @@
                 <a href="#/maps/spatial-datasource" class="btn btn-default" translate>
                   GEO_DATASOURCE.CANCEL
                 </a>
+
+                <button ng-click="testeConnectionObiee(spatialDataSource)"
+                        ng-disabled="spatial_data_source.$invalid"
+                        type="button"
+                        class="btn btn-primary">
+                  TESTAR CONEXÃO
+                </button>
+
                 <button class="btn btn-primary" ng-disabled="spatial_data_source.$invalid" translate>
                   GEO_DATASOURCE.SAVE
                 </button>

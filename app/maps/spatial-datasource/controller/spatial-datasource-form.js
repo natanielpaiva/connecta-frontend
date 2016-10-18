@@ -15,7 +15,6 @@ define([
         }
 
         $scope.save = function (spatialDataSource) {
-            testeConnectionObiee(spatialDataSource);
             if (isEdit) {
                 update(spatialDataSource._id, spatialDataSource);
                 return;
@@ -33,7 +32,7 @@ define([
             $location.path("/maps/spatial-datasource");
         };
 
-        function testeConnectionObiee(spatialDataSource){
+        $scope.testeConnectionObiee = function(spatialDataSource){
             var params = {
                 location: spatialDataSource.dsn,
                 user: spatialDataSource.user,
@@ -48,7 +47,7 @@ define([
                 notify.success("deu bom");
             });
 
-        }
+        };
 
         function update(id, spatialDataSource) {
             SpatialDataSourceService.update(id, spatialDataSource).then(function (response) {
