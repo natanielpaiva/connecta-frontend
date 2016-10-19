@@ -101,7 +101,7 @@
         "DESCRIPTION": "Descrição",
         "VIEWER_LIST": "Lista de <b>Visualizadores</b>",
         "NO_OUTFIELDS": "Nenhuma variável salva",
-        "ADD_VIEWER": "NOVA ANÁLISE",
+        "ADD_VIEWER": "NOVO VISUALIZADOR",
         "ADD_OUTFIELD": "NOVA VARIÁVEL",
         "DELETE_OUTFIELD": "EXCLUIR VARIÁVEL",
         "SAVE_OUTFIELD": "SALVAR VARIÁVEL",
@@ -155,7 +155,8 @@
         "LOCALIZATION" : "Localização",
         "MINIATURE" : "Miniatura",
         "NORTH_SCALE" : "Escala + Norte",
-        "ZOOM_HISTORIC" : "Histórico de Zoom"
+        "ZOOM_HISTORIC" : "Histórico de Zoom",
+        "ZOOM" : "Zoom"
     },
     "WIZARD" : {
         "GENERAL_INFORMATION" : "Informações Gerais",

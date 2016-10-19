@@ -156,7 +156,8 @@
         "LOCALIZATION" : "Localization",
         "MINIATURE" : "Miniature",
         "NORTH_SCALE" : "North + Scale",
-        "ZOOM_HISTORIC" : "Zoom Historic"
+        "ZOOM_HISTORIC" : "Zoom Historic",
+        "ZOOM" : "Zoom"
     },
     "WIZARD" : {
         "GENERAL_INFORMATION" : "General Information",

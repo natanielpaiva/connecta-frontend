@@ -1,16 +1,19 @@
 /* global angular */
 define([
     'connecta.portal',
-    'portal/layout/service/util'
+    'portal/layout/service/util',
+    'maps/project/service/project-service',
+    'presenter/analysis/service/analysis-service'
 ], function (portal) {
     return portal.lazy.directive('mapViewer', function (applications) {
 
-        function mapController($scope, util) {
+        function mapController($scope, util, ProjectService, AnalysisService) {
 
             $scope.mapDivId = util.uuid();
             $scope.mapsClient = applications.maps.embedded;
 
             var promise = getElementById($scope.mapDivId);
+
             promise.then(onGetIFrame);
 
             /**
@@ -18,71 +21,78 @@ define([
              * @param {HTMLIFrameElement} iframe
              */
             function onGetIFrame(iframe) {
-                //TODO: consumir resultSets configurados e deverá passá los para o iframe antes de passar a view
-                // iframe.contentWindow.postMessage({
-                //     VIEW : $scope.model
-                // });
 
-                iframe.contentWindow.postMessage({
-                    "view": "default",
-                    "defaultSettings": {
-                        "context": {
-                            "1": {
-                                "analyses": [
-                                    {
-                                        "_id": "2",
-                                        "title": "Fecomercio Empresas",
-                                        "spatialDataSourceId": "26",
-                                        "enable": false,
-                                        "currentType": "thematic",
-                                        "configRenderer": {
-                                            "thematic": {
-                                                "unique": {
-                                                    "values" : {
-                                                        "ATIVA": {
-                                                            fill: "#3ea20e"
-                                                        },
-                                                        "BAIXADA": {
-                                                            fill: "#fe0000"
-                                                        }
-                                                    },
-                                                    "classificationField" : "SITUACAO"
-                                                }
-                                            }
-                                        },
-                                        "opacity": 0.5,
-                                        "where": "DATA_ABERT like '2000%' or DATA_ABERT like '%2000'"
-                                    },
-                                    {
-                                        "_id": "1",
-                                        "title": "Fecomercio Bairros",
-                                        "spatialDataSourceId": "25",
-                                        "enable": true,
-                                        "currentType": "thematic",
-                                        "configRenderer": {
-                                            "thematic": {
-                                                "fill": {
-                                                    "classificationMethod": "jenks",
-                                                    "classificationField": "Count_1",
-                                                    "breakCount": 5,
-                                                    "colorRamp": [
-                                                        "#feeedf",
-                                                        "#fcbe85",
-                                                        "#fd8c3c",
-                                                        "#e65407",
-                                                        "#a63700"
-                                                    ]
-                                                }
-                                            }
-                                        },
-                                        "opacity": 0.7
-                                    }
-                                ]
-                            }
-                        }
+                ProjectService.get($scope.model.projectId).then( function (response) {
+                    var project = response.data,
+                        promises = [];
+
+                    for (var index in project.richLayers) {
+                        promises.push(AnalysisService.getAnalysis(project.richLayers[index].dataSourceIdentifier));
                     }
-                }, '*');
 
+                    Promise.all(promises).then( function (response) {
+                        promises = [];
+
+                        for (var index in response) {
+                            promises.push(AnalysisService.execute(paramsFactory(project.richLayers[index], response[index].data)));
+                        }
+
+                        Promise.all(promises).then( function (responses) {
+                            var id;
+
+                            for (var index in responses) {
+                                id = project.richLayers[index].resultSetId;
+
+                                iframe.contentWindow.postMessage({
+                                    "topicName" : "RESULT_SET",
+                                    "data" : JSON.stringify({
+                                        identifier : id,
+                                        data : responses[index].data
+                                    })
+                                }, '*');
+
+                            }
+
+                            iframe.contentWindow.postMessage({
+                                "topicName" : "VIEWER",
+                                "data" : JSON.stringify($scope.model)
+                            }, '*');
+
+                        });
+
+                    });
+
+                });
+
+                /**
+                 * @param {
+                 * {
+                 * layer: Object,
+                 * dataSourceIdentifier:String,
+                 * title: String,
+                 * drillLabels: {up: String, down: String},
+                 * resultSetId: String,
+                 * crossingKeys : { geoKey :  String, resultSetKey : String}
+                 * }
+                 * } richLayer
+                 * @param {*} analysis
+                 * @returns {{analysis: {}, filters: Array, drill: {columnToDrill: string, columnsToSum: Array, listPreviousColumns: *[]}}}
+                 */
+                function paramsFactory(richLayer, analysis){
+                    return {
+                        analysis : analysis,
+                        filters : [],
+                        drill : {
+                            columnToDrill : richLayer.crossingKeys.resultSetKey,
+                            columnsToSum : $scope.model.richLayersInfo.filter( function (item) {
+                                return item.richLayerId === richLayer._id;
+                            })[0].outFields.map( function (field) {
+                                return field.name;
+                            }),
+                            listPreviousColumns : []
+                        }
+                    };
+                }
             }
         }
 

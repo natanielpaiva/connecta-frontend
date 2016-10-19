@@ -191,6 +191,9 @@ define([
 
         $scope.saveViewer = function () {
             var promise;
+
+            $scope.viewer.viewContext = $scope.selectedProject.serviceType;
+
             if (!$scope.isEditing) {
                 promise = ViewerService.save($scope.viewer);
             } else {

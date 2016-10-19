@@ -37,7 +37,7 @@ define([
                                     applications[obj.module].viewerPath;
                             obj.viewerUrl = viewerPath.replace(':id', obj.id);
                             obj.viewer = obj.id;
-                            
+
                             delete obj.id;
                         });
 
@@ -56,7 +56,7 @@ define([
         $scope.$on('$locationChangeStart', function () {
             SidebarService.hide();
         });
-        
+
         if ($routeParams.id) {
             DashboardService.get($routeParams.id).then(function (response) {
                 response.data.sections.forEach(function (section) {
@@ -178,7 +178,7 @@ define([
                 templateUrl: 'app/portal/dashboard/template/_dashboard-form-config.html',
                 controller: function ($scope) {
                     $scope.dashboard = $parentScope.dashboard;
-                    
+
                     $scope.fileDropped = function ($files) {
                         $scope.dashboard.backgroundImage = $files[0];
                     };

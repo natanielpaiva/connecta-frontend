@@ -79,11 +79,16 @@ define([
                 $scope.$apply();
             }).catch(console.error.bind(console));
 
+            promises = [];
+
             for (var index in data.widgets) {
-                $scope.widgets.push(toolsConfig.widgets[index].title);
+                promises.push($translate(toolsConfig.widgets[index].title));
             }
 
-            $scope.widgets = $scope.widgets.join(", ");
+            Promise.all(promises).then(function (labels) {
+                $scope.widgets = labels.join(', ');
+                $scope.$apply();
+            }).catch(console.error.bind(console));
 
             return data;
 
