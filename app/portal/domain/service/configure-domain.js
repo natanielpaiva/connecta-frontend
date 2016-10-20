@@ -22,7 +22,7 @@ define([
                         "#2980b9",
                         "#9b59b6",
                         "#95a5a6"
-                    ]
+                    ];
 
                     $scope.save = function () {
                         DomainService.updateDomain($scope.domain).then(function () {

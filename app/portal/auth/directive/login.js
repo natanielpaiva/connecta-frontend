@@ -36,6 +36,16 @@ define([
                     forgotPassword: "recoveryPassword",
                     forgotForm: "forgotForm"
                 };
+                
+                $scope.colors = [
+                    "#2980b9",
+                    "#9b59b6",
+                    "#2ecc71",
+                    "#e74c3c",
+                    "#e67e22",
+                    "#f1c40f",
+                    "#95a5a6"
+                ];
 
                 $scope.setSection = function (section) {
                     $scope.user = {};
@@ -188,9 +198,9 @@ define([
                         $scope.setSection($scope.sections.login);
                     });
                 };
-                $scope.cancel = function(){
+                $scope.cancel = function () {
                     $scope.setSection($scope.sections.login);
-                     location.hash = '';
+                    location.hash = '';
                 };
 
                 //                $scope.loginWithGoogle = function(){

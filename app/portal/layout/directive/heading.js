@@ -177,7 +177,7 @@ define([
 
                 $scope.inviteUser = function () {
                     DomainConfig.inviteUser($cookieStore.get('user.domain.name'), $scope.user.email);
-                    $scope.toggleDomain = !$scope.toggleDomain;
+//                    $scope.toggleDomain = !$scope.toggleDomain;
                     $scope.user.emails = null;
                     $scope.inviteForm = false;
                     

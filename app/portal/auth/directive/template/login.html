@@ -182,15 +182,19 @@
     <div class="thumbnail-grid row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="domain in domains">
             <div class="thumbnail-grid-item" ng-class="{'thumbnail-grid-item-editing':domainBeingEdited === $index}">
-                <div class="thumbnail-grid-item-head" ng-click="selectDomain(domain)">
+                <div class="thumbnail-grid-item-head" ng-click="selectDomain(domain)"
+                     style="background-color:{{domain.theme}}">
                     <div class="thumbnail-grid-item-head-name">{{domain.name}}</div>
                     <div ng-click="showConfiguration($index)" class="icon-cog"></div>
                 </div>
-                <div class="thumbnail-grid-item-form" click-out="domainBeingEdited=null">
+                <div class="thumbnail-grid-item-form" click-out="domainBeingEdited=null"
+                     style="border-color:{{domain.theme}}">
                     <form novalidate name="domainForm" ng-submit="domain.id ? updateDomain(domain) : createDomain(domain)">
                         <div>
                             <span class="icon-edit2"></span>
-                            <input ng-model="domain.name" name="name" class="name-input" placeholder="{{'DOMAIN.NAME'|translate}}" autofocus required />
+                            <input ng-model="domain.name" name="name" class="name-input"
+                                   placeholder="{{'DOMAIN.NAME'|translate}}" autofocus required
+                                   style="border-bottom-color: {{domain.theme}}"/>
                             <div ng-show="domainForm.name.$touched" ng-messages="domainForm.name.$error" 
                                  ng-messages-include="portal-error-messages"></div>
                         </div>
@@ -198,9 +202,15 @@
                             <label translate>DOMAIN.INVITE</label>
                             <input ng-model="invite.emails" class="form-control" placeholder="{{'DOMAIN.SEARCH'| translate}}" />
                         </div>
-                        <!-- <div class="form-group">
-                            TODO Implementar Cores do Tema
-                        </div> -->
+                        <div class="colors" ng-init="domain.theme = domain.theme ? domain.theme : colors[0]">
+                            <ul>
+                                <li ng-repeat="color in colors" class="circle"
+                                    ng-click="domain.theme = color"
+                                    style="background-color:{{color}};" ng-class="{
+                                        active: domain.theme == color
+                                    }"></li>
+                            </ul>
+                        </div>
                         <div class="clearfix margin-top-single">
                             <button type="button" class="btn btn-default pull-left" ng-click="deleteDomain(domain.id, $index)" ng-if="domain.id" translate>
                                 DOMAIN.DELETE
@@ -209,7 +219,8 @@
                                     ng-click="domains.splice($index, 1)">
                                 LAYOUT.CANCEL
                             </button>
-                            <button class="btn btn-primary pull-right" ng-if="domain.id" translate>
+                            <button class="btn btn-primary pull-right" ng-if="domain.id"
+                                    style="background-color:{{domain.theme}}" translate>
                                 DOMAIN.SAVE
                             </button>
                             <button ng-if="!domain.id" class="btn btn-primary pull-right" ng-disabled="domainForm.$invalid" translate>

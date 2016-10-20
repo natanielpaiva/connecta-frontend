@@ -414,7 +414,7 @@ heading {
 
 .domain-config-header{
     border-radius: 6px 6px 0 0;
-    background-color: #f2f2f2;
+    background-color: #f0f0f0;
     .domain-config-title{
         margin-left: 0.8em;
     }
@@ -424,7 +424,7 @@ heading {
     width: 95%;
     margin-left: auto;
     margin-right: auto;
-   input {
+    input {
         // line-height: 2em;
         width:100%;
         padding:0;
@@ -463,6 +463,9 @@ heading {
                 height: 1.5em;
                 border-radius: 50%;
                 margin-right: 1.5em;
+                &.active {
+                    border:solid 2px $lightBlack;
+                }
             }
         }
     }
