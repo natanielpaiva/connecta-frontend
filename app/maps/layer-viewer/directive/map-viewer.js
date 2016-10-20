@@ -1,20 +1,52 @@
 /* global angular */
 define([
     'connecta.portal',
+    'maps/helper/map',
     'portal/layout/service/util',
     'maps/project/service/project-service',
     'presenter/analysis/service/analysis-service'
-], function (portal) {
+], function (portal, leafletHelper) {
     return portal.lazy.directive('mapViewer', function (applications) {
 
-        function mapController($scope, util, ProjectService, AnalysisService) {
+        function mapController($scope, $rootScope, util, ProjectService, AnalysisService, $location) {
 
+            var url = $location.$$absUrl;
+            var mapHelper = Object.assign({}, leafletHelper);
+            var routeIsChanged;
+
+            $scope.isCreatingOrEditing = (/edit/g.test(url) || /new/g.test(url));
+            $scope.mapIframeId = util.uuid();
             $scope.mapDivId = util.uuid();
             $scope.mapsClient = applications.maps.embedded;
 
-            var promise = getElementById($scope.mapDivId);
+            var changeRouteSuccess = $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
+                if (!(/edit/g.test(next.$$route.originalPath) || /new/g.test(next.$$route.originalPath))) {
+                    routeIsChanged = true;
+                }
+            });
 
-            promise.then(onGetIFrame);
+            if (!$scope.isCreatingOrEditing) {
+                var promise = getElementById($scope.mapIframeId);
+                promise.then(onGetIFrame);
+            } else {
+                $scope.initMap = function () {
+                    setTimeout(function () {
+                        var promise = mapHelper.buildMap('_mapDivProjectView' + $scope.mapDivId, {attributionControl: false, zoomControl: false});
+                        promise.catch(function (err) {
+                            notify.error(err.statusText);
+                        });
+                        promise.then(function (map) {
+                            var timer = setInterval( function() {
+                                if (routeIsChanged) {
+                                    changeRouteSuccess();
+                                    clearInterval(timer);
+                                }
+                                map.invalidateSize();
+                            }, 500);
+                        });
+                    }, 10);
+                };
+            }
 
             /**
              *

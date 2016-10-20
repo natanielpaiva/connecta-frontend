@@ -4,7 +4,7 @@ define([
     "../../project/service/project-service"
 ], function (maps) {
 
-    return maps.lazy.controller("ViewerViewController", function ($scope, $location, $routeParams, ViewerService, ProjectService, notify) {
+    return maps.lazy.controller("ViewerViewController", function ($scope, $location, $routeParams, MapsViewerService, ProjectService, notify) {
 
         init();
 
@@ -13,7 +13,7 @@ define([
         }
 
         function loadViewer() {
-            ViewerService.get($routeParams.id)
+            MapsViewerService.get($routeParams.id)
                 .catch(function (err) {
                     notify.error(err.statusText);
                 })
@@ -46,7 +46,7 @@ define([
 
 
         $scope.delete = function () {
-            ViewerService.delete($scope.viewer._id)
+            MapsViewerService.delete($scope.viewer._id)
                 .catch(function (err) {
                     notify.error("VIEWER.DELETE_ERROR");
                 })

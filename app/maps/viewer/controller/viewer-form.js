@@ -5,7 +5,7 @@ define([
     '../../datasource/service/datasource-service'
 ], function (maps) {
 
-    return maps.lazy.controller('ViewerFormController', function ($scope, $location, $routeParams, ViewerService, ProjectService, DatasourceService, notify) {
+    return maps.lazy.controller('ViewerFormController', function ($scope, $location, $routeParams, MapsViewerService, ProjectService, DatasourceService, notify) {
 
         $scope.viewer = {
             popupConfig: {
@@ -38,7 +38,7 @@ define([
         function checkEditing() {
             if ($routeParams.id) {
                 $scope.isEditing = true;
-                ViewerService.get($routeParams.id)
+                MapsViewerService.get($routeParams.id)
                     .catch(function (err) {
                         notify.error(err.statusText);
                     })
@@ -195,9 +195,9 @@ define([
             $scope.viewer.viewContext = $scope.selectedProject.serviceType;
 
             if (!$scope.isEditing) {
-                promise = ViewerService.save($scope.viewer);
+                promise = MapsViewerService.save($scope.viewer);
             } else {
-                promise = ViewerService.update($scope.viewer._id, $scope.viewer);
+                promise = MapsViewerService.update($scope.viewer._id, $scope.viewer);
             }
             promise.catch(function (err) {
                 notify.error('VIEWER.SAVE_ERROR');
