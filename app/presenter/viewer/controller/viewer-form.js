@@ -232,7 +232,8 @@ define([
 
                     $scope.getAnalysisResult = function () {
                         return AnalysisService.execute({
-                            analysis: $scope.viewer.analysis
+                            analysis: $scope.viewer.analysis,
+                            pagination: {count: 50, page: 1}
                         }).then(function (response) {
                             $uibModal.open({
                                 animation: true,

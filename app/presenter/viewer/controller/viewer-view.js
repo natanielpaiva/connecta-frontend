@@ -135,7 +135,6 @@ define([
                         }
                         //sidebarAnalysis();
                         getPreview();
-                        load();
                         break;
                 }
             });
