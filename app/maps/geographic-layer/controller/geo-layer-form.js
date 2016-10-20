@@ -139,7 +139,8 @@ define([
                 params.layer = JSON.stringify(layer);
                 params.queryParams = JSON.stringify({
                     outSR: 4269,
-                    outFields: ['*']
+                    outFields: ['*'],
+                    resultRecordCount: 100
                 });
                 var mapId = mapHelper.map._leaflet_id;
                 var promise = GeoLayerService.query(params);
