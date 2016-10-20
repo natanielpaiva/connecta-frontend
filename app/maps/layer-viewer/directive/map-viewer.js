@@ -54,7 +54,7 @@ define([
              */
             function onGetIFrame(iframe) {
 
-                ProjectService.get($scope.model.projectId).then( function (response) {
+                ProjectService.get($scope.model.project._id).then( function (response) {
                     var project = response.data,
                         promises = [];
 
