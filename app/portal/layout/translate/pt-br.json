@@ -45,7 +45,7 @@
         "CONFIRM_DELETE": "Confirmar a exclusão do dominio.",
         "OK": "Ok",
         "SEND": "Enviar",
-        "FORGOT_MSG": "Digite seu email recuperar sua senha"
+        "FORGOT_MSG": "Digite seu email para recuperar sua senha"
     },
     "NOTIFICATION":{
         "NOTIFICATIONS": "Notificações",
