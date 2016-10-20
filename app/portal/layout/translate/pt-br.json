@@ -37,12 +37,15 @@
         "LOGIN_GOOGLE": "Entrar com Google +",
         "OR":"ou",
         "ADD_ACC":"Criar conta",
+        "RECOVERY_PASSWORD":"Recuperar senha",
         "NO_RESULTS": "Nenhum resultado encontrado",
         "MORE_APPS":"Obter mais aplicativos",
         "MORE":"E mais {{size}} registros...",
         "NO_CONNECTION":"Sem conexão com o servidor. Verifique se o módulo está instalado ou se sua rede tem acesso a internet.",
         "CONFIRM_DELETE": "Confirmar a exclusão do dominio.",
-        "OK": "Ok"
+        "OK": "Ok",
+        "SEND": "Enviar",
+        "FORGOT_MSG": "Digite seu email recuperar sua senha"
     },
     "NOTIFICATION":{
         "NOTIFICATIONS": "Notificações",
