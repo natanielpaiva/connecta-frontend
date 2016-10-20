@@ -38,6 +38,9 @@ define([
                             obj.viewerUrl = viewerPath.replace(':id', obj.id);
                             obj.viewer = obj.id;
 
+                            obj.sizeX = 6;
+                            obj.sizeY = 2;
+
                             delete obj.id;
                         });
 
@@ -99,8 +102,8 @@ define([
             minColumns: 1, // the minimum columns the grid must have
             minRows: 2, // the minimum height of the grid, in rows
             maxRows: 100,
-            defaultSizeX: 2, // the default width of a gridster item, if not specifed
-            defaultSizeY: 1, // the default height of a gridster item, if not specified
+            defaultSizeX: 6, // the default width of a gridster item, if not specifed
+            defaultSizeY: 2, // the default height of a gridster item, if not specified
             minSizeX: 1, // minimum column width of an item
             maxSizeX: null, // maximum column width of an item
             minSizeY: 1, // minumum row height of an item
@@ -162,14 +165,14 @@ define([
             $scope.items.splice($scope.items.indexOf(item), 1);
         };
 
-        $scope.add = function () {
-            $scope.items.push({
-                sizeX: 2,
-                sizeY: 1,
-                row: 0,
-                col: 0
-            });
-        };
+        // $scope.add = function () {
+        //     $scope.items.push({
+        //         sizeX: 6,
+        //         sizeY: 2,
+        //         row: 0,
+        //         col: 0
+        //     });
+        // };
 
         $scope.config = function () {
             var $parentScope = $scope;
