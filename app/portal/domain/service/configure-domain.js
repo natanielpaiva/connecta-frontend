@@ -14,6 +14,15 @@ define([
                 controller: function ($scope) {
                     $scope.title = title;
                     $scope.domain = domain;
+                    $scope.colors = [
+                        "#e74c3c",
+                        "#e67e22",
+                        "#f1c40f",
+                        "#2ecc71",
+                        "#2980b9",
+                        "#9b59b6",
+                        "#95a5a6"
+                    ]
 
                     $scope.save = function () {
                         DomainService.updateDomain($scope.domain).then(function () {

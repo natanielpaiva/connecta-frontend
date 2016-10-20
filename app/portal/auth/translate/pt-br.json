@@ -25,6 +25,7 @@
         "CONFIGURE" : "Configurar Domínio",
         "CHANGE": "Trocar de Domínio",
         "NULL_NAME": "Digite um nome para o domínio",
-        "DELETE_CONFIRM": "Se você fizer isso todos os relacionamentos no domínio serão removidos. Deseja realmente removê-lo"
+        "DELETE_CONFIRM": "Se você fizer isso todos os relacionamentos no domínio serão removidos. Deseja realmente removê-lo",
+        "THEME_COLOR": "Cor tema"
     }
 }
