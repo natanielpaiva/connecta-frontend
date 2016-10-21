@@ -69,10 +69,11 @@
             <thead>
             <tr class="row">
                 <th class="col-md-3">Título</th>
-                <th class="col-md-3">Camada</th>
+                <th class="col-md-2">Camada</th>
                 <th class="col-md-2">Campo Geo</th>
                 <th class="col-md-2">Identificador</th>
                 <th class="col-md-2">Campo Tabular</th>
+                <th class="col-md-1"></th>
             </tr>
             </thead>
             <tbody class="rich-layers-table">
@@ -86,11 +87,12 @@
             <tr class="row"
                 ng-click="selectRichLayer(richLayer)"
                 ng-repeat="richLayer in selectedProject.richLayers">
-                <td class="col-md-2">{{richLayer.title}}</td>
+                <td class="col-md-3">{{richLayer.title}}</td>
                 <td class="col-md-2">{{richLayer.layer.title}}</td>
                 <td class="col-md-2">{{richLayer.crossingKeys.geoKey}}</td>
                 <td class="col-md-2">{{richLayer.resultSetId}}</td>
                 <td class="col-md-2">{{richLayer.crossingKeys.resultSetKey}}</td>
+                <td class="col-md-1"> <i class="icon-settings"></i> </td>
             </tr>
 
             </tbody>

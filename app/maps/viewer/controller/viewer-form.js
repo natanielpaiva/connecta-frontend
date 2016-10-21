@@ -69,6 +69,7 @@ define([
                             if (richLayer.length) {
                                 richLayer = richLayer[0];
                                 $scope.selectedRichLayer = richLayer;
+                                $scope.richLayerModel = richLayer;
                                 populateMetadataFields(richLayer);
                             }
                         } catch (err) {
