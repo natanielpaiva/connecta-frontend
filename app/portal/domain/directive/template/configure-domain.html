@@ -3,6 +3,7 @@
 </div>
 <div class="modal-body domain-config" id="modal-body">
     <form ng-submit="save()">
+        
         <div>
             <span class="icon-edit2"></span>
             <input ng-model="domain.name" name="name" class="name-input"
@@ -12,21 +13,22 @@
         <table class="table table-striped">
 
             <thead class="body-table">
-            <th>{{'DOMAIN.PARTICIPANTS'| translate}}</th>
-            <th>{{'DOMAIN.EMAIL'| translate}}</th>
-            <th>{{'DOMAIN.STATUS'| translate}}</th>
-            <th></th>
+                <th>{{'DOMAIN.PARTICIPANTS'| translate}}</th>
+                <th>{{'DOMAIN.EMAIL'| translate}}</th>
+                <th>{{'DOMAIN.STATUS'| translate}}</th>
+                <th></th>
             </thead>
 
             <tbody ng-repeat="user in domain.users">
-            <td>{{user.name}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.roles[0].name}}</td>
-            <td><span ng-click="deleteUser(user.id, $index)" class="icon-trashcan"></span></td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.roles[0].name}}</td>
+                <td><span ng-click="deleteUser(user.id, $index)" class="icon-trashcan"></span></td>
             </tbody>
+            
         </table>
 
-        <div class="colors" ng-init="domain.theme = domain.theme ? domain.theme : colors[0]">
+        <div class="colors" ng-init="domain.theme">
             <ul>
                 <li ng-repeat="color in colors" class="circle" 
                     style="background-color:{{color}};"
@@ -37,8 +39,6 @@
             </ul>
         </div>
 
-        <div style=""></div>
-
         <div class="modal-footer">
             <button type="button" class="btn btn-default" ng-click="cancel()" translate>
                 LAYOUT.CANCEL
@@ -47,5 +47,6 @@
                 LAYOUT.SAVE
             </button>
         </div>
+        
     </form>
 </div>

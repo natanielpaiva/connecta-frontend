@@ -424,6 +424,10 @@ heading {
     width: 95%;
     margin-left: auto;
     margin-right: auto;
+    .modal-footer{
+        border-top:none;
+        
+    }
     input {
         // line-height: 2em;
         width:100%;

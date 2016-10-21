@@ -7,11 +7,13 @@ define([
     return portal.service('DomainConfig', function ($q, DomainService, notify) {
         var DomainConfig = this;
 
-        DomainConfig.inviteUser = function (id, emailsInvited) {
+        DomainConfig.inviteUser = function (hash, emailsInvited) {
             if (emailsInvited) {
                 var emails = emailsInvited.split(" ");
-                DomainService.inviteUser(emails, id).then(function () {
+                DomainService.inviteUser(emails, hash).then(function () {
                     notify.success('USER.INVITED_SUCCESS');
+                },function(){
+                    notify('Já');
                 });
             }
 

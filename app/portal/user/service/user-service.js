@@ -94,9 +94,9 @@ define([
 
             return $http.post(url);
         };
-        UserService.resetPassword = function (id, newPass) {
+        UserService.resetPassword = function (hash, newPass) {
             var url = portalResources.user + '/reset?' +
-                    'id=' + id +
+                    'hash=' + hash +
                     '&newPass=' + newPass;
             return $http.post(url);
         };

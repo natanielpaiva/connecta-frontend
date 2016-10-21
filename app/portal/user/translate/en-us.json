@@ -31,7 +31,7 @@
         "EDIT": "Edit User",
         "SAVE_PROFILE": "Save Profile",
         "GRAVATAR_TEXT": "You can change your avatar here or remove the current avatar to revert to <a href='http://gravatar.com'>gravatar.com</a>",
-        "FORGOT_PASSWORD": "Check your mail",
+        "FORGOT_PASSWORD": "Check your email",
         "RESET_PASS": "Reset your password",
         "VALIDATION": {
             "IMAGESIZE": "Maximum image file size: 600Kb",

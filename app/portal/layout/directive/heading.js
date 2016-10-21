@@ -176,11 +176,11 @@ define([
                 };
 
                 $scope.inviteUser = function () {
-                    DomainConfig.inviteUser($cookieStore.get('user.domain.name'), $scope.user.email);
+                    DomainConfig.inviteUser($cookieStore.get('user.domain.name'), $scope.user.emails);
 //                    $scope.toggleDomain = !$scope.toggleDomain;
                     $scope.user.emails = null;
                     $scope.inviteForm = false;
-                    
+
                 };
 
                 reloadPageAfterDomainSelection = function () {

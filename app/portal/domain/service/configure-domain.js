@@ -15,12 +15,12 @@ define([
                     $scope.title = title;
                     $scope.domain = domain;
                     $scope.colors = [
+                        "#2980b9",
+                        "#9b59b6",
+                        "#2ecc71",
                         "#e74c3c",
                         "#e67e22",
                         "#f1c40f",
-                        "#2ecc71",
-                        "#2980b9",
-                        "#9b59b6",
                         "#95a5a6"
                     ];
 
