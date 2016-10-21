@@ -106,7 +106,7 @@
                 <label for="email" translate>USER.EMAIL</label>
                 <input type="email" class="form-control" id="email" name="email"
                        ng-model="emailRecoverPass" required maxlength="100" />
-                <div ng-show="user_pass_form.emailRecoverPass.$touched" ng-messages="user_pass_form.RecoverPass.$error" 
+                <div ng-show="user_pass_form.emailRecoverPass.$touched" ng-messages="user_pass_form.emailRecoverPass.$error" 
                      ng-messages-include="portal-error-messages"></div>
             </div>
             <div class="text-right margin-top-single">
@@ -114,7 +114,7 @@
                     LAYOUT.BACK
                 </a>
                 <button class="btn btn-primary" type='button' translate 
-                        ng-disabled="user_config_fouser_pass_formrm.$invalid" 
+                        ng-disabled="user_pass_form.$invalid" 
                         ng-click="forgotPassword()">
                     LAYOUT.SEND
                 </button>
@@ -223,7 +223,9 @@
                                     style="background-color:{{domain.theme}}" translate>
                                 DOMAIN.SAVE
                             </button>
-                            <button ng-if="!domain.id" class="btn btn-primary pull-right" ng-disabled="domainForm.$invalid" translate>
+                            <button ng-if="!domain.id" class="btn btn-primary pull-right"
+                                    ng-disabled="domainForm.$invalid" 
+                                    style="background-color:{{domain.theme}}" translate>
                                 DOMAIN.CREATE
                             </button>
                         </div>

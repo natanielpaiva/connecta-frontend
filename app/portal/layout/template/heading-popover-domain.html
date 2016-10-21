@@ -9,14 +9,17 @@
                 <li>
                     <a href="" ng-click="toggleDomainMenu($event)"><span class='icon-user'></span>
                         {{'DOMAIN.INVITE_USER'| translate}}
-                        <div ng-show="inviteForm">
+                        <div class="input-group" ng-show="inviteForm">
                             <form ng-submit="inviteUser()">
-                                <input class="form-control" id="email" name="email" 
+                                <input class="form-control invite-input" id="email" name="email" 
                                        ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
                                        ng-model="user.emails" required maxlength="100" />
-                                <button class="btn btn-primary pull-right" type='button' ng-click="inviteUser()" translate>
-                                    USER.INVITE_USER
-                                </button>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary pull-right button-invite" type='button' ng-click="inviteUser()" translate>
+                                        <!--USER.INVITE_USER-->
+                                        <span class="icon-search"></span>
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </a>

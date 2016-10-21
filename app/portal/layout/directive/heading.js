@@ -170,16 +170,19 @@ define([
                         _getDomain();
                         $scope.domain.users = response.data;
 
-                        $configureDomain('DOMAIN.CONFIGURE', $scope.domain);
+                        $configureDomain('DOMAIN.CONFIGURE', $scope.domain).then(function () {
+                            _getDomain();//Atualiza o domínio atual para o domínio salvo na modal.
+                        });
 
                     });
                 };
 
                 $scope.inviteUser = function () {
-                    DomainConfig.inviteUser($cookieStore.get('user.domain.name'), $scope.user.emails);
+                    DomainConfig.inviteUser($cookieStore.get('user.domain.name'), $scope.user.emails).then(function () {
+                        $scope.inviteForm = false;
+                    });
 //                    $scope.toggleDomain = !$scope.toggleDomain;
                     $scope.user.emails = null;
-                    $scope.inviteForm = false;
 
                 };
 

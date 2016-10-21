@@ -339,6 +339,11 @@ heading {
 
                         .domain-popover-content {
                             padding: 0;
+                            .button-invite{
+                                height:34px;
+                                position: absolute;
+                                margin-left: 0;
+                            }
                             nav{
 
                                 float: left;
@@ -426,7 +431,7 @@ heading {
     margin-right: auto;
     .modal-footer{
         border-top:none;
-        
+
     }
     input {
         // line-height: 2em;

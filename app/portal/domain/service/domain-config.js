@@ -13,7 +13,7 @@ define([
                 DomainService.inviteUser(emails, hash).then(function () {
                     notify.success('USER.INVITED_SUCCESS');
                 },function(){
-                    notify('Já');
+//                    notify('Já');
                 });
             }
 
