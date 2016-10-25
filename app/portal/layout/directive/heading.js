@@ -53,6 +53,12 @@ define([
                 $scope.getUserAvatarUrl = function () {
                     $scope.avatarUrl = UserService.makeBackgroundImage($scope.user.id);
                 };
+                $scope.domainImage = function () {
+                    return $scope.domain.name.toUpperCase()
+                        .split(" ").map(function (word) {
+                            return word[0];
+                        }).join("").substring(0, 2);
+                };
                 $scope.logoutUser = function () {
                     LoginService.unauthenticate();
                 };

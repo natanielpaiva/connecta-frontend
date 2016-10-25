@@ -39,12 +39,16 @@
             </a>
         </li>
         <li ng-class="{'heading-item-focus': domainPopoverFocus}">
-            <a class="image-on-background domain-avatar" href title="{{domain.name}}" ng-click="toggleDomainPopOver()">
-                <span class="image-on-background domain-avatar"></span>
+            <a class="image-on-background avatar" href title="{{domain.name}}" 
+               ng-click="toggleDomainPopOver()"
+               ng-attr-style="background-color:{{domain.theme}}">
+                <div ng-if="domain.id" class="domain-image">
+                    {{domainImage()}}
+                </div>
             </a>
         </li> 
         <li ng-class="{'heading-item-focus': userPopoverFocus }">
-            <a class="image-on-background user-avatar" href title="{{user.name + ' ' + user.lastName}}"
+            <a class="image-on-background avatar" href title="{{user.name + ' ' + user.lastName}}"
                ng-click="toggleUserPopOver()" ng-attr-style="background-image:url({{avatarUrl}})">
             </a>
         </li>
