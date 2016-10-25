@@ -13,11 +13,11 @@ define([
      * Componente usado para renderizar e manter o header do portal
      */
     return portal.directive('heading', function (LayoutService, LoginService,
-            HeadingPopoverService, UserService, DomainService, DomainConfig, notify) {
+            HeadingPopoverService, UserService, DomainService, DomainConfig) {
         return {
             restrict: 'E',
             templateUrl: 'app/portal/layout/directive/template/heading.html',
-            controller: function ($scope, applications, util, $route, $cookieStore, $configureDomain) {
+            controller: function ($scope, applications, util, $cookieStore, $configureDomain) {
 
                 $scope.user = {};
                 $scope.domain = {};
@@ -30,9 +30,6 @@ define([
                     LoginService.getCurrentUser().then(function (user) {
                         $scope.user = user;
                         $scope.getUserAvatarUrl();
-                        $scope.toggleDomain = false;
-                        var currentDomain = $cookieStore.get('user.domain.name');
-                        identifyAndHighlightUserDomain(currentDomain);
 
                     });
                 };
@@ -142,27 +139,9 @@ define([
                 $scope.$on('layout.modulechange', function ($event, module) {
                     $scope.currentModule = module;
                 });
-                identifyAndHighlightUserDomain = function (domainSelected) {
-                    for (var i = 0; i < $scope.user.domains.length; i++) {
-                        if ($scope.user.domains[i].id === domainSelected) {
-                            $scope.user.domains[i].selected = true;
-                        } else {
-                            $scope.user.domains[i].selected = false;
-                        }
-                    }
-                };
                 $scope.toggleDomainMenu = function ($event) {
-//                    $scope.toggleDomain = !$scope.toggleDomain;
                     $event.stopPropagation();
                     $scope.inviteForm = true;
-                };
-                $scope.changeDomain = function (domain) {
-                    if ($cookieStore.get('user.domain.name') !== domain.id) {
-                        $cookieStore.put('user.domain.name', domain.id);
-                        identifyAndHighlightUserDomain(domain.id);
-                        reloadPageAfterDomainSelection();
-                    }
-                    $scope.toggleDomain = false;
                 };
 
                 $scope.configureDomain = function () {
@@ -181,14 +160,10 @@ define([
                     DomainConfig.inviteUser($cookieStore.get('user.domain.name'), $scope.user.emails).then(function () {
                         $scope.inviteForm = false;
                     });
-//                    $scope.toggleDomain = !$scope.toggleDomain;
                     $scope.user.emails = null;
 
                 };
 
-                reloadPageAfterDomainSelection = function () {
-                    $route.reload();
-                };
             }
         };
     });

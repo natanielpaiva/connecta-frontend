@@ -104,7 +104,7 @@
         <form novalidate name="user_pass_form" ng-submit="forgotPassword()">
             <div class="form-group has-feedback">
                 <label for="email" translate>USER.EMAIL</label>
-                <input type="email" class="form-control" id="email" name="email"
+                <input class="form-control" id="email" name="email"
                        ng-model="emailRecoverPass" required maxlength="100" />
                 <div ng-show="user_pass_form.emailRecoverPass.$touched" ng-messages="user_pass_form.emailRecoverPass.$error" 
                      ng-messages-include="portal-error-messages"></div>
