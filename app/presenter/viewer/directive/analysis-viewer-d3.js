@@ -5,18 +5,74 @@ define([
     'portal/layout/directive/click-out',
     'portal/layout/service/export-file',
     'presenter/analysis/service/analysis-service',
-    'presenter/viewer/service/viewer-service',
-    'bower_components/amcharts/dist/amcharts/exporting/canvg',
-    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor'
+    'presenter/viewer/service/viewer-service'
 ], function (portal) {
     return portal.lazy.directive('analysisViewer', function (ExportFile, $routeParams) {
         return {
-            templateUrl: 'app/presenter/viewer/directive/template/analysis-viewer.html',
+            templateUrl: 'app/presenter/viewer/directive/template/analysis-viewer-d3.html',
             scope: {
                 model: '=ngModel',
                 edit: '=?edit'
             },
             controller: function ($scope, ViewerService, AnalysisService, util) {
+
+            $scope.options = {
+                    chart: {
+                        type: 'lineChart',
+                        height: 450,
+                        margin : {
+                            top: 20,
+                            right: 20,
+                            bottom: 40,
+                            left: 55
+                        },
+                        x: function(d){ return d.x; },
+                        y: function(d){ return d.y; },
+                        useInteractiveGuideline: true,
+                        dispatch: {
+                            stateChange: function(e){ console.log("stateChange"); },
+                            changeState: function(e){ console.log("changeState"); },
+                            tooltipShow: function(e){ console.log("tooltipShow"); },
+                            tooltipHide: function(e){ console.log("tooltipHide"); }
+                        },
+                        xAxis: {
+                            axisLabel: 'Time (ms)'
+                        },
+                        yAxis: {
+                            axisLabel: 'Voltage (v)',
+                            tickFormat: function(d){
+                                return d3.format('.02f')(d);
+                            },
+                            axisLabelDistance: -10
+                        },
+                        callback: function(chart){
+                            console.log("!!! lineChart callback !!!");
+                        }
+                    },
+                    title: {
+                        enable: true,
+                        text: 'Title for Line Chart'
+                    },
+                    subtitle: {
+                        enable: true,
+                        text: 'Subtitle for simple line chart. Lorem ipsum dolor sit amet, at eam blandit sadipscing, vim adhuc sanctus disputando ex, cu usu affert alienum urbanitas.',
+                        css: {
+                            'text-align': 'center',
+                            'margin': '10px 13px 0px 7px'
+                        }
+                    },
+                    caption: {
+                        enable: true,
+                        html: '<b>Figure 1.</b> Lorem ipsum dolor sit amet, at eam blandit sadipscing, <span style="text-decoration: underline;">vim adhuc sanctus disputando ex</span>, cu usu affert alienum urbanitas. <i>Cum in purto erat, mea ne nominavi persecuti reformidans.</i> Docendi blandit abhorreant ea has, minim tantas alterum pro eu. <span style="color: darkred;">Exerci graeci ad vix, elit tacimates ea duo</span>. Id mel eruditi fuisset. Stet vidit patrioque in pro, eum ex veri verterem abhorreant, id unum oportere intellegam nec<sup>[1, <a href="https://github.com/krispo/angular-nvd3" target="_blank">2</a>, 3]</sup>.',
+                        css: {
+                            'text-align': 'justify',
+                            'margin': '10px 13px 0px 7px'
+                        }
+                    }
+                };
+
+                $scope.data = {};
+
                 $scope.drillOrder = 0;
                 $scope.m2a = util.mapToArray;
                 $scope.options = {
@@ -89,33 +145,29 @@ define([
                     _prepareFiltersForRequest();
 
                     AnalysisService.execute($scope.analysisExecuteRequest).then(function (response) {
-                        mountResult(response.data);
-                    });
-                };
-
-                var mountResult = function(result){
-                    if ($scope.model.configuration.type === 'table') {
-                        $scope.model.configuration.data = result;
-                        $scope.model.columns = $scope.model.analysisViewerColumns;
-                    } else {
-                        var columnDrill = $scope.drillLevels[$scope.drillOrder];
-                        if (columnDrill)
-                            updateChartFields(columnDrill.label);
-
-                        var typeViewer = identifyViewerType($scope.model, result);
-
-                        if ($scope.model.configuration.type === 'pie' &&
-                                typeViewer === 2 && drillMaxLevel < 1) {
-                            montaPieType2($scope.model, result);
-                        } else if ($scope.model.configuration.type === 'serial' &&
-                                typeViewer === 2 && drillMaxLevel < 1) {
-                            montaSerialType2($scope.model, result);
+                        if ($scope.model.configuration.type === 'table') {
+                            $scope.model.configuration.data = response.data;
+                            $scope.model.columns = $scope.model.analysisViewerColumns;
                         } else {
-                            $scope.model.configuration.dataProvider = result;
-                            $scope.model.configuration.export = {enabled: true};
-                        }
+                            var columnDrill = $scope.drillLevels[$scope.drillOrder];
+                            if (columnDrill)
+                                updateChartFields(columnDrill.label);
 
-                    }
+                            var typeViewer = identifyViewerType($scope.model, response.data);
+
+                            if ($scope.model.configuration.type === 'pie' &&
+                                    typeViewer === 2 && drillMaxLevel < 1) {
+                                montaPieType2($scope.model, response.data);
+                            } else if ($scope.model.configuration.type === 'serial' &&
+                                    typeViewer === 2 && drillMaxLevel < 1) {
+                                montaSerialType2($scope.model, response.data);
+                            } else {
+                                $scope.model.configuration.dataProvider = response.data;
+                                $scope.model.configuration.export = {enabled: true};
+                            }
+
+                        }
+                    });
                 };
 
                 if ($scope.model.id !== undefined) {
@@ -139,10 +191,6 @@ define([
                         });
 
                         $scope.getAnalysisResult();
-
-                        // por enquanto só funciona com analises sem drill
-                        if($scope.model.analysis.hasDrill === false)
-                            connectSocket();
                     });
                 }
 
@@ -250,6 +298,19 @@ define([
                     }
                 });
 
+
+//                $scope.$watchCollection('model.analysisViewerColumns', function (newValue, oldValue) {
+//                    $scope.columnsTable = {};
+//                    for (var key in newValue) {
+//                         $scope.columnExample = true;
+//                        if(newValue[key].columnType === 'METRIC'){
+//                            $scope.columnsTable[key] = {value: newValue[key].analysisColumn.label};
+//                        }
+//                    }
+//                    if ($scope.columnsTable[0] === undefined) {
+//                        $scope.columnExample = '';
+//                    }
+//                });
                 $scope.drillUp = function () {
                     $scope.drillOrder--;
                     $scope.drillLevels[$scope.drillOrder].filterDrillValue = undefined;
@@ -378,30 +439,6 @@ define([
                                     .drill.columnsToSum.push(column.analysisColumn.name);
                         }
                     });
-                }
-
-                // websocket //
-                var stompClient = null; 
-
-                function connectSocket() {
-                    var socket = AnalysisService.createSocket();
-                    stompClient = Stomp.over(socket);
-                    stompClient.debug = null;
-                    stompClient.connect({}, function(frame) {
-                        stompClient.subscribe('/topic/analysis/' + $scope.model.analysis.id, 
-                            function(response){
-                                updateResult(JSON.parse(response.body));
-                            });
-                    });
-                }
-
-                function disconnect() {
-                    stompClient.disconnect();
-                }
-
-                function updateResult(result) {
-                    mountResult(result);
-                    $scope.$apply();
                 }
             }
         };

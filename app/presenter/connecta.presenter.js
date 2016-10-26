@@ -51,7 +51,8 @@ define([
             hierarchyItem: appPresenter.host + '/hierarchy/hierarchy-item',
             group: appPresenter.host + '/group',
             viewer: appPresenter.host + '/viewer',
-            publicViewer: appPresenter.host + 'viewer/public'
+            publicViewer: appPresenter.host + 'viewer/public',
+            webSocket: appPresenter.host + '/analysisSocket'
         });
     });
 
