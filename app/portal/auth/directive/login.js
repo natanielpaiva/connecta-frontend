@@ -36,7 +36,7 @@ define([
                     forgotPassword: "recoveryPassword",
                     forgotForm: "forgotForm"
                 };
-                
+
                 $scope.colors = [
                     "#2980b9",
                     "#9b59b6",
@@ -189,8 +189,10 @@ define([
                 $scope.forgotPassword = function () {
                     UserService.recoverPassword($scope.emailRecoverPass).then(function () {
                         notify.success('USER.FORGOT_PASSWORD');
-                        $scope.setSection($scope.sections.login);
+                    }, function () {
+                        notify.warning('USER.ERROR.FORGOT_PASSWORD');
                     });
+                    $scope.setSection($scope.sections.login);
                 };
                 $scope.savePassword = function () {
                     UserService.resetPassword($scope.hash, $scope.credentials.password).then(function () {

@@ -45,7 +45,8 @@
         },
         "ERROR": {
             "USERNAME_EXISTS": "Esse email já está sendo usado",
-            "INVITE_EXPIRED": "Esse convite expirou"
+            "INVITE_EXPIRED": "Esse convite expirou",
+            "FORGOT_PASSWORD": "Contate o administrador do sistema"
         },
         "DOMAINS" : "Domínios"
     }
