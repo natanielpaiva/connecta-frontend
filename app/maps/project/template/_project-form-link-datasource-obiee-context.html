@@ -1,1 +1,16 @@
 OBIEE CONTEXT
+<treecontrol class="tree-classic"
+             tree-model="dataForTheTree"
+             options="treeOptions"
+             on-node-toggle="toogleNode(node)"
+             on-selection="showSelected(node)"
+             selected-node="node1">
+    {{node.name}} age {{node.age}}
+</treecontrol>
+
+<label class="required">Opções</label>
+<select class="form-control"
+        ng-model="options"
+        ng-options="option for option in options">
+    <option value="">Selecione</option>
+</select>
