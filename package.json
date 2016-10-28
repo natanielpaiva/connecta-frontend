@@ -24,9 +24,5 @@
     "karma-requirejs": "0.2.2",
     "matchdep": "~0.1.1",
     "phantomjs": "~1.9.13"
-  },
-  "dependencies": {
-    "esri-leaflet": "^2.0.3",
-    "leaflet": "^1.0.0-rc.2"
   }
 }
