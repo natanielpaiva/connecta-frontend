@@ -25,8 +25,7 @@ define([
             widgets : {},
             tools : [],
             richLayers : [],
-            title: "test",
-            serviceType : "obiee",
+            serviceType : "connecta",
             mapConfig: {
                 minZoom : 3,
                 maxZoom : 13
