@@ -1,7 +1,6 @@
 <section>
     <h4 translate>VIEWER.BASIC_INFO</h4>
     <form name="viewerForm" novalidate>
-
         <div class="row">
             <div class="col-md-6 form-group">
                 <label class="required" translate>VIEWER.PROJECT</label>
@@ -63,9 +62,7 @@
             </div>
         </div>
 
-
         <table class="table table-striped table-hover">
-
             <thead>
             <tr class="row">
                 <th class="col-md-3">Título</th>
@@ -94,17 +91,12 @@
                 <td class="col-md-2">{{richLayer.crossingKeys.resultSetKey}}</td>
                 <td class="col-md-1"> <i class="icon-settings"></i> </td>
             </tr>
-
             </tbody>
         </table>
     </form>
 
-
-
     <div uib-collapse="!richLayer">
-
-        <h3 style="margin: 10px">Campos de saída de <strong>{{richLayer.title}}</strong></h3>
-
+        <h4 style="margin: 10px">Campos de saída de <strong>{{richLayer.title}}</strong></h4>
         <table class="table table-striped table-hover">
             <thead>
             <tr class="row">
@@ -181,10 +173,7 @@
                 </div>
             </div>
         </form>
-
     </div>
-
-
 
     <div class="row" ng-if="!outField && !richLayer">
         <div class="col-md-12 text-right">
@@ -196,7 +185,4 @@
             </button>
         </div>
     </div>
-
-
-
 </section>

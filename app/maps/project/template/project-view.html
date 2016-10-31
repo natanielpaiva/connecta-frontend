@@ -18,7 +18,6 @@
                 </button>
             </div>
         </div>
-
     </div>
 
     <div class="row">
@@ -27,25 +26,22 @@
                 <strong>Titulo:</strong>
                 {{project.title}}
             </p>
-            <p>
+            <p style="text-transform: capitalize">
                 <strong>Origem de Dados:</strong>
                 {{project.serviceType}}
             </p>
-            <p>
+            <p ng-if="project.description">
                 <strong>Descricao:</strong>
                 {{project.description}}
             </p>
-
             <p>
                 <strong>Ferramentas:</strong>
                 {{listTools}}
             </p>
-
             <p>
                 <strong>Widgets:</strong>
                 {{widgets}}
             </p>
-
         </div>
     </div>
 
@@ -54,7 +50,6 @@
     </menu-carrousel>
 
     <div id="_mapDivProjectView" ng-init="initMap()" style="height: 500px; margin-top: 10px"></div>
-
 </section>
 
 
