@@ -134,6 +134,7 @@ define([
                 return;
             }
             if ($scope.selectedSpatialDataSource[layer.layerIdentifier]) {
+                $scope.fieldsListOfSelectedLayer = $scope.selectedSpatialDataSource[layer.layerIdentifier].fields;
                 mapHelper.previewLayer($scope.selectedSpatialDataSource[layer.layerIdentifier]);
             } else {
                 var params = {};
@@ -159,6 +160,7 @@ define([
                         }
                         var geoJSONLayer = mapHelper.buildLayer(response.data);
                         $scope.selectedSpatialDataSource[layer.layerIdentifier] = geoJSONLayer;
+                        $scope.selectedSpatialDataSource[layer.layerIdentifier].fields = response.data.fields;
                         $scope.selectedSpatialDataSource[layer.layerIdentifier].type = geometryType[response.data.geometryType];
                         $scope.selectedSpatialDataSource[layer.layerIdentifier].srid = response.data.spatialReference.wkid;
 
