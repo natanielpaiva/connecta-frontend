@@ -43,7 +43,8 @@
         "SAVE_SUCCESS": "Registro salvo com sucesso",
         "DELETE_ERROR": "Erro ao excluir o registro",
         "DELETE_SUCCESS": "Registro excluído com sucesso",
-        "ERROR_OPERATION": "Erro ao efetuar a operação"
+        "ERROR_OPERATION": "Erro ao efetuar a operação",
+        "OBJECT_ID_FIELD" : "Campo identificador"
     },
     "DATASOURCE": {
         "ADD_DATASOURCE": "NOVA FONTE DE DADOS",

@@ -87,7 +87,8 @@ define([
                     geoCache: {
                         queryCache: true,
                         getBreaksCache: true
-                    }
+                    },
+                    info : {}
                 };
             }
         }
@@ -160,6 +161,9 @@ define([
                         $scope.selectedSpatialDataSource[layer.layerIdentifier] = geoJSONLayer;
                         $scope.selectedSpatialDataSource[layer.layerIdentifier].type = geometryType[response.data.geometryType];
                         $scope.selectedSpatialDataSource[layer.layerIdentifier].srid = response.data.spatialReference.wkid;
+
+                        $scope.fieldsListOfSelectedLayer = response.data.fields;
+
                         mapHelper.previewLayer(geoJSONLayer);
                         $scope.isLoadingLayer = false;
                     } catch (err) {

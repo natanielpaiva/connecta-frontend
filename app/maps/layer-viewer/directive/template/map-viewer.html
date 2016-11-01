@@ -1,7 +1,7 @@
 <iframe ng-if="!isCreatingOrEditing" ng-src="{{mapsClient}}" id="{{mapIframeId}}" class="fullHeightAndWidth" frameborder="0"></iframe>
 
 <div ng-if="isCreatingOrEditing"  class="fullHeightAndWidth" style="position: relative">
-    <link rel="stylesheet" href="../../../node_modules/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="../../../bower_components/leaflet/dist/leaflet.css">
     <div class="fullHeightAndWidth map-mask"></div>
 
     <h3 class="map-title">{{model.title}}</h3>
