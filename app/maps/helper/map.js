@@ -117,7 +117,7 @@ define(['esri-leaflet'], function (esri) {
             this.map.setMaxBounds(latLngBounds);
         },
 
-        freezeCurrentBounds: function (center, zoom) {
+        freezeBounds: function (center, zoom) {
             this.map.setView(center, zoom);
             setTimeout(function () {
                 var currentBounds = this.map.getBounds();

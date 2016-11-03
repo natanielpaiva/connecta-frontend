@@ -6,7 +6,7 @@
                 <label class="required" translate>VIEWER.PROJECT</label>
                 <select class="form-control"
                         ng-model="selectedProject"
-                        ng-change="projectChanged(selectedProject._id)"
+                        ng-change="prepareProject(selectedProject._id)"
                         ng-options="project.title for project in projects track by project._id" required>
                     <option value="" translate>LAYOUT.SELECT</option>
                 </select>
