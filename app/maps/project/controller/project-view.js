@@ -28,8 +28,7 @@ define([
                         var timer = setInterval(function () {
                             if (mapHelper.map) {
                                 var zoomConfig = $scope.project.mapConfig;
-                                mapHelper.map.setView(zoomConfig.center, zoomConfig.zoom);
-                                mapHelper.freezeCurrentBounds();
+                                mapHelper.freezeCurrentBounds(zoomConfig.center, zoomConfig.zoom);
                                 clearInterval(timer);
                             }
                         }, 100);

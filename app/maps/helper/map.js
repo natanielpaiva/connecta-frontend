@@ -117,12 +117,15 @@ define(['esri-leaflet'], function (esri) {
             this.map.setMaxBounds(latLngBounds);
         },
 
-        freezeCurrentBounds: function () {
-            var currentBounds = this.map.getBounds();
-            var staticZoom = this.map.getBoundsZoom(currentBounds);
-            this.setMaxZoom(staticZoom);
-            this.setMinZoom(staticZoom);
-            this.map.setMaxBounds(currentBounds);
+        freezeCurrentBounds: function (center, zoom) {
+            this.map.setView(center, zoom);
+            setTimeout(function () {
+                var currentBounds = this.map.getBounds();
+                var staticZoom = this.map.getBoundsZoom(currentBounds);
+                this.setMaxZoom(staticZoom);
+                this.setMinZoom(staticZoom);
+                this.map.setMaxBounds(currentBounds);
+            }.bind(this), 1000);
         },
 
         getCenter: function () {
