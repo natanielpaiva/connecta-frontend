@@ -95,7 +95,7 @@ define([
                         });
                 } catch (err) {
                     reject(err);
-                }s
+                }
             });
         }
 
