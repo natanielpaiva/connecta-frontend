@@ -8,7 +8,7 @@ define([
         var url = mapsResources.project;
 
         this.get = function (id) {
-            return $http.get((id) ? url + '/' + id : url);
+            return $http.get( id ? url + '/' + id : url );
         };
 
         this.save = function (project) {

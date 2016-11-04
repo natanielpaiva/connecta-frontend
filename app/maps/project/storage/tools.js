@@ -7,7 +7,7 @@ define({
         },
         zoom: {
             model: 'zoom',
-            title: 'Zoom',
+            title: 'WIDGETS_NAMES.ZOOM',
             checked: false
         },
         miniature: {

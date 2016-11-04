@@ -3,7 +3,7 @@ define([
     '../../helper/url'
 ], function (maps, urlHelper) {
 
-    return maps.lazy.service('ViewerService', function ($http, mapsResources) {
+    return maps.lazy.service('MapsViewerService', function ($http, mapsResources) {
 
         var url = mapsResources.viewer;
 
