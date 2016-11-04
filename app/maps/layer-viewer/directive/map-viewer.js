@@ -22,6 +22,7 @@ define([
             var changeRouteSuccess = $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
                 if (!(/edit/g.test(next.$$route.originalPath) || /new/g.test(next.$$route.originalPath))) {
                     routeIsChanged = true;
+                    mapHelper.map.remove();
                 }
             });
 

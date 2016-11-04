@@ -28,7 +28,7 @@ define([
         };
 
         this.catalogObiee = function (location, user, password, path) {
-            var url = 'http://172.16.0.31:8080/connecta-portal/obiee/catalog?';
+            var url = 'http://jboss.connecta.cds.com.br/connecta-portal/obiee/catalog?';
             url += 'location=' + location;
             url +=  '&user=' + user;
             url +=  '&password=' + password;

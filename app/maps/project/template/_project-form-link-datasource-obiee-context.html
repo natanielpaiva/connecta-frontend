@@ -1,9 +1,8 @@
 <section>
     <div class="form-group col-md-12">
-
         <h4>Catálogo Obiee</h4>
         <div class="row">
-            <div style="height: 300px;    overflow-y: auto; margin-bottom: 10px;">
+            <div style="height: 300px;overflow-y: auto; margin-bottom: 10px;">
                 <treecontrol class="tree-classic"
                              tree-model="dataForTheTree"
                              options="treeOptions"
@@ -17,7 +16,7 @@
 
         <div class="row">
             <div class="form-group col-md-4">
-                <span class="required">Colunas da Analise <strong>Obiee</strong></span>
+                <label class="required" translate>Colunas da Analise Obiee</label>
                 <select class="form-control"
                         ng-disabled="options.length ===0"
                         ng-model="richLayerAdd.crossingKeys.resultSetKey"
@@ -67,6 +66,5 @@
                 ng-click="toggleOptionAdd(richLayerAdd)">
             Adicionar
         </button>
-
     </div>
 </section>
