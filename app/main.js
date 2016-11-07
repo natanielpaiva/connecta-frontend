@@ -208,6 +208,33 @@ require.config({
                 'bower_components/jquery-ui-custom/index',
                 'bower_components/bootstrap/dist/js/bootstrap.min'
             ]
+        },
+        'bower_components/sockjs/sockjs.min': {
+            deps: [
+                'angular'
+            ]
+        },
+        'bower_components/stomp-websocket/lib/stomp.min': {
+            deps: [
+                'angular',
+                'bower_components/sockjs/sockjs.min'
+            ]
+        },
+        'bower_components/d3/d3.min': {
+                deps: ['angular']
+        },
+        'bower_components/nvd3/build/nv.d3.min': {
+            deps: [
+            'angular',
+            'bower_components/d3/d3.min'
+            ]
+        },
+        'bower_components/angular-nvd3/dist/angular-nvd3.min': {
+            deps: [
+            'angular',
+            'bower_components/d3/d3.min',
+            'bower_components/nvd3/build/nv.d3.min'    
+            ]
         }
     }
 });

@@ -5,7 +5,7 @@ define([
     "maps/project/service/project-service"
 ], function (maps, helperFilter) {
 
-    return maps.lazy.controller("ViewerListController", function ($scope, ngTableParams, ViewerService, ProjectService, notify) {
+    return maps.lazy.controller("ViewerListController", function ($scope, ngTableParams, MapsViewerService, ProjectService, notify) {
 
         $scope.tableViewerParams = new ngTableParams({
             count : 10,
@@ -21,7 +21,7 @@ define([
 
                     var queryString = helperFilter.getQueryString(params, $scope.filter, $scope.tableViewerParams.filter());
 
-                    ViewerService.list(queryString).then(onSuccess, onError);
+                    MapsViewerService.list(queryString).then(onSuccess, onError);
 
                     function onSuccess (response) {
                         var promises = [];

@@ -453,5 +453,9 @@ define([
                 }
             });
         };
+
+        this.createSocket = function(){
+            return new SockJS(presenterResources.webSocket);
+        };
     });
 });

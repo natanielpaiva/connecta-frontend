@@ -14,7 +14,8 @@ define([
     'bower_components/html2canvas/dist/html2canvas',
     'bower_components/angular-ui-select/dist/select'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerViewController', function ($scope, ViewerService, $routeParams, AnalysisService) {
+    return presenter.lazy.controller('ViewerViewController', function ($scope,
+                                    ViewerService, $routeParams, AnalysisService, $location) {
 
         $scope.state = {loaded: false};
         $scope.chartCursor = {ativo: false};
@@ -135,10 +136,15 @@ define([
                         }
                         //sidebarAnalysis();
                         getPreview();
-                        load();
                         break;
                 }
             });
-        } 
+        }
+
+        $scope.excluir = function (id) {
+            ViewerService.delete(id).then(function () {
+                $location.path('presenter/viewer');
+            });
+        };
     });
 });

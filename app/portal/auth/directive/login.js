@@ -2,6 +2,7 @@ define([
     'connecta.portal',
     'json!package',
     'portal/user/directive/unique-email',
+    'portal/domain/service/domain-config',
     // 'portal/layout/directive/click-out',
     'portal/layout/service/confirm',
     'portal/layout/service/notify'
@@ -11,7 +12,7 @@ define([
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, LoginService, UserService, $location, $route, notify, DomainService, $translate, $confirm) { // FacebookService, GPlusService,
+            controller: function ($scope, LoginService, UserService, $location, $route, $routeParams, notify, DomainService, DomainConfig, $translate, $confirm) { // FacebookService, GPlusService,
                 $scope.package = package;
 
                 $scope.invite = {};
@@ -22,7 +23,8 @@ define([
                 $scope.user = {};
                 $scope.domains = [];
                 $scope.email = "";
-                $scope.hash = $location.search().hash;
+                $scope.hash = $routeParams.hash;
+                $scope.flow = $routeParams.flow;
                 $scope.domainBeingEdited = null;
                 $scope.logged = false;
                 $scope.isCreating = false;
@@ -30,8 +32,20 @@ define([
                     login: "login",
                     form: "form",
                     domain: "domain",
-                    formInvited: "formInvited"
+                    formInvited: "formInvited",
+                    forgotPassword: "recoveryPassword",
+                    forgotForm: "forgotForm"
                 };
+
+                $scope.colors = [
+                    "#2980b9",
+                    "#9b59b6",
+                    "#2ecc71",
+                    "#e74c3c",
+                    "#e67e22",
+                    "#f1c40f",
+                    "#95a5a6"
+                ];
 
                 $scope.setSection = function (section) {
                     $scope.user = {};
@@ -45,12 +59,25 @@ define([
                         $scope.email = $scope.invited.email;
 
                     });
-                    location.hash = '';
-                    return $scope.sections.formInvited;
                 };
 
-                $scope.currentSection = $scope.hash && $scope.hash !== '' ?
-                        $scope.prepareInviteSection() : $scope.sections.login;
+                function init() {
+                    switch ($scope.flow) {
+                        case 'create-account':
+                            $scope.prepareInviteSection();
+                            $scope.setSection($scope.sections.formInvited);
+                            break;
+                        case 'forgot-password':
+                            $scope.credentials = null;
+                            $scope.setSection($scope.sections.forgotForm);
+                            break;
+                        default:
+                            $scope.setSection($scope.sections.login);
+                    }
+                    location.hash = '';
+                }
+
+                init();
 
                 $scope.loadDomains = function (username) {
                     DomainService.getDomainsByUser(username).then(function (response) {
@@ -156,15 +183,27 @@ define([
                 };
 
                 $scope.inviteUser = function (id) {
-                    if ($scope.invite.emails) {
-                        $scope.emails = $scope.invite.emails.split(" ");
-                        DomainService.inviteUser($scope.emails, id).then(function () {
-                            notify.success('USER.INVITED_SUCCESS');
-                        });
-                    }
-
+                    DomainConfig.inviteUser(id, $scope.invite.emails);
                 };
 
+                $scope.forgotPassword = function () {
+                    UserService.recoverPassword($scope.emailRecoverPass).then(function () {
+                        notify.success('USER.FORGOT_PASSWORD');
+                    }, function () {
+                        notify.warning('USER.ERROR.FORGOT_PASSWORD');
+                    });
+                    $scope.setSection($scope.sections.login);
+                };
+                $scope.savePassword = function () {
+                    UserService.resetPassword($scope.hash, $scope.credentials.password).then(function () {
+                        notify.success('USER.CHANGE_PASSWORD_SUCCESS');
+                        $scope.setSection($scope.sections.login);
+                    });
+                };
+                $scope.cancel = function () {
+                    $scope.setSection($scope.sections.login);
+                    location.hash = '';
+                };
 
                 //                $scope.loginWithGoogle = function(){
                 //                    GPlusService.loginWithGoogle();

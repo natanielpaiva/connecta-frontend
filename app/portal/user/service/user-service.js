@@ -53,7 +53,7 @@ define([
             return $http.post(url, user);
         };
         UserService.saveInvited = function (user) {
-            var url = portalResources.user + '/invited' ;
+            var url = portalResources.user + '/invited';
 
             return $http.post(url, user);
         };
@@ -76,6 +76,12 @@ define([
             return $http.get(url);
         };
 
+        UserService.recoverPassword = function (email) {
+            var url = portalResources.user + '/recover?email=' + email;
+
+            return $http.post(url);
+        };
+
         UserService.saveFacebook = function (user) {
             var url = portalResources.user;
             return $http.post(url, user);
@@ -83,9 +89,15 @@ define([
 
         UserService.changePassword = function (credentials) {
             var url = portalResources.user + '/credentials?' +
-                      'newPass=' + credentials.password +
-                      '&oldPass=' + credentials.authenticatedUserPassword;
+                    'newPass=' + credentials.password +
+                    '&oldPass=' + credentials.authenticatedUserPassword;
 
+            return $http.post(url);
+        };
+        UserService.resetPassword = function (hash, newPass) {
+            var url = portalResources.user + '/reset?' +
+                    'hash=' + hash +
+                    '&newPass=' + newPass;
             return $http.post(url);
         };
 
