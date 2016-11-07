@@ -49,12 +49,12 @@ define([
         $scope.print = function () {
             $scope.config.isPrinting = true;
 
-//            $timeout(function(){
-//                $scope.$apply(function(){
-//                    $window.print();
-//                    $scope.config.isPrinting = false;
-//                });
-//            },2000);
+           $timeout(function(){
+               $scope.$apply(function(){
+                   $window.print();
+                   $scope.config.isPrinting = false;
+               });
+           },2000);
         };
 
         PublicDashboardService.getPublic($routeParams.id).then(function (response) {

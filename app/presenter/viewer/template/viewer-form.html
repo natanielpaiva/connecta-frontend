@@ -3,10 +3,10 @@
         <div class="col-md-12">
             <div class="form-group" validated-field-holder="formObject.name">
                 <input required type="text" ng-model="viewer.name" required
-                       id="name" class="form-control connecta-inline-edit-input" 
+                       id="name" class="form-control connecta-inline-edit-input"
                        placeholder="{{'VIEWER.NAME' | translate}}" autofocus/>
                 <validated-field-messages ng-model="formViewer.name"></validated-field-messages>
-                
+
                 <input type="text" ng-model="viewer.description"
                        id="description" class="form-control connecta-inline-edit-textarea"
                        placeholder="{{'VIEWER.DESCRIPTION' | translate}}"/>
@@ -15,9 +15,19 @@
     </div>
 
     <div class="row" ng-if="viewer.configuration.type == 'serial' ||
-                viewer.configuration.type == 'pie' ||
-                viewer.configuration.type == 'funnel' ||
-                viewer.configuration.type == 'radar'">
+                viewer.configuration.type == 'pie'     ||
+                viewer.configuration.type == 'funnel'  ||
+                viewer.configuration.type == 'radar'   ||
+                viewer.configuration.subtype == 'pie'  ||
+                viewer.configuration.subtype == 'radar'||
+                viewer.configuration.subtype == 'area' ||
+                viewer.configuration.subtype == 'line' ||
+                viewer.configuration.subtype == 'area' ||
+                viewer.configuration.subtype == 'horizontalBar' ||
+                viewer.configuration.subtype == 'doughnut'      ||
+                viewer.configuration.subtype == 'bar' ||
+                viewer.configuration.subtype == 'polarArea' ||
+                viewer.configuration.subtype == 'radar'">
         <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.METRIC</span>
@@ -67,7 +77,8 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-if="viewer.configuration.type == 'xy'">
+    <div class="row" ng-if="viewer.configuration.type == 'xy' ||
+                viewer.configuration.subtype == 'bubble'">
         <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.XFIELD</span>
@@ -130,6 +141,30 @@
                                 ng-attr-style="background-image:url({{column.label}})">
                                 {{column.analysisColumn.label}}
                                 <i class="icon-close" ng-click="viewer.valueFields.splice($index, 1)"></i>
+                            </li>
+                            <li class="animate-repeat" ng-if="results.length === 0">
+                                {{'LAYOUT.NO_RESULTS'| translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="viewer.configuration.subtype == 'bubble'">
+            <div class="box-viewer">
+                <span class="box-name" translate>VIEWER.DESCRIPTION</span>
+                <div class="columns-viewer">
+                    <div class="sidebar-viewer">
+                        <ul dnd-list="viewer.descriptions" dnd-drop="transformColumnDrop(item, 'DESCRIPTION')"
+                            ng-class="{
+                                'has-item':!!viewer.descriptions.length
+                            }">
+                            <li ng-repeat="viewerColumn in viewer.descriptions"
+                                dnd-draggable="viewerColumn"
+                                dnd-moved="viewer.descriptions.splice($index, 1)"
+                                dnd-effect-allowed="move">
+                                {{viewerColumn.analysisColumn.label}}
+                                <span class="icon-close" ng-click="viewer.descriptions.splice($index, 1)"></span>
                             </li>
                             <li class="animate-repeat" ng-if="results.length === 0">
                                 {{'LAYOUT.NO_RESULTS'| translate}}

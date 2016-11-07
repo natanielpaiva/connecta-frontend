@@ -17,12 +17,14 @@ define([
                 edit: '=?edit'
             },
             controller: function ($scope, ViewerService, AnalysisService, util) {
+
                 $scope.drillOrder = 0;
                 $scope.m2a = util.mapToArray;
                 $scope.options = {
                     isDrilling: true, // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
                     filterConfigOpen: false
                 };
+
                 $scope.idDashboard = $routeParams.id;
 
                 $scope.filterOperators = AnalysisService.getFilterOperators();
@@ -46,7 +48,7 @@ define([
 //                        }
 //                    });
                 };
-                
+
                 function _closeFilterForms() {
                     if($scope.analysisExecuteRequest.filters) {
                         $scope.analysisExecuteRequest.filters.forEach(function(filter){
@@ -54,10 +56,10 @@ define([
                         });
                     }
                 }
-                
+
                 $scope.addFilter = function(){
                     _closeFilterForms();
-                    
+
                     $scope.analysisExecuteRequest.filters.push({
                         isEditing:true
                     });
@@ -97,11 +99,11 @@ define([
                     if ($scope.model.configuration.type === 'table') {
                         $scope.model.configuration.data = result;
                         $scope.model.columns = $scope.model.analysisViewerColumns;
-                    } else {
-                        var columnDrill = $scope.drillLevels[$scope.drillOrder];
-                        if (columnDrill)
-                            updateChartFields(columnDrill.label);
-
+                    }else if ($scope.model.configuration.type === 'chartjs'){
+                        var columnDrill = updateDrillColumns();
+                        montaChartjsResult($scope.model,result, columnDrill);
+                    }else{
+                        updateDrillColumns();
                         var typeViewer = identifyViewerType($scope.model, result);
 
                         if ($scope.model.configuration.type === 'pie' &&
@@ -114,7 +116,6 @@ define([
                             $scope.model.configuration.dataProvider = result;
                             $scope.model.configuration.export = {enabled: true};
                         }
-
                     }
                 };
 
@@ -141,10 +142,19 @@ define([
                         $scope.getAnalysisResult();
 
                         // por enquanto só funciona com analises sem drill
-                        if($scope.model.analysis.hasDrill === false)
+                        if($scope.model.analysis.hasDrill === false &&
+                            $scope.model.analysis.type === 'DATABASE')
                             connectSocket();
                     });
                 }
+
+                var updateDrillColumns = function(){
+                    var columnDrill = $scope.drillLevels[$scope.drillOrder];
+                    if (columnDrill)
+                        updateChartFields(columnDrill.label);
+
+                    return columnDrill;
+                };
 
                 var identifyViewerType = function (viewer, result) {
                     var descriptionCount = 0;
@@ -187,6 +197,10 @@ define([
                             }
                         }
                     });
+                };
+
+                var montaChartjsResult = function (viewer, result, columnDrill) {
+                    ViewerService.getPreviewChartJs(viewer,result, columnDrill);
                 };
 
                 var montaSerialType2 = function (viewer, result) {
@@ -381,14 +395,14 @@ define([
                 }
 
                 // websocket //
-                var stompClient = null; 
+                var stompClient = null;
 
                 function connectSocket() {
                     var socket = AnalysisService.createSocket();
                     stompClient = Stomp.over(socket);
                     stompClient.debug = null;
                     stompClient.connect({}, function(frame) {
-                        stompClient.subscribe('/topic/analysis/' + $scope.model.analysis.id, 
+                        stompClient.subscribe('/topic/analysis/' + $scope.model.analysis.id,
                             function(response){
                                 updateResult(JSON.parse(response.body));
                             });
@@ -402,6 +416,17 @@ define([
                 function updateResult(result) {
                     mountResult(result);
                     $scope.$apply();
+                }
+
+                if(!$scope.edit){
+                    $scope.onClick = function (points, evt) {
+                        prepareOrderDrill($scope.model.analysis.analysisColumns);
+                        if(points[0] && points[0]._model) {
+                            if ($scope.drillOrder < drillMaxLevel && $scope.options.isDrilling) {
+                                $scope.getAnalysisResult(points[0]._model.label);
+                            }
+                        }
+                    };
                 }
             }
         };

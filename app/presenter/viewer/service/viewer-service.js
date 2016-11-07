@@ -455,92 +455,6 @@ define([
             return presenterResources.singlesource + '/' + singlesource.id + '/binary';
         };
 
-//        var filterAnalysisViewer = function (analysisViewer) {
-//            switch (analysisViewer.type) {
-//                case 'SINGLESOURCE':
-//                    for (var key in analysisViewer.singlesource.list) {
-//                        analysisViewer.singleSource.id = analysisViewer.singlesource.list[key].id;
-//                    }
-//                    delete analysisViewer.singlesource;
-//                    break;
-//                default:
-//                    for (key in analysisViewer.metrics) {
-//                        analysisViewer
-//                                .analysisViewerColumns
-//                                .push({
-//                                    columnDataType: 'NUMBER',
-//                                    columnType: 'METRIC',
-//                                    analysisColumn: analysisViewer.metrics[key]
-//                                }
-//                                );
-//                    }
-//
-//                    for (key in analysisViewer.filters) {
-//                        analysisViewer
-//                                .analysisViewerColumns
-//                                .push({
-//                                    columnDataType: 'TEXT',
-//                                    columnType: 'FILTER',
-//                                    analysisColumn: analysisViewer.filters[key]
-//                                }
-//                                );
-//                    }
-//
-//                    for (key in analysisViewer.descriptions) {
-//                        analysisViewer
-//                                .analysisViewerColumns
-//                                .push({
-//                                    columnDataType: 'TEXT',
-//                                    columnType: 'DESCRIPTION',
-//                                    analysisColumn: analysisViewer.descriptions[key]
-//                                }
-//                                );
-//                    }
-//
-//                    for (key in analysisViewer.xfields) {
-//                        analysisViewer
-//                                .analysisViewerColumns
-//                                .push({
-//                                    columnDataType: 'NUMBER',
-//                                    columnType: 'XFIELD',
-//                                    analysisColumn: analysisViewer.xfields[key]
-//                                }
-//                                );
-//                    }
-//
-//                    for (key in analysisViewer.yfields) {
-//                        analysisViewer
-//                                .analysisViewerColumns
-//                                .push({
-//                                    columnDataType: 'NUMBER',
-//                                    columnType: 'YFIELD',
-//                                    analysisColumn: analysisViewer.yfields[key]
-//                                }
-//                                );
-//                    }
-//
-//                    for (key in analysisViewer.valueFields) {
-//                        analysisViewer
-//                                .analysisViewerColumns
-//                                .push({
-//                                    columnDataType: 'NUMBER',
-//                                    columnType: 'VALUEFIELD',
-//                                    analysisColumn: analysisViewer.valueFields[key]
-//                                }
-//                                );
-//                    }
-//                    break;
-//            }
-//
-//
-//            delete analysisViewer.metrics;
-//            delete analysisViewer.descriptions;
-//            delete analysisViewer.yfields;
-//            delete analysisViewer.xfields;
-//            delete analysisViewer.valueFields;
-//            delete analysisViewer.filters;
-//        };
-
         this.save = function (analysisViewer) {
             var analysisViewerCopy = angular.copy(analysisViewer);
             var url = presenterResources.viewer;
@@ -553,23 +467,6 @@ define([
                 return $http.put(url, analysisViewerCopy);
             }
         };
-
-//        this.preview = function (analysisViewer) {
-//            var analysisViewerCopy = angular.copy(analysisViewer);
-//            var url = presenterResources.viewer + "/preview";
-//            filterAnalysisViewer(analysisViewerCopy);
-//            return $http.post(url, analysisViewerCopy);
-//        };
-
-//        this.result = function (id) {
-//            var url = [
-//                presenterResources.viewer,
-//                id,
-//                "result"
-//            ].join("/");
-//
-//            return $http.get(url);
-//        };
 
         this.getListAnalysis = function (analysisViewerData, analysisData) {
             analysisViewerData.analysisViewerColumns = [];
@@ -614,9 +511,6 @@ define([
         };
 
         this.getPreview = function (viewer, result) {
-//            var viewerConfiguration = analysisViewerResult.analysisViewer.configuration;
-//            viewer.configuration = analysisViewerResult.analysisViewer.configuration;
-//            viewer.configuration.export = {enabled: true};
             viewer.configuration.colors = [ '#d80000', '#2f469a' , '#c6c6c6', '#132053'
             ];
             viewer.configuration.fontFamily = 'Arial';
@@ -894,5 +788,261 @@ define([
                 }
             });
         };
+
+        // ----------- Chart JS  ------------ //
+
+        var chartJsTypes = {
+            chartjs : [
+                {
+                    id: 'horizontal-bar-chartjs',
+                    src: 'assets/img/presenter/barras/bar-clustered.png'
+                },
+                {
+                    id: 'area-chartjs',
+                    src: 'assets/img/presenter/area/area-area.png'
+                },
+                {
+                    id: 'bubble-chartjs',
+                    src: 'assets/img/presenter/xy/xy-markers.png'
+                },
+                {
+                    id: 'donut-chartjs',
+                    src: 'assets/img/presenter/circular/donut.png'
+                },
+                {
+                    id: 'bar-chartjs',
+                    src: 'assets/img/presenter/colunas/column-using-custom-colors.png'
+                },
+                {
+                    id: 'line-chartjs',
+                    src: 'assets/img/presenter/linhas/line.png'
+                },
+                {
+                    id: 'pie-chartjs',
+                    src: 'assets/img/presenter/circular/pie.png'
+                },
+                {
+                    id: 'polar-area-chartjs',
+                    src: 'assets/img/presenter/outros/other-polar.png'
+                },
+                {
+                    id: 'radar-chartjs',
+                    src: 'assets/img/presenter/outros/other-radar.png'
+                }
+            ]
+        };
+
+        this.getChartJsTypes = function () {
+            return chartJsTypes;
+        };
+
+        this.getPreviewChartJs = function (viewer, result, columnDrill) {
+
+            viewer.configuration.labels = [];
+            viewer.configuration.series = [];
+            viewer.configuration.data = [];
+
+            switch (viewer.configuration.subtype) {
+                case "bar":
+                    configureBarLineAndRadarChartJs(viewer, result, columnDrill);
+                    break;
+                case "horizontalBar":
+                    configureBarLineAndRadarChartJs(viewer, result, columnDrill);
+                    break;
+                case "line":
+                    configureBarLineAndRadarChartJs(viewer, result, columnDrill);
+                    break;
+                case "pie":
+                    configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
+                    break;
+                case "doughnut":
+                    configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
+                    break;
+                case "polarArea":
+                    configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
+                    break;
+                case "radar":
+                    configureBarLineAndRadarChartJs(viewer, result, columnDrill);
+                    break;
+                case "bubble":
+                    configureBubbleChartJs(viewer,result);
+                    break;
+            }
+
+        };
+
+        var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
+
+            if (columnDrill) {
+                viewer.configuration.labels =
+                    montaArrayChartJs(columnDrill.label, result);
+
+                viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                    if (analysisViewerColumn.columnType === 'METRIC') {
+                        var labelMetric = analysisViewerColumn.analysisColumn.label;
+                        viewer.configuration.series.push(labelMetric);
+                        viewer.configuration.data.push(montaArrayChartJs(labelMetric, result));
+                    }
+                });
+            }else{
+                viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                    if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                       viewer.configuration.labels =
+                            montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
+                    }else if (analysisViewerColumn.columnType === 'METRIC') {
+                        var labelMetric = analysisViewerColumn.analysisColumn.label;
+                        viewer.configuration.series.push(labelMetric);
+                        viewer.configuration.data.push(montaArrayChartJs(labelMetric, result));
+                    }
+                });
+            }
+        };
+
+        var configurePieDonutAndAreaChartJs = function (viewer, result, columnDrill) {
+
+            if(!viewer.configuration.options) {
+                viewer.configuration.options = {};
+            }
+
+            //configuração de porcentagem
+            viewer
+                .configuration
+                    .options
+                        .tooltips = {
+                            callbacks: {
+                                label: function(tooltipItem, data) {
+                                    var allData = data.datasets[tooltipItem.datasetIndex].data;
+                                    var tooltipLabel = data.labels[tooltipItem.index];
+                                    var tooltipData = allData[tooltipItem.index];
+                                    var total = 0;
+                                    for (var i in allData) {
+                                        total += allData[i];
+                                    }
+                                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                                }
+                        }
+                    };
+
+            var typeViewer = identifyViewerType(viewer, result);
+
+            if(typeViewer.type === 2){
+                montaChartJsPieType2(viewer, result);
+            }else{
+                montaChartJsPie(viewer, result, columnDrill);
+            }
+        };
+
+        var montaChartJsPieType2 = function(viewer, result){
+            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                if (analysisViewerColumn.columnType === 'METRIC') {
+                    viewer.configuration.labels.push(
+                        analysisViewerColumn.analysisColumn.label);
+                    var labelMetric = analysisViewerColumn.analysisColumn.label;
+                    viewer.configuration.data.push(retornaValueFromField(labelMetric, result));
+                }
+            });
+        };
+
+        var montaChartJsPie = function(viewer, result, columnDrill){
+            if (columnDrill) {
+                viewer.configuration.labels =
+                    montaArrayChartJs(columnDrill.label, result);
+
+                viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                    if (analysisViewerColumn.columnType === 'METRIC') {
+                        var labelMetric = analysisViewerColumn.analysisColumn.label;
+                        viewer.configuration.data = montaArrayChartJs(labelMetric, result);
+                    }
+                });
+            } else {
+                viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                    if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                        viewer.configuration.labels =
+                            montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
+                    }else if (analysisViewerColumn.columnType === 'METRIC') {
+                        var labelMetric = analysisViewerColumn.analysisColumn.label;
+                        viewer.configuration.data = montaArrayChartJs(labelMetric, result);
+                    }
+                });
+            }
+        };
+
+        var configureBubbleChartJs = function(viewer, result) {
+
+            var xField;
+            var yField;
+            var valueField;
+            var descriptionField;
+
+            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                    descriptionField = analysisViewerColumn.analysisColumn.label;
+                    viewer.configuration.series =
+                        montaArrayChartJs(descriptionField, result);
+                }else if (analysisViewerColumn.columnType === 'XFIELD') {
+                    xField = analysisViewerColumn.analysisColumn.label;
+                }else if (analysisViewerColumn.columnType === 'YFIELD') {
+                    yField = analysisViewerColumn.analysisColumn.label;
+                }else if (analysisViewerColumn.columnType === 'VALUEFIELD') {
+                    valueField = analysisViewerColumn.analysisColumn.label;
+                }
+            });
+
+            for(var i = 0; i < result.length; i++){
+                if(!descriptionField)
+                    viewer.configuration.series.push('Bubble-'+(i+1));
+                viewer.configuration.data.push(montaArrayXYChartJs(xField,yField,valueField,result[i]));
+            }
+        };
+
+        var montaArrayXYChartJs = function(xField,yField,valueField,result) {
+            var array = [];
+            var xyr = {};
+            var object = result;
+            for (var t in object) {
+                if (t === xField) {
+                    xyr.x = object[t];
+                } else if (t === yField) {
+                    xyr.y = object[t];
+                } else if (t === valueField) {
+                    xyr.r = object[t];
+                }
+            }
+            array.push(!xyr.r ? xyr = {x:xyr.x,y:xyr.y,r:1} : xyr);
+            return array;
+        };
+
+        var montaArrayChartJs = function(field, result) {
+            var array = [];
+            for (var r in result) {
+                var valueField;
+                var object = result[r];
+                for (var t in object) {
+                    if (t === field) {
+                        valueField = object[t];
+                    }
+                }
+
+                array.push(valueField);
+            }
+            return array;
+        };
+
+        var retornaValueFromField = function(field, result) {
+            var valueField;
+
+            for (var r in result) {
+                var object = result[r];
+                for (var t in object) {
+                    if (t === field) {
+                        valueField = object[t];
+                        break;
+                    }
+                }
+            }
+            return valueField;
+        };
+
     });
 });

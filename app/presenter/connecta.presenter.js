@@ -8,14 +8,14 @@ define([
     'bower_components/amcharts/dist/amcharts/themes/chalk',
     'bower_components/amcharts/dist/amcharts/themes/dark',
     'bower_components/amcharts/dist/amcharts/themes/light',
-    'bower_components/amcharts/dist/amcharts/themes/patterns'
-
+    'bower_components/amcharts/dist/amcharts/themes/patterns',
+    'bower_components/angular-chart.js/dist/angular-chart'
 ], function (angular) {
-    var presenter = angular.module('connecta.presenter', []);
+    var presenter = angular.module('connecta.presenter', ['chart.js']);
 
     presenter._configKey = 'presenter';
 
-    presenter.config(function ($translatePartialLoaderProvider) {
+    presenter.config(function ($translatePartialLoaderProvider, ChartJsProvider) {
         $translatePartialLoaderProvider.addPart('presenter/datasource');
         $translatePartialLoaderProvider.addPart('presenter/singlesource');
         $translatePartialLoaderProvider.addPart('presenter/analysis');
@@ -23,6 +23,28 @@ define([
         $translatePartialLoaderProvider.addPart('presenter/hierarchy');
         $translatePartialLoaderProvider.addPart('presenter/network');
         $translatePartialLoaderProvider.addPart('presenter/viewer');
+
+        //default config chartjs
+        ChartJsProvider.setOptions({
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                display: true,
+                position: 'bottom'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+         });
     });
 
     presenter.value('fileExtensions', {
@@ -52,7 +74,8 @@ define([
             group: appPresenter.host + '/group',
             viewer: appPresenter.host + '/viewer',
             publicViewer: appPresenter.host + 'viewer/public',
-            webSocket: appPresenter.host + '/analysisSocket'
+            webSocket: appPresenter.host + '/analysisSocket',
+            publicWebSocket: appPresenter.host + '/publicAnalysisSocket'
         });
     });
 

@@ -92,7 +92,11 @@ define([
                     analysis: _prepareForRequest($scope.viewer),
                     drill: populateDrillIfExists($scope.viewer)
                 }).then(function (response) {
-                    ViewerService.getPreview($scope.viewer, response.data);
+                    if($scope.viewer.configuration.type === 'chartjs'){
+                        ViewerService.getPreviewChartJs($scope.viewer, response.data);
+                    }else{
+                        ViewerService.getPreview($scope.viewer, response.data);
+                    }
                     $scope.state.loaded = true;
                 });
             }

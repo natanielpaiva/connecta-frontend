@@ -5,7 +5,8 @@
     <div class="modal-body">
         <tabset type="pills">
             <tab ng-repeat="t in templates">
-                <tab-heading>{{ 'VIEWER_TEMPLATE_TYPE.' + t.id | translate}}</tab-heading>
+                <!-- <tab-heading>{{ 'VIEWER_TEMPLATE_TYPE.' + t.id | translate}}</tab-heading> -->
+                <tab-heading>{{ t.id }}</tab-heading>
                 <div class="container-gallery clearfix">
                     <ul class="gallery-view">
                         <li ng-repeat="types in t.templates" class="item-gallery">
@@ -96,7 +97,19 @@
                                 <img ng-if="types.id === 'xy-fills'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-fills.png" />
                                 <img ng-if="types.id === 'xy-markers-lines'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-markers-lines.png" />
 
-                                <span>{{'VIEWER_TEMPLATE_ITEM.' + types.id| translate}}</span>
+                                <!-- ChartJS -->
+                                <img ng-if="types.id === 'bar-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/colunas/column-using-custom-colors.png" />
+                                <img ng-if="types.id === 'bubble-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/xy/xy-markers.png" />
+                                <img ng-if="types.id === 'donut-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/circular/donut.png" />
+                                <img ng-if="types.id === 'horizontal-bar-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/barras/bar-clustered.png" />
+                                <img ng-if="types.id === 'line-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/linhas/line.png" />
+                                <img ng-if="types.id === 'pie-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/circular/pie.png" />
+                                <img ng-if="types.id === 'polar-area-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-polar.png" />
+                                <img ng-if="types.id === 'radar-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/outros/other-radar.png" />
+                                <img ng-if="types.id === 'area-chartjs'" class="thumb-chart" ng-src="assets/img/presenter/area/area-area.png" />
+
+                                <!-- <span>{{'VIEWER_TEMPLATE_ITEM.' + types.id| translate}}</span> -->
+                                <span>{{types.id}}</span>
                             </a>
                         </li>
                     </ul>
