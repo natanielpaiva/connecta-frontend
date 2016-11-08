@@ -12,57 +12,37 @@ define([
         init();
 
         function init() {
-          checkEdit();
+            checkEdit();
         }
 
 
         function checkEdit() {
-          if ($routeParams.id) {
-            try {
-              var promise = DatasourceService.get($routeParams.id);
-              promise.catch(function (error) {
-                notify.error(error);
-              });
-              promise.then(function (response) {
-                $scope.datasource = response.data;
-                isEdit = true;
-              });
-
-            } catch (error) {
-              notify.error(error);
-            }
-          }
-        }
-
-        $scope.validateDatasource = function (datasource) {
-
-            if (datasource.serviceType === "obiee") {
+            if ($routeParams.id) {
                 try {
-                    var promise = DatasourceService.catalogObiee(datasource.dsn, datasource.user, datasource.password, '/shared');
+                    var promise = DatasourceService.get($routeParams.id);
                     promise.catch(function (error) {
                         notify.error(error);
-                        return;
                     });
-                    promise.then(function () {
-                        try {
-                            if (datasource._id) {
-                                update(datasource._id, datasource);
-                            } else {
-                                save(datasource);
-                            }
-                        } catch (error) {
-                            notify.error(error);
-                        }
+                    promise.then(function (response) {
+                        $scope.datasource = response.data;
+                        isEdit = true;
                     });
+
                 } catch (error) {
                     notify.error(error);
                 }
-            } else {
+            }
+        }
+
+        $scope.saveDatasource = function (datasource) {
+            try {
                 if (datasource._id) {
                     update(datasource._id, datasource);
                 } else {
                     save(datasource);
                 }
+            } catch (error) {
+                notify.error(error);
             }
         };
 
@@ -76,14 +56,14 @@ define([
                     $location.path("/maps/datasource");
                 });
             } catch (error) {
-               notify.error(error);
+                notify.error(error);
             }
         }
 
         function update(id, datasource) {
             var promise = DatasourceService.update(id, datasource);
             promise.catch(function (error) {
-               notify.error(error);
+                notify.error(error);
             });
             promise.then(function (response) {
                 $location.path("/maps/datasource");
