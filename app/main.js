@@ -12,7 +12,6 @@ require.config({
         'angular-resource': '../bower_components/angular-resource/angular-resource.min',
         'angular-ui-bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-ng-table': '../bower_components/ng-table/ng-table.min',
-//        'angular-facebook': '../bower_components/angular-facebook/lib/angular-facebook',
         'portal': 'portal',
         'collector': 'collector',
         'speaknow': 'speaknow',
@@ -24,10 +23,11 @@ require.config({
         'connecta.presenter': 'presenter/connecta.presenter',
         'connecta.maps': 'maps/connecta.maps',
         'connecta.inspection': 'inspection/connecta.inspection',
-        'leaflet': '../node_modules/leaflet/dist/leaflet',
-        'esri-leaflet': '../node_modules/esri-leaflet/dist/esri-leaflet',
+        'leaflet': '../bower_components/leaflet/dist/leaflet',
+        'esri-leaflet': '../bower_components/esri-leaflet/dist/esri-leaflet',
         'angular-tree-control' : '../bower_components/angular-tree-control/angular-tree-control',
-        'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min'
+        'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min',
+        'chart' : '../bower_components/chart.js/dist/Chart.min'
     },
     shim: {
         'angular': {
@@ -95,12 +95,6 @@ require.config({
             deps: [
                 'angular',
                 'bower_components/javascript-detect-element-resize/detect-element-resize'
-            ]
-        },
-        'bower_components/angular-redactor/angular-redactor': {
-            deps: [
-                'angular',
-                'bower_components/imperavi-redactor/redactor/redactor.min'
             ]
         },
         'bower_components/amcharts/dist/amcharts/amcharts': {
@@ -188,16 +182,6 @@ require.config({
         'bower_components/bootstrap/dist/js/bootstrap.min': {
             deps: ['jquery']
         },
-        'bower_components/jquery-slimscroll/jquery.slimscroll.min': {
-            deps: ['jquery']
-        },
-        'bower_components/imperavi-redactor/redactor/redactor.min': {
-            deps: ['jquery'],
-            exports: 'jQuery.fn.redactor'
-        },
-//        'bower_components/ngAutocomplete/src/ngAutocomplete': {
-//            deps: ['angular','bower_components/connectaGeoJS/index/openlayersImplementation/async/async!//maps.googleapis.com/maps/api/js?sensor=false&region=br&libraries=places']
-//        },
         'esri-leaflet' : {
             deps : ['leaflet']
         },
@@ -220,20 +204,10 @@ require.config({
                 'bower_components/sockjs/sockjs.min'
             ]
         },
-        'bower_components/d3/d3.min': {
-                deps: ['angular']
-        },
-        'bower_components/nvd3/build/nv.d3.min': {
+        'bower_components/angular-chart.js/dist/angular-chart': {
             deps: [
-            'angular',
-            'bower_components/d3/d3.min'
-            ]
-        },
-        'bower_components/angular-nvd3/dist/angular-nvd3.min': {
-            deps: [
-            'angular',
-            'bower_components/d3/d3.min',
-            'bower_components/nvd3/build/nv.d3.min'    
+                'angular',
+                'chart'
             ]
         }
     }

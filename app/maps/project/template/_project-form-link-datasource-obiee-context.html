@@ -1,11 +1,23 @@
-<section>
+<section ng-init="prepareCatalog()">
     <div class="form-group col-md-12">
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <span class="required">Fonte de dados <strong>Obiee</strong></span>
+                <select class="form-control"
+                        ng-model="$parent.$parent.$parent.selectedDataSource"
+                        ng-change="prepareDataTree(selectedDataSource)"
+                        ng-options="dataSource as dataSource.title for dataSource in obieeDataSources">
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+        </div>
 
         <h4>Catálogo Obiee</h4>
         <div class="row">
             <div style="height: 300px;    overflow-y: auto; margin-bottom: 10px;">
                 <treecontrol class="tree-classic"
-                             tree-model="dataForTheTree"
+                             tree-model="dataTree"
                              options="treeOptions"
                              on-node-toggle="toogleNode(node)"
                              on-selection="showSelected(node)"
@@ -19,9 +31,9 @@
             <div class="form-group col-md-4">
                 <span class="required">Colunas da Analise <strong>Obiee</strong></span>
                 <select class="form-control"
-                        ng-disabled="options.length ===0"
+                        ng-disabled="columnsObiee.length === 0"
                         ng-model="richLayerAdd.crossingKeys.resultSetKey"
-                        ng-options="option for option in options">
+                        ng-options="column for column in columnsObiee">
                     <option value="">Selecione</option>
                 </select>
             </div>
