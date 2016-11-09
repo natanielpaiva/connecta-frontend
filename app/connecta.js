@@ -31,8 +31,6 @@ define([
     'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min',
     'bower_components/angular-messages/angular-messages.min',
     'bower_components/ng-file-upload/angular-file-upload.min',
-    'bower_components/amcharts/dist/amcharts/amcharts',
-    'bower_components/angular-amchart-directive/angular-amchart-directive',
     'bower_components/angular-currency-mask/angular-currency-mask',
     //  'bower_components/angular-facebook/lib/angular-facebook',
     //  'bower_components/ngAutocomplete/src/ngAutocomplete',
@@ -69,7 +67,6 @@ define([
         'pascalprecht.translate',
         'angularFileUpload',
         'currencyMask',
-        'AngularAmChart',
         'base64',
         'duScroll',
         'show-on-konami-code'

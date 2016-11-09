@@ -97,68 +97,10 @@ require.config({
                 'bower_components/javascript-detect-element-resize/detect-element-resize'
             ]
         },
-        'bower_components/amcharts/dist/amcharts/amcharts': {
-            exports: 'AmCharts'
-        },
         'bower_components/html2canvas/build': {
             exports: 'Html2canvas'
         },
-        'bower_components/amcharts/dist/amcharts/themes/black': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.black'
-        },
-        'bower_components/amcharts/dist/amcharts/themes/chalk': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.chalk'
-        },
-        'bower_components/amcharts/dist/amcharts/themes/dark': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.dark'
-        },
-        'bower_components/amcharts/dist/amcharts/themes/light': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.light'
-        },
-        'bower_components/amcharts/dist/amcharts/themes/patterns': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.patterns'
-        },
-        'bower_components/amcharts/dist/amcharts/funnel': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmFunnelChart'
-        },
-        'bower_components/amcharts/dist/amcharts/gauge': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmAngularGauge'
-        },
-        'bower_components/amcharts/dist/amcharts/pie': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmPieChart'
-        },
-        'bower_components/amcharts/dist/amcharts/radar': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmRadarChart'
-        },
-        'bower_components/amcharts/dist/amcharts/serial': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmSerialChart'
-        },
-        'bower_components/amcharts/dist/amcharts/xy': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmXYChart'
-        },
-        'bower_components/angular-amchart-directive/angular-amchart-directive': {
-            deps: ['angular',
-                'bower_components/amcharts/dist/amcharts/amcharts',
-                'bower_components/amcharts/dist/amcharts/pie',
-                'bower_components/amcharts/dist/amcharts/serial',
-                'bower_components/amcharts/dist/amcharts/xy',
-                'bower_components/amcharts/dist/amcharts/radar',
-                'bower_components/amcharts/dist/amcharts/gauge',
-                'bower_components/amcharts/dist/amcharts/funnel'
-            ]
-        },
-        'angular-ng-table': {
+         'angular-ng-table': {
             deps: ['angular']
         },
         'angular-tree-control' : {

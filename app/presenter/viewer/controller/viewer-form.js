@@ -10,8 +10,6 @@ define([
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
     'presenter/viewer/controller/modal-analysis',
-    'bower_components/amcharts/dist/amcharts/exporting/canvg',
-    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
     'bower_components/html2canvas/dist/html2canvas.min',
     'bower_components/html2canvas/dist/html2canvas',
     'bower_components/angular-ui-select/dist/select'
@@ -89,169 +87,6 @@ define([
             }).show();
         };
 
-        var sidebarAnalysis = function () {
-            SidebarService.config({
-                controller: function ($scope) {
-
-                    ViewerService.analysisList().then(function (response) {
-                        $scope.analysisList = response.data;
-                    });
-
-                    $scope.types = AnalysisService.getTypes();
-
-                    $scope.analysisBar = "ANALYSIS";
-                    $scope.typeBar = "TYPE";
-                    $scope.settingsBar = "SETTINGS";
-                    $scope.setLayoutConfiguration = false;
-                    $scope.chartCursor = getChartCursor();
-                    $scope.chartScrollbar = getChartScrollbar();
-                    $scope.legend = getLegend();
-
-                    ViewerService.getTemplates().then(function (response) {
-                        $scope.templates = response.data;
-                    });
-
-                    $scope.changeTypeChart = function (template, type) {
-                        ViewerService.getTemplates(type, template).then(function (response) {
-                            // var data = angular.copy($scope.viewer.configuration.data);
-                            // var titles = angular.copy($scope.viewer.configuration.titles);
-                            // var titleField = angular.copy($scope.viewer.configuration.titleField);
-                            // var valueField = angular.copy($scope.viewer.configuration.valueField);
-                            // var categoryField = angular.copy($scope.viewer.configuration.categoryField);
-                            // var graphs = angular.copy($scope.viewer.configuration.graphs);
-
-                            $scope.viewer.configuration = response.data;
-                            getPreview();
-                            defaultChartConfigs();
-                            // delete $scope.viewer.configuration.dataProvider;
-
-                            // $scope.viewer.configuration.data = data;
-                            // $scope.viewer.configuration.titles = titles;
-
-                            // if (response.data.type === 'serial') {
-                            //     dataSerial(categoryField, graphs);
-                            // }
-                            // if (response.data.type === 'pie') {
-                            //     dataPie(titleField, valueField);
-                            // }
-                        });
-                    };
-
-                    var dataSerial = function (categoryField, graphs) {
-                        $scope.viewer.configuration.categoryField = categoryField;
-                        for (var i in graphs) {
-                            graphs[i].balloonText = "[[title]] de [[category]]:[[value]]";
-                        }
-                        $scope.viewer.configuration.graphs = graphs;
-
-                    };
-
-                    var dataPie = function (titleField, valueField) {
-                        $scope.viewer.configuration.titleField = titleField;
-                        $scope.viewer.configuration.valueField = valueField;
-                    };
-
-                    $scope.typeAmChart = ViewerService.getTypeAmChart();
-
-                    $scope.accordionConfig = ViewerService.getAccordionConfig();
-                    $scope.templateSidebar = ViewerService.getTemplateSidebar();
-
-                    $scope.changeChartCursor = function () {
-                        if ($scope.chartCursor.ativo) {
-                            $scope.viewer.configuration.chartCursor = {
-                                color: "#FFF"
-                            };
-                        } else {
-                            delete $scope.viewer.configuration.chartCursor;
-                        }
-                    };
-
-                    $scope.changeChartScrollbar = function () {
-                        if ($scope.chartScrollbar.ativo) {
-                            $scope.viewer.configuration.chartScrollbar = {
-                                color: "#FFF"
-                            };
-                        } else {
-                            delete $scope.viewer.configuration.chartScrollbar;
-                        }
-                    };
-
-                    $scope.changeLegend = function () {
-                        if ($scope.legend.ativo) {
-                            $scope.viewer.configuration.legend = {
-                            };
-                        } else {
-                            delete $scope.viewer.configuration.legend;
-                        }
-                    };
-
-                    $scope.viewerBar = "ANALYSIS";
-                    $scope.getAnalysis = function (val) {
-                        return ViewerService.getAnalysis(val);
-                    };
-
-
-                    $scope.analysisViewerData = {
-                        name: "",
-                        description: "",
-                        type: "ANALYSIS",
-                        analysisViewerColumns: []
-                    };
-
-                    $scope.disabledLayoutConfig = function () {
-                        $scope.setLayoutConfiguration = false;
-                    };
-
-                    initializeAnalysisWatch();
-
-                    $scope.getAnalysisResult = function () {
-                        return AnalysisService.execute({
-                            analysis: $scope.viewer.analysis,
-                            pagination: {count: 50, page: 1}
-                        }).then(function (response) {
-                            $uibModal.open({
-                                animation: true,
-                                templateUrl: 'app/presenter/viewer/template/_modal-analysis.html',
-                                controller: 'ModalAnalysis',
-                                size: 'lg',
-                                backdrop: false,
-                                resolve: {
-                                    analysisResult: function () {
-                                        return response.data;
-                                    }
-                                }
-                            });
-                        });
-                    };
-
-
-                    $scope.viewer = getViewer();
-
-                    $scope.templateCombo = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-combo.html';
-                    $scope.templateSettings = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-settings.html';
-                    $scope.templateTypes = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-types.html';
-
-                    $scope.setLayoutSettings = function (config) {
-                        $scope.layoutConfig = config;
-                        $scope.setLayoutConfiguration = true;
-                    };
-
-                    $scope.checkViewerBar = function (type) {
-                        $scope.viewerBar = type;
-                    };
-
-                    $scope.openedAccordion = 0;
-
-                    $scope.openAccordion = function () {
-                        var retorno = false;
-                        return retorno;
-                    };
-
-                },
-                src: 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar.html'
-            }).show();
-        };
-
         var sidebarAnalysisChartJs = function () {
             SidebarService.config({
                 controller: function ($scope) {
@@ -264,7 +99,7 @@ define([
 
                     $scope.analysisBar = "ANALYSIS";
                     $scope.typeBar = "TYPE";
-                    // $scope.settingsBar = "SETTINGS";
+                    $scope.settingsBar = "SETTINGS";
                     $scope.setLayoutConfiguration = false;
 
                     $scope.chartJsTypes = ViewerService.getChartJsTypes();
@@ -500,42 +335,22 @@ define([
 
         if ($routeParams.template && $routeParams.type && $routeParams.analysis) {
 
-            if($routeParams.type === 'chartjs'){
+            if($routeParams.template === 'other-singlesource'){
+                $scope.viewer = {
+                    singleSource: {id: ""},
+                    singlesource: {list: []},
+                    name: "",
+                    description: "",
+                    type: "SINGLESOURCE"
+                };
+                sidebarSinglesource();
+            }else if($routeParams.type === 'chartjs'){
                 sidebarAnalysisChartJs();
                 ViewerService.getTemplates($routeParams.type, $routeParams.template).then(function (response) {
                     var dados = response.data;
                     $scope.viewer.configuration = dados;
                     load();
                 });
-            }else{
-                switch ($routeParams.template) {
-                    case "other-singlesource":
-                        $scope.viewer = {
-                            singleSource: {id: ""},
-                            singlesource: {list: []},
-                            name: "",
-                            description: "",
-                            type: "SINGLESOURCE"
-                        };
-                        sidebarSinglesource();
-                        break;
-                    default:
-                        sidebarAnalysis();
-                        ViewerService.getTemplates($routeParams.type, $routeParams.template).then(function (response) {
-                            var dados = response.data;
-                            dados.data = response.data.dataProvider;
-                            $scope.viewer.configuration = dados;
-                            //Disable Animation
-                            $scope.viewer.configuration.startDuration = 0;
-                            angular.forEach($scope.viewer.configuration.titles, function (title) {
-                                title.text = '';
-                            });
-                            $scope.viewer.configuration.thousandsSeparator = '.';
-                            $scope.viewer.configuration.decimalSeparator = ',';
-                            load();
-                        });
-                        break;
-                }
             }
 
             ViewerService.getAnalysisById($routeParams.analysis).then(function (response) {
@@ -600,11 +415,9 @@ define([
                             var columnType = analysisViewerColumns[k].columnType;
                             arrays[columnType].push(analysisViewerColumns[k]);
                         }
-                        if($scope.viewer.configuration.type === 'chartjs'){
-                            sidebarAnalysisChartJs();
-                        }else{
-                            sidebarAnalysis();
-                        }
+
+                        sidebarAnalysisChartJs();
+
                         getPreview();
                         load();
                         break;
@@ -612,36 +425,22 @@ define([
             });
         } else if ($routeParams.template && $routeParams.type) {
 
-            if($routeParams.type === 'chartjs'){
+            if($routeParams.template === 'other-singlesource'){
+                $scope.viewer = {
+                    singleSource: {id: ""},
+                    singlesource: {list: []},
+                    name: "",
+                    description: "",
+                    type: "SINGLESOURCE"
+                };
+                sidebarSinglesource();
+            }else if($routeParams.type === 'chartjs'){
                 sidebarAnalysisChartJs();
                 ViewerService.getTemplates($routeParams.type, $routeParams.template).then(function (response) {
                     var dados = response.data;
                     $scope.viewer.configuration = dados;
                     load();
                 });
-            }else{
-                switch ($routeParams.template) {
-                    case "other-singlesource":
-                        $scope.viewer = {
-                            singleSource: {id: ""},
-                            singlesource: {list: []},
-                            name: "",
-                            description: "",
-                            type: "SINGLESOURCE"
-                        };
-                        sidebarSinglesource();
-                        break;
-                    default:
-                        sidebarAnalysis();
-                        ViewerService.getTemplates($routeParams.type, $routeParams.template).then(function (response) {
-                            var dados = response.data;
-                            dados.data = response.data.dataProvider;
-                            $scope.viewer.configuration = dados;
-                            defaultChartConfigs();
-                            load();
-                        });
-                        break;
-                }
             }
 
             $scope.state.loaded = true;

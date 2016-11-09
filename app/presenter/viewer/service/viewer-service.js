@@ -44,68 +44,6 @@ define([
             }
         };
 
-        var typeAmChart = {
-            bar: [
-                {
-                    id: 'bar-two-value-axes',
-                    src: 'assets/img/presenter/barras/bar-two-value-axes.png'
-                },
-                {
-                    id: 'bar-and-line',
-                    src: 'assets/img/presenter/barras/bar-and-line.png'
-                },
-                {
-                    id: 'bar-clustered-3d',
-                    src: 'assets/img/presenter/barras/bar-clustered-3d.png'
-                },
-                {
-                    id: 'bar-3d-bar',
-                    src: 'assets/img/presenter/barras/bar-3d-bar.png'
-                }
-
-            ],
-            column: [
-                {
-                    id: 'column-using-custom-colors',
-                    src: 'assets/img/presenter/colunas/column-using-custom-colors.png'
-                }
-            ],
-            area: [
-                {
-                    id: 'area-area',
-                    src: 'assets/img/presenter/area/area-area.png'
-                }
-            ],
-            line: [
-                {
-                    id: 'line-stacked',
-                    src: 'assets/img/presenter/linhas/line-stacked.png'
-                },
-                {
-                    id: 'line-rotate',
-                    src: 'assets/img/presenter/linhas/line-rotate.png'
-                },
-                {
-                    id: 'line',
-                    src: 'assets/img/presenter/linhas/line.png'
-                }
-            ],
-            'pie-donut': [
-                {
-                    id: 'pie',
-                    src: 'assets/img/presenter/circular/pie.png'
-                },
-                {
-                    id: 'donut-3d',
-                    src: 'assets/img/presenter/circular/donut-3d.png'
-                },
-                {
-                    id: 'donut',
-                    src: 'assets/img/presenter/circular/donut.png'
-                }
-            ]
-        };
-
         var templateSidebar = [
             {
                 type: "ANALYSIS",
@@ -399,10 +337,6 @@ define([
             return exampleTable;
         };
 
-        this.getTypeAmChart = function () {
-            return typeAmChart;
-        };
-
         this.getTemplateSidebar = function () {
             return templateSidebar;
         };
@@ -496,7 +430,7 @@ define([
             if (type !== undefined && template !== undefined)
                 url = presenterResources.viewer + "/chart-template/" + type + "/" + template;
             else
-                url = presenterResources.viewer + "/chart-template";
+                url = presenterResources.viewer + "/chart-template/chartjs";
             return $http.get(url);
         };
 
@@ -508,238 +442,6 @@ define([
         this.delete = function (id) {
             var url = presenterResources.viewer + "/" + id;
             return $http.delete(url);
-        };
-
-        this.getPreview = function (viewer, result) {
-            viewer.configuration.colors = [ '#d80000', '#2f469a' , '#c6c6c6', '#132053'
-            ];
-            viewer.configuration.fontFamily = 'Arial';
-            if (viewer.configuration.type !== "gauge") {
-                viewer.configuration.data = result;
-            } else {
-                viewer.configuration.arrows = [];
-                for (var iResult in result) {
-                    for (var key in  result[iResult]) {
-                        var arrows = {
-                            id: key,
-                            value: result[iResult][key],
-                            color: '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
-                        };
-                        viewer.configuration.arrows.push(arrows);
-                    }
-                }
-            }
-
-            switch (viewer.configuration.type) {
-                case "table":
-                    viewer.configuration.data = result;
-                    break;
-                case "serial":
-                    configureSerialAndRadar(viewer, result);
-                    break;
-                case "radar":
-                    configureSerialAndRadar(viewer, result);
-                    break;
-                case "pie":
-                    configureFunnelAndPie(viewer, result);
-                    break;
-                case "funnel":
-                    configureFunnelAndPie(viewer, result);
-                    break;
-                case "xy":
-                    var analysisViewerColumns = viewer.analysisViewerColumns;
-                    var qtdXField = 0;
-                    var qtdYField = 0;
-                    var qtdValueField = 0;
-                    for (var i in analysisViewerColumns) {
-                        switch (analysisViewerColumns[i].columnType) {
-                            case'XFIELD':
-                                qtdXField++;
-                                break;
-                            case'YFIELD':
-                                qtdYField++;
-                                break;
-                            case'VALUEFIELD':
-                                qtdValueField++;
-                                break;
-                        }
-                    }
-
-                    if (qtdXField === qtdYField) {
-                        var standardGraph = angular.copy(viewer.configuration.graphs[0]);
-                        viewer.configuration.graphs = [];
-                        for (var l = 0; l < qtdXField; l++) {
-                            var graphXy = angular.copy(standardGraph);
-                            for (i in analysisViewerColumns) {
-                                switch (analysisViewerColumns[i].columnType) {
-                                    case'XFIELD':
-                                        graphXy.xField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
-                                        break;
-                                    case'YFIELD':
-                                        graphXy.yField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
-                                        break;
-                                    case'VALUEFIELD':
-                                        graphXy.valueField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
-                                        break;
-                                }
-                            }
-                            viewer.configuration.graphs.push(graphXy);
-                        }
-                    }
-
-                    delete viewer.configuration.dataProvider;
-                    break;
-            }
-        };
-
-        var configureSerialAndRadar = function (viewer, result) {
-            var standardGraph = angular.copy(viewer.configuration.graphs[0]);
-            viewer.configuration.graphs = [];
-            var analysisViewerColumns = viewer.analysisViewerColumns;
-            var typeViewer = identifyViewerType(viewer, result);
-            var negativeValue = false;
-            if (typeViewer.type === 2) {
-                negativeValue = montaSerialType2(viewer, result, typeViewer, standardGraph);
-            } else {
-                for (var i in analysisViewerColumns) {
-                    if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
-                        viewer.configuration.categoryField = analysisViewerColumns[i].analysisColumn.label;
-                    }
-
-                    if (analysisViewerColumns[i].columnType === 'METRIC') {
-                        var graph = angular.copy(standardGraph);
-                        graph.title = angular.copy(analysisViewerColumns[i].analysisColumn.label);
-                        graph.valueField = angular.copy(analysisViewerColumns[i].analysisColumn.label);
-                        graph.id = angular.copy(analysisViewerColumns[i].analysisColumn.label);
-                        graph.balloonText = "[[title]] de [[category]] : [[value]]";
-                        viewer.configuration.graphs.push(graph);
-
-                        //verifica se tem algum numero negativo para setar ou não a escala
-                        for (var r in result) {
-                            var labelMetric = analysisViewerColumns[i].analysisColumn.label;
-                            var valueMetric;
-                            var object = result[r];
-                            for (var t in object) {
-                                if (t === labelMetric) {
-                                    valueMetric = object[t];
-                                    if (valueMetric < 0) {
-                                        negativeValue = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
-
-            viewer.configuration.valueAxes.forEach(function (valueAxis) {
-                valueAxis.title = "";
-                if (!negativeValue)
-                    valueAxis.minimum = 0;
-                else
-                    delete valueAxis.minimum;
-            });
-
-            delete viewer.configuration.dataProvider;
-        };
-        var configureFunnelAndPie = function (viewer, result) {
-            var typeViewer = identifyViewerType(viewer, result);
-            var analysisViewerColumns = viewer.analysisViewerColumns;
-
-
-            if (viewer.configuration.legend) {
-                viewer.configuration.legend.valueWidth = 100;
-            } else {
-                viewer.configuration.legend = {};
-                viewer.configuration.legend.valueWidth = 100;
-            }
-            if (typeViewer.type === 2) {
-                montaPieType2(viewer, result, typeViewer);
-            } else {
-                for (var i in analysisViewerColumns) {
-                    if (analysisViewerColumns[i].columnType === 'DESCRIPTION') {
-                        viewer.configuration.titleField = analysisViewerColumns[i].analysisColumn.label;
-                    }
-                    if (analysisViewerColumns[i].columnType === 'METRIC') {
-                        viewer.configuration.valueField = analysisViewerColumns[0].analysisColumn.label;
-                    }
-                }
-            }
-
-            delete viewer.configuration.dataProvider;
-        };
-
-
-        var montaPieType2 = function (viewer, result, typeViewer) {
-            viewer.configuration.data = [];
-            var description = typeViewer.descriptionLabel;
-            var value = "value";
-            viewer.configuration.titleField = description;
-            viewer.configuration.valueField = value;
-            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
-                if (analysisViewerColumn.columnType === 'METRIC') {
-                    for (var r in result) {
-                        var obj = {};
-                        var labelMetric = analysisViewerColumn.analysisColumn.label;
-                        var valueMetric;
-                        var object = result[r];
-                        for (var t in object) {
-                            if (t === labelMetric) {
-                                valueMetric = object[t];
-                            }
-                        }
-
-                        if (valueMetric !== undefined) {
-                            obj[description] = labelMetric;
-                            obj.value = valueMetric;
-                        }
-                        viewer.configuration.data.push(obj);
-                    }
-                }
-            });
-        };
-
-        var montaSerialType2 = function (viewer, result, typeViewer, standardGraph) {
-            var negative;
-            viewer.configuration.data = [];
-            var description = typeViewer.descriptionLabel;
-            var value = "value";
-            viewer.configuration.categoryField = description;
-
-            var graph = angular.copy(standardGraph);
-            graph.title = description;
-            graph.valueField = value;
-            graph.id = description;
-            graph.balloonText = "[[category]] de [[title]] : [[value]]";
-            viewer.configuration.graphs.push(graph);
-
-            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
-                if (analysisViewerColumn.columnType === 'METRIC') {
-                    for (var r in result) {
-                        var obj = {};
-                        var labelMetric = analysisViewerColumn.analysisColumn.label;
-                        var valueMetric;
-                        var object = result[r];
-                        for (var t in object) {
-                            if (t === labelMetric) {
-                                valueMetric = object[t];
-                            }
-                        }
-
-                        if (valueMetric !== undefined) {
-                            obj[description] = labelMetric;
-                            obj.value = valueMetric;
-                            if (valueMetric < 0) {
-                                negative = true;
-                            }
-                        }
-                        viewer.configuration.data.push(obj);
-                    }
-                }
-            });
-
-            return negative;
         };
 
         var identifyViewerType = function (viewer, result) {
@@ -874,6 +576,7 @@ define([
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
 
             if (columnDrill) {
+                viewer.configuration.descriptionLabel = columnDrill.label;
                 viewer.configuration.labels =
                     montaArrayChartJs(columnDrill.label, result);
 
@@ -887,6 +590,7 @@ define([
             }else{
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                     if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                        viewer.configuration.descriptionLabel = analysisViewerColumn.analysisColumn.label;
                        viewer.configuration.labels =
                             montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
                     }else if (analysisViewerColumn.columnType === 'METRIC') {
@@ -946,22 +650,26 @@ define([
 
         var montaChartJsPie = function(viewer, result, columnDrill){
             if (columnDrill) {
+                viewer.configuration.descriptionLabel = columnDrill.label;
                 viewer.configuration.labels =
                     montaArrayChartJs(columnDrill.label, result);
 
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                     if (analysisViewerColumn.columnType === 'METRIC') {
                         var labelMetric = analysisViewerColumn.analysisColumn.label;
+                        viewer.configuration.series.push(labelMetric);
                         viewer.configuration.data = montaArrayChartJs(labelMetric, result);
                     }
                 });
             } else {
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                     if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                        viewer.configuration.descriptionLabel = analysisViewerColumn.analysisColumn.label;
                         viewer.configuration.labels =
                             montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
                     }else if (analysisViewerColumn.columnType === 'METRIC') {
                         var labelMetric = analysisViewerColumn.analysisColumn.label;
+                        viewer.configuration.series.push(labelMetric);
                         viewer.configuration.data = montaArrayChartJs(labelMetric, result);
                     }
                 });
