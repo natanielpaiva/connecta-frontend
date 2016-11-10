@@ -42,10 +42,7 @@ define([
     'bower_components/angular-scroll/angular-scroll.min',
     'bower_components/angular-show-on-konami-code/angular-show-on-konami-code',
     'bower_components/sockjs/sockjs.min',
-    'bower_components/stomp-websocket/lib/stomp.min',
-    'bower_components/d3/d3.min',
-    'bower_components/nvd3/build/nv.d3.min',
-    'bower_components/angular-nvd3/dist/angular-nvd3.min'
+    'bower_components/stomp-websocket/lib/stomp.min'
 ], function ($, angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
     var connecta = angular.module('connecta', [
@@ -76,8 +73,7 @@ define([
         'AngularAmChart',
         'base64',
         'duScroll',
-        'show-on-konami-code',
-        'nvd3'
+        'show-on-konami-code'
     ]);
 
     // Configuração do backend dos módulos
@@ -316,7 +312,7 @@ define([
             var token = LoginService.getAuthenticationToken();
             if(token)
                 getHeaders().Authorization = "Bearer " + token;
-            
+
             var domain = DomainService.getDomainName();
             if(domain)
                 getHeaders().Domain = domain;
@@ -327,7 +323,7 @@ define([
                 getHeaders().publicDashboardId = PublicDashboardService.getDashboardId();
                 getHeaders().publicDashboardKey = PublicDashboardService.getDashboardPublicKey();
             }
-        
+
             return data;
         });
 

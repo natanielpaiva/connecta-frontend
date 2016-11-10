@@ -26,8 +26,7 @@ require.config({
         'leaflet': '../bower_components/leaflet/dist/leaflet',
         'esri-leaflet': '../bower_components/esri-leaflet/dist/esri-leaflet',
         'angular-tree-control' : '../bower_components/angular-tree-control/angular-tree-control',
-        'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min',
-        'chart' : '../bower_components/chart.js/dist/Chart.min'
+        'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min'
     },
     shim: {
         'angular': {
@@ -202,12 +201,6 @@ require.config({
             deps: [
                 'angular',
                 'bower_components/sockjs/sockjs.min'
-            ]
-        },
-        'bower_components/angular-chart.js/dist/angular-chart': {
-            deps: [
-                'angular',
-                'chart'
             ]
         }
     }
