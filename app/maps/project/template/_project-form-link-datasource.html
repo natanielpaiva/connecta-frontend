@@ -21,7 +21,7 @@
                 LAYOUT.NO_RESULTS
             </td>
         </tr>
-
+        <input type="text" id="copyTarget" style="position: absolute; top: -100px; left: -100px;">
         <tr class="row"
              ng-repeat="richLayer in project.richLayers"
              dnd-draggable="richLayer"
@@ -31,7 +31,10 @@
             <td class="col-md-2">{{richLayer.title}}</td>
             <td class="col-md-2">{{richLayer.layer.title}}</td>
             <td class="col-md-2">{{richLayer.crossingKeys.geoKey}}</td>
-            <td class="col-md-2">{{richLayer.resultSetId}}</td>
+            <td class="col-md-2">
+                <i class="fa fa-clipboard maozinha" aria-hidden="true" ng-click="copyResultSetId(richLayer.resultSetId)"></i>
+                {{richLayer.resultSetId}}
+            </td>
             <td class="col-md-2">{{richLayer.crossingKeys.resultSetKey}}</td>
             <td class="">
                 <span class="glyphicon glyphicon-pencil maozinha"
