@@ -20,11 +20,11 @@
 <div class="row">
   <div class="col-md-12">
     <div class="well margin-top-single margin-bottom-single">
-      <p style="text-transform: capitalize">
+      <p>
         <strong translate>{{"DATASOURCE.SERVER"}}:</strong>
-        {{datasource.serviceType}}
+        {{datasource.contextType}}
       </p>
-      <p ng-if="datasource.dsn">
+      <p>
         <strong>URL:</strong>
         {{datasource.dsn}}
       </p>
@@ -32,11 +32,11 @@
         <strong translate>{{"DATASOURCE.TITLE"}}:</strong>
         {{datasource.title}}
       </p>
-      <p ng-if="datasource.user">
+      <p>
         <strong translate>{{"DATASOURCE.USER"}}:</strong>
         {{datasource.user}}
       </p>
-      <p ng-if="datasource.description">
+      <p>
         <strong translate>{{"DATASOURCE.DESCRIPTION"}}:</strong>
         {{datasource.description}}
       </p>

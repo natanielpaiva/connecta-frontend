@@ -1,7 +1,8 @@
 define([
     "connecta.maps",
-    "maps/helper/url"
-], function (maps, urlHelper) {
+    "maps/helper/url",
+    "json!applications.json"
+], function (maps, urlHelper, applications) {
 
     return maps.lazy.service("DatasourceService", function ($http, mapsResources, presenterResources) {
 
@@ -27,12 +28,22 @@ define([
             return $http.delete(url + '/' + id);
         };
 
-        this.catalogObiee = function (location, user, password, path) {
-            var url = 'http://jboss.connecta.cds.com.br/connecta-portal/obiee/catalog?';
-            url += 'location=' + location;
-            url +=  '&user=' + user;
-            url +=  '&password=' + password;
-            url += '&path=' + path;
+        this.metadataObiee = function (dsn, user, password, path) {
+            var url = applications.presenter.host + '/obiee/metadata?';
+            url += 'location=' + dsn;
+            url += '&user=' + user;
+            url += '&password=' + password;
+            url += '&path=' + (path ? path : '/shared');
+
+            return $http.get(url);
+        };
+
+        this.catalogObiee = function (dsn, user, password, path) {
+            var url = applications.portal.host + '/obiee/catalog?';
+            url += 'location=' + dsn;
+            url += '&user=' + user;
+            url += '&password=' + password;
+            url += '&path=' + (path ? path : '/shared');
 
             return $http.get(url);
         };

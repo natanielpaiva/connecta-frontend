@@ -5,14 +5,13 @@ define([
     'maps/helper/map',
     "maps/project/storage/tools",
     "maps/project/storage/context-config",
-    "maps/project/controller/mock",
     "maps/project/service/project-service",
     "maps/spatial-datasource/service/spatial-datasource-service",
     "maps/geographic-layer/service/geo-layer-service",
     "maps/project/directive/menu-carrousel",
     "maps/project/directive/input-slider",
     "maps/datasource/service/datasource-service"
-], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig, contextConfig, mock) {
+], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig, contextConfig) {
 
     return maps.lazy.controller("ProjectFormController", function ($scope, $q, $timeout, $location, $routeParams, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
 
@@ -32,6 +31,8 @@ define([
                 maxZoom : 13
             }
         };
+
+        $scope.options = [];
 
         $scope.richLayer = {
             crossingKeys : {
@@ -162,7 +163,7 @@ define([
 
             if($scope.currentStep == 2 && increment) {
                 if (!$scope.project.richLayers.length) {
-                    notify.warning("Tem que haver pelo menos uma camada cadastrada.");
+                    notify.error("Cadastre uma RichLayer");
                     return;
                 }
             }
@@ -233,6 +234,7 @@ define([
             }
         }
 
+
         $scope.cancel = function () {
             returnRichLayerList();
             $scope.index_edit = null;
@@ -243,6 +245,7 @@ define([
             $scope.richLayerAdd = {};
             var copyRichLayer = angular.copy(richLayer);
             delete copyRichLayer.$$hashKey;
+
 
             SpatialDataSourceService.list({size : "*"}).then(function (response) {
                 $scope.spatialDataSources = response.data.content;
@@ -262,6 +265,7 @@ define([
 
                 $scope.index_edit = index;
             }, onErrorEdit);
+
 
             DatasourceService.listConnectaDatasources().then(onSuccesListDataSources, onError);
         };
@@ -432,6 +436,8 @@ define([
 
         }
 
+
+
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
 
         $scope.saveProject = function () {
@@ -447,10 +453,10 @@ define([
 
         };
 
+
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE-OBIEE] -----------//
         $scope.treeOptions = {
-            nodeChildren: "child",
-            dirSelectable: true,
+            dirSelectable: false,
             injectClasses: {
                 ul: "a1",
                 li: "a2",
@@ -463,16 +469,106 @@ define([
             }
         };
 
-        $scope.dataForTheTree = mock;
+        $scope.prepareCatalog = function () {
+            var queryString = "?page='*'&size='*'&filter=" + JSON.stringify({ serviceType: 'obiee' });
+            DatasourceService.list(queryString).then(
+                function (response) {
+                    console.log(response);
+                    $scope.obieeDataSources = response.data.content;
+                }, function (err) {
+                    console.log(err);
+                });
+        };
+
+        $scope.prepareDataTree = function () {
+            try {
+                var dataSource = $scope.selectedDataSource;
+                DatasourceService.catalogObiee(dataSource.dsn, dataSource.user, dataSource.password).then(
+                    function (response) {
+                        $scope.dataTree = [];
+                        console.log(response);
+                        if (response.data.length) {
+                            populateChildren().then(
+                                function (nodes) {
+                                    $scope.dataTree = nodes;
+                                    $scope.$apply();
+                                }, function (err) {
+                                    console.log(err);
+                                });
+
+                        }
+                    },
+                    function (err) {
+                        console.log(err);
+                    }
+                );
+            } catch (err) {
+                console.log(err);
+            }
+        };
 
         $scope.toogleNode= function (node) {
             //TODO serviço que vai pegar os childs vai ficar aqui
+            if (node.children[0]) {
+                return;
+            }
+
+            populateChildren(node.path).then(
+                function (nodes) {
+                    node.children = nodes;
+                    $scope.$apply();
+                }, function (err) {
+                    console.log(err);
+                });
+
+        };
+
+        $scope.copyResultSetId = function (value) {
+            var element = document.querySelector('#copyTarget');
+            element.value = value;
+            element.select();
+            document.execCommand('copy');
+            notify.info('Copiado!');
         };
 
         $scope.showSelected = function (node) {
             //TODO  a service que pega as colunas do obiee tem que ficar aqui
-                $scope.options = ['NUM_ANO', 'VL_PAGO', 'QUANTIDADE_ATLETA', 'DS_RACA', 'DS_ESCOLARIDADE', 'DS_SEXO'];
+            var dataSource = $scope.selectedDataSource;
+            DatasourceService.metadataObiee(dataSource.dsn, dataSource.user, dataSource.password, node.path).then(
+                function (response) {
+                    $scope.richLayerAdd.dataSourceIdentifier = node.path;
+                    $scope.columnsObiee = response.data.columns;
+                },
+                function (err) {
+                    console.log(err);
+                }
+            );
         };
+
+        function populateChildren(path) {
+            return new Promise(function (resolve, reject) {
+                try {
+                    var dataSource = $scope.selectedDataSource;
+                    DatasourceService.catalogObiee(dataSource.dsn, dataSource.user, dataSource.password, path).then(
+                        function (response) {
+                            try {
+                                var nodes = response.data.map(function (catalog) {
+                                    return {
+                                        name: catalog.name,
+                                        children: catalog.type == 'folder' ? [0] : [],
+                                        path: catalog.path
+                                    };
+                                });
+                                resolve(nodes);
+                            } catch (err) {
+                                reject(err);
+                            }
+                        }, reject);
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
 
     });
 });

@@ -15,6 +15,7 @@ define([
             checkEdit();
         }
 
+
         function checkEdit() {
             if ($routeParams.id) {
                 try {
@@ -24,7 +25,6 @@ define([
                     });
                     promise.then(function (response) {
                         $scope.datasource = response.data;
-                        $scope.onServerChange($scope.datasource.serviceType);
                         isEdit = true;
                     });
 
@@ -34,35 +34,15 @@ define([
             }
         }
 
-        $scope.validateDatasource = function (datasource) {
-
-            if (datasource.serviceType === "obiee") {
-                try {
-                    var promise = DatasourceService.catalogObiee(datasource.dsn, datasource.user, datasource.password, '/shared');
-                    promise.catch(function (error) {
-                        notify.error(error);
-                        return;
-                    });
-                    promise.then(function () {
-                        try {
-                            if (datasource._id) {
-                                update(datasource._id, datasource);
-                            } else {
-                                save(datasource);
-                            }
-                        } catch (error) {
-                            notify.error(error);
-                        }
-                    });
-                } catch (error) {
-                    notify.error(error);
-                }
-            } else {
+        $scope.saveDatasource = function (datasource) {
+            try {
                 if (datasource._id) {
                     update(datasource._id, datasource);
                 } else {
                     save(datasource);
                 }
+            } catch (error) {
+                notify.error(error);
             }
         };
 
@@ -110,6 +90,7 @@ define([
 
             $scope.currentState = context;
         };
+
 
     });
 

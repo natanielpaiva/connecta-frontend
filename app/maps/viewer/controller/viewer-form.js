@@ -66,7 +66,7 @@ define([
                                 return richLayer._id === $scope.viewer.initialRichLayerId;
                             });
 
-                            $scope.prepareProject($scope.selectedProject._id);
+                            $scope.prepareProject($scope.selectedProject);
 
                             if (richLayer.length) {
                                 richLayer = richLayer[0];
@@ -109,17 +109,20 @@ define([
             return invalid;
         };
 
-        $scope.prepareProject = function (projectId) {
-            $scope.viewer.projectId = projectId;
+        $scope.prepareProject = function (project) {
+            $scope.viewer.projectId = project._id;
             $scope.viewer.richLayersInfo = $scope.viewer.richLayersInfo || [];
-            if (!$scope.viewer.richLayersInfo.length) {
-                $scope.selectedProject.richLayers.forEach(function (richLayer) {
+            project.richLayers.forEach(function (richLayer) {
+                var filter = $scope.viewer.richLayersInfo.filter(function (richLayerInfo) {
+                    return richLayerInfo.richLayerId === richLayer._id;
+                });
+                if (!filter.length) {
                     $scope.viewer.richLayersInfo.push({
                         richLayerId: richLayer._id,
                         outFields: []
                     });
-                });
-            }
+                }
+            });
         };
 
         $scope.selectRichLayer = function (richLayer) {

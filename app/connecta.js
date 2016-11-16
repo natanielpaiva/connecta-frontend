@@ -40,7 +40,9 @@ define([
     'bower_components/angular-base64/angular-base64',
     'bower_components/angular-ui-select/dist/select',
     'bower_components/angular-scroll/angular-scroll.min',
-    'bower_components/angular-show-on-konami-code/angular-show-on-konami-code'
+    'bower_components/angular-show-on-konami-code/angular-show-on-konami-code',
+    'bower_components/sockjs/sockjs.min',
+    'bower_components/stomp-websocket/lib/stomp.min'
 ], function ($, angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
     var connecta = angular.module('connecta', [
@@ -305,10 +307,23 @@ define([
      * @param {type} DomainService
      * @returns {undefined}
      */
-    function configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService) {
+    function configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService) {
         $http.defaults.transformRequest.push(function (data, getHeaders) {
-            getHeaders().Authorization = "Bearer " + LoginService.getAuthenticationToken();
-            getHeaders().Domain = DomainService.getDomainName();
+            var token = LoginService.getAuthenticationToken();
+            if(token)
+                getHeaders().Authorization = "Bearer " + token;
+
+            var domain = DomainService.getDomainName();
+            if(domain)
+                getHeaders().Domain = domain;
+
+            var publicDashboardValidated = PublicDashboardService.isPublicDashboardValidated();
+            if(publicDashboardValidated){
+                getHeaders().publicDashboardValidated = publicDashboardValidated;
+                getHeaders().publicDashboardId = PublicDashboardService.getDashboardId();
+                getHeaders().publicDashboardKey = PublicDashboardService.getDashboardPublicKey();
+            }
+
             return data;
         });
 
@@ -331,9 +346,9 @@ define([
         //$locationProvider.html5Mode(true);
     });
 
-    connecta.run(function ($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService) {
+    connecta.run(function ($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService, PublicDashboardService) {
 
-        configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService);
+        configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService);
         configureRouteChangeListener($rootScope, $menu, LayoutService);
 
     });
@@ -380,7 +395,8 @@ define([
         'speaknow/company/service/company-service',
         'portal/user/service/user-service',
         'portal/domain/service/domain-service',
-        'portal/auth/directive/visibleToRoles'
+        'portal/auth/directive/visibleToRoles',
+        'portal/dashboard/service/dashboard-service-public'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });
