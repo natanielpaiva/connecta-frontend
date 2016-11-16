@@ -5,13 +5,14 @@ define([
     'maps/helper/map',
     "maps/project/storage/tools",
     "maps/project/storage/context-config",
+    "maps/project/controller/mock",
     "maps/project/service/project-service",
     "maps/spatial-datasource/service/spatial-datasource-service",
     "maps/geographic-layer/service/geo-layer-service",
     "maps/project/directive/menu-carrousel",
     "maps/project/directive/input-slider",
     "maps/datasource/service/datasource-service"
-], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig, contextConfig) {
+], function (maps, baseMapsConfig, stepsConfig, mapHelper, toolsConfig, contextConfig, mock) {
 
     return maps.lazy.controller("ProjectFormController", function ($scope, $q, $timeout, $location, $routeParams, ProjectService, SpatialDataSourceService, GeoLayerService, DatasourceService, notify) {
 
@@ -159,6 +160,13 @@ define([
 
         $scope.changeStep = function (increment) {
 
+            if($scope.currentStep == 2 && increment) {
+                if (!$scope.project.richLayers.length) {
+                    notify.warning("Tem que haver pelo menos uma camada cadastrada.");
+                    return;
+                }
+            }
+
             var active = "active",
                 disabled = "disabled",
                 complete = "complete",
@@ -225,7 +233,6 @@ define([
             }
         }
 
-
         $scope.cancel = function () {
             returnRichLayerList();
             $scope.index_edit = null;
@@ -236,7 +243,6 @@ define([
             $scope.richLayerAdd = {};
             var copyRichLayer = angular.copy(richLayer);
             delete copyRichLayer.$$hashKey;
-
 
             SpatialDataSourceService.list({size : "*"}).then(function (response) {
                 $scope.spatialDataSources = response.data.content;
@@ -256,7 +262,6 @@ define([
 
                 $scope.index_edit = index;
             }, onErrorEdit);
-
 
             DatasourceService.listConnectaDatasources().then(onSuccesListDataSources, onError);
         };
@@ -324,7 +329,7 @@ define([
         $scope.setAllWidgetsSelected = setAllWidgetsSelected;
 
         function getResultSetId () {
-            return btoa(String(Math.floor(Math.random()*1000 + Date.now()))).replace(/\=/g, '').substr(-7);
+            return btoa(String(Math.floor(Math.random()*9000 + Date.now()))).replace(/\=/g, '').substr(-7);
         }
 
         function onSuccessListSpatialDS(response) {
@@ -427,8 +432,6 @@ define([
 
         }
 
-
-
 //---------- [JS - PROJECT-FORM-LINK-DATASOURCE] -----------//
 
         $scope.saveProject = function () {
@@ -444,6 +447,32 @@ define([
 
         };
 
-    });
+//---------- [JS - PROJECT-FORM-LINK-DATASOURCE-OBIEE] -----------//
+        $scope.treeOptions = {
+            nodeChildren: "child",
+            dirSelectable: true,
+            injectClasses: {
+                ul: "a1",
+                li: "a2",
+                liSelected: "a7",
+                iExpanded: "a3",
+                iCollapsed: "a4",
+                iLeaf: "a5",
+                label: "a6",
+                labelSelected: "a8"
+            }
+        };
 
+        $scope.dataForTheTree = mock;
+
+        $scope.toogleNode= function (node) {
+            //TODO serviço que vai pegar os childs vai ficar aqui
+        };
+
+        $scope.showSelected = function (node) {
+            //TODO  a service que pega as colunas do obiee tem que ficar aqui
+                $scope.options = ['NUM_ANO', 'VL_PAGO', 'QUANTIDADE_ATLETA', 'DS_RACA', 'DS_ESCOLARIDADE', 'DS_SEXO'];
+        };
+
+    });
 });

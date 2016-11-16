@@ -87,7 +87,8 @@ define([
                     geoCache: {
                         queryCache: true,
                         getBreaksCache: true
-                    }
+                    },
+                    info : {}
                 };
             }
         }
@@ -133,13 +134,15 @@ define([
                 return;
             }
             if ($scope.selectedSpatialDataSource[layer.layerIdentifier]) {
+                $scope.fieldsListOfSelectedLayer = $scope.selectedSpatialDataSource[layer.layerIdentifier].fields;
                 mapHelper.previewLayer($scope.selectedSpatialDataSource[layer.layerIdentifier]);
             } else {
                 var params = {};
                 params.layer = JSON.stringify(layer);
                 params.queryParams = JSON.stringify({
                     outSR: 4269,
-                    outFields: ['*']
+                    outFields: ['*'],
+                    resultRecordCount: 100
                 });
                 var mapId = mapHelper.map._leaflet_id;
                 var promise = GeoLayerService.query(params);
@@ -157,8 +160,12 @@ define([
                         }
                         var geoJSONLayer = mapHelper.buildLayer(response.data);
                         $scope.selectedSpatialDataSource[layer.layerIdentifier] = geoJSONLayer;
+                        $scope.selectedSpatialDataSource[layer.layerIdentifier].fields = response.data.fields;
                         $scope.selectedSpatialDataSource[layer.layerIdentifier].type = geometryType[response.data.geometryType];
                         $scope.selectedSpatialDataSource[layer.layerIdentifier].srid = response.data.spatialReference.wkid;
+
+                        $scope.fieldsListOfSelectedLayer = response.data.fields;
+
                         mapHelper.previewLayer(geoJSONLayer);
                         $scope.isLoadingLayer = false;
                     } catch (err) {

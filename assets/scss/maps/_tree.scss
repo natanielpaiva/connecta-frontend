@@ -1,0 +1,21 @@
+@mixin spaceIcon($w, $h) {
+    background-size: $w $h !important;
+    background-repeat: no-repeat;
+    margin-right: 6px;
+}
+
+treecontrol.tree-classic li.tree-expanded i.tree-branch-head {
+    background: url("../img/maps/tree/open_folder.png") !important;
+    @include spaceIcon(20px, 17px);
+}
+
+treecontrol.tree-classic li.tree-collapsed i.tree-branch-head {
+    background: url("../img/maps/tree/closed_folder.png") !important;
+    @include spaceIcon(20px, 17px);
+}
+
+treecontrol.tree-classic li.tree-leaf i.tree-leaf-head {
+    background: url("../img/maps/tree/document.png") !important;
+    padding: 0px 9px !important;
+    @include spaceIcon(18px, 15px);
+}

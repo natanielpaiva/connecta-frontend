@@ -12,26 +12,26 @@ define([
         init();
 
         function init() {
-          checkEdit();
+            checkEdit();
         }
 
-
         function checkEdit() {
-          if ($routeParams.id) {
-            try {
-              var promise = DatasourceService.get($routeParams.id);
-              promise.catch(function (error) {
-                notify.error(error);
-              });
-              promise.then(function (response) {
-                $scope.datasource = response.data;
-                isEdit = true;
-              });
+            if ($routeParams.id) {
+                try {
+                    var promise = DatasourceService.get($routeParams.id);
+                    promise.catch(function (error) {
+                        notify.error(error);
+                    });
+                    promise.then(function (response) {
+                        $scope.datasource = response.data;
+                        $scope.onServerChange($scope.datasource.serviceType);
+                        isEdit = true;
+                    });
 
-            } catch (error) {
-              notify.error(error);
+                } catch (error) {
+                    notify.error(error);
+                }
             }
-          }
         }
 
         $scope.validateDatasource = function (datasource) {
@@ -76,14 +76,14 @@ define([
                     $location.path("/maps/datasource");
                 });
             } catch (error) {
-               notify.error(error);
+                notify.error(error);
             }
         }
 
         function update(id, datasource) {
             var promise = DatasourceService.update(id, datasource);
             promise.catch(function (error) {
-               notify.error(error);
+                notify.error(error);
             });
             promise.then(function (response) {
                 $location.path("/maps/datasource");
@@ -110,7 +110,6 @@ define([
 
             $scope.currentState = context;
         };
-
 
     });
 
