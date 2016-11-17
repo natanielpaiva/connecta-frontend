@@ -529,6 +529,14 @@ define([
             );
         };
 
+        $scope.copyResultSetId = function (value) {
+            var element = document.querySelector('#copyTarget');
+            element.value = value;
+            element.select();
+            document.execCommand('copy');
+            notify.info('Copiado!');
+        };
+
         $scope.showSelected = function (node) {
             //TODO  a service que pega as colunas do obiee tem que ficar aqui
             var dataSource = $scope.selectedDataSource;
@@ -542,6 +550,31 @@ define([
                 }
             );
         };
+
+        function populateChildren(path) {
+            return new Promise(function (resolve, reject) {
+                try {
+                    var dataSource = $scope.selectedDataSource;
+                    DatasourceService.catalogObiee(dataSource.dsn, dataSource.user, dataSource.password, path).then(
+                        function (response) {
+                            try {
+                                var nodes = response.data.map(function (catalog) {
+                                    return {
+                                        name: catalog.name,
+                                        children: catalog.type == 'folder' ? [0] : [],
+                                        path: catalog.path
+                                    };
+                                });
+                                resolve(nodes);
+                            } catch (err) {
+                                reject(err);
+                            }
+                        }, reject);
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
 
     });
 });
