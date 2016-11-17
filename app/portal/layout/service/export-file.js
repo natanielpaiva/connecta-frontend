@@ -11,63 +11,10 @@ define([
         function _exportImage(deferred, filename, element) {
             var type = 'png';
 
-            var svgs = element.getElementsByTagName('svg');
+            var myCanvas = element.getElementsByTagName('canvas');
 
-            var options = {
-                ignoreAnimation: true,
-                ignoreMouse: true,
-                ignoreClear: true,
-                ignoreDimensions: true,
-                offsetX: 0,
-                offsetY: 0
-            };
-
-            var canvas = document.createElement('canvas');
-            var context = canvas.getContext('2d');
-            var counter = {
-                height: 0,
-                width: 0
-            };
-
-            function removeImages(svg) {
-                var startStr = '<image';
-                var stopStr = '</image>';
-                var stopStrAlt = '/>';
-                var start = svg.indexOf(startStr);
-                var stop;
-
-                if (start !== -1) {
-                    stop = svg.slice(start, start + 1000).indexOf(stopStr);
-                    if (stop !== -1) {
-                        svg = removeImages(svg.slice(0, start) + svg.slice(start + stop + stopStr.length, svg.length));
-                    } else {
-                        stop = svg.slice(start, start + 1000).indexOf(stopStrAlt);
-                        if (stop !== -1) {
-                            svg = removeImages(svg.slice(0, start) + svg.slice(start + stop + stopStr.length, svg.length));
-                        }
-                    }
-                }
-                return svg;
-            }
-
-            canvas.height = element.offsetHeight;
-            canvas.width = element.offsetWidth;
-            context.fillStyle = 'transparent';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            if (svgs.length > 0) {
-                // Add SVGs
-                for (var i = 0; i < svgs.length; i++) {
-                    var container = svgs[i].parentNode;
-                    var innerHTML = removeImages(container.innerHTML); // remove images from svg until its supported
-
-                    options.offsetY = counter.height;
-                    counter.height += container.offsetHeight;
-                    counter.width = container.offsetWidth;
-                    canvg(canvas, innerHTML, options);
-                }
-
-                var image = canvas.toDataURL('image/' + type);
+            if (myCanvas) {
+                var image = myCanvas[0].toDataURL('image/' + type);
                 _outputData(image, filename);
                 deferred.resolve();
             } else {
@@ -105,26 +52,51 @@ define([
             _download(obj_url, filename + '.' + type);
         }
 
-        function _exportCsv(deferred, array, filename) {
+        function _exportCsv(deferred, data, filename) {
+            console.log(data);
             var csv = '';
-            for (var head in array[0]) {
-                csv += head + ';';
-            }
-            csv += '\r\n';
+            var line = '';
+            var i = 0;
 
-            for (var i = 0; i < array.length; i++) {
-                var line = '';
-                for (var index in array[i]) {
-                    if (line !== '')
-                        line += ';';
-
-                    line += array[i][index];
+            if(data.series && data.series.length > 0){
+                if(data.descriptionLabel){
+                    csv += data.descriptionLabel + ';';
+                }else{
+                    csv += ';';
                 }
-                csv += line + '\r\n';
+
+                for(i = 0; i < data.series.length; i++){
+                    csv += data.series[i] + ';';
+                }
+                csv += '\r\n';
+
+                if(data.subtype == 'pie' || data.subtype == 'doughnut'){
+                    for (i = 0; i < data.labels.length; i++) {
+                        line = '';
+                        line += data.labels[i] + ';' + data.data[i];
+                        csv += line + '\r\n';
+                    }
+                }else{
+                    for (i = 0; i < data.labels.length; i++) {
+                        line = '';
+                        line += data.labels[i];
+                        for(var j = 0; j < data.series.length; j++){
+                            line += ';' + data.data[j][i];
+                        }
+                        csv += line + '\r\n';
+                    }
+                }
+            }else{
+                for (i = 0; i < data.labels.length; i++) {
+                    line = '';
+                    line += data.labels[i] + ';' + data.data[i];
+                    csv += line + '\r\n';
+                }
             }
+
             var uri = "data:text/csv;charset=UTF-8," + escape(csv);
             var name = filename + ".csv";
-            
+
             _download(uri, name);
             deferred.resolve();
         }
@@ -144,20 +116,20 @@ define([
         };
 
         /**
-         * 
+         *
          * @param {Function} strategy
          * @returns {undefined}
          */
         ExportFile.export = function (strategy) {
             var deferred = $q.defer();
-            
+
             var argArray = Array.prototype.slice.call(arguments)
                     .slice(1, arguments.length);
-            
+
             argArray.unshift(deferred);
-            
+
             strategy.apply(ExportFile, argArray);
-            
+
             return deferred.promise;
         };
 

@@ -3,23 +3,26 @@ define([
     'connecta.portal',
     'portal/auth/service/login-service',
     'portal/layout/service/layout',
+    'portal/domain/service/domain-config',
     'portal/layout/service/util',
-    'portal/layout/service/heading-popover-service'
+    'portal/layout/service/heading-popover-service',
+    'portal/domain/service/configure-domain',
+    'portal/layout/service/notify'
 ], function (angular, portal) {
     /**
      * Componente usado para renderizar e manter o header do portal
      */
     return portal.directive('heading', function (LayoutService, LoginService,
-            HeadingPopoverService, UserService, DomainService) {
+            HeadingPopoverService, UserService, DomainService, DomainConfig) {
         return {
             restrict: 'E',
             templateUrl: 'app/portal/layout/directive/template/heading.html',
-            controller: function ($scope, applications, util, $route, $cookieStore) {
+            controller: function ($scope, applications, util, $cookieStore, $configureDomain) {
 
                 $scope.user = {};
                 $scope.domain = {};
                 $scope.avatarUrl = null;
-                $scope.teste = false;
+                $scope.inviteForm = false;
 
                 // adiciona a lista de aplicações no escopo
                 $scope.applications = util.mapToArray(applications);
@@ -27,18 +30,13 @@ define([
                     LoginService.getCurrentUser().then(function (user) {
                         $scope.user = user;
                         $scope.getUserAvatarUrl();
-                        $scope.toggleDomain = false;
-                        var currentDomain = $cookieStore.get('user.domain.name');
-                        identifyAndHighlightUserDomain(currentDomain);
 
                     });
                 };
                 var _getDomain = function () {
                     DomainService.getCurrentDomain().then(function (response) {
                         $scope.domain = response.data;
-
                     });
-
 
                 };
                 $scope.$on('login.authenticated', function ($event, isAuthenticated) {
@@ -54,6 +52,12 @@ define([
                 LoginService.checkAuthentication();
                 $scope.getUserAvatarUrl = function () {
                     $scope.avatarUrl = UserService.makeBackgroundImage($scope.user.id);
+                };
+                $scope.domainImage = function () {
+                    return $scope.domain.name.toUpperCase()
+                        .split(" ").map(function (word) {
+                            return word[0];
+                        }).join("").substring(0, 2);
                 };
                 $scope.logoutUser = function () {
                     LoginService.unauthenticate();
@@ -141,45 +145,31 @@ define([
                 $scope.$on('layout.modulechange', function ($event, module) {
                     $scope.currentModule = module;
                 });
-                identifyAndHighlightUserDomain = function (domainSelected) {
-                    for (var i = 0; i < $scope.user.domains.length; i++) {
-                        if ($scope.user.domains[i].id === domainSelected) {
-                            $scope.user.domains[i].selected = true;
-                        } else {
-                            $scope.user.domains[i].selected = false;
-                        }
-                    }
-                };
                 $scope.toggleDomainMenu = function ($event) {
-                    $scope.toggleDomain = !$scope.toggleDomain;
                     $event.stopPropagation();
-                };
-                $scope.changeDomain = function (domain) {
-                    var currentDomain = $cookieStore.get('user.domain.name');
-                    if (currentDomain !== domain.name) {
-                        $cookieStore.put('user.domain.name', domain.id);
-                        identifyAndHighlightUserDomain(domain.id);
-                        reloadPageAfterDomainSelection();
-                    }
-                    $scope.toggleDomain = false;
-                };
-
-                $scope.switchDomain = function () {
-                    // TODO  Criar um evento para ficar escutando o domain
+                    $scope.inviteForm = true;
                 };
 
                 $scope.configureDomain = function () {
-                    $scope.teste = true;
-                    console.log($scope.domain);
+                    DomainService.getParticipants($scope.domain.id).then(function (response) {
+                        _getDomain();
+                        $scope.domain.users = response.data;
+
+                        $configureDomain('DOMAIN.CONFIGURE', $scope.domain).then(function () {
+                            _getDomain();//Atualiza o domínio atual para o domínio salvo na modal.
+                        });
+
+                    });
                 };
 
-                $scope.cancelConfigure = function () {
-                    $scope.teste = false;
+                $scope.inviteUser = function () {
+                    DomainConfig.inviteUser($cookieStore.get('user.domain.name'), $scope.user.emails).then(function () {
+                        $scope.inviteForm = false;
+                    });
+                    $scope.user.emails = null;
+
                 };
 
-                reloadPageAfterDomainSelection = function () {
-                    $route.reload();
-                };
             }
         };
     });

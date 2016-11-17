@@ -8,13 +8,12 @@ define([
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
     'presenter/viewer/controller/modal-analysis',
-    'bower_components/amcharts/dist/amcharts/exporting/canvg',
-    'bower_components/amcharts/dist/amcharts/exporting/rgbcolor',
     'bower_components/html2canvas/dist/html2canvas.min',
     'bower_components/html2canvas/dist/html2canvas',
     'bower_components/angular-ui-select/dist/select'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerViewController', function ($scope, ViewerService, $routeParams, AnalysisService) {
+    return presenter.lazy.controller('ViewerViewController', function ($scope,
+                                    ViewerService, $routeParams, AnalysisService, $location) {
 
         $scope.state = {loaded: false};
         $scope.chartCursor = {ativo: false};
@@ -91,7 +90,11 @@ define([
                     analysis: _prepareForRequest($scope.viewer),
                     drill: populateDrillIfExists($scope.viewer)
                 }).then(function (response) {
-                    ViewerService.getPreview($scope.viewer, response.data);
+                    if($scope.viewer.configuration.type === 'chartjs'){
+                        ViewerService.getPreviewChartJs($scope.viewer, response.data);
+                    }else{
+                        ViewerService.getPreview($scope.viewer, response.data);
+                    }
                     $scope.state.loaded = true;
                 });
             }
@@ -135,10 +138,15 @@ define([
                         }
                         //sidebarAnalysis();
                         getPreview();
-                        load();
                         break;
                 }
             });
-        } 
+        }
+
+        $scope.excluir = function (id) {
+            ViewerService.delete(id).then(function () {
+                $location.path('presenter/viewer');
+            });
+        };
     });
 });

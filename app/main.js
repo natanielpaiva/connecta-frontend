@@ -12,7 +12,6 @@ require.config({
         'angular-resource': '../bower_components/angular-resource/angular-resource.min',
         'angular-ui-bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-ng-table': '../bower_components/ng-table/ng-table.min',
-//        'angular-facebook': '../bower_components/angular-facebook/lib/angular-facebook',
         'portal': 'portal',
         'collector': 'collector',
         'speaknow': 'speaknow',
@@ -24,10 +23,11 @@ require.config({
         'connecta.presenter': 'presenter/connecta.presenter',
         'connecta.maps': 'maps/connecta.maps',
         'connecta.inspection': 'inspection/connecta.inspection',
-        'leaflet': '../node_modules/leaflet/dist/leaflet',
-        'esri-leaflet': '../node_modules/esri-leaflet/dist/esri-leaflet',
+        'leaflet': '../bower_components/leaflet/dist/leaflet',
+        'esri-leaflet': '../bower_components/esri-leaflet/dist/esri-leaflet',
         'angular-tree-control' : '../bower_components/angular-tree-control/angular-tree-control',
-        'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min'
+        'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min',
+        'chart' : '../bower_components/chart.js/dist/Chart.min'
     },
     shim: {
         'angular': {
@@ -97,74 +97,10 @@ require.config({
                 'bower_components/javascript-detect-element-resize/detect-element-resize'
             ]
         },
-        'bower_components/angular-redactor/angular-redactor': {
-            deps: [
-                'angular',
-                'bower_components/imperavi-redactor/redactor/redactor.min'
-            ]
-        },
-        'bower_components/amcharts/dist/amcharts/amcharts': {
-            exports: 'AmCharts'
-        },
         'bower_components/html2canvas/build': {
             exports: 'Html2canvas'
         },
-        'bower_components/amcharts/dist/amcharts/themes/black': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.black'
-        },
-        'bower_components/amcharts/dist/amcharts/themes/chalk': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.chalk'
-        },
-        'bower_components/amcharts/dist/amcharts/themes/dark': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.dark'
-        },
-        'bower_components/amcharts/dist/amcharts/themes/light': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.light'
-        },
-        'bower_components/amcharts/dist/amcharts/themes/patterns': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.themes.patterns'
-        },
-        'bower_components/amcharts/dist/amcharts/funnel': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmFunnelChart'
-        },
-        'bower_components/amcharts/dist/amcharts/gauge': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmAngularGauge'
-        },
-        'bower_components/amcharts/dist/amcharts/pie': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmPieChart'
-        },
-        'bower_components/amcharts/dist/amcharts/radar': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmRadarChart'
-        },
-        'bower_components/amcharts/dist/amcharts/serial': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmSerialChart'
-        },
-        'bower_components/amcharts/dist/amcharts/xy': {
-            deps: ['bower_components/amcharts/dist/amcharts/amcharts'],
-            exports: 'AmCharts.AmXYChart'
-        },
-        'bower_components/angular-amchart-directive/angular-amchart-directive': {
-            deps: ['angular',
-                'bower_components/amcharts/dist/amcharts/amcharts',
-                'bower_components/amcharts/dist/amcharts/pie',
-                'bower_components/amcharts/dist/amcharts/serial',
-                'bower_components/amcharts/dist/amcharts/xy',
-                'bower_components/amcharts/dist/amcharts/radar',
-                'bower_components/amcharts/dist/amcharts/gauge',
-                'bower_components/amcharts/dist/amcharts/funnel'
-            ]
-        },
-        'angular-ng-table': {
+         'angular-ng-table': {
             deps: ['angular']
         },
         'angular-tree-control' : {
@@ -188,16 +124,6 @@ require.config({
         'bower_components/bootstrap/dist/js/bootstrap.min': {
             deps: ['jquery']
         },
-        'bower_components/jquery-slimscroll/jquery.slimscroll.min': {
-            deps: ['jquery']
-        },
-        'bower_components/imperavi-redactor/redactor/redactor.min': {
-            deps: ['jquery'],
-            exports: 'jQuery.fn.redactor'
-        },
-//        'bower_components/ngAutocomplete/src/ngAutocomplete': {
-//            deps: ['angular','bower_components/connectaGeoJS/index/openlayersImplementation/async/async!//maps.googleapis.com/maps/api/js?sensor=false&region=br&libraries=places']
-//        },
         'esri-leaflet' : {
             deps : ['leaflet']
         },
@@ -207,6 +133,23 @@ require.config({
                 'jquery',
                 'bower_components/jquery-ui-custom/index',
                 'bower_components/bootstrap/dist/js/bootstrap.min'
+            ]
+        },
+        'bower_components/sockjs/sockjs.min': {
+            deps: [
+                'angular'
+            ]
+        },
+        'bower_components/stomp-websocket/lib/stomp.min': {
+            deps: [
+                'angular',
+                'bower_components/sockjs/sockjs.min'
+            ]
+        },
+        'bower_components/angular-chart.js/dist/angular-chart': {
+            deps: [
+                'angular',
+                'chart'
             ]
         }
     }

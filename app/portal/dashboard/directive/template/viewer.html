@@ -1,5 +1,6 @@
 <div ng-switch="model.type" ng-class="{edit:edit}" export-image="model"
      class="connecta-viewer-{{uuid}}">
+    <analysis-viewer-chartjs ng-model="model" ng-switch-when="ANALYSIS_CHARTJS" edit="edit"></analysis-viewer-chartjs>
     <analysis-viewer ng-model="model" ng-switch-when="ANALYSIS" edit="edit"></analysis-viewer>
     <singlesource-viewer ng-model="model" ng-switch-when="SINGLESOURCE" edit="edit"></singlesource-viewer>
     <singlesource-group-viewer ng-model="model" ng-switch-when="SINGLESOURCE_GROUP" edit="edit"></singlesource-group-viewer>

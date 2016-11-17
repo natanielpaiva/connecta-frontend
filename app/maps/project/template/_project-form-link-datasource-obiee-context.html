@@ -1,1 +1,84 @@
-OBIEE CONTEXT
+<section ng-init="prepareCatalog()">
+    <div class="form-group col-md-12">
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <span class="required">Fonte de dados <strong>Obiee</strong></span>
+                <select class="form-control"
+                        ng-model="$parent.$parent.$parent.selectedDataSource"
+                        ng-change="prepareDataTree(selectedDataSource)"
+                        ng-options="dataSource as dataSource.title for dataSource in obieeDataSources">
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+        </div>
+
+        <h4>Catálogo Obiee</h4>
+        <div class="row">
+            <div style="height: 300px;    overflow-y: auto; margin-bottom: 10px;">
+                <treecontrol class="tree-classic"
+                             tree-model="dataTree"
+                             options="treeOptions"
+                             on-node-toggle="toogleNode(node)"
+                             on-selection="showSelected(node)"
+                             selected-node="node1">
+                    {{node.name}}
+                </treecontrol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <span class="required">Colunas da Analise <strong>Obiee</strong></span>
+                <select class="form-control"
+                        ng-disabled="columnsObiee.length === 0"
+                        ng-model="richLayerAdd.crossingKeys.resultSetKey"
+                        ng-options="column for column in columnsObiee">
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="required" translate>Título</label>
+                <input ng-model="richLayerAdd.title" type="text" class="form-control" required/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label class="required" translate>Origem de dados espacial</label>
+                <select ng-model="richLayerAdd.spatialDatasource" class="form-control"
+                        ng-change="getLayersBySpatialDS(richLayerAdd.spatialDatasource._id)"
+                        ng-options="spatialDataSource.title for spatialDataSource in spatialDataSources track by spatialDataSource.title"
+                        required>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="required" translate>Camada Geo</label>
+                <select ng-model="richLayerAdd.layer" class="form-control"
+                        ng-change="getColumnsByLayer(richLayerAdd.layer._id)"
+                        ng-disabled="layersBySpatials.length == 0"
+                        ng-options="layers.title for layers in layersBySpatials track by layers._id" required>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="required" translate>Campo</label>
+                <select ng-model="richLayerAdd.crossingKeys.geoKey" ng-disabled="columnsByLayer.length == 0"
+                        class="form-control"
+                        ng-options="column.name as column.name for column in columnsByLayer" required>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn btn-block margin-bottom-double"
+                ng-click="toggleOptionAdd(richLayerAdd)">
+            Adicionar
+        </button>
+
+    </div>
+</section>

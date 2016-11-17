@@ -453,5 +453,13 @@ define([
                 }
             });
         };
+
+        this.createSocket = function(){
+            return new SockJS(presenterResources.webSocket);
+        };
+
+        this.createPublicSocket = function(){
+            return new SockJS(presenterResources.publicWebSocket);
+        };
     });
 });

@@ -3,10 +3,10 @@
         <div class="col-md-12">
             <div class="form-group" validated-field-holder="formObject.name">
                 <input required type="text" ng-model="viewer.name" required
-                       id="name" class="form-control connecta-inline-edit-input" 
+                       id="name" class="form-control connecta-inline-edit-input"
                        placeholder="{{'VIEWER.NAME' | translate}}" autofocus/>
                 <validated-field-messages ng-model="formViewer.name"></validated-field-messages>
-                
+
                 <input type="text" ng-model="viewer.description"
                        id="description" class="form-control connecta-inline-edit-textarea"
                        placeholder="{{'VIEWER.DESCRIPTION' | translate}}"/>
@@ -14,10 +14,7 @@
         </div>
     </div>
 
-    <div class="row" ng-if="viewer.configuration.type == 'serial' ||
-                viewer.configuration.type == 'pie' ||
-                viewer.configuration.type == 'funnel' ||
-                viewer.configuration.type == 'radar'">
+    <div class="row" ng-if="viewer.configuration.subtype != 'bubble'">
         <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.METRIC</span>
@@ -67,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-if="viewer.configuration.type == 'xy'">
+    <div class="row" ng-if="viewer.configuration.subtype == 'bubble'">
         <div class="col-md-6">
             <div class="box-viewer">
                 <span class="box-name" translate>VIEWER.XFIELD</span>
@@ -139,21 +136,21 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row" ng-if="viewer.configuration.type === 'gauge'">
         <div class="col-md-6">
             <div class="box-viewer">
-                <span class="box-name" translate>VIEWER.METRIC</span>
+                <span class="box-name" translate>VIEWER.DESCRIPTION</span>
                 <div class="columns-viewer">
                     <div class="sidebar-viewer">
-                        <ul dnd-list="viewer.metrics" dnd-drop="transformColumnDrop(item, 'METRIC')"
+                        <ul dnd-list="viewer.descriptions" dnd-drop="transformColumnDrop(item, 'DESCRIPTION')"
                             ng-class="{
-                                'has-item':!!viewer.metrics.length
+                                'has-item':!!viewer.descriptions.length
                             }">
-                            <li ng-repeat="column in viewer.metrics" dnd-draggable="column" dnd-moved="viewer.metrics.splice($index, 1)" dnd-effect-allowed="move" ng-attr-style="background-image:url({{column.label}})">
-                                {{column.analysisColumn.label}}
-                                <i class="icon-close" ng-click="viewer.metrics.splice($index, 1)"></i>
+                            <li ng-repeat="viewerColumn in viewer.descriptions"
+                                dnd-draggable="viewerColumn"
+                                dnd-moved="viewer.descriptions.splice($index, 1)"
+                                dnd-effect-allowed="move">
+                                {{viewerColumn.analysisColumn.label}}
+                                <span class="icon-close" ng-click="viewer.descriptions.splice($index, 1)"></span>
                             </li>
                             <li class="animate-repeat" ng-if="results.length === 0">
                                 {{'LAYOUT.NO_RESULTS'| translate}}
@@ -163,101 +160,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8 viewer-gauge-interval-list">
-            <div class="clearfix margin-bottom-single">
-                {{'VIEWER.INTERVAL'|translate}}
-                <button class="btn btn-default btn-sm pull-right" type="button"
-                        ng-click="newInterval()">
-                    <span class="icon-plus"></span>
-                    {{'LAYOUT.ADD'|translate}}
-                </button>
-            </div>
-            <div ng-repeat="interval in viewer.configuration.axes[0].bands">
-                <input type='color' class="form-control input-sm viewer-gauge-interval"
-                       ng-model='interval.color'/>
-                <input type='number' class="form-control input-sm viewer-gauge-interval"
-                       ng-model='interval.startValue' placeholder="{{'VIEWER.INTERVAL_FROM'|translate}}" />
-                <input type='number' class="form-control input-sm viewer-gauge-interval"
-                       ng-model='interval.endValue' placeholder="{{'VIEWER.INTERVAL_TO'|translate}}" />
-                <button type="button" class="btn btn-xs btn-icon-only"
-                        ng-click="deleteInterval(interval)">
-                    <span class="icon-close"></span>
-                </button>
-            </div>
-            <translate ng-if="!viewer.configuration.axes[0].bands.length">
-                KEY_VALUE.NO_ITEM
-            </translate>
-        </div>
     </div>
+
     <div class="row margin-bottom-single">
         <div class="col-md-12 analysis-viewer">
             <viewer ng-model="viewer" edit="true"></viewer>
         </div>
     </div>
-<!--    <div>
-        <uib-accordion close-others="true">
-            <uib-accordion-group>
-                <uib-accordion-heading>
-                    <span translate>VIEWER.SETTINGS_ADVANCED</span>
-                    <span ng-click="changeStatus()" class="pull-right glyphicon"
-                          ng-class="{
-                            'glyphicon-chevron-down': isOpen,
-                            'glyphicon-chevron-right': !isOpen
-                          }">
-                    </span>
-                </uib-accordion-heading>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div translate>VIEWER.SETTINGS_FILTER</div>
-                        <div translate>VIEWER.DRAG_COLUMNS_FOR_SET_FILTERS</div>
-                        <div class="box-viewer">
-                            <div class="columns-viewer">
-                                <div class="sidebar-viewer">
-                                    <ul dnd-list="viewer.filters" dnd-drop="transformColumnDrop(item, 'FILTER')"
-                                        ng-class="{
-                                            'has-item':!!viewer.filters.length
-                                        }">
-                                        <li ng-repeat="column in viewer.filters" dnd-draggable="column"
-                                            dnd-moved="viewer.filters.splice($index, 1)"
-                                            dnd-effect-allowed="move"
-                                            >
-                                            {{column.analysisColumn.label}}
-                                            <i class="icon-close" ng-click="viewer.filters.splice($index, 1)"></i>
-                                        </li>
-                                        <li class="animate-repeat" ng-if="results.length === 0">
-                                            {{'LAYOUT.NO_RESULTS'| translate}}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                                        <div class="col-md-6">
-                                        <div  translate>VIEWER.SETTINGS_DRILL</div>
-                                        <div  translate>VIEWER.DRAG_COLUMNS_FOR_DRILL</div>
-                                        <div class="box-viewer-filter">
-                                            <div class="columns-viewer">
-                                                <div class="sidebar-viewer">
-                                                    <ul dnd-list="viewer.drills">
-                                                        <li ng-repeat="column in viewer.drills"
-                                                            dnd-draggable="column"
-                                                            dnd-moved="viewer.drills.splice($index, 1)"
-                                                            dnd-effect-allowed="move"
-                                                            >
-                                                            {{column.label}}
-                                                        </li>
-                                                        <li class="animate-repeat" ng-if="results.length === 0">
-                                                            {{'LAYOUT.NO_RESULTS'| translate}}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                </div>
-            </uib-accordion-group>
-        </uib-accordion>
-    </div>-->
+
     <div class="row margin-top-single">
         <div class="col-md-12 text-right">
             <a href="#/presenter/viewer" class="btn btn-default" translate>

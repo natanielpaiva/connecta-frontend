@@ -5,9 +5,9 @@ define([
 
     return portal.service('PublicDashboardService', function ($rootScope, portalResources, $http, applications, $filter, $cookieStore, LoginService) {
 
-        var dashboardValidated;
-        var dashboardId;
-        var dashboardPublicKey;
+        // $cookieStore.put('portal.dashboard.validated', false);
+        // $cookieStore.put('portal.dashboard.id', null);
+        // $cookieStore.put('portal.dashboard.publickey', null);
 
         this.getPublic = function (id) {
             var url = portalResources.publicDashboard + '/' + id;
@@ -21,8 +21,8 @@ define([
                         delete item.id;
                     });
                 });
-                dashboardId = response.data.id;
-                dashboardPublicKey = response.data.publicDashboard.id;
+                $cookieStore.put('portal.dashboard.id', response.data.id);
+                $cookieStore.put('portal.dashboard.publickey', response.data.publicDashboard.id);
 
                 return response;
             });
@@ -39,25 +39,25 @@ define([
         };
 
         $rootScope.$on('validatePublicDashboard', function(){
-            dashboardValidated = true;
+            $cookieStore.put('portal.dashboard.validated', true);
             LoginService.setAuthenticated(true);
         });
 
         $rootScope.$on('invalidatePublicDashboard', function(){
-            dashboardValidated = false;
+            $cookieStore.put('portal.dashboard.validated', false);
             LoginService.setAuthenticated(false);
         });
 
         this.isPublicDashboardValidated = function(){
-            return LoginService.isAuthenticated() === false ? dashboardValidated : undefined;
+            return LoginService.isAuthenticated() === false ? $cookieStore.get('portal.dashboard.validated') : undefined;
         };
 
         this.getDashboardId = function(){
-            return LoginService.isAuthenticated() === false ? dashboardId : undefined;
+            return LoginService.isAuthenticated() === false ? $cookieStore.get('portal.dashboard.id') : undefined;
         };
 
         this.getDashboardPublicKey = function(){
-            return LoginService.isAuthenticated() === false ? dashboardPublicKey : undefined;
+            return LoginService.isAuthenticated() === false ? $cookieStore.get('portal.dashboard.publickey') : undefined;
         };
 
     });

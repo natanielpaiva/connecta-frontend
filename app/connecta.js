@@ -31,17 +31,16 @@ define([
     'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min',
     'bower_components/angular-messages/angular-messages.min',
     'bower_components/ng-file-upload/angular-file-upload.min',
-    'bower_components/amcharts/dist/amcharts/amcharts',
-    'bower_components/angular-amchart-directive/angular-amchart-directive',
     'bower_components/angular-currency-mask/angular-currency-mask',
-    'bower_components/angular-redactor/angular-redactor',
-//  'bower_components/angular-facebook/lib/angular-facebook',
-//  'bower_components/ngAutocomplete/src/ngAutocomplete',
+    //  'bower_components/angular-facebook/lib/angular-facebook',
+    //  'bower_components/ngAutocomplete/src/ngAutocomplete',
     'bower_components/angular-base64/angular-base64',
     'bower_components/angular-ui-select/dist/select',
     'bower_components/angular-scroll/angular-scroll.min',
-    'bower_components/angular-show-on-konami-code/angular-show-on-konami-code'
-], function ($, angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
+    'bower_components/angular-show-on-konami-code/angular-show-on-konami-code',
+    'bower_components/sockjs/sockjs.min',
+    'bower_components/stomp-websocket/lib/stomp.min'
+], function($, angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
     var connecta = angular.module('connecta', [
         'connecta.portal',
@@ -68,7 +67,6 @@ define([
         'pascalprecht.translate',
         'angularFileUpload',
         'currencyMask',
-        'AngularAmChart',
         'base64',
         'duScroll',
         'show-on-konami-code'
@@ -79,7 +77,7 @@ define([
 
     /**
      * Salva a referência dos providers em todos os módulos para poder
-     * registrar componentes por lazy loading
+     * registrar componentesu por lazy loading
      *
      * @param {type} $controllerProvider
      * @param {type} $compileProvider
@@ -125,26 +123,26 @@ define([
             urlTemplate: 'app/{part}/translate/{lang}.json'
         });
 
-//        $translateProvider.registerAvailableLanguageKeys(['en', 'pt'], {
-//            'en-us': 'en-us',
-//            'en-gb': 'en-us',
-//            'pt-br': 'pt-br',
-//            'pt-pt': 'pt-br'
-//        });
+        //        $translateProvider.registerAvailableLanguageKeys(['en', 'pt'], {
+        //            'en-us': 'en-us',
+        //            'en-gb': 'en-us',
+        //            'pt-br': 'pt-br',
+        //            'pt-pt': 'pt-br'
+        //        });
 
-//        $translateProvider.determinePreferredLanguage(function () {
-//            var lang = 'en-us';
-//
-//            if (navigator.userLanguage || navigator.language) {
-//                lang = navigator.userLanguage || navigator.language;
-//            }
-//
-//            return lang.toLowerCase();
-//        });
+        //        $translateProvider.determinePreferredLanguage(function () {
+        //            var lang = 'en-us';
+        //
+        //            if (navigator.userLanguage || navigator.language) {
+        //                lang = navigator.userLanguage || navigator.language;
+        //            }
+        //
+        //            return lang.toLowerCase();
+        //        });
 
         $translateProvider.preferredLanguage('en-us');
 
-//        $translateProvider.fallbackLanguage('en-us');
+        //        $translateProvider.fallbackLanguage('en-us');
 
         $translateProvider.useCookieStorage();
     }
@@ -155,9 +153,9 @@ define([
      */
     function buildRoutes() {
         var finalRouteObject = {};
-        angular.forEach(arguments, function (module) {
+        angular.forEach(arguments, function(module) {
             // Coloca a referência
-            angular.forEach(module._routes, function (value) {
+            angular.forEach(module._routes, function(value) {
                 value.module = module.name;
             });
 
@@ -174,16 +172,16 @@ define([
     function configureRoutes($routeProvider) {
         var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, inspection);
 
-        angular.forEach(allRoutes, function (route, url) {
+        angular.forEach(allRoutes, function(route, url) {
             if (route.controllerUrl) {
                 if (!route.resolve) {
                     route.resolve = {};
                 }
 
                 if (!route.resolve.load) {
-                    route.resolve.load = function ($q, $rootScope) {
+                    route.resolve.load = function($q, $rootScope) {
                         var deferred = $q.defer();
-                        require([route.controllerUrl], function () {
+                        require([route.controllerUrl], function() {
                             deferred.resolve();
                             $rootScope.$apply();
                         });
@@ -202,12 +200,12 @@ define([
      * @param {object} applications
      */
     function configureRequestInterceptors($httpProvider, applications) {
-        $httpProvider.interceptors.push(function ($q, $rootScope) {
+        $httpProvider.interceptors.push(function($q, $rootScope) {
             return {
-                request: function (config) {
+                request: function(config) {
                     if (new RegExp("^http.*$").test(config.url)) {
                         var matched = false;
-                        angular.forEach(applications, function (app, id) {
+                        angular.forEach(applications, function(app, id) {
                             if (!matched) {
                                 matched = new RegExp("^" + app.host + ".*$").test(config.url);
                             }
@@ -219,32 +217,32 @@ define([
                     }
                     return config;
                 },
-                responseError: function (rejection) {
+                responseError: function(rejection) {
                     var responseInterceptors = {
-                        0: function (rejection) { // NET ERROR
+                        0: function(rejection) { // NET ERROR
                             console.log('ERROR CODE 0', rejection);
                             $rootScope.$broadcast('layout.notify', {
                                 type: 'ERROR',
                                 message: 'LAYOUT.NO_CONNECTION'
                             });
                         },
-                        400: function (rejection) { // BAD REQUEST
+                        400: function(rejection) { // BAD REQUEST
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        401: function (rejection) { // UNAUTHORIZED
+                        401: function(rejection) { // UNAUTHORIZED
                             $rootScope.$broadcast('login.request_unathorized', rejection);
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        403: function (rejection) { // FORBIDDEN
+                        403: function(rejection) { // FORBIDDEN
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        404: function (rejection) { // PAGE NOT FOUND
+                        404: function(rejection) { // PAGE NOT FOUND
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        500: function (rejection) { // INTERNAL SERVER ERROR
+                        500: function(rejection) { // INTERNAL SERVER ERROR
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        409: function (rejection) { // CONFLICT
+                        409: function(rejection) { // CONFLICT
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         }
                     };
@@ -283,7 +281,7 @@ define([
          * Verifica mudança de rotas e emite os eventos de entrada e saida dos módulos
          * Bem como a mudança do menu de contexto de cada módulo
          */
-        $rootScope.$on('$routeChangeSuccess', function ($event, $destRoute, $originRoute) {
+        $rootScope.$on('$routeChangeSuccess', function($event, $destRoute, $originRoute) {
             var destModule = $destRoute.$$route && $destRoute.$$route.module ? $destRoute.$$route.module : null;
             var originModule = $originRoute && $originRoute.$$route && $originRoute.$$route.module ? $originRoute.$$route.module : null;
             var isModuleChange = (!originModule) || (destModule && $originRoute.$$route.module !== $destRoute.$$route.module);
@@ -305,35 +303,35 @@ define([
      * @param {type} DomainService
      * @returns {undefined}
      */
-    function configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService) {
-        $http.defaults.transformRequest.push(function (data, getHeaders) {
-            var token = LoginService.getAuthenticationToken();
-            if(token)
-                getHeaders().Authorization = "Bearer " + token;
-            
-            var domain = DomainService.getDomainName();
-            if(domain)
-                getHeaders().Domain = domain;
+    function configureAuthenticationListener($httpProvider, $routeProvider) {
+        $httpProvider.interceptors.push(function($cookieStore) { //PublicDashboardService
+            return {
+                request: function(config) {
+                    var token = $cookieStore.get('portal.auth.access_token');
 
-            var publicDashboardValidated = PublicDashboardService.isPublicDashboardValidated();
-            if(publicDashboardValidated){
-                getHeaders().publicDashboardValidated = publicDashboardValidated;
-                getHeaders().publicDashboardId = PublicDashboardService.getDashboardId();
-                getHeaders().publicDashboardKey = PublicDashboardService.getDashboardPublicKey();
-            }
-        
-            return data;
-        });
+                    if (token) {
+                        config.headers.Authorization = "Bearer " + token;
+                    }
 
-        $rootScope.$on('login.authenticated', function ($event, authenticated) {
-            //Ao autenticar emite evento de enter do módulo novamnete
-            if (authenticated) {
-                $rootScope.$broadcast($route.current.$$route.module + '.enter', $route.current);
-            }
+                    var domain = $cookieStore.get('user.domain.name');
+
+                    if (domain) {
+                        config.headers.Domain = domain;
+                    }
+
+                    if (!token && $cookieStore.get('portal.dashboard.validated')) {
+                        config.headers.publicDashboardValidated = $cookieStore.get('portal.dashboard.validated');
+                        config.headers.publicDashboardId = $cookieStore.get('portal.dashboard.id');
+                        config.headers.publicDashboardKey = $cookieStore.get('portal.dashboard.publickey');
+                    }
+
+                    return config;
+                }
+            };
         });
     }
 
-    connecta.config(function ($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider, applications) {
+    connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider, applications) {
 
         configureLazyProviders($controllerProvider, $compileProvider, $provide, $filterProvider);
         configureTranslations($translateProvider, window.navigator);
@@ -341,13 +339,22 @@ define([
         configureRequestInterceptors($httpProvider, applications);
         configureHTTPWhitelist($compileProvider, $sceProvider);
 
+        configureAuthenticationListener($httpProvider, $routeProvider);
+
         //$locationProvider.html5Mode(true);
     });
 
-    connecta.run(function ($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService, PublicDashboardService) {
+    connecta.run(function($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService, PublicDashboardService) {
 
-        configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService);
+        //configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService);
         configureRouteChangeListener($rootScope, $menu, LayoutService);
+
+        $rootScope.$on('login.authenticated', function($event, authenticated) {
+            //Ao autenticar emite evento de enter do módulo novamnete
+            if (authenticated) {
+                $rootScope.$broadcast($route.current.$$route.module + '.enter', $route.current);
+            }
+        });
 
     });
 
@@ -395,7 +402,7 @@ define([
         'portal/domain/service/domain-service',
         'portal/auth/directive/visibleToRoles',
         'portal/dashboard/service/dashboard-service-public'
-    ], function (doc) {
+    ], function(doc) {
         angular.bootstrap(doc, [connecta.name]);
     });
 

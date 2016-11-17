@@ -37,12 +37,15 @@
         "LOGIN_GOOGLE": "Login with Google +",
         "OR": "or",
         "ADD_ACC": "Create Account",
+        "RECOVERY_PASSWORD":"Recovery password",
         "NO_RESULTS": "No results found",
         "MORE_APPS": "Get more apps",
         "MORE": "And {{size}} more records...",
         "NO_CONNECTION":"Can't connect to server. Check if the requested module is installed or if your network has access to the internet.",
         "CONFIRM_DELETE":"confirm delete of domain",
-        "OK": "Ok"
+        "OK": "Ok",
+        "SEND": "Send",
+        "FORGOT_MSG": "Enter your email to recover your password"
     },
     "NOTIFICATION": {
         "NOTIFICATIONS": "Notifications",

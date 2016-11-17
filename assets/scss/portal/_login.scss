@@ -72,7 +72,7 @@ $loginWhite: #f6f6f6;
 
             svg {
                 path:nth-child(3),
-                path:nth-child(5) {
+                    path:nth-child(5) {
                     animation: fade $time linear infinite;
                 }
             }
@@ -212,7 +212,7 @@ $loginWhite: #f6f6f6;
         border: none;
 
         &:focus,
-        &:hover {
+            &:hover {
             background-color: lighten($presenterBlue, $defaultLight);
             cursor: pointer;
             transition: background-color 250ms;
@@ -402,11 +402,31 @@ $loginWhite: #f6f6f6;
             }
 
             &.thumbnail-grid-item-editing {
+                /*width: 25em;*/
+                /*height: 90em;*/
                 .thumbnail-grid-item-head {
                     display: none;
                 }
                 .thumbnail-grid-item-form {
                     display: block;
+                    .colors {
+                        ul {
+                            list-style-type: none;
+                            margin:0;
+                            padding:0;
+                            .circle{
+                                display: inline-block;
+                                width: 1.25em;
+                                height: 1.25em;
+                                border-radius: 50%;
+                                margin-right: 1em;
+                                
+                                &.active {
+                                    border:solid 2px $lightBlack;
+                                }
+                            }
+                        }
+                    }
                 }
             }
 

@@ -60,7 +60,9 @@ define([
             UserService.update($scope.user).then(function () {
                 if ($scope.imageFile) {
                     UserService.upload($scope.imageFile, $scope.user)
-                            .error(function () {
+                            .then(function(){
+
+                            }, function () {
                                 notify.warning('USER.VALIDATION.USER_UNAUTHORIZED');
                             });
                 }

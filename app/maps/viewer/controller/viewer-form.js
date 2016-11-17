@@ -5,7 +5,7 @@ define([
     '../../datasource/service/datasource-service'
 ], function (maps) {
 
-    return maps.lazy.controller('ViewerFormController', function ($scope, $location, $routeParams, ViewerService, ProjectService, DatasourceService, notify) {
+    return maps.lazy.controller('ViewerFormController', function ($scope, $location, $routeParams, MapsViewerService, ProjectService, DatasourceService, notify) {
 
         $scope.viewer = {
             popupConfig: {
@@ -38,7 +38,7 @@ define([
         function checkEditing() {
             if ($routeParams.id) {
                 $scope.isEditing = true;
-                ViewerService.get($routeParams.id)
+                MapsViewerService.get($routeParams.id)
                     .catch(function (err) {
                         notify.error(err.statusText);
                     })
@@ -66,9 +66,13 @@ define([
                                 return richLayer._id === $scope.viewer.initialRichLayerId;
                             });
 
+                            $scope.prepareProject($scope.selectedProject._id);
+
                             if (richLayer.length) {
                                 richLayer = richLayer[0];
                                 $scope.selectedRichLayer = richLayer;
+                                $scope.richLayerModel = richLayer;
+                                $scope.richLayerModel.outFields = [];
                                 populateMetadataFields(richLayer);
                             }
                         } catch (err) {
@@ -95,15 +99,27 @@ define([
             });
         }
 
-        $scope.projectChanged = function (projectId) {
-            $scope.viewer.projectId = projectId;
-            $scope.viewer.richLayersInfo = [];
-            $scope.selectedProject.richLayers.forEach(function (richLayer) {
-                $scope.viewer.richLayersInfo.push({
-                    richLayerId: richLayer._id,
-                    outFields: []
-                });
+        $scope.invalidOutFields = function () {
+            var invalid = false;
+            $scope.viewer.richLayersInfo.forEach(function (richLayerInfo) {
+                if (!richLayerInfo.outFields.length) {
+                    invalid = true;
+                }
             });
+            return invalid;
+        };
+
+        $scope.prepareProject = function (projectId) {
+            $scope.viewer.projectId = projectId;
+            $scope.viewer.richLayersInfo = $scope.viewer.richLayersInfo || [];
+            if (!$scope.viewer.richLayersInfo.length) {
+                $scope.selectedProject.richLayers.forEach(function (richLayer) {
+                    $scope.viewer.richLayersInfo.push({
+                        richLayerId: richLayer._id,
+                        outFields: []
+                    });
+                });
+            }
         };
 
         $scope.selectRichLayer = function (richLayer) {
@@ -191,10 +207,13 @@ define([
 
         $scope.saveViewer = function () {
             var promise;
+
+            $scope.viewer.viewContext = $scope.selectedProject.serviceType;
+
             if (!$scope.isEditing) {
-                promise = ViewerService.save($scope.viewer);
+                promise = MapsViewerService.save($scope.viewer);
             } else {
-                promise = ViewerService.update($scope.viewer._id, $scope.viewer);
+                promise = MapsViewerService.update($scope.viewer._id, $scope.viewer);
             }
             promise.catch(function (err) {
                 notify.error('VIEWER.SAVE_ERROR');

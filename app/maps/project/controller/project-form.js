@@ -32,6 +32,8 @@ define([
             }
         };
 
+        $scope.options = [];
+
         $scope.richLayer = {
             crossingKeys : {
                 geoKey : {},
@@ -158,6 +160,13 @@ define([
         $scope.context = contextConfig;
 
         $scope.changeStep = function (increment) {
+
+            if($scope.currentStep == 2 && increment) {
+                if (!$scope.project.richLayers.length) {
+                    notify.error("Cadastre uma RichLayer");
+                    return;
+                }
+            }
 
             var active = "active",
                 disabled = "disabled",
@@ -324,7 +333,7 @@ define([
         $scope.setAllWidgetsSelected = setAllWidgetsSelected;
 
         function getResultSetId () {
-            return btoa(String(Math.floor(Math.random()*1000 + Date.now()))).replace(/\=/g, '').substr(-7);
+            return btoa(String(Math.floor(Math.random()*9000 + Date.now()))).replace(/\=/g, '').substr(-7);
         }
 
         function onSuccessListSpatialDS(response) {
@@ -444,6 +453,95 @@ define([
 
         };
 
-    });
 
+//---------- [JS - PROJECT-FORM-LINK-DATASOURCE-OBIEE] -----------//
+        $scope.treeOptions = {
+            dirSelectable: false,
+            injectClasses: {
+                ul: "a1",
+                li: "a2",
+                liSelected: "a7",
+                iExpanded: "a3",
+                iCollapsed: "a4",
+                iLeaf: "a5",
+                label: "a6",
+                labelSelected: "a8"
+            }
+        };
+
+        $scope.prepareCatalog = function () {
+            var queryString = "?page='*'&size='*'&filter=" + JSON.stringify({ serviceType: 'obiee' });
+            DatasourceService.list(queryString).then(
+                function (response) {
+                    console.log(response);
+                    $scope.obieeDataSources = response.data.content;
+                }, function (err) {
+                    console.log(err);
+                });
+        };
+
+        $scope.prepareDataTree = function () {
+            try {
+                var dataSource = $scope.selectedDataSource;
+                DatasourceService.catalogObiee(dataSource.dsn, dataSource.user, dataSource.password).then(
+                    function (response) {
+                        $scope.dataTree = [];
+                        console.log(response);
+                        if (response.data.length) {
+                            $scope.dataTree = response.data.map(function (catalog) {
+                                return {
+                                    name: catalog.name,
+                                    children: catalog.type == 'folder' ? [0] : [],
+                                    path: catalog.path
+                                };
+                            });
+                        }
+                    },
+                    function (err) {
+                        console.log(err);
+                    }
+                );
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        $scope.toogleNode= function (node) {
+            //TODO serviço que vai pegar os childs vai ficar aqui
+            console.log('toggle node', node);
+            if (node.children[0]) {
+                return;
+            }
+            var dataSource = $scope.selectedDataSource;
+            DatasourceService.catalogObiee(dataSource.dsn, dataSource.user, dataSource.password, node.path).then(
+                function (response) {
+                    node.children = response.data.map(function (catalog) {
+                        return {
+                            name: catalog.name,
+                            children: catalog.type == 'folder' ? [0] : [],
+                            path: catalog.path
+                        };
+                    });
+                },
+                function (err) {
+                    console.log(err);
+                }
+            );
+        };
+
+        $scope.showSelected = function (node) {
+            //TODO  a service que pega as colunas do obiee tem que ficar aqui
+            var dataSource = $scope.selectedDataSource;
+            DatasourceService.metadataObiee(dataSource.dsn, dataSource.user, dataSource.password, node.path).then(
+                function (response) {
+                    $scope.richLayerAdd.dataSourceIdentifier = node.path;
+                    $scope.columnsObiee = response.data.columns;
+                },
+                function (err) {
+                    console.log(err);
+                }
+            );
+        };
+
+    });
 });

@@ -1,13 +1,5 @@
 <section>
 
-    <!--<treecontrol-->
-    <!--class="tree-classic"-->
-    <!--tree-model="dataObiee"-->
-    <!--options="treeOptions"-->
-    <!--selected-node="node1">-->
-    <!--<span ng-click="getPath($index, node.path)">{{node.name}}</span>-->
-    <!--</treecontrol>-->
-
     <h4>Camadas geográficas</h4>
     <!--TABELA-->
     <table class="table table-striped table-hover" show-filter="true">
@@ -24,8 +16,8 @@
         </thead>
         <tbody dnd-list="project.richLayers" class="rich-layers-table">
 
-        <tr ng-if="projects.richLayers.length === 0" class="row">
-            <td class="col-xs-12 text-center" colspan="12" translate>
+        <tr ng-if=" !project || project.richLayers.length === 0" class="row">
+            <td class="col-xs-12 text-center" colspan="7" translate>
                 LAYOUT.NO_RESULTS
             </td>
         </tr>

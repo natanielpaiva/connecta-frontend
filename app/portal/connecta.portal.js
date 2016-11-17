@@ -6,8 +6,7 @@ define([
     var portal = angular.module('connecta.portal', [
         'pascalprecht.translate',
         'ngCookies',
-        'gridster',
-        'angular-redactor'
+        'gridster'
 //        ,'facebook'
     ]);
 
@@ -23,20 +22,13 @@ define([
         domain: applications.portal.host + '/domain'
     });
 
-    portal.config(function ($translatePartialLoaderProvider, redactorOptions) { //, FacebookProvider
+    portal.config(function ($translatePartialLoaderProvider) { //, FacebookProvider
         $translatePartialLoaderProvider.addPart('portal/layout');
         $translatePartialLoaderProvider.addPart('portal/application');
         $translatePartialLoaderProvider.addPart('portal/dashboard');
         $translatePartialLoaderProvider.addPart('portal/auth');
         $translatePartialLoaderProvider.addPart('portal/user');
         $translatePartialLoaderProvider.addPart('portal/domain');
-
-        var _redactorOptions = {
-            // buttons: ['formatting', '|', 'bold', 'italic'],
-            toolbarFixed: true
-        };
-
-        angular.extend(redactorOptions, _redactorOptions);
 
 //
 //        var appIdConnectaCloud = '950123895028823';

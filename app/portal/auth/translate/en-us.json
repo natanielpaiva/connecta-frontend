@@ -15,6 +15,9 @@
         "SAVE": "Save",
         "INVITE": "Invite Participants",
         "SEARCH": "Search by name or email",
+        "PARTICIPANTS": "Participants",
+        "EMAIL": "Email",
+        "STATUS": "Status",
         "DELETE": "Delete",
         "DELETED": "Domain deleted",
         "UPDATED": "Domain updated",
@@ -22,6 +25,7 @@
         "CONFIGURE": "Configure Domain",
         "CHANGE": "Change Domain",
         "NULL_NAME": "Enter a name for the domain",
-        "DELETE_CONFIRM": "All relationships in the domain will be removed. Do you want to remove it?"
+        "DELETE_CONFIRM": "All relationships in the domain will be removed. Do you want to remove it?",
+        "THEME_COLOR": "Theme Color"
     }
 }
