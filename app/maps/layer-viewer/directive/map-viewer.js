@@ -116,14 +116,24 @@ define([
                         filters : [],
                         drill : {
                             columnToDrill : richLayer.crossingKeys.resultSetKey,
-                            columnsToSum : $scope.model.richLayersInfo.filter( function (item) {
-                                return item.richLayerId === richLayer._id;
-                            })[0].outFields.map( function (field) {
-                                return field.name;
-                            }),
+                            columnsToSum : mapOutFields(),
                             listPreviousColumns : []
                         }
                     };
+
+                    function mapOutFields() {
+                        var outFields = [];
+                        var filter = $scope.model.richLayersInfo.filter( function (item) {
+                            return item.richLayerId === richLayer._id;
+                        });
+                        if (filter.length) {
+                            outFields = filter[0].outFields.map( function (field) {
+                                return field.name;
+                            });
+                        }
+
+                        return outFields;
+                    }
                 }
             }
         }

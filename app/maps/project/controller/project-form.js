@@ -529,6 +529,14 @@ define([
             );
         };
 
+        $scope.copyResultSetId = function (value) {
+            var element = document.querySelector('#copyTarget');
+            element.value = value;
+            element.select();
+            document.execCommand('copy');
+            notify.info('Copiado!');
+        };
+
         $scope.showSelected = function (node) {
             //TODO  a service que pega as colunas do obiee tem que ficar aqui
             var dataSource = $scope.selectedDataSource;
