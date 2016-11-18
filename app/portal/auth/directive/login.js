@@ -12,7 +12,9 @@ define([
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
-            controller: function ($scope, LoginService, UserService, $location, $route, $routeParams, notify, DomainService, DomainConfig, $translate, $confirm) { // FacebookService, GPlusService,
+            controller: function ($scope, LoginService, UserService, $location,
+                    $route, $routeParams, notify, DomainService,
+                    DomainConfig, $translate, $confirm) { // FacebookService, GPlusService,
                 $scope.package = package;
 
                 $scope.invite = {};

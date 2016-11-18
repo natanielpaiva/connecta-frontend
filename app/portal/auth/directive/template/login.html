@@ -62,7 +62,16 @@
                     <div class="material-border"></div>
                 </div>
             </div>
+
             <button class="btn-login" translate>AUTH.LOGIN</button>
+
+            <div class="checkbox">
+                <label for="keepLogged">
+                    {{'USER.KEEP_LOGGED'| translate}}
+                    <input type="checkbox" name="keepLogged"
+                           ng-model="credentials.keepLogged"/>
+                </label>
+            </div>
         </form>
         <div class="add-account">
             <a href="javascript:void(0);" ng-click="setSection(sections.forgotPassword)" translate="">LAYOUT.RECOVERY_PASSWORD</a>
