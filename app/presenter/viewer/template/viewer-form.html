@@ -173,7 +173,7 @@
             <a href="#/presenter/viewer" class="btn btn-default" translate>
                 LAYOUT.BACK
             </a>
-            <button type="button" class="btn btn-default" translate
+            <button ng-if="viewer.type !== 'SINGLESOURCE'" type="button" class="btn btn-default" translate
                     ng-click="viewer.exportImage()">
                 VIEWER.EXPORT
             </button>
