@@ -3,7 +3,7 @@
         "CLIENT": "Client",
         "CLIENTS": "Clients",
         "CLIENT_ADDRESS": "Client Address",
-        "CLIENT_ADDRESS": "Client Addresses",
+        "CLIENT_ADDRESSES": "Client Addresses",
         "ADD": "Add  Client Address",
         "EDIT": "Edit Client Address",
         "VIEW": "View Client Address",
