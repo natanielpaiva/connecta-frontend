@@ -3,7 +3,7 @@
         "CLIENT": "Cliente",
         "CLIENTS": "Clientes",
         "CLIENT_ADDRESS": "Endereço do Cliente",
-        "CLIENT_ADDRESS": "Endereços de Clientes",        
+        "CLIENT_ADDRESSES": "Endereços de Clientes",        
         "ADD": "Cadastrar Endereço de Cliente",
         "EDIT": "Editar Endereço de Cliente",
         "VIEW": "Visualizar Endereço de Cliente",
