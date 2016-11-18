@@ -7,15 +7,17 @@ define([
     'presenter/analysis/controller/_analysis-webservice',
     'presenter/analysis/controller/_analysis-csv',
     'presenter/analysis/controller/_analysis-obiee',
-    'presenter/analysis/controller/_analysis-hdfs'
+    'presenter/analysis/controller/_analysis-hdfs',
+    'presenter/analysis/controller/_analysis-rest'
 ], function (presenter,
-            DatabaseAnalysisFormController,
-            EndecaAnalysisFormController,
-            SolrAnalysisFormController,
-            WebserviceAnalysisFormController,
-            CsvAnalysisFormController,
-            ObieeAnalysisFormController,
-            HdfsAnalysisFormController) {
+        DatabaseAnalysisFormController,
+        EndecaAnalysisFormController,
+        SolrAnalysisFormController,
+        WebserviceAnalysisFormController,
+        CsvAnalysisFormController,
+        ObieeAnalysisFormController,
+        HdfsAnalysisFormController,
+        RestAnalysisFormController) {
 
     return presenter.lazy.service('AnalysisService', function (presenterResources, $http, DomainService) {
 
@@ -99,21 +101,34 @@ define([
                 icon: 'icon-insert-drive-file',
                 template: '_analysis-csv.html',
                 controller: CsvAnalysisFormController
+            },
+            REST: {
+                id: 'rest',
+                name: 'REST',
+                icon: 'icon-solr',
+                template: '_analysis-rest.html',
+                controller: RestAnalysisFormController,
+                start: function (datasouce, component) {
+                    var url = presenterResources.datasource + '/' + datasouce.id + "/rest";
+                     $http.get(url).then(function(response){
+                         component.restRequests = response.data.requests;
+                     });
+                }
             }
         };
-        
+
         var _databaseRequestTypes = {
-            SQL:'ANALYSIS.DATABASE.REQUEST_SQL',
-            TABLE:'ANALYSIS.DATABASE.REQUEST_TABLE'
+            SQL: 'ANALYSIS.DATABASE.REQUEST_SQL',
+            TABLE: 'ANALYSIS.DATABASE.REQUEST_TABLE'
         };
-        
+
         var _solrRequestTypes = {
-            QUERY_BUILDER:'ANALYSIS.SOLR.QUERY_BUILDER',
-            TEXT_QUERY:'ANALYSIS.SOLR.TEXT_QUERY'
+            QUERY_BUILDER: 'ANALYSIS.SOLR.QUERY_BUILDER',
+            TEXT_QUERY: 'ANALYSIS.SOLR.TEXT_QUERY'
         };
-        
-      
-        
+
+
+
         var _filterOperators = {
             EQUAL: {
                 order: 0,
@@ -182,8 +197,8 @@ define([
                 type: 'STRING'
             }
         };
-        
-        this.getFilterOperators = function() {
+
+        this.getFilterOperators = function () {
             return _filterOperators;
         };
 
@@ -204,11 +219,11 @@ define([
         this.getTypes = function () {
             return _types;
         };
-        
+
         this.getDatabaseRequestTypes = function () {
             return _databaseRequestTypes;
         };
-        
+
         this.getSolrRequestTypes = function () {
             return _solrRequestTypes;
         };
@@ -224,50 +239,55 @@ define([
             var url = presenterResources.analysis + "/" + idDataSource + "/columns-datasource";
             return $http.get(url);
         };
-        
-        var _prepareAnalysisRequest = function(analysisExecuteRequest){
+
+        var _prepareAnalysisRequest = function (analysisExecuteRequest) {
             var analysisExecuteRequestCopy = angular.copy(analysisExecuteRequest);
-            
+
             if (!analysisExecuteRequestCopy.filters) {
                 analysisExecuteRequestCopy.filters = [];
             }
-            
-            analysisExecuteRequestCopy.filters = analysisExecuteRequestCopy.filters.filter(function(filter){
+
+            analysisExecuteRequestCopy.filters = analysisExecuteRequestCopy.filters.filter(function (filter) {
                 return filter.type && filter.analysisColumn && filter.value;
-            }).map(function(filter){
+            }).map(function (filter) {
                 return {
                     operator: filter.type, // o tipo do filtro
                     columnName: filter.analysisColumn.name,
                     value: filter.value
                 };
             });
-            
+
             return analysisExecuteRequestCopy;
         };
 
-        this.execute = function(analysisExecuteRequest) {
+        this.execute = function (analysisExecuteRequest) {
             var url = presenterResources.analysis + "/result";
-            
+
             var analysisExecuteRequestCopy = _prepareAnalysisRequest(analysisExecuteRequest);
-            
+
             return $http.post(url, analysisExecuteRequestCopy);
         };
-        
-        this.possibleValuesFor = function(analysisExecuteRequest, filter) {
-            var url = presenterResources.analysis + "/filter-value?column="+
+
+        this.possibleValuesFor = function (analysisExecuteRequest, filter) {
+            var url = presenterResources.analysis + "/filter-value?column=" +
                     filter.analysisColumn.name; // Não tem outro jeito de fazer post com parâmetros :/
-            
+
             var analysisExecuteRequestCopy = _prepareAnalysisRequest(analysisExecuteRequest);
-            
-            analysisExecuteRequestCopy.filters = analysisExecuteRequestCopy.filters.filter(function(f){
+
+            analysisExecuteRequestCopy.filters = analysisExecuteRequestCopy.filters.filter(function (f) {
                 return f.columnName !== filter.analysisColumn.name;
             });
-            
+
             return $http.post(url, angular.copy(analysisExecuteRequestCopy));
         };
 
         this.getAnalysis = function (idAnalysis) {
             var url = presenterResources.analysis + "/" + idAnalysis;
+            return $http.get(url);
+        };
+        
+        this.getAnalysisRest = function (idAnalysis) {
+            var url = presenterResources.analysis + "/" + idAnalysis +"/rest";
             return $http.get(url);
         };
 
@@ -282,10 +302,10 @@ define([
         var _fixAttributes = function (analysis) {
             angular.forEach(analysis.analysisAttributes, function (attribute) {
                 if (angular.isString(attribute.attribute)) {
-                    attribute.attribute = {name: attribute.attribute, description:"", type:attribute.attributeType.label};
+                    attribute.attribute = {name: attribute.attribute, description: "", type: attribute.attributeType.label};
                     delete attribute.attributeType;
-                }else{
-                    if(attribute.attributeType !== undefined){
+                } else {
+                    if (attribute.attributeType !== undefined) {
                         attribute.attribute.type = attribute.attributeType.label;
                         delete attribute.attributeType;
                     }
@@ -319,7 +339,7 @@ define([
         };
 
         //Soap
-        this.getResulApplyingXpath = function ( analysis, operation) {
+        this.getResulApplyingXpath = function (analysis, operation) {
             var analysisCopy = angular.copy(analysis);
             var url = presenterResources.analysis + "/" + analysis.datasource.id + "/soap-applying-xpath/operation/" + operation;
             return $http.post(url, analysisCopy);
@@ -335,37 +355,51 @@ define([
 
 
         //solr
-        this.getSolrResultApplyingQuery = function(idDatasouce, query, facet) {
-               var queryPersist = angular.copy({"statement": query});
-               _fixQueryBuilder(queryPersist, false);
-               var url = presenterResources.analysis + "/" + idDatasouce + "/solr-result-applying-query/facet/" + facet;
-               return $http.post(url, queryPersist);
+        this.getSolrResultApplyingQuery = function (idDatasouce, query, facet) {
+            var queryPersist = angular.copy({"statement": query});
+            _fixQueryBuilder(queryPersist, false);
+            var url = presenterResources.analysis + "/" + idDatasouce + "/solr-result-applying-query/facet/" + facet;
+            return $http.post(url, queryPersist);
         };
 
-        this.saveQueryBuilder = function(query) {
-             var queryBuilder = angular.copy({"statement": query});
-             var urlSaveQuery = presenterResources.group + "/query";
+        this.saveQueryBuilder = function (query) {
+            var queryBuilder = angular.copy({"statement": query});
+            var urlSaveQuery = presenterResources.group + "/query";
 
-             _fixQueryBuilder(queryBuilder);
-             return $http.post(urlSaveQuery, queryBuilder);
+            _fixQueryBuilder(queryBuilder);
+            return $http.post(urlSaveQuery, queryBuilder);
         };
 
-        this.formatQueryBuiderEdit = function(query) {
+        this.formatQueryBuiderEdit = function (query) {
             _fixQueryBuilder(query.statement, true);
             return query;
         };
 
-        this.getConditionsSorl = function(id){
+        this.getConditionsSorl = function (id) {
             var url = presenterResources.analysis + "/" + id + "/conditions-sorl";
             return $http.get(url);
         };
 
         //csv
-        this.getResultCSV = function(analysis){
+        this.getResultCSV = function (analysis) {
             var analysisCopy = angular.copy(analysis);
             var url = presenterResources.analysis + "/result-csv";
             return $http.post(url, analysisCopy);
         };
+        
+        this.sendRequest = function (analysis) {
+            var analysisCopy = angular.copy(analysis);
+           var url = presenterResources.analysis + '/execute-rest';
+            return $http.post(url, analysisCopy);
+        };
+        
+        this.getTabularFormatJson = function ( analysis) {
+            var analysisCopy = angular.copy(analysis);
+            console.log("analysis ", analysisCopy);
+            var url = presenterResources.analysis + "/rest-tabular-format";
+            return $http.post(url, analysisCopy);
+        };
+        
 
         //solr
         var _fixQueryBuilder = function (statement, edit) {
@@ -404,31 +438,31 @@ define([
 
         };
 
-        var agreementValueArray = function(value, edit) {
-               var valueArray = [];
-               for (var i in value) {
-                    valueArray.push(value[i].text);
-               }
-               return {
-                    "value": "",
-                    "between": {},
-                    "in": valueArray
-               };
-          };
+        var agreementValueArray = function (value, edit) {
+            var valueArray = [];
+            for (var i in value) {
+                valueArray.push(value[i].text);
+            }
+            return {
+                "value": "",
+                "between": {},
+                "in": valueArray
+            };
+        };
 
-        var agreementValueString = function(value, edit) {
-               var retorno = {
-                    "value": value,
-                    "between": {},
-                    "in": []
-               };
-               if (edit) {
-                    retorno = value.value;
-               }
-               return retorno;
-          };
+        var agreementValueString = function (value, edit) {
+            var retorno = {
+                "value": value,
+                "between": {},
+                "in": []
+            };
+            if (edit) {
+                retorno = value.value;
+            }
+            return retorno;
+        };
 
-        var agreementValueObject = function(value, edit) {
+        var agreementValueObject = function (value, edit) {
             var retorno = {
                 "value": "",
                 "between": value,

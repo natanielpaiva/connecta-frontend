@@ -60,6 +60,8 @@
             "NO_COLUMNS_YET":"No columns yet"
         },
         "DELETE":"Delete",
-        "EDIT":"Edit"
+        "EDIT":"Edit",
+        "REQUEST":"Request"
+
     }
 }

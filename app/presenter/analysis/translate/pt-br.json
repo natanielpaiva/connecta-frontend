@@ -60,6 +60,7 @@
             "NO_COLUMNS_YET":"Nenhuma coluna ainda"
         },
         "DELETE":"Excluir",
-        "EDIT":"Editar"
+        "EDIT":"Editar",
+        "REQUEST":"requisição"
     }
 }

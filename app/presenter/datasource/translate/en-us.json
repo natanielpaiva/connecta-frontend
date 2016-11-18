@@ -27,6 +27,14 @@
         "EDIT": "Edit",
         "DELETE": "Delete",
         "TEST_CONNECTION":"Test connection",
-        "CHEKING_CONNECTION": "Cheking connection"
+        "CHEKING_CONNECTION": "Cheking connection",
+        "REQUEST": "Request",
+        "NEW_REQUEST": "New request",
+        "NAME_REQUEST": "Name request",
+        "HEADERS": "Headers",
+        "SEND":"Send",
+        "KEY":"Key",
+        "VALUE":"Value",
+        "BODY":"Body"
     }
 }

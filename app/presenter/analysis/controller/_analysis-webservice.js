@@ -168,6 +168,7 @@ define([
 
         // Json
         $scope.$watch('component.webserviceRestJson', function (json) {
+                       console.log("sssssssssssssssssssssssssssssssssss", json);
             refParentJson(json);
         });
 
