@@ -3,7 +3,7 @@ define([
     'connecta.presenter',
     'portal/layout/service/autocomplete'
 ], function (presenter) {
-    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, DomainService) {
+    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, DomainService, util) {
 
         var exampleTable = {
             examples: [
@@ -543,6 +543,9 @@ define([
             viewer.configuration.labels = [];
             viewer.configuration.series = [];
             viewer.configuration.data = [];
+            if(!viewer.configuration.options) {
+                viewer.configuration.options = {};
+            }
 
             switch (viewer.configuration.subtype) {
                 case "bar":
@@ -575,6 +578,21 @@ define([
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
 
+            //configuração de formatação
+            viewer
+                .configuration
+                    .options
+                        .tooltips = {
+                            callbacks: {
+                                label: function(tooltipItem, data) {
+                                    var allData = data.datasets[tooltipItem.datasetIndex].data;
+                                    var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label;
+                                    var tooltipData = allData[tooltipItem.index];
+                                    return tooltipLabel + ': ' + util.formatNumber(tooltipData,2,',','.');
+                                }
+                        }
+                    };
+
             if (columnDrill) {
                 viewer.configuration.descriptionLabel = columnDrill.label;
                 viewer.configuration.labels =
@@ -604,10 +622,6 @@ define([
 
         var configurePieDonutAndAreaChartJs = function (viewer, result, columnDrill) {
 
-            if(!viewer.configuration.options) {
-                viewer.configuration.options = {};
-            }
-
             //configuração de porcentagem
             viewer
                 .configuration
@@ -623,7 +637,7 @@ define([
                                         total += allData[i];
                                     }
                                     var tooltipPercentage = Math.round((tooltipData / total) * 100);
-                                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                                    return tooltipLabel + ': ' + util.formatNumber(tooltipData,2,',','.') + ' (' + tooltipPercentage + '%)';
                                 }
                         }
                     };
