@@ -41,6 +41,11 @@ define([
                 type: "SINGLESOURCE_GROUP",
                 icon: 'icon-perm-media',
                 template: ""
+            },
+            TWITTER_TIMELINE: {
+                type: "TWITTER_TIMELINE",
+                icon: "icon-twitter",
+                template: ""
             }
         };
 
