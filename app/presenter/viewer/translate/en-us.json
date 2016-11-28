@@ -5,6 +5,7 @@
         "TYPE_ANALYSIS": "Analysis",
         "TYPE_SINGLESOURCE": "Media",
         "TYPE_SINGLESOURCE_GROUP": "Media Group",
+        "TYPE_TWITTER_TIMELINE" : "Twitter Timeline",
 
         "INTERVAL":"Interval",
         "INTERVAL_FROM":"From",
@@ -188,7 +189,8 @@
         "DRAG_COLUMNS_FOR_DRILL":"Drag columns for drill",
         "SETTINGS_ADVANCED":"Advanced settings",
         "SELECT":"Select",
-        "LABEL_TEXT":"Label text"
+        "LABEL_TEXT":"Label text",
+        "TWITTER_USER":"Twitter User"
     },
     "VIEWER_TEMPLATE_TYPE": {
         "bar": "Bar",
@@ -210,6 +212,7 @@
         "pie-chartjs" : "Pie",
         "polar-area-chartjs" : "Polar",
         "radar-chartjs" : "Radar",
-        "area-chartjs" : "Area"
+        "area-chartjs" : "Area",
+        "twitter-timeline" : "Twitter Timeline"
    }
 }
