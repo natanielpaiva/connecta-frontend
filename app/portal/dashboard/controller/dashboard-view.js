@@ -5,6 +5,7 @@ define([
     'portal/layout/service/layout',
     'portal/dashboard/directive/viewer',
     'presenter/viewer/directive/analysis-viewer',
+    'presenter/viewer/directive/twitter-timeline-viewer',
     'presenter/viewer/directive/singlesource-viewer',
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
