@@ -14,14 +14,26 @@ define([
                     request.headers.push({});
                 },
                 addNewRequest: function () {
-                    $scope.datasource.requests.push({
-                        headers: [{}],
-                        parametersBody :[{}],
-                        variables: [{}]
-                    });
+
+                    if ($scope.datasource.user || $scope.datasource.password) {
+                        $scope.datasource.requests.push({
+                            headers: [{
+                                    key: 'Authorization',
+                                    value: makeBasicHash(),
+                                }],
+                            parametersBody: [{}],
+                            variables: [{}]
+                        });
+                    } else {
+                        $scope.datasource.requests.push({
+                            headers: [{}],
+                            parametersBody: [{}],
+                            variables: [{}]
+                        });
+                    }
                 },
-                deleteRequest: function(index, $event){
-                    $scope.datasource.requests.splice( index, 1);
+                deleteRequest: function (index, $event) {
+                    $scope.datasource.requests.splice(index, 1);
                     $event.preventDefault();
                 },
                 sendRequest: function (request) {
@@ -59,6 +71,26 @@ define([
                         value: null
                     });
                 },
+                basicAuthorization: function () {
+                    var requests = $scope.datasource.requests;
+                    for (var i = 0; i < requests.length; i++) {
+                        var headers = requests[i].headers;
+                        for (var j = 0; j < headers.length; j++) {
+                            console.log("headers ", headers[j]);
+                            if (headers[j].key === 'Authorization') {
+                                headers[j].value = makeBasicHash();
+                                break;
+                            }
+                            if ((headers.length - 1) === j) {
+                                headers.push({
+                                    key: 'Authorization',
+                                    value: makeBasicHash()
+                                });
+                            }
+                        }
+                    }
+                },
+
                 status: {
                     isCustomHeaderOpen: false,
                     isFirstOpen: true,
@@ -71,7 +103,7 @@ define([
                     'application/xml',
                     'multipart/form-data'
                 ],
-                possibleHeaders: ['Accept', 'Accept-Charset', 'Accept-Encoding',  'Authorization',  'Content-Type' ]
+                possibleHeaders: ['Accept', 'Accept-Charset', 'Accept-Encoding', 'Authorization', 'Content-Type']
             }
         };
         if ($routeParams.id) {
@@ -145,6 +177,11 @@ define([
                 });
             });
         };
+        function makeBasicHash() {
+            var tok = $scope.datasource.user + ':' + $scope.datasource.password;
+            var hash = window.btoa(tok);
+            return "Basic " + hash;
+        }
         $scope.onTextClick = function () {
             //$event.target.select();
 
