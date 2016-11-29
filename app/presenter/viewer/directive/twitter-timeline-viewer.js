@@ -25,11 +25,10 @@ define([
                         twttr.widgets.createTimeline(
                           {
                             sourceType: 'profile',
-                            screenName: $scope.model.twitterUser === undefined
-                                    ? 'twitterdev' : $scope.model.twitterUser
+                            screenName: $scope.model.twitterUser === undefined ?
+                                'twitterdev' : $scope.model.twitterUser
                           },
-                          document.getElementById('twitter-timeline-' + $scope.uuid)
-                          ,
+                          document.getElementById('twitter-timeline-' + $scope.uuid),
                           {
                             width: '100%',
                             height: '100%',
