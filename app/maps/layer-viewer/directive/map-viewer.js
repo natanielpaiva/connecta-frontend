@@ -127,10 +127,8 @@ define([
                             return item.richLayerId === richLayer._id;
                         });
                         if (filter.length) {
-                            filter[0].outFields.map( function (field) {
-                                if (field.valueType === 'number') {
-                                    outFields.push(field.name);
-                                }
+                            outFields = filter[0].outFields.map( function (field) {
+                                return field.name;
                             });
                         }
 
