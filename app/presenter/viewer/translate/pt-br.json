@@ -204,6 +204,7 @@
         "polar-area-chartjs" : "Polar",
         "radar-chartjs" : "Radar",
         "area-chartjs" : "Área",
-        "twitter-timeline": "Twitter Timeline"
+        "twitter-timeline": "Twitter Timeline",
+        "other-number": "Number"
    }
 }

@@ -499,7 +499,7 @@ define([
         // ----------- Chart JS  ------------ //
 
         var chartJsTypes = {
-            chartjs : [
+            chartjs: [
                 {
                     id: 'horizontal-bar-chartjs',
                     src: 'assets/img/presenter/barras/bar-clustered.png'
@@ -543,12 +543,16 @@ define([
             return chartJsTypes;
         };
 
+        this.getPreview = function (viewer, result) {
+            viewer.configuration.data = result;
+        };
+
         this.getPreviewChartJs = function (viewer, result, columnDrill) {
 
             viewer.configuration.labels = [];
             viewer.configuration.series = [];
             viewer.configuration.data = [];
-            if(!viewer.configuration.options) {
+            if (!viewer.configuration.options) {
                 viewer.configuration.options = {};
             }
 
@@ -575,7 +579,7 @@ define([
                     configureBarLineAndRadarChartJs(viewer, result, columnDrill);
                     break;
                 case "bubble":
-                    configureBubbleChartJs(viewer,result);
+                    configureBubbleChartJs(viewer, result);
                     break;
             }
 
@@ -585,23 +589,23 @@ define([
 
             //configuração de formatação
             viewer
-                .configuration
+                    .configuration
                     .options
-                        .tooltips = {
-                            callbacks: {
-                                label: function(tooltipItem, data) {
-                                    var allData = data.datasets[tooltipItem.datasetIndex].data;
-                                    var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label;
-                                    var tooltipData = allData[tooltipItem.index];
-                                    return tooltipLabel + ': ' + util.formatNumber(tooltipData,2,',','.');
-                                }
+                    .tooltips = {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var allData = data.datasets[tooltipItem.datasetIndex].data;
+                                var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label;
+                                var tooltipData = allData[tooltipItem.index];
+                                return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.');
+                            }
                         }
                     };
 
             if (columnDrill) {
                 viewer.configuration.descriptionLabel = columnDrill.label;
                 viewer.configuration.labels =
-                    montaArrayChartJs(columnDrill.label, result);
+                        montaArrayChartJs(columnDrill.label, result);
 
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                     if (analysisViewerColumn.columnType === 'METRIC') {
@@ -610,13 +614,13 @@ define([
                         viewer.configuration.data.push(montaArrayChartJs(labelMetric, result));
                     }
                 });
-            }else{
+            } else {
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
-                    if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                    if (analysisViewerColumn.columnType === 'DESCRIPTION') {
                         viewer.configuration.descriptionLabel = analysisViewerColumn.analysisColumn.label;
-                       viewer.configuration.labels =
-                            montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
-                    }else if (analysisViewerColumn.columnType === 'METRIC') {
+                        viewer.configuration.labels =
+                                montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
+                    } else if (analysisViewerColumn.columnType === 'METRIC') {
                         var labelMetric = analysisViewerColumn.analysisColumn.label;
                         viewer.configuration.series.push(labelMetric);
                         viewer.configuration.data.push(montaArrayChartJs(labelMetric, result));
@@ -629,49 +633,49 @@ define([
 
             //configuração de porcentagem
             viewer
-                .configuration
+                    .configuration
                     .options
-                        .tooltips = {
-                            callbacks: {
-                                label: function(tooltipItem, data) {
-                                    var allData = data.datasets[tooltipItem.datasetIndex].data;
-                                    var tooltipLabel = data.labels[tooltipItem.index];
-                                    var tooltipData = allData[tooltipItem.index];
-                                    var total = 0;
-                                    for (var i in allData) {
-                                        total += allData[i];
-                                    }
-                                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
-                                    return tooltipLabel + ': ' + util.formatNumber(tooltipData,2,',','.') + ' (' + tooltipPercentage + '%)';
+                    .tooltips = {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var allData = data.datasets[tooltipItem.datasetIndex].data;
+                                var tooltipLabel = data.labels[tooltipItem.index];
+                                var tooltipData = allData[tooltipItem.index];
+                                var total = 0;
+                                for (var i in allData) {
+                                    total += allData[i];
                                 }
+                                var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                                return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.') + ' (' + tooltipPercentage + '%)';
+                            }
                         }
                     };
 
             var typeViewer = identifyViewerType(viewer, result);
 
-            if(typeViewer.type === 2){
+            if (typeViewer.type === 2) {
                 montaChartJsPieType2(viewer, result);
-            }else{
+            } else {
                 montaChartJsPie(viewer, result, columnDrill);
             }
         };
 
-        var montaChartJsPieType2 = function(viewer, result){
+        var montaChartJsPieType2 = function (viewer, result) {
             viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                 if (analysisViewerColumn.columnType === 'METRIC') {
                     viewer.configuration.labels.push(
-                        analysisViewerColumn.analysisColumn.label);
+                            analysisViewerColumn.analysisColumn.label);
                     var labelMetric = analysisViewerColumn.analysisColumn.label;
                     viewer.configuration.data.push(retornaValueFromField(labelMetric, result));
                 }
             });
         };
 
-        var montaChartJsPie = function(viewer, result, columnDrill){
+        var montaChartJsPie = function (viewer, result, columnDrill) {
             if (columnDrill) {
                 viewer.configuration.descriptionLabel = columnDrill.label;
                 viewer.configuration.labels =
-                    montaArrayChartJs(columnDrill.label, result);
+                        montaArrayChartJs(columnDrill.label, result);
 
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                     if (analysisViewerColumn.columnType === 'METRIC') {
@@ -682,11 +686,11 @@ define([
                 });
             } else {
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
-                    if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                    if (analysisViewerColumn.columnType === 'DESCRIPTION') {
                         viewer.configuration.descriptionLabel = analysisViewerColumn.analysisColumn.label;
                         viewer.configuration.labels =
-                            montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
-                    }else if (analysisViewerColumn.columnType === 'METRIC') {
+                                montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
+                    } else if (analysisViewerColumn.columnType === 'METRIC') {
                         var labelMetric = analysisViewerColumn.analysisColumn.label;
                         viewer.configuration.series.push(labelMetric);
                         viewer.configuration.data = montaArrayChartJs(labelMetric, result);
@@ -695,7 +699,7 @@ define([
             }
         };
 
-        var configureBubbleChartJs = function(viewer, result) {
+        var configureBubbleChartJs = function (viewer, result) {
 
             var xField;
             var yField;
@@ -703,27 +707,27 @@ define([
             var descriptionField;
 
             viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
-                if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                if (analysisViewerColumn.columnType === 'DESCRIPTION') {
                     descriptionField = analysisViewerColumn.analysisColumn.label;
                     viewer.configuration.series =
-                        montaArrayChartJs(descriptionField, result);
-                }else if (analysisViewerColumn.columnType === 'XFIELD') {
+                            montaArrayChartJs(descriptionField, result);
+                } else if (analysisViewerColumn.columnType === 'XFIELD') {
                     xField = analysisViewerColumn.analysisColumn.label;
-                }else if (analysisViewerColumn.columnType === 'YFIELD') {
+                } else if (analysisViewerColumn.columnType === 'YFIELD') {
                     yField = analysisViewerColumn.analysisColumn.label;
-                }else if (analysisViewerColumn.columnType === 'VALUEFIELD') {
+                } else if (analysisViewerColumn.columnType === 'VALUEFIELD') {
                     valueField = analysisViewerColumn.analysisColumn.label;
                 }
             });
 
-            for(var i = 0; i < result.length; i++){
-                if(!descriptionField)
-                    viewer.configuration.series.push('Bubble-'+(i+1));
-                viewer.configuration.data.push(montaArrayXYChartJs(xField,yField,valueField,result[i]));
+            for (var i = 0; i < result.length; i++) {
+                if (!descriptionField)
+                    viewer.configuration.series.push('Bubble-' + (i + 1));
+                viewer.configuration.data.push(montaArrayXYChartJs(xField, yField, valueField, result[i]));
             }
         };
 
-        var montaArrayXYChartJs = function(xField,yField,valueField,result) {
+        var montaArrayXYChartJs = function (xField, yField, valueField, result) {
             var array = [];
             var xyr = {};
             var object = result;
@@ -736,11 +740,11 @@ define([
                     xyr.r = object[t];
                 }
             }
-            array.push(!xyr.r ? xyr = {x:xyr.x,y:xyr.y,r:1} : xyr);
+            array.push(!xyr.r ? xyr = {x: xyr.x, y: xyr.y, r: 1} : xyr);
             return array;
         };
 
-        var montaArrayChartJs = function(field, result) {
+        var montaArrayChartJs = function (field, result) {
             var array = [];
             for (var r in result) {
                 var valueField;
@@ -756,7 +760,7 @@ define([
             return array;
         };
 
-        var retornaValueFromField = function(field, result) {
+        var retornaValueFromField = function (field, result) {
             var valueField;
 
             for (var r in result) {

@@ -94,7 +94,8 @@ define([
                 };
 
                 var mountResult = function(result){
-                    if ($scope.model.configuration.type === 'table') {
+                    if ($scope.model.configuration.type === 'table' || 
+                        $scope.model.configuration.type === 'number' ) {
                         $scope.model.configuration.data = result;
                         $scope.model.columns = $scope.model.analysisViewerColumns;
                     }else if ($scope.model.configuration.type === 'chartjs'){

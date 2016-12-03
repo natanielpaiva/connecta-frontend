@@ -39,7 +39,7 @@ define([
         };
 
         this.catalogObiee = function (dsn, user, password, path) {
-            var url = applications.portal.host + '/obiee/catalog?';
+            var url = applications.presenter.host + '/obiee/catalog?';
             url += 'location=' + dsn;
             url += '&user=' + user;
             url += '&password=' + password;
