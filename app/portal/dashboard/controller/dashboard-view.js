@@ -21,7 +21,13 @@ define([
             $scope.$apply();
         });
 
-        $scope.dashboard = {};
+        $scope.dashboard = {
+            hasExpandedViewer: false
+        };
+
+        $scope.$on('dashboard.hasExpanded', function($event, hasExpanded){
+            $scope.dashboard.hasExpandedViewer = hasExpanded;
+        });
 
         LayoutService.setFullscreen(true);
 
