@@ -1,5 +1,4 @@
 <div class="viewer-header" ng-if="!edit">
-    <h3>{{model.name}}</h3>
     <div class="controls">
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
@@ -39,6 +38,7 @@
             </div>
         </div>
     </div>
+    <h3 ng-click="model.doExpand()">{{model.name}}</h3>
 </div>
 
 <div class="drill-breadcrumb" ng-if="notEmpty().length">

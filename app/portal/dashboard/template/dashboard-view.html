@@ -4,7 +4,7 @@
          'background-image':getImage(dashboard.backgroundImage),
          'width':config.isPrinting?'730px':'auto',
          'margin':config.isPrinting?'0 auto':'initial'
-     }">
+     }" ng-class="{'has-expanded':dashboard.hasExpandedViewer}">
     <div class="dashboard-header" ng-class="{
           'dashboard-header-mini': config.headerMini
         }">

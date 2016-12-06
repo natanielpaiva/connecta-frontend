@@ -1,4 +1,4 @@
-<div ng-switch="model.type" ng-class="{edit:edit}" export-image="model"
+<div ng-switch="model.type" ng-class="{edit:edit, expanded:model.expand}" export-image="model"
      class="connecta-viewer-{{uuid}}">
     <twitter-timeline-viewer ng-model="model" ng-switch-when="TWITTER_TIMELINE" edit="edit">
     </twitter-timeline-viewer>
