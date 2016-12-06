@@ -250,6 +250,31 @@
 
     $defaultAnimationDuration:$defaultAnimationDuration*2;
 
+    &.has-expanded {
+        .dashboard-header {
+            display:none;
+        }
+        viewer {
+            &:hover {
+                border:none;
+            }
+            [ng-switch] {
+                display:none;
+            }
+            [ng-switch].expanded {
+                display:block;
+            }
+        }
+        .section-menu {
+            display:none;
+        }
+        .dashboard-section {
+            h2 {
+                display:none;
+            }
+        }
+    }
+
     .dashboard-header {
         @include clearfix;
         background-color:$black;
@@ -721,6 +746,22 @@ viewer {
     [ng-switch] {
         @include div-block();
         z-index: 0 !important;
+        transition: top $defaultAnimationDuration ease,
+            bottom $defaultAnimationDuration ease,
+            left $defaultAnimationDuration ease,
+            top $defaultAnimationDuration ease,
+            background-color $defaultAnimationDuration ease;
+
+        &.expanded {
+            position:fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            padding:2em;
+            z-index: 999;
+            background-color: $white;
+        }
 
         map-viewer {
             z-index: 0 !important;
@@ -759,7 +800,8 @@ viewer {
             font-size: 1.2em;
             font-weight: normal;
             line-height:1em;
-            float:left;
+            //float:left;
+            cursor:pointer;
         }
         .controls {
             @include clearfix;
