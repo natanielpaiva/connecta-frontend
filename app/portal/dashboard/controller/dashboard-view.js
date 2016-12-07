@@ -78,6 +78,12 @@ define([
             });
 
             $scope.dashboard = response.data;
+
+            $timeout(function(){
+               $scope.$apply(function(){
+                  $document.scrollTop(20);
+               });
+           },1000);
         });
 
         $scope.getImage = function (image) {
