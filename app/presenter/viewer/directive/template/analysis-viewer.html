@@ -1,4 +1,4 @@
-<div class="viewer-header" ng-if="!edit">
+<div class="viewer-header" ng-if="!edit && model.configuration.type !== 'number'">
     <div class="controls">
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>

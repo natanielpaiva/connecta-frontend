@@ -20,7 +20,7 @@ define([
             responsive: true,
             maintainAspectRatio: false,
             legend: {
-                display: true,
+                display: false,
                 position: 'bottom'
             },
             scales: {

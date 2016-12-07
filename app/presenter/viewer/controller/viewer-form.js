@@ -340,7 +340,6 @@ define([
         if ($routeParams.template && $routeParams.type && $routeParams.analysis) {
 
             if($routeParams.template === 'other-singlesource'){
-                console.log('teste');
                 $scope.viewer = {
                     singleSource: {id: ""},
                     singlesource: {list: []},
@@ -437,7 +436,6 @@ define([
         } else if ($routeParams.template && $routeParams.type) {
 
             if($routeParams.template === 'other-singlesource'){
-                console.log('teste');
                 $scope.viewer = {
                     singleSource: {id: ""},
                     singlesource: {list: []},
