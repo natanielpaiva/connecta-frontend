@@ -19,8 +19,11 @@ define([
         ChartJsProvider.setOptions({
             responsive: true,
             maintainAspectRatio: false,
+            tooltips: {
+                enabled: true
+            },
             legend: {
-                display: false,
+                display: true,
                 position: 'bottom'
             },
             scales: {
