@@ -156,7 +156,7 @@ define([
                     $scope.viewer = getViewer();
 
                     $scope.templateCombo = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-combo.html';
-                    // $scope.templateSettings = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-settings.html';
+                    $scope.templateSettings = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-settings.html';
                     $scope.templateTypes = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-types-chartjs.html';
 
                     $scope.setLayoutSettings = function (config) {
@@ -174,6 +174,14 @@ define([
                         var retorno = false;
                         return retorno;
                     };
+
+                    $scope.configAnimationCallBack = function(enabled) {
+                        if(!enabled){
+                            ViewerService.createAnimationCallBack($scope.viewer.configuration.options);
+                        }else{
+                            ViewerService.removeAnimationCallBack($scope.viewer.configuration.options);
+                        }
+                    }
 
                 },
                 src: 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar.html'

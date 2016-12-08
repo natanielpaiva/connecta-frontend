@@ -3,7 +3,7 @@ define([
     'connecta.presenter',
     'portal/layout/service/autocomplete'
 ], function (presenter) {
-    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, DomainService, util) {
+    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, DomainService, util, ChartJs) {
 
         var exampleTable = {
             examples: [
@@ -77,265 +77,23 @@ define([
                     type: 'APPEARANCE'
                 }
 
-            },
-            {
-                heading: "VIEWER._BACKGROUND_AND_PLOT_AREA",
-                title: "Background and plot area",
-                type: "BACKGROUND",
-                children: [
-                    {
-                        type: "PLOT_AREA",
-                        name: "VIEWER.PLOT_AREA",
-                        config: {
-                            name: 'VIEWER.PLOT_AREA',
-                            template: 'app/presenter/viewer/template/background-and-plot-area/plot-area.html',
-                            type: 'PLOT_AREA'
-                        }
-                    },
-                    {
-                        type: "MARGINS",
-                        name: "VIEWER.MARGINS",
-                        config: {
-                            name: 'VIEWER.MARGINS',
-                            template: 'app/presenter/viewer/template/background-and-plot-area/margins.html',
-                            type: 'MARGINS'
-                        }
-                    },
-                    {
-                        type: "BACKGROUND_AND_BORDER",
-                        name: "VIEWER.BACKGROUND_AND_BORDER",
-                        config: {
-                            name: 'VIEWER.BACKGROUND_AND_BORDER',
-                            template: 'app/presenter/viewer/template/background-and-plot-area/background-and-border.html',
-                            type: 'BACKGROUND_AND_BORDER'
-                        }
-                    }
-                ]
-
-            },
-            {
-                heading: "VIEWER._GENERAL_SETTINGS",
-                title: "VIEWER.GENERAL_SETTINGS",
-                type: "GENERAL_SETTINGS",
-                children: "",
-                config: {
-                    name: 'VIEWER.GENERAL_SETTINGS',
-                    template: 'app/presenter/viewer/template/general-settings/general-settings.html',
-                    type: 'GENERAL_SETTINGS'
-                }
-            },
-            {
-                heading: "VIEWER._MISCELLANEOUS",
-                title: "VIEWER.MISCELLANEOUS",
-                type: "MISCELLANEOUS",
-                children: [
-                    {
-                        type: "OTHER",
-                        name: "VIEWER.OTHER",
-                        config: {
-                            name: 'VIEWER.OTHER',
-                            template: 'app/presenter/viewer/template/miscellaneous/other.html',
-                            type: 'OTHER'
-                        }
-                    },
-                    {
-                        type: "COLUMNS",
-                        name: "VIEWER.COLUMNS",
-                        config: {
-                            name: 'VIEWER.COLUMNS',
-                            template: 'app/presenter/viewer/template/miscellaneous/columns.html',
-                            type: 'COLUMNS'
-                        }
-                    },
-                    {
-                        type: "ZOOMING",
-                        name: "VIEWER.ZOOMING",
-                        config: {
-                            name: 'VIEWER.ZOOMING',
-                            template: 'app/presenter/viewer/template/miscellaneous/zooming.html',
-                            type: 'ZOOMING'
-                        }
-                    },
-                    {
-                        type: "ANIMATION",
-                        name: "VIEWER.ANIMATION",
-                        config: {
-                            name: 'VIEWER.ANIMATION',
-                            template: 'app/presenter/viewer/template/miscellaneous/animation.html',
-                            type: 'ANIMATION'
-                        }
-                    }
-                ]
-            },
-            {
-                heading: "VIEWER._NUMBER_FORMATTING",
-                title: "Number formatting",
-                type: "VIEWER.NUMBER_FORMATTING",
-                children: "",
-                config: {
-                    name: 'VIEWER.NUMBER_FORMATTING',
-                    template: 'app/presenter/viewer/template/number-formating/number-formating.html',
-                    type: 'NUMBER_FORMATTING'
-                }
-
-            },
-            {
-                heading: "VIEWER._CHART_CURSOR",
-                title: "VIEWER.CHART_CURSOR",
-                type: "CHART_CURSOR",
-                children: [
-                    {
-                        type: "GENERAL_SETTINGS",
-                        name: "VIEWER.CHART_CURSOR",
-                        config: {
-                            name: 'VIEWER.CHART_CURSOR',
-                            template: 'app/presenter/viewer/template/chart-cursor/general-settings.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "APPEARANCE",
-                        name: "VIEWER.APPEARANCE",
-                        config: {
-                            name: 'VIEWER.APPEARANCE',
-                            template: 'app/presenter/viewer/template/chart-cursor/appearance.html',
-                            type: 'APPEARANCE'
-                        }
-                    }
-                ]
-            },
-            {
-                heading: "VIEWER._CHART_SCROLLBAR",
-                title: "VIEWER.CHART_SCROLLBAR",
-                type: "CHART_SCROLLBAR",
-                children: [
-                    {
-                        type: "GENERAL_SETTINGS",
-                        name: "VIEWER.GENERAL_SETTINGS",
-                        config: {
-                            name: 'VIEWER.GENERAL_SETTINGS',
-                            template: 'app/presenter/viewer/template/chart-scrollbar/general-settings.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "APPEARANCE",
-                        name: "VIEWER.APPEARANCE",
-                        config: {
-                            name: 'VIEWER.APPEARANCE',
-                            template: 'app/presenter/viewer/template/chart-scrollbar/appearance.html',
-                            type: 'APPEARANCE'
-                        }
-                    }
-                ]
-            },
-            {
-                heading: "VIEWER._LEGEND",
-                title: "VIEWER.LEGEND",
-                type: "LEGEND",
-                children: [
-                    {
-                        type: "GENERAL_SETTINGS",
-                        name: "VIEWER.GENERAL_SETTINGS",
-                        config: {
-                            name: 'VIEWER.GENERAL_SETTINGS',
-                            template: 'app/presenter/viewer/template/legend/general-settings.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "POSITION_AND_MARGINS",
-                        name: "VIEWER.POSITION_AND_MARGINS",
-                        config: {
-                            name: 'VIEWER.POSITION_AND_MARGINS',
-                            template: 'app/presenter/viewer/template/legend/position-and-margins.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "APPEARANCE",
-                        name: "VIEWER.APPEARANCE",
-                        config: {
-                            name: 'VIEWER.APPEARANCE',
-                            template: 'app/presenter/viewer/template/legend/appearance.html',
-                            type: 'APPEARANCE'
-                        }
-                    },
-                    {
-                        type: "MARKERS",
-                        name: "VIEWER.MARKERS",
-                        config: {
-                            name: 'VIEWER.MARKERS',
-                            template: 'app/presenter/viewer/template/legend/markers.html',
-                            type: 'MARKERS'
-                        }
-                    }
-
-                ]
-            },
-            {
-                heading: "VIEWER._BALLON",
-                title: "VIEWER.BALLON",
-                type: "BALLON",
-                children: [
-                    {
-                        type: "GENERAL_SETTINGS",
-                        name: "VIEWER.GENERAL_SETTINGS",
-                        config: {
-                            name: 'VIEWER.GENERAL_SETTINGS',
-                            template: 'app/presenter/viewer/template/ballon/general-settings.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "APPEARANCE",
-                        name: "VIEWER.APPEARANCE",
-                        config: {
-                            name: 'VIEWER.APPEARANCE',
-                            template: 'app/presenter/viewer/template/ballon/appearance.html',
-                            type: 'APPEARANCE'
-                        }
-                    }
-
-                ]
-
-            },
-            {
-                heading: "VIEWER._TITLE",
-                title: "VIEWER.TITLE",
-                type: "TITLE",
-                children: "",
-                config: {
-                    name: 'VIEWER.TITLE',
-                    template: 'app/presenter/viewer/template/title/title.html',
-                    type: 'TITLE'
-                }
-
-            },
-            {
-                heading: "VIEWER._GRAPHS",
-                title: "VIEWER.GRAPHS",
-                type: "GRAPHS",
-                children: "",
-                config: {
-                    name: 'VIEWER.GRAPHS',
-                    template: 'app/presenter/viewer/template/graphs/graphs.html',
-                    type: 'GRAPHS'
-                }
-
-            },
-            {
-                heading: "VIEWER._CATEGORY_AXIS",
-                title: "Category Axis",
-                type: "CATEGORY_AXIS",
-                children: "",
-                config: {
-                    name: 'VIEWER.CATEGORY_AXIS',
-                    template: 'app/presenter/viewer/template/category-axis/axis-label.html',
-                    type: 'CATEGORY_AXIS'
-                }
-
             }
+            // {
+            //     heading: "VIEWER._BACKGROUND_AND_PLOT_AREA",
+            //     title: "Background and plot area",
+            //     type: "BACKGROUND",
+            //     children: [
+            //         {
+            //             type: "PLOT_AREA",
+            //             name: "VIEWER.PLOT_AREA",
+            //             config: {
+            //                 name: 'VIEWER.PLOT_AREA',
+            //                 template: 'app/presenter/viewer/template/background-and-plot-area/plot-area.html',
+            //                 type: 'PLOT_AREA'
+            //             }
+            //         }
+            //     ]
+            // }
         ];
 
         this.getExampleTable = function () {
@@ -556,6 +314,11 @@ define([
                 viewer.configuration.options = {};
             }
 
+            if(!viewer.configuration.options.tooltips ||
+                viewer.configuration.options.tooltips.enabled){
+                angular.merge(viewer.configuration.options, ChartJs.getOptions());
+            }
+
             switch (viewer.configuration.subtype) {
                 case "bar":
                     configureBarLineAndRadarChartJs(viewer, result, columnDrill);
@@ -583,22 +346,24 @@ define([
                     break;
             }
 
+            animationCallBack(viewer);
+
+            console.log(viewer.configuration.options);
+
         };
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
 
             //configuração de formatação
             viewer
-                    .configuration
-                    .options
-                    .tooltips = {
-                        callbacks: {
-                            label: function (tooltipItem, data) {
-                                var allData = data.datasets[tooltipItem.datasetIndex].data;
-                                var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label;
-                                var tooltipData = allData[tooltipItem.index];
-                                return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.');
-                            }
+                .configuration
+                .options
+                .tooltips.callbacks = {
+                        label: function (tooltipItem, data) {
+                            var allData = data.datasets[tooltipItem.datasetIndex].data;
+                            var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label;
+                            var tooltipData = allData[tooltipItem.index];
+                            return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.');
                         }
                     };
 
@@ -633,21 +398,19 @@ define([
 
             //configuração de porcentagem
             viewer
-                    .configuration
-                    .options
-                    .tooltips = {
-                        callbacks: {
-                            label: function (tooltipItem, data) {
-                                var allData = data.datasets[tooltipItem.datasetIndex].data;
-                                var tooltipLabel = data.labels[tooltipItem.index];
-                                var tooltipData = allData[tooltipItem.index];
-                                var total = 0;
-                                for (var i in allData) {
-                                    total += allData[i];
-                                }
-                                var tooltipPercentage = Math.round((tooltipData / total) * 100);
-                                return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.') + ' (' + tooltipPercentage + '%)';
+                .configuration
+                .options
+                .tooltips.callbacks = {
+                        label: function (tooltipItem, data) {
+                            var allData = data.datasets[tooltipItem.datasetIndex].data;
+                            var tooltipLabel = data.labels[tooltipItem.index];
+                            var tooltipData = allData[tooltipItem.index];
+                            var total = 0;
+                            for (var i in allData) {
+                                total += allData[i];
                             }
+                            var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                            return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.') + ' (' + tooltipPercentage + '%)';
                         }
                     };
 
@@ -774,6 +537,58 @@ define([
             }
             return valueField;
         };
+
+
+        var animationCallBack = function(viewer){
+            if(!viewer.configuration.options.tooltips.enabled){
+                this.createAnimationCallBack(viewer.configuration.options);
+            }else{
+                this.removeAnimationCallBack(viewer.configuration.options);
+            }
+        }.bind(this);
+
+        this.createAnimationCallBack = function(viewerOptions) {
+            var options = {
+                events: false,
+                hover: {
+                    animationDuration: 0
+                },
+                animation: {
+                    duration: 1,
+                    onComplete: function() {
+                        var ctx = this.chart.ctx;
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+
+                        this.data.datasets.forEach(function(dataset) {
+                            for (var i = 0; i < dataset.data.length; i++) {
+                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                                    scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
+                                ctx.fillStyle = '#444';
+                                var y_pos = model.y - 5;
+                                // Make sure data value does not get overflown and hidden
+                                // when the bar's value is too close to max value of scale
+                                // Note: The y value is reverse, it counts from top down
+                                if ((scale_max - model.y) / scale_max >= 0.93)
+                                    y_pos = model.y + 20;
+                                ctx.fillText(util.formatNumber(dataset.data[i], 2, ',', '.'), model.x, y_pos);
+                            }
+                        });
+                    }
+                }
+            }
+
+            angular.merge(viewerOptions, options);
+
+            console.log(viewerOptions);
+        }
+
+        this.removeAnimationCallBack = function(viewerOptions) {
+            delete viewerOptions.events;
+            delete viewerOptions.hover;
+            delete viewerOptions.animation;
+        }
 
     });
 });

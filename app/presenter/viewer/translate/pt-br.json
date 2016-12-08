@@ -190,7 +190,8 @@
         "SETTINGS_ADVANCED":"Configurações avançadas",
         "SELECT":"Selecione",
         "LABEL_TEXT":"Texto do label",
-        "TWITTER_USER":"Usuário do Twitter"
+        "TWITTER_USER":"Usuário do Twitter",
+        "TOOLTIP":"Tooltip"
     },
     "VIEWER_TEMPLATE_ITEM": {
         "other-singlesource":"Media",
