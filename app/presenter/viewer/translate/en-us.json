@@ -190,7 +190,8 @@
         "SETTINGS_ADVANCED":"Advanced settings",
         "SELECT":"Select",
         "LABEL_TEXT":"Label text",
-        "TWITTER_USER":"Twitter User"
+        "TWITTER_USER":"Twitter User",
+        "TOOLTIP":"Tooltip"
     },
     "VIEWER_TEMPLATE_TYPE": {
         "bar": "Bar",
