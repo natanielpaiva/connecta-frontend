@@ -577,18 +577,18 @@ define([
                         });
                     }
                 }
-            }
+            };
 
             angular.merge(viewerOptions, options);
 
             console.log(viewerOptions);
-        }
+        };
 
         this.removeAnimationCallBack = function(viewerOptions) {
             delete viewerOptions.events;
             delete viewerOptions.hover;
             delete viewerOptions.animation;
-        }
+        };
 
     });
 });
