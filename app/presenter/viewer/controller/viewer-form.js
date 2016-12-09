@@ -181,7 +181,7 @@ define([
                         }else{
                             ViewerService.removeAnimationCallBack($scope.viewer.configuration.options);
                         }
-                    }
+                    };
 
                 },
                 src: 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar.html'
