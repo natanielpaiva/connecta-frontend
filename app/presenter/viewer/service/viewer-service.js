@@ -348,8 +348,6 @@ define([
 
             animationCallBack(viewer);
 
-            console.log(viewer.configuration.options);
-
         };
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
@@ -580,8 +578,6 @@ define([
             };
 
             angular.merge(viewerOptions, options);
-
-            console.log(viewerOptions);
         };
 
         this.removeAnimationCallBack = function(viewerOptions) {
