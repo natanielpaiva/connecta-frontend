@@ -193,7 +193,6 @@ define([
                     }else{
                        for(var i = $scope.drillOrder ; i >= drillLevel; i--){
                            $scope.drillLevels[i].filterDrillValue = undefined;
-                           console.log(i);
                        }
                        $scope.drillOrder = drillLevel;
                        $scope.getAnalysisResult();
