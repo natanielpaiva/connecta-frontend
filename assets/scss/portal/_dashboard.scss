@@ -775,6 +775,12 @@ viewer {
                     cursor: crosshair;
                 }
             }
+
+            .underlying-data {
+                margin:1em;
+                overflow-y: auto;
+                height:100%;
+            }
         }
     }
 
@@ -823,6 +829,12 @@ viewer {
 
             .connecta-dropdown {
                 width:10em;
+
+                .connecta-dropdown-item {
+                    .icon-layout7 {
+                        margin:0 0.1em;
+                    }
+                }
             }
 
             > span, .other-options > span {
