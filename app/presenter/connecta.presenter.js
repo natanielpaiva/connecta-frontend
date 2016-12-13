@@ -28,6 +28,7 @@ define([
             },
             scales: {
                 yAxes: [{
+                    display: true,
                     ticks: {
                         beginAtZero:true,
                         callback: function(label, index, labels) {
@@ -43,6 +44,7 @@ define([
                     }
                 }],
                 xAxes: [{
+                    display: true,
                     ticks: {
                         beginAtZero:true
                     }
