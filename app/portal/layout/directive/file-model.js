@@ -9,6 +9,7 @@ define([
                     if (element[0].files[0]) {
                         $timeout(function () {
                             $parse(attrs.fileModel).assign(scope, element[0].files[0]);
+                            element[0].value = '';
                         });
                     }
                 });

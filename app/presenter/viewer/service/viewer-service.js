@@ -330,9 +330,11 @@ define([
                     configureBarLineAndRadarChartJs(viewer, result, columnDrill);
                     break;
                 case "pie":
+                    setAxisToFalse(viewer.configuration.options.scales);
                     configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
                     break;
                 case "doughnut":
+                    setAxisToFalse(viewer.configuration.options.scales);
                     configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
                     break;
                 case "polarArea":
@@ -347,7 +349,11 @@ define([
             }
 
             animationCallBack(viewer);
+        };
 
+        var setAxisToFalse = function(scales){
+            scales.yAxes[0].display = false;
+            scales.xAxes[0].display = false;
         };
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
