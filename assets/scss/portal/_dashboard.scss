@@ -770,6 +770,7 @@ viewer {
         analysis-viewer {
             z-index:0 !important;
             perspective: 800px;     // Profundidade da carta
+            position:relative;
             
             .amchart {
                 &.is-drilling {
@@ -789,22 +790,35 @@ viewer {
                     position: absolute;
                     width: 100%;
                     backface-visibility: hidden;
+
+                    * {
+                        backface-visibility: hidden;
+                    }
                 }
 
                 > *:not(.underlying-data) { // PARTES DA FRENTE DA CARTA
-
+                    // background-color: $white;
+                    z-index:0;
                 }
 
                 .underlying-data {  // PARTE DE TRÁS DA CARTA
                     padding:1em;
-                    overflow-y: auto;
+                    overflow: auto;
                     height:100%;
                     transform: rotateY(180deg);
-                    background-color: $white;
+                    opacity: 0;
+                    backface-visibility: hidden !important;
+                    table {
+                        backface-visibility: hidden;
+                    }
                 }
 
                 &.show-underlying-data {
                     transform: rotateY(180deg);
+
+                    .underlying-data {
+                        opacity: 1;
+                    }
                 }
             }
         }
@@ -834,6 +848,7 @@ viewer {
             line-height:1em;
             //float:left;
             cursor:pointer;
+            @include clipped-text;
         }
         .controls {
             @include clearfix;
