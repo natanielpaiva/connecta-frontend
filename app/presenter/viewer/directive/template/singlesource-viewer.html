@@ -20,8 +20,7 @@
         </div>
         <div class="viewer-frame" ng-if="item.type === 'URL'" >
             <iframe id="{{'iframe_' + item.id}}"
-            src="{{item.url}}"
-            onLoad="loadConnectaMaps()"></iframe>
+            src="{{item.url}}"></iframe>
         </div>
     </div>
     <div class="dropzone" ng-if="model.singlesource.list.length === 0" translate>
@@ -53,7 +52,6 @@ diretiva do código do formulário -->
          style="width:100%;height:100%;">
         <iframe id="{{'iframe_' + model.singleSource.id}}"
             style="width:100%;height:100%;border:none;"
-            src="{{model.singleSource.url}}"
-            onLoad="loadConnectaMaps()"></iframe>
+            src="{{model.singleSource.url}}"></iframe>
     </div>
 </div>
