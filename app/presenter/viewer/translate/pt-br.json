@@ -191,7 +191,8 @@
         "SELECT":"Selecione",
         "LABEL_TEXT":"Texto do label",
         "TWITTER_USER":"Usuário do Twitter",
-        "TOOLTIP":"Tooltip"
+        "TOOLTIP":"Tooltip",
+        "NUMBER_SAMPLE_TEXT": "Descrição da métrica"
     },
     "VIEWER_TEMPLATE_ITEM": {
         "other-singlesource":"Media",
