@@ -443,28 +443,46 @@
 }
 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    background-color: #297EB8;
-    text-align: center;
     width: 100%;
     height: 100%;
-}
+    position: relative;
+    background-color: lighten($white,1%);
+    box-shadow: 0.2em 0.2em 0.1em 0.05em rgba(0,0,0,0.2);
 
+// $black:         #0A0A0A;
+// $lightBlack:    #111111;
+// $darkerGray:    #222222;
+// $darkGray:      #252525;
+// $gray:          #333333;
+// $lightgray:     #5A5A5A;
+// $lighterGray:   #717171;
+// $darkerWhite:   #CCCCCC; //204,204,204
+// $darkWhite:     #E1E1E1; //225,225,225
+// $white:         #F9F9F9;
 
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+    // &:hover {
+    //     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    // }
 
-.container-card {
-    padding: 2px 2px 2px 2px;
-    text-align: center;
-    color: white;
-}
+    .card-value {
+        font-size: 2.5em;
+        font-weight: bolder;
+        position: absolute;
+        top:50%;
+        left:0;
+        right:0;
+        transform:translateY(-50%);
+        text-align: center;
+        color:$lightgray;
+    }
 
-.card-title{
-    text-align: center;
-    text-decoration: underline;
-    color: white;
-    padding-top: 10%;
+    .card-description {
+        font-size: 1em;
+        font-weight:normal;
+        position: absolute;
+        top:65%;
+        left:50%;
+        transform:translateX(-50%);
+        color:$gray;
+    }
 }
