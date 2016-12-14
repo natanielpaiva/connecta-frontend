@@ -4,6 +4,7 @@ define([
     'portal/dashboard/service/dashboard-service',
     'portal/dashboard/directive/viewer',
     'presenter/viewer/directive/analysis-viewer',
+    'presenter/viewer/directive/twitter-timeline-viewer',
     'presenter/viewer/directive/singlesource-viewer',
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
@@ -18,6 +19,7 @@ define([
         var _sectionTemplate = {
             name: $filter('translate')('DASHBOARD.NEW_SECTION'),
             items: [],
+            columns: 12,
             active: true
         };
 
@@ -83,7 +85,7 @@ define([
         }
 
         $scope.gridsterOpts = {
-            columns: 6, // the width of the grid, in columns
+            columns: 12, // the width of the grid, in columns
             pushing: true, // whether to push other items out of the way on move or resize
             floating: true, // whether to automatically float items up so they stack (you can temporarily disable if you are adding unsorted items with ng-repeat)
             swapping: false, // whether or not to have items of the same size switch places instead of pushing down if they are the same size
@@ -161,14 +163,14 @@ define([
             $scope.items.splice($scope.items.indexOf(item), 1);
         };
 
-        $scope.add = function () {
+        /*$scope.add = function () {
             $scope.items.push({
                 sizeX: 2,
                 sizeY: 1,
                 row: 0,
                 col: 0
             });
-        };
+        };*/
 
         $scope.config = function () {
             var $parentScope = $scope;

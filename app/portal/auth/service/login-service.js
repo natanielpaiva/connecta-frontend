@@ -3,12 +3,13 @@ define([
     'connecta.portal'
 ], function (portal) {
     return portal.service('LoginService', function (portalResources, $http, $rootScope,
-            $cookieStore, $route, $q, $timeout, $heading, $base64) {
+            $cookieStore, $cookies, $route, $q, $timeout, $heading, $base64) {
 
         var loginService = this;
         var _reloadNeeded = false;
         var _currentUser = null;
         var _userToken = {};
+        var TIME_EXPIRE = 2; // In hours
 
         var _oauth = {
             clientId: 'frontend',
@@ -35,10 +36,11 @@ define([
 
         /**
          * Seta o token da autenticação
+         * @param {type} token
          * @returns {String}
          */
         this.setAuthenticationToken = function (token) {
-            return $cookieStore.get('portal.auth.access_token');
+            return $cookieStore.put('portal.auth.access_token', token);
         };
 
         /**
@@ -121,7 +123,7 @@ define([
          "access_token": "c7b5bd57-9b05-4b6c-8b54-ac783846ef4b",
          "token_type": "bearer",
          "refresh_token": "43c06b0b-9028-42ba-9ff4-5ef856c68f29",
-         "expires_in": 299,
+         "expires_in":,
          "scope": "read trust write"
          }
          *
@@ -143,8 +145,22 @@ define([
             }).then(function (response) {
                 _userToken.access_token = response.data.access_token;
                 _userToken.refresh_token = response.data.refresh_token;
-                $cookieStore.put('portal.auth.access_token', _userToken.access_token);
-                $cookieStore.put('portal.auth.refresh_token', _userToken.refresh_token);
+
+                if (!user.keepLogged) {
+                    var date = new Date();
+                    date.setHours(date.getHours() + TIME_EXPIRE);
+                    $cookies.putObject('portal.auth.access_token', _userToken.access_token, {
+                        'expires': date
+                    });
+                    $cookies.putObject('portal.auth.refresh_token', _userToken.refresh_token, {
+                        'expires': date
+                    });
+                    
+                } else {
+                    $cookieStore.put('portal.auth.access_token', _userToken.access_token);
+                    $cookieStore.put('portal.auth.refresh_token', _userToken.refresh_token);
+                }
+
                 deferred.resolve(response);
             }, function (response) {
                 loginService.setAuthenticated(false);

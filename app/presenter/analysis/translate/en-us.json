@@ -21,7 +21,7 @@
         "SEPARATOR": "Separator",
         "QUOTE": "Quote",
         "CSV_TYPE": "type CSV",
-        "CSV_FILE": "Or drag CSV here",
+        "CSV_FILE": "Upload CSV",
         "CSV_TEXT": "CSV Text",
         "DOMAIN": "Domain",
         "TYPE_QUERY": "Query type",
@@ -60,6 +60,8 @@
             "NO_COLUMNS_YET":"No columns yet"
         },
         "DELETE":"Delete",
-        "EDIT":"Edit"
+        "EDIT":"Edit",
+        "REQUEST":"Request"
+
     }
 }

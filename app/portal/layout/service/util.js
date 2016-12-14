@@ -50,6 +50,22 @@ define([
             });
             return array;
         };
+
+        this.formatNumber = function(number, decimalsLength, decimalSeparator, thousandSeparator) {
+           var n = number,
+               dl = isNaN(decimalsLength = Math.abs(decimalsLength)) ? 2 : decimalsLength,
+               ds = decimalSeparator === undefined ? "," : decimalSeparator,
+               ts = thousandSeparator === undefined ? "." : thousandSeparator,
+               sign = n < 0 ? "-" : "",
+               i = parseInt(n = Math.abs(+n || 0).toFixed(dl)) + "",
+               j = (j = i.length) > 3 ? j % 3 : 0;
+
+           return sign +
+               (j ? i.substr(0, j) + ts : "") +
+               i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + ts) +
+               (dl ? (ds + Math.abs(n - i).toFixed(dl).slice(2)).replace(/\,0+$/,'') : "");
+        };
+
     });
 });
 

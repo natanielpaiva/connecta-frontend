@@ -14,23 +14,23 @@
         margin-top:0.5em;
         padding: 0.8em;
         min-height: 12em;
-        
+
         &.dndDragover {
             background-color: $darkWhite;
             border: dashed 0.2em $darkerWhite;
         }
-        
+
         &.has-item {
             background-color:$white;
             border: solid 0.2em $darkerWhite;
-            
+
             .dndPlaceholder {
                 display:block;
                 background-color: $darkWhite;
                 border: dashed 0.2em $darkerWhite;
             }
         }
-        
+
         .dndPlaceholder {
             display: none;
         }
@@ -38,7 +38,7 @@
         .dndDraggingSource {
             display: none;
         }
-        
+
         li {
             background-color: $presenterBlue;
             box-shadow: 0.1em 0.1em 0 $darkerWhite;
@@ -54,7 +54,7 @@
             margin-right:0.25em;
             padding:0 0.5em;
             @include clearfix;
-            
+
             .icon-close {
                 color:$darkerWhite;
                 line-height:1em;
@@ -99,7 +99,7 @@
         th {
             cursor: pointer;
         }
-        
+
     }
 }
 
@@ -142,10 +142,10 @@
         font-size: 1.1em;
     }
     .columns-viewer {
-/*        margin-top:0.5em;
-        border: 0.2em dashed $darkWhite;
-        padding: 0.8em;
-        min-height: 12em;*/
+        /*        margin-top:0.5em;
+                border: 0.2em dashed $darkWhite;
+                padding: 0.8em;
+                min-height: 12em;*/
 
         .sidebar-viewer {
             ul {
@@ -304,7 +304,7 @@
 .form-sidebar {
     @extend .margin-top-single;
     padding: 30px 10px 0;
-    
+
     label {
         color: $white;
     }
@@ -440,4 +440,31 @@
 .close-modal{
     float:right;
     cursor: pointer;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: #297EB8;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container-card {
+    padding: 2px 2px 2px 2px;
+    text-align: center;
+    color: white;
+}
+
+.card-title{
+    text-align: center;
+    text-decoration: underline;
+    color: white;
+    padding-top: 10%;
 }

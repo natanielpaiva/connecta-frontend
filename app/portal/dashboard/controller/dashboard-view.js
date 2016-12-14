@@ -5,6 +5,7 @@ define([
     'portal/layout/service/layout',
     'portal/dashboard/directive/viewer',
     'presenter/viewer/directive/analysis-viewer',
+    'presenter/viewer/directive/twitter-timeline-viewer',
     'presenter/viewer/directive/singlesource-viewer',
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
@@ -15,13 +16,18 @@ define([
             headerMini: false,
             isPrinting: false
         };
-
         $document.on('scroll', function () {
-            $scope.config.headerMini = $document.scrollTop() > 70;
+            $scope.config.headerMini = $document.scrollTop() > 1;
             $scope.$apply();
         });
 
-        $scope.dashboard = {};
+        $scope.dashboard = {
+            hasExpandedViewer: false
+        };
+
+        $scope.$on('dashboard.hasExpanded', function($event, hasExpanded){
+            $scope.dashboard.hasExpandedViewer = hasExpanded;
+        });
 
         LayoutService.setFullscreen(true);
 
@@ -47,12 +53,12 @@ define([
         $scope.print = function () {
             $scope.config.isPrinting = true;
 
-           $timeout(function(){
-               $scope.$apply(function(){
-                   $window.print();
-                   $scope.config.isPrinting = false;
-               });
-           },2000);
+            $timeout(function(){
+                $scope.$apply(function(){
+                    $window.print();
+                    $scope.config.isPrinting = false;
+                });
+            },2000);
         };
 
 
@@ -72,6 +78,12 @@ define([
             });
 
             $scope.dashboard = response.data;
+
+            $timeout(function(){
+               $scope.$apply(function(){
+                  $document.scrollTop(20);
+               });
+           },1000);
         });
 
         $scope.getImage = function (image) {

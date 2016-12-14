@@ -35,6 +35,8 @@
         "DRILL_UP":"Generalize (Drill up)",
         "ACTIVATE_DRILL":"Activate detailing (Drill)",
         "OPEN_FILTER":"Open filter settings",
+        "VIEWER_DATA":"View data",
+        "RETURN_TO_VIEWER":"Back to viewer",
         "FILTER": {
             "SELECT_FILTER":"Filter settings",
             "SELECTED_FILTER":"Type: {{name}}. Click to active this filter",

@@ -19,17 +19,32 @@ define([
         ChartJsProvider.setOptions({
             responsive: true,
             maintainAspectRatio: false,
+            tooltips: {
+                enabled: true
+            },
             legend: {
                 display: true,
                 position: 'bottom'
             },
             scales: {
                 yAxes: [{
+                    display: true,
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:true,
+                        callback: function(label, index, labels) {
+                            if(!isNaN(label)){
+                                if(label > 999){
+                                    return label.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                                }else if(label > 0 && label < 1){
+                                    return label.toFixed(1);
+                                }
+                            }
+                            return label;
+                        }
                     }
                 }],
                 xAxes: [{
+                    display: true,
                     ticks: {
                         beginAtZero:true
                     }

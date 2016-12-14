@@ -58,6 +58,7 @@ define([
         if ($routeParams.id) {
             $scope.edit = true;
             AnalysisService.getAnalysis($routeParams.id).then(function (response) {
+                
                 //preenche o select de tabelas do banco de dados
                 angular.extend($scope.analysis, response.data);
                 prepareOrderDrill($scope.analysis.analysisColumns);
@@ -68,6 +69,8 @@ define([
                 } else {
                     $scope.analysis.datasource.type = response.data.type;
                 }
+               
+                
                 $scope.subform = $scope.types[response.data.type];
 
                 if ($scope.analysis.analysisRelations &&
@@ -143,7 +146,7 @@ define([
 
         // Analysis relations
         $scope.autosuggest = function () {
-            
+
         };
 
         $scope.acceptSuggestion = function (index, suggestion) {
@@ -234,6 +237,7 @@ define([
 
                 AnalysisService.save(analysisCopy).then(function (response) {
                     $location.path('presenter/analysis/' + response.data.id);
+                    //console.log("Save response", response)
                 });
             }
         };

@@ -28,16 +28,12 @@ define([
         };
 
         $scope.$watch('csv.file', function (val) {
-            dataURI(val).then(function(string) {
-                $scope.analysis.binaryFile = decodeURIComponent(
-                    escape(
-                        atob(string.split('base64,')[1])
-                    )
-                );
-            });
+            if (val) {
+                dataURI(val, true).then(function(string) {
+                    $scope.analysis.binaryFile = string;
+                });
+            }
         });
-
-
 
         $scope.getDataCsv = function () {
             //remove o datasource (csv não pode ter datasource)
@@ -66,7 +62,7 @@ define([
 
         };
 
-        fillAnalysisColumns = function(responseCsv){
+        var fillAnalysisColumns = function(responseCsv){
             for (var cl in responseCsv) {
                 $scope.analysis.analysisColumns.push({
                     name: cl,

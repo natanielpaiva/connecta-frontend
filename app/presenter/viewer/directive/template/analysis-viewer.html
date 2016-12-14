@@ -1,14 +1,18 @@
-<div class="viewer-header" ng-if="!edit">
-    <h3>{{model.name}}</h3>
+<div class="viewer-header" ng-if="!edit && model.configuration.type !== 'number'">
     <div class="controls">
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
         <span class="drill icon-select-arrows" ng-click="options.isDrilling = !options.isDrilling"
               ng-class="{active:options.isDrilling}" title="{{'DASHBOARD.ACTIVATE_DRILL'|translate}}"
               ng-if="model.analysis.hasDrill"></span>
+
         <span class="filter icon-filter2" ng-click="options.filterConfigOpen = true"
               title="{{'DASHBOARD.OPEN_FILTER'|translate}}"
               ng-class="{active:options.filterConfigOpen}"></span>
+        <span ng-click="editViewer(model.id, idDashboard)" class="filter icon-edit3"
+              title="{{'VIEWER.EDIT_VIEWER'|translate}}"></span>
+
+        
         <!--    Feio demais essa classe com uuid, mas se não tiver não tem como distinguir
                 se o click fora é nesse visualizador dentro do dashboard ou em qualquer
                 outro, se tirar, só o primeiro dropdown do dashboard abre. -->
@@ -28,60 +32,117 @@
                           title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
                     {{'DASHBOARD.EXPORT_PNG'|translate}}
                 </div>
-                <div class="connecta-dropdown-item">
-                    <span id="png" class="icon-viewer"
-                          title="{{'DASHBOARD.EXPORT_PNG'|translate}}"></span>
-                    <a href="#/presenter/viewer/{{model.id}}/edit/dashboard/{{idDashboard}}"  translate>
-                        VIEWER.EDIT_VIEWER
-                    </a>
-
+                <div class="connecta-dropdown-item" ng-click="viewerData(true)" ng-if="!options.isShowingData">
+                    <span class="icon-layout7"
+                        title="{{'DASHBOARD.VIEWER_DATA'|translate}}"></span>
+                    {{'DASHBOARD.VIEWER_DATA'|translate}}
+                </div>
+                <div class="connecta-dropdown-item" ng-click="viewerData(false)" ng-if="options.isShowingData">
+                    <span class="icon-area-graph"
+                        title="{{'DASHBOARD.RETURN_TO_VIEWER'|translate}}"></span>
+                    {{'DASHBOARD.RETURN_TO_VIEWER'|translate}}
                 </div>
             </div>
         </div>
     </div>
+    <h3 title="{{model.name}}" ng-click="model.doExpand()">{{model.name}}</h3>
 </div>
 
-<div class="drill-breadcrumb" ng-if="notEmpty().length">
-    <div class="drill-breadcrumb-item drill-breadcrumb-item-home">
-        <span class="fa fa-home" ng-click="drillUpFromBreadCrumb(0)"></span>
+<div class="underlying-data-container" ng-class="{'show-underlying-data':options.isShowingData}">
+
+    <div class="drill-breadcrumb" ng-if="notEmpty().length">
+        <div class="drill-breadcrumb-item drill-breadcrumb-item-home">
+            <span class="fa fa-home" ng-click="drillUpFromBreadCrumb(0)"></span>
+        </div>
+        <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index"
+             title="{{drill.label}}: {{drill.filterDrillValue}}" ng-click="drillUpFromBreadCrumb($index + 1)">
+            {{drill.filterDrillValue}}
+        </div>
     </div>
-    <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index"
-         title="{{drill.label}}: {{drill.filterDrillValue}}" ng-click="drillUpFromBreadCrumb($index + 1)">
-        {{drill.filterDrillValue}}
+
+    <div ng-if="model.configuration.type === 'chartjs'"
+         style="width:100%; height:100%; padding-top:2em; padding-bottom: 1em">
+        <canvas class="chart-base" chart-type="model.configuration.subtype"
+                chart-options="model.configuration.options" chart-data="model.configuration.data" chart-labels="model.configuration.labels" chart-series="model.configuration.series" chart-click="onClick"
+                style="position:absolute">
+        </canvas>
     </div>
+    <div class="card" ng-if="model.configuration.type === 'number'">
+        <div dnd-list="model.columns"  dnd-drop="transformColumnDrop(item, 'COLUMN')">
+            <div ng-if="model.columns.length > 0">
+                <div ng-repeat="(indice, analysisColumn ) in model.configuration.data">
+                    <div ng-if="i === model.columns[model.columns.length - 1].analysisColumn.name && indice === 0" ng-repeat="(i,item) in analysisColumn">
+                        <div class="card-title" >
+                            <h1><b>{{item}}</b></h1>
+                        </div>
+                        <div class="container-card">
+                            <h4><b>{{i}}</b></h4> 
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-if="model.columns.length === 0" >
+                <div class="card-title" >
+                    <h1><b>100</b></h1>
+                </div>
+                <div class="container-card">
+                    <h4><b>Descrição do número</b></h4> 
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div ng-if="model.configuration.type === 'table'">
+        <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
+            <thead>
+                <tr dnd-list="model.columns" dnd-drop="transformColumnDrop(item, 'COLUMN')" class="row">
+                    <th class="text-center" ng-if="columnExample === '' && model.configuration.type === 'table'" translate>VIEWER.DRAG_HERE</th>
+                    <th dnd-draggable="n" dnd-moved="model.columns.splice($index, 1)"
+                        ng-repeat="n in model.columns" class="text-center"
+                        ng-if="columnExample !== '' && n.columnType === 'COLUMN'">
+
+                        {{n.analysisColumn.label| translate}}
+                        <span ng-if="edit" class="icon-close" ng-click="model.columns.splice($index, 1)"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row" ng-repeat="example in model.configuration.data track by $index">
+                    <td ng-repeat="n in columnsTable track by $index" class="text-center" translate>
+                        {{example[n.value]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- VIEW UNDERLYING DATA -->
+    <div class="underlying-data"> <!--ng-if="options.isShowingData"-->
+        <table class="table table-striped table-hover table-viewer table-condensed table-single-line">
+            <thead>
+                <tr class="row">
+                    <th ng-repeat="column in model.analysis.analysisColumns" class="text-center">
+                        {{column.label}}
+                        <span ng-if="edit" class="icon-close" ng-click="model.columns.splice($index, 1)"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row" ng-repeat="row in model.$$lastAnalysisResult track by $index">
+                    <td ng-repeat="column in model.analysis.analysisColumns track by $index" class="text-center" translate>
+                        {{row[column.name]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- END VIEW UNDERLYING DATA -->
+
 </div>
 
-<div ng-if="model.configuration.type === 'chartjs'"
-    style="width:100%; height:100%; padding-top:2em; padding-bottom: 1em">
-    <canvas class="chart-base" chart-type="model.configuration.subtype"
-        chart-options="model.configuration.options" chart-data="model.configuration.data" chart-labels="model.configuration.labels" chart-series="model.configuration.series" chart-click="onClick"
-        style="position:absolute">
-    </canvas>
-</div>
-
-<div ng-if="model.configuration.type === 'table'">
-    <table  class="table table-striped table-hover table-viewer table-condensed table-single-line">
-        <thead>
-            <tr dnd-list="model.columns" dnd-drop="transformColumnDrop(item, 'COLUMN')" class="row">
-                <th class="text-center" ng-if="columnExample === '' && model.configuration.type === 'table'" translate>VIEWER.DRAG_HERE</th>
-                <th dnd-draggable="n" dnd-moved="model.columns.splice($index, 1)"
-                    ng-repeat="n in model.columns" class="text-center"
-                    ng-if="columnExample !== '' && n.columnType === 'COLUMN'">
-
-                    {{n.analysisColumn.label| translate}}
-                    <span ng-if="edit" class="icon-close" ng-click="model.columns.splice($index, 1)"></span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="row" ng-repeat="example in model.configuration.data track by $index">
-                <td ng-repeat="n in columnsTable track by $index" class="text-center" translate>
-                    {{example[n.value]}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 
 <!--click-out="options.filterConfigOpen=false" click-out-exceptions="['.filter']"-->
 <div class="viewer-filter-config" ng-class="{'viewer-filter-active':options.filterConfigOpen}"
@@ -135,11 +196,11 @@
                     <div class="viewer-filter-column">
                         <!--model.analysisViewerColumns-->
                         <select ng-change="possibleValues(filter); filter.value = {}" class="form-control input-sm" ng-model="filter.analysisColumn"
-                                ng-options="column as column.label for column in model.analysis.analysisColumns | orderBy:'analysisColumn.label' track by column.id">
+                                ng-options="column as column.label for column in model.analysis.analysisColumns| orderBy:'analysisColumn.label' track by column.id">
                             <option value>{{'LAYOUT.SELECT'|translate}}</option>
                         </select>
                     </div>
-                    <div class="viewer-filter-type" ng-init="filter.type=filter.type?filter.type:'CONTAINS'">
+                    <div class="viewer-filter-type" ng-init="filter.type = filter.type?filter.type:'CONTAINS'">
                         <!--title="{{'DASHBOARD.FILTER.SELECTED_FILTER'|translate:{name: (filterOperators[filter.type].name|translate) } }}"-->
                         <div class="viewer-filter-config-type-button"
                              title="{{'DASHBOARD.FILTER.TYPE'|translate}}"

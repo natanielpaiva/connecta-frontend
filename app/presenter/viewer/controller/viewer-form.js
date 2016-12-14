@@ -6,6 +6,7 @@ define([
     'portal/dashboard/directive/viewer',
     'portal/layout/service/util',
     'presenter/viewer/directive/analysis-viewer',
+    'presenter/viewer/directive/twitter-timeline-viewer',
     'presenter/viewer/directive/singlesource-viewer',
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
@@ -155,7 +156,7 @@ define([
                     $scope.viewer = getViewer();
 
                     $scope.templateCombo = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-combo.html';
-                    // $scope.templateSettings = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-settings.html';
+                    $scope.templateSettings = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-settings.html';
                     $scope.templateTypes = 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar-analysis-types-chartjs.html';
 
                     $scope.setLayoutSettings = function (config) {
@@ -172,6 +173,14 @@ define([
                     $scope.openAccordion = function () {
                         var retorno = false;
                         return retorno;
+                    };
+
+                    $scope.configAnimationCallBack = function(enabled) {
+                        if(!enabled){
+                            ViewerService.createAnimationCallBack($scope.viewer.configuration.options);
+                        }else{
+                            ViewerService.removeAnimationCallBack($scope.viewer.configuration.options);
+                        }
                     };
 
                 },
@@ -293,6 +302,9 @@ define([
             },
             SINGLESOURCE: function (viewer) {
                 angular.extend(viewer.singleSource, viewer.singlesource.list[0]);
+            },
+            TWITTER_TIMELINE : function (viewer) {
+                return viewer;
             }
         };
 
@@ -344,6 +356,12 @@ define([
                     type: "SINGLESOURCE"
                 };
                 sidebarSinglesource();
+            }else if ($routeParams.template === 'twitter-timeline'){
+                $scope.viewer = {
+                    name: "",
+                    description: "",
+                    type: "TWITTER_TIMELINE"
+                };
             }else if($routeParams.type === 'chartjs'){
                 sidebarAnalysisChartJs();
                 ViewerService.getTemplates($routeParams.type, $routeParams.template).then(function (response) {
@@ -434,6 +452,12 @@ define([
                     type: "SINGLESOURCE"
                 };
                 sidebarSinglesource();
+            }else if ($routeParams.template === 'twitter-timeline'){
+                $scope.viewer = {
+                    name: "",
+                    description: "",
+                    type: "TWITTER_TIMELINE"
+                };
             }else if($routeParams.type === 'chartjs'){
                 sidebarAnalysisChartJs();
                 ViewerService.getTemplates($routeParams.type, $routeParams.template).then(function (response) {
