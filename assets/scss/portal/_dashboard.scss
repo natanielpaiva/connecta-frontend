@@ -742,6 +742,9 @@
 viewer {
     @include div-block();
     z-index: 0 !important;
+    box-sizing:border-box;
+    padding:1em;
+    border:solid 0.1em transparent;
 
     [ng-switch] {
         @include div-block();
@@ -802,7 +805,7 @@ viewer {
                 }
 
                 .underlying-data {  // PARTE DE TRÁS DA CARTA
-                    padding:1em;
+                    padding:1em 0;
                     overflow: auto;
                     height:100%;
                     transform: rotateY(180deg);
@@ -823,10 +826,6 @@ viewer {
             }
         }
     }
-
-    box-sizing:border-box;
-    padding:1em;
-    border:solid 0.1em transparent;
 
     &:hover:not(.edit) {
         border:solid 0.1em darken($darkWhite,10%);

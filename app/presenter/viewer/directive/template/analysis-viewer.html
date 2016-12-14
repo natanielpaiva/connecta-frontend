@@ -70,24 +70,23 @@
     <div class="card" ng-if="model.configuration.type === 'number'">
         <div dnd-list="model.columns"  dnd-drop="transformColumnDrop(item, 'COLUMN')">
             <div ng-if="model.columns.length > 0">
-                <div ng-repeat="(indice, analysisColumn ) in model.configuration.data">
-                    <div ng-if="i === model.columns[model.columns.length - 1].analysisColumn.name && indice === 0" ng-repeat="(i,item) in analysisColumn">
-                        <div class="card-title" >
-                            <h1><b>{{item}}</b></h1>
+                <div ng-repeat="(index, analysisColumn ) in model.configuration.data">
+                    <div ng-if="i === model.columns[model.columns.length - 1].analysisColumn.name && index === 0" ng-repeat="(i,item) in analysisColumn">
+                        <div class="card-value">
+                            {{item}}
                         </div>
-                        <div class="container-card">
-                            <h4><b>{{i}}</b></h4> 
+                        <div class="card-description">
+                            {{i}}
                         </div>
                     </div>
                 </div>
-
             </div>
             <div ng-if="model.columns.length === 0" >
-                <div class="card-title" >
-                    <h1><b>100</b></h1>
+                <div class="card-value" >
+                    100
                 </div>
-                <div class="container-card">
-                    <h4><b>Descrição do número</b></h4> 
+                <div class="card-description" translate>
+                    VIEWER.NUMBER_SAMPLE_TEXT
                 </div>
             </div>
 
