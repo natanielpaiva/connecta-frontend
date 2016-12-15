@@ -1,0 +1,27 @@
+<!-- OBIEE -->
+<div class="form-group" validated-field-holder="formObject.obieeAddress">
+    <label for="address" translate class="required">VIEWER.ADDRESS</label>
+    <input type="text" name="obieeAddress" id="address" class="form-control"
+           ng-model="object.address" required/>
+    <validated-field-messages ng-model="formObject.obieeAddress"></validated-field-messages>
+</div>
+<div class="form-group" validated-field-holder="formObject.obieePath">
+    <label for="path" translate class="required">VIEWER.PATH</label>
+    <input type="text" name="obieePath" id="path" class="form-control"
+           ng-model="object.path" required />
+    <validated-field-messages ng-model="formObject.obieePath"></validated-field-messages>
+</div>
+<div class="row" >
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.obieeUsername">
+        <label for="user" translate class="required">VIEWER.USERNAME</label>
+        <input type="text" name="obieeUsername" id="user" class="form-control"
+               ng-model="object.user" required/>
+        <validated-field-messages ng-model="formObject.obieeUsername"></validated-field-messages>
+    </div>
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.obieePassword">
+        <label for="password" translate class="required">VIEWER.PASSWORD</label>
+        <input type="text" name="obieePassword" id="password" class="form-control"
+               ng-model="object.password" required />
+        <validated-field-messages ng-model="formObject.obieePassword"></validated-field-messages>
+    </div>
+</div>

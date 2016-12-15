@@ -1,0 +1,120 @@
+<div class="viewer-view">
+    <div class="row">
+        <div class="col-md-10">
+            <h3>
+                <span class="{{types[viewer.type].icon}}"></span>
+                {{viewer.name}}
+            </h3>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group pull-right">
+                <a title="{{ 'DATASOURCE.EDIT' | translate }}" class="btn btn-default btn-sm" href="#/graph/viewer/{{viewer.id}}/edit">
+                    <span class="icon-pencil" aria-hidden="true"></span>
+                </a>
+                <button title="{{ 'DATASOURCE.DELETE' | translate }}" 
+                class="btn btn-default btn-sm" ng-click="excluir(viewer.id)">
+                    <span class="icon-trash" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well margin-top-single margin-bottom-single">
+                <p ng-if="viewer.description">
+                    <strong translate>DATASOURCE.DESCRIPTION</strong>:
+                    {{viewer.description}}
+                </p>
+
+                <p ng-if="viewer.type" >
+                    <strong translate>DATASOURCE.DATASOURCE_TYPE</strong>:
+                    <span class="{{types[viewer.type].icon}}"></span>
+                    {{types[viewer.type].name}}
+                </p>
+
+                <!-- banco de dados-->
+                <p ng-if="viewer.driver"> 
+                    <strong translate>DATASOURCE.DRIVER_NAME</strong>:
+                    {{viewer.driver}}
+                </p>
+
+                <p ng-if="viewer.server">
+                    <strong translate>DATASOURCE.SERVER</strong>:
+                    <a href="{{viewer.server}}" target="_blank">
+                        {{viewer.server}}
+                    </a>
+                </p>
+
+                <p ng-if="viewer.port">
+                    <strong translate>DATASOURCE.PORT</strong>:
+                    {{viewer.port}}
+                </p>
+
+                <p ng-if="viewer.sid"> 
+                    <strong translate>DATASOURCE.DATABASE</strong>:
+                    {{viewer.sid}}
+                </p>
+                <!-- banco de dados -->
+
+                <!-- endeca webservice-->
+                <p ng-if="viewer.address"> 
+                    <strong translate>DATASOURCE.ADDRESS</strong>:
+                    <a href="{{viewer.address}}" target="_blank">
+                        {{viewer.address}}
+                    </a>
+                </p>
+                <!-- endeca -->
+
+                <p ng-if="viewer.path">
+                    <strong translate>DATASOURCE.PATH</strong>:
+                    {{viewer.path}}
+                </p>
+
+                <!-- webservice -->
+                <p ng-if="viewer.method">
+                    <strong translate>DATASOURCE.METHOD</strong>:
+                    {{viewer.method}}
+                </p>
+
+                <p ng-if="viewer.parameters && viewer.parameters.length">
+                    <strong translate>DATASOURCE.PARAMETERS</strong>:
+                </p>
+
+                <ul ng-if="viewer.parameters" class="list-unstyled">
+                    <li ng-repeat="p in viewer.parameters">
+                        <kbd>{{p.params}}</kbd>
+                        =
+                        <code>{{p.value}}</code>
+                    </li>
+                </ul>
+
+                <!--webservice-->
+                <p ng-if="viewer.user">
+                    <strong translate>DATASOURCE.USERNAME</strong>:
+                    {{viewer.user}}
+                </p>
+
+                <p ng-if="viewer.password">
+                    <strong translate>DATASOURCE.PASSWORD</strong>:
+                    {{viewer.password | bullet:showPassword}}
+                    <input type="checkbox" ng-model="showPassword" />
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-right">
+             <a href="#/graph/analysis/new/viewer/{{viewer.id}}" role="button" class="btn btn-default" translate>
+                ANALYSIS.NEW_ANALYSIS
+            </a>
+            <button class="btn btn-default" ng-if="viewer.type == 'DATABASE'" ng-click="testConnection()" type="button" translate>
+                DATASOURCE.TEST_CONNECTION
+            </button>
+            <a href="#/graph/viewer" role="button" class="btn btn-default" translate>
+                LAYOUT.BACK
+            </a>
+        </div>
+    </div>
+</div>

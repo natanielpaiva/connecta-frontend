@@ -1,0 +1,65 @@
+<default-list-heading
+    title-text="SINGLESOURCE.MEDIA"
+    add-button-text="LAYOUT.NEW_F"
+    add-button-href="#/graph/singlesource/new">
+</default-list-heading>
+
+<table ng-table="tableParams" class="table table-striped table-hover">
+    <thead>
+        <tr class="row">
+            <th class="col-lg-1 col-xs-1">
+                <label class="reset-spacing full-size-block cursor-pointer">
+                    <input type="checkbox" class="reset-spacing cursor-pointer hidden"
+                           select-all="singlesources" select-all-property="selected"
+                           ng-model="selected" />
+                    <span class="bulk-actions-checkbox" ng-class="{
+                                'icon-check-box-outline-blank':!selected,
+                                'icon-check-box':selected,
+                            }"></span>
+                </label>
+            </th>
+            <th class="col-lg-8 col-md-7 col-sm-5 col-xs-10" translate>SINGLESOURCE.NAME</th>
+            <th class="col-lg-3 col-md-4 col-sm-6 hidden-xs" translate>SINGLESOURCE.TYPE_MEDIA</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-if="!singlesources.length" class="row">
+            <td class="col-xs-12 text-center" colspan="3" translate>
+                LAYOUT.NO_RESULTS
+            </td>
+        </tr>
+        <tr ng-repeat="ss in singlesources" class="row" ng-class="{'selected':ss.selected}">
+            <td class="col-md-1 col-xs-1">
+                <label class="reset-spacing full-size-block cursor-pointer">
+                    <input type="checkbox" class="reset-spacing cursor-pointer hidden"
+                           ng-model="ss.selected" />
+                    <span class="bulk-actions-checkbox"
+                          ng-class="{
+                                'icon-check-box-outline-blank':!ss.selected,
+                                'icon-check-box':ss.selected,
+                            }"></span>
+                </label>
+            </td>
+            <td class="col-lg-8 col-md-7 col-sm-5 col-xs-10">
+                <a href="#/graph/singlesource/{{ss.id}}" class="full-size-block link-no-state">
+                    <span class="list-icon-for-type visible-xs-inline hidden-sm hidden-md hidden-lg {{types[ss.type].icon}}"
+                          title="{{types[ss.type].icon.name}}"></span>
+                    {{ss.name}}
+                </a>
+            </td>
+            <td class="col-lg-3 col-md-4 col-sm-6 hidden-xs">
+                <a href="#/graph/singlesource/{{ss.id}}" class="full-size-block link-no-state">
+                    <span class="list-icon-for-type {{types[ss.type].icon}}"></span>
+                    {{'SINGLESOURCE.' + types[ss.type].name | translate}}
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<bulk-action-bar ng-show="(singlesources | filter:{selected:true}).length"
+    class="am-slide-right">
+    <bulk-action icon="icon-trash" title="LAYOUT.DELETE"
+        ng-click="bulkRemove((singlesources | filter:{selected:true}))">
+    </bulk-action>
+</bulk-action-bar>

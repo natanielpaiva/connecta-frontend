@@ -1,0 +1,239 @@
+<form novalidate name="formulario" ng-submit="submit()" class="analysis-form">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <input type="text" class="form-control connecta-inline-edit-input" id="name"
+                       ng-model="analysis.name" maxlength="100" required
+                       placeholder="NOME" />
+            </div>
+            <div class="form-group">
+                <label for="description" class="sr-only" translate>ANALYSIS.DESCRIPTION</label>
+                <textarea class="form-control connecta-inline-edit-textarea" id="description"
+                          ng-model="analysis.description" maxlength="500" rows="1"
+                          placeholder="DESCRIÇÃO" ></textarea>
+            </div>
+            <div class="form-group" ng-if="!edit&&!cameFromAnalysis">
+                <label for="datasource" translate class="required">ANALYSIS.SOURCE_ANALYSIS</label>
+                <select class="form-control" id="datasource" ng-model="analysis.datasource"
+                        ng-options="ds as ds.name for ds in listDatasource track by ds.id">
+                </select>
+                <!--<option ng-selected="{{ds.id == testDatasource}}" value="{{ds.id}}">{{ds.name}}</option>-->
+            </div>
+            <div class="form-group" ng-if="edit||cameFromAnalysis">
+                <label for="datasource" translate>ANALYSIS.SOURCE_ANALYSIS</label>
+                <input type="text" id="datasource" class="form-control"
+                       disabled="disabled" ng-model="analysis.datasource.name" />
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="showForm && subform.template">
+        <div ng-include="'app/graph/analysis/template/' + subform.template"
+             ng-controller="subform.controller"></div>
+    </div>
+
+    <h4 translate>ANALYSIS.DESCRIPTION_OF_COLUMNS</h4>
+    <div class="row">
+        <div class="col-md-12" >
+            <div class="clearfix well" > 
+                <div ng-repeat="columns in analysis.analysisColumns" >
+                    <div class="col-md-5 form-group">
+                        <label for="column" translate>ANALYSIS.COLUMN</label>
+                        <input type="text" ng-model="columns.name" disabled class="form-control"/>
+                    </div>
+                    <div class="col-md-5 form-group">
+                        <label for="valor" translate>ANALYSIS.DESCRIPTION</label>
+                        <input type="text" ng-model="columns.label"  class="form-control" />
+                        <input type="hidden" ng-model="columns.formula"  class="form-control" />
+                    </div>
+                    <div class="col-md-2 close-column">
+                        <span ng-click="analysis.analysisColumns.splice($index, 1)" class="icon-close"></span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+<!--    <div class="analysis-relations">
+        <h4>
+            {{'ANALYSIS.RELATIONS.RELATIONS'|translate}}
+            <button class="auto-detect btn btn-default btn-sm pull-right"
+                    type="button" translate ng-click="autosuggest()">
+                ANALYSIS.RELATIONS.DETECT
+            </button>
+        </h4>
+        <div class="relations">
+            <div class="analysis-relation am-fade-and-slide-left"
+                 ng-repeat="($index, relation) in analysis.analysisRelations">
+                <div class="left-analysis">
+                    <div class="left-analysis-name" title="{{analysis.name}}">
+                        <span class="icon-analysis"></span>
+                        {{analysis.name||'('+('ANALYSIS.NEW_ANALYSIS'|translate)+')'}}
+                    </div>
+                    <div class="left-analysis-column">
+                        Trocar pelo tipo da coluna assim que existir a funcionalidade
+                        <span class="column-type type-text">Aa</span>
+                        <select ng-model="relation.leftAnalysisColumn"
+                            ng-show="analysis.analysisColumns.length"
+                            ng-options="column as column.label for column in analysis.analysisColumns track by column.id">
+                        </select>
+                        <span class="no-columns" translate
+                              ng-show="!analysis.analysisColumns.length">
+                            ANALYSIS.RELATIONS.NO_COLUMNS_YET
+                        </span>
+                    </div>
+                </div>
+                <div class="right-analysis">
+                    <div class="right-analysis-column">
+                        <span class="column-type type-text">Aa</span>
+                        <select ng-model="relation.rightAnalysisColumn"
+                            ng-options="column as column.name for column in relation.rightAnalysis.analysisColumns track by column.id"
+                            ng-show="relation.rightAnalysis.analysisColumns.length || !!relation.rightAnalysisColumn">
+                        </select>
+                        <span class="select-right-analysis" translate
+                              ng-show="!relation.rightAnalysis.analysisColumns.length && !relation.rightAnalysisColumn">
+                            ANALYSIS.RELATIONS.SELECT_RIGHT_ANALYSIS
+                        </span>
+                    </div>
+                    <div class="right-analysis-name" title="{{relation.rightAnalysis.name}}">
+                        <span class="icon-analysis"></span>
+                        <select ng-model="relation.rightAnalysis" ng-change="getRightAnalysisColumns(relation)"
+                            ng-options="analysis as analysis.name for analysis in otherAnalysis track by analysis.id">
+                        </select>
+                    </div>
+                    <span ng-click="analysis.analysisRelations.splice($index, 1)"
+                          class="icon-action icon-close"></span>
+                </div>
+            </div>
+            <div class="new-relation" ng-click="addRelation()" translate>
+                ANALYSIS.RELATIONS.NEW_RELATION
+            </div>
+            <h4 class="am-fade-and-slide-top" ng-if="analysisRelationSuggestions.length">
+                Suggestions
+            </h4>
+            <div class="analysis-relation-suggestion am-fade-and-slide-left"
+                 ng-repeat="($index, suggestion) in analysisRelationSuggestions">
+                <div class="left-analysis">
+                    <div class="left-analysis-name" title="{{analysis.name}}">
+                        <span class="icon-analysis"></span>
+                        {{analysis.name||'('+('ANALYSIS.NEW_ANALYSIS'|translate)+')'}}
+                    </div>
+                    <div class="left-analysis-column">
+                        <span class="column-type type-text">Aa</span>
+                        {{suggestion.leftAnalysisColumn.label}}
+                    </div>
+                </div>
+                <div class="right-analysis">
+                    <div class="right-analysis-column">
+                        <span class="column-type type-text">Aa</span>
+                        {{suggestion.rightAnalysisColumn.label}}
+                    </div>
+                    <div class="right-analysis-name" title="{{suggestion.rightAnalysis.name}}">
+                        <span class="icon-analysis"></span>
+                        {{suggestion.rightAnalysis.name}}
+                    </div>
+                    <span ng-click="acceptSuggestion($index, suggestion)"
+                          class="icon-action icon-checkmark3"></span>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <div class="configure-drill margin-top-single">
+        <uib-accordion close-others="true">
+            <uib-accordion-group is-open="status.open">
+                <uib-accordion-heading>
+                    <span translate>VIEWER.SETTINGS_ADVANCED</span>
+                    <span ng-click="changeStatus()" class="pull-right glyphicon" ng-class="{
+                        'icon-chevron-down': status.open,
+                        'icon-chevron-right': !status.open
+                    }">
+                    </span>
+                </uib-accordion-heading>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div translate>ANALYSIS.DRILL_SEQUENCE</div>
+                        <div class="analysis-drag-here">
+                            <ul dnd-list="analysisColumnsDrill" 
+                                ng-class="{
+                                'has-item':!!analysisColumnsDrill.length
+                            }">
+                                <li ng-repeat="column in analysisColumnsDrill" 
+                                    dnd-draggable="column" 
+                                    dnd-moved="analysisColumnsDrill.splice($index, 1)">
+                                    {{column.label}}
+                                    <span class="icon-close" ng-click="analysisColumnsDrill.splice($index, 1)"></span>
+                                </li>
+                                <div class="drag-here-text" translate
+                                     ng-if="!analysisColumnsDrill.length">VIEWER.DRAG_HERE</div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div translate>ANALYSIS.COLUMNS</div>
+                        <div class="analysis-settings-drill">
+                            <ul dnd-list="analysis.analysisColumns"
+                                dnd-effect-allowed="copy" dnd-allowed-types="[]"
+                                 ng-class="{
+                                    'has-item':!!analysis.analysisColumns.length
+                                }">
+                                <li ng-repeat="column in analysis.analysisColumns" 
+                                    dnd-draggable="column">
+                                    {{column.label}}
+                                </li>
+                                <li class="animate-repeat" ng-if="results.length === 0">
+                                    {{'LAYOUT.NO_RESULTS'| translate}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicionar atributos -->
+                <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>
+
+                <div key-value class="well well-sm clearfix" ng-model="analysis.analysisAttributes">
+                    <div key-value-item class="row">
+                        <div class="col-md-4">
+                            <div class="form-group has-feedback">
+                                <label for="user" translate>SINGLESOURCE.ATTRIBUTE_NAME</label>
+
+                                <input type="text" name="analysisAttribute" id="analysisAttribute" class="form-control" 
+                                       ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
+                                <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="valor" translate>SINGLESOURCE.ATTRIBUTE_VALUE</label>
+                                <input type="text" class="form-control"
+                                       ng-model="$parent.$parent.$item.value" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
+                                <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
+                                        ng-model="$parent.$parent.$item.attributeType" class="form-control" >
+                                    <option value="" translate>LAYOUT.SELECT</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uib-accordion-group>
+        </uib-accordion>
+    </div>
+
+
+
+    <div class="row" >
+        <div class="col-md-12 text-right">
+            <a href="#/graph/analysis" class="btn btn-default" translate>
+                LAYOUT.BACK
+            </a>
+            <button class="btn btn-primary" translate ng-disabled="formulario.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,37 @@
+<!-- Solr --> 
+<div ng-if="statement.type === 'CONDITION_SOLR'" class="statement {{ statement.type | lowercase }}">
+    Condição
+<!--<debug ng-model="statement"></debug>-->
+<!--   <debug ng-model="analysis.analysisColumns"></debug>-->
+    <select  ng-model="statement.name" >
+        <option value="">Selecione</option>
+        <option title="{{statement.name}}" ng-repeat="cl in analysis.conditionSorl" ng-selected="{{statement.name === cl}}" value="{{cl}}">{{cl}}</option>
+    </select>
+
+    <select ng-model="statement.predicate" ng-options="key as value.name for (key, value) in predicateMap"></select>
+    <!-- Like, EQUAL -->
+    <input ng-if="statement.predicate != 'BETWEEN' && statement.predicate != 'NOT_BETWEEN'
+                            && statement.predicate != 'IN' && statement.predicate != 'NOT_IN'" placeholder="Valor" style="width:100px;" type="text" ng-model="statement.value" />
+
+    <!-- Between -->
+    <input ng-if="statement.predicate == 'BETWEEN' || statement.predicate == 'NOT_BETWEEN'" placeholder="De" style="width:100px;" type="text" ng-model="statement.value.between.start" />
+
+    <input ng-if="statement.predicate == 'BETWEEN' || statement.predicate == 'NOT_BETWEEN'" placeholder="Até" style="width:100px;" type="text" ng-model="statement.value.between.end" />
+
+    <!-- In -->
+    <tags-input min-length="1" style="width:100px;" ng-if="statement.predicate == 'IN' || statement.predicate == 'NOT_IN'"
+                ng-model="statement.value"></tags-input>
+
+    <button type="button" ng-click="remove(parent, statement)">-</button>
+</div>
+<div ng-if="statement.type == 'GROUP'" class="statement {{ statement.type | lowercase }}">
+    Grupo
+    <select ng-model="statement.operator" ng-options="key as value.name for (key, value) in operatorMap">
+    </select>
+    <button type="button" ng-click="addGroup(statement)">+grupo</button>
+    <button type="button" ng-click="addCondition(statement)">+condicao</button>
+    <button type="button" ng-if="parent != null" ng-click="remove(parent, statement)">-</button>
+    <div ng-repeat="stmt in statement.statements" ng-init="prnt = statement" ng-include="'app/graph/analysis/template/_analysis-solr-query-builder.html'" onload="statement = stmt;
+                        parent = prnt">
+    </div>
+</div>

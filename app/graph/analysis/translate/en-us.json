@@ -1,0 +1,67 @@
+{
+    "ANALYSIS": {
+        "NEW_ANALYSIS":"New analysis",
+        "na":"New analysis",
+        "REGISTER_ANALYSIS": "Register Analysis",
+        "SOURCE_ANALYSIS": "Analysis Source",
+        "NAMES": "Analysis name",
+        "DESCRIPTION": "Description",
+        "ATTRIBUTE": "Attribute",
+        "VALUE": "Value",
+        "TYPE": "Type",
+        "ANALYSIS_TYPE": "Analysis Type",
+        "ADD_ATTRIBUTES": "Add Attributes",
+        "SOURCE_OF_DATA": "Source of Data",
+        "DATA_INSERTION": "Data insertion",
+        "TABLE": "Table",
+        "COLUMN": "Column",
+        "COLUMNS": "Columns",
+        "DESCRIPTION_OF_COLUMNS": "Columns",
+        "SELECT": "Select",
+        "SEPARATOR": "Separator",
+        "QUOTE": "Quote",
+        "CSV_TYPE": "type CSV",
+        "CSV_FILE": "Or drag CSV here",
+        "CSV_TEXT": "CSV Text",
+        "DOMAIN": "Domain",
+        "TYPE_QUERY": "Query type",
+        "HIVE_QL": "HiveQL",
+        "PIG_QUERY": "PigQuery",
+        "MR_CLASS": "MR Class",
+        "MR_METHOD": "MR Method",
+        "DIRECTORIES": "Directories",
+        "METHOD": "Method",
+        "PARAMETER": "Parameter",
+        "PARAMETER_METHOD": "Parametros do Método",
+        "FETCH_DATA": "Fetch Data",
+        "IS_COLUMN":"Column",
+        "UNTITLED_OBJECT": "Untitled Object",
+        "UNTITLED_LIST": "Untitled List",
+        "UNKNOWN": "Unknown",
+        "PREVIEW": "Preview",
+        "FACET": "Facet",
+        "RESPONSE_XML": "Response XML",
+        "RESULTS_OF_THE_ANALYSIS": "Results of the analysis",
+        "DRILL_SEQUENCE":"Drill (detailing) sequence",
+        "DATABASE": {
+            "REQUEST_TABLE": "Table",
+            "REQUEST_SQL": "Custom query"
+        },
+        "QUERY":"Query",
+        "SOLR":{
+           "CUSTOM_QUERY": "Custom query",
+           "TEXT_QUERY": "Text query"
+        },
+        "RELATIONS": {
+            "RELATIONS":"Related analysis",
+            "DETECT":"Auto-detect",
+            "NEW_RELATION":"+ Relate with another analysis",
+            "SELECT_RIGHT_ANALYSIS":"Select right analysis",
+            "NO_COLUMNS_YET":"No columns yet"
+        },
+        "DELETE":"Delete",
+        "EDIT":"Edit",
+        "REQUEST":"Request"
+
+    }
+}

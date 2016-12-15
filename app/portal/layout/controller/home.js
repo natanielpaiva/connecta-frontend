@@ -20,6 +20,11 @@ require([
                 '#/link1': 'DATASOURCE.NEW_DATASOURCE',
                 '#/link2': 'DATASOURCE.NEW_DATASOURCE',
                 '#/link3': 'DATASOURCE.NEW_DATASOURCE'
+            },
+            graph: {
+                '#/graph/datasource/new': 'DATASOURCE.NEW_DATASOURCE',
+                '#/graph/analysis': 'ANALYSIS.NEW_ANALYSIS',
+                '#/graph/viewer': 'VIEWER.ANALYSIS_SOURCE',
             }
             // TODO Continuar com ações padrão
         };

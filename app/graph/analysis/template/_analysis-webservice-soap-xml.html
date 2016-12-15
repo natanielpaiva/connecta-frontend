@@ -1,0 +1,32 @@
+<!--Checkbox Coluna-->
+<input type="checkbox" id="xml-column-{{node.$$hashKey.replace(':', '-')}}"
+       name="column" ng-model="node.isSelected" ng-click="generateXPathColumns(node, [])" />
+<label for="xml-column-{{node.$$hashKey.replace(':', '-')}}"
+       class="checkbox-column element-level" translate>
+    ANALYSIS.IS_COLUMN
+</label>
+
+<!--Nome do elemento-->
+<input type="radio" id="xml-table-{{node.$$hashKey.replace(':', '-')}}"
+       name="table" ng-model="xmlTable" ng-click="generateXPathTable(node, [])"/>
+<label for="xml-table-{{node.$$hashKey.replace(':', '-')}}" class="radio-table"
+       tooltip="{{node.textContent}}">
+    {{node.nodeName}}
+</label>
+
+<!-- Atributos XML -->
+
+<span ng-repeat="attr in node.attributes" tooltip="{{attr.textContent}}">
+    <input type="checkbox" id="xml-column-{{node.$$hashKey.replace(':', '-')}}-{{attr.nodeName}}"
+           name="column" ng-model="attr.isSelected" ng-click="generateXPathAttribute(attr, [])" />
+    <label for="xml-column-{{node.$$hashKey.replace(':', '-')}}-{{attr.nodeName}}"
+           class="checkbox-column">
+        {{attr.nodeName}}
+    </label>
+</span>
+
+<ul>
+    <li ng-repeat="node in node.childNodes"
+        ng-include="'app/graph/analysis/template/_analysis-webservice-soap-xml.html'">
+    </li>
+</ul>

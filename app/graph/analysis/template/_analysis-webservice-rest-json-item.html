@@ -1,0 +1,233 @@
+<div ng-switch="current.type">
+    <div ng-switch-when="ARRAY">
+        <div class="card-form card-section">
+            <div class="header-card">
+                <h4>
+                    <span class="icon-view-list"></span>
+                    {{ current.name ? current.name : 'ANALYSIS.UNTITLED_LIST' | translate }}
+                </h4>
+                <div class="btn-group pull-right margin-right-single" role="group">
+                    <button type="button" class="btn btn-default" ng-click="generateJsonPathTable(current, [])"> 
+                        Tabela
+                    </button>
+                </div>
+            </div>
+            <div class="content-card">
+                <div ng-repeat="value in current.values"
+                     ng-include="'app/graph/analysis/template/_analysis-webservice-rest-json-item.html'"
+                     onload="current = value;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="OBJECT">
+        <div class="card-form card-section">
+            <div class="header-card" >
+                <h4>
+                    <span class="icon-cube"></span>
+                    {{ current.name ? current.name : 'ANALYSIS.UNTITLED_OBJECT' | translate }}
+                </h4>
+                <div class="btn-group pull-right margin-right-single" role="group">
+                    <button type="button" class="btn btn-default" ng-click="generateJsonPathTable(current, [])">
+                        Tabela
+                    </button>
+                </div>
+            </div>
+            <div class="content-card">
+                <div ng-repeat="attribute in current.attributes"
+                     ng-include="'app/graph/analysis/template/_analysis-webservice-rest-json-item.html'"
+                     onload="current = attribute;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="STRING">
+        <div class="card-form-min card-section">
+            <div class="header-card">
+                <h4>
+                    <span class="icon-quote22"></span>
+                    <b>{{ current.name ? current.name : current.value }}</b>: 
+
+                    {{current.value ? current.value: current.name}} 
+
+                </h4>
+
+                <div class="btn-group pull-right margin-right-single" role="group">
+
+                    <button type="button" class="btn btn-default" ng-click="generateJsonPathColumns(current, [])">
+                        Coluna
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="NUMBER">
+        <div class="card-form-min card-section">
+            <div class="header-card">
+                <h4>
+                    <span class="icon-number5"></span>
+                    {{ current.name ? current.name : current.value }}
+                </h4>
+                <div class="btn-group pull-right margin-right-single" role="group">
+                    <button type="button" class="btn btn-default" ng-click="generateJsonPathColumns(current, [])">
+                        Coluna
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="BOOLEAN">
+        <div class="card-form-min card-section">
+            <div class="header-card">
+                <h4>
+                    <span class="icon-check"></span>
+                    {{ current.name ? current.name : current.value }}
+                </h4>
+                <div class="btn-group pull-right margin-right-single" role="group">
+                    <button type="button" class="btn btn-default" ng-click="generateJsonPathColumns(current, [])">
+                        Coluna
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="UNKNOWN">
+        <div class="card-form-min card-section">
+            <div class="header-card">
+                <h4>
+                    <span class="icon-block"></span>
+                    {{ current.name ? current.name : 'ANALYSIS.UNKNOWN' }}
+                </h4>
+                <div class="btn-group pull-right margin-right-single" role="group">
+                    <button type="button" class="btn btn-default" ng-click="generateJsonPathColumns(current, [])">
+                        Coluna
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+<div class="card-form card-section">
+            <div class="header-card">
+                <h4>Lista sem nome</h4>
+                <div class="btn-group pull-right margin-right-single" role="group">
+                    <button type="button" class="btn btn-default">
+                        Tabela
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="">
+                        Coluna
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-form card-section" >
+                    header
+                    <div class="header-card" >
+                        <h4> <span class="glyphicon glyphicon-certificate"></span> Objeto sem nome</h4>
+                        <div class="btn-group pull-right margin-right-single" role="group">
+                            <button type="button" class="btn btn-primary">
+                                Tabela
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="">
+                                Coluna
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <button style="margin-left: 20px " type="button" class="btn btn-default glyphicon glyphicon-font"> Nome</button> João
+                    </div>
+                    <div class="row">
+                        <button style="margin-left: 20px" type="button" class="btn btn-default glyphicon glyphicon-sort-by-order"> Idade</button> 25
+                    </div>
+                    <div class="row">
+                        <button style="margin-left: 20px" type="button" class="btn btn-default glyphicon glyphicon-ok"> Ativo</button>Sim
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="content-card">
+                <div class="card-section" >
+                    header
+                    <div class="header-card" >
+                        <h4> <span class="glyphicon glyphicon-certificate"></span> Objeto sem nome</h4>
+                        <div class="btn-group pull-right margin-right-single" role="group">
+                            <button type="button" class="btn btn-primary">
+                                Tabela
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="">
+                                Coluna
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <button style="margin-left: 20px " type="button" class="btn btn-default glyphicon glyphicon-font"> Nome</button> João
+                    </div>
+
+
+                    <div class="content-card">
+                        <div class="card-form card-section" >
+                            header
+                            <div class="header-card" >
+                                <h4> <span class="glyphicon glyphicon-certificate"></span> Endereco</h4>
+                                <div class="btn-group pull-right margin-right-single" role="group">
+                                    <button type="button" class="btn btn-primary">
+                                        Tabela
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="">
+                                        Coluna
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <button style="margin-left: 20px " type="button" class="btn btn-default glyphicon glyphicon-font"> Rua</button> SHIGS 706  bloco c Asa Sul
+                            </div>
+                            <div class="row">
+                                <button style="margin-left: 20px" type="button" class="btn btn-default glyphicon glyphicon-sort-by-order"> numero</button> 1838
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="content-card">
+                        <div class="card-form card-section" >
+                            header
+                            <div class="header-card" >
+                                <h4> <span class="glyphicon glyphicon-th-list"></span> Telefone</h4>
+                                <div class="btn-group pull-right margin-right-single" role="group">
+                                    <button type="button" class="btn btn-primary">
+                                        Tabela
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="">
+                                        Coluna
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <button style="margin-left: 20px " type="button" class="btn btn-default glyphicon glyphicon-font"> +55 61 9250-6621</button>
+                            </div>
+                            <div class="row" >
+                                <button style="margin-left: 20px " type="button" class="btn btn-default glyphicon glyphicon-font"> +55 61 9250-6621</button>
+                            </div>
+                            <div class="row" >
+                                <button style="margin-left: 20px " type="button" class="btn btn-default glyphicon glyphicon-font"> +55 61 9250-6621</button>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+
+                    
+                    
+                    <div class="row">
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>-->
