@@ -14,8 +14,10 @@ define([
     return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $filter, $document, $window, $timeout, applications) {
         $scope.config = {
             headerMini: false,
-            isPrinting: false
+            isPrinting: false,
+            isBrowserOnFullscreen: false
         };
+
         $document.on('scroll', function () {
             $scope.config.headerMini = $document.scrollTop() > 1;
             $scope.$apply();
@@ -42,8 +44,11 @@ define([
             col: 'item.column'
         };
 
+
         $scope.fullscreen = function () {
             LayoutService.toggleBrowserFullscreen();
+
+            $scope.config.isBrowserOnFullscreen = LayoutService.isBrowserOnFullscreen();
         };
 
         $scope.export = function () {
