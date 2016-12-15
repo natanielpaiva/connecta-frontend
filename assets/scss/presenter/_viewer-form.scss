@@ -1,5 +1,4 @@
 .sidebar-viewer {
-
     width: 100%;
     position: relative;
 
@@ -40,6 +39,7 @@
         }
 
         li {
+            @include clearfix;
             background-color: $presenterBlue;
             box-shadow: 0.1em 0.1em 0 $darkerWhite;
             border-radius: 0.2em;
@@ -53,7 +53,6 @@
             margin-bottom:0.25em;
             margin-right:0.25em;
             padding:0 0.5em;
-            @include clearfix;
 
             .icon-close {
                 color:$darkerWhite;
@@ -351,7 +350,7 @@
 .viewer-template-modal {
     .modal-body {
         ul.nav {
-            @include clearfix();
+            @include clearfix;
 
             li {
                 display:block;
@@ -415,7 +414,7 @@
     > [ng-repeat]{
         padding:0;
         line-height:2.5em;
-        @include clearfix();
+        @include clearfix;
         * {
             display:block;
             float:left;
@@ -462,6 +461,7 @@
     }
 
     .card-description {
+        @include clipped-text;
         font-size: 1em;
         font-weight:normal;
         position: absolute;
@@ -473,6 +473,5 @@
         text-align: center;
         transform:translateY(-50%);
         color:$gray;
-        @include clipped-text;
     }
 }
