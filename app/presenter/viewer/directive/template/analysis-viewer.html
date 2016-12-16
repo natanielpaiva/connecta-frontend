@@ -50,16 +50,6 @@
 
 <div class="underlying-data-container" ng-class="{'show-underlying-data':options.isShowingData}">
 
-    <div class="drill-breadcrumb" ng-if="notEmpty().length">
-        <div class="drill-breadcrumb-item drill-breadcrumb-item-home">
-            <span class="fa fa-home" ng-click="drillUpFromBreadCrumb(0)"></span>
-        </div>
-        <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index"
-             title="{{drill.label}}: {{drill.filterDrillValue}}" ng-click="drillUpFromBreadCrumb($index + 1)">
-            {{drill.filterDrillValue}}
-        </div>
-    </div>
-
     <div ng-if="model.configuration.type === 'chartjs'"
          style="width:100%; height:100%; padding-top:2em; padding-bottom: 1em">
         <canvas class="chart-base" chart-type="model.configuration.subtype"
@@ -139,6 +129,16 @@
         </table>
     </div>
     <!-- END VIEW UNDERLYING DATA -->
+
+    <div class="drill-breadcrumb" ng-if="notEmpty().length">
+        <div class="drill-breadcrumb-item drill-breadcrumb-item-home">
+            <span class="fa fa-home" ng-click="drillUpFromBreadCrumb(0)"></span>
+        </div>
+        <div class="drill-breadcrumb-item" ng-repeat="drill in notEmpty() track by $index"
+             title="{{drill.label}}: {{drill.filterDrillValue}}" ng-click="drillUpFromBreadCrumb($index + 1)">
+            {{drill.filterDrillValue}}
+        </div>
+    </div>
 
 </div>
 
