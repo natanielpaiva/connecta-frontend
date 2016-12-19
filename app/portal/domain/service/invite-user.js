@@ -51,9 +51,9 @@ define([
                     $scope.getImage();
 
                     $scope.save = function () {
-//                        InviteService.invite($scope.idDomain, $scope.emails).then(function () {
+                        InviteService.invite($scope.idDomain, $scope.emails).then(function () {
                             deferred.resolve();
-//                        });
+                        });
                         modal.close();
                     };
 
