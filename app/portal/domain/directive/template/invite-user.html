@@ -1,0 +1,58 @@
+<div class="modal-header">
+</div>
+<div class="modal-body modal-invite">
+    <form ng-submit="save()">
+
+        <div class="input-tag">
+            <input autocomplete="off" class="input-invite" ng-model="regex" 
+                   ng-change="getByRegex()" name="mail" autofocus 
+                   placeholder="{{'DOMAIN.SEARCH'|translate}}"
+                   ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}">     
+        </div>
+
+        <div ng-if="!users.length" class="not-found">
+            <h5>{{'USER.ERROR.NOT_FOUND'| translate}}</h5>
+        </div>
+
+        <div class="table-users">
+            <table>
+                <tbody>
+                    <tr ng-repeat="user in users" class="line">
+
+                        <td class="column-image" ng-click="pushEmail(user)">
+                            <div ng-if="user.id" class="image-on-background avatar"
+                                 ng-style="{'background-image':'url(' + user.image + ')'}">
+                            </div>
+                        </td>
+
+                        <td class="column-name" ng-click="pushEmail(user)">
+                            <div ng-if="user.name">
+                                {{user.name}}
+                            </div>
+                            <div ng-if="!user.name">
+                                {{user.email}}
+                            </div>
+                        </td>
+
+                        <td class="remove-email">
+                            <span ng-show="emails.indexOf(user.email) !== -1" 
+                                  ng-click="removeEmail(user)" 
+                                  class="icon-clear"></span>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="cancel()" translate>
+                LAYOUT.CANCEL
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="save()" translate>
+                LAYOUT.SAVE
+            </button>
+        </div>
+
+    </form>
+</div>

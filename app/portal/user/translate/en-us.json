@@ -47,7 +47,8 @@
         "ERROR": {
             "USERNAME_EXISTS": "There is already someone using this email",
             "INVITE_EXPIRED": "Invite has been expired",
-            "FORGOT_PASSWORD": "Please contact the system administrator"
+            "FORGOT_PASSWORD": "Please contact the system administrator",
+            "NOT_FOUND": "No results found"
         },
         "DOMAINS": "Domains"
     }
