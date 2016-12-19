@@ -75,6 +75,18 @@ define([
 
             return $http.get(url);
         };
+        
+        UserService.get = function (length) {
+            var url = portalResources.user + '/get/' + length;
+
+            return $http.get(url);
+        };
+        
+        UserService.getByRegex = function (regex) {
+            var url = portalResources.user + '/search?regex=' + regex;
+
+            return $http.get(url);
+        };
 
         UserService.recoverPassword = function (email) {
             var url = portalResources.user + '/recover?email=' + email;

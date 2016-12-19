@@ -18,7 +18,7 @@ define([
             });
         };
 
-        this.getCurrentDomain = function(){
+        this.getCurrentDomain = function () {
             return $http.get(portalResources.domain + '/' + $cookieStore.get('user.domain.name'));
         };
 
@@ -28,7 +28,7 @@ define([
 
         this.createDomain = function (domain) {
             var url = portalResources.domain;
-            
+
             return $http.post(url, domain);
         };
 
@@ -50,16 +50,16 @@ define([
 
             return $http.post(url);
         };
-        
-        this.getParticipants = function (idDomain){
+
+        this.getParticipants = function (idDomain) {
             var url = portalResources.domain + '/participants?id=' + idDomain;
-            
+
             return $http.get(url);
         };
-        
-        this.removeUser = function (idDomain, idUser){
+
+        this.removeUser = function (idDomain, idUser) {
             var url = portalResources.domain + '/domain/' + idDomain;
-            
+
             return $http.put(url, idUser);
         };
     });
