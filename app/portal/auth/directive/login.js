@@ -2,7 +2,8 @@ define([
     'connecta.portal',
     'json!package',
     'portal/user/directive/unique-email',
-    'portal/domain/service/domain-config',
+    'portal/domain/service/invite-service',
+    'portal/domain/service/invite-user',
     // 'portal/layout/directive/click-out',
     'portal/layout/service/confirm',
     'portal/layout/service/notify'
@@ -14,11 +15,13 @@ define([
             templateUrl: 'app/portal/auth/directive/template/login.html',
             controller: function ($scope, LoginService, UserService, $location,
                     $route, $routeParams, notify, DomainService,
-                    DomainConfig, $translate, $confirm) { // FacebookService, GPlusService,
+                    InviteService, $translate, $confirm, $inviteUser) { // FacebookService, GPlusService,
+
+                var AMOUNT_USERS = 10;
+
                 $scope.package = package;
 
                 $scope.invite = {};
-                $scope.invite.user = {};
                 $scope.invited = {};
                 $scope.credentials = {};
                 $scope.authResponse = {};
@@ -81,6 +84,12 @@ define([
 
                 init();
 
+                $scope.inviteUser = function (idDomain) {
+                    $inviteUser($scope.users,idDomain).then(function () {
+                        notify.success('USER.INVITED_SUCCESS');
+                    });
+                };
+
                 $scope.loadDomains = function (username) {
                     DomainService.getDomainsByUser(username).then(function (response) {
                         $scope.domains = response.data;
@@ -121,9 +130,11 @@ define([
                     $scope.domainBeingEdited = index;
                     _removeInvalidDomain();
 
-//                    UserService.getAll().then(function (response) {
-//                        $scope.invite.users = response.data;
-//                    });
+                    if (!$scope.users) {
+                        UserService.get(AMOUNT_USERS).then(function (response) {
+                            $scope.users = response.data;
+                        });
+                    }
                 };
 
                 $scope.updateDomain = function (domain) {
@@ -132,7 +143,6 @@ define([
                     DomainService.updateDomain(domain).then(function () {
                         $scope.domainBeingEdited = null;
                         notify.success('DOMAIN.UPDATED');
-                        $scope.inviteUser(domain.id);
                     });
                 };
 
@@ -141,7 +151,6 @@ define([
                         angular.extend(domain, response.data);
                         $scope.domainBeingEdited = null;
                         notify.success('DOMAIN.CREATED');
-                        $scope.inviteUser(domain.id);
                     });
                 };
 
@@ -182,10 +191,6 @@ define([
                     }, function (response) {
                         notify.error(response.data);
                     });
-                };
-
-                $scope.inviteUser = function (id) {
-                    DomainConfig.inviteUser(id, $scope.invite.emails);
                 };
 
                 $scope.forgotPassword = function () {
