@@ -1,4 +1,8 @@
-# Connecta Portal [![Code Climate](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/gpa.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend)
+# Connecta Portal
+
+[![Code Climate](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/gpa.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend)
+[![Test Coverage](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/coverage.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend/coverage)
+[![Issue Count](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/issue_count.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend)
 
 Interface principal dos aplicativos Connecta.
 
