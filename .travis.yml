@@ -1,0 +1,4 @@
+language: javascript
+group: stable
+dist: precise
+os: linux
