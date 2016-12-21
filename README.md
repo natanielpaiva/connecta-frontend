@@ -4,10 +4,6 @@ Interface principal dos aplicativos Connecta.
 
 ## Instalação
 
-Versão mínima do Node: __v0.10.36__
-
-Versão mínima do NPM: __2.1.17__
-
 ### Instalação das dependências no Linux
 
 No Github da Joyent tem o how-to da instalação do Node para cada distribuição de Linux (https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager), sendo a mais comum o Ubuntu com o `curl` instalado, baixe o shell da instalação e passe ele para o bash com o comando:
