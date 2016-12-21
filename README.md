@@ -1,4 +1,4 @@
-# Connecta Portal
+# Connecta Portal [![Code Climate](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/gpa.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend)
 
 Interface principal dos aplicativos Connecta.
 
