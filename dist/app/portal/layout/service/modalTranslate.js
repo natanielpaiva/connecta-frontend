@@ -1,0 +1,1 @@
+define(["connecta.portal"],function(portal){return portal.lazy.factory("$modalTranslate",["$translate",function($translate){return function(modalParams,prop,alias){$translate(alias).then(function(text){modalParams[prop]=text})}}])});
