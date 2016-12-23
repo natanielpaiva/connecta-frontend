@@ -23,6 +23,7 @@ define([
                     filterConfigOpen: false,  // 
                     isShowingData: false  // Mostra os dados da análise
                 };
+                
 
                 $scope.idDashboard = $routeParams.id;
 
