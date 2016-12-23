@@ -1,1 +1,0 @@
-define(["angular"],function(angular){var collector=angular.module("connecta.collector",[]);collector._configKey="collector";collector._routes={};return collector});

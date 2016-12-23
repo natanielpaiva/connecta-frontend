@@ -1,1 +1,0 @@
-define(["connecta.portal"],function(portal){return portal.directive("debug",function(){return{template:"<pre>{{model | json}}</pre>",require:"ngModel",scope:{model:"=ngModel"}}})});
