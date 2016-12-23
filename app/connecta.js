@@ -344,9 +344,8 @@ define([
         //$locationProvider.html5Mode(true);
     });
 
-    connecta.run(function ($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService, PublicDashboardService) {
+    connecta.run(function ($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService) {
 
-        //configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService);
         configureRouteChangeListener($rootScope, $menu, LayoutService);
 
         $rootScope.$on('login.authenticated', function ($event, authenticated) {
@@ -400,8 +399,7 @@ define([
         'speaknow/company/service/company-service',
         'portal/user/service/user-service',
         'portal/domain/service/domain-service',
-        'portal/auth/directive/visibleToRoles',
-        'portal/dashboard/service/dashboard-service-public'
+        'portal/auth/directive/visibleToRoles'
     ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });
