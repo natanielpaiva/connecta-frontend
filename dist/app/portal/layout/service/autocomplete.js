@@ -1,0 +1,1 @@
+define(["connecta.portal","angular"],function(portal,angular){return portal.lazy.factory("$autocomplete",["$http",function($http){return function(resource,parameters){var params={page:1,count:5};angular.extend(params,parameters);return $http.get(resource,{params:params})}}])});
