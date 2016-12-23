@@ -307,6 +307,8 @@ define([
 
         this.getPreviewChartJs = function (viewer, result, columnDrill) {
 
+            viewer.configuration.colors = ['#d80000', '#2f469a' , '#c6c6c6', '#132053'];
+
             viewer.configuration.labels = [];
             viewer.configuration.series = [];
             viewer.configuration.data = [];

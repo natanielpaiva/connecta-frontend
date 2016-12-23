@@ -3,7 +3,7 @@ define([
     'connecta.portal'
 ], function (portal) {
 
-    return portal.service('PublicDashboardService', function ($rootScope, portalResources, $http, applications, $filter, $cookieStore, LoginService) {
+    return portal.lazy.service('PublicDashboardService', function ($rootScope, portalResources, $http, applications, $filter, $cookieStore, LoginService) {
 
         // $cookieStore.put('portal.dashboard.validated', false);
         // $cookieStore.put('portal.dashboard.id', null);
