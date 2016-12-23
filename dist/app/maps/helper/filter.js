@@ -1,1 +1,0 @@
-define(function(){return{getQueryString:function(params,filter,fields){var array=[],fieldObj,queryString;for(var field in fields){fieldObj={};fieldObj[field]={$regex:filter,$options:"i"};array.push(fieldObj)}queryString="?size="+params.count()+"&page="+params.page();if(filter){queryString+="&filter="+JSON.stringify({$or:array})}return queryString}}});
