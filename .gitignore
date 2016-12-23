@@ -1,1 +1,7 @@
 /nbproject/private/
+/node_modules
+/dist
+/nbproject
+.sass-cache
+.project
+.settings
