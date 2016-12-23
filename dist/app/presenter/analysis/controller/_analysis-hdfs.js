@@ -1,1 +1,0 @@
-define([],function(){return function HdfsAnalysisFormController($scope){$scope.typeQuery=[{value:"hiveQL",name:"HiveQL"},{value:"pigQuery",name:"PigQuery"}]}});
