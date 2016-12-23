@@ -1,0 +1,14 @@
+{
+  "name": "angular-currency-mask",
+  "version": "0.1.0-alpha",
+  "main": ["angular-currency-mask.js"],
+  "ignore": [
+    ".gitignore",
+    "demo.html",
+    "README.md"
+  ],
+  "dependencies": {
+    "angular": ">=1.0.8"
+  },
+  "devDependencies": {}
+}
