@@ -1,0 +1,1 @@
+define(["connecta.portal"],function(portal){return portal.service("$heading",["$rootScope",function($rootScope){this.setLogo=function(logoSrc){$rootScope.$broadcast("heading.change-logo",logoSrc)};this.clearLogo=function(){$rootScope.$broadcast("heading.remove-logo")}}])});
