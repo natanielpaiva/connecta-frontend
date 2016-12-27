@@ -76,14 +76,14 @@ define([
             return $http.get(url);
         };
         
-        UserService.get = function (length) {
-            var url = portalResources.user + '/get/' + length;
+        UserService.get = function (length,idDomain) {
+            var url = portalResources.user + '/get/' + length + '/' +idDomain;
 
             return $http.get(url);
         };
         
-        UserService.getByRegex = function (regex) {
-            var url = portalResources.user + '/search?regex=' + regex;
+        UserService.getByRegex = function (regex,idDomain) {
+            var url = portalResources.user + '/search/'+ idDomain +'?regex=' + regex;
 
             return $http.get(url);
         };
