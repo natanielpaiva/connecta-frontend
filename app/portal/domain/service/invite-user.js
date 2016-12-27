@@ -35,7 +35,7 @@ define([
                         if ($scope.regex === "") {
                             $scope.users = users;
                         } else {
-                            UserService.getByRegex($scope.regex).then(function (response) {
+                            UserService.getByRegex($scope.regex,idDomain).then(function (response) {
                                 $scope.users = response.data;
                                 $scope.getImage();
                             });
