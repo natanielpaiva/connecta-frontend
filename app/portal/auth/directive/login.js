@@ -85,8 +85,10 @@ define([
                 init();
 
                 $scope.inviteUser = function (idDomain) {
-                    $inviteUser($scope.users,idDomain).then(function () {
-                        notify.success('USER.INVITED_SUCCESS');
+                    UserService.get(AMOUNT_USERS, idDomain).then(function (response) {
+                        $inviteUser(response.data, idDomain).then(function () {
+                            notify.success('USER.INVITED_SUCCESS');
+                        });
                     });
                 };
 
@@ -130,11 +132,6 @@ define([
                     $scope.domainBeingEdited = index;
                     _removeInvalidDomain();
 
-                    if (!$scope.users) {
-                        UserService.get(AMOUNT_USERS).then(function (response) {
-                            $scope.users = response.data;
-                        });
-                    }
                 };
 
                 $scope.updateDomain = function (domain) {

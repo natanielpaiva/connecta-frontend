@@ -166,7 +166,7 @@ define([
                 };
 
                 $scope.inviteUser = function () {
-                    UserService.get(AMOUNT_USERS).then(function (response) {
+                    UserService.get(AMOUNT_USERS,$cookieStore.get('user.domain.name')).then(function (response) {
                         $inviteUser(response.data, $cookieStore.get('user.domain.name')).then(function () {
                             notify.success('USER.INVITED_SUCCESS');
                         });
