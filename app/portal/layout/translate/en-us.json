@@ -67,5 +67,9 @@
         "COLLECTOR": {
             "DESCRIPTION": "Intelligent search to social media has its name. Discover what is said about your company or topics of interest in major social networks and the Web."
         }
+    },
+    "CONFIG":{
+        "REFRESH_TIME": "Define Analysis refresh time:",
+        "MINUTES": "minutes"
     }
 }
