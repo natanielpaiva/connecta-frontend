@@ -1,9 +1,10 @@
 /* global angular */
 define([
     'connecta.presenter',
-    'presenter/datasource/service/datasource-service'
+    'presenter/datasource/service/datasource-service',
+    'portal/layout/service/confirm'
 ], function (presenter) {
-    return presenter.lazy.controller('DatasourceListController', function ($scope, DatasourceService, ngTableParams) {
+    return presenter.lazy.controller('DatasourceListController', function ($scope, $confirm, DatasourceService, ngTableParams) {
         
         $scope.datasources = [];
 
@@ -28,10 +29,12 @@ define([
         });
 
         $scope.bulkRemove = function (datasources) {
-            DatasourceService.bulkRemove(datasources).then(function(){
-                angular.forEach(datasources, function(datasource){
-                    $scope.datasources.splice(
-                        $scope.datasources.indexOf(datasource), 1);
+            $confirm('DATASOURCE.BULK_DELETE_CONFIRM', 'DATASOURCE.BULK_CONFIRM_DELETE').then(function(){
+                DatasourceService.bulkRemove(datasources).then(function(){
+                    angular.forEach(datasources, function(datasource){
+                        $scope.datasources.splice(
+                            $scope.datasources.indexOf(datasource), 1);
+                    });
                 });
             });
         };

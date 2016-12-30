@@ -2,16 +2,19 @@ define([
     'connecta.presenter',
     'presenter/analysis/service/analysis-service',
     'presenter/group/service/group-service',
-    'presenter/datasource/service/datasource-service'
+    'presenter/datasource/service/datasource-service',
+    'portal/layout/service/confirm'
 
 ], function (presenter) {
     return presenter.lazy.controller('AnalysisViewController', function ($scope,
-            $routeParams, AnalysisService, DatasourceService, $location) {
+            $routeParams, AnalysisService, DatasourceService, $confirm, $location) {
         if ($routeParams.id) {
 
             $scope.excluir = function (id) {
-                AnalysisService.remove(id).then(function () {
-                    $location.path('presenter/analysis');
+                $confirm('ANALYSIS.DELETE_CONFIRM', 'ANALYSIS.CONFIRM_DELETE').then(function(){
+                    AnalysisService.remove(id).then(function () {
+                        $location.path('presenter/analysis');
+                    });
                 });
             };
 

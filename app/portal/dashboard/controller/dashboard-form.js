@@ -9,10 +9,11 @@ define([
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
     'maps/layer-viewer/directive/map-viewer',
-    'portal/layout/filter/data-uri'
+    'portal/layout/filter/data-uri',
+    'portal/layout/service/confirm'
 ], function (portal) {
     return portal.lazy.controller('DashboardFormController', function (
-            $scope, DashboardService, $routeParams, $location, $filter, SidebarService, applications, $modal, $http) {
+            $scope, DashboardService, $routeParams, $location, $filter, $confirm, SidebarService, applications, $modal, $http) {
         $scope.dashboard = {};
         $scope.dashboard.isPublic = false;
 
@@ -226,8 +227,11 @@ define([
                     ];
 
                     $scope.removeItem = function ($close) {
-                        section.items.splice(section.items.indexOf(item), 1);
-                        $close();
+                        $confirm('DASHBOARD.CONFIRM_DELETE', 'DASHBOARD.DELETE_CONFIRM').then(function(){
+                            section.items.splice(section.items.indexOf(item), 1);
+                            $close();
+                            
+                        });
                     };
                 },
                 size: 'lg'

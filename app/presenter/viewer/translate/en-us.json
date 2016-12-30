@@ -30,6 +30,10 @@
         "EXPORT": "Export image",
         "DELETE":"Delete",
         "EDIT":"Edit",
+        "DELETE_CONFIRM": "Remove viewer",
+        "CONFIRM_DELETE": "Do you really want to delete this viewer?",
+        "BULK_DELETE_CONFIRM": "Remove Viewers",
+        "BULK_CONFIRM_DELETE": "Do you really want to exclude these viewers",
 
         "FONT_COLOR": "Color",
         "FONT_FAMILY": "Font",
