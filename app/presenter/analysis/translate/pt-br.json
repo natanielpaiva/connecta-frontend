@@ -43,6 +43,10 @@
         "RESPONSE_XML": "Resposta XML",
         "RESULTS_OF_THE_ANALYSIS": "Resultado da Análise",
         "DRILL_SEQUENCE":"Sequência de Drill (detalhamento)",
+        "DELETE_CONFIRM": "Remover Análise",
+        "CONFIRM_DELETE": "Deseja realmente excluir esta análise?",
+        "BULK_DELETE_CONFIRM": "Remover Análises",
+        "BULK_CONFIRM_DELETE": "Deseja realmente excluir estas análises?",
         "DATABASE": {
             "REQUEST_TABLE": "Tabela",
             "REQUEST_SQL": "Query personalizada"

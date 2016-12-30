@@ -1,8 +1,9 @@
 define([
     'connecta.presenter',
-    'presenter/singlesource/service/singlesource-service'
+    'presenter/singlesource/service/singlesource-service',
+    'portal/layout/service/confirm'
 ], function (presenter) {
-    return presenter.lazy.controller('SingleSourceViewController', function ($scope, SingleSourceService, $routeParams, $location, fileExtensions) {
+    return presenter.lazy.controller('SingleSourceViewController', function ($scope, $confirm, SingleSourceService, $routeParams, $location, fileExtensions) {
 
         SingleSourceService.getById($routeParams.id).then(function (response) {
 
@@ -20,9 +21,11 @@ define([
             };
 
             $scope.excluir = function(id){
+               $confirm('SINGLESOURCE.DELETE_CONFIRM', 'SINGLESOURCE.CONFIRM_DELETE').then(function(){
                 SingleSourceService.delete(id).then(function(){
                     $location.path('presenter/singlesource');
                 });
+               });
             };
         });
 

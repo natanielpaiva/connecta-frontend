@@ -12,7 +12,11 @@
         "ATTRIBUTE_VALUE": "Valor do atributo",
         "ATTRIBUTE TYPE": "Tipo de atributo",
         "URL": "URL",
-        "DOWNLOAD":"Baixar"
+        "DOWNLOAD":"Baixar",
+        "DELETE_CONFIRM": "Remover mídia",
+        "CONFIRM_DELETE": "Deseja realmente excluir esta mídia?",
+        "BULK_DELETE_CONFIRM" : "Remover mídias",
+        "BULK_CONFIRM_DELETE" : "Deseja realmente excluir essas mídias?"
     }
 }
 

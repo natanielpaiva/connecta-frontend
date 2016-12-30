@@ -2,9 +2,10 @@
 define([
     'connecta.portal',
     'portal/layout/service/layout',
-    'portal/dashboard/service/dashboard-service'
+    'portal/dashboard/service/dashboard-service',
+    'portal/layout/service/confirm'
 ], function (portal) {
-    return portal.lazy.controller('DashboardListController', function ($scope, DashboardService) {
+    return portal.lazy.controller('DashboardListController', function ($scope, DashboardService, $confirm) {
         $scope.dashboards = [];
 
         $scope.listview = {
@@ -21,11 +22,14 @@ define([
         });
         
         $scope.bulkRemove = function (dashboard) {
-            DashboardService.bulkRemove(dashboard).then(function(){
-                angular.forEach(dashboard, function(dashboard){
-                    $scope.dashboards.splice(
-                        $scope.dashboards.indexOf(dashboard), 1);
+            $confirm('DASHBOARD.CONFIRM_BULK_DELETE','DASHBOARD.BULK_DELETE_CONFIRM').then(function(){
+                DashboardService.bulkRemove(dashboard).then(function(){
+                    angular.forEach(dashboard, function(dashboard){
+                        $scope.dashboards.splice(
+                            $scope.dashboards.indexOf(dashboard), 1);
+                    });
                 });
+                
             });
         };
     });
