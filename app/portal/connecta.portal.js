@@ -127,6 +127,11 @@ define([
             controller: 'UserFormController',
             controllerUrl: 'portal/user/controller/user-form',
             templateUrl: 'app/portal/user/template/user-form.html'
+        },
+        '/config': {
+            controller: 'ConnectaConfigController',
+            controllerUrl: 'portal/layout/controller/connecta-config',
+            templateUrl: 'app/portal/layout/template/connecta-config.html'
         }
     };
 

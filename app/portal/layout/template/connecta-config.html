@@ -1,0 +1,22 @@
+<div class="row user-forms">
+    <form name="configForm" ng-submit="submit()" class="col-md-offset-1 col-md-6">
+        <div class="form-group">
+            <h3>
+                {{'CONFIG.REFRESH_TIME' | translate}}
+            </h3>
+            <select id="refresh-interval" class="form-control" ng-model="interval">
+                <option value="5">5 {{'CONFIG.MINUTES' | translate}}</option>
+                <option value="10">10 {{'CONFIG.MINUTES' | translate}}</option>
+                <option value="15">15 {{'CONFIG.MINUTES' | translate}}</option>
+                <option value="30">30 {{'CONFIG.MINUTES' | translate}}</option>
+                <option value="45">45 {{'CONFIG.MINUTES' | translate}}</option>
+                <option value="60">60 {{'CONFIG.MINUTES' | translate}}</option>
+            </select>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" translate ng-disabled="configForm.$invalid">
+                LAYOUT.SAVE
+            </button>
+        </div>
+    </form>
+</div>
