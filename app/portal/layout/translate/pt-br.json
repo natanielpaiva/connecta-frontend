@@ -67,5 +67,9 @@
         "COLLECTOR":{
             "DESCRIPTION":"A busca inteligente às mídias sociais tem um novo nome. Descubra o que foi dito sobre a sua empresa ou tópicos de interesse nas maiores redes sociais e na Web."
         }
+    },
+    "CONFIG":{
+        "REFRESH_TIME":"Definir tempo de atualização das análises:",
+        "MINUTES": "minutos"
     }
 }
