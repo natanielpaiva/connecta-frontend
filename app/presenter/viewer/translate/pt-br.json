@@ -30,6 +30,10 @@
         "EXPORT": "Exportar imagem",
         "DELETE":"Excluir",
         "EDIT":"Editar",
+        "DELETE_CONFIRM": "Remover visualizador",
+        "CONFIRM_DELETE": "Deseja realmente excluir este visualizador?",
+        "BULK_DELETE_CONFIRM": "Remover visualizador",
+        "BULK_CONFIRM_DELETE": "Deseja realmente excluir estes visualizadores?",
 
         "FONT_COLOR": "Cor",
         "FONT_FAMILY": "Fonte",

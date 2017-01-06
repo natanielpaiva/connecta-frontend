@@ -12,7 +12,11 @@
         "ATTRIBUTE_VALUE": "Attribute Value",
         "ATTRIBUTE TYPE": "Attribute Type",
         "URL": "URL",
-        "DOWNLOAD":"Download"
+        "DOWNLOAD":"Download",
+        "DELETE_CONFIRM": "Remove media",
+        "CONFIRM_DELETE": "Do you really want to remove this media?",
+        "BULK_DELETE_CONFIRM" : "Remove medias",
+        "BULK_CONFIRM_DELETE" : "Do you really want to remove these media?"
     }
 }
 
