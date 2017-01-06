@@ -307,8 +307,9 @@ define([
 
         this.getPreviewChartJs = function (viewer, result, columnDrill) {
 
-            viewer.configuration.colors = ['#d80000', '#2f469a' , '#c6c6c6', '#132053'];
-
+            if(!viewer.configuration.colors){
+                viewer.configuration.colors = ['#d80000', '#2f469a' , '#c6c6c6', '#132053'];
+            }
             viewer.configuration.labels = [];
             viewer.configuration.series = [];
             viewer.configuration.data = [];
@@ -376,14 +377,14 @@ define([
             var typeViewer = identifyViewerType(viewer, result);
 
             if (typeViewer.type === 2) {
-                montaChartJsLineType2(viewer, result);
+                montaChartJsLineType2(viewer, result, typeViewer.descriptionLabel);
             } else {
                 montaChartJsLine(viewer, result, columnDrill);
             }
         };
 
-        var montaChartJsLineType2 = function (viewer, result) {
-            viewer.configuration.series.push(viewer.configuration.descriptionLabel);
+        var montaChartJsLineType2 = function (viewer, result, descriptionLabel) {
+            viewer.configuration.series.push(descriptionLabel);
             var newArray = [];
             viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                 if (analysisViewerColumn.columnType === 'METRIC') {
