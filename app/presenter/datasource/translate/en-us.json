@@ -35,6 +35,8 @@
         "SEND":"Send",
         "KEY":"Key",
         "VALUE":"Value",
-        "BODY":"Body"
+        "BODY":"Body",
+        "BULK_DELETE_CONFIRM": "Remove source",
+        "BULK_CONFIRM_DELETE": "Do you really want to delete this source?"
     }
 }

@@ -37,6 +37,10 @@
         "OPEN_FILTER":"Abrir configuração do filtro",
         "VIEWER_DATA":"Ver dados",
         "RETURN_TO_VIEWER":"Voltar ao visualizador",
+        "CONFIRM_DELETE": "Remover visualizador ",
+        "DELETE_CONFIRM": "Deseja remover esse visualizador?",
+        "CONFIRM_BULK_DELETE": "Remover Dashboard",
+        "BULK_DELETE_CONFIRM": "Os visualizadores neste dashboard serão excluidos. Quer realmente excluí-lo?",
         "FILTER": {
             "SELECT_FILTER":"Configuração do filtro",
             "SELECTED_FILTER":"Tipo: {{name}}. Clique para ativar esse filtro",

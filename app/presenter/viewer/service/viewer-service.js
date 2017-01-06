@@ -373,6 +373,30 @@ define([
                         }
                     };
 
+            var typeViewer = identifyViewerType(viewer, result);
+
+            if (typeViewer.type === 2) {
+                montaChartJsLineType2(viewer, result);
+            } else {
+                montaChartJsLine(viewer, result, columnDrill);
+            }
+        };
+
+        var montaChartJsLineType2 = function (viewer, result) {
+            viewer.configuration.series.push(viewer.configuration.descriptionLabel);
+            var newArray = [];
+            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                if (analysisViewerColumn.columnType === 'METRIC') {
+                    viewer.configuration.labels.push(
+                            analysisViewerColumn.analysisColumn.label);
+                    var labelMetric = analysisViewerColumn.analysisColumn.label;
+                    newArray.push(retornaValueFromField(labelMetric, result));
+                }
+            });
+            viewer.configuration.data.push(newArray);
+        };
+
+        var montaChartJsLine = function(viewer, result, columnDrill) {
             if (columnDrill) {
                 viewer.configuration.descriptionLabel = columnDrill.label;
                 viewer.configuration.labels =

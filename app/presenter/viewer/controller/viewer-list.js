@@ -2,9 +2,10 @@
 define([
     'connecta.presenter',
     'presenter/viewer/service/viewer-service',
-    'presenter/viewer/controller/modal-instance-ctrl'
+    'presenter/viewer/controller/modal-instance-ctrl',
+    'portal/layout/service/confirm'
 ], function (presenter) {
-    return presenter.lazy.controller('ViewerListController', function ($scope, ViewerService, ngTableParams, $modal, $routeParams) {
+    return presenter.lazy.controller('ViewerListController', function ($scope, $confirm, ViewerService, ngTableParams, $modal, $routeParams) {
         $scope.viewers = [];
         
         $scope.types = ViewerService.getTypes();
@@ -23,10 +24,12 @@ define([
         });
         
         $scope.bulkRemove = function (viewers) {
-            ViewerService.bulkRemove(viewers).then(function(){
-                angular.forEach(viewers, function(viewer){
-                    $scope.viewers.splice(
-                        $scope.viewers.indexOf(viewer), 1);
+            $confirm('VIEWER.BULK_DELETE_CONFIRM', 'VIEWER.BULK_CONFIRM_DELETE').then(function(){
+                ViewerService.bulkRemove(viewers).then(function(){
+                    angular.forEach(viewers, function(viewer){
+                        $scope.viewers.splice(
+                            $scope.viewers.indexOf(viewer), 1);
+                    });
                 });
             });
         };

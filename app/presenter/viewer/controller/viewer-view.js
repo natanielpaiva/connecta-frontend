@@ -3,6 +3,7 @@ define([
     'presenter/viewer/service/viewer-service',
     'presenter/analysis/service/analysis-service',
     'portal/dashboard/directive/viewer',
+    'portal/layout/service/confirm',
     'presenter/viewer/directive/analysis-viewer',
     'presenter/viewer/directive/twitter-timeline-viewer',
     'presenter/viewer/directive/singlesource-viewer',
@@ -14,7 +15,7 @@ define([
     'bower_components/angular-ui-select/dist/select'
 ], function (presenter) {
     return presenter.lazy.controller('ViewerViewController', function ($scope,
-                                    ViewerService, $routeParams, AnalysisService, $location) {
+                                    ViewerService, $confirm, $routeParams, AnalysisService, $location) {
 
         $scope.state = {loaded: false};
         $scope.chartCursor = {ativo: false};
@@ -145,8 +146,10 @@ define([
         }
 
         $scope.excluir = function (id) {
-            ViewerService.delete(id).then(function () {
-                $location.path('presenter/viewer');
+            $confirm('VIEWER.DELETE_CONFIRM','VIEWER.CONFIRM_DELETE').then(function(){
+                ViewerService.delete(id).then(function () {
+                    $location.path('presenter/viewer');
+                });
             });
         };
     });

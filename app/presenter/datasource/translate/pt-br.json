@@ -35,6 +35,8 @@
         "SEND": "Enviar",
         "KEY": "Chave",
         "VALUE": "Valor",
-        "BODY":"Corpo"
+        "BODY":"Corpo",
+        "BULK_DELETE_CONFIRM": "Remover fonte",
+        "BULK_CONFIRM_DELETE": "Deseja realmente excluir essa fonte?"
     }
 }
