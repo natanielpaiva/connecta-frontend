@@ -440,7 +440,7 @@ define([
                             for (var i in allData) {
                                 total += allData[i];
                             }
-                            var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                            var tooltipPercentage = util.formatNumber(((tooltipData / total) * 100),2,',','.');
                             return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.') + ' (' + tooltipPercentage + '%)';
                         }
                     };
