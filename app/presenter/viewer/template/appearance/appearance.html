@@ -25,3 +25,41 @@
         </div>
     </div>
 </div>
+<div class="graphs" ng-if="viewer.configuration.subtype !== 'pie'
+                         && viewer.configuration.subtype !== 'doughnut'
+                         && viewer.configuration.subtype !== 'polarArea'"
+                         ng-repeat="obj in viewer.configuration.series track by $index">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>
+                    <translate>VIEWER.FILL_COLOR</translate>
+                    - {{obj}}
+                </label>
+                <input class="form-control input-sm" type="text"
+                    ng-model="viewer.configuration.colors[$index]"/>
+                <input class="form-control input-sm corColorCluster" type="color"
+                    ng-model="viewer.configuration.colors[$index]"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="graphs" ng-if="viewer.configuration.subtype === 'pie'
+                         || viewer.configuration.subtype === 'doughnut'
+                         || viewer.configuration.subtype === 'polarArea'"
+                         ng-repeat="obj in viewer.configuration.labels track by $index">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>
+                    <translate>VIEWER.FILL_COLOR</translate>
+                    - {{obj}}
+                </label>
+                <input class="form-control input-sm" type="text"
+                    ng-model="viewer.configuration.colors[$index]"/>
+                <input class="form-control input-sm corColorCluster" type="color"
+                    ng-model="viewer.configuration.colors[$index]"/>
+            </div>
+        </div>
+    </div>
+</div>

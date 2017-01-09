@@ -183,6 +183,25 @@ define([
                         }
                     };
 
+                    $scope.$watchCollection('viewer.configuration.colors', function(newValues) {
+                        //convert object to hex
+                        if($scope.viewer.configuration && $scope.viewer.configuration.colors){
+                            var lastValue = $scope.viewer.configuration.colors[$scope.viewer.configuration.colors.length-1];
+                            $scope.viewer.configuration.colors[$scope.viewer.configuration.colors.length-1] = $scope.rgb2hex(lastValue);
+                        }
+                    });
+
+                    $scope.rgb2hex = function(rgba){
+                        if(rgba && rgba.backgroundColor){
+                            rgb = rgba.backgroundColor.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+                            return (rgb && rgb.length === 4) ? "#" +
+                                ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+                                ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+                                ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+                        }else{
+                            return rgba;
+                        }
+                    };
                 },
                 src: 'app/presenter/viewer/template/sidebar/_viewer-form-sidebar.html'
             }).show();
