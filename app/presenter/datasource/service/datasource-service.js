@@ -66,7 +66,12 @@ define([
                 name: 'Sql Server',
                 defaultPort: 1433,
                 hasSid: false
-            }
+            },
+            ORIENTDB: {
+                name: 'Oriente db',
+                defaultPort: 2424,
+                hasSid: false
+            },
         };
 
         var getTypeUrl = function (datasource) {
