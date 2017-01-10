@@ -98,7 +98,8 @@
                     <th class="text-center" ng-if="columnExample === '' && model.configuration.type === 'table'" translate>VIEWER.DRAG_HERE</th>
                     <th dnd-draggable="n" dnd-moved="model.columns.splice($index, 1)"
                         ng-repeat="n in model.columns" class="text-center"
-                        ng-if="columnExample !== '' && n.columnType === 'COLUMN'">
+                        ng-if="columnExample !== '' && n.columnType === 'COLUMN'"
+                        ng-click="setOrderProp(n.analysisColumn.label)">
 
                         {{n.analysisColumn.label| translate}}
                         <span ng-if="edit" class="icon-close" ng-click="model.columns.splice($index, 1)"></span>
@@ -106,8 +107,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="row" ng-repeat="example in model.configuration.data track by $index">
-                    <td ng-repeat="n in columnsTable track by $index" class="text-center" translate>
+                <tr class="row" ng-repeat="example in model.configuration.data | orderBy: orderProp">
+                    <td ng-repeat="(key , n) in columnsTable" class="text-center" translate>
                         {{example[n.value] ? example[n.value]:"-"}}
                     </td>
                 </tr>

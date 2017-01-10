@@ -24,6 +24,11 @@ define([
                     isShowingData: false  // Mostra os dados da análise
                 };
                 
+                $scope.orderProp = 0;
+                
+                $scope.setOrderProp = function(prop){
+                    $scope.orderProp = prop;
+                };
 
                 $scope.idDashboard = $routeParams.id;
 
@@ -101,6 +106,12 @@ define([
                         $scope.model.configuration.type === 'number' ) {
                         $scope.model.configuration.data = result;
                         $scope.model.columns = $scope.model.analysisViewerColumns;
+                        for( var i in $scope.model.configuration.data){
+                            var obj = $scope.model.configuration.data[i];
+                            for(var k in obj){
+                                $scope.orderProp = k;
+                            }
+                        }
                     }else if ($scope.model.configuration.type === 'chartjs'){
                         var columnDrill = updateDrillColumns();
                         montaChartjsResult($scope.model,result, columnDrill);
