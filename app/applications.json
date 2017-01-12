@@ -19,6 +19,7 @@
         "headerLogo": "assets/img/horizontal-logos/presenter.png",
         "home": "#/presenter/datasource",
         "viewerPath": "/viewer/:id",
+        "publicViewerPath": "/viewer/public/:id",
         "color": "#297EB8",
         "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/presenter",
         "active": true
