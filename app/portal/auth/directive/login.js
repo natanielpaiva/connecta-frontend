@@ -79,7 +79,7 @@ define([
                         default:
                             $scope.setSection($scope.sections.login);
                     }
-                    location.hash = '';
+                    // location.hash = '';
                 }
 
                 init();
