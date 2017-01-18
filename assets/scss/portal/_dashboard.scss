@@ -271,9 +271,9 @@
         .dashboard-section {
             h2 {
                 display:none;
-                }
             }
         }
+    }
 
     &.browser-fullscreen {
         padding-top:1em;
@@ -774,6 +774,16 @@
                 color:$white;
             }
         }
+
+        .logo-bottom {
+            margin: 0 93em 1em;
+
+            img {
+                width: 144px;
+                height: 34px;
+            }
+        }
+
     }
 }
 

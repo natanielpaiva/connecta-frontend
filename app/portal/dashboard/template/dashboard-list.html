@@ -60,18 +60,21 @@
             <label class="thumbnail-grid-checkbox-label">
                 <input type="checkbox" class="hidden" ng-model="dashboard.selected" />
                 <span ng-class="{
-                        'icon-check-box-outline-blank':!dashboard.selected,
+                        'icon-check - box - outline - blank':!dashboard.selected,
                         'icon-check-box':dashboard.selected,
                     }"></span>
             </label>
+        </div>
+        <div class="logo-bottom">
+            <img src="assets/img/connecta.png" alt="logo"/>
         </div>
     </div>
 </div>
 
 
 <bulk-action-bar ng-show="(dashboards | filter:{selected:true}).length"
-    class="am-slide-right">
+                 class="am-slide-right">
     <bulk-action icon="icon-trash" title="LAYOUT.DELETE"
-        ng-click="bulkRemove((dashboards | filter:{selected:true}))">
+                 ng-click="bulkRemove((dashboards | filter:{selected:true}))">
     </bulk-action>
 </bulk-action-bar>
