@@ -271,9 +271,9 @@
         .dashboard-section {
             h2 {
                 display:none;
+                }
             }
         }
-    }
 
     &.browser-fullscreen {
         padding-top:1em;
@@ -300,7 +300,7 @@
 
     .dashboard-header {
         @include clearfix;
-        background-color:$black;
+        background-color:$darkerBlackCet;
         width:75%;
         position:fixed;
         top:0;
@@ -325,7 +325,7 @@
             right:-58px;
             border-style: solid;
             border-width: 2.275em;
-            border-color:$black transparent transparent $black;
+            border-color:$darkerBlackCet transparent transparent $darkerBlackCet;
             transition:border-color $defaultAnimationDuration ease;
         }
 
@@ -379,6 +379,21 @@
                 transform:rotate(0deg) scale(1);
                 transition:transform $defaultAnimationDuration ease;
                 transform-origin:50% 50%;
+            }
+        }
+
+        .cet-logo{
+            margin-left: 56px;
+            margin-right: 33px;
+            img{
+                height: 34px;
+                width: 81px;
+            }
+        }
+        .prefeitura-logo{
+            img{
+                height: 26px;
+                width: 28px;
             }
         }
 
@@ -513,8 +528,8 @@
             &:link, &:hover, &:visited, &:active{
                 display:block;
                 font-weight: 600;
-                border-left: solid 0.3em $presenterBlue;
-                color: $presenterBlue;
+                border-left: solid 0.3em $orangeCet;
+                color: $orangeCet;
                 padding-left:0.5em;
                 line-height:1.25em;
             }
@@ -565,7 +580,7 @@
 
             @include clipped-text;
 
-            background-color:$presenterBlue;
+            background-color:$darkerBlackCet;
             color:white;
 
             &:hover {
@@ -797,7 +812,7 @@ viewer {
             z-index:0 !important;
             perspective: 800px;     // Profundidade da carta
             position:relative;
-            
+
             .amchart {
                 &.is-drilling {
                     cursor: crosshair;
@@ -813,30 +828,30 @@ viewer {
                 transition: transform $defaultAnimationDuration;
 
                 > *:not(.underlying-data), .underlying-data {   // Estilos gerais pros dois lados
-                    position: absolute;
-                    width: 100%;
-                    backface-visibility: hidden;
+                                                                position: absolute;
+                                                                width: 100%;
+                                                                backface-visibility: hidden;
 
-                    * {
-                        backface-visibility: hidden;
-                    }
+                                                                * {
+                                                                    backface-visibility: hidden;
+                                                                }
                 }
 
                 > *:not(.underlying-data) { // PARTES DA FRENTE DA CARTA
-                    // background-color: $white;
-                    z-index:0;
+                                            // background-color: $white;
+                                            z-index:0;
                 }
 
                 .underlying-data {  // PARTE DE TRÁS DA CARTA
-                    padding:1em 0;
-                    overflow: auto;
-                    height:100%;
-                    transform: rotateY(180deg);
-                    opacity: 0;
-                    backface-visibility: hidden !important;
-                    table {
-                        backface-visibility: hidden;
-                    }
+                                    padding:1em 0;
+                                    overflow: auto;
+                                    height:100%;
+                                    transform: rotateY(180deg);
+                                    opacity: 0;
+                                    backface-visibility: hidden !important;
+                                    table {
+                                        backface-visibility: hidden;
+                                    }
                 }
 
                 &.show-underlying-data {
@@ -1085,7 +1100,7 @@ viewer {
                                 margin:0;
                                 width:50%;
                                 float:left;
-                                
+
                                 &:first-of-type {
                                     border-right:none;
                                 }
@@ -1138,7 +1153,7 @@ viewer {
                             background-image: -webkit-gradient(linear, right top, left top,
                                 from(rgba($white, 1)),
                                 to(rgba($white, 0))
-                            );
+                                );
                         }
                     }
                 }

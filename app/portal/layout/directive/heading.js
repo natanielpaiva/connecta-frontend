@@ -26,7 +26,7 @@ define([
                 $scope.domain = {};
                 $scope.avatarUrl = null;
                 $scope.inviteForm = false;
-
+                
                 // adiciona a lista de aplicações no escopo
                 $scope.applications = util.mapToArray(applications);
                 var _getUser = function () {

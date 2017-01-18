@@ -1,7 +1,7 @@
-<img alt="detail" class="top-left-detail" src="assets/img/bottom-right.svg" ng-class="{active:(currentSection === sections.login)}" />
+<img alt="detail" class="top-left-detail" src="assets/img/bottom-right.png" ng-class="{active:(currentSection === sections.login)}" />
 <div class="top-left-detail-big" ng-class="{active:(currentSection === sections.login)}">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 350">
-        <path fill="#600202">
+        <path fill="#03435e">
             <animate attributeName="d" dur="10s" repeatCount="indefinite"
                      keyTimes="0; 0.5; 1"
                      values="
@@ -9,7 +9,7 @@
                      M0,0 V350 L79,208     L170,180     L304.7,75   L412.4,55   L500,0   Z;
                      M0,0 V311 L79.4,208.5 L196.7,155.5 L304.7,78.5 L412.4,52.3 L531.4,0 Z" />
         </path>
-        <path fill="#9b0d0d">
+        <path fill="#0f6e99">
             <animate attributeName="d" dur="10s" repeatCount="indefinite"
                      keyTimes="0; 0.5; 1"
                      values="
@@ -17,19 +17,19 @@
                      M0,0 V75    L79,208     L145,0 Z;
                      M0,0 V124.4 L79.4,208.8 L150.4,0 Z" />
         </path>
-        <path fill="#d30f0f">
+        <path fill="#0f90c7">
             <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0; 0.5; 1" values="
                      M150.5,0 L106.3,129.3 L251.60000000000002,116.30000000000001 L304.6,78.30000000000001 L150.60000000000002,1.4210854715202004e-14 Z;
                      M145,0   L104,128     L235,130                               L304.6,75                L150.60000000000002,1.4210854715202004e-14 Z;
                      M150.5,0 L106.3,129.3 L251.60000000000002,116.30000000000001 L304.6,78.30000000000001 L150.60000000000002,1.4210854715202004e-14 Z" />
         </path>
-        <path fill="#9b0d0d">
+        <path fill="#0f6e99">
             <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0; 0.5; 1" values="
                      M375.5,0 L304.5,78.7 L412.5,52.5 L410.7,0 Z;
                      M380,0   L304.5,75   L412.5,55   L385,0 Z;
                      M375.5,0 L304.5,78.7 L412.5,52.5 L410.7,0 Z" />
         </path>
-        <path fill="#d30f0f">
+        <path fill="#0f90c7">
             <animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0; 0.5; 1" values="
                      M0,241.8 V311 L80,208.00000000000003 L0,242.00000000000003 Z;
                      M0,100   V350 L79,208                L0,242.00000000000003 Z;
@@ -40,13 +40,15 @@
 </div>
 
 
-<section ng-show="currentSection === sections.login">
+<section class="login" ng-show="currentSection === sections.login">
     <div class="header-login">
-        <div class="logo">
-            <img src="assets/img/connecta.png" alt="logo" title="Connecta version {{package.version}}" class="logo-app-master" />
-        </div>
+        <img src="assets/img/cet-logo/LogoCet.png" alt="logo" 
+             title="Connecta version {{package.version}}" class="cet-logo"/>
+
+        <img src="assets/img/cet-logo/prefeiturasaopaulo.png" alt="logo"
+             title="Connecta version {{package.version}}" class="prefeitura-logo"/>
     </div>
-    <div class="form-login">
+    <div class="section-login form-login">
         <form name="loginForm" ng-submit="submit()">
             <div class="line-form">
                 <span class="icon-mail"></span>
@@ -220,7 +222,7 @@
                                     ng-click="domain.theme = color"
                                     style="background-color:{{color}};" ng-class="{
                                         active: domain.theme == color
-                                    }"></li>
+                                        }"></li>
                             </ul>
                         </div>
                         <div class="clearfix margin-top-single">
@@ -359,4 +361,8 @@
     </div>
 </div>
 
-<img alt="detail" class="bottom-right-detail" src="assets/img/bottom-right.svg" />
+<div class="logo-bottom">
+    <img src="assets/img/connecta.png" alt="logo"/>
+</div>
+
+<img alt="detail" class="bottom-right-detail" src="assets/img/bottom-right.png" />

@@ -36,7 +36,7 @@ heading {
         }
     }
     .navbar-header {
-        background-color: $lightBlack;
+        background-color: $darkerBlackCet;
         .navbar-brand {
             font-size: 13px;
             height: 60px;
@@ -410,17 +410,18 @@ heading {
 .current-app {
     width: 11em !important;
     height: 100%;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 11em auto;
-    margin-right: 3em;
-    transition: all 0.3s;
-    float: right !important;
-    display:block;
+    margin-bottom: 1px;
+    
+    .logo-cet{
+        width: 71px;
+        height: 34px;
+    }
 
-    //Fallback
-    background-image: url("../img//horizontal-logos/connecta.png");
+    .logo-prefeitura{
+        width: 40px;
+        height: 46px;
+    }
+
 }
 
 .domain-config-header{

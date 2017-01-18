@@ -5,7 +5,7 @@ $miniSidebarSize: 4em;
 menu { 
     font-family: 'Open Sans';
     width: $sidebarSize;
-    background-color: $black;
+    background-color: $lighterBlackCet;
     margin: 0;
     margin-top: 4.6em;
     padding:0;
@@ -28,9 +28,9 @@ menu {
                     background: transparent;
                 }
                 &.active {
-                    background-color: $red;
+                    background-color: $orangeCet !important;
                     &:hover {
-                        background-color: $red;
+                        background-color: $orangeCet !important;
                     }
                 }
                 &:hover {

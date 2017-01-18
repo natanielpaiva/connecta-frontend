@@ -43,7 +43,7 @@ $loginWhite: #f6f6f6;
             }
         }
 
-        .top-left-detail-big {
+        .top-left-detail-big{
             position: fixed;
             top: 0;
             left: 0;
@@ -131,95 +131,113 @@ $loginWhite: #f6f6f6;
     }
 }
 
-.header-login {
-    margin: 0;
+.logo-bottom {
+    margin: 0 1em 1em;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 
-    .logo {
-        margin: 0 0 1em;
-
-        img {
-            width: 100%;
-            margin: 0;
-        }
+    img {
+        width: 109px;
+        height: 25px;
     }
 }
+.login{
 
-.form-login {
-    @include clearfix;
-    width: 100%;
+    .header-login {
+        width: 400px !important;
+        text-align: center;
 
-    .line-form {
-        @include clearfix;
-        width: 100%;
-        line-height: 2.2em;
-        margin-bottom: 1em;
-        position: relative;
-
-        span {
-            width: 1em;
-            line-height: 2.5em;
-            color: $loginGray;
-            position: absolute;
-            left: 0;
-            top: 0.1em;
+        .cet-logo{
+            margin-right: 46px;
+            width: 186px;
+            height: 58px;
         }
 
-        .field-text {
-            overflow: hidden;
+        .prefeitura-logo{
+            width: 152px;
+            height: 67px;
+        }
+
+    }
+
+    .form-login {
+        @include clearfix;
+        width: $boxWidth;
+
+        .line-form {
+            @include clearfix;
+            width: 100%;
+            line-height: 2.2em;
+            margin-bottom: 1em;
             position: relative;
 
-            input {
-                outline: none;
-                width: 100%;
-                color: $lightBlack;
-                background-color: transparent;
-                border: none;
-                border-bottom: 1px solid $loginGray;
-                padding-left: 1.5em;
+            span {
+                width: 1em;
+                line-height: 2.5em;
+                color: $loginGray;
+                position: absolute;
+                left: 0;
+                top: 0.1em;
+            }
 
-                .material-border {
-                    transition: width ease $defaultAnimationDuration;
-                    width: 1em;
-                    height: 1em;
-                    background-color: green;
-                    position: absolute;
-                    left: 0;
-                    bottom: 0;
-                    border-bottom: 1px solid $presenterBlue;
-                }
+            .field-text {
+                overflow: hidden;
+                position: relative;
 
-                &:focus ~ .material-border {
+                input {
+                    outline: none;
                     width: 100%;
-                    transition: width ease $defaultAnimationDuration;
+                    color: $lightBlack;
+                    background-color: transparent;
+                    border: none;
+                    border-bottom: 1px solid $loginGray;
+                    padding-left: 1.5em;
+
+                    .material-border {
+                        transition: width ease $defaultAnimationDuration;
+                        width: 1em;
+                        height: 1em;
+                        background-color: green;
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        border-bottom: 1px solid $presenterBlue;
+                    }
+
+                    &:focus ~ .material-border {
+                        width: 100%;
+                        transition: width ease $defaultAnimationDuration;
+                    }
                 }
             }
         }
-    }
 
-    .keep-logged{
-        color: #333;
-    }
+        .keep-logged{
+            color: #333;
+        }
 
-    .add-account {
-        text-align: center;
-        padding-top: 0.5em;
-    }
+        .add-account {
+            text-align: center;
+            padding-top: 0.5em;
+        }
 
-    .btn-login {
-        background-color: $presenterBlue;
-        width: 100%;
-        height: 2.5em;
-        line-height: 2.5em;
-        color: $white;
-        /*margin-top: 1.5em;*/
-        transition: background-color 250ms;
-        border: none;
-
-        &:focus,
-            &:hover {
-            background-color: lighten($presenterBlue, $defaultLight);
-            cursor: pointer;
+        .btn-login {
+            background-color: $presenterBlue;
+            width: 100%;
+            height: 2.5em;
+            line-height: 2.5em;
+            color: $white;
+            /*margin-top: 1.5em;*/
             transition: background-color 250ms;
+            border: none;
+
+            &:focus,
+                &:hover {
+                background-color: lighten($presenterBlue, $defaultLight);
+                cursor: pointer;
+                transition: background-color 250ms;
+            }
         }
     }
 }
@@ -550,7 +568,7 @@ $loginWhite: #f6f6f6;
 
             .column-image{
                 width: 50px;
-                
+
                 .avatar {
                     margin: 0.2em;
                     height: 2.5em;
