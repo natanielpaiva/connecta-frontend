@@ -35,6 +35,12 @@
         "DRILL_UP":"Generalize (Drill up)",
         "ACTIVATE_DRILL":"Activate detailing (Drill)",
         "OPEN_FILTER":"Open filter settings",
+        "VIEWER_DATA":"View data",
+        "RETURN_TO_VIEWER":"Back to viewer",
+        "CONFIRM_DELETE": "Remove viewer ",
+        "DELETE_CONFIRM": "Do you want to remove this viewer?",
+        "CONFIRM_BULK_DELETE": "Remove Dashboard",
+        "BULK_DELETE_CONFIRM": "The viewers on this dashboard will be excluded. Do you really want to delete it?",
         "FILTER": {
             "SELECT_FILTER":"Filter settings",
             "SELECTED_FILTER":"Type: {{name}}. Click to active this filter",

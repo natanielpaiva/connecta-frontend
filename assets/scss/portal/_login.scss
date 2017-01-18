@@ -196,6 +196,10 @@ $loginWhite: #f6f6f6;
         }
     }
 
+    .keep-logged{
+        color: #333;
+    }
+
     .add-account {
         text-align: center;
         padding-top: 0.5em;
@@ -420,7 +424,7 @@ $loginWhite: #f6f6f6;
                                 height: 1.25em;
                                 border-radius: 50%;
                                 margin-right: 1em;
-                                
+
                                 &.active {
                                     border:solid 2px $lightBlack;
                                 }
@@ -503,6 +507,60 @@ $loginWhite: #f6f6f6;
             h3 {
                 margin-top: 0.35em;
                 padding-top: 1em;
+            }
+        }
+    }
+}
+
+.modal-invite{
+
+    .input-invite{
+        resize: none;
+        width:100%;
+        color: $gray;
+        line-height: 0.85em;
+        font-weight: 600;
+        font-size:1.2em;
+        padding:0 !important;
+        padding-left:1.5em;
+        margin:0;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $presenterBlue;
+        outline: none;
+
+        &:not(.name-input) {
+            font-size: 1em;
+            padding:0 1.75em;
+        }
+    }
+
+    .not-found{
+        text-align: center;
+    }
+
+    .table-users{
+        @extend .cursor-pointer;
+        overflow: scroll; 
+        height: 130px; 
+        margin-top: 0px;
+
+        .line{
+            height: 40px;
+
+            .column-image{
+                width: 50px;
+                
+                .avatar {
+                    margin: 0.2em;
+                    height: 2.5em;
+                    width: 2.5em;
+                    border-radius: 50%;
+                }
+            }
+            .column-name{
+                width: 185px;
+
             }
         }
     }

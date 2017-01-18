@@ -3,7 +3,7 @@ define([
     'connecta.presenter',
     'portal/layout/service/autocomplete'
 ], function (presenter) {
-    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, DomainService) {
+    return presenter.lazy.service('ViewerService', function (presenterResources, $autocomplete, $http, DomainService, util, ChartJs) {
 
         var exampleTable = {
             examples: [
@@ -41,6 +41,11 @@ define([
                 type: "SINGLESOURCE_GROUP",
                 icon: 'icon-perm-media',
                 template: ""
+            },
+            TWITTER_TIMELINE: {
+                type: "TWITTER_TIMELINE",
+                icon: "icon-twitter",
+                template: ""
             }
         };
 
@@ -72,265 +77,23 @@ define([
                     type: 'APPEARANCE'
                 }
 
-            },
-            {
-                heading: "VIEWER._BACKGROUND_AND_PLOT_AREA",
-                title: "Background and plot area",
-                type: "BACKGROUND",
-                children: [
-                    {
-                        type: "PLOT_AREA",
-                        name: "VIEWER.PLOT_AREA",
-                        config: {
-                            name: 'VIEWER.PLOT_AREA',
-                            template: 'app/presenter/viewer/template/background-and-plot-area/plot-area.html',
-                            type: 'PLOT_AREA'
-                        }
-                    },
-                    {
-                        type: "MARGINS",
-                        name: "VIEWER.MARGINS",
-                        config: {
-                            name: 'VIEWER.MARGINS',
-                            template: 'app/presenter/viewer/template/background-and-plot-area/margins.html',
-                            type: 'MARGINS'
-                        }
-                    },
-                    {
-                        type: "BACKGROUND_AND_BORDER",
-                        name: "VIEWER.BACKGROUND_AND_BORDER",
-                        config: {
-                            name: 'VIEWER.BACKGROUND_AND_BORDER',
-                            template: 'app/presenter/viewer/template/background-and-plot-area/background-and-border.html',
-                            type: 'BACKGROUND_AND_BORDER'
-                        }
-                    }
-                ]
-
-            },
-            {
-                heading: "VIEWER._GENERAL_SETTINGS",
-                title: "VIEWER.GENERAL_SETTINGS",
-                type: "GENERAL_SETTINGS",
-                children: "",
-                config: {
-                    name: 'VIEWER.GENERAL_SETTINGS',
-                    template: 'app/presenter/viewer/template/general-settings/general-settings.html',
-                    type: 'GENERAL_SETTINGS'
-                }
-            },
-            {
-                heading: "VIEWER._MISCELLANEOUS",
-                title: "VIEWER.MISCELLANEOUS",
-                type: "MISCELLANEOUS",
-                children: [
-                    {
-                        type: "OTHER",
-                        name: "VIEWER.OTHER",
-                        config: {
-                            name: 'VIEWER.OTHER',
-                            template: 'app/presenter/viewer/template/miscellaneous/other.html',
-                            type: 'OTHER'
-                        }
-                    },
-                    {
-                        type: "COLUMNS",
-                        name: "VIEWER.COLUMNS",
-                        config: {
-                            name: 'VIEWER.COLUMNS',
-                            template: 'app/presenter/viewer/template/miscellaneous/columns.html',
-                            type: 'COLUMNS'
-                        }
-                    },
-                    {
-                        type: "ZOOMING",
-                        name: "VIEWER.ZOOMING",
-                        config: {
-                            name: 'VIEWER.ZOOMING',
-                            template: 'app/presenter/viewer/template/miscellaneous/zooming.html',
-                            type: 'ZOOMING'
-                        }
-                    },
-                    {
-                        type: "ANIMATION",
-                        name: "VIEWER.ANIMATION",
-                        config: {
-                            name: 'VIEWER.ANIMATION',
-                            template: 'app/presenter/viewer/template/miscellaneous/animation.html',
-                            type: 'ANIMATION'
-                        }
-                    }
-                ]
-            },
-            {
-                heading: "VIEWER._NUMBER_FORMATTING",
-                title: "Number formatting",
-                type: "VIEWER.NUMBER_FORMATTING",
-                children: "",
-                config: {
-                    name: 'VIEWER.NUMBER_FORMATTING',
-                    template: 'app/presenter/viewer/template/number-formating/number-formating.html',
-                    type: 'NUMBER_FORMATTING'
-                }
-
-            },
-            {
-                heading: "VIEWER._CHART_CURSOR",
-                title: "VIEWER.CHART_CURSOR",
-                type: "CHART_CURSOR",
-                children: [
-                    {
-                        type: "GENERAL_SETTINGS",
-                        name: "VIEWER.CHART_CURSOR",
-                        config: {
-                            name: 'VIEWER.CHART_CURSOR',
-                            template: 'app/presenter/viewer/template/chart-cursor/general-settings.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "APPEARANCE",
-                        name: "VIEWER.APPEARANCE",
-                        config: {
-                            name: 'VIEWER.APPEARANCE',
-                            template: 'app/presenter/viewer/template/chart-cursor/appearance.html',
-                            type: 'APPEARANCE'
-                        }
-                    }
-                ]
-            },
-            {
-                heading: "VIEWER._CHART_SCROLLBAR",
-                title: "VIEWER.CHART_SCROLLBAR",
-                type: "CHART_SCROLLBAR",
-                children: [
-                    {
-                        type: "GENERAL_SETTINGS",
-                        name: "VIEWER.GENERAL_SETTINGS",
-                        config: {
-                            name: 'VIEWER.GENERAL_SETTINGS',
-                            template: 'app/presenter/viewer/template/chart-scrollbar/general-settings.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "APPEARANCE",
-                        name: "VIEWER.APPEARANCE",
-                        config: {
-                            name: 'VIEWER.APPEARANCE',
-                            template: 'app/presenter/viewer/template/chart-scrollbar/appearance.html',
-                            type: 'APPEARANCE'
-                        }
-                    }
-                ]
-            },
-            {
-                heading: "VIEWER._LEGEND",
-                title: "VIEWER.LEGEND",
-                type: "LEGEND",
-                children: [
-                    {
-                        type: "GENERAL_SETTINGS",
-                        name: "VIEWER.GENERAL_SETTINGS",
-                        config: {
-                            name: 'VIEWER.GENERAL_SETTINGS',
-                            template: 'app/presenter/viewer/template/legend/general-settings.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "POSITION_AND_MARGINS",
-                        name: "VIEWER.POSITION_AND_MARGINS",
-                        config: {
-                            name: 'VIEWER.POSITION_AND_MARGINS',
-                            template: 'app/presenter/viewer/template/legend/position-and-margins.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "APPEARANCE",
-                        name: "VIEWER.APPEARANCE",
-                        config: {
-                            name: 'VIEWER.APPEARANCE',
-                            template: 'app/presenter/viewer/template/legend/appearance.html',
-                            type: 'APPEARANCE'
-                        }
-                    },
-                    {
-                        type: "MARKERS",
-                        name: "VIEWER.MARKERS",
-                        config: {
-                            name: 'VIEWER.MARKERS',
-                            template: 'app/presenter/viewer/template/legend/markers.html',
-                            type: 'MARKERS'
-                        }
-                    }
-
-                ]
-            },
-            {
-                heading: "VIEWER._BALLON",
-                title: "VIEWER.BALLON",
-                type: "BALLON",
-                children: [
-                    {
-                        type: "GENERAL_SETTINGS",
-                        name: "VIEWER.GENERAL_SETTINGS",
-                        config: {
-                            name: 'VIEWER.GENERAL_SETTINGS',
-                            template: 'app/presenter/viewer/template/ballon/general-settings.html',
-                            type: 'GENERAL_SETTINGS'
-                        }
-                    },
-                    {
-                        type: "APPEARANCE",
-                        name: "VIEWER.APPEARANCE",
-                        config: {
-                            name: 'VIEWER.APPEARANCE',
-                            template: 'app/presenter/viewer/template/ballon/appearance.html',
-                            type: 'APPEARANCE'
-                        }
-                    }
-
-                ]
-
-            },
-            {
-                heading: "VIEWER._TITLE",
-                title: "VIEWER.TITLE",
-                type: "TITLE",
-                children: "",
-                config: {
-                    name: 'VIEWER.TITLE',
-                    template: 'app/presenter/viewer/template/title/title.html',
-                    type: 'TITLE'
-                }
-
-            },
-            {
-                heading: "VIEWER._GRAPHS",
-                title: "VIEWER.GRAPHS",
-                type: "GRAPHS",
-                children: "",
-                config: {
-                    name: 'VIEWER.GRAPHS',
-                    template: 'app/presenter/viewer/template/graphs/graphs.html',
-                    type: 'GRAPHS'
-                }
-
-            },
-            {
-                heading: "VIEWER._CATEGORY_AXIS",
-                title: "Category Axis",
-                type: "CATEGORY_AXIS",
-                children: "",
-                config: {
-                    name: 'VIEWER.CATEGORY_AXIS',
-                    template: 'app/presenter/viewer/template/category-axis/axis-label.html',
-                    type: 'CATEGORY_AXIS'
-                }
-
             }
+            // {
+            //     heading: "VIEWER._BACKGROUND_AND_PLOT_AREA",
+            //     title: "Background and plot area",
+            //     type: "BACKGROUND",
+            //     children: [
+            //         {
+            //             type: "PLOT_AREA",
+            //             name: "VIEWER.PLOT_AREA",
+            //             config: {
+            //                 name: 'VIEWER.PLOT_AREA',
+            //                 template: 'app/presenter/viewer/template/background-and-plot-area/plot-area.html',
+            //                 type: 'PLOT_AREA'
+            //             }
+            //         }
+            //     ]
+            // }
         ];
 
         this.getExampleTable = function () {
@@ -494,7 +257,7 @@ define([
         // ----------- Chart JS  ------------ //
 
         var chartJsTypes = {
-            chartjs : [
+            chartjs: [
                 {
                     id: 'horizontal-bar-chartjs',
                     src: 'assets/img/presenter/barras/bar-clustered.png'
@@ -538,11 +301,26 @@ define([
             return chartJsTypes;
         };
 
+        this.getPreview = function (viewer, result) {
+            viewer.configuration.data = result;
+        };
+
         this.getPreviewChartJs = function (viewer, result, columnDrill) {
 
+            if(!viewer.configuration.colors){
+                viewer.configuration.colors = ['#d80000', '#2f469a' , '#c6c6c6', '#132053'];
+            }
             viewer.configuration.labels = [];
             viewer.configuration.series = [];
             viewer.configuration.data = [];
+            if (!viewer.configuration.options) {
+                viewer.configuration.options = {};
+            }
+
+            if(!viewer.configuration.options.tooltips ||
+                viewer.configuration.options.tooltips.enabled){
+                angular.merge(viewer.configuration.options, ChartJs.getOptions());
+            }
 
             switch (viewer.configuration.subtype) {
                 case "bar":
@@ -555,9 +333,11 @@ define([
                     configureBarLineAndRadarChartJs(viewer, result, columnDrill);
                     break;
                 case "pie":
+                    setAxisToFalse(viewer.configuration.options.scales);
                     configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
                     break;
                 case "doughnut":
+                    setAxisToFalse(viewer.configuration.options.scales);
                     configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
                     break;
                 case "polarArea":
@@ -567,18 +347,61 @@ define([
                     configureBarLineAndRadarChartJs(viewer, result, columnDrill);
                     break;
                 case "bubble":
-                    configureBubbleChartJs(viewer,result);
+                    configureBubbleChartJs(viewer, result);
                     break;
             }
 
+            animationCallBack(viewer);
+        };
+
+        var setAxisToFalse = function(scales){
+            scales.yAxes[0].display = false;
+            scales.xAxes[0].display = false;
         };
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
 
+            //configuração de formatação
+            viewer
+                .configuration
+                .options
+                .tooltips.callbacks = {
+                        label: function (tooltipItem, data) {
+                            var allData = data.datasets[tooltipItem.datasetIndex].data;
+                            var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label;
+                            var tooltipData = allData[tooltipItem.index];
+                            return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.');
+                        }
+                    };
+
+            var typeViewer = identifyViewerType(viewer, result);
+
+            if (typeViewer.type === 2) {
+                montaChartJsLineType2(viewer, result, typeViewer.descriptionLabel);
+            } else {
+                montaChartJsLine(viewer, result, columnDrill);
+            }
+        };
+
+        var montaChartJsLineType2 = function (viewer, result, descriptionLabel) {
+            viewer.configuration.series.push(descriptionLabel);
+            var newArray = [];
+            viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
+                if (analysisViewerColumn.columnType === 'METRIC') {
+                    viewer.configuration.labels.push(
+                            analysisViewerColumn.analysisColumn.label);
+                    var labelMetric = analysisViewerColumn.analysisColumn.label;
+                    newArray.push(retornaValueFromField(labelMetric, result));
+                }
+            });
+            viewer.configuration.data.push(newArray);
+        };
+
+        var montaChartJsLine = function(viewer, result, columnDrill) {
             if (columnDrill) {
                 viewer.configuration.descriptionLabel = columnDrill.label;
                 viewer.configuration.labels =
-                    montaArrayChartJs(columnDrill.label, result);
+                        montaArrayChartJs(columnDrill.label, result);
 
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                     if (analysisViewerColumn.columnType === 'METRIC') {
@@ -587,13 +410,13 @@ define([
                         viewer.configuration.data.push(montaArrayChartJs(labelMetric, result));
                     }
                 });
-            }else{
+            } else {
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
-                    if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                    if (analysisViewerColumn.columnType === 'DESCRIPTION') {
                         viewer.configuration.descriptionLabel = analysisViewerColumn.analysisColumn.label;
-                       viewer.configuration.labels =
-                            montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
-                    }else if (analysisViewerColumn.columnType === 'METRIC') {
+                        viewer.configuration.labels =
+                                montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
+                    } else if (analysisViewerColumn.columnType === 'METRIC') {
                         var labelMetric = analysisViewerColumn.analysisColumn.label;
                         viewer.configuration.series.push(labelMetric);
                         viewer.configuration.data.push(montaArrayChartJs(labelMetric, result));
@@ -604,55 +427,49 @@ define([
 
         var configurePieDonutAndAreaChartJs = function (viewer, result, columnDrill) {
 
-            if(!viewer.configuration.options) {
-                viewer.configuration.options = {};
-            }
-
             //configuração de porcentagem
             viewer
                 .configuration
-                    .options
-                        .tooltips = {
-                            callbacks: {
-                                label: function(tooltipItem, data) {
-                                    var allData = data.datasets[tooltipItem.datasetIndex].data;
-                                    var tooltipLabel = data.labels[tooltipItem.index];
-                                    var tooltipData = allData[tooltipItem.index];
-                                    var total = 0;
-                                    for (var i in allData) {
-                                        total += allData[i];
-                                    }
-                                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
-                                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
-                                }
+                .options
+                .tooltips.callbacks = {
+                        label: function (tooltipItem, data) {
+                            var allData = data.datasets[tooltipItem.datasetIndex].data;
+                            var tooltipLabel = data.labels[tooltipItem.index];
+                            var tooltipData = allData[tooltipItem.index];
+                            var total = 0;
+                            for (var i in allData) {
+                                total += allData[i];
+                            }
+                            var tooltipPercentage = util.formatNumber(((tooltipData / total) * 100),2,',','.');
+                            return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.') + ' (' + tooltipPercentage + '%)';
                         }
                     };
 
             var typeViewer = identifyViewerType(viewer, result);
 
-            if(typeViewer.type === 2){
+            if (typeViewer.type === 2) {
                 montaChartJsPieType2(viewer, result);
-            }else{
+            } else {
                 montaChartJsPie(viewer, result, columnDrill);
             }
         };
 
-        var montaChartJsPieType2 = function(viewer, result){
+        var montaChartJsPieType2 = function (viewer, result) {
             viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                 if (analysisViewerColumn.columnType === 'METRIC') {
                     viewer.configuration.labels.push(
-                        analysisViewerColumn.analysisColumn.label);
+                            analysisViewerColumn.analysisColumn.label);
                     var labelMetric = analysisViewerColumn.analysisColumn.label;
                     viewer.configuration.data.push(retornaValueFromField(labelMetric, result));
                 }
             });
         };
 
-        var montaChartJsPie = function(viewer, result, columnDrill){
+        var montaChartJsPie = function (viewer, result, columnDrill) {
             if (columnDrill) {
                 viewer.configuration.descriptionLabel = columnDrill.label;
                 viewer.configuration.labels =
-                    montaArrayChartJs(columnDrill.label, result);
+                        montaArrayChartJs(columnDrill.label, result);
 
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
                     if (analysisViewerColumn.columnType === 'METRIC') {
@@ -663,11 +480,11 @@ define([
                 });
             } else {
                 viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
-                    if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                    if (analysisViewerColumn.columnType === 'DESCRIPTION') {
                         viewer.configuration.descriptionLabel = analysisViewerColumn.analysisColumn.label;
                         viewer.configuration.labels =
-                            montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
-                    }else if (analysisViewerColumn.columnType === 'METRIC') {
+                                montaArrayChartJs(analysisViewerColumn.analysisColumn.label, result);
+                    } else if (analysisViewerColumn.columnType === 'METRIC') {
                         var labelMetric = analysisViewerColumn.analysisColumn.label;
                         viewer.configuration.series.push(labelMetric);
                         viewer.configuration.data = montaArrayChartJs(labelMetric, result);
@@ -676,7 +493,7 @@ define([
             }
         };
 
-        var configureBubbleChartJs = function(viewer, result) {
+        var configureBubbleChartJs = function (viewer, result) {
 
             var xField;
             var yField;
@@ -684,27 +501,27 @@ define([
             var descriptionField;
 
             viewer.analysisViewerColumns.forEach(function (analysisViewerColumn) {
-                if(analysisViewerColumn.columnType === 'DESCRIPTION'){
+                if (analysisViewerColumn.columnType === 'DESCRIPTION') {
                     descriptionField = analysisViewerColumn.analysisColumn.label;
                     viewer.configuration.series =
-                        montaArrayChartJs(descriptionField, result);
-                }else if (analysisViewerColumn.columnType === 'XFIELD') {
+                            montaArrayChartJs(descriptionField, result);
+                } else if (analysisViewerColumn.columnType === 'XFIELD') {
                     xField = analysisViewerColumn.analysisColumn.label;
-                }else if (analysisViewerColumn.columnType === 'YFIELD') {
+                } else if (analysisViewerColumn.columnType === 'YFIELD') {
                     yField = analysisViewerColumn.analysisColumn.label;
-                }else if (analysisViewerColumn.columnType === 'VALUEFIELD') {
+                } else if (analysisViewerColumn.columnType === 'VALUEFIELD') {
                     valueField = analysisViewerColumn.analysisColumn.label;
                 }
             });
 
-            for(var i = 0; i < result.length; i++){
-                if(!descriptionField)
-                    viewer.configuration.series.push('Bubble-'+(i+1));
-                viewer.configuration.data.push(montaArrayXYChartJs(xField,yField,valueField,result[i]));
+            for (var i = 0; i < result.length; i++) {
+                if (!descriptionField)
+                    viewer.configuration.series.push('Bubble-' + (i + 1));
+                viewer.configuration.data.push(montaArrayXYChartJs(xField, yField, valueField, result[i]));
             }
         };
 
-        var montaArrayXYChartJs = function(xField,yField,valueField,result) {
+        var montaArrayXYChartJs = function (xField, yField, valueField, result) {
             var array = [];
             var xyr = {};
             var object = result;
@@ -717,11 +534,11 @@ define([
                     xyr.r = object[t];
                 }
             }
-            array.push(!xyr.r ? xyr = {x:xyr.x,y:xyr.y,r:1} : xyr);
+            array.push(!xyr.r ? xyr = {x: xyr.x, y: xyr.y, r: 1} : xyr);
             return array;
         };
 
-        var montaArrayChartJs = function(field, result) {
+        var montaArrayChartJs = function (field, result) {
             var array = [];
             for (var r in result) {
                 var valueField;
@@ -737,7 +554,7 @@ define([
             return array;
         };
 
-        var retornaValueFromField = function(field, result) {
+        var retornaValueFromField = function (field, result) {
             var valueField;
 
             for (var r in result) {
@@ -750,6 +567,56 @@ define([
                 }
             }
             return valueField;
+        };
+
+
+        var animationCallBack = function(viewer){
+            if(!viewer.configuration.options.tooltips.enabled){
+                this.createAnimationCallBack(viewer.configuration.options);
+            }else{
+                this.removeAnimationCallBack(viewer.configuration.options);
+            }
+        }.bind(this);
+
+        this.createAnimationCallBack = function(viewerOptions) {
+            var options = {
+                events: false,
+                hover: {
+                    animationDuration: 0
+                },
+                animation: {
+                    duration: 1,
+                    onComplete: function() {
+                        var ctx = this.chart.ctx;
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+
+                        this.data.datasets.forEach(function(dataset) {
+                            for (var i = 0; i < dataset.data.length; i++) {
+                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                                    scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
+                                ctx.fillStyle = '#444';
+                                var y_pos = model.y - 5;
+                                // Make sure data value does not get overflown and hidden
+                                // when the bar's value is too close to max value of scale
+                                // Note: The y value is reverse, it counts from top down
+                                if ((scale_max - model.y) / scale_max >= 0.93)
+                                    y_pos = model.y + 20;
+                                ctx.fillText(util.formatNumber(dataset.data[i], 2, ',', '.'), model.x, y_pos);
+                            }
+                        });
+                    }
+                }
+            };
+
+            angular.merge(viewerOptions, options);
+        };
+
+        this.removeAnimationCallBack = function(viewerOptions) {
+            delete viewerOptions.events;
+            delete viewerOptions.hover;
+            delete viewerOptions.animation;
         };
 
     });

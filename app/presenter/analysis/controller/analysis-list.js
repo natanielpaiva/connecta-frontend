@@ -1,8 +1,9 @@
 define([
     'connecta.presenter',
-    'presenter/analysis/service/analysis-service'
+    'presenter/analysis/service/analysis-service',
+    'portal/layout/service/confirm'
 ], function (presenter) {
-    return presenter.lazy.controller('AnalysisListController', function ($scope, AnalysisService, ngTableParams) {
+    return presenter.lazy.controller('AnalysisListController', function ($scope, $confirm, AnalysisService, ngTableParams) {
 
         $scope.types = AnalysisService.getTypes();
         
@@ -20,10 +21,12 @@ define([
         });
 
         $scope.bulkRemove = function (analysisList) {
-            AnalysisService.bulkRemove(analysisList).then(function(){
-                angular.forEach(analysisList, function(analysis){
-                    $scope.analysisList.splice(
-                        $scope.analysisList.indexOf(analysis), 1);
+            $confirm('ANALYSIS.BULK_DELETE_CONFIRM', 'ANALYSIS.BULK_CONFIRM_DELETE').then(function(){
+                AnalysisService.bulkRemove(analysisList).then(function(){
+                    angular.forEach(analysisList, function(analysis){
+                        $scope.analysisList.splice(
+                            $scope.analysisList.indexOf(analysis), 1);
+                    });
                 });
             });
         };

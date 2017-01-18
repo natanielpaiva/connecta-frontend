@@ -1,25 +1,29 @@
 <div class="row">
     <div class="col-xs-3 form-group">
         <label for="separador" class="required" translate>ANALYSIS.SEPARATOR</label>
-        <select class="form-control" ng-model="analysis.separator" ng-options="item.value as item.name for item in separator" required >
+        <select name="analysisSeparator" class="form-control" ng-model="analysis.separator" ng-options="item.value as item.name for item in separator" required >
             <option value="">Selecione</option>
         </select>
-        <div ng-show="formulario.separator.$touched" ng-messages="formulario.separator.$error"
+        <div ng-show="formulario.analysisSeparator.$touched" ng-messages="formulario.analysisSeparator.$error"
              ng-messages-include="portal-error-messages" ></div>
     </div>
 
     <div class="col-xs-3 form-group">
         <label for="quote" class="required" translate>ANALYSIS.QUOTE</label>
-        <select class="form-control" ng-model="analysis.quote" ng-options="item.value as item.name for item in quote"  >
+        <select name="analysisQuote" class="form-control" ng-model="analysis.quote" ng-options="item.value as item.name for item in quote"  required>
             <option value="">Selecione</option>
         </select>
+        <div ng-show="formulario.analysisQuote.$touched" ng-messages="formulario.analysisQuote.$error"
+             ng-messages-include="portal-error-messages" ></div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-8 form-group">
         <label for="textCSV" class="required" translate>ANALYSIS.CSV_TEXT</label>
-        <textarea class="form-control" rows="4" ng-model="analysis.binaryFile" required></textarea>
+        <textarea name="analysisBinaryFile" class="form-control" rows="4" ng-model="analysis.binaryFile" required></textarea>
+        <div ng-show="formulario.analysisBinaryFile.$touched" ng-messages="formulario.analysisBinaryFile.$error"
+        ng-messages-include="portal-error-messages" ></div>
     </div>
     <div class="col-sm-4 form-group analysis-csv-file">
         <label for="csv-file" translate>ANALYSIS.CSV_FILE</label>
@@ -28,7 +32,10 @@
 </div>
 
 <div class="text-right">
-    <button type="button" class="btn btn-sm btn-default" ng-click="getDataCsv()" translate>
+    <button ng-disabled="formulario.analysisSeparator.$invalid ||
+                        formulario.analysisQuote.$invalid ||
+                        formulario.analysisBinaryFile.$invalid"
+        type="button" class="btn btn-sm btn-default" ng-click="getDataCsv()" translate>
         ANALYSIS.PREVIEW
     </button>
 </div>

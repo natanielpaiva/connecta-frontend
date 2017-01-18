@@ -7,7 +7,7 @@ define([
     'presenter/analysis/service/analysis-service',
     'presenter/viewer/service/viewer-service'
 ], function (portal) {
-    return portal.lazy.directive('analysisViewer', function (ExportFile, $routeParams) {
+    return portal.lazy.directive('analysisViewer', function (ExportFile, $routeParams, $location) {
         return {
             templateUrl: 'app/presenter/viewer/directive/template/analysis-viewer.html',
             scope: {
@@ -19,8 +19,15 @@ define([
                 $scope.drillOrder = 0;
                 $scope.m2a = util.mapToArray;
                 $scope.options = {
-                    isDrilling: true, // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
-                    filterConfigOpen: false
+                    isDrilling: true,  // Faz a troca no frontend para habilitar ou desabilitar o clique do Drill
+                    filterConfigOpen: false,  // 
+                    isShowingData: false  // Mostra os dados da análise
+                };
+                
+                $scope.orderProp = 0;
+                
+                $scope.setOrderProp = function(prop){
+                    $scope.orderProp = prop;
                 };
 
                 $scope.idDashboard = $routeParams.id;
@@ -94,9 +101,17 @@ define([
                 };
 
                 var mountResult = function(result){
-                    if ($scope.model.configuration.type === 'table') {
+                    $scope.model.$$lastAnalysisResult = result;
+                    if ($scope.model.configuration.type === 'table' || 
+                        $scope.model.configuration.type === 'number' ) {
                         $scope.model.configuration.data = result;
                         $scope.model.columns = $scope.model.analysisViewerColumns;
+                        for( var i in $scope.model.configuration.data){
+                            var obj = $scope.model.configuration.data[i];
+                            for(var k in obj){
+                                $scope.orderProp = k;
+                            }
+                        }
                     }else if ($scope.model.configuration.type === 'chartjs'){
                         var columnDrill = updateDrillColumns();
                         montaChartjsResult($scope.model,result, columnDrill);
@@ -192,11 +207,14 @@ define([
                     }else{
                        for(var i = $scope.drillOrder ; i >= drillLevel; i--){
                            $scope.drillLevels[i].filterDrillValue = undefined;
-                           console.log(i);
                        }
                        $scope.drillOrder = drillLevel;
                        $scope.getAnalysisResult();
                     }
+                };
+
+                $scope.editViewer = function(viewerId, dashboardId){
+                    $location.path('/presenter/viewer/'+viewerId+'/edit/dashboard/'+dashboardId);
                 };
 
                 $scope.exportCsv = function () {
@@ -205,6 +223,10 @@ define([
                         $scope.model.configuration,
                         $scope.model.name
                     );
+                };
+
+                $scope.viewerData = function(show){
+                    $scope.options.isShowingData = show;
                 };
 
                 $scope.exampleTable = ViewerService.getExampleTable();

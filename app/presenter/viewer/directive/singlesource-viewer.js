@@ -14,7 +14,7 @@ define([
                 // FIXME gato feioso enquanto não refatora a diretiva
                 $scope.isEditing = $scope.model.singlesource &&
                         angular.isArray($scope.model.singlesource.list);
-                
+
                 if ($scope.model.singleSource.type === 'FILE') {
                     $scope.model.singleSource.binaryFile = SingleSourceService
                         .getFileById($scope.model.singleSource.id);
@@ -34,22 +34,6 @@ define([
                         }
                     }
                 });
-
-                window.loadConnectaMaps = function(){
-                    setTimeout(function () {
-                        var iframeId = 'iframe_' + $scope.model.singleSource.id;
-                        var iframe = document.getElementById(iframeId);
-                        console.log(iframe);
-                        if(iframe){
-                            $scope.model.singleSource.singleSourceAttributes.forEach(function(ssa){
-                                if(ssa.attribute.type === 'CONNECTA_MAPS'){
-                                    console.log(ssa.value);
-                                    iframe.contentWindow.postMessage(JSON.parse(ssa.value),'*');
-                                }
-                            });
-                        }
-                    }, 2000);
-                };
             },
         };
     });

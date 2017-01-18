@@ -1,6 +1,6 @@
 {
     "DATASOURCE": {
-        "NEW_DATASOURCE":"Nova fonte de dados",
+        "NEW_DATASOURCE": "Nova fonte de dados",
         "REGISTER_ANALYSIS_SOURCE": "Cadastro de fontes de análise",
         "VIEW_ANALYSIS_SOURCE": "Visualizar fonte de análise",
         "ANALYSIS_SOURCE": "Fontes de análise",
@@ -26,7 +26,17 @@
         "DATASOURCE": "Fonte de dados",
         "EDIT": "Editar",
         "DELETE": "Excluir",
-        "TEST_CONNECTION":"Testar conexão",
-        "CHEKING_CONNECTION": "Checando conexão"
+        "TEST_CONNECTION": "Testar conexão",
+        "CHEKING_CONNECTION": "Checando conexão",
+        "REQUEST": "Requisição",
+        "NEW_REQUEST": "Nova requisição",
+        "NAME_REQUEST": "Nome da requisição",
+        "HEADERS": "Cabeçalho",
+        "SEND": "Enviar",
+        "KEY": "Chave",
+        "VALUE": "Valor",
+        "BODY":"Corpo",
+        "BULK_DELETE_CONFIRM": "Remover fonte",
+        "BULK_CONFIRM_DELETE": "Deseja realmente excluir essa fonte?"
     }
 }

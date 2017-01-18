@@ -5,6 +5,7 @@ define([
     'portal/layout/service/layout',
     'portal/dashboard/directive/viewer',
     'presenter/viewer/directive/analysis-viewer',
+    'presenter/viewer/directive/twitter-timeline-viewer',
     'presenter/viewer/directive/singlesource-viewer',
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
@@ -13,15 +14,22 @@ define([
     return portal.lazy.controller('DashboardViewController', function ($scope, DashboardService, $routeParams, LayoutService, $filter, $document, $window, $timeout, applications) {
         $scope.config = {
             headerMini: false,
-            isPrinting: false
+            isPrinting: false,
+            isBrowserOnFullscreen: false
         };
 
         $document.on('scroll', function () {
-            $scope.config.headerMini = $document.scrollTop() > 70;
+            $scope.config.headerMini = $document.scrollTop() > 1;
             $scope.$apply();
         });
 
-        $scope.dashboard = {};
+        $scope.dashboard = {
+            hasExpandedViewer: false
+        };
+
+        $scope.$on('dashboard.hasExpanded', function($event, hasExpanded){
+            $scope.dashboard.hasExpandedViewer = hasExpanded;
+        });
 
         LayoutService.setFullscreen(true);
 
@@ -36,8 +44,11 @@ define([
             col: 'item.column'
         };
 
+
         $scope.fullscreen = function () {
             LayoutService.toggleBrowserFullscreen();
+
+            $scope.config.isBrowserOnFullscreen = LayoutService.isBrowserOnFullscreen();
         };
 
         $scope.export = function () {
@@ -47,12 +58,12 @@ define([
         $scope.print = function () {
             $scope.config.isPrinting = true;
 
-           $timeout(function(){
-               $scope.$apply(function(){
-                   $window.print();
-                   $scope.config.isPrinting = false;
-               });
-           },2000);
+            $timeout(function(){
+                $scope.$apply(function(){
+                    $window.print();
+                    $scope.config.isPrinting = false;
+                });
+            },2000);
         };
 
 

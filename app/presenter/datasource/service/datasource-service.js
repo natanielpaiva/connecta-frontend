@@ -19,8 +19,8 @@ define([
             OBIEE: {
                 name: 'OBIEE',
                 template: 'app/presenter/datasource/template/_datasource-obiee.html',
-                icon: 'icon-obiee',
-                disabled: true
+                icon: 'icon-obiee'
+                        //disabled: true
             },
             SOLR: {
                 name: 'SOLR',
@@ -30,8 +30,14 @@ define([
             WEBSERVICE: {
                 name: 'WebService',
                 template: 'app/presenter/datasource/template/_datasource-webservice.html',
-                icon: 'icon-webservice', // Capitão Planeta?
-                disabled: true
+                icon: 'icon-webservice' // Capitão Planeta?
+                        //disabled: true
+            },
+            REST: {
+                name: 'REST',
+                template: 'app/presenter/datasource/template/_datasource-rest.html',
+                icon: 'icon-webservice' // Capitão Planeta?
+                        //disabled: true
             }
         };
 
@@ -60,7 +66,12 @@ define([
                 name: 'Sql Server',
                 defaultPort: 1433,
                 hasSid: false
-            }
+            },
+            ORIENTDB: {
+                name: 'Oriente db',
+                defaultPort: 2424,
+                hasSid: false
+            },
         };
 
         var getTypeUrl = function (datasource) {
@@ -108,6 +119,8 @@ define([
             return $http.get(url);
         };
 
+
+
         this.bulkRemove = function (datasources) {
             return $http.delete(presenterResources.datasource, {
                 data: datasources.map(function (e) {
@@ -118,6 +131,16 @@ define([
                     'Content-Type': 'application/json'
                 }
             });
+        };
+
+        this.getRestRequestById = function (id) {
+            var url = presenterResources.datasource + '/' + id + "/rest";
+            return $http.get(url);
+        };
+
+        this.sendRequest = function (request) {
+           var url = presenterResources.datasource + '/send-request';
+            return $http.post(url, request);
         };
 
     });

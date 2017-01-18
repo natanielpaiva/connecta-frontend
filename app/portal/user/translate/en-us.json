@@ -33,6 +33,7 @@
         "GRAVATAR_TEXT": "You can change your avatar here or remove the current avatar to revert to <a href='http://gravatar.com'>gravatar.com</a>",
         "FORGOT_PASSWORD": "Check your email",
         "RESET_PASS": "Reset your password",
+        "KEEP_LOGGED":"Stay signed in",
         "VALIDATION": {
             "IMAGESIZE": "Maximum image file size: 600Kb",
             "IMAGEFORM": "Avatar image must be quadrangular",
@@ -46,7 +47,8 @@
         "ERROR": {
             "USERNAME_EXISTS": "There is already someone using this email",
             "INVITE_EXPIRED": "Invite has been expired",
-            "FORGOT_PASSWORD": "Please contact the system administrator"
+            "FORGOT_PASSWORD": "Please contact the system administrator",
+            "NOT_FOUND": "No results found"
         },
         "DOMAINS": "Domains"
     }

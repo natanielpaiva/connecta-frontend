@@ -77,17 +77,22 @@ define([
             }
         };
 
-        this.toggleBrowserFullscreen = function () {
+        this.isBrowserOnFullscreen = function(){
             var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled;
 
             if (fullscreenEnabled) { // Browser tem suporte para Fullscreen
                 var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
 
-                if (fullscreenElement) { // Fullscreen ativado, sair
-                    layout.exitFullscreen();
-                } else {    // Fullscreen desativado, ativar
-                    layout.launchBrowserFullscreen(document.documentElement); // a página toda
-                }
+                return !!fullscreenElement;
+            }
+            return false;
+        };
+
+        this.toggleBrowserFullscreen = function () {
+            if (layout.isBrowserOnFullscreen()) {
+                layout.exitFullscreen();
+            } else {
+                layout.launchBrowserFullscreen(document.documentElement); // a página toda
             }
         };
 

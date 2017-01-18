@@ -62,7 +62,16 @@
                     <div class="material-border"></div>
                 </div>
             </div>
+
             <button class="btn-login" translate>AUTH.LOGIN</button>
+
+            <div class="checkbox">
+                <label class="keep-logged" for="keepLogged">
+                    {{'USER.KEEP_LOGGED'| translate}}
+                    <input type="checkbox" name="keepLogged"
+                           ng-model="credentials.keepLogged"/>
+                </label>
+            </div>
         </form>
         <div class="add-account">
             <a href="javascript:void(0);" ng-click="setSection(sections.forgotPassword)" translate="">LAYOUT.RECOVERY_PASSWORD</a>
@@ -198,9 +207,12 @@
                             <div ng-show="domainForm.name.$touched" ng-messages="domainForm.name.$error" 
                                  ng-messages-include="portal-error-messages"></div>
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label translate>DOMAIN.INVITE</label>
-                            <input ng-model="invite.emails" class="form-control" placeholder="{{'DOMAIN.SEARCH'| translate}}" />
+                            <!--<span class="icon-add-user" ng-click="inviteUser(domain.id)"></span>-->
+                            <input ng-model="invite.emails" 
+                                   ng-click="inviteUser(domain.id)" 
+                                   class="form-control" placeholder="{{'DOMAIN.SEARCH'| translate}}" />
                         </div>
                         <div class="colors" ng-init="domain.theme = domain.theme ? domain.theme : colors[0]">
                             <ul>

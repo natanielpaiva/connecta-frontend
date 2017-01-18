@@ -2,9 +2,10 @@
 
 define([
     'connecta.presenter',
-    'presenter/singlesource/service/singlesource-service'
+    'presenter/singlesource/service/singlesource-service',
+    'portal/layout/service/confirm'
 ], function (presenter) {
-    return presenter.lazy.controller('SingleSourceListController', function ($scope, SingleSourceService, fileExtensions, ngTableParams) {
+    return presenter.lazy.controller('SingleSourceListController', function ($scope, $confirm, SingleSourceService, fileExtensions, ngTableParams) {
         $scope.types = SingleSourceService.getTypes();
 
         $scope.filter = false;
@@ -26,10 +27,12 @@ define([
         });
 
         $scope.bulkRemove = function (singlesources) {
-            SingleSourceService.bulkRemove(singlesources).then(function () {
-                angular.forEach(singlesources, function (singlesource) {
-                    $scope.singlesources.splice(
-                            $scope.singlesources.indexOf(singlesource), 1);
+            $confirm('SINGLESOURCE.BULK_DELETE_CONFIRM', 'SINGLESOURCE.BULK_CONFIRM_DELETE').then(function(){
+                SingleSourceService.bulkRemove(singlesources).then(function () {
+                    angular.forEach(singlesources, function (singlesource) {
+                        $scope.singlesources.splice(
+                                $scope.singlesources.indexOf(singlesource), 1);
+                    });
                 });
             });
         };

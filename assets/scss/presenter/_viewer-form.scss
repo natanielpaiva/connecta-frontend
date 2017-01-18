@@ -1,5 +1,4 @@
 .sidebar-viewer {
-
     width: 100%;
     position: relative;
 
@@ -14,23 +13,23 @@
         margin-top:0.5em;
         padding: 0.8em;
         min-height: 12em;
-        
+
         &.dndDragover {
             background-color: $darkWhite;
             border: dashed 0.2em $darkerWhite;
         }
-        
+
         &.has-item {
             background-color:$white;
             border: solid 0.2em $darkerWhite;
-            
+
             .dndPlaceholder {
                 display:block;
                 background-color: $darkWhite;
                 border: dashed 0.2em $darkerWhite;
             }
         }
-        
+
         .dndPlaceholder {
             display: none;
         }
@@ -38,8 +37,9 @@
         .dndDraggingSource {
             display: none;
         }
-        
+
         li {
+            @include clearfix;
             background-color: $presenterBlue;
             box-shadow: 0.1em 0.1em 0 $darkerWhite;
             border-radius: 0.2em;
@@ -53,8 +53,7 @@
             margin-bottom:0.25em;
             margin-right:0.25em;
             padding:0 0.5em;
-            @include clearfix;
-            
+
             .icon-close {
                 color:$darkerWhite;
                 line-height:1em;
@@ -99,7 +98,7 @@
         th {
             cursor: pointer;
         }
-        
+
     }
 }
 
@@ -142,10 +141,10 @@
         font-size: 1.1em;
     }
     .columns-viewer {
-/*        margin-top:0.5em;
-        border: 0.2em dashed $darkWhite;
-        padding: 0.8em;
-        min-height: 12em;*/
+        /*        margin-top:0.5em;
+                border: 0.2em dashed $darkWhite;
+                padding: 0.8em;
+                min-height: 12em;*/
 
         .sidebar-viewer {
             ul {
@@ -304,7 +303,7 @@
 .form-sidebar {
     @extend .margin-top-single;
     padding: 30px 10px 0;
-    
+
     label {
         color: $white;
     }
@@ -351,7 +350,7 @@
 .viewer-template-modal {
     .modal-body {
         ul.nav {
-            @include clearfix();
+            @include clearfix;
 
             li {
                 display:block;
@@ -415,7 +414,7 @@
     > [ng-repeat]{
         padding:0;
         line-height:2.5em;
-        @include clearfix();
+        @include clearfix;
         * {
             display:block;
             float:left;
@@ -440,4 +439,39 @@
 .close-modal{
     float:right;
     cursor: pointer;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0em 0.3em 0.5em 1px rgba(0,0,0,0.1);
+
+    .card-value {
+        font-size: 2.5em;
+        font-weight: bolder;
+        position: absolute;
+        top:50%;
+        left:0;
+        right:0;
+        transform:translateY(-50%);
+        text-align: center;
+        color:$lightgray;
+    }
+
+    .card-description {
+        @include clipped-text;
+        font-size: 1em;
+        font-weight:normal;
+        position: absolute;
+        top:50%;
+        left:0;
+        right:0;
+        margin-top: 2.5em;
+        padding: 0 1em;
+        text-align: center;
+        transform:translateY(-50%);
+        color:$gray;
+    }
 }

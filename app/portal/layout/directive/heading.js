@@ -3,7 +3,8 @@ define([
     'connecta.portal',
     'portal/auth/service/login-service',
     'portal/layout/service/layout',
-    'portal/domain/service/domain-config',
+    'portal/domain/service/invite-service',
+    'portal/domain/service/invite-user',
     'portal/layout/service/util',
     'portal/layout/service/heading-popover-service',
     'portal/domain/service/configure-domain',
@@ -13,11 +14,13 @@ define([
      * Componente usado para renderizar e manter o header do portal
      */
     return portal.directive('heading', function (LayoutService, LoginService,
-            HeadingPopoverService, UserService, DomainService, DomainConfig) {
+            HeadingPopoverService, UserService, DomainService, InviteService, $inviteUser, notify) {
         return {
             restrict: 'E',
             templateUrl: 'app/portal/layout/directive/template/heading.html',
             controller: function ($scope, applications, util, $cookieStore, $configureDomain) {
+
+                var AMOUNT_USERS = 10;
 
                 $scope.user = {};
                 $scope.domain = {};
@@ -55,9 +58,9 @@ define([
                 };
                 $scope.domainImage = function () {
                     return $scope.domain.name.toUpperCase()
-                        .split(" ").map(function (word) {
-                            return word[0];
-                        }).join("").substring(0, 2);
+                            .split(" ").map(function (word) {
+                        return word[0];
+                    }).join("").substring(0, 2);
                 };
                 $scope.logoutUser = function () {
                     LoginService.unauthenticate();
@@ -163,10 +166,11 @@ define([
                 };
 
                 $scope.inviteUser = function () {
-                    DomainConfig.inviteUser($cookieStore.get('user.domain.name'), $scope.user.emails).then(function () {
-                        $scope.inviteForm = false;
+                    UserService.get(AMOUNT_USERS,$cookieStore.get('user.domain.name')).then(function (response) {
+                        $inviteUser(response.data, $cookieStore.get('user.domain.name')).then(function () {
+                            notify.success('USER.INVITED_SUCCESS');
+                        });
                     });
-                    $scope.user.emails = null;
 
                 };
 

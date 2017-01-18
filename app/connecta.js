@@ -12,8 +12,8 @@ define([
     'connecta.maps',
     'connecta.inspection',
     // Dependências principais
-    'angular-route',
     'angular-resource',
+    'angular-route',
     'angular-ui-bootstrap',
     'bower_components/angular-ui-utils/ui-utils',
     'bower_components/angular-ui-tree/dist/angular-ui-tree.min',
@@ -40,7 +40,7 @@ define([
     'bower_components/angular-show-on-konami-code/angular-show-on-konami-code',
     'bower_components/sockjs/sockjs.min',
     'bower_components/stomp-websocket/lib/stomp.min'
-], function($, angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
+], function ($, angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
 
     var connecta = angular.module('connecta', [
         'connecta.portal',
@@ -153,9 +153,9 @@ define([
      */
     function buildRoutes() {
         var finalRouteObject = {};
-        angular.forEach(arguments, function(module) {
+        angular.forEach(arguments, function (module) {
             // Coloca a referência
-            angular.forEach(module._routes, function(value) {
+            angular.forEach(module._routes, function (value) {
                 value.module = module.name;
             });
 
@@ -171,17 +171,16 @@ define([
      */
     function configureRoutes($routeProvider) {
         var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, inspection);
-
-        angular.forEach(allRoutes, function(route, url) {
+        angular.forEach(allRoutes, function (route, url) {
             if (route.controllerUrl) {
                 if (!route.resolve) {
                     route.resolve = {};
                 }
 
                 if (!route.resolve.load) {
-                    route.resolve.load = function($q, $rootScope) {
+                    route.resolve.load = function ($q, $rootScope) {
                         var deferred = $q.defer();
-                        require([route.controllerUrl], function() {
+                        require([route.controllerUrl], function () {
                             deferred.resolve();
                             $rootScope.$apply();
                         });
@@ -189,8 +188,9 @@ define([
                     };
                 }
             }
-
-            $routeProvider.when(url, route);
+            $routeProvider.when(url, route).otherwise({
+                template: '<h1>Not Found</h1>'
+            });
         });
     }
 
@@ -200,12 +200,12 @@ define([
      * @param {object} applications
      */
     function configureRequestInterceptors($httpProvider, applications) {
-        $httpProvider.interceptors.push(function($q, $rootScope) {
+        $httpProvider.interceptors.push(function ($q, $rootScope) {
             return {
-                request: function(config) {
+                request: function (config) {
                     if (new RegExp("^http.*$").test(config.url)) {
                         var matched = false;
-                        angular.forEach(applications, function(app, id) {
+                        angular.forEach(applications, function (app, id) {
                             if (!matched) {
                                 matched = new RegExp("^" + app.host + ".*$").test(config.url);
                             }
@@ -217,32 +217,32 @@ define([
                     }
                     return config;
                 },
-                responseError: function(rejection) {
+                responseError: function (rejection) {
                     var responseInterceptors = {
-                        0: function(rejection) { // NET ERROR
+                        0: function (rejection) { // NET ERROR
                             console.log('ERROR CODE 0', rejection);
                             $rootScope.$broadcast('layout.notify', {
                                 type: 'ERROR',
                                 message: 'LAYOUT.NO_CONNECTION'
                             });
                         },
-                        400: function(rejection) { // BAD REQUEST
+                        400: function (rejection) { // BAD REQUEST
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        401: function(rejection) { // UNAUTHORIZED
+                        401: function (rejection) { // UNAUTHORIZED
                             $rootScope.$broadcast('login.request_unathorized', rejection);
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        403: function(rejection) { // FORBIDDEN
+                        403: function (rejection) { // FORBIDDEN
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        404: function(rejection) { // PAGE NOT FOUND
+                        404: function (rejection) { // PAGE NOT FOUND
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        500: function(rejection) { // INTERNAL SERVER ERROR
+                        500: function (rejection) { // INTERNAL SERVER ERROR
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         },
-                        409: function(rejection) { // CONFLICT
+                        409: function (rejection) { // CONFLICT
                             $rootScope.$broadcast('layout.notify', rejection.data);
                         }
                     };
@@ -281,7 +281,7 @@ define([
          * Verifica mudança de rotas e emite os eventos de entrada e saida dos módulos
          * Bem como a mudança do menu de contexto de cada módulo
          */
-        $rootScope.$on('$routeChangeSuccess', function($event, $destRoute, $originRoute) {
+        $rootScope.$on('$routeChangeSuccess', function ($event, $destRoute, $originRoute) {
             var destModule = $destRoute.$$route && $destRoute.$$route.module ? $destRoute.$$route.module : null;
             var originModule = $originRoute && $originRoute.$$route && $originRoute.$$route.module ? $originRoute.$$route.module : null;
             var isModuleChange = (!originModule) || (destModule && $originRoute.$$route.module !== $destRoute.$$route.module);
@@ -304,9 +304,9 @@ define([
      * @returns {undefined}
      */
     function configureAuthenticationListener($httpProvider, $routeProvider) {
-        $httpProvider.interceptors.push(function($cookieStore) { //PublicDashboardService
+        $httpProvider.interceptors.push(function ($cookieStore) { //PublicDashboardService
             return {
-                request: function(config) {
+                request: function (config) {
                     var token = $cookieStore.get('portal.auth.access_token');
 
                     if (token) {
@@ -331,7 +331,7 @@ define([
         });
     }
 
-    connecta.config(function($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider, applications) {
+    connecta.config(function ($controllerProvider, $compileProvider, $provide, $filterProvider, $translateProvider, $routeProvider, $httpProvider, $sceProvider, applications) {
 
         configureLazyProviders($controllerProvider, $compileProvider, $provide, $filterProvider);
         configureTranslations($translateProvider, window.navigator);
@@ -344,12 +344,11 @@ define([
         //$locationProvider.html5Mode(true);
     });
 
-    connecta.run(function($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService, PublicDashboardService) {
+    connecta.run(function ($rootScope, $menu, $http, $route, LoginService, LayoutService, DomainService) {
 
-        //configureAuthenticationListener($http, $rootScope, $route, LoginService, DomainService, PublicDashboardService);
         configureRouteChangeListener($rootScope, $menu, LayoutService);
 
-        $rootScope.$on('login.authenticated', function($event, authenticated) {
+        $rootScope.$on('login.authenticated', function ($event, authenticated) {
             //Ao autenticar emite evento de enter do módulo novamnete
             if (authenticated) {
                 $rootScope.$broadcast($route.current.$$route.module + '.enter', $route.current);
@@ -400,9 +399,8 @@ define([
         'speaknow/company/service/company-service',
         'portal/user/service/user-service',
         'portal/domain/service/domain-service',
-        'portal/auth/directive/visibleToRoles',
-        'portal/dashboard/service/dashboard-service-public'
-    ], function(doc) {
+        'portal/auth/directive/visibleToRoles'
+    ], function (doc) {
         angular.bootstrap(doc, [connecta.name]);
     });
 

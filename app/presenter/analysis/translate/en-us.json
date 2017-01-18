@@ -21,7 +21,7 @@
         "SEPARATOR": "Separator",
         "QUOTE": "Quote",
         "CSV_TYPE": "type CSV",
-        "CSV_FILE": "Or drag CSV here",
+        "CSV_FILE": "Upload CSV",
         "CSV_TEXT": "CSV Text",
         "DOMAIN": "Domain",
         "TYPE_QUERY": "Query type",
@@ -43,6 +43,10 @@
         "RESPONSE_XML": "Response XML",
         "RESULTS_OF_THE_ANALYSIS": "Results of the analysis",
         "DRILL_SEQUENCE":"Drill (detailing) sequence",
+        "DELETE_CONFIRM": "Remove Analysis",
+        "CONFIRM_DELETE": "Do you really want to delete this analysis?",
+        "BULK_DELETE_CONFIRM": "Remove Analyzes",
+        "BULK_CONFIRM_DELETE": "Do you really want to exclude these analyzes?",
         "DATABASE": {
             "REQUEST_TABLE": "Table",
             "REQUEST_SQL": "Custom query"
@@ -60,6 +64,8 @@
             "NO_COLUMNS_YET":"No columns yet"
         },
         "DELETE":"Delete",
-        "EDIT":"Edit"
+        "EDIT":"Edit",
+        "REQUEST":"Request"
+
     }
 }

@@ -250,6 +250,54 @@
 
     $defaultAnimationDuration:$defaultAnimationDuration*2;
 
+    &.has-expanded {
+        .dashboard-header {
+            display:none;
+        }
+        viewer {
+            &:hover {
+                border:none;
+            }
+            [ng-switch] {
+                display:none;
+            }
+            [ng-switch].expanded {
+                display:block;
+            }
+        }
+        .section-menu {
+            display:none;
+        }
+        .dashboard-section {
+            h2 {
+                display:none;
+            }
+        }
+    }
+
+    &.browser-fullscreen {
+        padding-top:1em;
+        .dashboard-header {
+            right:1em;
+            bottom:1em;
+            top:auto;
+            left:auto;
+            width:auto;
+            background-color:rgba($black, 0.8);
+            &:after {
+                display: none;
+            }
+
+            svg, h1 {
+                display:none;
+            }
+
+            .dashboard-view-controls {
+
+            }
+        }
+    }
+
     .dashboard-header {
         @include clearfix;
         background-color:$black;
@@ -717,10 +765,29 @@
 viewer {
     @include div-block();
     z-index: 0 !important;
+    box-sizing:border-box;
+    padding:1em;
+    border:solid 0.1em transparent;
 
     [ng-switch] {
         @include div-block();
         z-index: 0 !important;
+        transition: top $defaultAnimationDuration ease,
+            bottom $defaultAnimationDuration ease,
+            left $defaultAnimationDuration ease,
+            top $defaultAnimationDuration ease,
+            background-color $defaultAnimationDuration ease;
+
+        &.expanded {
+            position:fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            padding:2em;
+            z-index: 999;
+            background-color: $white;
+        }
 
         map-viewer {
             z-index: 0 !important;
@@ -728,18 +795,60 @@ viewer {
         }
         analysis-viewer {
             z-index:0 !important;
+            perspective: 800px;     // Profundidade da carta
+            position:relative;
             
             .amchart {
                 &.is-drilling {
                     cursor: crosshair;
                 }
             }
+
+
+            // EFEITO DE FUNDO DA CARTA
+            .underlying-data-container {
+                width: 100%;
+                height: 100%;
+                transform-style: preserve-3d;
+                transition: transform $defaultAnimationDuration;
+
+                > *:not(.underlying-data), .underlying-data {   // Estilos gerais pros dois lados
+                    position: absolute;
+                    width: 100%;
+                    backface-visibility: hidden;
+
+                    * {
+                        backface-visibility: hidden;
+                    }
+                }
+
+                > *:not(.underlying-data) { // PARTES DA FRENTE DA CARTA
+                    // background-color: $white;
+                    z-index:0;
+                }
+
+                .underlying-data {  // PARTE DE TRÁS DA CARTA
+                    padding:1em 0;
+                    overflow: auto;
+                    height:100%;
+                    transform: rotateY(180deg);
+                    opacity: 0;
+                    backface-visibility: hidden !important;
+                    table {
+                        backface-visibility: hidden;
+                    }
+                }
+
+                &.show-underlying-data {
+                    transform: rotateY(180deg);
+
+                    .underlying-data {
+                        opacity: 1;
+                    }
+                }
+            }
         }
     }
-
-    box-sizing:border-box;
-    padding:1em;
-    border:solid 0.1em transparent;
 
     &:hover:not(.edit) {
         border:solid 0.1em darken($darkWhite,10%);
@@ -759,7 +868,9 @@ viewer {
             font-size: 1.2em;
             font-weight: normal;
             line-height:1em;
-            float:left;
+            //float:left;
+            cursor:pointer;
+            @include clipped-text;
         }
         .controls {
             @include clearfix;
@@ -781,6 +892,12 @@ viewer {
 
             .connecta-dropdown {
                 width:10em;
+
+                .connecta-dropdown-item {
+                    .icon-layout7 {
+                        margin:0 0.1em;
+                    }
+                }
             }
 
             > span, .other-options > span {
@@ -1096,42 +1213,6 @@ viewer {
                     line-height: 2.3em;
                 }
             }
-
-
-            /*            > div {
-                            @include clearfix;
-                            width:100%;
-                            padding:0;
-                            margin:0 0 0.5em 0;
-                            height: 30px;
-                            line-height: 30px;
-            
-                            &:last-of-type {
-                                margin:0;
-                            }
-            
-                            .viewer-filter-config-label,
-                            .viewer-filter-config-type,
-                            .viewer-filter-config-value {
-                                float:left;
-                                display:block;
-                                margin:0;
-                                padding:0;
-                                height: 30px;
-                                line-height: 30px;
-                            }
-            
-                            .viewer-filter-config-label {
-                                @include clipped-text;
-                                width:10em;
-                            }
-                            
-                            .viewer-filter-config-value {
-                                width:15.8em;
-            
-                                
-                            }
-                        }*/
         }
     }
 }
