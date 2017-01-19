@@ -292,8 +292,12 @@
                 display:none;
             }
 
-            .dashboard-view-controls {
+            .header-logo{
+                display: none;
+            }
 
+            .dashboard-view-controls {
+                margin-top: 0em;
             }
         }
     }
