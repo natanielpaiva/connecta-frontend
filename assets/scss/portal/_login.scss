@@ -140,6 +140,7 @@ $loginWhite: #f6f6f6;
     img {
         width: 109px;
         height: 25px;
+        opacity: 0.7;
     }
 }
 .login{
@@ -165,6 +166,7 @@ $loginWhite: #f6f6f6;
     .form-login {
         @include clearfix;
         width: $boxWidth;
+        margin-top: 35px;
 
         .line-form {
             @include clearfix;

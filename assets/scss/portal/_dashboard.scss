@@ -382,18 +382,17 @@
             }
         }
 
-        .cet-logo{
-            margin-left: 56px;
-            margin-right: 33px;
-            img{
-                height: 34px;
-                width: 81px;
+        .header-logo{
+            width: 238px;
+            .cet-logo{
+                margin-left: 56px;
+                margin-right: 33px;
+                height: 37px;
+                width: 91px;
             }
-        }
-        .prefeitura-logo{
-            img{
-                height: 26px;
-                width: 28px;
+            .prefeitura-logo{
+                height: 45px;
+                width: 42px;
             }
         }
 
@@ -404,6 +403,7 @@
             line-height:3em;
             padding:0 0 0 0.5em;
             text-align: center;
+            margin-top: -3em;
             @include clipped-text;
         }
         .dashboard-view-controls {
@@ -412,6 +412,7 @@
             line-height:4.5em;
             height:4.5em;
             text-align: right;
+            margin-top: -4.5em;
             a {
                 font-size:1.8em;
                 display: block;
