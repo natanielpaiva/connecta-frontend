@@ -1,70 +1,74 @@
 <style>
-[gridster] {
-    {{dashboard.backgroundColor?'background-color:'+dashboard.backgroundColor+';':''}}
-    background-image:{{getImage(dashboard.backgroundImage)}};
-}
+    [gridster] {
+        {{dashboard.backgroundColor?'background-color:'+dashboard.backgroundColor+';':''}}
+        background-image:{{getImage(dashboard.backgroundImage)}};
+    }
 </style>
 
 <form ng-submit="save()" novalidate name="formObject" class="dashboard-form">
-  <div class="row">
-    <div class="col-xs-8">
-      <div class="form-group">
-        <input type="text" ng-model="dashboard.name"
-          placeholder="{{'DASHBOARD.DASHBOARD_NAME'|translate}}"
-          class="form-control connecta-inline-edit-input" id="dashboard-name" required autofocus/>
-      </div>
-      <div class="form-group checkbox">
-       <label> Público <input type="checkbox" ng-model="dashboard.public"/> </label>
-      </div>
-    </div>
-    <div class="col-xs-4 text-right">
-      <button class="btn btn-default" type="button" ng-click="config()">
-        <span class="icon-cog"></span>
-        <translate class="hidden-xs">LAYOUT.SETTINGS</translate>
-      </button>
-      <button class="btn btn-primary" type="submit" ng-disabled="formObject.$invalid">
-          <span class="icon-save hidden-lg hidden-md hidden-sm"></span>
-          <translate class="hidden-xs">LAYOUT.SAVE</translate>
-      </button>
-    </div>
-  </div>
-  <tabset>
-    <tab ng-repeat="section in dashboard.sections | orderBy:'order'" active="section.active">
-      <tab-heading>
-        <span ng-if="!section.edit" ng-dblclick="renameSection($event, section, true)"
-              class="dashboard-form-section-name">
-            {{section.name}}
-        </span>
-        <input class="dashboard-form-section-name-edit" ng-model="section.name"
-             ng-if="section.edit" ng-blur="renameSection($event, section, false)" />
-        <button class="btn btn-xs btn-icon-only" ng-click="removeSection($event, section)" type="button">
-          <span class="icon-close"></span>
-        </button>
-      </tab-heading>
-      <div gridster="section" dnd-list="section.items" class="image-on-background">
-        <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
-            <viewer edit="true" src="item.viewerUrl" type="item.type"
-                class="image-on-background" ng-style="{
-                'background-color':toRGBA(item.backgroundColor,item.opacity),
-                'background-image':getImage(item.backgroundImage)
-            }"></viewer>
-            <button class="btn btn-icon-only dashboard-form-item-edit"
-                    type="button" ng-click="itemConfig(item, section)">
-                <span class="icon-pencil"></span>
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="form-group">
+                <input type="text" ng-model="dashboard.name"
+                       placeholder="{{'DASHBOARD.DASHBOARD_NAME'|translate}}"
+                       class="form-control connecta-inline-edit-input" id="dashboard-name" required autofocus/>
+            </div>
+            <div class="form-group checkbox">
+                <label> Público <input type="checkbox" ng-model="dashboard.public"/>
+                    <a ng-if="dashboard.public" href="{{publicUrl}}">
+                        {{publicUrl}}
+                    </a>
+                </label>
+            </div>
+        </div>
+        <div class="col-xs-4 text-right">
+            <button class="btn btn-default" type="button" ng-click="config()">
+                <span class="icon-cog"></span>
+                <translate class="hidden-xs">LAYOUT.SETTINGS</translate>
+            </button>
+            <button class="btn btn-primary" type="submit" ng-disabled="formObject.$invalid">
+                <span class="icon-save hidden-lg hidden-md hidden-sm"></span>
+                <translate class="hidden-xs">LAYOUT.SAVE</translate>
             </button>
         </div>
-        <div class="dashboard-no-item" ng-if="!section.items.length">
-          <span class="icon-area-graph"></span>
-          <p translate>
-            DASHBOARD.NO_ITEM
-          </p>
-        </div>
-      </div>
-    </tab>
-    <tab select="addSection()">
-      <tab-heading>
-        <span class="icon-plus"></span>
-      </tab-heading>
-    </tab>
-  </tabset>
+    </div>
+    <tabset>
+        <tab ng-repeat="section in dashboard.sections| orderBy:'order'" active="section.active">
+            <tab-heading>
+                <span ng-if="!section.edit" ng-dblclick="renameSection($event, section, true)"
+                      class="dashboard-form-section-name">
+                    {{section.name}}
+                </span>
+                <input class="dashboard-form-section-name-edit" ng-model="section.name"
+                       ng-if="section.edit" ng-blur="renameSection($event, section, false)" />
+                <button class="btn btn-xs btn-icon-only" ng-click="removeSection($event, section)" type="button">
+                    <span class="icon-close"></span>
+                </button>
+            </tab-heading>
+            <div gridster="section" dnd-list="section.items" class="image-on-background">
+                <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
+                    <viewer edit="true" src="item.viewerUrl" type="item.type"
+                            class="image-on-background" ng-style="{
+                'background - color':toRGBA(item.backgroundColor,item.opacity),
+                'background - image':getImage(item.backgroundImage)
+            }"></viewer>
+                    <button class="btn btn-icon-only dashboard-form-item-edit"
+                            type="button" ng-click="itemConfig(item, section)">
+                        <span class="icon-pencil"></span>
+                    </button>
+                </div>
+                <div class="dashboard-no-item" ng-if="!section.items.length">
+                    <span class="icon-area-graph"></span>
+                    <p translate>
+                        DASHBOARD.NO_ITEM
+                    </p>
+                </div>
+            </div>
+        </tab>
+        <tab select="addSection()">
+            <tab-heading>
+                <span class="icon-plus"></span>
+            </tab-heading>
+        </tab>
+    </tabset>
 </form>

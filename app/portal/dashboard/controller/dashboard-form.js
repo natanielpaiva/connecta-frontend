@@ -16,7 +16,8 @@ define([
             $scope, DashboardService, $routeParams, $location, $filter, $confirm, SidebarService, applications, $modal, $http) {
         $scope.dashboard = {};
         $scope.dashboard.isPublic = false;
-
+        var publicUrl = $location.$$absUrl.split("#");
+        $scope.publicUrl = publicUrl[0] + "#/dashboard/public/" + $routeParams.id;
         var _sectionTemplate = {
             name: $filter('translate')('DASHBOARD.NEW_SECTION'),
             items: [],
