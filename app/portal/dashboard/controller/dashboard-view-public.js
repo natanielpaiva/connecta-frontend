@@ -17,7 +17,7 @@ define([
         };
 
         $document.on('scroll', function () {
-            $scope.config.headerMini = $document.scrollTop() > 70;
+            $scope.config.headerMini = $document.scrollTop() > 1;
             $scope.$apply();
         });
 
