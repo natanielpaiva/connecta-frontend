@@ -176,10 +176,13 @@ define([
                     };
 
                     $scope.configAnimationCallBack = function(enabled) {
-                        if(!enabled){
-                            ViewerService.createAnimationCallBack($scope.viewer.configuration.options);
-                        }else{
-                            ViewerService.removeAnimationCallBack($scope.viewer.configuration.options);
+                        if($scope.viewer.configuration.subtype !== 'pie' &&
+                            $scope.viewer.configuration.subtype !== 'doughnut'){
+                            if(!enabled){
+                                ViewerService.createAnimationCallBack($scope.viewer.configuration.options);
+                            }else{
+                                ViewerService.removeAnimationCallBack($scope.viewer.configuration.options);
+                            }
                         }
                     };
 
