@@ -8,7 +8,8 @@ define([
         return {
             templateUrl: 'app/presenter/viewer/directive/template/singlesource-viewer.html',
             scope: {
-                model: '=?ngModel'
+                model: '=?ngModel',
+                edit: '=?edit'
             },
             controller: function ($scope, fileExtensions, SingleSourceService) {
                 // FIXME gato feioso enquanto não refatora a diretiva

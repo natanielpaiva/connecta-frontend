@@ -10,8 +10,8 @@
         </div>
     </div>
 </div>
-<div class="row" ng-if="viewer.configutarion.subtype !== 'pie' &&
-                        viewer.configutarion.subtype !== 'doughnut'">
+<div class="row" ng-if="viewer.configuration.subtype !== 'pie' &&
+                            viewer.configuration.subtype !== 'doughnut'">
     <div class="col-xs-12">
         <div class="form-group checkbox">
             <label>
@@ -21,6 +21,20 @@
                 <input type="checkbox"
                     ng-change="configAnimationCallBack(viewer.configuration.options.tooltips.enabled)"
                     ng-model="viewer.configuration.options.tooltips.enabled"/>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="viewer.configuration.subtype === 'pie' ||
+                            viewer.configuration.subtype === 'doughnut'">
+    <div class="col-xs-12">
+        <div class="form-group checkbox">
+            <label>
+                <translate>
+                    VIEWER.SHOWALLTOOLTIP
+                </translate>
+                <input type="checkbox"
+                    ng-model="viewer.configuration.options.showAllTooltips"/>
             </label>
         </div>
     </div>

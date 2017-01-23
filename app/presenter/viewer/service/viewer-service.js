@@ -317,8 +317,9 @@ define([
                 viewer.configuration.options = {};
             }
 
-            if(!viewer.configuration.options.tooltips ||
-                viewer.configuration.options.tooltips.enabled){
+            if(!viewer.configuration.options.showAllTooltips &&
+                (!viewer.configuration.options.tooltips ||
+                 viewer.configuration.options.tooltips.enabled)){
                 angular.merge(viewer.configuration.options, ChartJs.getOptions());
             }
 
@@ -333,11 +334,13 @@ define([
                     configureBarLineAndRadarChartJs(viewer, result, columnDrill);
                     break;
                 case "pie":
-                    setAxisToFalse(viewer.configuration.options.scales);
+                    registerTooltipPlugin(viewer);
+                    setAxisToFalse(viewer);
                     configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
                     break;
                 case "doughnut":
-                    setAxisToFalse(viewer.configuration.options.scales);
+                    registerTooltipPlugin(viewer);
+                    setAxisToFalse(viewer);
                     configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
                     break;
                 case "polarArea":
@@ -354,9 +357,64 @@ define([
             animationCallBack(viewer);
         };
 
-        var setAxisToFalse = function(scales){
-            scales.yAxes[0].display = false;
-            scales.xAxes[0].display = false;
+        var registerTooltipPlugin = function(viewer) {
+            if (viewer.configuration.options.tooltips.enabled) {
+                Chart.pluginService.register({
+                    beforeRender: function(chart) {
+                        if (chart.config.options.showAllTooltips) {
+                            // create an array of tooltips
+                            // we can't use the chart tooltip because there is only one tooltip per chart
+                            chart.pluginTooltips = [];
+                            chart.config.data.datasets.forEach(function(dataset, i) {
+                                chart.getDatasetMeta(i).data.forEach(function(sector, j) {
+                                    chart.pluginTooltips.push(new Chart.Tooltip({
+                                        _chart: chart.chart,
+                                        _chartInstance: chart,
+                                        _data: chart.data,
+                                        _options: chart.options.tooltips,
+                                        _active: [sector]
+                                    }, chart));
+                                });
+                            });
+
+                            // turn off normal tooltips
+                            chart.options.tooltips.enabled = false;
+                        }
+                    },
+                    afterDraw: function(chart, easing) {
+                        if (chart.config.options.showAllTooltips) {
+                            // we don't want the permanent tooltips to animate, so don't do anything till the animation runs atleast once
+                            if (!chart.allTooltipsOnce) {
+                                if (easing !== 1)
+                                    return;
+                                chart.allTooltipsOnce = true;
+                            }
+
+                            // turn on tooltips
+                            chart.options.tooltips.enabled = true;
+                            Chart.helpers.each(chart.pluginTooltips, function(tooltip) {
+                                tooltip.initialize();
+                                tooltip.update();
+                                // we don't actually need this since we are not animating tooltips
+                                tooltip.pivot();
+                                tooltip.transition(easing).draw();
+                            });
+                            chart.options.tooltips.enabled = false;
+                        }
+                    }
+                });
+            }
+        };
+
+        var setAxisToFalse = function(viewer){
+            viewer.configuration.options.scales = {
+                yAxes: [{
+                    display: false
+                }],
+                xAxes: [{
+                    display: false
+                }]
+            }
         };
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
@@ -427,7 +485,9 @@ define([
 
         var configurePieDonutAndAreaChartJs = function (viewer, result, columnDrill) {
 
-            //configuração de porcentagem
+            viewer.configuration.options.legend.position = 'bottom';
+
+            // configuração de porcentagem
             viewer
                 .configuration
                 .options
@@ -444,6 +504,8 @@ define([
                             return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.') + ' (' + tooltipPercentage + '%)';
                         }
                     };
+
+            // viewer.configuration.options.showAllTooltips= true;
 
             var typeViewer = identifyViewerType(viewer, result);
 
@@ -571,10 +633,13 @@ define([
 
 
         var animationCallBack = function(viewer){
-            if(!viewer.configuration.options.tooltips.enabled){
-                this.createAnimationCallBack(viewer.configuration.options);
-            }else{
-                this.removeAnimationCallBack(viewer.configuration.options);
+            if(viewer.configuration.subtype !== 'pie' &&
+                viewer.configuration.subtype !== 'doughnut'){
+                if(!viewer.configuration.options.tooltips.enabled){
+                    this.createAnimationCallBack(viewer.configuration.options);
+                }else{
+                    this.removeAnimationCallBack(viewer.configuration.options);
+                }
             }
         }.bind(this);
 
@@ -621,3 +686,4 @@ define([
 
     });
 });
+
