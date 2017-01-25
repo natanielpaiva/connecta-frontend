@@ -414,7 +414,7 @@ define([
                 xAxes: [{
                     display: false
                 }]
-            }
+            };
         };
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
@@ -485,7 +485,8 @@ define([
 
         var configurePieDonutAndAreaChartJs = function (viewer, result, columnDrill) {
 
-            viewer.configuration.options.legend.position = 'bottom';
+            if(viewer.configuration.options.legend)
+                viewer.configuration.options.legend.position = 'bottom';
 
             // configuração de porcentagem
             viewer
