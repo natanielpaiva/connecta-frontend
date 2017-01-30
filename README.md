@@ -20,14 +20,14 @@ Web interface for all Connecta modules.
 
 ### Installing Connecta
 
-Rode os seguintes comandos na raiz do projeto para instalar:
+Run the following commands to install:
 
 ```
 npm install
 bower install
 ```
 
-**NOTICE: Bower issues with company network**
+**NOTICE - Bower issues with company network:**
 
 Beware that if your company restricts the use of some protocols like `git://`, you may have issues not only with Git but also with Bower (as it uses git for most of the packages in the repository). You can fix that by exchanging the method of downloading the packages to `https://` with the following command:
 
