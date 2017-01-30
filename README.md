@@ -1,69 +1,24 @@
 # Connecta Frontend
 
-Interface principal dos aplicativos Connecta.
+Web interface for all Connecta modules.
 
 [![Build Status](https://travis-ci.org/connecta-solutions/connecta-frontend.svg?branch=master)](https://travis-ci.org/connecta-solutions/connecta-frontend)
 [![Test Coverage](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/coverage.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend/coverage)
 [![Code Climate](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/gpa.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend)
 [![Issue Count](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/issue_count.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend)
 
-## Instalação
+## Installation
 
-### Instalação das dependências no Linux
+### Requirements
 
-No Github da Joyent tem o how-to da instalação do Node para cada distribuição de Linux (https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager), sendo a mais comum o Ubuntu com o `curl` instalado, baixe o shell da instalação e passe ele para o bash com o comando:
+- NodeJS (https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+- NPM
+- Bower
+- Grunt
+- Karma
+- SASS
 
-```
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-```
-
-O script acima adiciona o repositório do NodeJS no seu APT e executa um `apt-get update`. Agora é só instalar o nodejs direto do APT:
-
-```
-apt-get install nodejs
-```
-
-Após o comando acima, estarão instalados o NodeJS e o NPM.
-
-Para instalar o Sass é necessário apenas rodar o comando:
-
-```
-gem install sass
-```
-
-Instalar o Git com o comando:
-
-```
-sudo apt-get install git
-```
-
-Instalar o Bower, o Grunt e o Karma:
-
-```
-npm install -g bower grunt-cli karma-cli
-```
-
-
-### Instalação das dependências no Windows
-
-Baixar o instalador .msi do site https://nodejs.org/download/, e instalar normalmente.
-
-Baixar o Ruby Installer no site oficial (http://rubyinstaller.org/downloads/)
-pelo link: http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe
-utilizar a versão rubyinstaller-1.9.3
-
-O Ruby installer já instala o Ruby Gems. A instalação do Sass no windows é o mesmo comando do Linux.
-
-Baixar e instalar o  http://git-scm.com/.
-
-Na rede interna, utilizar o comando abaixo para usar o protocolo HTTPS ao invés de git://, que não funciona aqui.
-
-```
-git config --global url."https://".insteadOf git://
-```
-
-
-### Instalação do Connecta
+### Installing Connecta
 
 Rode os seguintes comandos na raiz do projeto para instalar:
 
@@ -72,30 +27,80 @@ npm install
 bower install
 ```
 
+**NOTICE: Bower issues with company network**
+
+Beware that if your company restricts the use of some protocols like `git://`, you may have issues not only with Git but also with Bower (as it uses git for most of the packages in the repository). You can fix that by exchanging the method of downloading the packages to `https://` with the following command:
+
+```
+git config --global url."https://".insteadOf git://
+```
+
 ## Build
 
-Para rodar o build da aplicação execute o comando `grunt` ou `grunt default`.
-O Grunt vai copiar a aplicação pra pasta /dist e remover todos os scripts de
-desenvolvimento.
+To build the frontend, run:
 
-## Teste Unitário
+```
+$ grunt
+```
 
-Para rodar os testes unitários execute o comando `grunt test` na raiz do projeto,
-o Grunt vai fazer o build da aplicação e depois rodas os testes unitários na
-linha de comando com o PhantomJS.
+or
 
-## Execução
+```
+$ grunt default
+```
 
-### Desenvolvimento
+Grunt processes and copy the code to the `/dist` folder and removes development-only features.
 
-Para executar a aplicação execute o comando `grunt run` na raiz da aplicação, o
-Grunt vai executar a build de desenvolvimento e iniciar um servidor HTTP para servir a pasta raiz
-da sua aplicação na porta especificada.
+## Unit testing
 
-Caso opte por usar o LiveReload, é só rodar o comando com `grunt run --reload`.
+To run all tests run the following in the root of the project:
 
-### Produção
+```
+$ grunt test
+```
 
-Para executar a aplicação execute o comando `grunt run` na raiz da aplicação, o
-Grunt vai executar a build de produção e iniciar um servidor HTTP para servir a pasta `dist`
-da sua aplicação na porta especificada.
+Grunt builds the app and then runs all tests in command line using PhantomJS as its browser.
+
+## Running
+
+### Development
+
+To run the app run:
+
+```
+$ grunt run
+```
+
+Grunt executes the development build and starts a Node Connect HTTP server to serve the **ROOT folder** on port 9001 (or the specified `--port` parameter).
+
+LiveReload is an opt-out feature in the `run` task. If you want to turn it off you can run the command setting `--reload` to `false`:
+
+```
+$ grunt run --reload=false
+```
+
+Also, if your browser is closed and you want it to instantly open a tab when the server is ready you can run with a `--open` flag:
+
+```
+$ grunt run --open
+```
+
+### Production
+
+For production use you can either choose to run the frontend as a standalone app or run it in a chosen HTTP server, like Apache HTTP server. The dist folder is just a simple HTML/JS website, so it should fit the simplest web server.
+
+To run as a standalone app, run:
+
+```
+$ grunt run-dist
+```
+
+Grunt executes the production build and serves the app through the `/dist` folder.
+
+## Generating a .WAR for Java containers
+
+...
+
+## Creating new modules
+
+...
