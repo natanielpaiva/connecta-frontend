@@ -99,8 +99,16 @@ Grunt executes the production build and serves the app through the `/dist` folde
 
 ## Generating a .WAR for Java containers
 
-...
+Although **not recommended**, some use cases require deployment in a Java web container alongside the backend applications. If that's the case, run the following command to generate the .war file:
 
-## Creating new modules
+```
+$ grunt war-dist
+```
 
-...
+## Creating new submodules
+
+Submodules on Connecta have a specific minimum archetype that should exist so it can be recognizable by its architecture. To create new submodules, run the following command passing the name of the module and submodule:
+
+```
+$ grunt module --module="the-module-name" --submodule="the-submodule-name"
+```
