@@ -691,7 +691,7 @@ define([
                     ctx.fillText(util.formatNumber(dataset.data[i], 2, ',', '.'), x_pos, y_pos);
                 }
             });
-        }
+        };
 
         var configureCallbackVertical = function(ctx, datasets){
             ctx.textAlign = 'center';
@@ -708,7 +708,7 @@ define([
                     ctx.fillText(util.formatNumber(dataset.data[i], 2, ',', '.'), model.x, y_pos);
                 }
             });
-        }
+        };
 
     });
 });
