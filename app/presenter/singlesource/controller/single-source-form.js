@@ -31,14 +31,7 @@ define([
                 $scope.typeSingleSource.type = type;
                 $scope.typeSingleSource.path = SingleSourceService.getFileById($routeParams.id);
 
-                if ($scope.typeSingleSource.singleSourceAttributes.length === 0) {
-                    $scope.typeSingleSource.singleSourceAttributes = [
-                        {
-                            attribute: "",
-                            value: ''
-                        }
-                    ];
-                } else {
+             
                     for (var key in $scope.typeSingleSource.singleSourceAttributes) {
 
                         var value = 0;
@@ -49,7 +42,6 @@ define([
 
                         $scope.typeSingleSource.singleSourceAttributes[key].attributeType = $scope.optionsAttributeTypes[value];
                     }
-                }
 
                 if ($scope.typeSingleSource.fileType !== undefined) {
                     $scope.fileExtensions = fileExtensions[$scope.typeSingleSource.fileType];
