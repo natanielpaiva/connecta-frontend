@@ -109,8 +109,8 @@
             </thead>
             <tbody>
                 <tr class="row" ng-repeat="example in model.configuration.data | orderBy: orderProp">
-                    <td ng-repeat="(key , n) in columnsTable" class="text-center" translate>
-                        {{example[n.value] ? example[n.value]:"-"}}
+                    <td ng-repeat="(key , n) in columnsTable" class="text-center">
+                        {{example[n.value] && example[n.value] !== ' ' ? example[n.value]:"-"}}
                     </td>
                 </tr>
             </tbody>
