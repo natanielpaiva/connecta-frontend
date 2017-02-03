@@ -66,6 +66,7 @@ define([
 
             angular.forEach(response.data.sections, function (section) {
                 section.config = {
+                    columns: 12,
                     draggable: {
                         enabled: false
                     },

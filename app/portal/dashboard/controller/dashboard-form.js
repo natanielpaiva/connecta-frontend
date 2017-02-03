@@ -15,7 +15,6 @@ define([
     return portal.lazy.controller('DashboardFormController', function (
             $scope, DashboardService, $routeParams, $location, $filter, $confirm, SidebarService, applications, $modal, $http) {
         $scope.dashboard = {};
-        $scope.dashboard.isPublic = false;
 
         var _sectionTemplate = {
             name: $filter('translate')('DASHBOARD.NEW_SECTION'),
@@ -63,6 +62,7 @@ define([
         if ($routeParams.id) {
             DashboardService.get($routeParams.id).then(function (response) {
                 response.data.sections.forEach(function (section) {
+                    section.columns = 12;
                     section.draggable = {
                         enabled: true
                     };
@@ -75,13 +75,14 @@ define([
                 $scope.dashboard = response.data;
             });
         } else {
-            var section = angular.copy(_sectionTemplate);
-            section.order = 0;
+            // var section = angular.copy(_sectionTemplate);
+            // section.order = 0;
             $scope.dashboard = {
                 sections: [
-                    section
+                    // section
                 ],
-                displayMode: 'VERTICAL'
+                displayMode: 'VERTICAL',
+                isPublic: false
             };
         }
 
