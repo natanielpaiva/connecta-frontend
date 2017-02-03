@@ -9,3 +9,5 @@
 /node_modules/
 /.sass-cache/
 /.project
+/assets/css/*
+
