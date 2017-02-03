@@ -1,6 +1,7 @@
 /* global angular */
 define([
     'connecta.portal',
+    'json!applications.json',
     'portal/dashboard/service/dashboard-service-public',
     'portal/layout/service/layout',
     'portal/dashboard/directive/viewer',
@@ -9,12 +10,14 @@ define([
     'presenter/viewer/directive/singlesource-group-viewer',
     'presenter/viewer/directive/combined-viewer',
     'maps/layer-viewer/directive/map-viewer'
-], function (portal) {
+], function (portal, applications) {
     return portal.lazy.controller('PublicDashboardViewController', function ($scope, $rootScope, PublicDashboardService, $routeParams, LayoutService, $filter, $document, $window, $timeout, applications) {
         $scope.config = {
             headerMini: false,
             isPrinting: false
         };
+        
+        $scope.logoCustom = applications.portal.theme.image.dashboard;
 
         $document.on('scroll', function () {
             $scope.config.headerMini = $document.scrollTop() > 70;
