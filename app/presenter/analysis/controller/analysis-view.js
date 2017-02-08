@@ -69,6 +69,18 @@ define([
                         $scope.analysisResult = response.data;
                     });
                 }
+                
+                //WSO2
+                if ($scope.analysis.type === $scope.types.WSO2.name.toUpperCase()) {
+                    AnalysisService.execute({
+                        analysis: $scope.analysis,
+                        pagination: {count: 50, page: 1}
+
+                    }).then(function (response) {
+                        $scope.analysisResult = response.data;
+
+                    });
+                }
             });
         }
     });

@@ -43,7 +43,9 @@
         "iconMini": "assets/img/module-icon/mini/maps.png",
         "headerLogo": "assets/img/horizontal-logos/maps.png",
         "home": "#/maps",
-        "viewerPath": "/layerViewers/:id",
+        "viewerPath": "/viewer/:id",
+        "publicViewerPath": "/viewer/:id",
+        "embedded": "http://staticmaps.cds.com.br/embeded.html",
         "color": "#3BB79D",
         "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/maps",
         "active": false
