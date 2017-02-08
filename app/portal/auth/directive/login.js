@@ -1,6 +1,7 @@
 define([
     'connecta.portal',
     'json!package',
+    'json!applications.json',
     'portal/user/directive/unique-email',
     'portal/domain/service/invite-service',
     'portal/domain/service/invite-user',
@@ -9,7 +10,7 @@ define([
     'portal/layout/service/notify'
             //    'portal/auth/service/facebook-service',
             //    'portal/auth/service/google-plus-service',
-], function (portal, package) {
+], function (portal, package, applications) {
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
@@ -20,6 +21,7 @@ define([
                 var AMOUNT_USERS = 10;
 
                 $scope.package = package;
+                $scope.applicationsPortal = applications.portal;
 
                 $scope.invite = {};
                 $scope.invited = {};
