@@ -8,7 +8,8 @@ define([
     'presenter/analysis/controller/_analysis-csv',
     'presenter/analysis/controller/_analysis-obiee',
     'presenter/analysis/controller/_analysis-hdfs',
-    'presenter/analysis/controller/_analysis-rest'
+    'presenter/analysis/controller/_analysis-rest',
+    'presenter/analysis/controller/_analysis-wso2'
 ], function (presenter,
         DatabaseAnalysisFormController,
         EndecaAnalysisFormController,
@@ -17,7 +18,8 @@ define([
         CsvAnalysisFormController,
         ObieeAnalysisFormController,
         HdfsAnalysisFormController,
-        RestAnalysisFormController) {
+        RestAnalysisFormController,
+        Wso2AnalysisFormController) {
 
     return presenter.lazy.service('AnalysisService', function (presenterResources, $http, DomainService) {
 
@@ -114,7 +116,20 @@ define([
                          component.restRequests = response.data.requests;
                      });
                 }
-            }
+            },
+            WSO2: {
+                id: 'wso2',
+                name: 'WSO2',
+                icon: 'icon-obiee',
+                template: '_analysis-wso2.html',
+                controller: Wso2AnalysisFormController,
+                start: function (idDatasource, component) {
+                    var url = presenterResources.analysis + "/" + idDatasource.id + "/tables-wso2";
+                    $http.get(url).then(function (response) {
+                        component.tableWso2 = response.data;
+                    });
+                }
+            },
         };
 
         var _databaseRequestTypes = {

@@ -415,7 +415,7 @@ define([
                     display: false
                 }]
             }
-        };
+            };
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
 
