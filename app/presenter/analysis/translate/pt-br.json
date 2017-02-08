@@ -65,6 +65,9 @@
         },
         "DELETE":"Excluir",
         "EDIT":"Editar",
-        "REQUEST":"requisição"
+        "REQUEST":"requisição",
+        "SEARCH": "Pesquisa",
+        "BY_QUERY": "Consulta",
+        "BY_DATA_RANGE": "Por intervalo de datas"
     }
 }
