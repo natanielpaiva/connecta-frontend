@@ -38,6 +38,12 @@ define([
                 template: 'app/presenter/datasource/template/_datasource-rest.html',
                 icon: 'icon-webservice' // Capitão Planeta?
                         //disabled: true
+            },
+            WSO2: {
+                name: 'WSO2',
+                template: 'app/presenter/datasource/template/_datasource-wso2.html',
+                icon: 'icon-obiee'
+                        //disabled: true
             }
         };
 
