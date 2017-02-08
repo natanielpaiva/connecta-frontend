@@ -2,7 +2,7 @@
 define([
     'connecta.portal'
 ], function (portal) {
-    portal.service('DomainService', function ($http, portalResources, $cookieStore) {
+    portal.service('DomainService', function ($http, portalResources, $cookieStore,$location) {
 
         this.getAll = function () {
             var url = portalResources.domain;
@@ -45,8 +45,10 @@ define([
         };
 
         this.inviteUser = function (emailInvite, idDomain) {
-            var url = portalResources.domain + '/invite?listEmails=' +
-                    emailInvite + '&idDomain=' + idDomain;
+            var absUrl = $location.$$absUrl.split('#')[0];
+            var url = portalResources.domain + '/invite?listEmails=' + emailInvite +
+                    '&idDomain=' + idDomain + 
+                    '&url=' + absUrl;
 
             return $http.post(url);
         };
