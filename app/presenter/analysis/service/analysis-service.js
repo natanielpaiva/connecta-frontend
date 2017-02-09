@@ -26,14 +26,14 @@ define([
         var _types = {
             DATABASE: {
                 id: 'database',
-                name: 'Database',
+                type: 'DATABASE',
                 icon: 'icon-database2',
                 template: '_analysis-database.html',
                 controller: DatabaseAnalysisFormController
             },
             ENDECA: {
                 id: 'endeca',
-                name: 'Endeca',
+                type: 'ENDECA',
                 icon: 'icon-endeca',
                 template: '_analysis-endeca.html',
                 controller: EndecaAnalysisFormController,
@@ -46,14 +46,14 @@ define([
             },
             HDFS: {
                 id: 'hdfs',
-                name: 'HDFS',
+                type: 'HDFS',
                 icon: 'icon-hadoop',
                 template: '_analysis-hdfs.html',
                 controller: HdfsAnalysisFormController
             },
             BI: {
                 id: 'bi',
-                name: 'BI',
+                type: 'OBIEE',
                 icon: 'icon-obiee',
                 template: '_analysis-obiee.html',
                 field: "catalog",
@@ -67,7 +67,7 @@ define([
             },
             SOLR: {
                 id: 'solr',
-                name: 'SOLR',
+                type: 'SOLR',
                 icon: 'icon-solr',
                 template: '_analysis-solr.html',
                 controller: SolrAnalysisFormController
@@ -99,14 +99,14 @@ define([
             },
             CSV: {
                 id: 'csv',
-                name: 'CSV',
+                type: 'CSV',
                 icon: 'icon-insert-drive-file',
                 template: '_analysis-csv.html',
                 controller: CsvAnalysisFormController
             },
             REST: {
                 id: 'rest',
-                name: 'REST',
+                type: 'REST',
                 icon: 'icon-solr',
                 template: '_analysis-rest.html',
                 controller: RestAnalysisFormController,
@@ -300,7 +300,7 @@ define([
             var url = presenterResources.analysis + "/" + idAnalysis;
             return $http.get(url);
         };
-        
+
         this.getAnalysisRest = function (idAnalysis) {
             var url = presenterResources.analysis + "/" + idAnalysis +"/rest";
             return $http.get(url);
@@ -407,14 +407,14 @@ define([
            var url = presenterResources.analysis + '/execute-rest';
             return $http.post(url, analysisCopy);
         };
-        
+
         this.getTabularFormatJson = function ( analysis) {
             var analysisCopy = angular.copy(analysis);
             console.log("analysis ", analysisCopy);
             var url = presenterResources.analysis + "/rest-tabular-format";
             return $http.post(url, analysisCopy);
         };
-        
+
 
         //solr
         var _fixQueryBuilder = function (statement, edit) {

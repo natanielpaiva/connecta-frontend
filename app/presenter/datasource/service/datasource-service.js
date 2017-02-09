@@ -6,35 +6,35 @@ define([
     return presenter.lazy.service('DatasourceService', function (presenterResources, $http, DomainService) {
         var typeConfig = {
             DATABASE: {
-                name: 'Database',
+                type: 'DATABASE',
                 template: 'app/presenter/datasource/template/_datasource-database.html',
                 icon: 'icon-database2'
             },
             HDFS: {
-                name: 'HDFS',
+                type: 'HDFS',
                 template: 'app/presenter/datasource/template/_datasource-hdfs.html',
                 icon: 'icon-hadoop',
                 disabled: true
             },
             OBIEE: {
-                name: 'OBIEE',
+                type: 'OBIEE',
                 template: 'app/presenter/datasource/template/_datasource-obiee.html',
                 icon: 'icon-obiee'
                         //disabled: true
             },
             SOLR: {
-                name: 'SOLR',
+                type: 'SOLR',
                 template: 'app/presenter/datasource/template/_datasource-solr.html',
                 icon: 'icon-solr'
             },
             WEBSERVICE: {
-                name: 'WebService',
+                type: 'WEBSERVICE',
                 template: 'app/presenter/datasource/template/_datasource-webservice.html',
                 icon: 'icon-webservice' // Capitão Planeta?
                         //disabled: true
             },
             REST: {
-                name: 'REST',
+                type: 'REST',
                 template: 'app/presenter/datasource/template/_datasource-rest.html',
                 icon: 'icon-webservice' // Capitão Planeta?
                         //disabled: true
