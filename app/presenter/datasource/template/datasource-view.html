@@ -88,6 +88,12 @@
                         <code>{{p.value}}</code>
                     </li>
                 </ul>
+                
+                <!-- wso2 -->
+                <p ng-if="datasource.url">
+                    <strong translate>DATASOURCE.PATH</strong>:
+                    {{datasource.url}}
+                </p>
 
                 <!--webservice-->
                 <p ng-if="datasource.user">
