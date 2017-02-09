@@ -2,7 +2,8 @@ define([
     'connecta.portal',
     'portal/auth/service/login-service'
 ], function (portal) {
-    portal.service('UserService', function ($http, portalResources, LoginService, $upload, $rootScope) {
+    portal.service('UserService', function ($http, portalResources, LoginService,
+                                            $upload, $rootScope,$location) {
         var UserService = this;
 
         var _sendUpdateUserEvent = function (response) {
@@ -89,7 +90,8 @@ define([
         };
 
         UserService.recoverPassword = function (email) {
-            var url = portalResources.user + '/recover?email=' + email;
+            var absUrl = $location.$$absUrl.split('#')[0] + '#';
+            var url = portalResources.user + '/recover?email=' + email + '&url=' + absUrl;
 
             return $http.post(url);
         };
