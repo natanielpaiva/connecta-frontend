@@ -11,7 +11,7 @@
                 <a title="{{ 'DATASOURCE.EDIT' | translate }}" class="btn btn-default btn-sm" href="#/presenter/datasource/{{datasource.id}}/edit">
                     <span class="icon-pencil" aria-hidden="true"></span>
                 </a>
-                <button title="{{ 'DATASOURCE.DELETE' | translate }}" 
+                <button title="{{ 'DATASOURCE.DELETE' | translate }}"
                 class="btn btn-default btn-sm" ng-click="excluir(datasource.id)">
                     <span class="icon-trash" aria-hidden="true"></span>
                 </button>
@@ -28,13 +28,13 @@
                 </p>
 
                 <p ng-if="datasource.type" >
-                    <strong translate>DATASOURCE.DATASOURCE_TYPE</strong>:
+                    <strong translate>DATASOURCE.TYPE</strong>:
                     <span class="{{types[datasource.type].icon}}"></span>
-                    {{types[datasource.type].name}}
+                    {{types[datasource.type].type}}
                 </p>
 
                 <!-- banco de dados-->
-                <p ng-if="datasource.driver"> 
+                <p ng-if="datasource.driver">
                     <strong translate>DATASOURCE.DRIVER_NAME</strong>:
                     {{datasource.driver}}
                 </p>
@@ -51,14 +51,14 @@
                     {{datasource.port}}
                 </p>
 
-                <p ng-if="datasource.sid"> 
+                <p ng-if="datasource.sid">
                     <strong translate>DATASOURCE.DATABASE</strong>:
                     {{datasource.sid}}
                 </p>
                 <!-- banco de dados -->
 
                 <!-- endeca webservice-->
-                <p ng-if="datasource.address"> 
+                <p ng-if="datasource.address">
                     <strong translate>DATASOURCE.ADDRESS</strong>:
                     <a href="{{datasource.address}}" target="_blank">
                         {{datasource.address}}
