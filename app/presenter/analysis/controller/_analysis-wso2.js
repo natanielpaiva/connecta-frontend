@@ -39,6 +39,7 @@ define([
 
 
         $scope.getResult = function () {
+            $scope.responseWso2 = null;
             $scope.analysis.analysisColumns = [];
 
             $scope.analysis.from = Date.parse($scope.analysis.from);
@@ -47,7 +48,6 @@ define([
             AnalysisService.execute({
                 analysis: $scope.analysis
             }).then(function (response) {
-
                 $scope.responseWso2 = response.data;
 
                 for (var cl in response.data[0]) {
