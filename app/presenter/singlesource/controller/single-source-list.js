@@ -8,7 +8,8 @@ define([
     return presenter.lazy.controller('SingleSourceListController', function ($scope, $confirm, SingleSourceService, fileExtensions, ngTableParams) {
         $scope.types = SingleSourceService.getTypes();
 
-        $scope.filter = false;
+        $scope.showFilter = false;
+        $scope.filter = {};
 
         $scope.singlesources = [];
 
@@ -19,8 +20,8 @@ define([
         }, {
             getData: function ($defer, params) {
                 return SingleSourceService.list(params.url()).then(function(response){
-                    $scope.singlesources = response.data;
-//                    params.total(response.data.totalElements);
+                    $scope.singlesources = response.data.content;
+                    params.total(response.data.totalElements);
                 });
             },
             counts: [50, 100, 150, 200]

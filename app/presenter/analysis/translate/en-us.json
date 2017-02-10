@@ -63,9 +63,9 @@
             "SELECT_RIGHT_ANALYSIS": "Select right analysis",
             "NO_COLUMNS_YET": "No columns yet"
         },
-        "DELETE":"Delete",
-        "EDIT":"Edit",
-        "REQUEST":"Request",
+        "DELETE": "Delete",
+        "EDIT": "Edit",
+        "REQUEST": "Request",
         "SEARCH": "Search",
         "BY_QUERY": "By Query",
         "BY_DATA_RANGE": "By Date Range",
@@ -78,7 +78,8 @@
         "ANALYSIS_TYPE_SOLR": "SOLR",
         "ANALYSIS_TYPE_WEBSERVICE": "WebService",
         "ANALYSIS_TYPE_CSV": "CSV",
-        "ANALYSIS_TYPE_REST": "REST"
+        "ANALYSIS_TYPE_REST": "REST",
+        "ANALYSIS_TYPE_WSO2": "WSO2"
 
     }
 }

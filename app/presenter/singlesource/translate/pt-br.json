@@ -16,7 +16,10 @@
         "DELETE_CONFIRM": "Remover mídia",
         "CONFIRM_DELETE": "Deseja realmente excluir esta mídia?",
         "BULK_DELETE_CONFIRM" : "Remover mídias",
-        "BULK_CONFIRM_DELETE" : "Deseja realmente excluir essas mídias?"
+        "BULK_CONFIRM_DELETE" : "Deseja realmente excluir essas mídias?",
+
+        "TYPE_MEDIA_URL": "URL",
+        "TYPE_MEDIA_FILE": "Arquivo"
     }
 }
 

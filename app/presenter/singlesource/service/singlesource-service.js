@@ -8,12 +8,12 @@ define([
 
         var types = {
             FILE: {
-                name: 'FILE',
+                type: 'FILE',
                 icon:'icon-insert-drive-file',
                 template: '_single-source-file.html'
             },
             URL: {
-                name: 'URL',
+                type: 'URL',
                 icon:'icon-link',
                 template: '_single-source-url.html'
             }
@@ -142,9 +142,11 @@ define([
             return attributeTypes;
         };
 
-        this.list = function () {
+        this.list = function (params) {
             var url = presenterResources.singlesource;
-            return $http.get(url);
+            return $http.get(url,{
+                params: params
+            });
         };
 
         this.delete = function (id) {

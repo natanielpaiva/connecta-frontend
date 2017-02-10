@@ -40,7 +40,7 @@ define([
                         //disabled: true
             },
             WSO2: {
-                name: 'WSO2',
+                type: 'WSO2',
                 template: 'app/presenter/datasource/template/_datasource-wso2.html',
                 icon: 'icon-obiee'
                         //disabled: true
