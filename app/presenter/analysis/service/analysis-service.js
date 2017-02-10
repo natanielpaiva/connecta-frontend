@@ -74,7 +74,7 @@ define([
             },
             WEBSERVICE: {
                 id: 'webservice',
-                name: 'WebService',
+                type: 'WebService',
                 icon: 'icon-webservice',
                 template: '_analysis-webservice.html',
                 controller: WebserviceAnalysisFormController,
@@ -119,7 +119,7 @@ define([
             },
             WSO2: {
                 id: 'wso2',
-                name: 'WSO2',
+                type: 'WSO2',
                 icon: 'icon-obiee',
                 template: '_analysis-wso2.html',
                 controller: Wso2AnalysisFormController,
@@ -300,7 +300,7 @@ define([
             var url = presenterResources.analysis + "/" + idAnalysis;
             return $http.get(url);
         };
-
+        
         this.getAnalysisRest = function (idAnalysis) {
             var url = presenterResources.analysis + "/" + idAnalysis +"/rest";
             return $http.get(url);
@@ -401,20 +401,20 @@ define([
             var url = presenterResources.analysis + "/result-csv";
             return $http.post(url, analysisCopy);
         };
-        
+
         this.sendRequest = function (analysis) {
             var analysisCopy = angular.copy(analysis);
            var url = presenterResources.analysis + '/execute-rest';
             return $http.post(url, analysisCopy);
         };
-
+        
         this.getTabularFormatJson = function ( analysis) {
             var analysisCopy = angular.copy(analysis);
             console.log("analysis ", analysisCopy);
             var url = presenterResources.analysis + "/rest-tabular-format";
             return $http.post(url, analysisCopy);
         };
-
+        
 
         //solr
         var _fixQueryBuilder = function (statement, edit) {

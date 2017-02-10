@@ -93,7 +93,7 @@ define([
                 controller: function ($scope) {
 
                     ViewerService.analysisList().then(function (response) {
-                        $scope.analysisList = response.data;
+                        $scope.analysisList = response.data.content;
                     });
 
                     $scope.types = AnalysisService.getTypes();

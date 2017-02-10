@@ -6,7 +6,7 @@
         "ANALYSIS_SOURCE": "Analysis Source",
         "NAME": "Name datasource",
         "DESCRIPTION": "Description",
-        "DATASOURCE_TYPE": "Datasource Type",
+        "TYPE": "Datasource Type",
         "ADDRESS": "Address",
         "PATH": "Path",
         "USERNAME": "Username",
@@ -37,6 +37,14 @@
         "VALUE":"Value",
         "BODY":"Body",
         "BULK_DELETE_CONFIRM": "Remove source",
-        "BULK_CONFIRM_DELETE": "Do you really want to delete this source?"
+        "BULK_CONFIRM_DELETE": "Do you really want to delete this source?",
+
+        "TYPE_DATABASE": "Database",
+        "TYPE_HDFS": "HDFS",
+        "TYPE_OBIEE": "OBIEE",
+        "TYPE_SOLR" : "SOLR",
+        "TYPE_WEBSERVICE": "WebService",
+        "TYPE_REST": "Rest",
+        "TYPE_WSO2": "WSO2"
     }
 }
