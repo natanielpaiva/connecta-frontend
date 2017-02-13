@@ -3,7 +3,7 @@ define([
     'portal/auth/service/login-service'
 ], function (portal) {
     portal.service('UserService', function ($http, portalResources, LoginService,
-                                            $upload, $rootScope,$location) {
+                                            Upload, $rootScope,$location) {
         var UserService = this;
 
         var _sendUpdateUserEvent = function (response) {
@@ -35,7 +35,7 @@ define([
          * @returns {unresolved}
          */
         UserService.upload = function (image, user) {
-            return $upload.upload({
+            return Upload.upload({
                 url: portalResources.user + '/' + user.id + '/avatar',
                 method: 'POST',
                 headers: {

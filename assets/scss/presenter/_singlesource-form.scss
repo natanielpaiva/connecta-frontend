@@ -1,0 +1,9 @@
+.single-source-form {
+	.set-file {
+		input[type=file] {
+			opacity:0;
+			height:0;
+			width:0;
+		}
+	}
+}

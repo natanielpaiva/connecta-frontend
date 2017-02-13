@@ -1,7 +1,7 @@
 define([
     'connecta.speaknow'
 ], function (speaknow) {
-    return speaknow.service('CompanyService', function (speaknowResources, $http, $upload, $q, $heading) {
+    return speaknow.service('CompanyService', function (speaknowResources, $http, Upload, $q, $heading) {
 
         this.list = function (params) {
             var url = speaknowResources.company + "/list";

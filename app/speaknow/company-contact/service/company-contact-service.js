@@ -1,7 +1,7 @@
 define([
     'connecta.speaknow'
 ], function (speaknow) {
-    return speaknow.lazy.service('CompanyContactService', function (speaknowResources, $http, $upload) {
+    return speaknow.lazy.service('CompanyContactService', function (speaknowResources, $http, Upload) {
 
         var _contactGroup = null;
         
