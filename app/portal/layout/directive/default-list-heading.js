@@ -10,7 +10,9 @@ define([
                 scope.listConfig = {
                     titleText: attrs.titleText,
                     addButtonText: attrs.addButtonText,
-                    addButtonHref: attrs.addButtonHref
+                    addButtonHref: attrs.addButtonHref,
+                    typeText: attrs.typeText,
+                    addButtonClickMethod: attrs.addButtonClickMethod
                 };
             }
         };

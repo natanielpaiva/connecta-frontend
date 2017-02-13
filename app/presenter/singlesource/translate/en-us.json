@@ -16,7 +16,10 @@
         "DELETE_CONFIRM": "Remove media",
         "CONFIRM_DELETE": "Do you really want to remove this media?",
         "BULK_DELETE_CONFIRM" : "Remove medias",
-        "BULK_CONFIRM_DELETE" : "Do you really want to remove these media?"
+        "BULK_CONFIRM_DELETE" : "Do you really want to remove these media?",
+
+        "TYPE_MEDIA_URL": "URL",
+        "TYPE_MEDIA_FILE": "File"
     }
 }
 

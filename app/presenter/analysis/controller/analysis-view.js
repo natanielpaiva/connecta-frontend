@@ -24,7 +24,7 @@ define([
                 $scope.analysisResult = null;
 
                 //SOLR
-                if ($scope.analysis.type === $scope.types.SOLR.name) {
+                if ($scope.analysis.type === $scope.types.SOLR.type) {
                     AnalysisService.execute({
                         analysis: $scope.analysis,
                         pagination: {count: 50, page: 1}
@@ -36,7 +36,7 @@ define([
 
                 }
                 //database
-                if ($scope.analysis.type === $scope.types.DATABASE.name.toUpperCase()) {
+                if ($scope.analysis.type === $scope.types.DATABASE.type.toUpperCase()) {
                     AnalysisService.execute({
                         analysis: $scope.analysis,
                         pagination: {count: 50, page: 1}
@@ -47,7 +47,7 @@ define([
                     });
                 }
                 //webService
-                if ($scope.analysis.type === $scope.types.WEBSERVICE.name.toUpperCase()) {
+                if ($scope.analysis.type === $scope.types.WEBSERVICE.type.toUpperCase()) {
 
                     if ($scope.analysis.datasource.typeWebservice === "REST") {
                         return AnalysisService.getResulApplyingJson($scope.analysis.datasource.id, $scope.analysis).then(function (response) {
@@ -69,9 +69,9 @@ define([
                         $scope.analysisResult = response.data;
                     });
                 }
-                
+
                 //WSO2
-                if ($scope.analysis.type === $scope.types.WSO2.name.toUpperCase()) {
+                if ($scope.analysis.type === $scope.types.WSO2.type.toUpperCase()) {
                     AnalysisService.execute({
                         analysis: $scope.analysis,
                         pagination: {count: 50, page: 1}

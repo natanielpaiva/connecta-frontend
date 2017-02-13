@@ -68,6 +68,18 @@
         "REQUEST": "Request",
         "SEARCH": "Search",
         "BY_QUERY": "By Query",
-        "BY_DATA_RANGE": "By Date Range"
+        "BY_DATA_RANGE": "By Date Range",
+
+
+        "ANALYSIS_TYPE_DATABASE": "Database",
+        "ANALYSIS_TYPE_ENDECA": "Endeca",
+        "ANALYSIS_TYPE_HDFS": "HDFS",
+        "ANALYSIS_TYPE_OBIEE": "OBIEE",
+        "ANALYSIS_TYPE_SOLR": "SOLR",
+        "ANALYSIS_TYPE_WEBSERVICE": "WebService",
+        "ANALYSIS_TYPE_CSV": "CSV",
+        "ANALYSIS_TYPE_REST": "REST",
+        "ANALYSIS_TYPE_WSO2": "WSO2"
+
     }
 }

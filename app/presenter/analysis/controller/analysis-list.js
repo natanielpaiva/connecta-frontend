@@ -6,7 +6,10 @@ define([
     return presenter.lazy.controller('AnalysisListController', function ($scope, $confirm, AnalysisService, ngTableParams) {
 
         $scope.types = AnalysisService.getTypes();
-        
+
+        $scope.showFilter = false;
+        $scope.filter = {};
+
         $scope.tableParams = new ngTableParams({
             count:50,
             page:1,
@@ -15,6 +18,7 @@ define([
             getData: function ($defer, params) {
                 return AnalysisService.list(params.url()).then(function(response){
                     $scope.analysisList = response.data.content;
+                    params.total(response.data.totalElements);
                 });
             },
             counts:[50,100,150,200]
