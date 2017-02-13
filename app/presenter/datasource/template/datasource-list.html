@@ -2,7 +2,8 @@
     title-text="DATASOURCE.ANALYSIS_SOURCE"
     add-button-text="LAYOUT.NEW_F"
     add-button-href="#/presenter/datasource/new"
-    ></default-list-heading>
+    type-text="DATASOURCE.TYPE">
+</default-list-heading>
 
 <table class="table table-striped table-hover" ng-table="tableParams" show-filter="true">
     <thead>
@@ -19,7 +20,7 @@
                 </label>
             </th>
             <th class="col-lg-9 col-md-8 col-sm-6 col-xs-11" translate>DATASOURCE.NAME</th>
-            <th class="col-lg-2 col-md-3 col-sm-5 hidden-xs" translate>DATASOURCE.DATASOURCE_TYPE</th>
+            <th class="col-lg-2 col-md-3 col-sm-5 hidden-xs" translate>DATASOURCE.TYPE</th>
         </tr>
     </thead>
     <tbody>
@@ -44,14 +45,14 @@
             <td class="col-lg-9 col-md-8 col-sm-6 col-xs-11">
                 <a href="#/presenter/datasource/{{ds.id}}" class="full-size-block link-no-state">
                     <span class="list-icon-for-type visible-xs-inline hidden-sm hidden-md hidden-lg {{types[ds.type].icon}}"
-                          title="{{types[ds.type].name}}"></span>
+                          title="{{types[ds.type].type}}"></span>
                     {{ds.name}}
                 </a>
             </td>
             <td class="col-lg-2 col-md-3 col-sm-5 hidden-xs">
                 <a href="#/presenter/datasource/{{ds.id}}" class="full-size-block link-no-state">
                     <span class="list-icon-for-type {{types[ds.type].icon}}"></span>
-                    {{types[ds.type].name}}
+                    {{('DATASOURCE.TYPE_'+types[ds.type].type) | translate}}
                 </a>
             </td>
         </tr>
