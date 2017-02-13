@@ -4,16 +4,16 @@ define([
 ], function (presenter) {
 
     return presenter.lazy.service('SingleSourceService', function ($autocomplete, presenterResources,
-              $http, $upload, DomainService, LoginService) {
+              $http, Upload, DomainService, LoginService) {
 
         var types = {
             FILE: {
-                name: 'FILE',
+                type: 'FILE',
                 icon:'icon-insert-drive-file',
                 template: '_single-source-file.html'
             },
             URL: {
-                name: 'URL',
+                type: 'URL',
                 icon:'icon-link',
                 template: '_single-source-url.html'
             }
@@ -82,12 +82,12 @@ define([
             _fixAttributes(singlesource);
             singlesource.domain = DomainService.getDomainName();
 
-            return $upload.upload({
+            return Upload.upload({
                 url: presenterResources.singlesource + "/file",
                 method: 'POST',
                 headers: { "Authorization" : "Bearer " + LoginService.getAuthenticationToken()},
                 fields: {
-                    singlesource: singlesource
+                    'singlesource': JSON.stringify(singlesource)
                 },
                 file: file
             }).progress(function (evt) {
@@ -142,9 +142,11 @@ define([
             return attributeTypes;
         };
 
-        this.list = function () {
+        this.list = function (params) {
             var url = presenterResources.singlesource;
-            return $http.get(url);
+            return $http.get(url,{
+                params: params
+            });
         };
 
         this.delete = function (id) {
