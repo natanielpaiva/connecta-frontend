@@ -25,6 +25,8 @@ define([
                 $scope.analysis.from =  dateConverter($scope.analysis.from);
             }
             $scope.component.columns = $scope.analysis.analysisColumns;
+        }else{
+            $scope.analysis.searchType = "QUERY";
         }
 
         function dateConverter(date) {
@@ -34,7 +36,6 @@ define([
             var today = now.getFullYear() + "-" + (month) + "-" + (day);
             
             return new Date(today + " " + now.toTimeString().slice(0, 8));
-            //return new Date(date);
         }
 
 

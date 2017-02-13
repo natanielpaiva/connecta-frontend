@@ -69,7 +69,8 @@
         "SEARCH": "Search",
         "BY_QUERY": "By Query",
         "BY_DATA_RANGE": "By Date Range",
-
+        "FROM": "From",
+        "TO": "To",
 
         "ANALYSIS_TYPE_DATABASE": "Database",
         "ANALYSIS_TYPE_ENDECA": "Endeca",
