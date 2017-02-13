@@ -18,7 +18,7 @@
 
     <div class="row" >
         <div class="col-xs-2 form-group">
-            <label for="SearchType" class="required" translate>ANALYSIS.SEARCH </label>
+            <label for="SearchType" translate>ANALYSIS.SEARCH </label>
         </div>
     </div>
     <div class="row" >
@@ -33,17 +33,16 @@
     </div>
 
 
-
     <div class="row" ng-if="analysis.searchType === 'RANGE'" >
         <div class="col-xs-4 form-group" >
             <label for="table" translate  class="required">ANALYSIS.FROM</label>
             <input type="datetime-local" id="exampleInput" name="input" ng-model="analysis.from"
-                   placeholder="yyyy-MM-ddTHH:mm:ss"  required />
+                   placeholder="yyyy-MM-ddTHH:mm:ss"   />
         </div>
         <div class="col-xs-4 form-group" >
             <label for="table" translate  class="required">ANALYSIS.TO</label>
             <input type="datetime-local" id="exampleInput" name="input" ng-model="analysis.to"
-                   placeholder="yyyy-MM-ddTHH:mm:ss"  required />
+                   placeholder="yyyy-MM-ddTHH:mm:ss"   />
         </div>
     </div>
 

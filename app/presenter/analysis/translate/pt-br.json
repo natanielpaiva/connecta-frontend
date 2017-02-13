@@ -69,6 +69,8 @@
         "SEARCH": "Pesquisa",
         "BY_QUERY": "Consulta",
         "BY_DATA_RANGE": "Por intervalo de datas",
+        "FROM": "A apartir de",
+        "TO": "Até",
 
         "ANALYSIS_TYPE_DATABASE": "Banco de dados",
         "ANALYSIS_TYPE_ENDECA": "Endeca",
