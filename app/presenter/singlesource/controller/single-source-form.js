@@ -4,7 +4,7 @@ define([
 ], function (presenter) {
     return presenter.lazy.controller('SingleSourceFormController', function ($scope, SingleSourceService, $routeParams, $location, fileExtensions) {
 
-        $scope.myFiles = [];
+        // $scope.myFiles = [];
         $scope.types = SingleSourceService.getTypesArray();
         $scope.optionsAttributeTypes = SingleSourceService.getAttributeTypes();
         $scope.typeSingleSource = {};
@@ -67,11 +67,11 @@ define([
         };
 
         $scope.submit = function () {
-
             if ($scope.typeSingleSource.type.id === "FILE") {
                 if ($scope.file !== "") {
                     $scope.typeSingleSource.type = "FILE";
                     $scope.typeSingleSource.filename = $scope.file.name;
+
 
                     SingleSourceService.save($scope.file, $scope.typeSingleSource).then(function () {
                         $location.path('presenter/singlesource');
@@ -98,7 +98,6 @@ define([
                     });
                 }
             }
-
         };
 
         $scope.change = function () {
