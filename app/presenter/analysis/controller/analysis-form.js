@@ -212,7 +212,7 @@ define([
 
             addOrderDrill($scope.analysis, $scope.analysisColumnsDrill);
 
-            if ($scope.types.SOLR.name === $scope.datasourceCurrent.type) {
+            if ($scope.types.SOLR.type === $scope.datasourceCurrent.type) {
                 var queryCopy = angular.copy($scope.analysis.query);
 
                 if ($scope.analysis.requestType === "QUERY_BUILDER") {
@@ -232,7 +232,7 @@ define([
                 });
             } else {
                 var analysisCopy = angular.copy($scope.analysis);
-                if ($scope.types.CSV.name === $scope.datasourceCurrent.type)
+                if ($scope.types.CSV.type === $scope.datasourceCurrent.type)
                     delete analysisCopy.datasource;
 
                 AnalysisService.save(analysisCopy).then(function (response) {
