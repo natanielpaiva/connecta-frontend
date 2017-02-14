@@ -70,22 +70,33 @@
         <div dnd-list="model.columns"  dnd-drop="transformColumnDrop(item, 'COLUMN')">
             <div ng-if="model.columns.length > 0">
                 <div ng-repeat="(index, analysisColumn ) in model.configuration.data">
-                    <div ng-if="i === model.columns[model.columns.length - 1].analysisColumn.name && index === 0" ng-repeat="(i,item) in analysisColumn">
-                        <div class="card-value">
-                            {{item}}
+                    <div class="card-content" ng-repeat="(i,item) in analysisColumn"
+                         ng-if="i === model.columns[model.columns.length - 1].analysisColumn.name && index === 0">
+                        <div class="card-title" translate>
+                            {{model.name ? model.name : ('VIEWER.NUMBER_SAMPLE_TITLE'|translate) }}
                         </div>
-                        <div class="card-description" title="{{i}}">
-                            {{i}}
+                        <div class="card-value">
+                            <span>{{item}}</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-description" title="{{i}}">
+                                {{i}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div ng-if="model.columns.length === 0" >
-                <div class="card-value" >
-                    100
+            <div class="card-content" ng-if="model.columns.length === 0" >
+                <div class="card-title">
+                    {{model.name ? model.name : ('VIEWER.NUMBER_SAMPLE_TITLE'|translate) }}
                 </div>
-                <div class="card-description" title="{{'VIEWER.NUMBER_SAMPLE_TEXT'|translate}}" translate>
-                    VIEWER.NUMBER_SAMPLE_TEXT
+                <div class="card-value" >
+                    <span>100</span>
+                </div>
+                <div class="card-footer">
+                    <div class="card-description" title="{{'VIEWER.NUMBER_SAMPLE_TEXT'|translate}}" translate>
+                        VIEWER.NUMBER_SAMPLE_TEXT
+                    </div>
                 </div>
             </div>
 
@@ -108,7 +119,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="row" ng-repeat="example in model.configuration.data | orderBy: orderProp">
+                <tr class="row" ng-repeat="example in model.configuration.data| orderBy: orderProp">
                     <td ng-repeat="(key , n) in columnsTable" class="text-center">
                         {{example[n.value] && example[n.value] !== ' ' ? example[n.value]:"-"}}
                     </td>
@@ -199,7 +210,7 @@
                             <option value>{{'LAYOUT.SELECT'|translate}}</option>
                         </select>
                     </div>
-                    <div class="viewer-filter-type" ng-init="filter.type = filter.type?filter.type:'CONTAINS'">
+                    <div class="viewer-filter-type" ng-init="filter.type = filter.type ? filter.type : 'CONTAINS'">
                         <!--title="{{'DASHBOARD.FILTER.SELECTED_FILTER'|translate:{name: (filterOperators[filter.type].name|translate) } }}"-->
                         <div class="viewer-filter-config-type-button"
                              title="{{'DASHBOARD.FILTER.TYPE'|translate}}"

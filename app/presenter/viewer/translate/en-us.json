@@ -197,7 +197,8 @@
         "TWITTER_USER":"Twitter User",
         "TOOLTIP":"Tooltip",
         "SHOWALLTOOLTIP": "Always show Tooltip",
-        "NUMBER_SAMPLE_TEXT": "Description of the metric"
+        "NUMBER_SAMPLE_TEXT": "Description of the metric",
+        "NUMBER_SAMPLE_TITLE": "Untitled"
     },
     "VIEWER_TEMPLATE_TYPE": {
         "bar": "Bar",
