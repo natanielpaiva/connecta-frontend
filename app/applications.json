@@ -2,7 +2,7 @@
     "portal": {
         "main": true,
         "title": "Connecta",
-        "host": "http://localhost:8080/connecta-portal",
+        "host": "http://jboss.connectaap.cds.com.br/connecta-portal",
         "icon": "assets/img/module-icon/connecta.png",
         "iconMini": "assets/img/module-icon/mini/connecta.png",
         "headerLogo": "assets/img/horizontal-logos/connecta.png",
@@ -25,7 +25,7 @@
     },
     "presenter": {
         "title": "Presenter",
-        "host": "http://localhost:8080/connecta-presenter",
+        "host": "http://jboss.connectaap.cds.com.br/connecta-presenter",
         "icon": "assets/img/module-icon/presenter.png",
         "iconMini": "assets/img/module-icon/mini/presenter.png",
         "headerLogo": "assets/img/horizontal-logos/presenter.png",
