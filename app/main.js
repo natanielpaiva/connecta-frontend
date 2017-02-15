@@ -24,7 +24,7 @@ require.config({
         'connecta.maps': 'maps/connecta.maps',
         'connecta.inspection': 'inspection/connecta.inspection',
         'leaflet': '../bower_components/leaflet/dist/leaflet',
-        'esri-leaflet': '../bower_components/esri-leaflet/dist/esri-leaflet',
+        'esri-leaflet': '../bower_components/esri-leaflet/src/EsriLeaflet',
         'angular-tree-control' : '../bower_components/angular-tree-control/angular-tree-control',
         'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min',
         'chart' : '../bower_components/chart.js/dist/Chart.min'
