@@ -66,6 +66,7 @@ define([
                                 notify.warning('USER.VALIDATION.USER_UNAUTHORIZED');
                             });
                 }
+                LoginService.refreshCurrentUser();
                 notify.success('USER.UPDATE_SUCCESS');
             });
         };
