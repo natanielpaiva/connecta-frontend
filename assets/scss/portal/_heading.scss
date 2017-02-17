@@ -170,6 +170,8 @@ heading {
                     }
 
                     .heading-popover-title {
+                        @include clipped-text;
+                        
                         font-size: 0.45em;
                         line-height: 2.5em;
                         height: 2.5em;
