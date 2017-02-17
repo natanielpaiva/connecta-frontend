@@ -189,8 +189,11 @@ define([
                     $scope.$watchCollection('viewer.configuration.colors', function(newValues) {
                         //convert object to hex
                         if($scope.viewer.configuration && $scope.viewer.configuration.colors){
-                            var lastValue = $scope.viewer.configuration.colors[$scope.viewer.configuration.colors.length-1];
-                            $scope.viewer.configuration.colors[$scope.viewer.configuration.colors.length-1] = $scope.rgb2hex(lastValue);
+                            angular.forEach($scope.viewer.configuration.colors, function (color, index) {
+                                if(color !== null && typeof color === 'object'){
+                                    $scope.viewer.configuration.colors[index] = $scope.rgb2hex(color);
+                                }
+                            });
                         }
                     });
 
