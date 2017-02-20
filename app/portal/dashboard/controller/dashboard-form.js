@@ -15,7 +15,8 @@ define([
     return portal.lazy.controller('DashboardFormController', function (
             $scope, DashboardService, $routeParams, $location, $filter, $confirm, SidebarService, applications, $modal, $http) {
         $scope.dashboard = {};
-
+        var publicUrl = $location.$$absUrl.split("#");
+        $scope.publicUrl = publicUrl[0] + "#/dashboard/public/" + $routeParams.id;
         var _sectionTemplate = {
             name: $filter('translate')('DASHBOARD.NEW_SECTION'),
             items: [],
@@ -166,13 +167,13 @@ define([
         };
 
         /*$scope.add = function () {
-            $scope.items.push({
-                sizeX: 2,
-                sizeY: 1,
-                row: 0,
-                col: 0
-            });
-        };*/
+         $scope.items.push({
+         sizeX: 2,
+         sizeY: 1,
+         row: 0,
+         col: 0
+         });
+         };*/
 
         $scope.config = function () {
             var $parentScope = $scope;
@@ -228,10 +229,10 @@ define([
                     ];
 
                     $scope.removeItem = function ($close) {
-                        $confirm('DASHBOARD.CONFIRM_DELETE', 'DASHBOARD.DELETE_CONFIRM').then(function(){
+                        $confirm('DASHBOARD.CONFIRM_DELETE', 'DASHBOARD.DELETE_CONFIRM').then(function () {
                             section.items.splice(section.items.indexOf(item), 1);
                             $close();
-                            
+
                         });
                     };
                 },
@@ -271,7 +272,7 @@ define([
 
         $scope.getImage = function (image) {
             if (image && angular.isString(image)) {
-                return 'url(' +image+ ')';
+                return 'url(' + image + ')';
             } else if (image && image.base64) {
                 return 'url(' + image.base64 + ')';
             } else {
