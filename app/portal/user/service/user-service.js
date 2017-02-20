@@ -16,13 +16,14 @@ define([
             return $http.put(url, user).then(_sendUpdateUserEvent);
         };
 
-        UserService.makeBackgroundImage = function (id) {
+        UserService.makeBackgroundImage = function (id, accessToken) {
+            accessToken = accessToken || LoginService.getAuthenticationToken();
             return [
                 portalResources.user,
                 '/',
                 id,
                 '/profile.png?access_token=',
-                LoginService.getAuthenticationToken(),
+                accessToken,
                 '&_=',
                 new Date().getTime()
             ].join('');
@@ -77,20 +78,30 @@ define([
             return $http.get(url);
         };
         
-        UserService.get = function (length,idDomain) {
+        UserService.get = function (length,idDomain, accessToken) {
+            accessToken = accessToken || LoginService.getAuthenticationToken();
             var url = portalResources.user + '/get/' + length + '/' +idDomain;
 
-            return $http.get(url);
+            return $http.get(url, {
+                headers: {
+                    Authorization: "Bearer " + accessToken
+                }
+            });
         };
         
-        UserService.getByRegex = function (regex,idDomain) {
+        UserService.getByRegex = function (regex, idDomain, accessToken) {
+            accessToken = accessToken || LoginService.getAuthenticationToken();
             var url = portalResources.user + '/search/'+ idDomain +'?regex=' + regex;
 
-            return $http.get(url);
+            return $http.get(url, {
+                headers: {
+                    Authorization: "Bearer " + accessToken
+                }
+            });
         };
 
         UserService.recoverPassword = function (email) {
-            var absUrl = $location.$$absUrl.split('#')[0] + '#';
+            var absUrl = $location.absUrl().split('#')[0] + '#';
             var url = portalResources.user + '/recover?email=' + email + '&url=' + absUrl;
 
             return $http.post(url);
