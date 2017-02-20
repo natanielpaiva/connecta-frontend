@@ -214,14 +214,15 @@
                             <div ng-show="domainForm.name.$touched" ng-messages="domainForm.name.$error" 
                                  ng-messages-include="portal-error-messages"></div>
                         </div>
-                        <div>
+                        <div ng-if="domain.id">
                             <label translate>DOMAIN.INVITE</label>
                             <!--<span class="icon-add-user" ng-click="inviteUser(domain.id)"></span>-->
                             <input ng-model="invite.emails" 
                                    ng-click="inviteUser(domain.id)" 
                                    class="form-control" placeholder="{{'DOMAIN.SEARCH'| translate}}" />
                         </div>
-                        <div class="colors" ng-init="domain.theme = domain.theme ? domain.theme : colors[0]">
+                        <div class="colors" ng-class="{'create-domain': !domain.id}" 
+                             ng-init="domain.theme = domain.theme ? domain.theme : colors[0]">
                             <ul>
                                 <li ng-repeat="color in colors" class="circle"
                                     ng-click="domain.theme = color"

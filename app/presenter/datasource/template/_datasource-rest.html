@@ -8,8 +8,9 @@
     </div>
     <div class="col-xs-6 form-group" >
         <label for="password" translate class="required">DATASOURCE.PASSWORD</label>
-        <input type="text" id="password" class="form-control"
-               ng-model="object.password" ng-keyup="aux.rest.basicAuthorization()" />
+        <input type="password" id="password" class="form-control"
+               ng-model="object.password" ng-keyup="aux.rest.basicAuthorization()" 
+               autocomplete="new-password"/>
     </div>
 </div>
 <div class="row">
