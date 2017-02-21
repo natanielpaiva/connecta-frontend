@@ -49,8 +49,8 @@
                 <div class="dashboard-item" gridster-item="gridsterItemConfig" ng-repeat="item in section.items">
                     <viewer edit="false" src="item.viewerUrl" type="item.type"
                             class="image-on-background" ng-style="{
-                'background - color':toRGBA(item.backgroundColor,item.opacity),
-                'background - image':getImage(item.backgroundImage)
+                'background-color':toRGBA(item.backgroundColor,item.opacity),
+                'background-image':getImage(item.backgroundImage)
             }"></viewer>
                     <button class="btn btn-icon-only dashboard-form-item-edit"
                             type="button" ng-click="itemConfig(item, section)">
