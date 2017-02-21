@@ -12,7 +12,8 @@ define([
             templateUrl: 'app/presenter/viewer/directive/template/analysis-viewer.html',
             scope: {
                 model: '=ngModel',
-                edit: '=?edit'
+                edit: '=?',
+                showHeader:'=?'
             },
             controller: function ($scope, ViewerService, AnalysisService, util) {
 

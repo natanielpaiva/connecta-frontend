@@ -9,7 +9,8 @@ define([
                 model:'=?ngModel',
                 src:'=?',
                 type:'=?',
-                edit:'=?'
+                edit:'=?',
+                showHeader:'=?'
             },
             controller: function ($rootScope, $scope, $http, util) {
                 $scope.uuid = util.uuid();
