@@ -6,6 +6,9 @@ define([
     'maps/project/service/project-service',
     'presenter/analysis/service/analysis-service'
 ], function (portal, leafletHelper) {
+
+    var ConnectaMaps;
+
     return portal.lazy.directive('mapViewer', function (applications) {
 
         function mapController($scope, $rootScope, util, ProjectService, AnalysisService, $location) {
@@ -15,9 +18,9 @@ define([
             var routeIsChanged;
 
             $scope.isCreatingOrEditing = (/edit/g.test(url) || /new/g.test(url));
-            $scope.mapIframeId = util.uuid();
+            $scope.uuid = util.uuid();
             $scope.mapDivId = util.uuid();
-            $scope.mapsClient = applications.maps.embedded;
+            $scope.clientDomain = applications.maps.clientDomain;
 
             var changeRouteSuccess = $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
                 if (!(/edit/g.test(next.$$route.originalPath) || /new/g.test(next.$$route.originalPath))) {
@@ -26,8 +29,7 @@ define([
             });
 
             if (!$scope.isCreatingOrEditing) {
-                var promise = getElementById($scope.mapIframeId);
-                promise.then(onGetIFrame);
+                initViewer();
             } else {
                 $scope.initMap = function () {
                     setTimeout(function () {
@@ -48,53 +50,53 @@ define([
                 };
             }
 
-            /**
-             *
-             * @param {HTMLIFrameElement} iframe
-             */
-            function onGetIFrame(iframe) {
+            function initViewer() {
+                var project;
 
-                ProjectService.get($scope.model.project._id).then( function (response) {
-                    var project = response.data,
-                        promises = [];
+                ProjectService.get($scope.model.project._id)
+                    .then( function (response) {
+                        var promises = [];
 
-                    for (var index in project.richLayers) {
-                        promises.push(AnalysisService.getAnalysis(project.richLayers[index].dataSourceIdentifier));
-                    }
+                        project = response.data;
 
-                    Promise.all(promises).then( function (response) {
-                        promises = [];
+                        for (var index in project.richLayers) {
+                            promises.push(AnalysisService.getAnalysis(project.richLayers[index].dataSourceIdentifier));
+                        }
+
+                        return Promise.all(promises);
+                    })
+                    .then( function (response) {
+                        var promises = [];
 
                         for (var index in response) {
                             promises.push(AnalysisService.execute(paramsFactory(project.richLayers[index], response[index].data)));
                         }
 
-                        Promise.all(promises).then( function (responses) {
-                            var id;
+                        return Promise.all(promises);
+                    })
+                    .then( function (responses) {
+                        var id;
+
+                        if (ConnectaMaps) {
+                            initConnectaMaps();
+                        } else {
+                            require(['ConnectaMaps'], initConnectaMaps);
+                        }
+
+                        function initConnectaMaps() {
+                            if (!ConnectaMaps) {
+                                ConnectaMaps = window.ConnectaMaps;
+                            }
 
                             for (var index in responses) {
                                 id = project.richLayers[index].resultSetId;
-
-                                iframe.contentWindow.postMessage({
-                                    "topicName" : "RESULT_SET",
-                                    "data" : JSON.stringify({
-                                        identifier : id,
-                                        data : responses[index].data
-                                    })
-                                }, '*');
-
+                                ConnectaMaps.MapsDataLoader.set(id, responses[index].data);
                             }
 
-                            iframe.contentWindow.postMessage({
-                                "topicName" : "VIEWER",
-                                "data" : JSON.stringify($scope.model)
-                            }, '*');
-
-                        });
+                            new ConnectaMaps(document.getElementById($scope.uuid), $scope.model._id, applications.maps.host);
+                        }
 
                     });
-
-                });
 
                 /**
                  * @param {
@@ -136,24 +138,6 @@ define([
                     }
                 }
             }
-        }
-
-        /**
-         *
-         * @param id
-         * @returns {Promise}
-         */
-        function getElementById(id) {
-            return new Promise(function (resolve, reject) {
-                var timer = setInterval(function () {
-                    var element = document.getElementById(id);
-
-                    if (element) {
-                        resolve(element);
-                        clearInterval(timer);
-                    }
-                }, 100);
-            });
         }
 
         return {
