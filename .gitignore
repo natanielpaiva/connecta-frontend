@@ -5,7 +5,9 @@
 .project
 .settings
 /bower_components/
-/bower_components/
 /node_modules/
 /.sass-cache/
 /.project
+/assets/css/*
+
+/npm-debug.log

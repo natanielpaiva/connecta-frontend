@@ -1,0 +1,22 @@
+<!-- wso2 -->
+<div class="form-group" validated-field-holder="formObject.wso2Url">
+    <label for="url" translate class="required">DATASOURCE.URL</label>
+    <input type="text" name="url" id="url" class="form-control"
+           ng-model="object.url" required/>
+    <validated-field-messages ng-model="formObject.url"></validated-field-messages>
+</div>
+
+<div class="row" >
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.wso2Username">
+        <label for="user" translate class="required">DATASOURCE.USERNAME</label>
+        <input type="text" name="wso2Username" id="user" class="form-control"
+               ng-model="object.user" required/>
+        <validated-field-messages ng-model="formObject.wso2Username"></validated-field-messages>
+    </div>
+    <div class="col-xs-6 form-group" validated-field-holder="formObject.wso2Password">
+        <label for="password" translate class="required">DATASOURCE.PASSWORD</label>
+        <input type="password" name="wso2Password" id="password" class="form-control"
+               ng-model="object.password" required autocomplete="new-password"/>
+        <validated-field-messages ng-model="formObject.wso2Password"></validated-field-messages>
+    </div>
+</div>

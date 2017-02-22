@@ -1,4 +1,4 @@
-<div class="viewer-header" ng-if="!edit && model.configuration.type !== 'number'">
+<div class="viewer-header" ng-if="showHeader && model.configuration.type !== 'number'">
     <div class="controls">
         <span class="drillup icon-triangle-up" ng-click="drillUp()" ng-if="drillOrder > 0"
               title="{{'DASHBOARD.DRILL_UP'|translate}}"></span>
@@ -11,7 +11,6 @@
               ng-class="{active:options.filterConfigOpen}"></span>
         <span ng-click="editViewer(model.id, idDashboard)" class="filter icon-edit3"
               title="{{'VIEWER.EDIT_VIEWER'|translate}}"></span>
-
 
         <!--    Feio demais essa classe com uuid, mas se não tiver não tem como distinguir
                 se o click fora é nesse visualizador dentro do dashboard ou em qualquer
@@ -56,9 +55,10 @@
         {{drill.filterDrillValue}}
     </div>
 </div>
+
 <div class="underlying-data-container" ng-class="{'show-underlying-data':options.isShowingData}">
 
-
+    <!-- CHARTJS -->
     <div ng-if="model.configuration.type === 'chartjs'"
          style="width:100%; height:100%; padding-top:2em; padding-bottom: 1em">
         <canvas class="chart-base" chart-type="model.configuration.subtype"
@@ -66,32 +66,46 @@
                 style="position:absolute">
         </canvas>
     </div>
+
+    <!-- KPI -->
     <div class="card" ng-if="model.configuration.type === 'number'">
         <div dnd-list="model.columns"  dnd-drop="transformColumnDrop(item, 'COLUMN')">
             <div ng-if="model.columns.length > 0">
                 <div ng-repeat="(index, analysisColumn ) in model.configuration.data">
-                    <div ng-if="i === model.columns[model.columns.length - 1].analysisColumn.name && index === 0" ng-repeat="(i,item) in analysisColumn">
-                        <div class="card-value">
-                            {{item}}
+                    <div class="card-content" ng-repeat="(i,item) in analysisColumn"
+                         ng-if="i === model.columns[model.columns.length - 1].analysisColumn.label && index === 0">
+                        <div class="card-title" translate>
+                            {{model.name ? model.name : ('VIEWER.NUMBER_SAMPLE_TITLE'|translate) }}
                         </div>
-                        <div class="card-description" title="{{i}}">
-                            {{i}}
+                        <div class="card-value">
+                            <span>{{item}}</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-description" title="{{i}}">
+                                {{i}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div ng-if="model.columns.length === 0" >
-                <div class="card-value" >
-                    100
+            <div class="card-content" ng-if="model.columns.length === 0" >
+                <div class="card-title">
+                    {{model.name ? model.name : ('VIEWER.NUMBER_SAMPLE_TITLE'|translate) }}
                 </div>
-                <div class="card-description" title="{{'VIEWER.NUMBER_SAMPLE_TEXT'|translate}}" translate>
-                    VIEWER.NUMBER_SAMPLE_TEXT
+                <div class="card-value" >
+                    <span>100</span>
+                </div>
+                <div class="card-footer">
+                    <div class="card-description" title="{{'VIEWER.NUMBER_SAMPLE_TEXT'|translate}}" translate>
+                        VIEWER.NUMBER_SAMPLE_TEXT
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 
+    <!-- TABLE -->
     <div ng-if="model.configuration.type === 'table'" style="overflow: auto; height:100%;">
         <table  class="table table-striped table-hover table-viewer table-condensed table-single-line" >
             <thead>
@@ -108,14 +122,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="row" ng-repeat="example in model.configuration.data | orderBy: orderProp">
-                    <td ng-repeat="(key , n) in columnsTable" class="text-center" translate>
-                        {{example[n.value] ? example[n.value]:"-"}}
+                <tr class="row" ng-repeat="example in model.configuration.data| orderBy: orderProp">
+                    <td ng-repeat="(key , n) in columnsTable" class="text-center">
+                        {{example[n.value] && example[n.value] !== ' ' ? example[n.value]:"-"}}
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
 
     <!-- VIEW UNDERLYING DATA -->
     <div class="underlying-data"> <!--ng-if="options.isShowingData"-->
@@ -139,9 +154,6 @@
     <!-- END VIEW UNDERLYING DATA -->
 
 </div>
-
-
-
 
 <!--click-out="options.filterConfigOpen=false" click-out-exceptions="['.filter']"-->
 <div class="viewer-filter-config" ng-class="{'viewer-filter-active':options.filterConfigOpen}"
@@ -199,7 +211,7 @@
                             <option value>{{'LAYOUT.SELECT'|translate}}</option>
                         </select>
                     </div>
-                    <div class="viewer-filter-type" ng-init="filter.type = filter.type?filter.type:'CONTAINS'">
+                    <div class="viewer-filter-type" ng-init="filter.type = filter.type ? filter.type : 'CONTAINS'">
                         <!--title="{{'DASHBOARD.FILTER.SELECTED_FILTER'|translate:{name: (filterOperators[filter.type].name|translate) } }}"-->
                         <div class="viewer-filter-config-type-button"
                              title="{{'DASHBOARD.FILTER.TYPE'|translate}}"

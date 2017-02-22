@@ -65,6 +65,22 @@
         },
         "DELETE":"Excluir",
         "EDIT":"Editar",
-        "REQUEST":"requisição"
+        "REQUEST":"requisição",
+        "SEARCH": "Pesquisa",
+        "BY_QUERY": "Consulta",
+        "BY_DATA_RANGE": "Por intervalo de datas",
+        "FROM": "A partir de",
+        "TO": "Até",
+
+        "ANALYSIS_TYPE_DATABASE": "Banco de dados",
+        "ANALYSIS_TYPE_ENDECA": "Endeca",
+        "ANALYSIS_TYPE_HDFS": "HDFS",
+        "ANALYSIS_TYPE_OBIEE": "OBIEE",
+        "ANALYSIS_TYPE_SOLR": "SOLR",
+        "ANALYSIS_TYPE_WEBSERVICE": "WebService",
+        "ANALYSIS_TYPE_CSV": "CSV",
+        "ANALYSIS_TYPE_REST": "REST",
+        "ANALYSIS_TYPE_WSO2": "WSO2"
+
     }
 }

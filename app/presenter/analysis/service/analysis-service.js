@@ -8,7 +8,8 @@ define([
     'presenter/analysis/controller/_analysis-csv',
     'presenter/analysis/controller/_analysis-obiee',
     'presenter/analysis/controller/_analysis-hdfs',
-    'presenter/analysis/controller/_analysis-rest'
+    'presenter/analysis/controller/_analysis-rest',
+    'presenter/analysis/controller/_analysis-wso2'
 ], function (presenter,
         DatabaseAnalysisFormController,
         EndecaAnalysisFormController,
@@ -17,21 +18,22 @@ define([
         CsvAnalysisFormController,
         ObieeAnalysisFormController,
         HdfsAnalysisFormController,
-        RestAnalysisFormController) {
+        RestAnalysisFormController,
+        Wso2AnalysisFormController) {
 
     return presenter.lazy.service('AnalysisService', function (presenterResources, $http, DomainService) {
 
         var _types = {
             DATABASE: {
                 id: 'database',
-                name: 'Database',
+                type: 'DATABASE',
                 icon: 'icon-database2',
                 template: '_analysis-database.html',
                 controller: DatabaseAnalysisFormController
             },
             ENDECA: {
                 id: 'endeca',
-                name: 'Endeca',
+                type: 'ENDECA',
                 icon: 'icon-endeca',
                 template: '_analysis-endeca.html',
                 controller: EndecaAnalysisFormController,
@@ -44,14 +46,14 @@ define([
             },
             HDFS: {
                 id: 'hdfs',
-                name: 'HDFS',
+                type: 'HDFS',
                 icon: 'icon-hadoop',
                 template: '_analysis-hdfs.html',
                 controller: HdfsAnalysisFormController
             },
             BI: {
                 id: 'bi',
-                name: 'BI',
+                type: 'OBIEE',
                 icon: 'icon-obiee',
                 template: '_analysis-obiee.html',
                 field: "catalog",
@@ -65,14 +67,14 @@ define([
             },
             SOLR: {
                 id: 'solr',
-                name: 'SOLR',
+                type: 'SOLR',
                 icon: 'icon-solr',
                 template: '_analysis-solr.html',
                 controller: SolrAnalysisFormController
             },
             WEBSERVICE: {
                 id: 'webservice',
-                name: 'WebService',
+                type: 'WebService',
                 icon: 'icon-webservice',
                 template: '_analysis-webservice.html',
                 controller: WebserviceAnalysisFormController,
@@ -97,14 +99,14 @@ define([
             },
             CSV: {
                 id: 'csv',
-                name: 'CSV',
+                type: 'CSV',
                 icon: 'icon-insert-drive-file',
                 template: '_analysis-csv.html',
                 controller: CsvAnalysisFormController
             },
             REST: {
                 id: 'rest',
-                name: 'REST',
+                type: 'REST',
                 icon: 'icon-solr',
                 template: '_analysis-rest.html',
                 controller: RestAnalysisFormController,
@@ -114,7 +116,20 @@ define([
                          component.restRequests = response.data.requests;
                      });
                 }
-            }
+            },
+            WSO2: {
+                id: 'wso2',
+                type: 'WSO2',
+                icon: 'icon-obiee',
+                template: '_analysis-wso2.html',
+                controller: Wso2AnalysisFormController,
+                start: function (idDatasource, component) {
+                    var url = presenterResources.analysis + "/" + idDatasource.id + "/tables-wso2";
+                    $http.get(url).then(function (response) {
+                        component.tableWso2 = response.data;
+                    });
+                }
+            },
         };
 
         var _databaseRequestTypes = {
@@ -386,7 +401,7 @@ define([
             var url = presenterResources.analysis + "/result-csv";
             return $http.post(url, analysisCopy);
         };
-        
+
         this.sendRequest = function (analysis) {
             var analysisCopy = angular.copy(analysis);
            var url = presenterResources.analysis + '/execute-rest';

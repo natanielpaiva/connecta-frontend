@@ -20,8 +20,8 @@
     </div>
     <div class="col-xs-6 form-group" validated-field-holder="formObject.obieePassword">
         <label for="password" translate class="required">DATASOURCE.PASSWORD</label>
-        <input type="text" name="obieePassword" id="password" class="form-control"
-               ng-model="object.password" required />
+        <input type="password" name="obieePassword" id="password" class="form-control"
+               ng-model="object.password" required  autocomplete="new-password"/>
         <validated-field-messages ng-model="formObject.obieePassword"></validated-field-messages>
     </div>
 </div>

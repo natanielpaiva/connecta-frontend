@@ -196,7 +196,9 @@
         "LABEL_TEXT":"Texto do label",
         "TWITTER_USER":"Usuário do Twitter",
         "TOOLTIP":"Tooltip",
-        "NUMBER_SAMPLE_TEXT": "Descrição da métrica"
+        "SHOWALLTOOLTIP": "Sempre mostrar tooltip",
+        "NUMBER_SAMPLE_TEXT": "Descrição da métrica",
+        "NUMBER_SAMPLE_TITLE": "Sem Título"
     },
     "VIEWER_TEMPLATE_ITEM": {
         "other-singlesource":"Media",

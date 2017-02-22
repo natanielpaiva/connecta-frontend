@@ -3,9 +3,9 @@
         <div class="user-image-container"
              ng-style="{'background-image':'url(' + imageURL + ')'}">
 
-            <label class="edit" ng-file-drop ng-file-select
-                   ng-accept="'.jpeg,.jpg,.png'"
-                   ng-file-change="fileDropped($files, item)">
+            <label class="edit" ngf-drop ngf-select
+                   accept="'.jpeg,.jpg,.png'"
+                   ngf-change="fileDropped($files, item)">
                 <span class="icon-pencil"></span>
             </label>
 

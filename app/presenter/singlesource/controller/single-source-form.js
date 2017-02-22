@@ -4,7 +4,7 @@ define([
 ], function (presenter) {
     return presenter.lazy.controller('SingleSourceFormController', function ($scope, SingleSourceService, $routeParams, $location, fileExtensions) {
 
-        $scope.myFiles = [];
+        // $scope.myFiles = [];
         $scope.types = SingleSourceService.getTypesArray();
         $scope.optionsAttributeTypes = SingleSourceService.getAttributeTypes();
         $scope.typeSingleSource = {};
@@ -31,14 +31,7 @@ define([
                 $scope.typeSingleSource.type = type;
                 $scope.typeSingleSource.path = SingleSourceService.getFileById($routeParams.id);
 
-                if ($scope.typeSingleSource.singleSourceAttributes.length === 0) {
-                    $scope.typeSingleSource.singleSourceAttributes = [
-                        {
-                            attribute: "",
-                            value: ''
-                        }
-                    ];
-                } else {
+             
                     for (var key in $scope.typeSingleSource.singleSourceAttributes) {
 
                         var value = 0;
@@ -49,7 +42,6 @@ define([
 
                         $scope.typeSingleSource.singleSourceAttributes[key].attributeType = $scope.optionsAttributeTypes[value];
                     }
-                }
 
                 if ($scope.typeSingleSource.fileType !== undefined) {
                     $scope.fileExtensions = fileExtensions[$scope.typeSingleSource.fileType];
@@ -75,11 +67,11 @@ define([
         };
 
         $scope.submit = function () {
-
             if ($scope.typeSingleSource.type.id === "FILE") {
                 if ($scope.file !== "") {
                     $scope.typeSingleSource.type = "FILE";
                     $scope.typeSingleSource.filename = $scope.file.name;
+
 
                     SingleSourceService.save($scope.file, $scope.typeSingleSource).then(function () {
                         $location.path('presenter/singlesource');
@@ -106,7 +98,6 @@ define([
                     });
                 }
             }
-
         };
 
         $scope.change = function () {

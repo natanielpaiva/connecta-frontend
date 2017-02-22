@@ -5,7 +5,7 @@ define([
     'portal/domain/service/invite-service'
 ], function (portal) {
     return portal.factory('$inviteUser', function ($modal, $q, UserService, InviteService) {
-        return function (users, idDomain) {
+        return function (users, idDomain, accessToken) {
             var deferred = $q.defer();
 
             var modal = $modal.open({
@@ -17,6 +17,8 @@ define([
                     $scope.emails = [];
                     $scope.users = users;
                     $scope.idDomain = idDomain;
+                    
+                    var _accessToken = accessToken;
 
                     $scope.pushEmail = function (user) {
                         if ($scope.emails.indexOf(user.email) === -1) {
@@ -35,7 +37,7 @@ define([
                         if ($scope.regex === "") {
                             $scope.users = users;
                         } else {
-                            UserService.getByRegex($scope.regex,idDomain).then(function (response) {
+                            UserService.getByRegex($scope.regex,idDomain, _accessToken).then(function (response) {
                                 $scope.users = response.data;
                                 $scope.getImage();
                             });
@@ -44,14 +46,14 @@ define([
 
                     $scope.getImage = function () {
                         $scope.users.forEach(function (current) {
-                            current.image = UserService.makeBackgroundImage(current.id);
+                            current.image = UserService.makeBackgroundImage(current.id, _accessToken);
                         });
                     };
 
                     $scope.getImage();
 
                     $scope.save = function () {
-                        InviteService.invite($scope.idDomain, $scope.emails).then(function () {
+                        InviteService.invite($scope.idDomain, $scope.emails, _accessToken).then(function () {
                             deferred.resolve();
                         });
                         modal.close();

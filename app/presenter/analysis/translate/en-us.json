@@ -1,6 +1,6 @@
 {
     "ANALYSIS": {
-        "NEW_ANALYSIS":"New analysis",
+        "NEW_ANALYSIS": "New analysis",
         "ANALYSIS": "Analysis",
         "REGISTER_ANALYSIS": "Register Analysis",
         "SOURCE_ANALYSIS": "Analysis Source",
@@ -34,7 +34,7 @@
         "PARAMETER": "Parameter",
         "PARAMETER_METHOD": "Parametros do Método",
         "FETCH_DATA": "Fetch Data",
-        "IS_COLUMN":"Column",
+        "IS_COLUMN": "Column",
         "UNTITLED_OBJECT": "Untitled Object",
         "UNTITLED_LIST": "Untitled List",
         "UNKNOWN": "Unknown",
@@ -42,7 +42,7 @@
         "FACET": "Facet",
         "RESPONSE_XML": "Response XML",
         "RESULTS_OF_THE_ANALYSIS": "Results of the analysis",
-        "DRILL_SEQUENCE":"Drill (detailing) sequence",
+        "DRILL_SEQUENCE": "Drill (detailing) sequence",
         "DELETE_CONFIRM": "Remove Analysis",
         "CONFIRM_DELETE": "Do you really want to delete this analysis?",
         "BULK_DELETE_CONFIRM": "Remove Analyzes",
@@ -51,21 +51,36 @@
             "REQUEST_TABLE": "Table",
             "REQUEST_SQL": "Custom query"
         },
-        "QUERY":"Query",
-        "SOLR":{
-           "CUSTOM_QUERY": "Custom query",
-           "TEXT_QUERY": "Text query"
+        "QUERY": "Query",
+        "SOLR": {
+            "CUSTOM_QUERY": "Custom query",
+            "TEXT_QUERY": "Text query"
         },
         "RELATIONS": {
-            "RELATIONS":"Related analysis",
-            "DETECT":"Auto-detect",
-            "NEW_RELATION":"+ Relate with another analysis",
-            "SELECT_RIGHT_ANALYSIS":"Select right analysis",
-            "NO_COLUMNS_YET":"No columns yet"
+            "RELATIONS": "Related analysis",
+            "DETECT": "Auto-detect",
+            "NEW_RELATION": "+ Relate with another analysis",
+            "SELECT_RIGHT_ANALYSIS": "Select right analysis",
+            "NO_COLUMNS_YET": "No columns yet"
         },
-        "DELETE":"Delete",
-        "EDIT":"Edit",
-        "REQUEST":"Request"
+        "DELETE": "Delete",
+        "EDIT": "Edit",
+        "REQUEST": "Request",
+        "SEARCH": "Search",
+        "BY_QUERY": "By Query",
+        "BY_DATA_RANGE": "By Date Range",
+        "FROM": "From",
+        "TO": "To",
+
+        "ANALYSIS_TYPE_DATABASE": "Database",
+        "ANALYSIS_TYPE_ENDECA": "Endeca",
+        "ANALYSIS_TYPE_HDFS": "HDFS",
+        "ANALYSIS_TYPE_OBIEE": "OBIEE",
+        "ANALYSIS_TYPE_SOLR": "SOLR",
+        "ANALYSIS_TYPE_WEBSERVICE": "WebService",
+        "ANALYSIS_TYPE_CSV": "CSV",
+        "ANALYSIS_TYPE_REST": "REST",
+        "ANALYSIS_TYPE_WSO2": "WSO2"
 
     }
 }

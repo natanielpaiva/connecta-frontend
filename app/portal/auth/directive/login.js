@@ -1,6 +1,7 @@
 define([
     'connecta.portal',
     'json!package',
+    'json!applications.json',
     'portal/user/directive/unique-email',
     'portal/domain/service/invite-service',
     'portal/domain/service/invite-user',
@@ -9,7 +10,7 @@ define([
     'portal/layout/service/notify'
             //    'portal/auth/service/facebook-service',
             //    'portal/auth/service/google-plus-service',
-], function (portal, package) {
+], function (portal, package, applications) {
     return portal.directive('login', function () {
         return {
             templateUrl: 'app/portal/auth/directive/template/login.html',
@@ -18,8 +19,10 @@ define([
                     InviteService, $translate, $confirm, $inviteUser) { // FacebookService, GPlusService,
 
                 var AMOUNT_USERS = 10;
+                var _accessToken = "";
 
                 $scope.package = package;
+                $scope.applicationsPortal = applications.portal;
 
                 $scope.invite = {};
                 $scope.invited = {};
@@ -85,21 +88,22 @@ define([
                 init();
 
                 $scope.inviteUser = function (idDomain) {
-                    UserService.get(AMOUNT_USERS, idDomain).then(function (response) {
-                        $inviteUser(response.data, idDomain).then(function () {
+                    UserService.get(AMOUNT_USERS, idDomain, _accessToken).then(function (response) {
+                        $inviteUser(response.data, idDomain, _accessToken).then(function () {
                             notify.success('USER.INVITED_SUCCESS');
                         });
                     });
                 };
 
                 $scope.loadDomains = function (username) {
-                    DomainService.getDomainsByUser(username).then(function (response) {
+                    DomainService.getDomainsByUser(username, _accessToken).then(function (response) {
                         $scope.domains = response.data;
                     });
                 };
 
                 $scope.submit = function () {
-                    LoginService.doLogin($scope.credentials).then(function () {
+                    LoginService.checkLogin($scope.credentials).then(function (response) {
+                        _accessToken = response.data.access_token;
                         $scope.loadDomains($scope.credentials.email);
                         $scope.setSection($scope.sections.domain);
                     }, function () {
@@ -114,8 +118,10 @@ define([
 //                };
 
                 $scope.selectDomain = function (domain) {
-                    LoginService.selectDomain(domain);
-                    $route.reload();
+                    LoginService.selectDomain(domain).then(function () {
+                        LoginService.doLogin($scope.credentials.keepLogged);
+                        $route.reload();
+                    });
                 };
 
                 function _removeInvalidDomain() {
@@ -137,14 +143,14 @@ define([
                 $scope.updateDomain = function (domain) {
                     event.stopPropagation();
 
-                    DomainService.updateDomain(domain).then(function () {
+                    DomainService.updateDomain(domain, _accessToken).then(function () {
                         $scope.domainBeingEdited = null;
                         notify.success('DOMAIN.UPDATED');
                     });
                 };
 
                 $scope.createDomain = function (domain) {
-                    DomainService.createDomain(domain).then(function (response) {
+                    DomainService.createDomain(domain, _accessToken).then(function (response) {
                         angular.extend(domain, response.data);
                         $scope.domainBeingEdited = null;
                         notify.success('DOMAIN.CREATED');
@@ -161,7 +167,7 @@ define([
 
                 $scope.deleteDomain = function (id, index) {
                     $confirm('LAYOUT.CONFIRM_DELETE', 'DOMAIN.DELETE_CONFIRM').then(function () {
-                        DomainService.deleteDomain(id).then(function () {
+                        DomainService.deleteDomain(id, _accessToken).then(function () {
                             $scope.domains.splice(index, 1);
                             $scope.domainBeingEdited = null;
                             notify.success('DOMAIN.DELETED');

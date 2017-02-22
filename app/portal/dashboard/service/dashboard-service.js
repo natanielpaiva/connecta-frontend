@@ -3,7 +3,7 @@ define([
     'connecta.portal'
 ], function (portal) {
 
-    return portal.lazy.service('DashboardService', function (portalResources, $http, $upload, 
+    return portal.lazy.service('DashboardService', function (portalResources, $http, Upload, 
                                                                 DomainService, applications, $filter, $cookieStore) {
 
         this.save = function (dashboard) {

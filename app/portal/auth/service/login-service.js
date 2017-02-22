@@ -130,7 +130,7 @@ define([
          * @param {Object} user
          * @returns {Promise}
          */
-        this.doLogin = function (user) {
+        this.checkLogin = function (user) {
             var data = "username=" + user.email + "&password=" + encodeURIComponent(user.password) + "&grant_type=password&scope=read%20write&" +
                     "client_secret=secret&client_id=frontend";
 
@@ -146,21 +146,6 @@ define([
                 _userToken.access_token = response.data.access_token;
                 _userToken.refresh_token = response.data.refresh_token;
 
-                if (!user.keepLogged) {
-                    var date = new Date();
-                    date.setHours(date.getHours() + TIME_EXPIRE);
-                    $cookies.putObject('portal.auth.access_token', _userToken.access_token, {
-                        'expires': date
-                    });
-                    $cookies.putObject('portal.auth.refresh_token', _userToken.refresh_token, {
-                        'expires': date
-                    });
-                    
-                } else {
-                    $cookieStore.put('portal.auth.access_token', _userToken.access_token);
-                    $cookieStore.put('portal.auth.refresh_token', _userToken.refresh_token);
-                }
-
                 deferred.resolve(response);
             }, function (response) {
                 loginService.setAuthenticated(false);
@@ -169,9 +154,33 @@ define([
             return deferred.promise;
         };
 
-        this.selectDomain = function (domain) {
-            $cookieStore.put('user.domain.name', domain.id);
+        this.doLogin = function (keepLogged) {
+
+            if (keepLogged) {
+                var date = new Date();
+                date.setHours(date.getHours() + TIME_EXPIRE);
+                $cookies.putObject('portal.auth.access_token', _userToken.access_token, {
+                    'expires': date
+                });
+                $cookies.putObject('portal.auth.refresh_token', _userToken.refresh_token, {
+                    'expires': date
+                });
+
+            } else {
+                $cookieStore.put('portal.auth.access_token', _userToken.access_token);
+                $cookieStore.put('portal.auth.refresh_token', _userToken.refresh_token);
+            }
             loginService.setAuthenticated(true);
+            
+        };
+
+        this.selectDomain = function (domain) {
+            var deferred = $q.defer();
+            
+            $cookieStore.put('user.domain.name', domain.id);
+            
+            deferred.resolve();
+            return deferred.promise;
         };
         this.setAuthenticatedUser = function (response) {
             _currentUser = response.data;

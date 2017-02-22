@@ -9,7 +9,10 @@ define([
         $scope.viewers = [];
         
         $scope.types = ViewerService.getTypes();
-        
+
+        $scope.showFilter = false;
+        $scope.filter = {};
+
         $scope.tableParams = new ngTableParams({
             count: 50,
             page: 1,
@@ -17,7 +20,8 @@ define([
         }, {
             getData: function ($defer, params) {
                 return ViewerService.list(params.url()).then(function(response){
-                    $scope.viewers = response.data;
+                    $scope.viewers = response.data.content;
+                    params.total(response.data.totalElements);
                 });
             },
             counts:[50,100,150,200]
@@ -42,6 +46,11 @@ define([
                 size: 'lg'
             });
         }
+
+        $scope.callFunction = function (name){
+            if(angular.isFunction($scope[name]))
+               $scope[name]();
+        };
 
         $scope.open = function () {
             openModal();

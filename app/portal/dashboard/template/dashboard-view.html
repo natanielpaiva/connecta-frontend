@@ -9,8 +9,12 @@
         'browser-fullscreen':config.isBrowserOnFullscreen
         }">
     <div class="dashboard-header" ng-class="{
-          'dashboard-header-mini': config.headerMini
+          'dashboard-header-mini': config.headerMini,
+          'logo-custom': logoCustom
         }">
+        
+        <div class="logo-customer"style="{{logoCustom?'background-image:url('+logoCustom+')':''}}"></div>
+        
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="318px"
         	 height="95px" viewBox="0 0 318 95" enable-background="new 0 0 318 95" xml:space="preserve">
             <g id="logo">
@@ -127,7 +131,7 @@
                     'background-image':getImage(item.backgroundImage),
                     'z-index':$index*(-1)
                    }">
-                <viewer src="item.viewerUrl" type="item.type"></viewer>
+                <viewer src="item.viewerUrl" type="item.type" show-header="true"></viewer>
             </div>
         </div>
     </div>

@@ -317,8 +317,9 @@ define([
                 viewer.configuration.options = {};
             }
 
-            if(!viewer.configuration.options.tooltips ||
-                viewer.configuration.options.tooltips.enabled){
+            if(!viewer.configuration.options.showAllTooltips &&
+                (!viewer.configuration.options.tooltips ||
+                 viewer.configuration.options.tooltips.enabled)){
                 angular.merge(viewer.configuration.options, ChartJs.getOptions());
             }
 
@@ -333,11 +334,13 @@ define([
                     configureBarLineAndRadarChartJs(viewer, result, columnDrill);
                     break;
                 case "pie":
-                    setAxisToFalse(viewer.configuration.options.scales);
+                    registerTooltipPlugin(viewer);
+                    setAxisToFalse(viewer);
                     configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
                     break;
                 case "doughnut":
-                    setAxisToFalse(viewer.configuration.options.scales);
+                    registerTooltipPlugin(viewer);
+                    setAxisToFalse(viewer);
                     configurePieDonutAndAreaChartJs(viewer, result, columnDrill);
                     break;
                 case "polarArea":
@@ -354,9 +357,64 @@ define([
             animationCallBack(viewer);
         };
 
-        var setAxisToFalse = function(scales){
-            scales.yAxes[0].display = false;
-            scales.xAxes[0].display = false;
+        var registerTooltipPlugin = function(viewer) {
+            if (viewer.configuration.options.tooltips.enabled) {
+                Chart.pluginService.register({
+                    beforeRender: function(chart) {
+                        if (chart.config.options.showAllTooltips) {
+                            // create an array of tooltips
+                            // we can't use the chart tooltip because there is only one tooltip per chart
+                            chart.pluginTooltips = [];
+                            chart.config.data.datasets.forEach(function(dataset, i) {
+                                chart.getDatasetMeta(i).data.forEach(function(sector, j) {
+                                    chart.pluginTooltips.push(new Chart.Tooltip({
+                                        _chart: chart.chart,
+                                        _chartInstance: chart,
+                                        _data: chart.data,
+                                        _options: chart.options.tooltips,
+                                        _active: [sector]
+                                    }, chart));
+                                });
+                            });
+
+                            // turn off normal tooltips
+                            chart.options.tooltips.enabled = false;
+                        }
+                    },
+                    afterDraw: function(chart, easing) {
+                        if (chart.config.options.showAllTooltips) {
+                            // we don't want the permanent tooltips to animate, so don't do anything till the animation runs atleast once
+                            if (!chart.allTooltipsOnce) {
+                                if (easing !== 1)
+                                    return;
+                                chart.allTooltipsOnce = true;
+                            }
+
+                            // turn on tooltips
+                            chart.options.tooltips.enabled = true;
+                            Chart.helpers.each(chart.pluginTooltips, function(tooltip) {
+                                tooltip.initialize();
+                                tooltip.update();
+                                // we don't actually need this since we are not animating tooltips
+                                tooltip.pivot();
+                                tooltip.transition(easing).draw();
+                            });
+                            chart.options.tooltips.enabled = false;
+                        }
+                    }
+                });
+            }
+        };
+
+        var setAxisToFalse = function(viewer){
+            viewer.configuration.options.scales = {
+                yAxes: [{
+                    display: false
+                }],
+                xAxes: [{
+                    display: false
+                }]
+            };
         };
 
         var configureBarLineAndRadarChartJs = function (viewer, result, columnDrill) {
@@ -427,7 +485,10 @@ define([
 
         var configurePieDonutAndAreaChartJs = function (viewer, result, columnDrill) {
 
-            //configuração de porcentagem
+            if(viewer.configuration.options.legend)
+                viewer.configuration.options.legend.position = 'bottom';
+
+            // configuração de porcentagem
             viewer
                 .configuration
                 .options
@@ -444,6 +505,8 @@ define([
                             return tooltipLabel + ': ' + util.formatNumber(tooltipData, 2, ',', '.') + ' (' + tooltipPercentage + '%)';
                         }
                     };
+
+            // viewer.configuration.options.showAllTooltips= true;
 
             var typeViewer = identifyViewerType(viewer, result);
 
@@ -571,10 +634,13 @@ define([
 
 
         var animationCallBack = function(viewer){
-            if(!viewer.configuration.options.tooltips.enabled){
-                this.createAnimationCallBack(viewer.configuration.options);
-            }else{
-                this.removeAnimationCallBack(viewer.configuration.options);
+            if(viewer.configuration.subtype !== 'pie' &&
+                viewer.configuration.subtype !== 'doughnut'){
+                if(!viewer.configuration.options.tooltips.enabled){
+                    this.createAnimationCallBack(viewer.configuration.options);
+                }else{
+                    this.removeAnimationCallBack(viewer.configuration.options);
+                }
             }
         }.bind(this);
 
@@ -589,23 +655,13 @@ define([
                     onComplete: function() {
                         var ctx = this.chart.ctx;
                         ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-                        ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
 
-                        this.data.datasets.forEach(function(dataset) {
-                            for (var i = 0; i < dataset.data.length; i++) {
-                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-                                    scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
-                                ctx.fillStyle = '#444';
-                                var y_pos = model.y - 5;
-                                // Make sure data value does not get overflown and hidden
-                                // when the bar's value is too close to max value of scale
-                                // Note: The y value is reverse, it counts from top down
-                                if ((scale_max - model.y) / scale_max >= 0.93)
-                                    y_pos = model.y + 20;
-                                ctx.fillText(util.formatNumber(dataset.data[i], 2, ',', '.'), model.x, y_pos);
-                            }
-                        });
+                        if(this.chart.config.type === 'horizontalBar'){
+                            configureCallbackHorizontal(ctx, this.data.datasets);
+                        }else{
+                            configureCallbackVertical(ctx, this.data.datasets);
+                        }
                     }
                 }
             };
@@ -619,5 +675,41 @@ define([
             delete viewerOptions.animation;
         };
 
+        var configureCallbackHorizontal = function(ctx, datasets){
+            ctx.textAlign = 'left';
+
+            datasets.forEach(function(dataset) {
+                for (var i = 0; i < dataset.data.length; i++) {
+                    var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                        scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._xScale.maxHeight;
+                    ctx.fillStyle = '#444';
+                    var x_pos = model.x + 5;
+                    var y_pos = model.y + 7;
+                    // Make sure data value does not get overflown and hidden
+                    if ((scale_max - model.x) / scale_max <= -4.5)
+                        x_pos = model.x - 20;
+                    ctx.fillText(util.formatNumber(dataset.data[i], 2, ',', '.'), x_pos, y_pos);
+                }
+            });
+        };
+
+        var configureCallbackVertical = function(ctx, datasets){
+            ctx.textAlign = 'center';
+
+            datasets.forEach(function(dataset) {
+                for (var i = 0; i < dataset.data.length; i++) {
+                    var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                        scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
+                    ctx.fillStyle = '#444';
+                    var y_pos = model.y - 5;
+                    // Make sure data value does not get overflown and hidden
+                    if ((scale_max - model.y) / scale_max >= 0.93)
+                        y_pos = model.y + 20;
+                    ctx.fillText(util.formatNumber(dataset.data[i], 2, ',', '.'), model.x, y_pos);
+                }
+            });
+        };
+
     });
 });
+

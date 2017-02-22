@@ -1,27 +1,20 @@
 <div class="dashboard-form-viewer-search" ng-init="search.doSearch()">
-    <div class="row">
-        <div class="col-md-12">
-            <label for="search-terms" translate class="sr-only">DASHBOARD.SEARCH_VIEWERS</label>
-            <input id="search-terms" class="form-control" type="search" autofocus
-                   ng-model="search.terms" placeholder="{{'DASHBOARD.SEARCH_VIEWERS'|translate}}" />
-        </div>
+    <div class="search-bar">
+        <label for="search-terms" translate class="sr-only">DASHBOARD.SEARCH_VIEWERS</label>
+        <input id="search-terms" class="form-control" type="search" autofocus
+               ng-model="search.terms" placeholder="{{'DASHBOARD.SEARCH_VIEWERS'|translate}}" />
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="list-unstyled">
-                <li ng-repeat="viewer in search.results" dnd-draggable="viewer"
-                    dnd-effect-allowed="move"
-                    dnd-moved="search.results.splice($index, 1)"
-                    class="image-on-background background-fallback-{{viewer.module}}"
-                    style="{{viewer.thumbnail?'background-image:url('+viewer.thumbnail+')':''}}">
-                    
-                    <div style="background-image:url({{applications[viewer.module].iconMini}})"
-                        class="module-icon image-on-background"></div>
+    <div class="search-results">
+        <div ng-repeat="viewer in search.results" dnd-draggable="viewer"
+            dnd-effect-allowed="move"
+            dnd-moved="search.results.splice($index, 1)"
+            class="result-viewer image-on-background background-fallback-{{viewer.module}}"
+            style="{{viewer.thumbnail?'background-image:url('+viewer.thumbnail+')':''}}">
+            
+            <div style="background-image:url({{applications[viewer.module].iconMini}})"
+                class="module-icon image-on-background"></div>
 
-                    <div class="viewer-name">{{viewer.name}}</div>
-                    
-                </li>
-            </ul>
+            <div class="viewer-name">{{viewer.name}}</div>
         </div>
     </div>
 </div>

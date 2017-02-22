@@ -82,7 +82,7 @@ require.config({
         'bower_components/angular-messages/angular-messages.min': {
             deps: ['angular']
         },
-        'bower_components/ng-file-upload/angular-file-upload.min': {
+        'bower_components/ng-file-upload/ng-file-upload-shim.min': {
             deps: ['angular']
         },
         'bower_components/angular-ui-tree/dist/angular-ui-tree.min': {

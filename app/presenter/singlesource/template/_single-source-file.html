@@ -1,49 +1,31 @@
 <div ng-if="fileExtensions.fileType !== '' && typeSingleSource.path === ''" class="form-group">
-    <p class="bold" translate>SINGLESOURCE.FILE<p>
-    <label for="file" class="set-file dropzone"
-
-           ng-file-drop 
-           ng-file-select
-           ng-model="myFiles" 
-
-           ng-file-change="fileDropped($files, $event, $rejectedFiles)" 
-           ng-multiple="false"
-           ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'" 
-           ng-model-rejected="rejFiles" 
-           allow-dir="false" 
-           drag-over-class="{accept:'accept', reject:'reject'}" 
-           drop-available="dropSupported" 
-           translate>
-        SINGLESOURCE.DROP_FILE_HERE
-    </label>
-
-    <div  ng-no-file-drop>File Drag/drop is not supported</div>
+  <p class="bold" translate>SINGLESOURCE.FILE<p>
+    <div ng-model="file" class="set-file dropzone" required 
+        ngf-drop ngf-select 
+        ngf-drag-over-class="'dragover'"  
+        ngf-multiple="true" 
+        ngf-allow-dir="true"
+        ngf-change="fileDropped($files, $event, $rejectedFiles)"
+        ngf-pattern="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'"
+        accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'">
+        {{'SINGLESOURCE.DROP_FILE_HERE'|translate}}
+    </div>
 </div>
+
 <div  ng-if="typeSingleSource.path !== ''" class="form-group am-flip-x">
     <div ng-if="typeSingleSource.type.name === 'FILE'" >
         <div ng-if="fileExtensions.fileType !== 'IMAGE'" >
-            <label for="nome" translate>SINGLESOURCE.FILE</label>
-            <label for="file"
-                   class="well drop-box set-file"
-
-                   ng-file-drop 
-                   ng-file-select
-                   ng-model="myFiles" 
-
-                   ng-file-change="fileDropped($files, $event, $rejectedFiles)" 
-                   ng-multiple="false"
-                   ng-accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'" 
-                   ng-model-rejected="rejFiles" 
-                   allow-dir="false" 
-                   drag-over-class="{accept:'acceptClass', reject:'rejectClass'}" 
-                   drop-available="dropSupported" 
-                   translate
-                   >
-                SINGLESOURCE.DROP_FILE_HERE
-
-            </label>
-
-            <div  ng-no-file-drop>File Drag/drop is not supported</div>
+            <div ng-model="file" class="set-file dropzone" required 
+                  ngf-drop ngf-select 
+                  ngf-drag-over-class="'dragover'" 
+                  ngf-multiple="true" 
+                  ngf-allow-dir="true" 
+                  ngf-change="fileDropped($files, $event, $rejectedFiles)"
+                  ngf-pattern="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'"
+                  accept="'.doc,.docx,.xls,.ppt,.pptx,.jpeg,.jpg,.png,.mp4'">
+                {{'SINGLESOURCE.DROP_FILE_HERE'|translate}}
+            </div>
+            <!-- <div  ng-no-file-drop>File Drag/drop is not supported</div> -->
         </div>
         <div ng-if="fileExtensions.fileType === 'IMAGE'">
             <label translate>SINGLESOURCE.IMAGE</label>

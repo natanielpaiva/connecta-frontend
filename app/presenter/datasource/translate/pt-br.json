@@ -6,7 +6,7 @@
         "ANALYSIS_SOURCE": "Fontes de análise",
         "NAME": "Nome da fonte de dados",
         "DESCRIPTION": "Descrição",
-        "DATASOURCE_TYPE": "Tipo de fonte",
+        "TYPE": "Tipo de fonte",
         "ADDRESS": "Endereço",
         "PATH": "Caminho",
         "USERNAME": "Nome de usuário",
@@ -37,6 +37,14 @@
         "VALUE": "Valor",
         "BODY":"Corpo",
         "BULK_DELETE_CONFIRM": "Remover fonte",
-        "BULK_CONFIRM_DELETE": "Deseja realmente excluir essa fonte?"
+        "BULK_CONFIRM_DELETE": "Deseja realmente excluir essa fonte?",
+
+        "TYPE_DATABASE": "Banco de dados",
+        "TYPE_HDFS": "HDFS",
+        "TYPE_OBIEE": "OBIEE",
+        "TYPE_SOLR" : "SOLR",
+        "TYPE_WEBSERVICE": "WebService",
+        "TYPE_REST": "Rest",
+        "TYPE_WSO2": "WSO2"
     }
 }

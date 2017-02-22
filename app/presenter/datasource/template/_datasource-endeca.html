@@ -19,8 +19,8 @@
     </div>
     <div class="col-xs-6 form-group" validated-field-holder="formObject.endecaPassword">
         <label for="password" translate class="required">DATASOURCE.PASSWORD</label>
-        <input type="text" name="endecaPassword" id="password" class="form-control"
-               ng-model="object.password" required />
+        <input type="password" name="endecaPassword" id="password" class="form-control"
+               ng-model="object.password" required autocomplete="new-password"/>
         <validated-field-messages ng-model="formObject.endecaPassword"></validated-field-messages>
         <div ng-show="formulario.password.$touched" ng-messages="formulario.password.$error"
              ng-messages-include="portal-error-messages"></div>
