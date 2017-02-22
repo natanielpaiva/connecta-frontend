@@ -27,7 +27,8 @@ require.config({
         'esri-leaflet': '../bower_components/esri-leaflet/dist/esri-leaflet',
         'angular-tree-control' : '../bower_components/angular-tree-control/angular-tree-control',
         'angularjs-slider': '../bower_components/angularjs-slider/dist/rzslider.min',
-        'chart' : '../bower_components/chart.js/dist/Chart.min'
+        'chart' : '../bower_components/chart.js/dist/Chart.min',
+        'ConnectaMaps' : '//staticmapsap.cds.com.br/static/js/main'
     },
     shim: {
         'angular': {

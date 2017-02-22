@@ -38,17 +38,17 @@
     },
     "maps": {
         "title": "Maps",
-        "host": "http://connectad.cds.com.br/connecta-maps",
+        "host": "http://connectamapsap.cds.com.br",
+        "clientDomain" : "http://staticmapsap.cds.com.br",
         "icon": "assets/img/module-icon/maps.png",
         "iconMini": "assets/img/module-icon/mini/maps.png",
         "headerLogo": "assets/img/horizontal-logos/maps.png",
-        "home": "#/maps",
+        "home": "#/maps/spatial-datasource",
         "viewerPath": "/viewer/:id",
         "publicViewerPath": "/viewer/:id",
-        "embedded": "http://staticmaps.cds.com.br/embeded.html",
         "color": "#3BB79D",
         "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/maps",
-        "active": false
+        "active": true
     },
     "speaknow": {
         "title": "Speaknow",
