@@ -62,9 +62,6 @@ require.config({
         'bower_components/angular-translate/angular-translate.min': {
             deps: ['angular']
         },
-//        'bower_components/angular-facebook/lib/angular-facebook': {
-//            deps: ['angular']
-//        },
         'bower_components/angular-scroll/angular-scroll.min': {
             deps: ['angular']
         },
@@ -119,9 +116,9 @@ require.config({
         'bower_components/angular-show-on-konami-code/angular-show-on-konami-code': {
             deps: ['angular']
         },
-        'bower_components/jquery-ui-custom/index': {
+        /*'bower_components/jquery-ui-custom/index': {
             deps: ['jquery']
-        },
+        },*/
         'bower_components/bootstrap/dist/js/bootstrap.min': {
             deps: ['jquery']
         },
@@ -132,7 +129,7 @@ require.config({
             deps: [
                 'angular',
                 'jquery',
-                'bower_components/jquery-ui-custom/index',
+                //'bower_components/jquery-ui-custom/index',
                 'bower_components/bootstrap/dist/js/bootstrap.min'
             ]
         },

@@ -10,9 +10,6 @@ define([
         $translatePartialLoaderProvider.addPart('presenter/datasource');
         $translatePartialLoaderProvider.addPart('presenter/singlesource');
         $translatePartialLoaderProvider.addPart('presenter/analysis');
-        $translatePartialLoaderProvider.addPart('presenter/group');
-        $translatePartialLoaderProvider.addPart('presenter/hierarchy');
-        $translatePartialLoaderProvider.addPart('presenter/network');
         $translatePartialLoaderProvider.addPart('presenter/viewer');
 
         //default config chartjs
@@ -156,46 +153,6 @@ define([
             controllerUrl: 'presenter/analysis/controller/analysis-form',
             templateUrl: 'app/presenter/analysis/template/analysis-form.html'
         },
-        '/presenter/group': {
-            controller: 'GroupListController',
-            controllerUrl: 'presenter/group/controller/group-list',
-            templateUrl: 'app/presenter/group/template/group-list.html'
-        },
-        '/presenter/group/new': {
-            controller: 'GroupFormController',
-            controllerUrl: 'presenter/group/controller/group-form',
-            templateUrl: 'app/presenter/group/template/group-form.html'
-        },
-        '/presenter/group/:id': {
-            controller: 'GroupViewController',
-            controllerUrl: 'presenter/group/controller/group-view',
-            templateUrl: 'app/presenter/group/template/group-view.html'
-        },
-        '/presenter/group/:id/edit': {
-            controller: 'GroupFormController',
-            controllerUrl: 'presenter/group/controller/group-form',
-            templateUrl: 'app/presenter/group/template/group-form.html'
-        },
-        '/presenter/hierarchy': {
-            controller: 'HierarchyListController',
-            controllerUrl: 'presenter/hierarchy/controller/hierarchy-list',
-            templateUrl: 'app/presenter/hierarchy/template/hierarchy-list.html'
-        },
-        '/presenter/hierarchy/new': {
-            controller: 'HierarchyFormController',
-            controllerUrl: 'presenter/hierarchy/controller/hierarchy-form',
-            templateUrl: 'app/presenter/hierarchy/template/hierarchy-form.html'
-        },
-        '/presenter/hierarchy/:id/edit': {
-            controller: 'HierarchyFormController',
-            controllerUrl: 'presenter/hierarchy/controller/hierarchy-form',
-            templateUrl: 'app/presenter/hierarchy/template/hierarchy-form.html'
-        },
-        '/presenter/hierarchy/:id': {
-            controller: 'HierarchyViewController',
-            controllerUrl: 'presenter/hierarchy/controller/hierarchy-view',
-            templateUrl: 'app/presenter/hierarchy/template/hierarchy-view.html'
-        },
         '/presenter/viewer/new/:type/:template': {
             controller: 'ViewerFormController',
             controllerUrl: 'presenter/viewer/controller/viewer-form',
@@ -265,27 +222,8 @@ define([
             title: 'SINGLESOURCE.MEDIA',
             icon: 'icon-perm-media',
             href: 'presenter/singlesource',
-            children: [
-//                {
-//                    href: 'presenter/group',
-//                    title: 'GROUP.GROUPS'
-//                },
-//                {
-//                    href: 'presenter/singlesource',
-//                    title: 'SINGLESOURCE.MEDIA'
-//                }
-            ]
+            children: []
         }
-//        {
-//            href: 'presenter/hierarchy',
-//            title: 'HIERARCHY.HIERARCHY_LIST'
-//        },
-//        {
-//            href: 'presenter/network',
-//            title: 'NETWORK.NETWORKS',
-//            icon: 'icon-networks',
-//            children: []
-//        }
     ];
 
     return presenter;

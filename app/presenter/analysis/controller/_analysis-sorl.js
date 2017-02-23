@@ -1,5 +1,5 @@
 define([
-    'presenter/group/service/group-service',
+    'presenter/analysis/service/group-service',
     'presenter/analysis/service/analysis-service'
 ], function () {
     return function SolrAnalysisFormController($scope, GroupService, AnalysisService, $timeout) {
@@ -7,9 +7,7 @@ define([
 
         $scope.analysis.facet = 10;
 
-        //$scope.types = GroupService.getTypes();
         $scope.queryBuilderTypes = GroupService.getTypes();
-        //$scope.typeFilter = GroupService.getTypeFilter();
         $scope.queryBuilderTypeFilter = GroupService.getTypeFilter();
         $scope.group = {};
 
