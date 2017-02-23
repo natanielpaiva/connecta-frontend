@@ -8,42 +8,44 @@ define([
             DATABASE: {
                 type: 'DATABASE',
                 template: 'app/presenter/datasource/template/_datasource-database.html',
-                icon: 'icon-database2'
+                icon: 'icon-database2',
+                active: true
             },
             HDFS: {
                 type: 'HDFS',
                 template: 'app/presenter/datasource/template/_datasource-hdfs.html',
                 icon: 'icon-hadoop',
-                disabled: true
+                active: false
             },
             OBIEE: {
                 type: 'OBIEE',
                 template: 'app/presenter/datasource/template/_datasource-obiee.html',
-                icon: 'icon-obiee'
-                        //disabled: true
+                icon: 'icon-obiee',
+                active: false
             },
             SOLR: {
                 type: 'SOLR',
                 template: 'app/presenter/datasource/template/_datasource-solr.html',
-                icon: 'icon-solr'
+                icon: 'icon-solr',
+                active: true
             },
             WEBSERVICE: {
                 type: 'WEBSERVICE',
                 template: 'app/presenter/datasource/template/_datasource-webservice.html',
-                icon: 'icon-webservice' // Capitão Planeta?
-                        //disabled: true
+                icon: 'icon-webservice', // Capitão Planeta?
+                active: false
             },
             REST: {
                 type: 'REST',
                 template: 'app/presenter/datasource/template/_datasource-rest.html',
-                icon: 'icon-webservice' // Capitão Planeta?
-                        //disabled: true
+                icon: 'icon-webservice', // Capitão Planeta?
+                active: true
             },
             WSO2: {
                 type: 'WSO2',
                 template: 'app/presenter/datasource/template/_datasource-wso2.html',
-                icon: 'icon-obiee'
-                        //disabled: true
+                icon: 'icon-obiee',
+                active: true
             }
         };
 

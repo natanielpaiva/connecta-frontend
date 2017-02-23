@@ -13,10 +13,10 @@
                           placeholder="{{'DATASOURCE.DESCRIPTION'|translate}}" row="1"></textarea>
             </div>
             <div class="portal-type-switcher margin-bottom-single">
-                <label ng-repeat="type in mapToArray(form.types) | orderBy:['-order','-disabled']" class="radio-inline portal-type-switcher-item"
-                       title="{{type.type}}" ng-class="{'portal-type-switcher-item-disabled':type.disabled}">
+                <label ng-repeat="type in mapToArray(form.types) | orderBy:['-order','-active'] | filter:!type.disabled" class="radio-inline portal-type-switcher-item"
+                       title="{{type.type}}" ng-class="{'portal-type-switcher-item-disabled':!type.active}">
                     <input type="radio" class="portal-type-switcher-input" name="type"
-                           ng-model="datasource.type" ng-value="type.id" ng-disabled="type.disabled" />
+                           ng-model="datasource.type" ng-value="type.id" ng-disabled="!type.active" />
                     <span class="portal-type-switcher-icon {{type.icon}}"></span>
                     <span class="portal-type-switcher-title">{{type.type}}</span>
                 </label>
