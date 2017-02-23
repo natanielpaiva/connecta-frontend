@@ -188,43 +188,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- Adicionar atributos -->
-                <h4 translate>ANALYSIS.ADD_ATTRIBUTES</h4>
-
-                <div key-value class="well well-sm clearfix" ng-model="analysis.analysisAttributes">
-                    <div key-value-item class="row">
-                        <div class="col-md-4">
-                            <div class="form-group has-feedback">
-                                <label for="user" translate>SINGLESOURCE.ATTRIBUTE_NAME</label>
-
-                                <input type="text" name="analysisAttribute" id="analysisAttribute" class="form-control" 
-                                       ng-model="$parent.$parent.$item.attribute" ng-change="change()" ng-blur="change()" typeahead="attribute as attribute.name for attribute in getAttributes($viewValue)" typeahead-loading="loadingAttributes"  />
-                                <span ng-show="loadingAttributes" class="glyphicon glyphicon-refresh form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="valor" translate>SINGLESOURCE.ATTRIBUTE_VALUE</label>
-                                <input type="text" class="form-control"
-                                       ng-model="$parent.$parent.$item.value" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label translate>SINGLESOURCE.ATTRIBUTE TYPE</label>
-                                <select ng-options="opt as opt.label for opt in optionsAttributeTypes"
-                                        ng-model="$parent.$parent.$item.attributeType" class="form-control" >
-                                    <option value="" translate>LAYOUT.SELECT</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </uib-accordion-group>
         </uib-accordion>
     </div>
-
-
 
     <div class="row" >
         <div class="col-md-12 text-right">
