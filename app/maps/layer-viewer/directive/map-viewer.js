@@ -12,6 +12,10 @@ define([
     return portal.lazy.directive('mapViewer', function (applications) {
 
         function mapController($scope, $rootScope, util, ProjectService, AnalysisService, $location) {
+            $scope.clientDomain = applications.maps.clientDomain;
+            $scope.mainCss = applications.maps.clientDomain + '/static/css/main.css';
+            $scope.uuid = util.uuid();
+            $scope.mapDivId = util.uuid();
 
             var url = $location.$$absUrl;
             var mapHelper = Object.assign({}, leafletHelper);
@@ -19,9 +23,6 @@ define([
             var _instanceMaps;
 
             $scope.isCreatingOrEditing = (/edit/g.test(url) || /new/g.test(url));
-            $scope.uuid = util.uuid();
-            $scope.mapDivId = util.uuid();
-            $scope.clientDomain = applications.maps.clientDomain;
 
             var changeRouteSuccess = $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
                 if (!(/edit/g.test(next.$$route.originalPath) || /new/g.test(next.$$route.originalPath))) {
