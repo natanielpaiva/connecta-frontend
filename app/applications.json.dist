@@ -35,41 +35,5 @@
         "color": "#3BB79D",
         "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/maps",
         "active": false
-    },
-    "speaknow": {
-        "title": "Speaknow",
-        "host": "http://connectad.cds.com.br/connecta-speaknow",
-        "icon": "assets/img/module-icon/speaknow.png",
-        "iconMini": "assets/img/module-icon/mini/speaknow.png",
-        "headerLogo": "assets/img/horizontal-logos/speaknow.png",
-        "home": "#/speaknow",
-        "color": "#1B7F96",
-        "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/speaknow",
-        "active": false
-    },
-    "speaknowBatch": {
-        "hide": true,
-        "host": "http://connectad.cds.com.br/speaknow-batch",
-        "active": false
-    },
-    "collector": {
-        "title": "Collector",
-        "host": "http://connectad.cds.com.br/connecta-collector",
-        "icon": "assets/img/module-icon/collector.png",
-        "iconMini": "assets/img/module-icon/mini/collector.png",
-        "headerLogo": "assets/img/horizontal-logos/collector.png",
-        "home": "#/collector",
-        "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/collector",
-        "active": false
-    },
-    "inspection": {
-        "hide":true,
-        "title": "Inspect",
-        "host": "http://connectad.cds.com.br/connecta-inspection",
-        "icon": "assets/img/module-icon/inspect.png",
-        "iconMini": "assets/img/module-icon/mini/inspect.png",
-        "home": "#/inspection",
-        "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/inspect",
-        "active": false
     }
 }
