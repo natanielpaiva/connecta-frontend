@@ -82,7 +82,8 @@
         "DESC_ZOOM_MAX_MIN": "Para definir zoom máximo e mínimo, utilize o slider ou navegue pelo mapa e clique em usar",
         "STATIC_NAVIGATION": "Navegação estática",
         "DYNAMIC_NAVIGATION": "Navegação dinâmica",
-        "DELETE_SUCCESS": "Registro excluído com sucesso"
+        "DELETE_SUCCESS": "Registro excluído com sucesso",
+        "OPENED_SIDEBAR": "Menu lateral aberto"
     },
     "VIEWER": {
         "NAME": "Nome do visualizador",
