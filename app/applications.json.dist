@@ -34,6 +34,6 @@
         "viewerPath": "/layerViewers/:id",
         "color": "#3BB79D",
         "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/maps",
-        "active": false
+        "active": true
     }
 }
