@@ -15,11 +15,6 @@ require([
                 '#/link1': 'DATASOURCE.NEW_DATASOURCE',
                 '#/link2': 'DATASOURCE.NEW_DATASOURCE',
                 '#/link3': 'DATASOURCE.NEW_DATASOURCE'
-            },
-            speaknow: {
-                '#/link1': 'DATASOURCE.NEW_DATASOURCE',
-                '#/link2': 'DATASOURCE.NEW_DATASOURCE',
-                '#/link3': 'DATASOURCE.NEW_DATASOURCE'
             }
             // TODO Continuar com ações padrão
         };

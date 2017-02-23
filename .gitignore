@@ -9,5 +9,6 @@
 /.sass-cache/
 /.project
 /assets/css/*
+/app/applications.json
 
 /npm-debug.log

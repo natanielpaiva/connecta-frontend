@@ -20,8 +20,6 @@ define([
         };
 
         if ($routeParams.id) {
-
-//            $scope.typeSingleSource.type = $scope.types[0];
             SingleSourceService.getById($routeParams.id).then(function (response) {
                 var type = $scope.types.filter(function (value) {
                     return value.id.toUpperCase() === response.data.type;

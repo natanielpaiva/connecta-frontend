@@ -6,11 +6,8 @@ define([
     'json!applications.json',
     // Módulos Angular Connecta
     'connecta.portal',
-    'connecta.collector',
-    'connecta.speaknow',
     'connecta.presenter',
     'connecta.maps',
-    'connecta.inspection',
     // Dependências principais
     'angular-resource',
     'angular-route',
@@ -32,23 +29,18 @@ define([
     'bower_components/angular-messages/angular-messages.min',
     'bower_components/ng-file-upload/ng-file-upload-all.min',
     'bower_components/angular-currency-mask/angular-currency-mask',
-    //  'bower_components/angular-facebook/lib/angular-facebook',
-    //  'bower_components/ngAutocomplete/src/ngAutocomplete',
     'bower_components/angular-base64/angular-base64',
     'bower_components/angular-ui-select/dist/select',
     'bower_components/angular-scroll/angular-scroll.min',
     'bower_components/angular-show-on-konami-code/angular-show-on-konami-code',
     'bower_components/sockjs/sockjs.min',
     'bower_components/stomp-websocket/lib/stomp.min'
-], function ($, angular, applications, portal, collector, speaknow, presenter, maps, inspection) {
+], function ($, angular, applications, portal, presenter, maps) {
 
     var connecta = angular.module('connecta', [
         'connecta.portal',
-        'connecta.collector',
-        'connecta.speaknow',
         'connecta.presenter',
         'connecta.maps',
-        'connecta.inspection',
         'ngRoute',
         'ngResource',
         'ngCookies',
@@ -100,11 +92,8 @@ define([
 
         connecta.lazy = lazy;
         portal.lazy = lazy;
-        collector.lazy = lazy;
-        speaknow.lazy = lazy;
         presenter.lazy = lazy;
         maps.lazy = lazy;
-        inspection.lazy = lazy;
     }
 
     /**
@@ -170,7 +159,7 @@ define([
      * @returns {undefined}
      */
     function configureRoutes($routeProvider) {
-        var allRoutes = buildRoutes(portal, collector, speaknow, presenter, maps, inspection);
+        var allRoutes = buildRoutes(portal, presenter, maps);
         angular.forEach(allRoutes, function (route, url) {
             if (route.controllerUrl) {
                 if (!route.resolve) {
@@ -392,11 +381,6 @@ define([
         'portal/layout/directive/file-model',
         'portal/layout/directive/conf-modal',
         'portal/auth/directive/login',
-        'inspection/inspection/directive/box-table-inspection',
-        'inspection/inspection/directive/status-change',
-        'inspection/inspection/directive/inspect-datepicker',
-        'inspection/inspection/directive/drop-file',
-        'speaknow/company/service/company-service',
         'portal/user/service/user-service',
         'portal/domain/service/domain-service',
         'portal/auth/directive/visibleToRoles'
