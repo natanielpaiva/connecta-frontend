@@ -1,12 +1,13 @@
-# Connecta Frontend
-
-Web interface for all Connecta modules.
-
 [![Build Status](https://travis-ci.org/connecta-solutions/connecta-frontend.svg?branch=master)](https://travis-ci.org/connecta-solutions/connecta-frontend)
 [![Test Coverage](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/coverage.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend/coverage)
 [![Code Climate](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/gpa.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend)
 [![Issue Count](https://codeclimate.com/github/connecta-solutions/connecta-frontend/badges/issue_count.svg)](https://codeclimate.com/github/connecta-solutions/connecta-frontend)
 [![Dependency Status](https://www.versioneye.com/user/projects/58af48656200aa0035dc0243/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58af48656200aa0035dc0243)
+
+
+# Connecta Frontend
+
+Web interface for all Connecta modules.
 
 ## Installation
 
