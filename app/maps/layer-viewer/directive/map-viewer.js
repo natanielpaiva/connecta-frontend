@@ -12,19 +12,26 @@ define([
     return portal.lazy.directive('mapViewer', function (applications) {
 
         function mapController($scope, $rootScope, util, ProjectService, AnalysisService, $location) {
+            $scope.clientDomain = applications.maps.clientDomain;
+            $scope.mainCss = applications.maps.clientDomain + '/static/css/main.css';
+            $scope.uuid = util.uuid();
+            $scope.mapDivId = util.uuid();
 
             var url = $location.$$absUrl;
             var mapHelper = Object.assign({}, leafletHelper);
             var routeIsChanged;
+            var _instanceMaps;
 
             $scope.isCreatingOrEditing = (/edit/g.test(url) || /new/g.test(url));
-            $scope.uuid = util.uuid();
-            $scope.mapDivId = util.uuid();
-            $scope.clientDomain = applications.maps.clientDomain;
 
             var changeRouteSuccess = $rootScope.$on("$routeChangeSuccess", function (event, next, current) {
                 if (!(/edit/g.test(next.$$route.originalPath) || /new/g.test(next.$$route.originalPath))) {
                     routeIsChanged = true;
+                    changeRouteSuccess();
+
+                    if (_instanceMaps) {
+                        // _instanceMaps.destroy();
+                    }
                 }
             });
 
@@ -52,6 +59,7 @@ define([
 
             function initViewer() {
                 var project;
+                var responses = [];
 
                 ProjectService.get($scope.model.project._id)
                     .then( function (response) {
@@ -66,13 +74,25 @@ define([
                         return Promise.all(promises);
                     })
                     .then( function (response) {
-                        var promises = [];
+                        var index = 0;
 
-                        for (var index in response) {
-                            promises.push(AnalysisService.execute(paramsFactory(project.richLayers[index], response[index].data)));
-                        }
+                        return new Promise(function (resolve, reject) {
+                            function execute() {
+                                if (index === response.length) {
+                                    resolve(responses);
+                                } else {
+                                    var promise = AnalysisService.execute(paramsFactory(project.richLayers[index], response[index].data));
 
-                        return Promise.all(promises);
+                                    promise.then(function (result) {
+                                        responses.push(result);
+                                        index += 1;
+                                        execute();
+                                    }, reject);
+                                }
+                            }
+
+                            execute();
+                        });
                     })
                     .then( function (responses) {
                         var id;
@@ -80,10 +100,12 @@ define([
                         if (ConnectaMaps) {
                             initConnectaMaps();
                         } else {
-                            require(['ConnectaMaps'], initConnectaMaps);
+                            require(['ConnectaMaps', 'esri-leaflet'], initConnectaMaps);
                         }
 
-                        function initConnectaMaps() {
+                        function initConnectaMaps(a, esri) {
+                            L.esri = esri;
+
                             if (!ConnectaMaps) {
                                 ConnectaMaps = window.ConnectaMaps;
                             }
@@ -93,7 +115,7 @@ define([
                                 ConnectaMaps.MapsDataLoader.set(id, responses[index].data);
                             }
 
-                            new ConnectaMaps(document.getElementById($scope.uuid), $scope.model._id, applications.maps.host);
+                            _instanceMaps = new ConnectaMaps(document.getElementById($scope.uuid), $scope.model._id, applications.maps.host);
                         }
 
                     });
@@ -118,7 +140,7 @@ define([
                         filters : [],
                         drill : {
                             columnToDrill : richLayer.crossingKeys.resultSetKey,
-                            columnsToSum : mapOutFields(),
+                            columnsToSum : [],
                             listPreviousColumns : []
                         }
                     };
