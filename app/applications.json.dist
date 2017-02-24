@@ -9,7 +9,19 @@
         "home": "#/",
         "color": "#9B0D0D",
         "site": "http://apconnecta.cds.com.br/connecta-hotsite/public/index.php/pt/products/collector",
-        "active": true
+        "active": true,
+        "theme": {
+            "color": {
+                "colorOne": "#9b0d0d",
+                "colorTwo": "#d30f0f",
+                "colorThree": "#600202"
+            },
+            "image": {
+                "login": "assets/img/connecta.png",
+                "bottom": "assets/img/bottom-right.svg",
+                "dashboard": ""
+            }
+        }
     },
     "presenter": {
         "title": "Presenter",
