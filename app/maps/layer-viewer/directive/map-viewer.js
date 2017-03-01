@@ -30,7 +30,7 @@ define([
                     changeRouteSuccess();
 
                     if (_instanceMaps) {
-                        // _instanceMaps.destroy();
+                        _instanceMaps.destroy();
                     }
                 }
             });
